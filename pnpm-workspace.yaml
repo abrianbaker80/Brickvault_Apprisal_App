@@ -1,0 +1,11 @@
+packages:
+  - apps/web
+  - packages/contracts
+
+strictPeerDependencies: true
+autoInstallPeers: false
+engineStrict: true
+storeDir: .local/pnpm-store
+cacheDir: .local/pnpm-cache
+allowBuilds:
+  esbuild: true

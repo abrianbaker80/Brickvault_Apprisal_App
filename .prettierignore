@@ -1,0 +1,14 @@
+node_modules/
+.local/
+**/.venv/
+**/dist/
+**/build/
+**/coverage/
+**/playwright-report/
+**/test-results/
+.env*
+pnpm-lock.yaml
+**/uv.lock
+**/openapi.json
+**/schema.d.ts
+*.zip

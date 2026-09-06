@@ -6,11 +6,13 @@ Marketplace screenshots and recognition are later optional inputs into the same 
 
 ## Current checkpoint
 
-The approved Phase 1 implementation plan is persisted in [ExecPlan 000](docs/plans/000-local-foundation.md) as part of the valuation-first documentation baseline. Phase 1 has not started. The next action eligible for separate explicit implementation authorization is **Slice 1A — toolchain and workspace only**.
+The approved Phase 1 implementation plan is persisted in [ExecPlan 000](docs/plans/000-local-foundation.md). **Slice 1A — toolchain and workspace only** is accepted from documentation baseline cb3e4373ee02faf4a485eb451d98749090f34e17. The plan records the acceptance review, bounded fixes, passed checks, deferred checks, and reviewed local checkpoint inventory. Phase 1 is not complete; Slice 1B has not started and requires separate authorization.
 
 Phase 1 has three bounded slices: 1A toolchain/workspace; 1B isolated database, API, and contracts; 1C web shell, built serving, CI, and full acceptance. Each requires its own explicit request and ends with a report. [Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review, not an implementation command.
 
-No application directories, manifests, dependencies, migrations, runtime configuration, CI workflows, or runnable setup commands exist yet. This checkpoint authorizes documentation and one reviewed local Git commit only; it authorizes no installs, services, database connections, network/server access, implementation, or push. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice authorization and narrow documentation-update rules.
+The active plan records approved TypeScript 5.9.3, repository-local uv 0.12.10, and ESLint 10 tooling selections. The acceptance request permits bounded Slice 1A corrections and one local commit only after all applicable checks pass. No application source, services, containers, database connections, infrastructure access, or push is authorized. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice authorization and narrow documentation-update rules.
+
+Use [local development](docs/LOCAL_DEVELOPMENT.md) for the verified local uv bootstrap, locked dependency setup, private configuration initialization, format/lint/type/unit commands, and documented limitations. Application builds, Python application installation, database tests, contracts, and browser acceptance remain deferred to their later slices.
 
 ## Product and architecture
 

@@ -133,3 +133,11 @@ The Slice 1A plan includes an exact-lock local checkpoint only under an explicit
 During Phase 1 implementation, AGENTS.md, ORIGINATING_CHAT_SUMMARY.md, PRODUCT_SPEC.md, VALUATION_RULES.md, and SECURITY_PRIVACY.md are read-only by default. Change one only for a concrete verified contradiction that cannot be accurately documented elsewhere; propose a narrow evidence-backed change and report it explicitly. Normal progress belongs in the current workflow/setup/plan/roadmap/traceability documents listed in ExecPlan 000, with architecture edits limited to verified details.
 
 [CODEX_WORKFLOW.md](../CODEX_WORKFLOW.md) and ExecPlan 000 carry current checkpoint and slice status. Prompt 01 remains reusable plan-only review; the next separately authorizable implementation action is Slice 1A only.
+
+### D-023 — Approved Slice 1A tooling corrections — 2026-09-05
+
+Brian authorizes TypeScript >=5.9.3,<5.10, initially 5.9.3, with openapi-typescript 7.13.0; this supersedes the incompatible TypeScript 6 proposal. ESLint >=10.0.0,<11, initially 10.10.0, with @eslint/js 10.0.1 and typescript-eslint 8.69.0 replaces the end-of-life ESLint 9 proposal. Select one workspace compiler and preserve strict peer checks, supported flat configuration, and stable supported direct dependencies.
+
+Official standalone uv 0.12.10 may be installed under ignored .local/tooling/uv/0.12.10/ with published artifact integrity verification. Invoke it explicitly and enforce its exact version. Global uv 0.10.7 and system/user configuration remain untouched; no automatic Python downloads are permitted. Retain Hatchling and use --no-install-project only for Slice 1A dependency synchronization, with actual application installation/build required once source exists.
+
+Persist these approvals even if subsequent installation is blocked; approvals are not test evidence. Slice 1A alone is authorized, with working-tree changes retained for review and no staging/commit, application source, services, databases, infrastructure, or automatic advancement. D-001 through D-022 retain their historical meaning.

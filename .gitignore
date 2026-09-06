@@ -1,0 +1,25 @@
+# Private local configuration; only the placeholder template is tracked.
+.env
+.env.*
+!.env.example
+.local/
+
+# Dependency environments and caches.
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.tsbuildinfo
+
+# Generated builds and test reports.
+dist/
+build/
+coverage/
+.coverage*
+htmlcov/
+playwright-report/
+test-results/
+*.log

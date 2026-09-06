@@ -1,6 +1,6 @@
 # Phase 1 — Local foundation implementation plan — ExecPlan 000
 
-**Status:** Approved implementation plan persisted; Phase 1 implementation NOT STARTED.
+**Status:** Slice 1A ACCEPTED for the reviewed local checkpoint. Slices 1B and 1C NOT STARTED. Phase 1 is not complete.
 
 **Date:** 2026-09-05
 
@@ -8,7 +8,7 @@
 
 This is the canonical, self-contained Phase 1 execution plan under D-021 and D-022. It incorporates the approved in-chat plan and Brian's documentation-checkpoint refinements: portable paths, narrow documentation-update rules, and separately authorized Slices 1A, 1B, and 1C.
 
-The current task authorizes Markdown changes and one reviewed local documentation baseline commit only. It authorizes no implementation, dependency installation/update, toolchain checks, service/container startup, database connection, external network/provider access, infrastructure access, or push. Every command below is a future execution contract unless explicitly identified as a documentation-only check. Plan approval, persistence, and the documentation commit do not authorize any implementation slice.
+The documentation baseline is commit cb3e4373ee02faf4a485eb451d98749090f34e17. Brian subsequently authorized Slice 1A implementation only, including bounded official documentation/registry/package access and a repository-local uv bootstrap. The initial implementation verified a clean baseline. The subsequent acceptance-review request expects the dirty Slice 1A result and authorizes bounded corrections plus one local commit only after acceptance passes. Branch changes, push, services, containers, database connections, infrastructure, and application source remain excluded. Slices 1B and 1C still require separate requests. Historical checkpoint statements below describe their dated authorizations.
 
 Read [workflow](../../CODEX_WORKFLOW.md), [guidance](../../AGENTS.md), [architecture](../ARCHITECTURE.md), [data model](../DATA_MODEL.md), [roadmap](../ROADMAP.md), [security/privacy](../SECURITY_PRIVACY.md), [valuation rules](../VALUATION_RULES.md), [traceability](../REQUIREMENTS_TRACEABILITY.md), and [decisions](../DECISIONS.md). [Prompt 01](../../prompts/01_scaffold_foundation.md) remains a reusable plan-only review; it is not an implementation command.
 
@@ -57,7 +57,7 @@ Do not connect to or modify the existing PostgreSQL service on port 5432. Do not
 
 The documentation-stage repository began at initial commit 064cfcf. The earlier image-first plan was never implemented. The valuation-first realignment, expanded implementation plan, and reviewed Markdown baseline belong to the current local documentation checkpoint.
 
-There are no application manifests, source directories, migrations, scripts, tests, CI workflows, runtime configuration, or runnable setup commands. Preserve unrelated dirty work in every future task.
+The clean baseline had no application manifests, source directories, migrations, scripts, tests, CI workflows, runtime configuration, or runnable setup commands. Slice 1A now adds only its manifests/configuration, exact locks, checked tooling, tests, and setup documentation. It adds no application source. Preserve unrelated dirty work in every future task.
 
 All governing documents and the approved in-chat plan were reviewed. No toolchain checks, installs, services, database connections, network requests, or implementation checks were performed during this persistence checkpoint. Its local commit hash and final Git status are reported separately rather than embedding a self-referential commit hash here.
 
@@ -83,16 +83,16 @@ Use ordinary explicit API/application/persistence modules and synchronous SQLAlc
 
 Use strict TypeScript, including noUncheckedIndexedAccess and exactOptionalPropertyTypes; checked JSDoc for .mjs orchestration; strict mypy for authored Python; Ruff, ESLint, and Prettier for their respective files.
 
-### Proposed version constraints
+### Approved version constraints
 
-These are unverified proposals derived from the planning baseline, not statements about installed or currently available releases.
+These families derive from the planning baseline with the explicit D-023 corrections. Actual installed/resolved versions and remaining limits are recorded in section 14. PostgreSQL image selection remains deferred to Slice 1B.
 
 | Component | Proposed constraint |
 |---|---|
 | Python | >=3.13,<3.14 |
 | Node.js | >=24,<25 |
 | pnpm | >=11,<12 |
-| uv | >=0.12,<0.13 |
+| uv | Exactly 0.12.10, repository-local executable only |
 | PostgreSQL | Supported stable 18.x |
 | FastAPI | >=0.141,<0.142 |
 | Pydantic | >=2.13,<2.14 |
@@ -103,19 +103,31 @@ These are unverified proposals derived from the planning baseline, not statement
 | Uvicorn | >=0.30,<1, compatible stable release |
 | React / React DOM | Matching 19.2.x versions |
 | Vite | >=8.2,<8.3 |
-| TypeScript | >=6.0,<6.1 |
+| TypeScript | >=5.9.3,<5.10; initial exact selection 5.9.3 |
 | Vite React plugin | Compatible stable release within >=5,<7 |
 | openapi-typescript | >=7.13,<7.14 |
 | openapi-fetch | >=0.17,<0.18 |
 | Vitest | >=4.1,<4.2 |
 | Playwright | >=1.63,<1.64 |
-| ESLint / typescript-eslint | 9.x / compatible 8.x |
+| ESLint / @eslint/js / typescript-eslint | >=10.0.0,<11 / compatible 10.x / compatible 8.x; initial selections 10.10.0 / 10.0.1 / 8.69.0 |
 | Prettier | 3.x |
 | Ruff / mypy | Compatible stable <1 / 1.x |
 | pytest / HTTPX | Compatible 9.x / >=0.28,<1 |
 | Hatchling | Compatible 1.x |
 
 Use compatible React 19 type packages, Testing Library React 16, jest-dom 6, and jsdom 26–29 for browser unit tests.
+
+### Approved tooling corrections — 2026-09-05
+
+These selections were persisted as approved with verification pending before installation. Approval itself is not evidence; subsequent actual results are recorded in the progress and outcome sections.
+
+- TypeScript 5.9.3 with openapi-typescript 7.13.0 replaces the former TypeScript >=6.0,<6.1 proposal because the generator requires TypeScript ^5.x. Use one selected compiler across authored workspace packages.
+- ESLint 10.10.0 with @eslint/js 10.0.1 and typescript-eslint 8.69.0 replaces ESLint 9.x, which reached end of life on 2026-08-06. Their published requirements determine compatibility; ESLint and @eslint/js patch/minor numbers need not match. Use supported flat configuration without peer overrides, warning suppression, or legacy switches.
+- Bootstrap official standalone uv 0.12.10 under .local/tooling/uv/0.12.10/ after ignoring .local/. Inspect the official version/platform release metadata and verify published archive integrity before extraction/execution. An official archive or inspected version-specific installer in documented unmanaged mode is permitted. Do not modify global uv 0.10.7, PATH, profiles, registry, or execution policies.
+- Invoke that local executable explicitly; missing/wrong-version tools fail with setup guidance. Enforce `[tool.uv] required-version = "==0.12.10"`. Use installed Python 3.13 only and disable automatic Python downloads. Keep all caches/environments ignored.
+- Retain the intended Hatchling build backend without dummy source. Slice 1A synchronizes dependencies with `sync --project services/api --locked --all-groups --no-install-project`, then checks `lock --project services/api --check`. Application package installation/build remains mandatory after source exists; later acceptance must not substitute dependency-only synchronization.
+
+References verified during prerequisite research: [generator peer metadata](https://registry.npmjs.org/openapi-typescript/7.13.0), [ESLint support](https://eslint.org/version-support/), [typescript-eslint support](https://typescript-eslint.io/users/dependency-versions/), and [official uv release](https://github.com/astral-sh/uv/releases/tag/0.12.10). See D-023 for the additive decision record.
 
 During separately authorized Slice 1A, verify official support status and peer compatibility, then select and lock exact stable versions within these constraints. Record resolved versions. A nonexistent, unsupported, or incompatible branch requires a documented correction before scaffolding proceeds; do not silently adopt a different major version or prerelease.
 
@@ -132,8 +144,8 @@ None of these commands were run during this checkpoint. In an authorized Windows
     Get-Command git, node, pnpm, uv, docker -ErrorAction SilentlyContinue
     node --version
     pnpm --version
-    uv --version
-    uv python list --only-installed
+    .local/tooling/uv/0.12.10/uv.exe --version
+    .local/tooling/uv/0.12.10/uv.exe python list --only-installed
     docker context show
     docker context inspect
 
@@ -156,9 +168,9 @@ The plugin command checks the proposed 6.x candidate; if it is unavailable or in
 
 ### Exact planned file inventory
 
-All paths below are relative to the repository root. Brace groups enumerate individual files; they are inventory notation, not shell commands. No listed implementation file is created by this checkpoint.
+All paths below are relative to the repository root. Brace groups enumerate individual files; they are inventory notation, not shell commands. Only the Slice 1A inventory is now implemented.
 
-Create in separately authorized Slice 1A:
+Created in authorized Slice 1A:
 
     .gitignore
     .editorconfig
@@ -168,6 +180,7 @@ Create in separately authorized Slice 1A:
     pnpm-workspace.yaml
     pnpm-lock.yaml
     tsconfig.base.json
+    tsconfig.json
     tsconfig.tools.json
     eslint.config.mjs
     prettier.config.mjs
@@ -221,7 +234,7 @@ Create in separately authorized Slice 1C:
 
 Later slices extend previously created configuration, scripts, main/API modules, tests, and setup documentation as needed within the final inventory. Keep Alembic resources inside the Python package so the built distribution carries the same migration graph used by readiness checks.
 
-Slice 1A creates manifests/configuration but no API or frontend source shell, placeholder domain modules, generated contracts, migrations, Compose files, or CI. Configure the Python project initially for dependency management without an installable package; switch it to the planned Hatchling package in Slice 1B when source exists. Do not fabricate an empty API package merely to make Slice 1A tooling pass. Typecheck applicable tooling then, and report future application checks as not yet available rather than false passes.
+Slice 1A creates manifests/configuration but no API or frontend source shell, placeholder domain modules, generated contracts, migrations, Compose files, or CI. Retain Hatchling configuration for the intended Python package and use the explicitly authorized --no-install-project synchronization while source is absent. Verify actual package installation in Slice 1B when source exists. Do not fabricate an empty API package merely to make Slice 1A tooling pass. Typecheck applicable tooling then, and report future application checks as not yet available rather than false passes.
 
 ### Documentation-update rules during implementation
 
@@ -352,15 +365,15 @@ contracts:check regenerates into temporary storage and compares bytes with the c
 
 ## 8. Implementation sequence
 
-Each slice requires a separate explicit implementation authorization naming that slice and its permitted local dependency/network/service scope. Completing one slice never authorizes the next. The current documentation commit authorizes none of them.
+Each slice requires a separate explicit implementation authorization naming that slice and its permitted local dependency/network/service scope. Completing one slice never authorizes the next. Only Slice 1A has subsequent implementation authorization; the documentation baseline alone authorized none of them.
 
 ### Slice 1A — Toolchain and workspace
 
 1. Inspect current Git changes and preserve unrelated work. Verify permitted local executable versions, official support, and package compatibility using section 6. Do not start services or contact Docker/database endpoints.
 2. Create only the Slice 1A inventory: workspace/manifests/configuration, exact dependency locks, portable command foundations, and local setup documentation.
-3. Resolve the Phase 1 dependency graph without implementing the later modules. Initial commands are pnpm install --strict-peer-dependencies and uv lock --project services/api. Subsequent reproducibility checks use frozen/locked installation.
+3. Resolve the Phase 1 dependency graph without implementing the later modules. Initial commands are pnpm install --strict-peer-dependencies and the explicitly invoked repository-local uv 0.12.10 with lock --project services/api. Use installed Python only, no Python downloads, and the root .local/uv-cache. Subsequent reproducibility checks use frozen/locked installation; Slice 1A sync includes --all-groups --no-install-project. Exact tested Windows commands are in LOCAL_DEVELOPMENT.md.
 4. Add formatting, linting, strict typing, and orchestration foundations, including idempotent dev:init and meaningful orchestration tests. Run only checks with actual applicable files. Commands for later slices must not claim success or start work when unavailable.
-5. Resolve and commit the exact dependency locks in a reviewed, narrowly staged local Slice 1A checkpoint when that slice's execution request explicitly authorizes its local Git checkpoint. The present request authorizes only the documentation commit, not this future commit.
+5. The original implementation retained exact locks uncommitted for review. Brian's subsequent acceptance request permits one local checkpoint only after all applicable checks pass, with an explicit reviewed file list and complete staged validation. No push is authorized.
 6. Report resolved versions, changed files, actual applicable checks, outstanding prerequisites, and checkpoint status. Stop before database infrastructure, migrations, API behavior, frontend source, built serving, or CI.
 
 Slice 1A acceptance: dependency resolution and frozen/locked reproduction succeed; applicable formatting/lint/type/orchestration tests pass; version/lock evidence is recorded; no database or application shell exists. This is partial Phase 1 evidence, not final acceptance.
@@ -423,10 +436,13 @@ The browser runner binds its API to 127.0.0.1:18000, separate from interactive d
 
 ### Exact future full acceptance sequence — Slice 1C
 
-After locks exist and local prerequisites are available:
+After locks exist and local prerequisites are available, Slice 1B must first extend uv:sync to install
+the real application (remove --no-install-project) and verify installation. The future sequence below
+requires that change; the current Slice 1A dependency-only command cannot pass full application acceptance.
+Retain its absolute cache/environment/temporary paths and local uv version guard:
 
     pnpm install --frozen-lockfile --strict-peer-dependencies
-    uv sync --project services/api --locked --all-groups
+    pnpm uv:sync
 
     pnpm dev:init
     pnpm dev:init
@@ -462,7 +478,7 @@ Finally, stop project services without removing data:
 
     pnpm db:stop
 
-Frozen installs verify previously generated locks; they cannot bootstrap nonexistent locks. None of these future commands broadens the currently authorized slice.
+Frozen installs verify previously generated locks; they cannot bootstrap nonexistent locks. The uv runner resolves the explicit local executable for its platform. Full Slice 1C synchronization must omit --no-install-project: actual application installation must then pass. None of these future commands broadens the currently authorized slice.
 
 ### Required test scenarios
 
@@ -567,11 +583,17 @@ Do not use broad reset, restore, clean, volume deletion, or unrelated process te
 - [x] 2026-09-05 — Rebase the unexecuted image-first foundation to the unified valuation-first scope.
 - [x] 2026-09-05 — Complete the in-chat Phase 1 plan-only review; Brian approves persistence with portable paths, documentation-update restrictions, and separate slices.
 - [x] 2026-09-05 — Persist the approved detailed plan as this canonical ExecPlan. Documentation/local Git only; implementation remains unstarted.
-- [ ] Obtain separate explicit Slice 1A implementation authorization; execute only its bounded scope, report actual evidence, and stop.
+- [x] 2026-09-05 — Receive explicit Slice 1A authorization and bounded TypeScript, local uv, and ESLint corrections; verify the required clean baseline before edits.
+- [x] 2026-09-05 — Persist approved tooling corrections before installation. Installation and validation remain pending at this checkpoint.
+- [x] 2026-09-05 — Create Slice 1A manifests/configuration, exact locks, local uv bootstrap, portable tooling and private initializer; no application source.
+- [x] 2026-09-05 — Strict initial/frozen pnpm installation, local uv lock/locked dependency sync/check, unchanged-lock reproduction, format/lint/strict tooling types, and 13 Node tests pass; document corrected development failures and deferred checks.
+- [x] 2026-09-05 — Run real dev:init twice with byte preservation, inspect secret/ignore/scope evidence and documentation; retain all Slice 1A work uncommitted for review. Stop before Slice 1B.
+- [x] 2026-09-05 — Acceptance review verifies the required HEAD, empty index, four modified documents and 23 new files; reviews every authored file, tracked diff, and both complete lock structures. Correct cwd-dependent uv destinations and normalized configuration URLs; record reproducible regression evidence below.
+- [x] 2026-09-05 — All applicable acceptance checks pass: frozen/locked offline reproduction, unchanged locks, formatting/lint/strict tooling types, 17 tests, private configuration preservation/redaction, ignore/credential scans, internal links, and diff checks. Local checkpoint is authorized after the required staged review; no Slice 1B work follows.
 - [ ] Obtain separate explicit Slice 1B implementation authorization; execute only its bounded scope, report actual evidence, and stop.
 - [ ] Obtain separate explicit Slice 1C implementation authorization; execute its scope and full Phase 1 acceptance, report, and stop before Phase 2.
 
-The documentation baseline commit result is reported by the checkpoint task after staged validation; no implementation or hosted CI result is implied by these checkboxes.
+The completed documentation-baseline checkbox remains historical. Slice 1A checkboxes record only the local tooling evidence below, not application acceptance or hosted CI results.
 
 ## 13. Open questions or physical-device/manual checks
 
@@ -597,4 +619,117 @@ Phase 1 is complete only when all declared files exist, all required checks pass
 
 Each slice report lists changed files, actual commands/results, unresolved limitations, and confirmation that existing PostgreSQL and production infrastructure were untouched. Completing any slice does not authorize another slice, staging/commit, push, or Phase 2.
 
-The next action eligible for a separate explicit implementation request is **Phase 1 Slice 1A only — toolchain and workspace**. That request must name its local dependency/network scope and any intended Slice 1A local Git checkpoint. It must stop before database/API/frontend shell work. No Slice 1A execution is authorized by this documentation baseline commit.
+### Slice 1A actual outcome — 2026-09-05 session
+
+Starting HEAD was cb3e4373ee02faf4a485eb451d98749090f34e17 with clean index/worktree and the current directory confirmed as repository root. The complete Slice 1A inventory above now exists, including tsconfig.json to expose the tools project to typescript-eslint's supported project service. README.md, CODEX_WORKFLOW.md, this plan, and the additive D-023 decision entry are the only previously tracked modifications; roadmap, product, architecture, security, valuation, and earlier decision history remain unchanged.
+
+Verified installed runtimes/tools: Git 2.54.0.windows.1, Node 24.14.0, pnpm 11.8.0, Python 3.13.12, repository-local uv 0.12.10. Read-only Docker CLI/Compose checks reported 29.2.1 / 5.0.2; desktop-linux resolves to a local named pipe and all five planned ports were free. Docker daemon readiness was not tested. Node 24 LTS/Python 3.13 family support and direct dependency requirements were researched through official documentation/registries.
+
+Exact JavaScript direct selections: TypeScript 5.9.3 in root/web/contracts; eslint 10.10.0; @eslint/js 10.0.1; typescript-eslint 8.69.0; prettier 3.9.6; @types/node 24.13.3; react/react-dom 19.2.8; @types/react 19.2.18; @types/react-dom 19.2.7; vite 8.2.2; @vitejs/plugin-react 6.1.1; openapi-typescript 7.13.0; openapi-fetch 0.17.0; vitest 4.1.11; @playwright/test 1.63.0; @testing-library/react 16.3.3; @testing-library/dom 10.4.1; @testing-library/jest-dom 6.9.1; jsdom 29.1.1. Initial pnpm installation added 236 packages. No peer overrides, warning suppression, or second compiler were used.
+
+Exact Python selections: fastapi 0.141.1; pydantic 2.13.5; pydantic-settings 2.15.0; sqlalchemy 2.0.52; alembic 1.19.2; psycopg/psycopg-binary 3.3.5; uvicorn 0.52.4; hatchling 1.32.0; ruff 0.16.6; mypy 1.20.2; pytest 9.1.1; httpx 0.28.1. uv.lock contains 41 records including the root project; 40 dependencies were synchronized without installing the application. Registry sources are PyPI only. Hatchling remains configured for the later real package.
+
+The official uv Windows x64 archive SHA-256 f65744f94072152b1f86ba2aace4d01f1124d9a8ecb235805039e3718c36cac2 matched both published release digest and .sha256 asset. Explicit local invocation reported uv 0.12.10 (3c979abda 2026-09-04 x86_64-pc-windows-msvc). Global uv 0.10.7 was not replaced; executable hashes matched before/after. No PATH, registry, profile, global Git, Docker, or persistent execution-policy changes occurred.
+
+Passed commands: pnpm install --strict-peer-dependencies; pnpm install --frozen-lockfile --strict-peer-dependencies; explicit local uv lock, sync --locked --all-groups --no-install-project, and lock --check; pnpm toolchain:check; pnpm dev:init twice; pnpm format:check; pnpm lint; pnpm typecheck; pnpm test:unit (13/13). Repeat installs/sync preserved both locks byte-for-byte. Lock SHA-256 values: pnpm-lock.yaml a047dd02498b1b68113bca873167a388eb2b66d1c0e8e0724920128dd6ee6be7; services/api/uv.lock 4fd75352f5d49ad72a30db22afba686d35c764b1ac56944e07c7e88af06f08bc. See [local setup](../LOCAL_DEVELOPMENT.md) for commands, exact argument boundaries, and test details.
+
+The tests cover process exit status, shell-free argument/path handling, task dispatch/failure, valid and invalid configuration preservation/redaction, Git ignore refusal with an unchanged index, local uv resolution, and lint configuration coverage. An unused-variable stdin probe triggers @typescript-eslint/no-unused-vars and CLI exit 1 with no parser error. Project service corrected the earlier explicit-project optimization that read disk content instead of stdin. Formatting covers all new supported tooling/configuration inputs; modified historical Markdown receives diff/link/consistency review without broad reformatting. Ruff/mypy were installed and version-checked, but substantive Python checks are deferred because no authored Python source exists.
+
+Initial development failures were corrected: uv's unsupported default-index key became a supported [[tool.uv.index]] entry; the cache path was corrected for cwd-relative resolution; Node tests now await registration; typed lint uses project service. Initial invalid settings caused ordinary downloads into the existing user cache. A small cache was also created at Downloads/.local/uv-cache before the relative path was corrected. Automatic approval review rejected relocating/removing that temporary cache with "blocked by policy"; it remains untouched. All final setup/reproduction commands use ignored repository .local/uv-cache. This is a recorded cleanup limitation, not an alternative toolchain or global configuration change.
+
+Ignored repository artifacts are .env.local (generated local values never printed), root/workspace node_modules, services/api/.venv, and .local tooling/archive/integrity metadata/caches/disposable test directories/validation records. No application source, provider calls, database connections, services, containers, migrations, Compose, generated API contracts, CI, PWA, Android, images, recognition, or deployment exists. Linux/macOS execution, Windows cross-user ACL hardening, application installation/builds, real PostgreSQL and browser acceptance remain unverified/deferred.
+
+That implementation session ended with an uncommitted review checkpoint. Its original next action was review; the subsequent acceptance record below supersedes its checkpoint status. Slice 1B — isolated database, API, and contracts — requires separate explicit authorization and refreshed Docker/port gates. Phase 1 remains incomplete.
+
+### Slice 1A acceptance review — 2026-09-05 local / 2026-09-06 UTC
+
+Entry gate passed: existing intended checkout, HEAD cb3e4373ee02faf4a485eb451d98749090f34e17,
+empty index, and exactly four tracked document modifications plus 23 new files. No unrelated change
+was found. No reset, branch/worktree change, relocation, or dependency version change was made.
+
+The complete reviewed checkpoint inventory is the following 27 files. Generated locks were parsed
+in full and checked against manifests, package records, dependency edges, sources, and integrity data;
+all new authored files and the complete tracked modifications were read.
+
+| Group | Exact reviewed files |
+|---|---|
+| Existing documents (4) | CODEX_WORKFLOW.md; README.md; docs/DECISIONS.md; docs/plans/000-local-foundation.md |
+| New root configuration (12) | .editorconfig; .env.example; .gitignore; .node-version; .prettierignore; eslint.config.mjs; package.json; pnpm-workspace.yaml; prettier.config.mjs; tsconfig.base.json; tsconfig.json; tsconfig.tools.json |
+| New locks (2) | pnpm-lock.yaml; services/api/uv.lock |
+| New workspace manifests/configuration (6) | apps/web/package.json; apps/web/tsconfig.json; packages/contracts/package.json; packages/contracts/tsconfig.json; services/api/.python-version; services/api/pyproject.toml |
+| New tooling and setup (3) | scripts/tasks.mjs; scripts/tasks.test.mjs; docs/LOCAL_DEVELOPMENT.md |
+
+Findings and bounded corrections:
+
+1. The reviewed services/api/pyproject.toml line 44 and original local setup commands selected
+   `.local/uv-cache` relative to the caller, without a guarded shared invocation or an explicit
+   environment destination. Read-only real-uv `cache dir` probes using the original --project and
+   --cache-dir arguments resolved to root/.local/uv-cache from root but services/api/.local/uv-cache
+   from the API directory. They created no cache. Existing tests never exercised effective uv paths.
+   [uvInvocation](../../scripts/tasks.mjs) now derives absolute project/cache/environment/temp paths
+   from the runner module, checks the local uv version, and rejects unsupported cwd before writes.
+   The existing dispatcher provides only uv:sync, uv:check, and uv:cache with optional --offline;
+   inherited uv overrides cannot redirect them. No package versions changed. Setup and the future
+   full-acceptance instructions use this same runner instead of raw relative-path commands.
+2. The original validateConfig URL checks (scripts/tasks.mjs lines 151–170 before corrections)
+   accepted trailing whitespace and an embedded hostname tab because URL parsing normalized them.
+   The extended invalid-existing-file test failed with `Missing expected exception` before the fix.
+   Comparing parsed href with the original value now rejects normalization before field checks.
+   The regression passes, preserves invalid bytes, and excludes credentials/input values from errors.
+
+Cache regression evidence: three path tests plus a uv child-failure test bring the suite from 13 to 17
+tests. They use the actual
+installed uv offline, the actual sync/check arguments and child environment, and root/API invocations
+in this checkout with spaces. Cache queries share all actual common options (only the operation and
+unsupported cache-query interpreter option differ); actual sync/check commands also run unchanged.
+Tests pin the API environment and check its Python sys.prefix, override inherited UV_* and temp
+destinations with targets confined to ignored fixtures, and verify those unwanted paths stay absent.
+Unsupported cwd/flags fail with exit 1 before creating any files. Test fixtures remain in ignored
+.local/tests; uv temporary files stay in .local/tmp. Windows path tests are not Linux execution.
+The child-failure test copies the existing runner and local uv into a disposable in-repository fixture,
+feeds uv invalid fixture configuration, and proves its nonzero exit status survives while the
+diagnostic sentinel is redacted. No fixture is staged or committed.
+
+Commands and results recorded during acceptance:
+
+| Check | Actual result |
+|---|---|
+| pnpm install --frozen-lockfile --strict-peer-dependencies --offline | Passed, all three workspace projects already up to date; strict peers/engines retained |
+| pnpm uv:sync --offline | Passed; --locked --all-groups --no-install-project with installed Python only; 40 distributions, no brickvault-api package installed |
+| pnpm uv:check --offline; pnpm uv:cache --offline | Passed; unchanged lock and absolute root/.local/uv-cache |
+| node ../../scripts/tasks.mjs uv:sync / uv:check / uv:cache --offline from services/api (three separate commands) | Passed with the same cache/environment; real uv tests also cover these exact argument forms |
+| pnpm toolchain:check and installed package metadata | Passed; Node 24.14.0, pnpm 11.8.0, Python 3.13.12, local uv 0.12.10, TypeScript 5.9.3 in all three packages, ESLint 10.10.0, typescript-eslint 8.69.0, Ruff 0.16.6, mypy 1.20.2 |
+| Complete lock/manifests inspection | Passed; pnpm 261 package records and 261 snapshots, three importers, one TypeScript compiler, SHA-512 integrity on every package; uv 41 records and 176 SHA-256 official PyPI artifacts; exact direct requirements and Hatchling match |
+| Original pnpm test:unit | Passed 13/13; no effective-cache regression existed |
+| Extended invalid-configuration regression before/after correction | Failed for the expected missing rejection, then passed with unchanged invalid bytes and redacted errors |
+| pnpm format:check; pnpm lint; pnpm typecheck; pnpm test:unit | Passed; 17/17 tests, zero skipped/deferred tests inside the applicable suite. ESLint negative input exits 1 for @typescript-eslint/no-unused-vars with no fatal parser error |
+| Real root dev:init twice | Passed; existing private configuration preserved byte-for-byte without printing values |
+| Ignore/credential/documentation/diff checks | Passed; 19 ignore probes, .env.example remains trackable, no private files tracked, no actual generated private values or credential patterns in the 27 reviewed files, 35 Markdown documents/187 local file links/one anchor checked, git diff --check clean |
+| Staged review and git diff --cached --check | Passed; exactly 27 normal files (23 additions, four document modifications), all staged blob IDs match reviewed content, full staged patch scanned with no credentials/ignored/unrelated files, historical decisions preserved; repeated after this final evidence update |
+
+Both lock SHA-256 values remain unchanged from the reviewed input: pnpm
+`a047dd02498b1b68113bca873167a388eb2b66d1c0e8e0724920128dd6ee6be7`; uv
+`4fd75352f5d49ad72a30db22afba686d35c764b1ac56944e07c7e88af06f08bc`.
+
+The original incident remains recorded: early implementation wrote into the existing user uv cache
+and created Downloads/.local/uv-cache. Automatic approval review rejected relocating/removing the
+latter with "blocked by policy". Acceptance did not inspect, delete, relocate, clean, or otherwise
+modify that leftover directory, and did not retry the rejected operation. Its cleanup remains
+unresolved; it is not used by the verified commands and is not itself an acceptance blocker.
+
+Deferred: substantive Python application checks and installation/builds, React/contracts compilation,
+generated OpenAPI/contracts, API/frontend builds, real PostgreSQL/migrations/integration tests,
+Docker daemon readiness, service/port readiness, browser/Chrome/responsive acceptance, CI execution,
+Linux/macOS execution, Windows cross-user ACL hardening, and all Android/physical-device evidence.
+There is no application source, database tooling, Compose, migration, CI workflow, provider/AI call,
+service/container start, database connection (including 5432), home-infrastructure access, or deployment.
+All acceptance dependency commands used offline caches; no fresh dependency research or upgrade ran.
+
+Acceptance status: **PASSED**; no unresolved correctness, security, reproducibility, or scope finding
+blocks Slice 1A. All 27 files are reviewed and all applicable checks passed before staging.
+Existing Git user.name and user.email are configured; no identity or global setting was changed.
+The requested commit message is `chore: complete phase 1a tooling and workspace foundation`.
+The local checkpoint contains this acceptance record; its resulting commit hash and final Git status
+are reported after Git returns, avoiding a self-referential hash in the commit. No failed hook is bypassed.
+No push is authorized. Next checkpoint: **separate explicit Slice 1B authorization**. Slice 1B and
+Slice 1C remain NOT STARTED; Phase 1 is incomplete.

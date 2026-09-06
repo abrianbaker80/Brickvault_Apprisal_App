@@ -1,0 +1,30 @@
+{
+  "name": "brickvault-appraisal-app",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "dev:init": "node scripts/tasks.mjs dev:init",
+    "toolchain:check": "node scripts/tasks.mjs toolchain:check",
+    "uv:sync": "node scripts/tasks.mjs uv:sync",
+    "uv:check": "node scripts/tasks.mjs uv:check",
+    "uv:cache": "node scripts/tasks.mjs uv:cache",
+    "format:check": "node scripts/tasks.mjs format:check",
+    "lint": "node scripts/tasks.mjs lint",
+    "typecheck": "node scripts/tasks.mjs typecheck",
+    "test:unit": "node scripts/tasks.mjs test:unit"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "10.10.0",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.69.0"
+  }
+}
