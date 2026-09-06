@@ -22,8 +22,8 @@ A tiny, well-contained bug fix does not need a new plan unless the current promp
 Store plans in `docs/plans/` with a numeric prefix and descriptive slug, for example:
 
 ```text
-docs/plans/000-foundation-and-risk-spikes.md
-docs/plans/010-android-capture-spike.md
+docs/plans/000-local-foundation.md
+docs/plans/150-android-capture-spike.md
 ```
 
 ## Required sections
@@ -55,3 +55,7 @@ Each plan must include:
 - Do not turn a plan into a sprawling wish list. Keep it bounded to the requested milestone.
 - Update the plan as implementation reveals facts. Do not preserve a known-wrong plan merely because it was written first.
 - If the prompt says **plan only**, stop before modifying application code.
+
+## Product and phase alignment
+
+Read [requirements traceability](../docs/REQUIREMENTS_TRACEABILITY.md) and [valuation rules](../docs/VALUATION_RULES.md) when planning core work. Keep each ExecPlan bounded to its requested roadmap phase. The Phase 1 foundation has no product workflow; image/capture plans are later modules under D-018/D-021. Historical plan examples do not authorize a phase.

@@ -1,48 +1,65 @@
 # Codex Workflow for BrickVault Appraisal App
 
+## Current checkpoint and next task
+
+The approved detailed [ExecPlan 000](docs/plans/000-local-foundation.md) is persisted as the canonical Phase 1 execution plan. This checkpoint permits documentation edits and one reviewed local documentation baseline commit with no push. Phase 1 implementation has not started.
+
+The next action eligible for a separate explicit implementation request is **Phase 1 Slice 1A — toolchain and workspace only**. Name that slice and its local dependency/network scope, plus any intended Slice 1A local Git checkpoint. No database, API/frontend shell, or CI implementation follows from the present documentation commit.
+
+[Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review. Its approved review has occurred; reopening that prompt still does not authorize implementation. Historical realignment checkpoint wording in product/history/security documents and dated decisions records the earlier task; current progress belongs here and in ExecPlan 000. Product and security obligations remain unchanged.
+
+## Phase 1 execution boundaries
+
+| Slice | Authorized scope when separately requested | Required stop |
+|---|---|---|
+| 1A — Toolchain and workspace | Verify stable toolchain/package compatibility; create workspace/manifests/configuration; resolve exact locks; format/lint/type/orchestration foundations; local lock checkpoint only when explicitly authorized | Report actual checks before database infrastructure, connections, application shells, or CI |
+| 1B — Database, API, and contracts | Isolated PostgreSQL development/test infrastructure, guarded tooling, SQLAlchemy/Alembic, health/readiness/OpenAPI, deterministic TypeScript contracts, unit/integration checks | Report before frontend/built-serving/browser/CI completion |
+| 1C — Web shell, built serving, CI, and acceptance | Responsive React status shell, Vite proxy, FastAPI static serving, browser tests, GitHub Actions, complete Phase 1 acceptance, permitted documentation | Report and stop before Phase 2 |
+
+Each slice requires a separate explicit implementation authorization. Completing one never authorizes the next. Dependency/tool acquisition requires that slice's explicit local/network scope. No product-provider calls, home access, PWA/Android, domain workflow, or existing PostgreSQL on 5432 belongs to Phase 1.
+
+The Slice 1A plan includes resolving and committing exact locks, but the present request authorizes only the documentation baseline commit. Its future implementation request must explicitly cover any local Git checkpoint. Never use blanket staging and never push implicitly.
+
+## Documentation-update rules during Phase 1 implementation
+
+Read-only by default:
+
+- AGENTS.md
+- docs/ORIGINATING_CHAT_SUMMARY.md
+- docs/PRODUCT_SPEC.md
+- docs/VALUATION_RULES.md
+- docs/SECURITY_PRIVACY.md
+
+Change one only for a concrete verified contradiction that cannot be accurately documented elsewhere. Any proposed change must be narrow, evidence-backed, and explicitly reported; routine implementation progress does not qualify.
+
+Normal status updates belong primarily in README.md, CODEX_WORKFLOW.md, docs/PROJECT_CONTEXT.md, docs/ROADMAP.md, docs/REQUIREMENTS_TRACEABILITY.md, docs/LOCAL_DEVELOPMENT.md, and docs/plans/000-local-foundation.md. Update docs/ARCHITECTURE.md only for verified implementation details. Keep future domain schemas and accepted historical decisions intact; record newly accepted decisions additively.
+
+Use repository-relative paths wherever sufficient. Resolve the repository root dynamically rather than hard-coding a machine/user/checkout location. The proposed local-development document does not exist yet; do not create implementation setup artifacts during the documentation checkpoint.
+
 ## Chat strategy
 
-Use one repository, but do **not** use one endless Codex chat.
+Use one repository and a fresh chat for each major phase; keep tightly scoped plan review and its separately authorized implementation together where practical. Each chat reads [AGENTS.md](AGENTS.md), [product spec](docs/PRODUCT_SPEC.md), [valuation rules](docs/VALUATION_RULES.md), [traceability](docs/REQUIREMENTS_TRACEABILITY.md), current decisions, roadmap, and relevant ExecPlan.
 
-- Start a brand-new Codex chat for project bootstrap.
-- Keep plan review and implementation of the same tightly scoped milestone in that chat.
-- Start a new chat when beginning a new major milestone, when changing from Android to recognition/pricing work, or when the current chat has accumulated obsolete assumptions.
-- Every new chat opens the same repository and reads `AGENTS.md` plus the current plan, so continuity comes from files rather than an enormous conversation.
-- Keep the current ChatGPT conversation for product decisions, tradeoffs, and generation of future Codex prompts.
-
-## Model and reasoning guidance
-
-| Work type | Model | Reasoning | Mode |
-|---|---|---:|---|
-| Initial architecture and risk plan | GPT-6 Astra | Extra High | Plan |
-| Cross-stack implementation milestone | GPT-6 Astra | High | Code after plan review |
-| Android capture/accessibility work | GPT-6 Astra | High or Extra High | Plan first |
-| Recognition/ranking design | GPT-6 Astra | Extra High | Plan first |
-| Well-scoped endpoint, migration, or test | GPT-6 Astra | Medium | Code |
-| Small UI adjustment | GPT-6 Astra | Light/Medium | Code |
-| Difficult cross-stack debugging | GPT-6 Astra | Extra High; Max only if needed | Plan/debug |
-| Independent audits after interfaces stabilize | GPT-6 Astra | Ultra selectively | Multi-agent |
-
-### Why not Ultra at the beginning?
-
-Ultra is best when meaningful parts can run independently. At project inception, architecture, contracts, and data semantics are tightly coupled. Parallel agents can produce competing stacks and inconsistent interfaces. Use Ultra later for bounded parallel work such as independent security, test, and accessibility reviews.
+The [originating summary](docs/ORIGINATING_CHAT_SUMMARY.md) is chronological context. Historical image-first instructions and the starter ZIP never override current decisions. Preserve accepted image contracts in their later module.
 
 ## Prompt rhythm
 
-1. Give Codex one milestone prompt.
-2. Require an ExecPlan for complex work.
-3. Review the plan and correct product assumptions before implementation.
-4. Tell Codex to implement only the approved plan.
-5. Require tests/builds and a concise report.
-6. Review the diff or use `/review` before starting the next milestone.
-7. Commit a clean checkpoint.
-8. Start a new chat for the next milestone.
+1. Select one phase from [ROADMAP.md](docs/ROADMAP.md), and one explicitly named slice for Phase 1.
+2. Establish its entry gate, scope, permitted access, and exclusions.
+3. Review the self-contained ExecPlan under [.agent/PLANS.md](.agent/PLANS.md).
+4. A plan-only request returns the plan in chat and stops. A documentation/local-Git request changes only its authorized Markdown and reviewed Git checkpoint.
+5. Implement only the separately requested slice/phase after required access gates are satisfied.
+6. Run applicable verification, inspect the full diff, and report actual evidence and limitations.
+7. Stage/commit only on Brian's explicit request; never advance automatically or push implicitly.
 
-## Usage-control rules
+Prompt 00 is bootstrap/revalidation. Prompt numbers 01–16 map one-to-one to roadmap phases; 1A/1B/1C are execution slices inside Phase 1, not new numbered phases/prompts. Prompts 13–16 remain optional later image work.
 
-- Do not ask Codex to “build the entire app.”
-- Avoid broad prompts such as “keep improving it.”
-- Give explicit stop conditions.
-- Keep each implementation prompt to one independently testable slice.
-- Use Medium for routine follow-ups rather than leaving every task on Extra High.
-- Do not use Max or Ultra merely because they are available.
+## Model, evidence, and special gates
+
+Use current user-selected settings. Do not spawn subagents unless the user or applicable task instructions explicitly request delegation.
+
+Fixtures prove behavior, not live provider entitlement, rights, or market coverage. Phase 3 resolves provider access/use constraints; Phase 4 proves representative feasibility before supported sourcing is claimed. No version or provider research was refreshed in this documentation checkpoint.
+
+Phase 9 requires Android package/physical core-flow evidence. Phase 10 hardens a local release. Phase 11 requires explicit read-only home discovery authorization; Phase 12 requires a distinct reviewed deployment authorization. Prompt 15 cannot claim overlay/Facebook compatibility from a build.
+
+Never broaden localhost to LAN/public access implicitly. Keep secrets out of chat/clients. Preserve unrelated uncommitted work; never use blanket stage/reset/clean to simplify a checkpoint.

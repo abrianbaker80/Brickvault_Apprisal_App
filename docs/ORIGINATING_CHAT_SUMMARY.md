@@ -1,98 +1,43 @@
 # Originating Chat Summary
 
-This file distills the product discussion that created BrickVault Appraisal App. It is intentionally shorter and more actionable than a verbatim transcript.
+## How to read this history
 
-## Initial idea
+This chronological summary preserves both ideas that now form one product. Historical exploration is not current sequencing authority. [PRODUCT_SPEC.md](PRODUCT_SPEC.md), [DECISIONS.md](DECISIONS.md), and [ROADMAP.md](ROADMAP.md) define the unified valuation-first direction. The starter ZIP is historical material.
 
-Brian wants an app that can analyze Facebook Marketplace LEGO listings when the seller does not provide a set name or number. The app should inspect listing photographs, identify likely sets, and provide current value and realistic resale value before Brian makes an offer.
+## 1. Initial Marketplace-photo idea
 
-Brian already has OpenAI and Gemini API keys.
+The originating discussion concerned Facebook Marketplace LEGO listings whose sellers omit set names/numbers. Brian wanted to inspect photographs, identify likely sets/minifigures, estimate market and realistic resale values, and choose an opening/maximum offer.
 
-## Discussion of training on every LEGO set
+The discussion considered training against every LEGO set. The recommendation was instead catalog/reference retrieval plus multimodal verification through server-side OpenAI/Gemini adapters, with evidence, uncertainty, and Brian's corrections; custom training would come only after enough verified examples.
 
-The first idea was to train an AI using images and metadata for every released set from sources such as Rebrickable and BrickLink.
+A proposed Android experience used a visible floating control, explicit capture, manual carousel swipes, optional crops, title/asking-price entry, upload, and appraisal handoff. Android Share and ordinary upload were fallbacks. No scraping, interception, unattended navigation, or seller automation was accepted.
 
-The recommended approach is instead:
+Brian wanted original photos, useful crops, model/prompt history, candidate scores, corrections, hard negatives, verified contents, and later resale outcomes preserved for training. Predictions were never confirmed labels, and training exports had to exclude seller/unrelated personal content.
 
-- index/catalog every set,
-- store reference images and metadata,
-- create visual embeddings,
-- retrieve the closest candidates for a Marketplace image,
-- use a multimodal model to compare the strongest candidates,
-- use minifigures, distinctive parts, colors, printed elements, visible text, theme, year, and inventories as supporting/contradicting evidence,
-- return ranked candidates with uncertainty,
-- collect Brian's corrections,
-- train a specialized matcher/reranker only after enough confirmed real Marketplace examples exist.
+## 2. Private-use and foundation planning decisions
 
-This avoids a brittle fixed classifier with tens of thousands of classes and avoids pretending pristine catalog photos resemble messy real listings.
+Brian specified one private user, self-hosting, shared server data, no public registration/billing/teams, and no app-store requirement. Personal resale channels, labor, costs, and outcomes could inform later estimates.
 
-## Private-use decision
+The initial repository therefore planned an image-storage slice followed by recognition and Android capture spikes. The documentation checkpoint refined that plan to React/Vite, FastAPI static serving, /api contracts, and robust image semantics: listing_image_id, partial success, immutable originals, derivative lineage, stable upload UUID/position, deterministic persisted ordering, and receipts recovering lost duplicate responses.
 
-Brian clarified that the app will be used solely by him.
+That plan was never implemented. The documents and accepted decision history exist; no application, schema, provider integration, or physical-device result is implied. The earlier image contract is now preserved in [IMAGE_INGESTION.md](IMAGE_INGESTION.md).
 
-Consequences:
+## 3. Product-scope audit and foundational sourcing definition
 
-- no registration, billing, subscriptions, teams, or public support,
-- no need for app-store distribution,
-- self-hosting on Brian's home server is preferred,
-- the app can learn Brian's actual resale channels, costs, margins, labor, and risk tolerance,
-- a browser UI and Android companion can share the same server data.
+Brian then supplied the authoritative set-number/minifigure-value sourcing concept: direct number/name lookup, whole-set new/used market values, each included figure and quantity, individual prices/totals, acquisition/selling costs, profit/ROI/max buy, saved deals/watchlists/settings, and Sets to Hunt.
 
-## Facebook Marketplace capture idea
+The read-only product-scope audit found the repository primarily described the photo-recognition app: images in Phase 1, recognition in Phase 2, capture in Phase 3, manual-priced appraisal in Phase 4, catalog in Phase 5, and pricing in Phase 6. It identified missing or late direct search, exhaustive figure relationships/totals, precise ROI, and hunting.
 
-Brian asked for a smoother way to select Marketplace images, similar to Google's screen overlay/read-the-screen experience.
+The audit recommended keeping one repository with shared catalog/valuation logic and correcting the sequence before any implementation. Internal documentation agreement was not sufficient evidence of product alignment.
 
-The desired Android experience is:
+## 4. Approved unified valuation-first correction
 
-- open a Marketplace listing,
-- tap a floating BrickVault control,
-- capture the current Facebook window/photo,
-- swipe the image carousel manually,
-- capture additional photos,
-- see the number of collected/unique photos,
-- optionally crop or circle a particular set/object,
-- extract or enter title, description, asking price, and URL,
-- send one listing session to the private server,
-- view a compact appraisal result or open the full app.
+Brian directed documentation-only realignment to one unified application. The deterministic set-number/minifigure-value concept is the foundational core. Marketplace image recognition remains a later input method into that same core, not another repository or competing product.
 
-The application must not scrape Facebook, intercept credentials/traffic, or autonomously navigate/click/swipe. Android Share and ordinary upload remain dependable fallbacks.
+D-018 preserves and annotates D-001 through D-008 history, changes D-008 sequencing, and starts D-003 image retention when that feature exists. D-019 makes Chrome/PWA/Android share the primary React UI and backend, with later native extensions only where needed. D-020 establishes exact financial/evidence rules; D-021 rebases the unexecuted foundation and preserves the later upload contract.
 
-## Save images for future training
+The order is foundation, catalog, market integration, representative feasibility, valuation, search/detail, saved deal workflows, hunting, PWA/Android, local hardening, separately authorized discovery/deployment, then optional images/recognition/capture/datasets. Provider rights, live coverage, and Android behavior remain unverified gates.
 
-Brian decided that listing photos should be saved on the server so they can later be used for training.
+## Current workflow and boundaries
 
-The recommended data design saves:
-
-- immutable original screen captures,
-- cropped listing photographs,
-- object-level crops,
-- thumbnails/normalized derivatives,
-- listing metadata and asking price,
-- AI model/provider/prompt versions,
-- candidate sets and scores,
-- Brian's confirmed or corrected identity,
-- hard-negative candidates,
-- condition/completeness notes,
-- purchase price and physically verified contents,
-- eventual resale proceeds, costs, profit, and time to sell.
-
-A prediction is not training truth. Training states should include unreviewed, partially labeled, confirmed, purchase-verified, training-ready, and excluded.
-
-Seller identity, profile photos, messages, notifications, exact addresses, and unrelated screen content should not enter training-ready exports.
-
-## Codex implementation decision
-
-Brian will use Codex with GPT-6 Astra to write the code and wants carefully scoped prompts plus guidance on reasoning level and chat continuity.
-
-Recommended workflow:
-
-- one repository/project,
-- durable context in `AGENTS.md` and `docs/`,
-- one Codex chat per major milestone,
-- plan first for difficult work,
-- Extra High reasoning for initial architecture and recognition design,
-- High for substantial implementations,
-- Medium for routine focused edits,
-- Ultra only when stable interfaces allow genuinely independent sub-tasks.
-
-The build should proceed through risk-controlled vertical slices rather than one prompt asking Codex to build the entire application.
+Use one repository, durable requirements, one bounded phase per request, and ExecPlans under [.agent/PLANS.md](../.agent/PLANS.md). The next step after review is the Phase 1 plan-only prompt, not implementation. No dependency/service/network/server work or staging/commit is authorized by this documentation correction.

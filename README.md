@@ -1,48 +1,45 @@
 # BrickVault Appraisal App
 
-Private, self-hosted software for analyzing LEGO listings—initially Facebook Marketplace listings—from screenshots or Android screen capture, identifying likely sets, estimating current market and resale value, and calculating a rational offer.
+One private, self-hosted LEGO sourcing and appraisal platform for Brian. Start with a set number (including 75331-1) or name, inspect new/used whole-set and minifigure values, calculate profit/ROI and maximum buy, save deals and watchlists, and find supported opportunities in Sets to Hunt.
 
-The originating chat has been distilled into `docs/ORIGINATING_CHAT_SUMMARY.md` so Codex receives the decisions without carrying a bloated transcript.
+Marketplace screenshots and recognition are later optional inputs into the same catalog and valuation core. Direct lookup works with every image feature disabled.
 
-This starter package is intentionally **documentation-first**. It gives Codex durable project context and a sequence of narrowly scoped prompts. It does not contain production application code yet.
+## Current checkpoint
 
-## Product principles
+The approved Phase 1 implementation plan is persisted in [ExecPlan 000](docs/plans/000-local-foundation.md) as part of the valuation-first documentation baseline. Phase 1 has not started. The next action eligible for separate explicit implementation authorization is **Slice 1A — toolchain and workspace only**.
 
-- Single-user: built specifically for Brian, not as a public SaaS product.
-- Private and self-hosted: API keys, listing history, images, and training data stay under Brian's control.
-- Risk-first: prove Android capture and LEGO recognition before investing in the complete app.
-- Dataset-first: retain useful listing photos and verified labels from the first working build.
-- Retrieval before training: index the LEGO catalog and retrieve candidates before considering a custom recognition model.
-- Human-confirmed truth: an AI prediction is never treated as a verified training label until Brian confirms it.
+Phase 1 has three bounded slices: 1A toolchain/workspace; 1B isolated database, API, and contracts; 1C web shell, built serving, CI, and full acceptance. Each requires its own explicit request and ends with a report. [Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review, not an implementation command.
 
-## Recommended repository shape
+No application directories, manifests, dependencies, migrations, runtime configuration, CI workflows, or runnable setup commands exist yet. This checkpoint authorizes documentation and one reviewed local Git commit only; it authorizes no installs, services, database connections, network/server access, implementation, or push. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice authorization and narrow documentation-update rules.
 
-```text
-apps/
-  web/                  Browser UI
-  android/              Native Android capture/share client
-services/
-  api/                  Python API and application logic
-packages/
-  contracts/            Generated/shared API contracts when useful
-infra/                   Local development and deployment files
-docs/                    Product, architecture, decisions, and plans
-.agent/PLANS.md          Rules for Codex execution plans
-AGENTS.md                Persistent Codex project guidance
-```
+## Product and architecture
 
-The exact framework versions and a few implementation choices must be validated by Codex against current official documentation before scaffolding.
+- React + Vite + TypeScript supplies one primary interface for responsive Chrome, the installable PWA, and Android packaging (Capacitor preferred, subject to its later spike).
+- FastAPI serves the production static build and all API routes under /api; one PostgreSQL database is authoritative.
+- Server-side catalog/provider adapters and exact-decimal deterministic valuation serve every client.
+- Sold evidence and current listings, new and used, and whole-set versus split-sale strategies remain distinct.
+- Missing prices are unknown; quantities, provenance, freshness, profit, ROI, and maximum-buy constraints are explicit.
+- Recognition, image storage, overlays, and training retention are later modules; AI predictions are never confirmed labels.
+- Home-server discovery and deployment are separate, explicitly authorized phases.
 
-## How to begin in Codex
+## Read and continue
 
-1. Create a new local folder or repository named `brickvault-appraisal-app`.
-2. Copy this starter package into the repository root.
-3. Open that folder in Codex.
-4. Start a **new Codex chat** with GPT-6 Astra, Extra High reasoning, and Plan mode.
-5. Paste `prompts/00_bootstrap_plan.md`.
-6. Review the plan before allowing implementation.
-7. Continue with `prompts/01_scaffold_foundation.md` in the same chat only after the plan is accepted.
-8. Run the recognition spike next; it tests the core product premise before the advanced Android overlay.
-9. Then run the Android capture spike and continue with one fresh Codex chat per later milestone, always in the same repository.
+1. Read [AGENTS.md](AGENTS.md), [project context](docs/PROJECT_CONTEXT.md), and [product specification](docs/PRODUCT_SPEC.md).
+2. Use [valuation rules](docs/VALUATION_RULES.md) and [traceability](docs/REQUIREMENTS_TRACEABILITY.md) to verify product scope.
+3. Follow [architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md), [decisions](docs/DECISIONS.md), and [roadmap](docs/ROADMAP.md).
+4. Review [ExecPlan 000](docs/plans/000-local-foundation.md), then run only the separately requested prompt under [workflow guidance](CODEX_WORKFLOW.md).
+5. Later-module details are preserved in [image ingestion](docs/IMAGE_INGESTION.md) and [provider gates](docs/PROVIDER_GATES.md).
 
-See `CODEX_WORKFLOW.md` for the model, reasoning, and chat strategy.
+## Planned repository shape
+
+    apps/web/           Shared React UI: Chrome, PWA, Android web assets
+    apps/android/       Later Android wrapper and needed native extensions
+    services/api/       FastAPI and shared catalog/market/valuation domain
+    packages/contracts/ Generated OpenAPI and TypeScript contracts
+    infra/              Later requested local dependencies; deployment separate
+    scripts/            Future local development and validation commands
+    docs/               Requirements, architecture, rules, plans
+    prompts/            Contiguous Phase 0–16 tasks
+    .agent/PLANS.md      ExecPlan requirements
+
+Use pnpm for web/contracts and uv for Python. Create only modules needed by the authorized phase. The starter ZIP is historical material: do not extract it over the repository or treat it as active instructions.

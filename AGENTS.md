@@ -2,107 +2,90 @@
 
 ## Product truth
 
-- This is a private, single-user application for Brian.
-- Its purpose is to analyze LEGO resale listings, identify likely official sets and minifigures, estimate current market value and realistic resale value, and recommend an opening and maximum offer.
-- Initial listing source: Facebook Marketplace. The product must also support ordinary image upload and Android sharing so it is not dependent on Facebook's UI.
-- The system will be self-hosted on Brian's home infrastructure. Do not deploy to, modify, restart, or administer any server unless the current task explicitly authorizes it.
-- The product name is **BrickVault Appraisal App**. The repository slug is `brickvault-appraisal-app`.
+- One private application for Brian: a deliberately unified LEGO sourcing and appraisal platform with a deterministic valuation-first MVP.
+- Direct set-number (including suffixed variants) and name search, whole-set new/used evidence, every included minifigure and quantity, individual/totals pricing, deal math, saved work, and Sets to Hunt are core requirements.
+- Chrome, PWA, and Android use one primary React UI, one FastAPI backend, and one authoritative PostgreSQL database.
+- Marketplace photos, listing sessions, recognition, overlays, and training data are later optional modules. Direct lookup must work when all image features are disabled.
+- The product name is BrickVault Appraisal App; repository slug is brickvault-appraisal-app.
+- Eventual home hosting and an approved abrianbaker.com subdomain confer no present authorization to access or modify any server, Proxmox, router, DNS, Cloudflare, or production system.
+- Checked-out guidance is current. The starter ZIP is historical; never restore it over the repository.
 
 ## Read before complex work
 
-Before planning or implementing a cross-cutting change, read:
+Read [project context](docs/PROJECT_CONTEXT.md), [originating history](docs/ORIGINATING_CHAT_SUMMARY.md), [product specification](docs/PRODUCT_SPEC.md), [valuation rules](docs/VALUATION_RULES.md), [traceability](docs/REQUIREMENTS_TRACEABILITY.md), [decisions](docs/DECISIONS.md), [architecture](docs/ARCHITECTURE.md), [data model](docs/DATA_MODEL.md), [roadmap](docs/ROADMAP.md), and the relevant plan.
 
-1. `docs/PROJECT_CONTEXT.md`
-2. `docs/ORIGINATING_CHAT_SUMMARY.md`
-3. `docs/PRODUCT_SPEC.md`
-4. `docs/DECISIONS.md`
-5. `docs/ARCHITECTURE.md`
-6. The relevant current plan under `docs/plans/`
+Use an ExecPlan under [.agent/PLANS.md](.agent/PLANS.md) for complex features, cross-stack work, migrations, integrations, capture, security, or deployment. The current [ExecPlan 000](docs/plans/000-local-foundation.md) covers only the local foundation.
 
-For a complex feature, significant refactor, schema change, external integration, Android capture change, or deployment change, use an ExecPlan as defined in `.agent/PLANS.md`.
+## Working method and authorization
 
-## Working method
-
-- Work in small, reviewable vertical slices.
-- Implement only the milestone requested in the current prompt. Do not silently begin later roadmap phases.
-- Prefer the smallest defensible change over a broad rewrite.
-- Inspect existing code and tests before editing.
-- State assumptions in the plan or final report. When an assumption becomes an accepted project decision, update `docs/DECISIONS.md`.
-- Keep durable requirements in repository documents rather than depending on chat memory.
-- Do not fabricate successful tests, device verification, API behavior, or external service responses.
-- Stop and report clearly when a step requires physical-device testing, credentials, a paid API, or access that is not present.
+- Work in small reviewable vertical slices and implement only the explicitly requested milestone.
+- Current checkpoint and the next separately authorizable slice are recorded in [CODEX_WORKFLOW.md](CODEX_WORKFLOW.md) and [ExecPlan 000](docs/plans/000-local-foundation.md). Phase 1 uses separate explicit authorizations for Slices 1A, 1B, and 1C; completing one never starts the next. [Prompt 01](prompts/01_scaffold_foundation.md) remains plan-only.
+- Plan approval, persistence, or a mode change does not authorize code, dependencies, service startup, network/provider calls, server access, staging, or a commit.
+- Never stage or commit unless Brian explicitly requests it. Preserve unrelated dirty work.
+- Inspect existing code/tests before future edits; diagnose root causes and use proportionate verification rather than presenting workarounds as solutions.
+- Keep durable requirements here, not only in chat. Record accepted changes additively in decisions.
+- Distinguish fixtures, live provider evidence, builds, emulator results, and physical-device verification; never fabricate any of them.
+- Stop at missing required account access, rights, paid-call authorization, device evidence, or infrastructure approval. Do not request secrets in chat.
+- This documentation task installs nothing. General advice to install missing tools does not override a task's explicit no-install boundary.
 
 ## Architecture guardrails
 
-- Native Android features belong in `apps/android` using Kotlin and Jetpack Compose unless an accepted decision says otherwise.
-- The browser UI belongs in `apps/web`.
-- Server-side application logic, model-provider calls, image processing, catalog ingestion, valuation logic, and secrets belong in `services/api`.
-- The server API is the source of truth. Android and web clients must not independently implement valuation rules or call AI/catalog/pricing providers directly.
-- External providers must be behind interfaces/adapters so OpenAI, Gemini, Rebrickable, BrickLink, or future sources can be replaced or compared.
-- Keep AI model IDs and provider settings configurable. Do not scatter model names throughout the codebase.
-- Start without Redis, a message broker, Kubernetes, MinIO, or microservices unless measured need justifies them. Use a storage abstraction so local filesystem storage can later be replaced by S3-compatible storage.
-- PostgreSQL is the planned metadata store. Use migrations for every schema change. Use pgvector only where vector retrieval is actually implemented.
-- Generate or share typed API contracts rather than duplicating request/response shapes manually across clients.
+- React + Vite + TypeScript belongs in apps/web; the same primary interface is packaged for Chrome/PWA/Android. Capacitor is preferred for Phase 9 pending a documented spike.
+- apps/android holds the later wrapper and genuinely needed native extensions; Kotlin/Compose is not a second implementation of the core UI.
+- FastAPI serves the configurable production static build and all routes under /api. Vite proxies /api locally; unknown API routes must remain JSON errors, not frontend HTML.
+- services/api owns catalog identity, set/minifigure relationships, provider mappings, market evidence, valuation, deals, settings/watchlists, hunting, authentication, and synchronization.
+- Clients never call catalog/pricing/AI providers directly or independently implement financial rules.
+- Use explicit server-side provider adapters; keep provider/model IDs configurable. Later recognition returns candidate canonical identities to the same core, with no separate catalog or valuation engine.
+- PostgreSQL is authoritative. Use reviewed Alembic migrations for every schema change, never runtime create_all.
+- Generate OpenAPI from Pydantic and TypeScript in packages/contracts; use openapi-fetch. No manually duplicated contract shapes.
+- Use uv for Python and pnpm for web/contracts. Start without Redis, brokers, Kubernetes, MinIO, or microservices. Add pgvector only in a measured later retrieval feature.
+- Later image bytes use a replaceable BlobStore abstraction; it is not part of Phase 1.
 
-## Facebook and Android boundaries
+## Financial and provider invariants
 
-- Do not scrape Facebook, intercept traffic, reuse Facebook credentials, automate seller interactions, or build unattended browsing.
-- Capture must be initiated by Brian through an explicit action.
-- Restrict accessibility-assisted capture to approved package names and make the active state visibly obvious.
-- Prefer Android's supported APIs. For Android 14+ evaluate window-specific screenshot capture so the app's overlay is not included in the captured image. Keep a share-target/manual-upload fallback.
-- Do not claim an AccessibilityService or overlay works in Facebook until it has been tested on Brian's physical device.
+- [VALUATION_RULES.md](docs/VALUATION_RULES.md) is authoritative: exact decimal money, explicit currency, documented conversions and rounding.
+- New/used and sold/current-listing evidence stay separate. Do not infer sealed/complete condition from an unsupported provider flag.
+- Missing price or mapping is unknown, never zero or an arbitrary first match. Include provider-scoped IDs, source versions, quantities, review states, periods, sample information, and freshness.
+- Preserve quantity-aware figure totals and missing/damaged adjustments; mutually exclusive sale strategies cannot double-count figures, residual builds, or components.
+- Net proceeds precede acquisition cost; profit subtracts acquisition cost; ROI uses acquisition cost and is undefined at zero.
+- Account for purchase-dependent tax/premiums in both target-ROI and minimum-profit maximum-buy constraints. Recommendations are deterministic, explainable, versioned, and blocked for missing required evidence.
+- Provider access does not establish display, cache, image, training, or historical-retention rights. Follow [provider gates](docs/PROVIDER_GATES.md); bounded retries, quota handling, provenance, and honest unavailable states are required.
+- Catalog/market feasibility precedes the engine and direct-search product; recognition never gates them.
 
-## Image and training-data integrity
+## Later image integrity — Phases 13–16 only
 
-- Preserve original uploaded bytes as immutable assets. Never overwrite the only copy.
-- Address image assets by content hash and detect exact duplicates.
-- Store raw screenshots, cropped listing photos, object crops, thumbnails, and training derivatives as distinct assets with lineage.
-- Separate full-screen captures that may contain personal information from sanitized LEGO-photo crops.
-- A model prediction is not ground truth.
-- Only Brian-confirmed labels, or labels verified after physical purchase, may become training-ready.
-- Save rejected candidates as hard negatives where appropriate.
-- Prevent data leakage: derivatives from one original listing must not be split across training and validation/test partitions.
-- Dataset releases must be versioned and reproducible.
+- Follow [IMAGE_INGESTION.md](docs/IMAGE_INGESTION.md); none of this is a Phase 1 requirement.
+- Preserve immutable originals, SHA-256 exact deduplication, distinct assets/derivative lineage, and explicit privacy classes.
+- Upload independently with partial success. Results use listing_image_id for the listing-to-image relationship, not an asset.
+- Assign client upload UUID and display_order before dispatch; retries preserve UUID, bytes, and position.
+- Persist deterministic ordering from minimum successful receipt positions, with database uniqueness constraints and explicit conflicts.
+- Every successful new or duplicate submission creates or reuses a durable receipt; replay recovers lost responses without extra records.
+- Approve image retention/deletion policy before shipping. A model prediction is not ground truth; only Brian-confirmed or purchase-verified, privacy-reviewed labels may become training-ready.
+- Keep rejected candidates as appropriate hard negatives; keep all connected listing/source derivatives, including shared exact originals, in the same dataset split.
 
-## Security and privacy
+## Later Facebook and Android capture boundaries
 
-- Never commit API keys, tokens, passwords, cookies, seller identities, or production configuration.
-- Keep OpenAI, Gemini, Rebrickable, BrickLink, and any future credentials server-side.
-- Provide `.env.example` with placeholders only.
-- Redact or exclude seller names, profile photos, chat messages, notifications, exact addresses, and unrelated screen content from training-ready images and exports.
-- Logs must not contain image bytes, secrets, authorization headers, or unnecessary personal data.
-- Any remote access design must use authenticated encrypted access. Do not expose an unauthenticated development service to the public internet.
+- Never scrape Facebook or other sources, intercept traffic/credentials, automate seller interactions, or browse/capture unattended.
+- Brian explicitly triggers each capture. Show active status, restrict supported package names, and keep Share/manual-upload fallbacks.
+- Use supported APIs; platform documentation is not proof of Facebook compatibility. Physical-device verification is required for Phase 15.
+- Native share/overlay code extends the shared app; it does not duplicate catalog, price, or offer logic.
 
-## Quality gates
+## Security and scope boundaries
 
-For every implementation task, run the relevant available checks before stopping:
+- Provider credentials stay server-side; never commit secrets, cookies, seller identities, or production configuration. Future .env.example contains placeholders only.
+- Exclude secrets, image bytes, unnecessary listing text, authorization headers, and private filenames from logs.
+- Phase 1 is unauthenticated and loopback-only; use isolated local development/test PostgreSQL and do not connect to or modify the existing service on 5432.
+- Add private authentication in Phase 7 before any non-loopback exposure, with explicit network scope approval; do not expose an unauthenticated development service.
+- Phase 11 is separately authorized read-only discovery. Phase 12 requires a reviewed plan and distinct deployment approval. PostgreSQL is never public.
+- Later screenshots may contain names, profile images, locations, messages, and notifications; apply retention, access, redaction, and deletion rules before that feature ships.
+- Read [SECURITY_PRIVACY.md](docs/SECURITY_PRIVACY.md) for current and later-module obligations.
 
-- formatter
-- linter
-- static/type checks
-- unit tests
-- integration tests affected by the change
-- build for each changed application
+## Quality gates and review priorities
 
-For UI work, verify the relevant route and responsive viewport when the environment permits. For Android work, distinguish compilation/emulator checks from physical-device verification.
+For implementation, run relevant formatter, linter, type/static checks, unit/integration tests, and builds. Verify changed UI routes at responsive viewports; distinguish Android builds from physical tests. Use real PostgreSQL for persistence behavior and deterministic barriers for concurrency tests.
 
-Every completed task must leave:
+For documentation-only tasks, inspect the complete diff including new documents, resolve local Markdown links, check roadmap/prompt/traceability consistency, preserve historical decisions, and confirm no non-document changes. Do not install dependencies or start services for documentation checks.
 
-- code in a buildable state,
-- tests or a documented reason a test cannot yet exist,
-- updated relevant documentation,
-- no unrelated generated files,
-- a concise final report listing changes, verification performed, limitations, and the next logical milestone.
+Flag incorrect money/ROI/max-buy math, double counting, missing data treated as zero, guessed provider mappings, unsupported rights/coverage claims, duplicated client arithmetic, predictions promoted to truth, lost originals/receipts, unstable image order, migration omissions, secret exposure, unauthorized infrastructure work, and tests that mock away the behavior being claimed.
 
-## Code review rules
-
-Flag these as high priority:
-
-- AI guesses persisted as confirmed labels.
-- Original images overwritten or deleted by derivative generation.
-- API keys or provider calls in client code.
-- Facebook automation or background capture without explicit user action.
-- Duplicate valuation formulas in multiple clients.
-- Unbounded external API calls without caching, rate handling, or cost logging.
-- Database changes without migrations.
-- Tests that mock away the behavior they claim to verify.
+Report changes, actual validation, limitations, and the next authorized milestone; stop there.

@@ -1,44 +1,47 @@
-# Prompt 01 — Implement the storage foundation
+# Prompt 01 — Repository and local foundation
 
-**Use in:** the same Codex chat as Prompt 00, after reviewing/accepting the ExecPlan  
-**Model:** GPT-6 Astra  
-**Reasoning:** High  
-**Mode:** Code  
-**Expected result:** one working end-to-end storage vertical slice
+**Mode:** Plan only
 
----
+**Expected result:** An in-chat review of the canonical approved Phase 1 plan; no file or runtime changes
 
-Implement only the approved Phase 1 portion of `docs/plans/000-foundation-and-risk-spikes.md`.
+## Instructions
 
-The completed slice must let me:
+This prompt is PLAN ONLY, including in a mode that permits edits. Read AGENTS.md, CODEX_WORKFLOW.md, README.md, .agent/PLANS.md, product/context/history/decision/architecture/data-model/valuation/security/traceability documents, the roadmap, and docs/plans/000-local-foundation.md. The approved detailed plan has been persisted; review it against current repository facts without implementing it.
 
-1. start the development environment from documented commands,
-2. create a listing in the browser,
-3. upload several PNG/JPEG/WebP images,
-4. preserve the original uploaded bytes immutably in the configured local BlobStore,
-5. store image metadata and listing relationships in PostgreSQL,
-6. detect exact duplicate uploads by SHA-256 without treating duplicates as independent physical blobs,
-7. generate and display thumbnails as separate derived assets with lineage,
-8. reopen the listing and see its metadata and images.
+Return a self-contained in-chat plan with exact future file/command contracts, unchanged final acceptance, and separate Slice 1A/1B/1C authorization and stop boundaries. Keep paths portable and apply the plan's narrow implementation documentation-update rules. Do not modify files, scaffold, install/update dependencies, create manifests/locks/migrations/containers/configuration/CI, start services, open database connections, call providers/network resources, access infrastructure, stage, or commit.
 
-Requirements:
+Future commands are contracts, not existing commands to execute. Installed toolchain/version/port checks belong only to their separately authorized implementation slice.
 
-- Follow `AGENTS.md` and the accepted plan exactly.
-- Use migrations; do not rely on automatic schema creation at runtime.
-- Validate actual image decoding, MIME type, upload size, and pixel dimensions.
-- Make file/database failure behavior transactional or recoverable; document any unavoidable orphan scenario and provide a safe reconciliation command or plan.
-- Keep original files immutable.
-- Add `.env.example` with placeholders only.
-- Do not implement AI, embeddings, LEGO catalog ingestion, pricing, Android code, authentication, remote deployment, queues, MinIO, or background workers.
-- Keep the UI functional and clean, but do not spend this milestone on visual polish.
-- Add unit and integration tests for hashing/deduplication, upload validation, asset lineage, and listing retrieval.
-- Add a lightweight end-to-end or browser test if the selected stack supports it without disproportionate setup.
-- Update README/setup documentation and the ExecPlan progress/outcome sections.
+## Inputs
 
-Verification:
+Approved product/architecture and canonical [ExecPlan 000](../docs/plans/000-local-foundation.md); current documentation baseline and explicit task boundaries.
 
-- Run formatters, linters, type checks, tests, migrations, and builds for every changed component.
-- Start the complete local stack and perform one real upload through the UI/API if the environment permits.
-- Do not claim a manual test occurred if it did not.
+## Scope
 
-Stop after Phase 1 is complete. Do not begin the Android or recognition spikes. In the final report include changed files, commands run and results, manual verification performed, known limitations, and the recommended next prompt.
+Review React/Vite responsive shell, FastAPI, isolated PostgreSQL, SQLAlchemy/Alembic empty baseline, health/readiness/OpenAPI and generated TypeScript contracts, strict checks, provider-free CI, and local setup documentation.
+
+## Exclusions
+
+Catalog imports/providers/pricing/valuation/set search/deals/authentication/Sets to Hunt, listing/image/recognition work, PWA/Android, home infrastructure, deployment, and all implementation or Git mutations in this plan-only prompt.
+
+## Acceptance evidence
+
+The future complete Phase 1 shell/API uses an isolated migrated database and passes contract/format/lint/type/unit/integration/build and built-serving desktop/mobile browser checks, with provider-free CI definitions and reproducible local setup. No product tables or external providers are needed.
+
+The canonical plan's final acceptance is unchanged by the slice split. No application check is claimed by this review.
+
+## Gate and access
+
+The approved plan-only review has occurred. Reusing this prompt remains offline and read-only. A separate explicit implementation request must name one slice:
+
+- **Slice 1A — Toolchain and workspace:** verify compatible stable toolchains; workspace/manifests/configuration, exact locks, and format/lint/type/orchestration foundations; explicitly authorized local lock checkpoint; report and stop before database or application shells.
+- **Slice 1B — Database, API, and contracts:** isolated PostgreSQL, guarded tooling, SQLAlchemy/Alembic, health/readiness/OpenAPI, generated contracts and relevant real tests; report and stop before frontend and CI completion.
+- **Slice 1C — Web shell, built serving, CI, and acceptance:** React shell, Vite proxy, FastAPI static serving, browser tests, GitHub Actions, all final acceptance, permitted documentation; report and stop before Phase 2.
+
+Completing one slice does not authorize the next. The next separately authorizable action is Slice 1A only; the documentation baseline commit is not implementation authorization. No product-provider calls, existing PostgreSQL on 5432, or home/production access belongs to any slice.
+
+## Stop condition
+
+Return the in-chat plan and stop without edits or implementation. Do not interpret this prompt, approval, persistence, or a mode change as a slice execution request.
+
+[Roadmap](../docs/ROADMAP.md) · [Product](../docs/PRODUCT_SPEC.md) · [Traceability](../docs/REQUIREMENTS_TRACEABILITY.md)

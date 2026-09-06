@@ -2,75 +2,40 @@
 
 ## Owner and audience
 
-The sole user and product owner is Brian. This is a private tool, not a public product, marketplace service, or subscription application.
+Brian is the sole user. BrickVault Appraisal App is one private LEGO sourcing and appraisal application, not a public marketplace or subscription service.
 
-## Problem
+## Governing purpose
 
-Facebook Marketplace LEGO listings frequently omit set names and set numbers. Photos may show assembled builds, partial builds, boxes, manuals, minifigures, mixed lots, or loose pieces. Brian wants to identify likely sets before making an offer and understand:
+The foundation answers a deterministic sourcing question: given a set number or name, its included minifigures, reliable condition-specific market evidence, and acquisition/selling assumptions, is the set worth buying? Brian needs whole-set new/used values, each figure's new/used value and quantity, totals, proceeds, profit, ROI, maximum buy, saved deals, and a Sets to Hunt list.
 
-- current fair market value,
-- realistic resale value,
-- likely net proceeds,
-- completeness and identification risk,
-- an opening offer,
-- a maximum rational offer.
+The [product specification](PRODUCT_SPEC.md) and [valuation rules](VALUATION_RULES.md) govern. Every recommendation must expose its evidence and arithmetic; missing information is unknown, not zero.
 
-## Desired experience
+## One platform, shared core
 
-While viewing a Facebook Marketplace listing on Android, Brian should eventually be able to tap a floating BrickVault control, collect the visible listing photos and useful text, and send them to the self-hosted server for analysis. The experience should resemble a private LEGO-focused screen-understanding overlay.
+Chrome, an installable PWA, and the Android core package share the primary React UI, FastAPI API, user data, and authoritative PostgreSQL database. Catalog identity, set/minifigure relationships, provider mappings, market observations, deterministic valuation, deals, watchlists, settings, and hunting scores belong to that core.
 
-The app must also support:
+Phase 1 establishes local tooling, shells, migrations, and health/readiness only. Catalog and market feasibility precede valuation, direct search, saved workflows, and hunting. [ROADMAP.md](ROADMAP.md) defines the gates.
 
-- selecting multiple screenshots from the phone,
-- Android Share into BrickVault,
-- browser upload from Chrome/desktop,
-- manual correction of price/title/description,
-- manual selection or cropping of an object in a crowded photo.
+## Later Marketplace extension
 
-## Recognition approach
+The originating photo concept addresses sellers who omit set numbers or names. Later user-triggered screenshots, photographs, Android Share, and overlay capture can produce candidate catalog identities for the already-proven core. Recognition never becomes a prerequisite to direct set search or owns independent financial rules.
 
-The initial system should not train one fixed classifier with one class for every LEGO set. Instead it should:
+The [originating summary](ORIGINATING_CHAT_SUMMARY.md) preserves that history. Training-useful original/crop/prediction/correction retention starts when the image feature exists, subject to an explicit privacy and deletion policy. No Facebook scraping, credential interception, unattended navigation, or seller automation is allowed.
 
-1. maintain a local catalog of official sets and metadata,
-2. create searchable visual/reference representations,
-3. retrieve a manageable list of candidate sets,
-4. use OpenAI and/or Gemini as candidate analyzers/verifiers,
-5. cross-check visible minifigures, distinctive parts, colors, text, and inventories,
-6. return ranked candidates with evidence and uncertainty,
-7. let Brian confirm, correct, or reject the result.
+## Providers and evidence
 
-A custom matching/reranking model may be trained later from confirmed real-world examples.
+Rebrickable and BrickLink are likely catalog/market sources, but access, mapping accuracy, usable new/used sold coverage, retention/display rights, quotas, and historical audit requirements remain unverified gates. Earlier public-document research is preserved with its limits in [PROVIDER_GATES.md](PROVIDER_GATES.md); it is not permission or live account evidence.
 
-## Data collection for future training
+Brian previously reported having OpenAI/Gemini keys for the later recognition extension. Do not request secrets in chat, inspect private credentials unnecessarily, or infer current entitlement. All provider secrets and calls remain server-side.
 
-Photos must be retained from the first working version in a structured way. Each listing should be able to hold:
+## Hosting and current boundaries
 
-- original full-screen captures,
-- cropped listing photos,
-- selected object crops,
-- thumbnails and normalized derivatives,
-- listing title, description, asking price, URL, and capture date,
-- AI provider/model and prompt version,
-- ranked candidates and scores,
-- Brian's confirmed identity or correction,
-- condition/completeness notes,
-- purchase decision and purchase price,
-- physically verified contents after purchase,
-- eventual resale result and time to sell.
+The eventual service should run on Brian's home server under an approved subdomain of abrianbaker.com. The exact hostname, architecture, and access path are not selected by this document.
 
-Training status should distinguish unreviewed, partially labeled, confirmed, purchase-verified, and training-ready examples.
+No home-server, Proxmox, router, DNS, Cloudflare, or production access is currently authorized. Phase 11 requires separate read-only discovery authorization; Phase 12 requires a reviewed deployment plan and distinct execution approval. Local development must isolate this app from the existing PostgreSQL service on port 5432.
 
-## Current credentials and likely sources
+## Current checkpoint and future possibilities
 
-Brian has OpenAI and Gemini API keys. Additional integrations are expected later for LEGO catalog data and pricing, likely including Rebrickable and BrickLink, but Codex must consult current official documentation and terms when implementing those integrations.
+The approved detailed Phase 1 plan is persisted in [ExecPlan 000](plans/000-local-foundation.md) for the documentation/local-Git baseline checkpoint. No implementation has started. The next separately authorizable action is Slice 1A, toolchain/workspace only; Slices 1B (database/API/contracts) and 1C (web/built serving/CI/acceptance) each require another explicit request. [Prompt 01](../prompts/01_scaffold_foundation.md) remains plan-only when reused. The current checkpoint authorizes one reviewed local documentation commit, no push, and no dependency/service/database/network/server work.
 
-## Hosting
-
-The eventual service will run on Brian's home server and may use a subdomain of `abrianbaker.com`. Local development and proof-of-concept work come first. No production deployment is authorized merely by this document.
-
-## Future possibilities
-
-- Link appraisals to Brian's LEGO sorter after purchase.
-- Use actual parts found by the sorter to update set probabilities and completeness.
-- Learn personalized resale adjustments from Brian's own purchase and sales outcomes.
-- Identify listings where minifigure value or part-out value exceeds complete-set resale value.
+Later outcomes can personalize resale assumptions. A future sorter integration may help verify contents after purchase, but no sorter integration or separate inventory product is part of this foundation. The starter ZIP remains historical material and never overrides checked-out guidance.

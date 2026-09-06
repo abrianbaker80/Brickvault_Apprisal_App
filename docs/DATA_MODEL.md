@@ -1,205 +1,143 @@
-# Data Model Outline
+# Data Model
 
-This is a conceptual model, not a final migration specification.
+## Scope, stages, and conventions
 
-## Listing and capture
+This is a conceptual contract, not a migration or permission to implement. Phase 1 creates only an empty Alembic baseline and its revision metadata; no listing, image, catalog, or valuation entity is required then. Add the entities below in their named phases under reviewed migrations. See [architecture](ARCHITECTURE.md), [valuation rules](VALUATION_RULES.md), and [traceability](REQUIREMENTS_TRACEABILITY.md).
 
-### `listing`
+Use UUID primary keys, timezone-aware UTC timestamps, explicit foreign keys, positive inventory quantities, and nonnegative adjustment/cost inputs where required. Money is exact NUMERIC/Decimal with currency; JSON uses decimal strings. Null/unavailable monetary evidence is not zero. Deletion of catalog rows referenced by history is restricted; use version/status changes and retain reproducible references subject to source rights.
 
-- id
-- source type (`facebook_marketplace`, `manual`, `other`)
-- source URL
-- title
-- description
-- asking price and currency
-- general location text
-- status
-- created/updated timestamps
+## Phase 2 — Explicit catalog identities and relationships
 
-### `capture_session`
+### catalog_set
 
-Groups images and metadata collected during one Android/web capture flow.
+Internal UUID; canonical base number and variant suffix; canonical full set number; name; theme reference; piece count and release/retirement metadata when known; provenance and active status. Unique canonical full identifier, preserving examples such as 75331-1. Canonical namespace rules are explicit; an unsuffixed number is a search input, not permission to pick a variant.
 
-- id
-- listing id
-- client type/version
-- device/OS metadata kept to the minimum useful level
-- started/completed timestamps
+### catalog_theme
 
-### `image_asset`
+Internal UUID, canonical/source name and parent relationship if verified, provenance/version. Unknown theme remains unknown.
 
-Represents immutable stored bytes.
+### minifigure
 
-- id
-- SHA-256
-- storage key
-- MIME type
-- byte count
-- width/height
-- asset kind
-- privacy class
-- created timestamp
+Internal UUID; canonical figure identifier and namespace; name; source/version provenance; active status. A minifigure is an explicit entity, not an untyped catalog-set placeholder.
 
-### `image_relation`
+### set_inventory_version and set_minifigure
 
-Records lineage between assets.
+set_inventory_version identifies one set's inventory revision, source/import run, completeness/review state, and validity/observed times. Distinguish verified empty inventory from missing/incomplete inventory.
 
-- parent asset id
-- child asset id
-- transformation type
-- crop coordinates or transformation metadata
+set_minifigure links inventory-version ID to minifigure ID with integer quantity > 0, source-line provenance, and review state; unique (inventory_version_id, minifigure_id). Repeated figures use quantity, not duplicate relationship rows. An inventory version belongs to exactly one set. A current-version pointer must reference that set's version; snapshots retain the exact version they used.
 
-### `listing_image`
+These foreign keys and constraints preserve explicit set/figure identity and quantities; generic catalog_item is not a substitute.
 
-Links an image asset to a listing/capture session with ordering and role.
+### catalog_import_run and catalog_source_version
 
-### `object_region`
+Record provider/source, source version or content digest, retrieval/import time, importer version, permitted-use reference, status, counts, and quarantine/error summaries without secrets. Imports are resumable/idempotent for a source version. Reject/quarantine malformed rows and uncertain relationships; never silently omit them while marking inventory complete.
 
-A selected/detected object within a listing image, with bounding geometry and an optional derived image asset.
+### set_provider_mapping and minifigure_provider_mapping
 
-## Analysis and recognition
+Separate tables link the appropriate canonical entity to provider namespace, provider item type, exact provider identifier, source/import version, mapping method, evidence, reviewer/time, and review state (proposed, verified, rejected, unresolved).
 
-### `analysis_run`
+A provider item key has at most one active verified canonical target within its item type/namespace. Conflicting proposed mappings remain reviewable and block dependent price attribution. A provider mapping can have multiple historical revisions; snapshots identify the exact accepted mapping revision. Suffix stripping, name similarity, and arbitrary first matches cannot create a verified mapping.
 
-- id
-- listing id
-- status
-- pipeline version
-- requested provider strategy
-- start/end timestamps
-- failure details
+### catalog_image_reference
 
-### `provider_call_log`
+Explicit nullable set ID or minifigure ID with an exactly-one-target constraint; provider/reference URL or permitted local asset reference; source/import provenance; permission basis; review/availability status. Images are optional display metadata with a placeholder when unavailable. Do not borrow unrelated variants' images or assume catalog-image storage rights. Phase 2 does not create the later listing-image BlobStore.
 
-- analysis run id
-- provider
-- model ID
-- prompt/template version
-- request purpose
-- token/image usage and estimated cost
-- latency
-- success/failure metadata without secrets or image bytes
+## Phase 3 — Market observations and provenance
 
-### `candidate_match`
+### market_observation
 
-- analysis run id
-- object/listing image id
-- candidate set number
-- rank
-- component scores (visual, text, inventory, verifier)
-- final score/confidence
-- evidence and contradictions
+Immutable observation identity; exactly one set-mapping revision or minifigure-mapping revision; provider/item key; raw source condition plus normalized new/used and supported packaging/completeness qualifiers; market side (sold or current_listing); statistic type; exact amount/currency or explicit unavailable state; region; source observed-at, fetched-at, observation-window start/end, and stale-after times; sample listing/sale count and item quantity when supplied; source request parameters/version; provenance/use-policy reference.
 
-### `identity_confirmation`
+Foreign keys tie each observation to its verified mapping and correct canonical item type. Do not silently attach an unmapped provider result to a set/figure. Unresolved mappings produce provider_fetch_run/quarantine outcomes, not observations attributed to unverified identities; the API derives mapping-unresolved status from that outcome. Observation state/reason fields represent unavailable, stale, thin, and provider error. Unknown sample information remains null/unknown. Availability and freshness are distinct dimensions.
 
-An append-only event recording Brian's decision.
+New/used, sold/current listing, currency, region, statistic, and observation period participate in query/cache identity. They cannot overwrite or masquerade as each other. Provider refresh creates an observation rather than rewriting one used in a saved calculation, where permitted.
 
-- target object/image/listing
-- confirmed set number or special class
-- confidence source (`user_confirmed`, `purchase_verified`)
-- notes
-- timestamp
+### provider_fetch_run and provider_cache_entry
 
-Special classes include:
+Record bounded request purpose, provider adapter version, canonical query key or unresolved attempted provider identifier, mapping review/quarantine outcome, status/timing/quota metadata, permitted cache expiry, and attributable observation references. Exclude keys, auth headers, URLs containing secrets, and excessive raw payloads. Cache/retention rules are source-specific and must pass Phase 3/4 rights gates.
 
-- unknown
-- insufficient evidence
-- custom build
-- mixed sets
-- non-LEGO
+### currency_conversion_observation
 
-## Catalog and pricing
+Source/target currencies, exact rate/direction, provider, source time, fetched time, and validity policy. Valuations reference the applied conversion; no implicit currency mixing.
 
-### `catalog_set`
+## Phase 4 — Feasibility evidence
 
-- canonical set number
-- name
-- theme/subtheme
-- release year
-- piece count
-- source mappings
-- metadata provenance and update timestamp
+### feasibility_run and feasibility_case
 
-### `reference_image`
+Versioned sample definition, catalog/mapping/import versions, observation references, sample category, expected/actual relationship quantities, whole-set/figure condition/side coverage, freshness/sample adequacy, gaps, rights/access status, and supported/partial/blocked conclusion. The first gate may use a reproducible Markdown/report artifact instead of new database tables if that preserves all evidence.
 
-- catalog set id
-- image asset or external-reference metadata
-- source and permitted-use metadata
-- view type
-- embedding/version status
+Include modern/retired; zero/one/many/repeated figures; dominant valuable figure; suffixed/variant identifiers; unresolved mappings; missing/stale/thin prices. Fixture evidence and live evidence have distinct status; a fixture cannot certify live entitlement.
 
-### `image_embedding`
+## Phase 5 — Valuation domain and snapshot contract
 
-- image asset/reference id
-- provider/model/version
-- dimension
-- vector
-- created timestamp
+The engine is independently testable before browser work. Phase 5 defines immutable snapshot schemas and fixture serialization; Phase 7 persists user deal snapshots through migrations.
 
-### `price_snapshot`
+### valuation_snapshot
 
-- item/set number
-- source
-- condition
-- region/currency
-- statistic type and value
-- sample count
-- observed period
-- fetched timestamp
+Set ID and inventory version; optional deal ID (no required listing/analysis-run ID); chosen sale strategy; formula/calculation version; evidence/confidence policy version; currency; enabled target ROI/minimum-profit constraints; exact assumptions; calculation time; complete/partial/blocked status/reasons; input hash; source/manual distinctions and permitted observation references.
 
-## Appraisal and outcomes
+### valuation_input_line
 
-### `appraisal`
+Snapshot ID, stable line ID, physical allocation group/figure identity or residual-build reference, catalog quantity, actual/absent/selected quantities, condition, source or manual value basis, adjusted unit value/currency, source freshness, conversion reference, and adjustment reason. Quantities must reconcile to the inventory/deal; no physical unit belongs to multiple sale lines in one strategy.
 
-- listing/analysis run id
-- confirmed or assumed identity
-- valuation profile/version
-- market/quick-sale/gross/net estimates
-- cost/risk assumptions
-- opening offer
-- maximum offer
-- explanation snapshot
+Cost input lines identify purchase price, purchase-dependent tax/premium function and bases, fixed acquisition expenses, fee bases/rates, order counts, shipping, packaging, labor/replacements, promotions, risk reserve, and other costs exactly once.
 
-### `deal_outcome`
+### valuation_output_line
 
-- listing id
-- bought/not bought
-- purchase price/date
-- verified contents and missing items
-- replacement costs
-- resale channel
-- gross sale, fees, shipping, other costs
-- net result
-- sale date/time-to-sell
+Snapshot ID, named calculation/line type, exact amount/currency or dimensionless ratio, quantity/coverage where applicable, input dependencies, rounding rule, and available/undefined/partial/blocked state. Outputs include minifigure new/used/deal totals, priced/total/unavailable quantity, concentration, gross/selling/net proceeds, acquisition cost, profit, ROI, each raw maximum-buy cap, recommended rounded/clamped cap, and explanation.
 
-## Dataset management
+Keep whole-set and split-sale snapshots separate; never add their totals. Preserve signed raw bounds and a no-feasible-purchase status when a zero clamp cannot meet targets. ROI is explicitly undefined for zero acquisition cost. Snapshot retention must comply with verified source rules; access alone does not grant perpetual provider-content storage.
 
-### `label_state`
+## Phase 7 — Private saved work and adjustments
 
-State per image/object:
+### user_settings and selling_profile
 
-- unreviewed
-- partially_labeled
-- confirmed
-- purchase_verified
-- training_ready
-- excluded
+Single Brian user/principal reference; revision; currency preference; enabled targets; target ROI/minimum profit; acquisition-cost rules; profile-specific fees, shipping, packaging, order-count, labor, reserve, and freshness policies; schema/version/time. Defaults are visible and editable, not hidden financial facts. Preserve configurable local-sale, shipped-resale, BrickLink-like, and personal-collection scenarios from earlier planning; fee schedules are dated settings, never eternal provider constants. No public registration/team model.
 
-### `dataset_release`
+### saved_set and watchlist_item
 
-- name/version
-- selection rules
-- split seed
-- manifest hash
-- created timestamp
+Canonical set reference and Brian owner; saved timestamp; active/status; target purchase price/currency; notes; selected strategy/profile; revision and notification-independent watch status. Use uniqueness for the same owner/set/strategy where appropriate; a watchlist is not an automated purchase or seller-contact permission.
 
-### `dataset_item`
+### saved_deal
 
-- dataset release id
-- image/object asset
-- label
-- split
-- hard-negative relationships
-- provenance
+Brian owner; canonical set and inventory version; asking price/currency; source URL/type, notes, target price, deal state, creation/update/revision; references to immutable valuation snapshots and selected profile version. URLs remain metadata and are not fetched. A later listing-session link is nullable. A deal can exist without any image or prediction.
 
-All derivatives from one original listing must remain in the same split group.
+### deal_minifigure_adjustment
+
+Deal/figure and stable unit-group references; catalog quantity, present quantity, absent quantity, selected-for-separate-sale quantity; intact/damaged/incomplete condition; adjusted value/replacement basis, notes, and provenance. Split mixed conditions into nonoverlapping quantity groups. Enforce totals and no more physical units than a declared inventory/explicit additional-item amendment permits.
+
+### deal_build_adjustment
+
+Deal and residual-build allocation; completeness estimate/evidence, missing build items, instructions/box status, retained figures, estimated proceeds basis, condition adjustment or replacement costs, confidence and notes. Prevent removed figures or their components from remaining in valued residual quantities.
+
+### authentication and revisions
+
+Private principal/session records store only approved credential verifiers/tokens, expiry/revocation, and minimal audit data; exact mechanism is a Phase 7 security-plan decision. Saved-work writes carry a server revision; conflicting updates are explicit, not silently overwritten. Phase 1 creates none of these tables.
+
+## Phase 8 — Hunting
+
+### hunt_run and hunt_score_snapshot
+
+Sample/universe and catalog/market/profile versions; scoring version; deterministic sort/tie policy; timestamp; eligible/blocked status; component scores and explanations; referenced valuation snapshot; profit/ROI/max-buy, minifigure coverage, market activity/freshness, confidence, top-figure concentration, residual-estimate dependence, estimated listing/order count, and operational burden.
+
+A score is reproducible from its inputs. Unknown required evidence blocks or excludes with a reason; no fabricated precise score. Catalog opportunities without a known asking price expose maximum buy and the explicit hypothetical acquisition assumption, not an invented available deal.
+
+## Phase 9 — Synchronization and caches
+
+PostgreSQL remains authoritative. Server revision/sync metadata identifies cached versions; device/browser caches hold only allowed dated views of set details, saved work, and watchlists. Initial offline behavior is read-only; fresh searches, recalculation, and writes require connectivity. Provider cache rights still apply on client caches; do not replicate prohibited content. Account logout/expiry clears or locks sensitive local data under the reviewed policy.
+
+## Later listing, image, recognition, and dataset module — Phases 13–16
+
+These entities are optional additions, not prerequisites for any core table or Phase 1.
+
+- Phase 13 listing: optional source URL/title/description/asking price with private metadata; nullable association to saved_deal.
+- Phase 13 blob: physical immutable SHA-256 key/byte count; image_asset: semantic original/thumbnail with dimensions/kind/privacy; image_relation: parent/child/versioned transformation lineage.
+- Phase 13 listing_image: UUID exposed as listing_image_id, listing ID, canonical original asset, persisted display_order; unique original and position per listing.
+- Phase 13 upload_receipt: listing, client UUID, immutable bytes hash/requested position, private filename, stored result, listing_image_id; unique UUID and claimed position per listing, same-listing foreign key. Every successful duplicate has a new/reused receipt; replay is recoverable.
+- Persist minimum successful receipt position per unique image; maintain receipt high-water mark and explicit UUID/position conflicts. Full constraints, race examples, privacy, and recovery are preserved in [IMAGE_INGESTION.md](IMAGE_INGESTION.md).
+- Phases 14–15 analysis_run, provider_call_log, candidate_match, identity_confirmation, capture_session, and object_region reference shared canonical sets/minifigures and optional image lineage, never duplicate core catalogs/mappings/valuation.
+- Later reference representations point to shared catalog_image_reference records and record embedding provider/model/version/dimension, view type, and update status; they are a derived index, not new catalog identities. Add vector persistence only when the measured Phase 14/16 use case needs it.
+- Phase 16 label_state, dataset_release, and dataset_item preserve reviewed labels, source grouping, manifests, split seed, hard negatives, and privacy provenance.
+- Phase 16 deal_outcome appends purchase price/date, verified sets/figures/missing items, replacements/labor, channel/date/gross/fees/shipping/net, time to sell, and forecast-versus-actual error to the core saved deal. It does not rewrite the original valuation snapshot.
+
+Originals cannot be overwritten. Implement retention/deletion only under the approved later policy; references, shared blobs, dataset releases, and backups must be handled deliberately. AI predictions never become confirmed training labels automatically.
