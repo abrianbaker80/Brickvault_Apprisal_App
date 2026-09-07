@@ -16,6 +16,8 @@ Completed local foundation; explicit identity/quantity contracts and permitted l
 
 Repeatable imports of sets, suffixed-number normalization, names/themes, minifigures, versioned quantity relationships, provider-scoped mappings, provenance, and source versions.
 
+R-11 also requires the catalog portion of the [part-out plan](../docs/plans/005-set-part-out-values.md): versioned component/color quantities, exact mappings, extras/alternates/matching groups and mutually exclusive assembled-figure allocation. Verify these with permitted fixtures; pricing and totals belong to later phases.
+
 ## Exclusions
 
 Pricing/valuation implementation, browser search/detail workflow, image ingestion, embeddings, recognition, scraping, and infrastructure changes. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.

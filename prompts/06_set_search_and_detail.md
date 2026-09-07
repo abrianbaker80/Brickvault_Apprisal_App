@@ -16,6 +16,8 @@ Verified catalog/market contracts, passed feasibility gate, and tested valuation
 
 Direct suffixed-number/name search and a set-detail API/React page with whole-set and minifigure new/used values, quantities/totals, permitted images/references, separate market sides, provenance, and unavailable states.
 
+Display both server-calculated new/used values from the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md), with inclusion choices, price basis, currency, freshness, lot/unit coverage and expanded component details. Browser acceptance must distinguish complete, partial and unavailable totals and identify them as theoretical values.
+
 ## Exclusions
 
 Listing sessions, user image uploads, recognition, separate client formulas, saved-deal editing, and deployment. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.

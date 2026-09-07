@@ -34,6 +34,10 @@ An accessible legacy terms page stated a default 5,000-call daily allowance and 
 
 Research references for a separately authorized future check: [published manual](https://static.bricklink.com/alpha/default/api_wiki.html), [legacy terms](https://www.bricklink.com/help.asp?helpID=2436), [current terms location](https://www.bricklink.com/v3/terms_of_use_api.page).
 
+## Set part-out evidence gate — added 2026-09-06
+
+The new/used [part-out plan](plans/005-set-part-out-values.md) follows public-manual verification of subset inventory and item price-guide methods. An aggregate set part-out-price endpoint was not found in the reviewed method list. Treat inventory-plus-price aggregation as the planned integration, subject to authenticated feasibility and current rights. Verify nested/matching/extra/alternate behavior, source flags, distinct item/color request budgets, and equivalent settings before claiming parity with BrickLink's website. No authenticated provider requests occurred in this planning check.
+
 ## Later AI and recognition gate — Phase 14
 
 Keep OpenAI/Gemini adapters, model IDs, embedding dimensions, prompts, and spending caps configurable and server-side. Prior bootstrap notes described Gemini multimodal image embeddings through gemini-embedding-2 and text-only gemini-embedding-001; model availability, account access, image-use permission, provider data retention, costs, and quality must be reverified in the requested spike.

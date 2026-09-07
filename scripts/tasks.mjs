@@ -7,12 +7,14 @@ import {
   linkSync,
   lstatSync,
   mkdirSync,
+  mkdtempSync,
   openSync,
   readFileSync,
+  realpathSync,
   unlinkSync,
   writeFileSync,
 } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
+import { dirname, join, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 export const UV_VERSION = '0.12.10';
@@ -79,7 +81,7 @@ export function uvInvocation(task, root, offline, cwd = process.cwd(), environme
   }
   /** @type {Record<string, string[]>} */
   const commands = {
-    'uv:sync': ['sync', '--locked', '--all-groups', '--no-install-project'],
+    'uv:sync': ['sync', '--locked', '--all-groups'],
     'uv:check': ['lock', '--check'],
     'uv:cache': ['cache', 'dir'],
   };
@@ -157,6 +159,29 @@ export function requirePrivateConfig(root) {
   const ignored = spawnSync('git', ['check-ignore', '--quiet', '--', '.env.local'], options);
   if (ignored.error || ignored.status !== 0) {
     throw new SetupError('Local configuration must be ignored by Git before initialization.');
+  }
+}
+
+/** Verify ignored local storage and its effective ancestry before any new writes.
+ * @param {string} root @param {string} directory
+ */
+export function requireLocalStorage(root, directory) {
+  const local = resolve(root, '.local');
+  if (directory !== local && !resolve(directory).startsWith(local + sep)) {
+    throw new SetupError('Temporary storage must remain inside repository .local.');
+  }
+  const ignored = spawnSync('git', ['check-ignore', '--quiet', '--', '.local/probe'], {
+    cwd: root,
+    stdio: 'pipe',
+    windowsHide: true,
+  });
+  if (ignored.status !== 0) throw new SetupError('Repository local storage must be ignored.');
+  let ancestor = resolve(directory);
+  while (!existsSync(ancestor)) ancestor = dirname(ancestor);
+  const realRoot = realpathSync(root);
+  const realAncestor = realpathSync(ancestor);
+  if (realAncestor !== realRoot && !realAncestor.startsWith(realRoot + sep)) {
+    throw new SetupError('Repository local storage must not redirect outside the checkout.');
   }
 }
 
@@ -312,10 +337,113 @@ const formatInputs = [
   'scripts/**/*.mjs',
   'apps/*/*.json',
   'packages/*/*.json',
+  'packages/contracts/src/index.ts',
+  'infra/*.yml',
   'docs/LOCAL_DEVELOPMENT.md',
 ];
 
-/** Only real Slice 1A commands are dispatched. Later commands are absent.
+/** @param {string} root */
+export function pythonPath(root) {
+  return join(
+    root,
+    'services/api/.venv',
+    process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python',
+  );
+}
+
+/** Keep Python caches/temp artifacts inside the repository without uv or dotenv loading.
+ * @param {string} root
+ */
+export function pythonEnvironment(root) {
+  const temporary = join(root, '.local/tmp');
+  requireLocalStorage(root, temporary);
+  mkdirSync(temporary, { recursive: true });
+  return {
+    ...Object.fromEntries(
+      Object.entries(process.env).filter(
+        ([key]) => !/^(?:PYTHON|VIRTUAL_ENV$|CONDA_PREFIX$|TMP$|TEMP$|TMPDIR$)/iu.test(key),
+      ),
+    ),
+    PYTHONNOUSERSITE: '1',
+    PYTHONUTF8: '1',
+    TMP: temporary,
+    TEMP: temporary,
+    TMPDIR: temporary,
+    MYPY_CACHE_DIR: join(root, '.local/mypy-cache'),
+    RUFF_CACHE_DIR: join(root, '.local/ruff-cache'),
+  };
+}
+
+/** @param {string} root @param {string[]} args */
+function runPython(root, args) {
+  const child = spawnSync(pythonPath(root), args, {
+    cwd: root,
+    env: pythonEnvironment(root),
+    stdio: 'inherit',
+    windowsHide: true,
+  });
+  if (child.error) throw new SetupError('Python project environment unavailable; run uv:sync.');
+  return child.status ?? 1;
+}
+
+/** @param {string} root @param {boolean} check @param {string} [expectedDirectory] */
+export function contractsTask(root, check, expectedDirectory = join(root, 'packages/contracts')) {
+  if (
+    ![root, join(root, 'services/api'), join(root, 'packages/contracts')].includes(
+      resolve(process.cwd()),
+    )
+  ) {
+    throw new SetupError('Run contract tasks from root, services/api, or packages/contracts.');
+  }
+  requirePrivateConfig(root);
+  const temporaryRoot = join(root, '.local/contracts');
+  requireLocalStorage(root, temporaryRoot);
+  mkdirSync(temporaryRoot, { recursive: true });
+  const temporary = mkdtempSync(join(temporaryRoot, 'generate-'));
+  const openapi = join(temporary, 'openapi.json');
+  const schema = join(temporary, 'schema.d.ts');
+  const env = Object.fromEntries(
+    Object.entries(pythonEnvironment(root)).filter(([key]) => !/^(?:BVA_|PG)/iu.test(key)),
+  );
+  const exported = spawnSync(pythonPath(root), ['-m', 'brickvault_api.contracts'], {
+    cwd: root,
+    env,
+    encoding: 'utf8',
+    windowsHide: true,
+  });
+  if (exported.error || exported.status !== 0)
+    throw new SetupError('Schema export failed; diagnostics redacted.');
+  writeFileSync(openapi, exported.stdout, 'utf8');
+  const generated = spawnSync(
+    process.execPath,
+    [
+      join(root, 'packages/contracts/node_modules/openapi-typescript/bin/cli.js'),
+      openapi,
+      '--output',
+      schema,
+    ],
+    { cwd: root, env, stdio: 'pipe', windowsHide: true },
+  );
+  const result = generated.status ?? 1;
+  if (result !== 0) return result;
+  /** @type {[string, string][]} */
+  const outputs = [
+    [openapi, join(expectedDirectory, 'openapi.json')],
+    [schema, join(expectedDirectory, 'src/schema.d.ts')],
+  ];
+  for (const [generated, expected] of outputs) {
+    const bytes = readFileSync(generated);
+    if (check) {
+      if (!existsSync(expected) || !readFileSync(expected).equals(bytes)) return 1;
+    } else {
+      mkdirSync(dirname(expected), { recursive: true });
+      writeFileSync(expected, bytes);
+    }
+  }
+  return 0;
+}
+
+/** Dispatch only implemented foundation commands. Slice 1C commands remain absent.
  * @param {string[]} args
  * @param {string} [root]
  * @param {(message: string) => void} [log]
@@ -328,7 +456,8 @@ export function dispatch(args, root = repositoryRoot(), log = console.log) {
     }
     return runUv(task, root, args[1] === '--offline', log);
   }
-  if (args.length !== 1) throw new SetupError('Expected one Slice 1A task name. See package.json.');
+  if (args.length !== 1)
+    throw new SetupError('Expected one foundation task name. See package.json.');
   switch (task) {
     case 'dev:init':
       log(`Local configuration ${initializeConfig(root)}; values redacted.`);
@@ -340,34 +469,109 @@ export function dispatch(args, root = repositoryRoot(), log = console.log) {
       return runChild(uv, ['--version'], root);
     }
     case 'format:check':
-      return runChild(
-        process.execPath,
-        [join(root, 'node_modules/prettier/bin/prettier.cjs'), '--check', ...formatInputs],
-        root,
+      return (
+        runChild(
+          process.execPath,
+          [join(root, 'node_modules/prettier/bin/prettier.cjs'), '--check', ...formatInputs],
+          root,
+        ) ||
+        runPython(root, [
+          '-m',
+          'ruff',
+          'format',
+          '--check',
+          'services/api/src',
+          'services/api/tests',
+          'scripts',
+        ])
       );
     case 'lint':
-      return runChild(
-        process.execPath,
-        [
-          join(root, 'node_modules/eslint/bin/eslint.js'),
-          '--max-warnings',
-          '0',
-          'scripts/**/*.mjs',
-          '*.config.mjs',
-        ],
-        root,
+      return (
+        runChild(
+          process.execPath,
+          [
+            join(root, 'node_modules/eslint/bin/eslint.js'),
+            '--max-warnings',
+            '0',
+            'scripts/**/*.mjs',
+            '*.config.mjs',
+          ],
+          root,
+        ) ||
+        runPython(root, [
+          '-m',
+          'ruff',
+          'check',
+          '--config',
+          'services/api/pyproject.toml',
+          'services/api/src',
+          'services/api/tests',
+          'scripts',
+        ])
       );
     case 'typecheck':
-      return runChild(
-        process.execPath,
-        [join(root, 'node_modules/typescript/bin/tsc'), '--project', 'tsconfig.tools.json'],
-        root,
+      return (
+        runChild(
+          process.execPath,
+          [join(root, 'node_modules/typescript/bin/tsc'), '--project', 'tsconfig.tools.json'],
+          root,
+        ) ||
+        runChild(
+          process.execPath,
+          [
+            join(root, 'node_modules/typescript/bin/tsc'),
+            '--project',
+            'packages/contracts/tsconfig.json',
+          ],
+          root,
+        ) ||
+        runPython(root, [
+          '-m',
+          'mypy',
+          '--config-file',
+          'services/api/pyproject.toml',
+          'services/api/src',
+          'services/api/tests',
+          'scripts',
+        ])
       );
     case 'test:unit':
-      return runChild(process.execPath, ['--test', join(root, 'scripts/tasks.test.mjs')], root);
+      return (
+        runChild(process.execPath, ['--test', join(root, 'scripts/tasks.test.mjs')], root) ||
+        runPython(root, [
+          '-m',
+          'pytest',
+          '-c',
+          'services/api/pyproject.toml',
+          'services/api/tests/unit',
+          'scripts/test_database.py',
+        ])
+      );
+    case 'db:up':
+    case 'db:migrate':
+    case 'db:status':
+    case 'db:stop':
+    case 'test:integration':
+      if (![root, join(root, 'services/api')].includes(resolve(process.cwd())))
+        throw new SetupError('Run database tasks from root or services/api.');
+      return runPython(root, [join(root, 'scripts/database.py'), task]);
+    case 'dev:api':
+      return runPython(root, [join(root, 'scripts/serve_api.py')]);
+    case 'contracts:generate':
+    case 'contracts:check': {
+      const status = contractsTask(root, task === 'contracts:check');
+      log(
+        status === 0
+          ? `${task} passed.`
+          : `${task} failed: generated contract drift or generator failure.`,
+      );
+      return status;
+    }
+    case 'build:api':
+      return runPython(root, [join(root, 'scripts/package_api.py')]);
     default:
       throw new SetupError(
-        'Unknown or unavailable Slice 1A task. See package.json; later slices are not implemented.',
+        'Unknown or unavailable foundation task. See package.json; later slices are not implemented.',
       );
   }
 }

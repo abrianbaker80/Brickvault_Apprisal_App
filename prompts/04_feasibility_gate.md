@@ -16,6 +16,8 @@ Catalog/mapping versions, normalized market adapter, permitted observations, and
 
 Evaluate modern/retired, zero/one/many/repeated figures, one valuable dominant figure, suffixed variants, unresolved mappings, missing prices, stale/thin evidence, and supported residual-build assumptions.
 
+Evaluate [R-11 part-out feasibility](../docs/plans/005-set-part-out-values.md): inventory flag/matching-group semantics, exact component/color coverage in each condition, request cost/latency and comparable website settings. Report live rights and coverage separately from fixtures; explain differences and keep partial totals explicit.
+
 ## Exclusions
 
 Recognition benchmarks, scaling imports instead of evaluating coverage, fabricated provider access/rights, product UI expansion, and production access. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.

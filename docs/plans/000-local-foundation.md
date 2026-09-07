@@ -1,14 +1,16 @@
 # Phase 1 — Local foundation implementation plan — ExecPlan 000
 
-**Status:** Slice 1A ACCEPTED for the reviewed local checkpoint. Slices 1B and 1C NOT STARTED. Phase 1 is not complete.
+**Status:** Slice 1A ACCEPTED at 150caf77820d09c60d028eeeba5b1b4317e11539. Slice 1B ACCEPTED for the reviewed local checkpoint; independent acceptance evidence follows the historical implementation report below. Slice 1C NOT STARTED. Phase 1 is not complete.
 
 **Date:** 2026-09-05
+
+**Slice 1B outcome updated:** 2026-09-06 local / 2026-09-07 UTC
 
 **Owner:** Brian
 
 This is the canonical, self-contained Phase 1 execution plan under D-021 and D-022. It incorporates the approved in-chat plan and Brian's documentation-checkpoint refinements: portable paths, narrow documentation-update rules, and separately authorized Slices 1A, 1B, and 1C.
 
-The documentation baseline is commit cb3e4373ee02faf4a485eb451d98749090f34e17. Brian subsequently authorized Slice 1A implementation only, including bounded official documentation/registry/package access and a repository-local uv bootstrap. The initial implementation verified a clean baseline. The subsequent acceptance-review request expects the dirty Slice 1A result and authorizes bounded corrections plus one local commit only after acceptance passes. Branch changes, push, services, containers, database connections, infrastructure, and application source remain excluded. Slices 1B and 1C still require separate requests. Historical checkpoint statements below describe their dated authorizations.
+The documentation baseline is commit cb3e4373ee02faf4a485eb451d98749090f34e17. Brian subsequently authorized Slice 1A implementation and its conditional local acceptance commit, then Slice 1B implementation and local repair/continuation. The later Slice 1B acceptance request authorizes bounded corrections, fresh checks and one local commit only after acceptance passes. No branch change, push or Slice 1C work is authorized. Historical checkpoint statements below retain their dated authorizations.
 
 Read [workflow](../../CODEX_WORKFLOW.md), [guidance](../../AGENTS.md), [architecture](../ARCHITECTURE.md), [data model](../DATA_MODEL.md), [roadmap](../ROADMAP.md), [security/privacy](../SECURITY_PRIVACY.md), [valuation rules](../VALUATION_RULES.md), [traceability](../REQUIREMENTS_TRACEABILITY.md), and [decisions](../DECISIONS.md). [Prompt 01](../../prompts/01_scaffold_foundation.md) remains a reusable plan-only review; it is not an implementation command.
 
@@ -579,6 +581,13 @@ Do not use broad reset, restore, clean, volume deletion, or unrelated process te
 
 ## 12. Progress log
 
+- [x] 2026-09-05 local / September 6 UTC — Slice 1B entry verified at 150caf77820d09c60d028eeeba5b1b4317e11539, clean worktree and empty index. Initial attempt stopped at missing Docker Desktop Linux named pipe without edits.
+- [x] Expanded repair authorization received for this local Windows computer only. It supersedes the earlier task's no-repair restriction; it does not authorize unrelated data loss, infrastructure access, global uv changes, abandoned-cache cleanup, Git mutations, or Slice 1C. Destructive repairs require verified recoverability; a reboot requires Brian's timing approval.
+- [x] Least disruptive repair succeeded: `docker desktop start --timeout 45`. Desktop 4.63.0.220185 was not running, Docker/Ubuntu WSL distributions were stopped, vmcompute/WslService were running. No configuration, installation, optional feature, permission, or version change; no backup/destructive operation/reboot was needed. Server 29.2.1 reports linux/amd64 on verified local `npipe:////./pipe/dockerDesktopLinuxEngine`; Compose 5.0.2 works. Existing Akaunting's three containers resumed automatically; four volumes and its network remain present, with no direct changes. Keep Docker running to preserve those workloads. Supported command: [Docker Desktop start](https://docs.docker.com/reference/cli/docker/desktop/start/). No interrupted running workloads, restore test, diagnostics upload, or configuration rollback to report.
+- [x] Rechecked all planned ports (8000, 5173, 55432, 55433, 18000): free. Neither intended Compose project nor its resources exists. Existing unrelated resources will not be adopted or stopped.
+- [x] 2026-09-06 local / 2026-09-07 UTC — Complete Slice 1B: guarded instances/roles, packaged empty baseline, FastAPI, generated contracts, 19 Node/51 Python unit tests, 24 real PostgreSQL integration tests, independent wheel verification and final cleanup. Record actual outcomes below; leave all changes uncommitted and stop before Slice 1C.
+- [x] 2026-09-06 — Record Brian's additional new/used part-out planning request in D-024/R-11, valuation rules, roadmap/traceability/provider gates, the Phases 2–6 prompts and a separate plan. Public API documentation only; no product implementation or authenticated provider request.
+
 - [x] 2026-09-05 — Read guidance, product documents/prompts, and product-scope audit; preserve historical decisions and later image contracts.
 - [x] 2026-09-05 — Rebase the unexecuted image-first foundation to the unified valuation-first scope.
 - [x] 2026-09-05 — Complete the in-chat Phase 1 plan-only review; Brian approves persistence with portable paths, documentation-update restrictions, and separate slices.
@@ -590,7 +599,7 @@ Do not use broad reset, restore, clean, volume deletion, or unrelated process te
 - [x] 2026-09-05 — Run real dev:init twice with byte preservation, inspect secret/ignore/scope evidence and documentation; retain all Slice 1A work uncommitted for review. Stop before Slice 1B.
 - [x] 2026-09-05 — Acceptance review verifies the required HEAD, empty index, four modified documents and 23 new files; reviews every authored file, tracked diff, and both complete lock structures. Correct cwd-dependent uv destinations and normalized configuration URLs; record reproducible regression evidence below.
 - [x] 2026-09-05 — All applicable acceptance checks pass: frozen/locked offline reproduction, unchanged locks, formatting/lint/strict tooling types, 17 tests, private configuration preservation/redaction, ignore/credential scans, internal links, and diff checks. Local checkpoint is authorized after the required staged review; no Slice 1B work follows.
-- [ ] Obtain separate explicit Slice 1B implementation authorization; execute only its bounded scope, report actual evidence, and stop.
+- [x] Obtain separate explicit Slice 1B implementation authorization; execute only its bounded scope, report actual evidence below, and stop.
 - [ ] Obtain separate explicit Slice 1C implementation authorization; execute its scope and full Phase 1 acceptance, report, and stop before Phase 2.
 
 The completed documentation-baseline checkbox remains historical. Slice 1A checkboxes record only the local tooling evidence below, not application acceptance or hosted CI results.
@@ -733,3 +742,431 @@ The local checkpoint contains this acceptance record; its resulting commit hash 
 are reported after Git returns, avoiding a self-referential hash in the commit. No failed hook is bypassed.
 No push is authorized. Next checkpoint: **separate explicit Slice 1B authorization**. Slice 1B and
 Slice 1C remain NOT STARTED; Phase 1 is incomplete.
+
+### Slice 1B actual outcome — 2026-09-06 local / 2026-09-07 UTC
+
+**Result: COMPLETE.** The backend slice is implemented and verified. Slice 1C is NOT STARTED;
+Phase 1 overall remains incomplete. No staging, commit, push, reset or branch change occurred.
+
+#### Entry state and environment repair
+
+Initial entry verified the intended existing checkout, HEAD
+150caf77820d09c60d028eeeba5b1b4317e11539, clean tracked/untracked worktree and empty index.
+The resumed task preserved this slice's existing dirty work, verified the same HEAD and empty
+index, and continued from the known TypeScript failure rather than repeating Slice 1A acceptance.
+
+Before daemon calls, Docker context inspection confirmed desktop-linux resolves to the local
+`npipe:////./pipe/dockerDesktopLinuxEngine`, with no effective Docker/Compose overrides. The
+initial missing pipe was a stopped Desktop/WSL engine. Under Brian's subsequent expanded repair
+authorization, `docker desktop start --timeout 45` restored it. No installation, reset, data
+deletion, Windows feature/service/security change, persistent configuration change or reboot was
+needed. Docker's [supported start command](https://docs.docker.com/reference/cli/docker/desktop/start/)
+was used. Existing Akaunting containers resumed automatically; none was directly operated on.
+
+The initial working versions were Desktop 4.63.0.220185, Engine 29.2.1 and Compose 5.0.2.
+Resumption found Desktop 4.89.0.238018, Engine 29.7.2 and Compose 5.5.0, plus an unrelated
+running container and three paused Akaunting containers. That intervening upgrade/state change
+was outside this task. Linux/amd64 daemon readiness and Compose operation were reverified;
+the task preserved those resumed unrelated states. Ports 8000, 5173, 55432, 55433 and 18000
+were free at the entry/resumption gates. No port owner was killed or replacement port selected.
+
+#### PostgreSQL identity, ownership and migrations
+
+Pinned image:
+
+    docker.io/library/postgres:18.6-bookworm@sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af
+
+This is the verified official PostgreSQL 18.6 Debian Bookworm image. The immutable reference
+uses the multi-platform index digest; the inspected linux/amd64 manifest is
+`sha256:a10c981235b4f635e65df0cfb66a5598064628128505dbc6a3ed4ca303717521`.
+Sources: [PostgreSQL support](https://www.postgresql.org/support/versioning/),
+[official-image metadata](https://raw.githubusercontent.com/docker-library/official-images/master/library/postgres),
+and the pinned source [18/bookworm Dockerfile](https://raw.githubusercontent.com/docker-library/postgres/e00e1bd34ec5c8a8e7ad89b273b3d42efaf6d5bc/18/bookworm/Dockerfile).
+The registry manifest and actual server version were verified. PGDATA is
+/var/lib/postgresql/18/docker; the named volume mounts at /var/lib/postgresql.
+
+| Purpose | Project | Loopback publication | Volume | Database |
+|---|---|---|---|---|
+| Development | brickvault-appraisal-dev | 127.0.0.1:55432 | brickvault-appraisal-dev_data | brickvault_dev |
+| Integration | brickvault-appraisal-test | 127.0.0.1:55433 | brickvault-appraisal-test_data | Exact run-recorded brickvault_test_ UUID names |
+
+Each project has its own default bridge network. Private checkout receipts, Compose project and
+service/resource labels, source path, image, mounts, credentials and configured/effective ports
+must all match before reuse/stop. Unlabelled names, incorrect receipts or unexpected state are
+refused. There are no external volumes, global container names, privileged containers, host
+directory/socket mounts or non-loopback publications.
+
+Connections reject host 5432, wrong purpose/database/role, ambiguous or remote hosts, normalized
+URLs, query options and inherited PG settings before engine/connection creation. Bootstrap access
+to the owned instance's maintenance database is explicit; migration owners are nonsuperusers,
+and runtime roles cannot manage roles/databases, create tables/schemas/temp tables, or modify
+revision state. Actual SQL and effective PUBLIC/default privilege tests establish these limits.
+
+Provisioning and migrations remain separate idempotent commands. Repeated dev:init preserved
+private file bytes; repeated actual development provisioning/migration preserved role password
+verifiers and database OID. Values were compared privately and never printed. Fresh disposable
+initialization and development migrations reached 0001_foundation. The public application schema
+contains only alembic_version. Disposable downgrade/re-upgrade, absent table/rows, outdated,
+unknown and additional revisions, real service outage/recovery and bounded statement/pool waits
+all passed. API startup/readiness does not create schema, migrate, provision or grant privileges.
+
+#### Implemented file and command inventory
+
+The final review contains **21 modified and 32 new files**. The complete exact path inventory is
+also in ignored .local/validation/slice1b-final.json; the grouped inventory below is durable.
+
+| Group | Created or modified paths |
+|---|---|
+| Tooling/configuration | package.json; scripts/tasks.mjs; scripts/tasks.test.mjs; scripts/database.py; scripts/test_database.py; scripts/integration_runner.py; scripts/serve_api.py; scripts/package_api.py; infra/compose.dev.yml; services/api/pyproject.toml; services/api/alembic.ini |
+| Backend package | services/api/src/brickvault_api: root, api, application and persistence __init__.py files; settings.py; main.py; observability.py; contracts.py; api/errors.py; api/health.py; application/readiness.py; persistence/database.py; migrations/env.py; migrations/script.py.mako; migrations/versions/0001_foundation.py |
+| Backend tests | services/api/tests/conftest.py; unit/test_api.py; unit/test_settings.py; unit/test_contracts.py; integration/test_database.py; integration/test_migrations.py |
+| Generated contracts | packages/contracts/package.json; openapi.json; src/schema.d.ts; src/index.ts |
+| Foundation/status docs | README.md; CODEX_WORKFLOW.md; docs/LOCAL_DEVELOPMENT.md; docs/PROJECT_CONTEXT.md; this plan |
+| Additional requested planning | docs/plans/005-set-part-out-values.md; additive docs/DECISIONS.md D-024, docs/PRODUCT_SPEC.md R-11 and docs/VALUATION_RULES.md subsection; docs/PROVIDER_GATES.md; docs/ROADMAP.md; docs/REQUIREMENTS_TRACEABILITY.md; prompts 02 through 06 |
+
+Root commands added: db:up, db:migrate, db:status, db:stop, test:integration, dev:api,
+contracts:generate, contracts:check and build:api. Existing format/lint/type/unit orchestration
+now covers actual Python/tooling/contracts source. uv:sync now installs the API project through
+normal --locked --all-groups synchronization. pyproject changes are strict mypy package/path and
+pytest import configuration only; no dependency or build-backend metadata correction was needed.
+
+#### API, contracts and package behavior
+
+Only GET /api/health, /api/ready and /api/openapi.json are public routes. Health is independent
+of PostgreSQL. Ready compares exact revisions with the packaged graph and returns the documented
+503 distinctions for unavailable database, missing migrations and mismatch. SQLAlchemy pool,
+connection and statement bounds are explicit, without application retries. Synchronous readiness
+runs outside the event loop; lifespan owns and disposes the engine.
+
+Positive/negative Host and Origin cases, duplicate headers, no permissive CORS/docs routes,
+redacted JSON 400/403/404/405/422/500, server-generated IDs, safe structured logs and no-store
+responses passed. Test-only error routes exist only in isolated test applications. Real API smoke
+ran on 127.0.0.1:18000 through the integration runner; the actual pnpm dev:api command was also
+verified on 127.0.0.1:8000 and stopped with Ctrl+C. It no longer leaves a detached Windows child.
+
+FastAPI/Pydantic produces deterministic OpenAPI without reading private configuration or opening
+a database connection. Pinned openapi-typescript generates schema.d.ts; TypeScript declarations
+are not manually duplicated. contracts:check compares bytes in ignored temporary directories
+without rewriting expected files. Real generator fixtures establish repeatability, supported cwd
+behavior, failure on isolated drift, and preservation of deliberately stale fixture bytes.
+
+Pinned Hatchling built wheel and sdist; both include the migration environment/template/baseline.
+An independent ignored environment installed the wheel with local uv and exact uv.lock-derived
+constraints. Import, packaged graph discovery and credential-free schema export passed with
+isolated Python outside source paths. The final wheel/sdist were rebuilt after the last code fixes.
+
+#### Actual validation and bounded corrections
+
+| Check | Final result |
+|---|---|
+| pnpm install --frozen-lockfile --strict-peer-dependencies --offline | Passed; all three workspace projects up to date |
+| pnpm uv:sync --offline | Passed with API project installation; normal locked sync, no --no-install-project |
+| pnpm format:check | Passed Prettier and Ruff; 25 Python files formatted |
+| pnpm lint | Passed ESLint with zero warnings and Ruff |
+| pnpm typecheck | Passed strict tooling/contracts TypeScript and mypy over 25 Python files |
+| pnpm test:unit | 19 Node tests and 51 Python tests passed; accepted 17 Node regressions retained |
+| pnpm test:integration | 24 real PostgreSQL tests passed, plus owned temporary API smoke; no skipped tests |
+| db:up, db:migrate repeated, db:status | Passed actual initialization, idempotency and revision 0001_foundation readiness |
+| contracts:generate / contracts:check | Passed deterministic fresh generation and byte comparison; isolated intentional drift fails as expected |
+| pnpm build:api | Passed wheel/sdist resources, independent installed wheel import/graph/export |
+| pnpm dev:api and real HTTP smoke | Health/ready/schema success and JSON 404 passed; Ctrl+C stopped its owned process |
+| Final scope, credentials, ignore, Markdown and Git checks | 53 changed/new files reviewed; six actual private values absent from source and 45 package archive members; 11 ignore probes; 36 Markdown documents, 203 local links and two anchors resolved; historical decisions and .env.example preserved; empty index and clean diff check |
+
+Two accepted-dependency deprecation warnings remain visible: Starlette's HTTPX TestClient and
+its AnyIO BlockingPortal alias. These do not fail tests; no warning was suppressed or dependency
+upgraded. No unresolved required check is skipped or mocked in place of real database acceptance.
+
+Development failures were corrected before final acceptance:
+
+1. TypeScript inferred generated-output tuple entries as string-or-undefined; explicit tuple
+   typing fixes the six strict errors that interrupted the previous run.
+2. Strict mypy identified archive variable reuse and nullable application state; distinct variables
+   and explicit state access corrected both. Ruff/Prettier findings were fixed normally.
+3. Docker represents a named-volume mount in HostConfig.Binds. Verification now permits only the
+   exact owned volume mapping while still checking actual mount type and destination.
+4. An internal-only bridge had no effective host publication despite a healthy database. Corrected
+   the network to an owned ordinary bridge with explicit loopback publishing, and added effective
+   publication verification. Only the exactly verified owned development container/network were
+   removed/recreated; its named volume and CreatedAt were unchanged. Ignored evidence:
+   .local/database/dev-network-correction.json. No general cleanup or volume deletion occurred.
+5. The independent uv install parsed constraint/artifact paths containing spaces as requirements;
+   file URIs preserve path boundaries. Missing offline artifacts were obtained from official PyPI
+   under exact locked constraints and the local cache. No version graph was changed.
+6. Windows execve emulation detached the API child; same-process serving preserves the launcher's
+   owned PID and makes Ctrl+C cleanup effective. The real root command was verified afterward.
+
+Both locks remain byte-for-byte identical to Slice 1A:
+
+- pnpm-lock.yaml: a047dd02498b1b68113bca873167a388eb2b66d1c0e8e0724920128dd6ee6be7
+- services/api/uv.lock: 4fd75352f5d49ad72a30db22afba686d35c764b1ac56944e07c7e88af06f08bc
+
+#### Cleanup, limitations and next boundary
+
+The successful final integration ledger is
+.local/database/runs/cc2f56eb16e142d7a4626692feae95a4.json. All three databases created by that
+run and its injected failure/interruption cases were removed after exact ownership checks. The
+final audit queried the actual owned test instance and found no remaining disposable databases
+and no ledgers reporting leftovers. It restored the prior stopped test-service state. A final
+pnpm db:stop stopped development as well, preserving both volumes and their ownership receipts.
+
+Final owned containers: development 3208f5bdcad9 and test 18a5234a6b0a, both exited normally.
+Both named volumes and owned networks remain for reuse. No API or planned development-port
+listener remains. Akaunting containers f8f530c16fcc, 07cb6b2f6c70 and 6a740f09ee02 remain paused;
+unrelated d8ffc3e3d83a remains running; all four Akaunting volumes remain present. Docker Desktop
+remains running for unrelated workloads. No unrelated service/resource was directly modified.
+
+Ignored package artifacts, independent environments, caches, generated private configuration,
+receipts and validation ledgers are intentionally retained. The existing abandoned outside-repo
+cache and its previously denied cleanup remain untouched and unused. Forced OS termination or
+machine failure cannot guarantee cleanup; recover only from an exact verified run ledger, never
+by prefix. No cross-user Windows ACL hardening or Linux/macOS execution is claimed.
+
+Deferred to separately authorized Slice 1C: React UI/Vite proxy, FastAPI static serving, aggregate
+frontend build, responsive/browser checks, GitHub Actions and full Phase 1 acceptance. Product
+catalog/pricing/valuation, authentication, PWA/Android/device evidence, images/recognition and
+infrastructure work remain their later phases. The part-out addition is documentation only;
+public manual research does not establish an aggregate API endpoint, account rights or live
+pricing coverage. The explicit side request accounts for the narrow additive product/valuation
+changes despite their normal implementation read-only policy.
+
+Final HEAD is unchanged, index empty, with 21 modified and 32 new files left for review and no
+remaining Slice 1B blocker. Host PostgreSQL on 5432, global uv, the abandoned cache, and all
+home/production infrastructure remained untouched. Any commit requires Brian's explicit request.
+The next implementation milestone is Slice 1C only after separate authorization.
+
+### Slice 1B independent acceptance review — 2026-09-06 local / 2026-09-07 UTC
+
+**Acceptance: PASSED.** This review supersedes the implementation report's checkpoint
+status. The three substantiated defects below are corrected, all applicable Slice 1B
+checks pass, and no blocking correctness, isolation, ownership or cleanup finding remains.
+Brian explicitly authorizes one local checkpoint commit after the exact staged review.
+Slice 1C is NOT STARTED; Phase 1 remains incomplete.
+
+#### Starting state and review coverage
+
+The intended existing repository was confirmed at HEAD
+150caf77820d09c60d028eeeba5b1b4317e11539 on main, with an empty index, 21 tracked
+modifications and 32 new files. No unrelated changes were found. This review read every
+tracked diff and every new authored file in full, including generated OpenAPI/TypeScript,
+all packaged source/resources and tests. Required guidance and product/architecture,
+data-model, security, workflow, roadmap and plan documents were reviewed. Ignored earlier
+review artifacts were not accepted as proof; checks below were rerun against actual code,
+PostgreSQL, HTTP responses, Docker resources and freshly built packages.
+
+The exact reviewed and permitted checkpoint inventory is these 53 files:
+
+```text
+CODEX_WORKFLOW.md
+README.md
+docs/DECISIONS.md
+docs/LOCAL_DEVELOPMENT.md
+docs/PRODUCT_SPEC.md
+docs/PROJECT_CONTEXT.md
+docs/PROVIDER_GATES.md
+docs/REQUIREMENTS_TRACEABILITY.md
+docs/ROADMAP.md
+docs/VALUATION_RULES.md
+docs/plans/000-local-foundation.md
+docs/plans/005-set-part-out-values.md
+infra/compose.dev.yml
+package.json
+packages/contracts/package.json
+packages/contracts/openapi.json
+packages/contracts/src/index.ts
+packages/contracts/src/schema.d.ts
+prompts/02_catalog_and_relationships.md
+prompts/03_market_price_provider.md
+prompts/04_feasibility_gate.md
+prompts/05_valuation_engine.md
+prompts/06_set_search_and_detail.md
+scripts/database.py
+scripts/integration_runner.py
+scripts/package_api.py
+scripts/serve_api.py
+scripts/tasks.mjs
+scripts/tasks.test.mjs
+scripts/test_database.py
+services/api/alembic.ini
+services/api/pyproject.toml
+services/api/src/brickvault_api/__init__.py
+services/api/src/brickvault_api/api/__init__.py
+services/api/src/brickvault_api/api/errors.py
+services/api/src/brickvault_api/api/health.py
+services/api/src/brickvault_api/application/__init__.py
+services/api/src/brickvault_api/application/readiness.py
+services/api/src/brickvault_api/contracts.py
+services/api/src/brickvault_api/main.py
+services/api/src/brickvault_api/migrations/env.py
+services/api/src/brickvault_api/migrations/script.py.mako
+services/api/src/brickvault_api/migrations/versions/0001_foundation.py
+services/api/src/brickvault_api/observability.py
+services/api/src/brickvault_api/persistence/__init__.py
+services/api/src/brickvault_api/persistence/database.py
+services/api/src/brickvault_api/settings.py
+services/api/tests/conftest.py
+services/api/tests/integration/test_database.py
+services/api/tests/integration/test_migrations.py
+services/api/tests/unit/test_api.py
+services/api/tests/unit/test_contracts.py
+services/api/tests/unit/test_settings.py
+```
+
+#### Findings and bounded corrections
+
+1. **API-process cleanup on ledger failure:** in scripts/integration_runner.py,
+   smoke_api started its child before entering the cleanup try/finally. Failure or
+   interruption during the first PID-ledger write leaked that child. Two regressions
+   using actual child processes failed for OSError and KeyboardInterrupt before the
+   correction. Moving the initial ledger update inside the cleanup region fixes both;
+   both regressions now pass. Shutdown still uses only the owned process handle.
+2. **Incorrect generated OpenAPI-document type:** main.py declared the schema endpoint
+   as a bare object, which the pinned generator represented as Record<string, never>.
+   This excluded every property of the actual nonempty OpenAPI document. The server
+   declaration now explicitly allows additional properties and the generated response
+   is Record<string, unknown>. The schema regression failed before correction; a real
+   TypeScript consumer of the generated declaration now accepts a nonempty document.
+   No handwritten duplicate contract was added. See the generator's
+   [object-schema guidance](https://openapi-ts.dev/advanced#be-specific-in-your-schema).
+3. **Literal percent signs in migration-resource paths:** persistence/database.py passed
+   an unescaped filesystem path to Alembic's interpolating ConfigParser. A real copied
+   migration graph under a path containing spaces and a percent sign failed with invalid
+   interpolation syntax. Escaping percent signs only at that configuration boundary
+   preserves the literal path and graph; the regression now discovers 0001_foundation.
+
+Additional coverage verifies runtime SET ROLE denial, actual migration-owner database
+and role creation denial, effective default table privileges, and the OS runner lock
+against a second Python process. These checks confirmed the existing privilege/lock
+implementation; no privilege or architecture changes were needed. Schema export now
+also runs from a directory with no .env.local, with no BVA/PG credentials, and with
+runtime-settings loading and Psycopg connection attempts made fatal by the test.
+
+The review corrected stale current-checkpoint/setup wording only in the workflow,
+README, context, roadmap, traceability, local setup and this plan. Historical decisions
+and implementation evidence remain preserved. Part-Out requirements, its plan and
+future prompt additions were not expanded. No dependency versions or families changed.
+
+#### Fresh PostgreSQL, Docker and API evidence
+
+Docker Desktop was already running: 4.89.0 / Engine 29.7.2 / Compose 5.5.0, linux/amd64,
+with desktop-linux on the local named pipe. No startup repair, reset, reinstall or
+Docker configuration change was needed. The registry manifest and local image/container
+inspection match the approved immutable index digest
+sha256:1c59e2c3c818eaa0f0628f695b36e7c9e362d6b219b36a54a32df645cbd7e1af;
+its linux/amd64 manifest is
+sha256:a10c981235b4f635e65df0cfb66a5598064628128505dbc6a3ed4ca303717521.
+No image pull or substitution occurred. Actual server version is
+18.6 (Debian 18.6-1.pgdg12+2). The pinned
+[official Dockerfile](https://raw.githubusercontent.com/docker-library/postgres/e00e1bd34ec5c8a8e7ad89b273b3d42efaf6d5bc/18/bookworm/Dockerfile)
+confirms PGDATA /var/lib/postgresql/18/docker and the /var/lib/postgresql volume mount.
+
+The development/test projects retain separate owner-labelled volumes and networks,
+published only on 127.0.0.1:55432 and 127.0.0.1:55433. Actual Docker resource labels,
+source Compose path, image, mounts and effective publications pass the guards. Remote
+Docker contexts, resource-name-only adoption, wrong owners, PostgreSQL 5432, noncanonical
+hosts, purpose/role/database mismatches, URL options and inherited PG settings fail
+before the prohibited operation. No broad prune, down -v or volume deletion exists.
+
+Real tests prove fresh baseline and repeated upgrade, disposable-only downgrade and
+re-upgrade, missing table/rows, stale/unknown/additional revisions, database outage and
+recovery, statement/pool bounds, and exact run-owned cleanup after failure/interruption.
+Runtime can read the revision but SQL permission failures deny table/schema/temp DDL,
+revision writes/ALTER, database/role creation and assuming the migration owner. Both
+application roles are nonsuperusers with no cluster-management flags; owner DDL stays
+within its application database. PUBLIC maintenance connectivity and effective default
+table privileges were checked. No product-domain table remains; public contains only
+alembic_version at 0001_foundation. API startup never provisions or migrates.
+
+Repeated development provisioning/migration preserved database OID and role password
+verifiers. dev:init twice preserved the private file byte-for-byte. These values were
+compared privately, never printed. Temporary real HTTP APIs were verified against the
+test database on 18000 and the development database on 8000. Health, exact readiness,
+canonical OpenAPI bytes, 400/403/404/405 JSON errors, Host/Origin allow/deny behavior,
+no permissive CORS, no-store and server-generated correlated request IDs passed.
+Unit applications additionally verify 422/500 redaction, duplicate headers, database-free
+health, engine disposal and safe arbitrary-path/query/body/header/exception handling.
+
+The review-only HTTP harness initially checked socket reuse too soon after termination
+of Windows' virtual-environment launcher. It was corrected to inspect actual listener
+ownership and confirm closure: launcher PID 43152 and server PID 59380 were distinct;
+after termination the OS reported no listener and a connection probe failed. No API
+process remained. This changed only the audit harness, not runtime binding or ownership
+guards. Actual HTTP checks passed on each run; cleanup was verified independently.
+
+#### Contracts, packaging and complete applicable checks
+
+| Check | Actual acceptance result |
+|---|---|
+| Frozen pnpm install with strict peers, offline | Passed across all three workspace projects |
+| pnpm uv:sync --offline; uv:check --offline; toolchain:check | Passed with the API project installed, exact local uv and unchanged locks |
+| pnpm format:check; pnpm lint | Passed Prettier, Ruff format/check and ESLint with zero warnings |
+| pnpm typecheck | Passed strict tooling/contracts TypeScript and strict mypy over 25 Python files |
+| pnpm test:unit | 19 Node and 55 Python tests passed, no skips; all existing Slice 1A regressions retained |
+| pnpm test:integration | Final 28 real PostgreSQL tests passed, no skips, plus real test-API smoke; earlier 24-test baseline also passed |
+| pnpm db:up; repeated db:migrate; db:status | Passed with the exact baseline and real development readiness |
+| pnpm contracts:generate; contracts:check | Passed; repeat generation/check preserved exact current bytes; isolated drift returns nonzero and preserves stale fixture bytes |
+| Credential-free export | Passed without a local env file, credentials, settings load or database connection; only three intended foundation paths and six schemas |
+| pnpm build:api | Wheel and sdist built with locked Hatchling; independent wheel install/import/graph/export passed outside source lookup paths |
+| Direct archive review | 18 wheel and 27 sdist members inspected; all packaged source/resource bytes match reviewed files; required migration environment/template/baseline present |
+| Real development HTTP/log audit | Passed exact successful payloads/schema, safe errors and request-ID/log correlation; owned API stopped |
+| Full-file, archive, ignore, link and Git checks | Six actual private values and credential patterns absent from reviewed files and all 45 archive members; 36 Markdown documents and local links/anchors validated; diff check passed |
+
+The existing dependency locks remain identical to accepted Slice 1A:
+pnpm-lock.yaml a047dd02498b1b68113bca873167a388eb2b66d1c0e8e0724920128dd6ee6be7;
+services/api/uv.lock 4fd75352f5d49ad72a30db22afba686d35c764b1ac56944e07c7e88af06f08bc.
+Generated OpenAPI SHA-256 is a1517b34a60f358a1ce785ad99c3c83b3dd6ccd9de7a69119a18a8f9f221b8f4;
+schema.d.ts is 3493d856ae4941703671181d58b27838fcc5bf4317cd945e5ec045a5856f7232.
+All generation remains FastAPI/Pydantic-authoritative using openapi-typescript 7.13.0.
+
+#### Exact deprecation-warning classification
+
+- **Transitive dependency warning:** Starlette 1.6.0 testclient.py lines 35–49 uses its
+  deprecated HTTPX fallback when httpx2 is absent. The warning is reported at direct
+  FastAPI 0.141.1 testclient.py:1, which re-exports TestClient. HTTPX 0.28.1 is the approved
+  direct development dependency. Our code uses the public TestClient API, not an AnyIO
+  alias or private fallback. Removing this warning would introduce the unapproved
+  httpx2 family or change accepted upstream versions; neither was done.
+- **Transitive dependency warning:** Starlette testclient.py:53 references
+  anyio.abc.BlockingPortal. AnyIO 4.15.1 marks that alias deprecated in favor of
+  anyio.from_thread.BlockingPortal. The deprecated reference is entirely upstream;
+  no authored application/test code uses it. Upstream dependency changes are deferred.
+
+Both warnings remain visible. Neither demonstrates a current failing API/database
+behavior in these checks; neither is suppressed or treated as a reason to change the
+approved dependency graph.
+
+#### Part-Out scope, cleanup and next checkpoint
+
+The existing Part-Out additions are documentation only, remain in Phases 2–6, preserve
+new/used and sold/listing separation, lot/unit coverage and missing-data semantics,
+and prohibit physical-item double counting. They introduce no Phase 1 product code,
+tables or provider calls. No liquidity or other separately planned capability was added.
+
+Both project services were stopped at entry and are stopped again after review.
+The final integration run 4badda2fb6e64caaa7efef1cac8f8822 and its injected failure and
+interruption runs removed only their exact recorded databases, with no leftovers.
+A final real query of the owned test instance found zero disposable databases; that
+temporary audit startup was then stopped. Development container 3208f5bdcad9 and test
+container 18a5234a6b0a remain, with both original named volumes and networks preserved.
+Their volume creation times remain 2026-09-07T02:52:50Z and 2026-09-07T02:59:43Z.
+No API or planned development/test listener remains. The three Akaunting containers
+remain paused, unrelated d8ffc3e3d83a remains running, and all unrelated volumes/networks
+are preserved. Docker Desktop remains running. Host PostgreSQL 5432, global uv, the
+abandoned outside-repository cache, home/production infrastructure and private credentials
+were not modified. Ignored tools, caches, package environments and review evidence remain
+inside the repository and are excluded from the checkpoint.
+
+Deferred Slice 1C checks: React status UI/Vite proxy, static built serving, aggregate
+frontend build, responsive/browser/Chrome checks, GitHub Actions and complete Phase 1
+acceptance. No Linux/macOS or Android/physical-device evidence is claimed. Provider,
+valuation, authentication, image, deployment and other product phases remain unstarted.
+
+Existing Git user.name and user.email are configured and unchanged. The checkpoint is
+restricted to the 53 literal reviewed paths above, with exact staged-blob comparison,
+complete staged-diff review, credential scan and git diff --cached --check before commit.
+Commit message: `feat: complete phase 1b database api and contracts foundation`.
+The resulting local hash is reported after Git returns; it is not embedded in its own
+commit. No push, amend, reset, branch change or blanket staging is permitted.
+
+**Exact next authorized action:** Run the separately approved Part-Out Value + liquidity
+documentation amendment. Stop this acceptance task here; do not execute that amendment
+or begin Slice 1C automatically.

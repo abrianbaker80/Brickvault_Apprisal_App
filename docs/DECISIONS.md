@@ -141,3 +141,9 @@ Brian authorizes TypeScript >=5.9.3,<5.10, initially 5.9.3, with openapi-typescr
 Official standalone uv 0.12.10 may be installed under ignored .local/tooling/uv/0.12.10/ with published artifact integrity verification. Invoke it explicitly and enforce its exact version. Global uv 0.10.7 and system/user configuration remain untouched; no automatic Python downloads are permitted. Retain Hatchling and use --no-install-project only for Slice 1A dependency synchronization, with actual application installation/build required once source exists.
 
 Persist these approvals even if subsequent installation is blocked; approvals are not test evidence. Slice 1A alone is authorized, with working-tree changes retained for review and no staging/commit, application source, services, databases, infrastructure, or automatic advancement. D-001 through D-022 retain their historical meaning.
+
+### D-024 — New and used set part-out values — 2026-09-06
+
+Brian requests separate new/used set part-out values in the sourcing product. Add the feature through Phases 2–6 under [the part-out plan](plans/005-set-part-out-values.md): quantity/color-aware inventory, verified component pricing, feasibility, deterministic aggregation, and set-detail display. These are theoretical component totals with evidence and coverage, distinct from supported net proceeds/profit/max-buy. Assembled figures and their components cannot both count. Operational individual-piece selling remains outside the initial scope.
+
+Public BrickLink documentation describes subset inventories and per-item guides; aggregate API availability, live account access, rights, coverage and website-calculator parity remain unverified. No provider calls or Phase 1 feature implementation is authorized by this planning addition. D-001 through D-023 retain their history.

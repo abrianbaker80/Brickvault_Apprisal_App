@@ -2,9 +2,11 @@
 
 ## Current checkpoint and next task
 
+Current checkpoint: Brian authorized **Slice 1B acceptance review, bounded corrections, and one conditional local commit** from HEAD 150caf77820d09c60d028eeeba5b1b4317e11539. The review passes with the complete file inventory, three substantiated fixes and fresh database/API/contracts/package evidence in ExecPlan 000. Only its reviewed files may enter the local checkpoint. No push, branch change or Slice 1C work is authorized. The earlier local repair authorization remains historical; this review needed no Docker repair.
+
 The approved detailed [ExecPlan 000](docs/plans/000-local-foundation.md) is the canonical Phase 1 execution plan. Slice 1A is accepted from documentation baseline cb3e4373ee02faf4a485eb451d98749090f34e17: all applicable checks pass, including 17 tests, and the reviewed local checkpoint contains exactly 27 files. The plan records the durable acceptance evidence, bounded fixes, deferred checks, and inventory. Phase 1 is not complete.
 
-The current authorized action is **Slice 1A acceptance review, bounded correction, and conditional local commit**. Approved selections remain TypeScript 5.9.3 with openapi-typescript 7.13.0, repository-local uv 0.12.10, and ESLint 10.10.0 / @eslint/js 10.0.1 / typescript-eslint 8.69.0. Use the verified uv wrappers and repository-owned paths in local setup. The next implementation checkpoint is **separate explicit authorization for Slice 1B**; it has not started. No push or branch change is authorized.
+Approved selections remain TypeScript 5.9.3 with openapi-typescript 7.13.0, repository-local uv 0.12.10, and ESLint 10.10.0 / @eslint/js 10.0.1 / typescript-eslint 8.69.0. Use the verified uv wrappers and repository-owned paths in local setup. After the Slice 1B checkpoint, the exact next authorized action is: **Run the separately approved Part-Out Value + liquidity documentation amendment.** That amendment is not performed by this acceptance task. Slice 1C still requires separate explicit implementation authorization.
 
 [Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review. Its approved review has occurred; reopening that prompt still does not authorize implementation. Historical realignment checkpoint wording in product/history/security documents and dated decisions records the earlier task; current progress belongs here and in ExecPlan 000. Product and security obligations remain unchanged.
 
@@ -30,11 +32,11 @@ Read-only by default:
 - docs/VALUATION_RULES.md
 - docs/SECURITY_PRIVACY.md
 
-Change one only for a concrete verified contradiction that cannot be accurately documented elsewhere. Any proposed change must be narrow, evidence-backed, and explicitly reported; routine implementation progress does not qualify.
+Change one only for a concrete verified contradiction that cannot be accurately documented elsewhere. Any proposed change must be narrow, evidence-backed, and explicitly reported; routine implementation progress does not qualify. Brian's additional explicit request to plan new/used set part-out values authorizes the additive R-11 and valuation subsection, linked to D-024 and the later part-out plan; it does not authorize feature implementation.
 
 Normal status updates belong primarily in README.md, CODEX_WORKFLOW.md, docs/PROJECT_CONTEXT.md, docs/ROADMAP.md, docs/REQUIREMENTS_TRACEABILITY.md, docs/LOCAL_DEVELOPMENT.md, and docs/plans/000-local-foundation.md. Update docs/ARCHITECTURE.md only for verified implementation details. Keep future domain schemas and accepted historical decisions intact; record newly accepted decisions additively.
 
-Use repository-relative paths wherever sufficient. Resolve the repository root dynamically rather than hard-coding a machine/user/checkout location. [Local development](docs/LOCAL_DEVELOPMENT.md) now records tested Slice 1A setup, final checks, deferred application acceptance, and the temporary-cache cleanup limitation. The next implementation slice is 1B only after a separate explicit request.
+Use repository-relative paths wherever sufficient. Resolve the repository root dynamically rather than hard-coding a machine/user/checkout location. [Local development](docs/LOCAL_DEVELOPMENT.md) records tested Slice 1A/1B setup, backend checks, deferred frontend acceptance, resource cleanup and the earlier temporary-cache limitation. The next implementation slice is 1C only after a separate explicit request.
 
 ## Chat strategy
 
@@ -58,7 +60,7 @@ Prompt 00 is bootstrap/revalidation. Prompt numbers 01–16 map one-to-one to ro
 
 Use current user-selected settings. Do not spawn subagents unless the user or applicable task instructions explicitly request delegation.
 
-Fixtures prove behavior, not live provider entitlement, rights, or market coverage. Phase 3 resolves provider access/use constraints; Phase 4 proves representative feasibility before supported sourcing is claimed. No version or provider research was refreshed in this documentation checkpoint.
+Fixtures prove behavior, not live provider entitlement, rights, or market coverage. Phase 3 resolves provider access/use constraints; Phase 4 proves representative feasibility before supported sourcing is claimed. Slice 1B verified only the official PostgreSQL image and relevant technical documentation. Part-out planning reviewed the public BrickLink manual; no authenticated provider request or live coverage claim followed.
 
 Phase 9 requires Android package/physical core-flow evidence. Phase 10 hardens a local release. Phase 11 requires explicit read-only home discovery authorization; Phase 12 requires a distinct reviewed deployment authorization. Prompt 15 cannot claim overlay/Facebook compatibility from a build.
 

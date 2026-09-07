@@ -56,6 +56,12 @@ A remaining-build value needs an explicit basis: comparable residual-build evide
 
 The theoretical sum of individual parts is a separate metric, not expected recoverable proceeds, until liquidity, completeness, order count, and selling-burden assumptions are supported. Full piece-level part-out is outside the initial engine. Unsupported residual proceeds block a supported split-sale recommendation; a manual scenario can remain visible as a labeled scenario.
 
+## New and used set part-out comparison — R-11
+
+The requested [part-out feature](plans/005-set-part-out-values.md) calculates a theoretical sum of component quantities times condition-specific unit observations, separately for new and used. Preserve exact color/variant identity, price statistic and market side, inclusion policy, currency, inventory/source versions, freshness and lot/unit coverage. A partial subtotal is not a complete total; absent required prices are unknown rather than zero. Default policy keeps minifigures assembled and excludes extras/alternates/box/instructions as detailed in that plan; unresolved required choices block completeness.
+
+A part-out total includes each allocated physical unit once. Never add it to whole-set value or residual-build value, or add minifigures again when already included. Its theoretical nature does not authorize a profit/max-buy recommendation without separately supported sell-through, costs and selling-burden assumptions. The initial exclusion for operational individual-piece sales remains; Phases 2–6 add this comparison metric only.
+
 ## Gross proceeds and selling costs
 
 Expected gross proceeds comprise only the sale lines in the selected strategy. Explicitly identify seller revenue such as charged shipping when included; exclude pass-through taxes that are not Brian's revenue.

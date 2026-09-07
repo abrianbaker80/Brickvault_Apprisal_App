@@ -2,7 +2,7 @@
 
 ## Status and phase map
 
-Current checkpoint: the valuation-first documentation baseline and approved detailed Phase 1 plan, with one explicitly requested local documentation commit. No application phase has started. One unified platform uses the deterministic core first; recognition is an optional Phase 14 input, never a prerequisite for direct search. The next separately authorizable implementation action is Slice 1A only. Prompt 01 remains PLAN ONLY when reused. No phase entry or completed slice itself authorizes implementation, network access, service startup, staging, a commit, or a push.
+Current checkpoint: Slices 1A and 1B are accepted; [ExecPlan 000](plans/000-local-foundation.md) records the reviewed local foundation evidence. Slice 1C is not started and Phase 1 is incomplete. The next authorized action is the separately approved Part-Out Value + liquidity documentation amendment; it is not performed by the Slice 1B acceptance task. One unified platform uses the deterministic core first; recognition is an optional Phase 14 input. Prompt 01 remains PLAN ONLY when reused. No phase entry or completed slice itself authorizes implementation, network access, service startup, staging, a commit, or a push.
 
 Each roadmap phase maps to exactly one numbered prompt. Prompts 13–16 refine the later image extension; they do not displace Phases 1–12. Inputs and gates must be satisfied before advancing.
 
@@ -41,7 +41,7 @@ Each roadmap phase maps to exactly one numbered prompt. Prompts 13–16 refine t
 - **Scope:** React/Vite responsive shell, FastAPI shell, isolated PostgreSQL, SQLAlchemy/Alembic empty baseline, health/readiness/OpenAPI and generated TypeScript contracts, strict checks, provider-free CI, and local setup documentation.
 - **Exclusions:** Catalog imports/providers/prices/valuation/search/deals/authentication/Sets to Hunt, listings/images/recognition, PWA/Android, and home-server/deployment work.
 - **Acceptance:** The implemented local web shell and API run against an isolated migrated database with reproducible contract/format/lint/type/unit/integration/build checks, CI definitions, and built-serving desktop/mobile browser evidence. No product tables or external providers are required.
-- **Gate:** Each of Slices 1A, 1B, and 1C requires separate explicit implementation authorization and ends with a report; completion does not authorize the next slice. Prompt 01 is reusable plan-only review. The present checkpoint permits only documentation/local Git, never implementation.
+- **Gate:** Each of Slices 1A, 1B, and 1C requires separate explicit implementation authorization and ends with a report; completion does not authorize the next slice. Prompt 01 is reusable plan-only review. Slice 1B acceptance authorizes only its bounded corrections and conditional local checkpoint; it does not begin Slice 1C.
 - **Access and evidence:** Slice 1A may verify/install local toolchains and resolve packages only under its explicit dependency/network scope, with no services/database work. Slice 1B separately authorizes isolated local database/API work. Slice 1C separately authorizes web/CI/local acceptance. Never contact product providers, existing PostgreSQL on 5432, or home infrastructure.
 
 ### Slice 1A — Toolchain and workspace
@@ -57,6 +57,8 @@ After separate authorization, add isolated development/test PostgreSQL, guarded 
 After separate authorization, add React status UI, Vite proxy, FastAPI built serving, browser smoke tests, and GitHub Actions. Run every full Phase 1 acceptance criterion, update permitted documentation, report, and stop before Phase 2. The slice split does not weaken final acceptance.
 
 ## Phase 2 — Catalog and set/minifigure relationships
+
+R-11 addition: [set part-out plan](plans/005-set-part-out-values.md) adds versioned component/color quantities and exact provider mappings here, component guides in Phase 3, coverage/website comparison in Phase 4, separate new/used decimal aggregation in Phase 5, and set-detail display in Phase 6. It is a theoretical sourcing metric; existing exclusions for full piece-by-piece sales operations and treating theoretical totals as cash remain. No Phase 1 work is added.
 
 - **Inputs:** Completed local foundation; explicit identity/quantity contracts and permitted local catalog fixtures.
 - **Scope:** Repeatable imports of sets, suffixed-number normalization, names/themes, minifigures, versioned quantity relationships, provider-scoped mappings, provenance, and source versions.
@@ -193,4 +195,4 @@ After separate authorization, add React status UI, Vite proxy, FastAPI built ser
 
 ## Shared acceptance authority
 
-Use [PRODUCT_SPEC.md](PRODUCT_SPEC.md), [VALUATION_RULES.md](VALUATION_RULES.md), [REQUIREMENTS_TRACEABILITY.md](REQUIREMENTS_TRACEABILITY.md), [PROVIDER_GATES.md](PROVIDER_GATES.md), and [SECURITY_PRIVACY.md](SECURITY_PRIVACY.md). These phases are planned and unexecuted; dated bootstrap research and recorded fixtures do not constitute provider or physical-device proof.
+Use [PRODUCT_SPEC.md](PRODUCT_SPEC.md), [VALUATION_RULES.md](VALUATION_RULES.md), [REQUIREMENTS_TRACEABILITY.md](REQUIREMENTS_TRACEABILITY.md), [PROVIDER_GATES.md](PROVIDER_GATES.md), and [SECURITY_PRIVACY.md](SECURITY_PRIVACY.md). Product phases remain planned; foundation evidence is limited to the accepted slices recorded in ExecPlan 000. Dated research and fixtures do not constitute provider or physical-device proof.

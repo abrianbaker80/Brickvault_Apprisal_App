@@ -9,6 +9,15 @@
     "pnpm": ">=11 <12"
   },
   "scripts": {
+    "db:up": "node scripts/tasks.mjs db:up",
+    "db:migrate": "node scripts/tasks.mjs db:migrate",
+    "db:status": "node scripts/tasks.mjs db:status",
+    "db:stop": "node scripts/tasks.mjs db:stop",
+    "test:integration": "node scripts/tasks.mjs test:integration",
+    "dev:api": "node scripts/tasks.mjs dev:api",
+    "contracts:generate": "node scripts/tasks.mjs contracts:generate",
+    "contracts:check": "node scripts/tasks.mjs contracts:check",
+    "build:api": "node scripts/tasks.mjs build:api",
     "dev:init": "node scripts/tasks.mjs dev:init",
     "toolchain:check": "node scripts/tasks.mjs toolchain:check",
     "uv:sync": "node scripts/tasks.mjs uv:sync",

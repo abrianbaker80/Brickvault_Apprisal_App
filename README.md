@@ -6,13 +6,13 @@ Marketplace screenshots and recognition are later optional inputs into the same 
 
 ## Current checkpoint
 
-The approved Phase 1 implementation plan is persisted in [ExecPlan 000](docs/plans/000-local-foundation.md). **Slice 1A — toolchain and workspace only** is accepted from documentation baseline cb3e4373ee02faf4a485eb451d98749090f34e17. The plan records the acceptance review, bounded fixes, passed checks, deferred checks, and reviewed local checkpoint inventory. Phase 1 is not complete; Slice 1B has not started and requires separate authorization.
+The approved Phase 1 implementation plan and actual validation evidence are recorded in [ExecPlan 000](docs/plans/000-local-foundation.md). Slice 1A is accepted at 150caf77820d09c60d028eeeba5b1b4317e11539. Slice 1B is accepted for the reviewed local checkpoint: isolated PostgreSQL, FastAPI health/readiness, packaged migrations and generated contracts. Phase 1 is not complete; Slice 1C has not started and requires separate authorization.
 
 Phase 1 has three bounded slices: 1A toolchain/workspace; 1B isolated database, API, and contracts; 1C web shell, built serving, CI, and full acceptance. Each requires its own explicit request and ends with a report. [Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review, not an implementation command.
 
-The active plan records approved TypeScript 5.9.3, repository-local uv 0.12.10, and ESLint 10 tooling selections. The acceptance request permits bounded Slice 1A corrections and one local commit only after all applicable checks pass. No application source, services, containers, database connections, infrastructure access, or push is authorized. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice authorization and narrow documentation-update rules.
+The accepted TypeScript 5.9.3, repository-local uv 0.12.10, ESLint 10 selections and exact dependency locks remain unchanged. The acceptance request authorizes one reviewed local Slice 1B commit, with no push, frontend or infrastructure work. The next authorized action is the separately approved Part-Out Value + liquidity documentation amendment. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice boundaries.
 
-Use [local development](docs/LOCAL_DEVELOPMENT.md) for the verified local uv bootstrap, locked dependency setup, private configuration initialization, format/lint/type/unit commands, and documented limitations. Application builds, Python application installation, database tests, contracts, and browser acceptance remain deferred to their later slices.
+Use [local development](docs/LOCAL_DEVELOPMENT.md) for locked setup, db:up/db:migrate/db:status/db:stop, dev:api, contract generation, unit/integration checks and API packaging. Backend verification uses real PostgreSQL. Frontend builds, static serving, browser checks and CI remain Slice 1C.
 
 ## Product and architecture
 
@@ -21,6 +21,7 @@ Use [local development](docs/LOCAL_DEVELOPMENT.md) for the verified local uv boo
 - Server-side catalog/provider adapters and exact-decimal deterministic valuation serve every client.
 - Sold evidence and current listings, new and used, and whole-set versus split-sale strategies remain distinct.
 - Missing prices are unknown; quantities, provenance, freshness, profit, ROI, and maximum-buy constraints are explicit.
+- [New/used set part-out values](docs/plans/005-set-part-out-values.md) are planned across catalog, market feasibility, valuation and set detail; theoretical totals remain distinct from expected proceeds.
 - Recognition, image storage, overlays, and training retention are later modules; AI predictions are never confirmed labels.
 - Home-server discovery and deployment are separate, explicitly authorized phases.
 
@@ -38,8 +39,8 @@ Use [local development](docs/LOCAL_DEVELOPMENT.md) for the verified local uv boo
     apps/android/       Later Android wrapper and needed native extensions
     services/api/       FastAPI and shared catalog/market/valuation domain
     packages/contracts/ Generated OpenAPI and TypeScript contracts
-    infra/              Later requested local dependencies; deployment separate
-    scripts/            Future local development and validation commands
+    infra/              Isolated local PostgreSQL Compose; deployment separate
+    scripts/            Guarded local development and validation commands
     docs/               Requirements, architecture, rules, plans
     prompts/            Contiguous Phase 0–16 tasks
     .agent/PLANS.md      ExecPlan requirements

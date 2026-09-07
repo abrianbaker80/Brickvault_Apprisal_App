@@ -16,9 +16,11 @@ Phase 4 feasibility outcome, exact valuation rules, verified representative fixt
 
 Implement pure server-side arithmetic and serializable versioned input/output snapshots for quantities, strategies, adjustments, costs, profit/ROI, both maximum-buy constraints, and blocked/partial results.
 
+Include separate new/used theoretical aggregation under the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md). Verify quantity/color-aware decimal sums, inclusion-policy snapshots, partial coverage and no assembled-figure/component double counting. Theoretical totals do not themselves establish realizable proceeds or a maximum offer.
+
 ## Exclusions
 
-UI financial logic, live provider calls required by unit tests, image/AI work, full individual-piece part-out, automatic purchasing, and production access. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.
+UI financial logic, live provider calls required by unit tests, image/AI work, operational individual-piece listing/fulfillment, automatic purchasing, and production access. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.
 
 ## Acceptance evidence
 

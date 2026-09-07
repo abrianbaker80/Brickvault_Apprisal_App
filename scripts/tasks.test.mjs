@@ -8,6 +8,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  symlinkSync,
   writeFileSync,
 } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
@@ -16,10 +17,12 @@ import { pathToFileURL } from 'node:url';
 import { ESLint } from 'eslint';
 import {
   dispatch,
+  contractsTask,
   initializeConfig,
   localUvPath,
   repositoryRoot,
   requireLocalUv,
+  requireLocalStorage,
   runChild,
   SetupError,
   uvInvocation,
@@ -72,7 +75,7 @@ await test('module paths resolve independently of cwd, spaces and URL escaping',
 });
 
 await test('unknown, missing, later and excess task arguments fail without echoing input', () => {
-  for (const args of [[], ['db:up'], ['secret-sentinel'], ['lint', 'secret-sentinel']]) {
+  for (const args of [[], ['dev:web'], ['secret-sentinel'], ['lint', 'secret-sentinel']]) {
     assert.throws(() => dispatch(args), SetupError);
     const result = cli(join(root, 'apps/web'), args);
     assert.equal(result.status, 1);
@@ -221,6 +224,60 @@ await test('local uv resolver refuses missing and non-executable paths without g
 
 await test('installed local uv passes its exact version check', () => {
   assert.equal(requireLocalUv(root), localUvPath(root));
+});
+
+await test('new local storage rejects unignored paths and junction redirection before writes', (t) => {
+  const directory = fixture(t);
+  writeFileSync(join(directory, '.gitignore'), '.env.local\n');
+  assert.throws(
+    () => requireLocalStorage(directory, join(directory, '.local/contracts')),
+    SetupError,
+  );
+  assert.equal(existsSync(join(directory, '.local')), false);
+  writeFileSync(join(directory, '.gitignore'), '.env.local\n.local/\n');
+  const target = fixture(t);
+  symlinkSync(target, join(directory, '.local'), process.platform === 'win32' ? 'junction' : 'dir');
+  assert.throws(
+    () => requireLocalStorage(directory, join(directory, '.local/contracts')),
+    SetupError,
+  );
+  assert.equal(existsSync(join(target, 'contracts')), false);
+});
+
+await test('contracts are repeatable, work from supported directories, and detect isolated drift without rewriting', (t) => {
+  const directory = fixture(t);
+  mkdirSync(join(directory, 'src'));
+  assert.equal(contractsTask(root, false, directory), 0);
+  const consumer = join(directory, 'consumer.ts');
+  writeFileSync(
+    consumer,
+    'import type { operations } from "./src/schema.js";\n' +
+      'const document: operations["openapi_document"]["responses"][200]["content"]["application/json"] = { openapi: "3.1.0", paths: {} };\n' +
+      'void document;\n',
+  );
+  assert.equal(
+    runChild(
+      process.execPath,
+      [join(root, 'node_modules/typescript/bin/tsc'), '--strict', '--noEmit', consumer],
+      root,
+      'pipe',
+    ),
+    0,
+    'Generated OpenAPI response type must accept a nonempty document',
+  );
+  const original = readFileSync(join(directory, 'src/schema.d.ts'));
+  assert.equal(contractsTask(root, true, directory), 0);
+  writeFileSync(
+    join(directory, 'src/schema.d.ts'),
+    Buffer.concat([original, Buffer.from('// deliberate drift\n')]),
+  );
+  const stale = readFileSync(join(directory, 'src/schema.d.ts'));
+  assert.equal(contractsTask(root, true, directory), 1);
+  assert.deepEqual(readFileSync(join(directory, 'src/schema.d.ts')), stale);
+  for (const cwd of [root, join(root, 'services/api'), join(root, 'packages/contracts')]) {
+    assert.equal(cli(cwd, ['contracts:check']).status, 0);
+  }
+  assert.equal(cli(directory, ['contracts:check']).status, 1);
 });
 
 await test('real uv resolves the same absolute cache with the sync/check arguments and environment', (t) => {

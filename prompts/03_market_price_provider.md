@@ -16,6 +16,8 @@ Verified canonical identities/relationships and mappings; provider-gate checklis
 
 Server-side adapters/cache for sets and minifigures, separate new/used and sold/current-listing evidence, exact amounts/currencies, observation/sample times/quantities, and explicit unavailable/stale/thin states.
 
+Include the component-guide portion of the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md), sharing the provider adapter/cache with exact item/color identity and request parameters. Test independent new/used missing evidence and bounded request budgets. Do not assume an aggregate API endpoint or website parity.
+
 ## Exclusions
 
 Scraping, guessed mappings, browser/Android secrets, valuation UI, recognition, unlimited retention assumptions, and infrastructure administration. No staging or commits unless Brian explicitly requests them. No later phase begins automatically.

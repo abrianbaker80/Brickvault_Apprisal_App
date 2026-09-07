@@ -19,13 +19,15 @@ All rows are **planned, not implemented or verified**. This approved documentati
 
 ## Phase and evidence discipline
 
+R-11, added 2026-09-06: [new/used set part-out values](plans/005-set-part-out-values.md) maps PRODUCT_SPEC R-11 and VALUATION_RULES part-out comparison to Phase 2 component/color inventory, Phase 3 observations, Phase 4 source feasibility, Phase 5 aggregation and Phase 6 set-detail display. Required evidence includes quantity/color fixtures, explicit inclusion choices, no figure/component double counting, new/used and sold/listing separation, partial coverage, deterministic decimal reproduction, and authorized live coverage/website reconciliation. Status: planned; public manual reviewed only, no account/API/feature acceptance.
+
 Phases 1–9 establish the sourcing core; Phase 10 local release precedes separate discovery/deployment approvals. Phases 13–16 are optional image/recognition/native-capture/training enhancements that reuse the same core. D-003 retention begins with that image feature, not the foundation.
 
 Fixture-based contract tests can pass before live entitlement is available, but Phase 4 must not certify product market feasibility without actual authorized coverage/use evidence. Distinguish planned acceptance from recorded results in each ExecPlan. Unknown prices, mappings, source rights, and device behavior remain explicit.
 
 ## Phase 1 slice evidence
 
-The canonical [ExecPlan 000](plans/000-local-foundation.md) requires separately authorized slices. None is implemented; this checkpoint records no application acceptance evidence.
+The canonical [ExecPlan 000](plans/000-local-foundation.md) requires separately authorized slices. Slice 1A is accepted at 150caf7. Slice 1B passes the independent acceptance review for its authorized local checkpoint; the plan records real PostgreSQL, backend, contracts and packaging evidence. Slice 1C is not started. Backend checks do not establish browser or full Phase 1 acceptance.
 
 | Slice | Bounded deliverable | Required evidence and stop |
 |---|---|---|

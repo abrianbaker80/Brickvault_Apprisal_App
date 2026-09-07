@@ -61,6 +61,10 @@ Use one primary React interface for responsive Chrome, an installable PWA, and a
 
 Eventually host on Brian's home server at an approved subdomain of abrianbaker.com. No host, Proxmox, router, DNS, Cloudflare, public-access, or production activity is currently authorized. Read-only discovery and deployment require distinct future approvals.
 
+### R-11 — New and used set part-out values
+
+Show separate new and used theoretical component totals for a set, using exact quantities/colors and verified component price evidence. Display inclusion policy, currency, sold/current-listing basis, freshness, priced/total lot and unit coverage, and partial/unavailable states. Keep whole-set sale, assembled minifigures and their parts from being double-counted. This is a sourcing comparison, not guaranteed recoverable proceeds or a new fulfillment workflow. Implement through Phases 2–6 under the [part-out plan](plans/005-set-part-out-values.md); no Phase 1 expansion.
+
 ## MVP acceptance scenario
 
 Using a verified representative catalog and permitted price observations, Brian enters 75331-1 or a set name without uploading anything, opens the correct variant, and sees whole-set new/used values, separate sold/listing evidence, all included minifigures and quantities, individual prices, and coverage-aware totals.
