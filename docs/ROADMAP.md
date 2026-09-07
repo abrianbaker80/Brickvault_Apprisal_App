@@ -2,7 +2,7 @@
 
 ## Status and phase map
 
-Current checkpoint: Slices 1A and 1B are accepted; [ExecPlan 000](plans/000-local-foundation.md) records the reviewed local foundation evidence. Slice 1C is not started and Phase 1 is incomplete. The next authorized action is the separately approved Part-Out Value + liquidity documentation amendment; it is not performed by the Slice 1B acceptance task. One unified platform uses the deterministic core first; recognition is an optional Phase 14 input. Prompt 01 remains PLAN ONLY when reused. No phase entry or completed slice itself authorizes implementation, network access, service startup, staging, a commit, or a push.
+Current checkpoint: Slices 1A and 1B are accepted, with Slice 1B locally committed at d79395223b5d6fedf78e01dabd3202b5526211eb; [ExecPlan 000](plans/000-local-foundation.md) retains its evidence unchanged. The D-025 Part-Out Value/liquidity documentation amendment passes independent acceptance for one local documentation checkpoint. After that checkpoint, the exact next action is **Phase 1 Slice 1C — web shell, local built serving, browser tests, CI, and complete Phase 1 acceptance.** Stop before its separately requested implementation. Slice 1C is not started, Phase 1 is incomplete and Phase 2 implementation does not begin here. Recognition remains an optional Phase 14 input; Prompt 01 remains PLAN ONLY. No phase entry/completion itself authorizes implementation, network access, services, staging, commit or push.
 
 Each roadmap phase maps to exactly one numbered prompt. Prompts 13–16 refine the later image extension; they do not displace Phases 1–12. Inputs and gates must be satisfied before advancing.
 
@@ -58,66 +58,66 @@ After separate authorization, add React status UI, Vite proxy, FastAPI built ser
 
 ## Phase 2 — Catalog and set/minifigure relationships
 
-R-11 addition: [set part-out plan](plans/005-set-part-out-values.md) adds versioned component/color quantities and exact provider mappings here, component guides in Phase 3, coverage/website comparison in Phase 4, separate new/used decimal aggregation in Phase 5, and set-detail display in Phase 6. It is a theoretical sourcing metric; existing exclusions for full piece-by-piece sales operations and treating theoretical totals as cash remain. No Phase 1 work is added.
+D-025 extends the existing [part-out plan](plans/005-set-part-out-values.md) through Phases 2–8 with PRODUCT_SPEC R-11–R-37. Full part-out analysis is core; operational individual-piece listing/fulfillment and theoretical totals presented as cash remain excluded. No standalone phase or Phase 1 product/provider/queue work is added. Selective harvest stays later until supported; each phase requires separate authorization.
 
 - **Inputs:** Completed local foundation; explicit identity/quantity contracts and permitted local catalog fixtures.
-- **Scope:** Repeatable imports of sets, suffixed-number normalization, names/themes, minifigures, versioned quantity relationships, provider-scoped mappings, provenance, and source versions.
+- **Scope:** Repeatable set/figure/part/color identities and exact provider mappings, suffix/name/theme semantics, inventory versions/provenance, separate regular/extra quantities, alternate/matching resolution, intact/component figure and nested subset relationships, sourced instructions and later permitted packaging, and scoped exact part/color rarity relationships.
 - **Exclusions:** Pricing/valuation implementation, browser search/detail workflow, image ingestion, embeddings, recognition, scraping, and infrastructure changes.
-- **Acceptance:** Verified fixtures resolve representative numbers/names and return every included minifigure with correct quantities, including duplicates and variants, while ambiguous mappings and malformed data remain explicit.
+- **Acceptance:** Permitted fixtures resolve representative numbers/names, preserve canonical variants and every figure/part/color quantity including repeated figures, expose malformed data and ambiguous mappings, resolve required choices, keep extras separate and prove physical inventory is never double-counted. Unknown mapping/expansion/catalog coverage cannot prove completeness or exclusivity.
 - **Gate:** Review import/source-use rights before source data is used; no arbitrary suffix stripping or first-match mapping; fixtures do not establish provider access.
 - **Access and evidence:** Local fixtures suffice for implementation checks; live catalog/download requests require separately authorized network access and verified source permissions.
 
 ## Phase 3 — Market-price provider integration
 
 - **Inputs:** Verified canonical identities/relationships and mappings; provider-gate checklist and permitted fixtures.
-- **Scope:** Server-side adapters/cache for sets and minifigures, separate new/used and sold/current-listing evidence, exact amounts/currencies, observation/sample times/quantities, and explicit unavailable/stale/thin states.
+- **Scope:** Server-side set/figure/part observations for NEW/USED and SOLD/CURRENT, exact currency/statistics, sold units/occurrences/window, point-in-time current units and supplied inventory/lot/store counts, freshness and confidence. Verify aggregate capabilities and design shared observation caching, deduplicated priority background refresh, request budgets and bounded concurrency/retries.
 - **Exclusions:** Scraping, guessed mappings, browser/Android secrets, valuation UI, recognition, unlimited retention assumptions, and infrastructure administration.
-- **Acceptance:** Authorized provider calls or labeled recorded fixtures produce normalized provenance-rich observations without guessing mappings, conflating conditions/market sides, or treating missing prices as zero.
+- **Acceptance:** Authorized calls or labeled permitted fixtures preserve four-view price/activity semantics and unknowns. Shared-part refresh tests prove deduplication, quota/backoff bounds, stale/failure isolation and no synchronous per-set fan-out; live aggregate capability and rights are explicitly verified.
 - **Gate:** Verify current official authentication/eligibility, rights/display/cache/retention, quotas/cost, and outbound-IP requirements before live calls or provider-content persistence; missing permissions block that path.
 - **Access and evidence:** Network/provider access is required for live proof and must be explicitly authorized; recorded-fixture checks remain distinguishable and cannot certify live access.
 
 ## Phase 4 — Representative-set feasibility gate
 
 - **Inputs:** Catalog/mapping versions, normalized market adapter, permitted observations, and a documented representative sample.
-- **Scope:** Evaluate modern/retired, zero/one/many/repeated figures, one valuable dominant figure, suffixed variants, unresolved mappings, missing prices, stale/thin evidence, and supported residual-build assumptions.
+- **Scope:** Benchmark modern/retired and suffixed variants, zero/one/many/repeated figures including dominant figures, unresolved mappings, missing/stale/thin evidence and supported residual-build assumptions alongside representative inventories and four POV views, authorized BrickLink-displayed equivalence/differences, price/activity coverage, proxy/velocity/supply/absorption semantics, large-set call budgets/cache/stale behavior, recovery assumptions, Gem/Liquid/Fast Cash/dead-stock/concentration/burden metrics and candidate Hunt normalization/weighting.
 - **Exclusions:** Recognition benchmarks, scaling imports instead of evaluating coverage, fabricated provider access/rights, product UI expansion, and production access.
-- **Acceptance:** A reproducible report demonstrates usable whole-set and minifigure new/used evidence coverage, documents every gap and request/display/retention constraint, and states whether deterministic sourcing is supported, partial, or blocked.
+- **Acceptance:** A reproducible representative real-set report establishes whole-set/minifigure NEW/USED coverage and whether deterministic sourcing is supported, partial or blocked, then records four-view numerical agreement or comparison gaps/reasons, rights and coverage, cold/warm/shared-set budgets and liquidity behavior. It validates or blocks candidate recovery/liquidity/Gem/burden/Hunt policies with sensitivity evidence; fixtures cannot certify live feasibility or final thresholds.
 - **Gate:** No live rights/account/coverage claim before this gate actually runs; fixture-only evidence cannot pass live-product feasibility, and critical unsupported mappings/evidence block advancement to supported recommendations.
 - **Access and evidence:** Live feasibility requires authorized provider/network access and Brian review; offline fixtures can rehearse the report only, with live gates explicitly unresolved.
 
 ## Phase 5 — Deterministic valuation engine
 
 - **Inputs:** Phase 4 feasibility outcome, exact valuation rules, verified representative fixtures, and supported evidence policies.
-- **Scope:** Implement pure server-side arithmetic and serializable versioned input/output snapshots for quantities, strategies, adjustments, costs, profit/ROI, both maximum-buy constraints, and blocked/partial results.
-- **Exclusions:** UI financial logic, live provider calls required by unit tests, image/AI work, full individual-piece part-out, automatic purchasing, and production access.
-- **Acceptance:** Table-driven tests reproduce every displayed calculation for complete, missing, damaged, repeated, unavailable, and variable-tax/premium cases without double-counting minifigures or costs.
+- **Scope:** Pure server calculations for four-view theoretical/recoverable POV, proxy/velocity/supply/absorption/occurrences, opportunities/Gems, Liquid/Fast Cash/dead-stock, concentration, break-even lots, value per lot/piece, burden, competition/rarity, POV premium and separate strategy economics. Retain exact costs/profit/ROI/both max-buy constraints and versioned partial/blocked snapshots.
+- **Exclusions:** UI financial logic, live provider calls required by unit tests, image/AI work, operational individual-piece listing/fulfillment, automatic purchasing, and production access.
+- **Acceptance:** Table-driven exact-arithmetic tests reproduce every valuation/liquidity formula and policy, covering complete/missing/damaged/repeated inventory, four-view and gross/net separation, zero/unknown/infinite states, partial coverage, alternate/extra/figure allocation, stable concentration/break-even ties, subset costs, policy boundaries and acquisition tax/premiums without double-counting.
 - **Gate:** Review formula/rounding/constraint examples and unsupported-evidence behavior before exposing recommendations; preserve rights-compliant reproducibility.
 - **Access and evidence:** Local deterministic fixtures; dependency access only if separately authorized for implementation, no product-provider or server access needed.
 
 ## Phase 6 — Set search and detail vertical slice
 
 - **Inputs:** Verified catalog/market contracts, passed feasibility gate, and tested valuation totals/coverage functions.
-- **Scope:** Direct suffixed-number/name search and a set-detail API/React page with whole-set and minifigure new/used values, quantities/totals, permitted images/references, separate market sides, provenance, and unavailable states.
+- **Scope:** Direct suffix/name search and shared API/React detail for whole-set/figure NEW/USED evidence, individual prices and quantity-aware totals, separate market sides, permitted images/references and provenance plus Part-Out Analysis: four POV views, recoverable gross, Liquid/Fast Cash/dead-stock, premium, coverage/freshness, Gems and high-value/low-liquidity warnings, top-5/top-10 concentration, density/burden and paginated part evidence with bounded refresh states.
 - **Exclusions:** Listing sessions, user image uploads, recognition, separate client formulas, saved-deal editing, and deployment.
-- **Acceptance:** Brian enters a set number or name without images, resolves the correct variant, and sees whole-set values plus every included minifigure, quantities, individual values, quantity-aware totals, provenance/freshness, and explicit missing-data indicators.
+- **Acceptance:** Desktop/mobile API/browser checks resolve numbers/names with recognition disabled and show whole-set values, every included figure/quantity/individual price/quantity-aware total and all required Part-Out Analysis fields, independent four-view coverage, evidence drill-down and fresh/stale/pending/partial/blocked states. No client arithmetic, synchronous hundreds-of-provider-calls request or guaranteed sale claim is accepted.
 - **Gate:** Browser/API acceptance must cover ambiguity, no-figure, repeated-figure, and unavailable-price cases with image modules disabled.
 - **Access and evidence:** Local fixtures/cached permitted evidence for tests; any live refresh remains within the already verified and explicitly authorized provider scope.
 
 ## Phase 7 — Deal calculator and saved work
 
 - **Inputs:** Direct set detail and tested valuation engine; reviewed private authentication and persistence design.
-- **Scope:** Asking price, actual contents/condition, build/instructions/box adjustments, selling profiles and costs, proceeds/profit/ROI/max buy, saved sets/deals/notes/watchlists/targets/settings, and Brian-only authentication.
+- **Scope:** Asking price, actual contents/condition and missing/damaged figure/part/build/instruction/box allocation, profiles/costs and separate complete-set, figures-plus-build and full-part-out comparisons with theoretical/recoverable gross, net/profit/ROI/max-buy, liquidity/burden and break-even lots. Persist saved sets/deals/notes/watchlists/targets/settings, assumptions/thresholds/calculation versions/freshness and Brian-only authentication; selective harvest remains later until supported.
 - **Exclusions:** Recognition/capture, new arithmetic in clients, offline writes, seller automation, provider-rights bypass, and production work.
-- **Acceptance:** A saved deal survives reload and every recommendation reproduces from visible inputs, persisted assumptions, and versioned output, with authenticated access, missing/damaged adjustments, and saved targets/notes/watchlists.
+- **Acceptance:** Authenticated saved sets/deals/notes/watchlists/targets/settings survive reload; strategy comparisons reproduce original allocation and missing/damaged adjustments, recovery/threshold/profile versions, evidence freshness, costs and outputs after market refresh. Verify removed parts/figures leave residual value, gross versus net break-even coverage, unknown costs/recovery, revision conflicts and unchanged original forecasts.
 - **Gate:** Review authentication and source-retention compatibility before persistent private workflows or any approved non-loopback access; revision conflicts cannot silently overwrite saved work.
 - **Access and evidence:** Local private tests first; no LAN/public binding change or home access without explicit scope, and provider access remains separately bounded.
 
 ## Phase 8 — Sets to Hunt
 
 - **Inputs:** Supported market/valuation snapshots, saved targets/profiles, feasibility policies, and deterministic sample opportunities.
-- **Scope:** Versioned ranking/explanations using profit/ROI/max buy, figure-value coverage, sales activity/freshness/confidence, top-figure concentration, residual-estimate dependence, listings/orders, and operational burden.
+- **Scope:** Decomposable Hunt components for asking-price economics or labeled hypothetical targets, POV premium/recoverable/Liquid/Fast Cash/dead-stock, Gems/figure/part/top-5/top-10/high-liquidity concentration, proxy/velocity/supply/absorption distributions, break-even lots, density/burden/listings/orders, rarity, competition and price/activity/mapping/sample/freshness confidence.
 - **Exclusions:** Scraping for deals, automatic purchases/contact, invented asking prices, theoretical part-out cash, recognition, and production access.
-- **Acceptance:** Reproducible results identify supported split-sale opportunities and explain every score, with insufficient/stale evidence reducing confidence or blocking ranking instead of producing false precision.
+- **Acceptance:** Reproducible rankings compare supported strategies and expose each input/component/version/tie rule and evidence blocker. Phase 4-reviewed calibration governs any combined score; missing critical data, high theoretical price or rarity alone cannot create a precise supported high rank.
 - **Gate:** Test ties, missing/thin/stale prices, concentration, residual assumptions, and selling burden; disclose a hypothetical acquisition assumption when no asking price exists.
 - **Access and evidence:** Local fixture/cached snapshot evaluation; separately authorized provider refresh only under established quotas/rights.
 

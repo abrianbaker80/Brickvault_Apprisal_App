@@ -1,16 +1,16 @@
 # BrickVault Appraisal App
 
-One private, self-hosted LEGO sourcing and appraisal platform for Brian. Start with a set number (including 75331-1) or name, inspect new/used whole-set and minifigure values, calculate profit/ROI and maximum buy, save deals and watchlists, and find supported opportunities in Sets to Hunt.
+One private, self-hosted LEGO sourcing and appraisal platform for Brian. The planned core starts with a set number (including 75331-1) or name, compares whole-set/minifigure values and four-view Part-Out Value with part-level liquidity, evaluates strategy profit/ROI/maximum buy, saves deals/watchlists and explains supported Sets-to-Hunt opportunities.
 
 Marketplace screenshots and recognition are later optional inputs into the same catalog and valuation core. Direct lookup works with every image feature disabled.
 
 ## Current checkpoint
 
-The approved Phase 1 implementation plan and actual validation evidence are recorded in [ExecPlan 000](docs/plans/000-local-foundation.md). Slice 1A is accepted at 150caf77820d09c60d028eeeba5b1b4317e11539. Slice 1B is accepted for the reviewed local checkpoint: isolated PostgreSQL, FastAPI health/readiness, packaged migrations and generated contracts. Phase 1 is not complete; Slice 1C has not started and requires separate authorization.
+The approved Phase 1 implementation plan and actual validation evidence are recorded in [ExecPlan 000](docs/plans/000-local-foundation.md). Slice 1A is accepted at 150caf77820d09c60d028eeeba5b1b4317e11539; Slice 1B is accepted and locally committed at d79395223b5d6fedf78e01dabd3202b5526211eb. Phase 1 is incomplete; Slice 1C is not started. The subsequent D-025 Part-Out Value/liquidity amendment changes planning only and passes independent acceptance for one local documentation checkpoint.
 
 Phase 1 has three bounded slices: 1A toolchain/workspace; 1B isolated database, API, and contracts; 1C web shell, built serving, CI, and full acceptance. Each requires its own explicit request and ends with a report. [Prompt 01](prompts/01_scaffold_foundation.md) remains a reusable plan-only review, not an implementation command.
 
-The accepted TypeScript 5.9.3, repository-local uv 0.12.10, ESLint 10 selections and exact dependency locks remain unchanged. The acceptance request authorizes one reviewed local Slice 1B commit, with no push, frontend or infrastructure work. The next authorized action is the separately approved Part-Out Value + liquidity documentation amendment. Follow [workflow guidance](CODEX_WORKFLOW.md) for slice boundaries.
+The accepted tooling selections and exact locks remain unchanged. After the local documentation checkpoint, the exact next action is **Phase 1 Slice 1C — web shell, local built serving, browser tests, CI, and complete Phase 1 acceptance.** Its implementation requires a separate explicit request. Follow [workflow guidance](CODEX_WORKFLOW.md); this review authorizes only the documentation checkpoint, with no push or automatic Slice 1C/Phase 2 start.
 
 Use [local development](docs/LOCAL_DEVELOPMENT.md) for locked setup, db:up/db:migrate/db:status/db:stop, dev:api, contract generation, unit/integration checks and API packaging. Backend verification uses real PostgreSQL. Frontend builds, static serving, browser checks and CI remain Slice 1C.
 
@@ -21,7 +21,7 @@ Use [local development](docs/LOCAL_DEVELOPMENT.md) for locked setup, db:up/db:mi
 - Server-side catalog/provider adapters and exact-decimal deterministic valuation serve every client.
 - Sold evidence and current listings, new and used, and whole-set versus split-sale strategies remain distinct.
 - Missing prices are unknown; quantities, provenance, freshness, profit, ROI, and maximum-buy constraints are explicit.
-- [New/used set part-out values](docs/plans/005-set-part-out-values.md) are planned across catalog, market feasibility, valuation and set detail; theoretical totals remain distinct from expected proceeds.
+- [Part-Out Value and liquidity intelligence](docs/plans/005-set-part-out-values.md) spans Phases 2–8: separate NEW/USED × SOLD/CURRENT, supported recoverable gross, Gems, Liquid POV, Fast Cash, Dead-Stock Exposure, concentration/break-even/density/burden, shared refresh and explainable Hunt components. Theoretical value, gross, net and profit stay separate; no sale guarantee or numerical threshold is implied.
 - Recognition, image storage, overlays, and training retention are later modules; AI predictions are never confirmed labels.
 - Home-server discovery and deployment are separate, explicitly authorized phases.
 

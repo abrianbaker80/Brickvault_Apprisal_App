@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** Table-driven tests reproduce every displayed calculation for complete, missing, damaged, repeated, unavailable, and variable-tax/premium cases without double-counting minifigures or costs.
+**Expected result:** Table-driven exact-arithmetic tests reproduce every valuation/liquidity formula and policy, covering complete/missing/damaged/repeated inventory, four-view and gross/net separation, zero/unknown/infinite states, partial coverage, alternate/extra/figure allocation, stable concentration/break-even ties, subset costs, policy boundaries and acquisition tax/premiums without double-counting.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Phase 4 feasibility outcome, exact valuation rules, verified representative fixt
 
 ## Scope
 
-Implement pure server-side arithmetic and serializable versioned input/output snapshots for quantities, strategies, adjustments, costs, profit/ROI, both maximum-buy constraints, and blocked/partial results.
+Pure server calculations for four-view theoretical/recoverable POV, proxy/velocity/supply/absorption/occurrences, opportunities/Gems, Liquid/Fast Cash/dead-stock, concentration, break-even lots, value per lot/piece, burden, competition/rarity, POV premium and separate strategy economics. Retain exact costs/profit/ROI/both max-buy constraints and versioned partial/blocked snapshots.
 
-Include separate new/used theoretical aggregation under the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md). Verify quantity/color-aware decimal sums, inclusion-policy snapshots, partial coverage and no assembled-figure/component double counting. Theoretical totals do not themselves establish realizable proceeds or a maximum offer.
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 5 checkpoint. Implement every planned formula test in VALUATION_RULES and only Phase 4-supported policies. Unknown full-value coverage cannot become 100%, absent activity cannot become dead stock and expensive/rare alone cannot make a Gem. Full part-out analysis is core; selective harvest remains evidence-gated and selling operations remain excluded.
 
 ## Exclusions
 
@@ -24,7 +24,7 @@ UI financial logic, live provider calls required by unit tests, image/AI work, o
 
 ## Acceptance evidence
 
-Table-driven tests reproduce every displayed calculation for complete, missing, damaged, repeated, unavailable, and variable-tax/premium cases without double-counting minifigures or costs.
+Table-driven exact-arithmetic tests reproduce every valuation/liquidity formula and policy, covering complete/missing/damaged/repeated inventory, four-view and gross/net separation, zero/unknown/infinite states, partial coverage, alternate/extra/figure allocation, stable concentration/break-even ties, subset costs, policy boundaries and acquisition tax/premiums without double-counting.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

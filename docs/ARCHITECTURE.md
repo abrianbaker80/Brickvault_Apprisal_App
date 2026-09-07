@@ -69,6 +69,8 @@ Local future development runs native FastAPI/Vite with isolated Compose PostgreS
 | Authentication/synchronization | Brian-only access, authoritative server revisions, dated client caches | 7 / 9 |
 | Responsive client | Shared views; no independent provider access or money arithmetic | 1 / 6–9 |
 
+D-025 extends catalog ownership to explicit part/color identities, full inventory choices, figure/component allocation and scoped rarity relationships; market ownership to part prices/activity and shared refresh; valuation ownership to POV, recovery, liquidity/opportunity and burden calculations; and hunting to their explainable score components. These are planned Phases 2–8 capabilities in the existing modules, not new services or Phase 1 work.
+
 Catalog and provider mappings are shared across every use case. A set number suffix is part of identity, not text to discard. A provider's figure ID is not assumed to equal another provider's identifier. No catalog-set-only generic record substitutes for quantity-bearing figure relationships.
 
 ## API contract strategy
@@ -105,6 +107,28 @@ The planned built shell has only the / frontend route and /assets; Swagger/ReDoc
 | 16 | Append actual purchase/resale outcomes to saved deals without changing historical estimates. |
 
 Phase 6 detail responses cannot require a listing session or recognition run. Set detail combines market observations with the Phase 5 total/coverage rules; fee/target deal recommendations appear through the Phase 7 workflow.
+
+## Part-out and liquidity data flow — planned Phases 2–8
+
+Authoritative versioned set inventory resolves exact part/color/condition quantities and mutually exclusive sale allocation. Server-side providers supply normalized item-level price/activity observations to the existing PostgreSQL market store. Shared deterministic valuation functions produce four POV views, part-liquidity/opportunity and set-level results, consumed by Set Detail, saved strategy comparisons and Hunt components. No client or recognition module recalculates these values.
+
+The initial evidence path is inventory plus item-level observations. Phase 3 verifies whether an authorized aggregate capability exists; a permitted direct result may supply additional evidence/benchmarking, but cannot erase our inclusion, provenance or coverage contract. Phase 4 compares equivalent settings with BrickLink-displayed values where authorized and practical. “BrickLink Part Out Value” naming requires demonstrated equivalence and permitted use.
+
+### Shared observation cache and priority refresh
+
+Phase 3 designs provider_cache_entry and durable provider_refresh_job ownership within the same backend/PostgreSQL application. Begin with a bounded worker execution mode in the modular monolith and PostgreSQL job state/leases; this plan does not add Redis, brokers, microservices or another database. Any later alternative needs measured justification and its own review. No queue/worker is implemented or started in Phase 1 or this amendment.
+
+Set Detail reads existing permitted observations/derived snapshots and returns fresh, stale-with-refresh, partial, pending or blocked states promptly. A bounded idempotent refresh request can enqueue missing/stale keys; the user-facing detail request never waits for hundreds of synchronous provider calls. Shared keys deduplicate across searched sets, watchlists and Hunt candidates. Responses carry independent price/activity ages, coverage and refresh status, not a fresh timestamp hiding old evidence.
+
+Cache keys include provider/type/item/color, condition, SOLD/CURRENT, region, currency, statistic/window, relevant source parameters and mapping compatibility. Apply source-specific TTL, maximum stale-display and retention limits, bounded concurrency and account quotas, Retry-After/backoff with attempt/deadline caps, negative-cache expiry and per-key/provider failure isolation. In-flight deduplication and transactional leases prevent concurrent refresh duplication; version/time checks prevent late stale results overwriting newer cache pointers. Retain immutable observations referenced by history only where rights allow.
+
+Priority classes consider Brian's explicit search, watchlisted sets, Hunt candidates, valuable liquid lots, stale high-value observations and broader coverage. Define quotas/fairness/aging so background work cannot exhaust foreground budget or starve indefinitely. Record request reason, policy/adapter version, attempt, quota status, source observation times and outcomes without credentials/raw private payloads. Refresh failure preserves usable dated evidence within permitted limits; expired or prohibited data stays unavailable. Prices and activity can fail independently.
+
+### Planned generated API and UI contracts
+
+Phase 6 extends set detail or its bounded /api/catalog/sets/{set_id}/part-out resource with the minimum snapshot contract in [the part-out plan](plans/005-set-part-out-values.md). Paginated lot drill-down exposes exact identity/allocation, permitted images, source prices/activity, formula inputs and Gem/classification reasons. A bounded refresh-status/request contract may be defined in that phase using the Phase 3 service; precise routes remain a reviewed interface decision, not implemented endpoints.
+
+The shared React Part-Out Analysis area shows the four-view matrix, recoverable gross, Liquid/Fast Cash/dead-stock, premium, concentrations, density and burden with explicit proxy/unknown/partial labels. Phase 7 /api/valuations and saved deals compare separate strategies and persist assumptions/thresholds/freshness; Phase 8 /api/hunts adds decomposable part-out/competition/rarity/liquidity components. Decimal/null-plus-state representations, server-only arithmetic, generated OpenAPI/TypeScript, revision conflicts and existing private-access/cache rules remain authoritative.
 
 ## Client, authentication, and offline boundaries
 

@@ -38,6 +38,45 @@ Research references for a separately authorized future check: [published manual]
 
 The new/used [part-out plan](plans/005-set-part-out-values.md) follows public-manual verification of subset inventory and item price-guide methods. An aggregate set part-out-price endpoint was not found in the reviewed method list. Treat inventory-plus-price aggregation as the planned integration, subject to authenticated feasibility and current rights. Verify nested/matching/extra/alternate behavior, source flags, distinct item/color request budgets, and equivalent settings before claiming parity with BrickLink's website. No authenticated provider requests occurred in this planning check.
 
+## Part-level price, activity and refresh gates — D-025
+
+This amendment uses repository planning only: no BrickLink, Rebrickable, eBay, Facebook Marketplace, AI or other provider was contacted. The preceding manual/terms observations remain dated historical findings, not new verification or access authorization. R-11–R-37 in [PRODUCT_SPEC](PRODUCT_SPEC.md) are requirements conditional on the evidence below, not claims that every provider exposes those fields.
+
+### Phase 2 inventory and mapping evidence
+
+Verify canonical/provider part and color/print identity, quantity and separately represented extras, alternate/matching cardinality/resolution, inventory versions, nested subsets and minifigure/component membership. Prove whether instructions/booklets and later packaging are represented and permitted. Verify each intact-versus-component expansion before complete counts or allocation claims. Exact part/color set counts need catalog scope/completeness and deduplicated canonical set relationships; unresolved alternatives cannot prove exclusivity. Optional image display/cache rights are separate, and no borrowed variant image is acceptable.
+
+### Phase 3 capability and field verification
+
+Initially calculate from authoritative inventory plus normalized item-level market observations. Explicitly check current authorized capabilities for direct aggregate POV or equivalent data; record endpoint/parameters, rights, coverage and meaning if one exists, or absence/unavailability if not. A permitted aggregate result is additional evidence/benchmarking, not permission to omit required lot-level provenance. Do not call our output “BrickLink Part Out Value” until equivalence and terminology/display permission are demonstrated.
+
+| Evidence family | Verify and preserve where available |
+|---|---|
+| Query identity | Provider item type/ID, exact color, mapping revision, NEW/USED, SOLD/CURRENT, currency, geography and all source-affecting request parameters |
+| Sold prices | Average, quantity-weighted average, useful minimum/maximum, statistic semantics, currency, source observation interval and sample adequacy; absent statistics never silently substitute |
+| Sold activity | Recent sold unit quantity; sale-occurrence count and its exact source meaning; window start/end/duration and boundary rules; units and occurrences remain separate |
+| Current prices/supply | Current average/quantity-weighted prices, point-in-time quantity, active inventory and lot counts, seller/store count where separately exposed, sample and observation timestamp |
+| Confidence/freshness | Source observed-at, fetched-at and stale-after; independent price/activity availability, coverage, age/skew limits, sample/quantity confidence and dispersion where exposed |
+| Rights | Current account eligibility/authentication, display/naming/image/cache/history permissions, request quota/cost and outbound-IP constraints; reproducible-snapshot compatibility |
+
+Do not invent beginning inventory, historical inventory exposure, transaction structure, seller distributions or individual store velocity. If only interval sold activity and current supply exist, S/(S+C) is explicitly a proxy. Unknown fields remain null/insufficient evidence; a genuine supplied zero must retain a verified window and field meaning. Combining incompatible scope/time observations is blocked for the affected metric. Provider listing/lot counts do not automatically mean transactions or sellers.
+
+### Phase 3 request budgets and background refresh
+
+Design normalized observation storage and shared provider caching with exact query identities, cross-set deduplication, provider-specific freshness/refresh intervals, permitted stale-while-refresh, priority jobs/workers, bounded concurrency, rate-limit handling, capped retries/backoff, per-key failure isolation and refresh provenance under [ARCHITECTURE](ARCHITECTURE.md#shared-observation-cache-and-priority-refresh). No synchronous hundreds-of-calls Set Detail design and no Phase 1 worker/queue.
+
+Budget cold inventory/nested resolution plus every distinct item/color/condition/market-side query. A four-view design may need up to four price-guide requests per unique item/color if the provider separates each view, plus separately needed activity/pagination calls; exact capability and counts must be measured, not assumed. Warm overlapping sets reuse compatible observations; a repeated part quantity is not a repeated fetch. Distinguish cached data, in-flight work, negative results and expired forbidden-to-display data.
+
+Prioritize explicit searches, watchlists, Hunt candidates, high-value/high-liquidity lots, stale high-value evidence and broader coverage with bounded quota allocation/fairness. Verify deduplicated work, lease/retry recovery, observation ordering, quota exhaustion, cancellation and stale-data behavior using deterministic barriers/fake clocks in later tests. Do not create extra providers/dependencies/infrastructure merely to support this design.
+
+### Phase 4 representative POV and liquidity benchmark
+
+Compare calculated POV with BrickLink-displayed POV where authorized and practical. Record exact set/inventory version, NEW/USED, SOLD/CURRENT, statistic, currency/region, observation time, nested/figure/extra/alternate/instruction flags and matched/unmatched settings. Report absolute/relative numerical differences and reasons; define justified tolerances before judging agreement, never apply unexplained correction factors. Where comparison is unavailable or impractical, record the reason and unverified equivalence; do not claim a successful comparison or permitted branded naming.
+
+Cover small and very large sets; current/retired; few-lot/high-value and many-lot/low-value; repeated quantities, alternates and extras; figure-heavy sets and valuable non-minifigure parts; high-value/high-velocity, high-value/low-velocity and low-value/high-velocity parts; missing prices, zero sales, very high supply and thin samples. Measure each condition/side's price and activity coverage, proxy/velocity/supply/absorption behavior, supply-versus-occurrence semantics, cold/warm/overlapping-set call volume, cache effectiveness, latency and stale/failure behavior.
+
+Evaluate candidate Gem, Liquid POV, Fast Cash, dead/slow and burden rules, recovery-model horizons/assumptions, concentration and value-density outputs, break-even subset costs, and Hunt normalization/weights/correlated metrics on representative real sets. Record candidate versions, sensitivity and separate calibration/validation results; numerical cutoffs and final Hunt weights are not approved by this amendment. Aggregate market activity cannot establish Brian-specific recovery fractions, labor hours or a sale deadline without additional evidence. Persist a supported/partial/blocked conclusion per capability; a fixture rehearsal cannot pass live feasibility.
+
 ## Later AI and recognition gate — Phase 14
 
 Keep OpenAI/Gemini adapters, model IDs, embedding dimensions, prompts, and spending caps configurable and server-side. Prior bootstrap notes described Gemini multimodal image embeddings through gemini-embedding-2 and text-only gemini-embedding-001; model availability, account access, image-use permission, provider data retention, costs, and quality must be reverified in the requested spike.

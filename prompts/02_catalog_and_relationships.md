@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** Verified fixtures resolve representative numbers/names and return every included minifigure with correct quantities, including duplicates and variants, while ambiguous mappings and malformed data remain explicit.
+**Expected result:** Permitted fixtures resolve representative numbers/names, preserve canonical variants and every figure/part/color quantity including repeated figures, expose malformed data and ambiguous mappings, resolve required choices, keep extras separate and prove physical inventory is never double-counted. Unknown mapping/expansion/catalog coverage cannot prove completeness or exclusivity.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Completed local foundation; explicit identity/quantity contracts and permitted l
 
 ## Scope
 
-Repeatable imports of sets, suffixed-number normalization, names/themes, minifigures, versioned quantity relationships, provider-scoped mappings, provenance, and source versions.
+Repeatable set/figure/part/color identities and exact provider mappings, suffix/name/theme semantics, inventory versions/provenance, separate regular/extra quantities, alternate/matching resolution, intact/component figure and nested subset relationships, sourced instructions and later permitted packaging, and scoped exact part/color rarity relationships.
 
-R-11 also requires the catalog portion of the [part-out plan](../docs/plans/005-set-part-out-values.md): versioned component/color quantities, exact mappings, extras/alternates/matching groups and mutually exclusive assembled-figure allocation. Verify these with permitted fixtures; pricing and totals belong to later phases.
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 2 checkpoint. Verify acyclic expansion, physical-piece versus sellable-unit counts, optional exact part/color images, deduplicated known-set counts and first/last appearances where supported. Prices and calculations remain later.
 
 ## Exclusions
 
@@ -24,7 +24,7 @@ Pricing/valuation implementation, browser search/detail workflow, image ingestio
 
 ## Acceptance evidence
 
-Verified fixtures resolve representative numbers/names and return every included minifigure with correct quantities, including duplicates and variants, while ambiguous mappings and malformed data remain explicit.
+Permitted fixtures resolve representative numbers/names, preserve canonical variants and every figure/part/color quantity including repeated figures, expose malformed data and ambiguous mappings, resolve required choices, keep extras separate and prove physical inventory is never double-counted. Unknown mapping/expansion/catalog coverage cannot prove completeness or exclusivity.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

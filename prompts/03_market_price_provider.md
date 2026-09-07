@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** Authorized provider calls or labeled recorded fixtures produce normalized provenance-rich observations without guessing mappings, conflating conditions/market sides, or treating missing prices as zero.
+**Expected result:** Authorized calls or labeled permitted fixtures preserve four-view price/activity semantics and unknowns. Shared-part refresh tests prove deduplication, quota/backoff bounds, stale/failure isolation and no synchronous per-set fan-out; live aggregate capability and rights are explicitly verified.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Verified canonical identities/relationships and mappings; provider-gate checklis
 
 ## Scope
 
-Server-side adapters/cache for sets and minifigures, separate new/used and sold/current-listing evidence, exact amounts/currencies, observation/sample times/quantities, and explicit unavailable/stale/thin states.
+Server-side set/figure/part observations for NEW/USED and SOLD/CURRENT, exact currency/statistics, sold units/occurrences/window, point-in-time current units and supplied inventory/lot/store counts, freshness and confidence. Verify aggregate capabilities and design shared observation caching, deduplicated priority background refresh, request budgets and bounded concurrency/retries.
 
-Include the component-guide portion of the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md), sharing the provider adapter/cache with exact item/color identity and request parameters. Test independent new/used missing evidence and bounded request budgets. Do not assume an aggregate API endpoint or website parity.
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 3 checkpoint. Preserve average/quantity-weighted and useful min/max statistics; never infer transactions from occurrences, sellers from lots or historical inventory from current supply. Use the existing backend/PostgreSQL for bounded priority jobs; test cold/warm/overlapping-set budgets, leases, late responses and timestamp skew with fake clocks/barriers. No branded equivalence claim before permission and Phase 4 comparison.
 
 ## Exclusions
 
@@ -24,7 +24,7 @@ Scraping, guessed mappings, browser/Android secrets, valuation UI, recognition, 
 
 ## Acceptance evidence
 
-Authorized provider calls or labeled recorded fixtures produce normalized provenance-rich observations without guessing mappings, conflating conditions/market sides, or treating missing prices as zero.
+Authorized calls or labeled permitted fixtures preserve four-view price/activity semantics and unknowns. Shared-part refresh tests prove deduplication, quota/backoff bounds, stale/failure isolation and no synchronous per-set fan-out; live aggregate capability and rights are explicitly verified.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

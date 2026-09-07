@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** A saved deal survives reload and every recommendation reproduces from visible inputs, persisted assumptions, and versioned output, with authenticated access, missing/damaged adjustments, and saved targets/notes/watchlists.
+**Expected result:** Authenticated saved sets/deals/notes/watchlists/targets/settings survive reload; strategy comparisons reproduce original allocation and missing/damaged adjustments, recovery/threshold/profile versions, evidence freshness, costs and outputs after market refresh. Verify removed parts/figures leave residual value, gross versus net break-even coverage, unknown costs/recovery, revision conflicts and unchanged original forecasts.
 
 ## Instructions
 
@@ -14,7 +14,9 @@ Direct set detail and tested valuation engine; reviewed private authentication a
 
 ## Scope
 
-Asking price, actual contents/condition, build/instructions/box adjustments, selling profiles and costs, proceeds/profit/ROI/max buy, saved sets/deals/notes/watchlists/targets/settings, and Brian-only authentication.
+Asking price, actual contents/condition and missing/damaged figure/part/build/instruction/box allocation, profiles/costs and separate complete-set, figures-plus-build and full-part-out comparisons with theoretical/recoverable gross, net/profit/ROI/max-buy, liquidity/burden and break-even lots. Persist saved sets/deals/notes/watchlists/targets/settings, assumptions/thresholds/calculation versions/freshness and Brian-only authentication; selective harvest remains later until supported.
+
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 7 checkpoint. Persist selected lot identities, actual regular/extra/missing quantities, exact evidence and break-even ranking policy. Only one strategy is active; comparison totals never add together. Selective harvest needs supported residual/recovery evidence, not whole-set-minus-theoretical-parts proceeds. Do not implement selling/listing/fulfillment operations.
 
 ## Exclusions
 
@@ -22,7 +24,7 @@ Recognition/capture, new arithmetic in clients, offline writes, seller automatio
 
 ## Acceptance evidence
 
-A saved deal survives reload and every recommendation reproduces from visible inputs, persisted assumptions, and versioned output, with authenticated access, missing/damaged adjustments, and saved targets/notes/watchlists.
+Authenticated saved sets/deals/notes/watchlists/targets/settings survive reload; strategy comparisons reproduce original allocation and missing/damaged adjustments, recovery/threshold/profile versions, evidence freshness, costs and outputs after market refresh. Verify removed parts/figures leave residual value, gross versus net break-even coverage, unknown costs/recovery, revision conflicts and unchanged original forecasts.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

@@ -10,6 +10,8 @@ The foundation answers a deterministic sourcing question: given a set number or 
 
 The [product specification](PRODUCT_SPEC.md) and [valuation rules](VALUATION_RULES.md) govern. Every recommendation must expose its evidence and arithmetic; missing information is unknown, not zero.
 
+D-025 makes part-level resale intelligence core alongside whole sets and figures: four NEW/USED × SOLD/CURRENT POV views, supported recoverable gross, liquidity proxies/velocity/supply/absorption, Part-Out Gems, Liquid POV, Fast Cash Value, Dead-Stock Exposure, concentration, break-even lots, value density, burden, competition and scoped rarity. Set Detail and Sets to Hunt use the same server results; theoretical value is not cash and rarity is not liquidity.
+
 ## One platform, shared core
 
 Chrome, an installable PWA, and the Android core package share the primary React UI, FastAPI API, user data, and authoritative PostgreSQL database. Catalog identity, set/minifigure relationships, provider mappings, market observations, deterministic valuation, deals, watchlists, settings, and hunting scores belong to that core.
@@ -36,8 +38,8 @@ No home-server, Proxmox, router, DNS, Cloudflare, or production access is curren
 
 ## Current checkpoint and future possibilities
 
-The approved detailed Phase 1 plan and actual evidence are recorded in [ExecPlan 000](plans/000-local-foundation.md). Slice 1A is accepted at 150caf77820d09c60d028eeeba5b1b4317e11539; Slice 1B isolated PostgreSQL, API, migrations and contracts passes acceptance for the explicitly authorized local checkpoint. The next authorized action is the separately approved Part-Out Value + liquidity documentation amendment, not executed by this review. Slice 1C (web/built serving/CI/acceptance) requires a separate explicit request. [Prompt 01](../prompts/01_scaffold_foundation.md) remains plan-only when reused. No push or infrastructure work is authorized.
+The approved detailed Phase 1 plan and actual evidence are recorded in [ExecPlan 000](plans/000-local-foundation.md). Slice 1A is accepted at 150caf7; Slice 1B is accepted and locally committed at d79395223b5d6fedf78e01dabd3202b5526211eb. The subsequent D-025 documentation amendment passes independent acceptance for one local documentation checkpoint. After that checkpoint, the exact next action is **Phase 1 Slice 1C — web shell, local built serving, browser tests, CI, and complete Phase 1 acceptance.** Stop before its separately requested implementation. Slice 1C and Phase 2 implementation remain unstarted. [Prompt 01](../prompts/01_scaffold_foundation.md) remains plan-only when reused; no push or infrastructure work is authorized.
 
-Brian also requested separate new/used set part-out values. The [part-out plan](plans/005-set-part-out-values.md) places inventory, market feasibility, deterministic aggregation and display in Phases 2–6. It records API/documentation uncertainty and coverage gates; no valuation feature or authenticated provider access is implemented in Slice 1B.
+The [existing part-out plan](plans/005-set-part-out-values.md) preserves D-024's useful inventory/inclusion/provenance rules and extends them through Phases 2–8 under D-025, adding normalized activity/shared background refresh, policy feasibility, strategy comparisons/saved assumptions and Hunt components. Full part-out economic analysis is core; operational piece listing/fulfillment remains excluded and selective harvest stays later until supported. Provider capabilities/rights/equivalence, recovery models and final liquidity/Hunt policies remain unverified gates. No provider research, dependency/service/database work or implementation occurred in this amendment.
 
 Later outcomes can personalize resale assumptions. A future sorter integration may help verify contents after purchase, but no sorter integration or separate inventory product is part of this foundation. The starter ZIP remains historical material and never overrides checked-out guidance.

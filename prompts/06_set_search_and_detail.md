@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** Brian enters a set number or name without images, resolves the correct variant, and sees whole-set values plus every included minifigure, quantities, individual values, quantity-aware totals, provenance/freshness, and explicit missing-data indicators.
+**Expected result:** Desktop/mobile API/browser checks resolve numbers/names with recognition disabled and show whole-set values, every included figure/quantity/individual price/quantity-aware total and all required Part-Out Analysis fields, independent four-view coverage, evidence drill-down and fresh/stale/pending/partial/blocked states. No client arithmetic, synchronous hundreds-of-provider-calls request or guaranteed sale claim is accepted.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Verified catalog/market contracts, passed feasibility gate, and tested valuation
 
 ## Scope
 
-Direct suffixed-number/name search and a set-detail API/React page with whole-set and minifigure new/used values, quantities/totals, permitted images/references, separate market sides, provenance, and unavailable states.
+Direct suffix/name search and shared API/React detail for whole-set/figure NEW/USED evidence, individual prices and quantity-aware totals, separate market sides, permitted images/references and provenance plus Part-Out Analysis: four POV views, recoverable gross, Liquid/Fast Cash/dead-stock, premium, coverage/freshness, Gems and high-value/low-liquidity warnings, top-5/top-10 concentration, density/burden and paginated part evidence with bounded refresh states.
 
-Display both server-calculated new/used values from the [R-11 part-out plan](../docs/plans/005-set-part-out-values.md), with inclusion choices, price basis, currency, freshness, lot/unit coverage and expanded component details. Browser acceptance must distinguish complete, partial and unavailable totals and identify them as theoretical values.
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 6 checkpoint. Follow PRODUCT_SPEC's Part-Out Analysis UX and minimum result contract. Show actual statistic/window/inclusions, supplied seller/lot/rarity context, physical pieces versus sellable lots, denominators/states and policy versions. Gem cards expose reasons and unknown fields; high-value/slow-demand cases remain visible. Fees/target deal recommendations stay Phase 7.
 
 ## Exclusions
 
@@ -24,7 +24,7 @@ Listing sessions, user image uploads, recognition, separate client formulas, sav
 
 ## Acceptance evidence
 
-Brian enters a set number or name without images, resolves the correct variant, and sees whole-set values plus every included minifigure, quantities, individual values, quantity-aware totals, provenance/freshness, and explicit missing-data indicators.
+Desktop/mobile API/browser checks resolve numbers/names with recognition disabled and show whole-set values, every included figure/quantity/individual price/quantity-aware total and all required Part-Out Analysis fields, independent four-view coverage, evidence drill-down and fresh/stale/pending/partial/blocked states. No client arithmetic, synchronous hundreds-of-provider-calls request or guaranteed sale claim is accepted.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** Reproducible results identify supported split-sale opportunities and explain every score, with insufficient/stale evidence reducing confidence or blocking ranking instead of producing false precision.
+**Expected result:** Reproducible rankings compare supported strategies and expose each input/component/version/tie rule and evidence blocker. Phase 4-reviewed calibration governs any combined score; missing critical data, high theoretical price or rarity alone cannot create a precise supported high rank.
 
 ## Instructions
 
@@ -14,7 +14,9 @@ Supported market/valuation snapshots, saved targets/profiles, feasibility polici
 
 ## Scope
 
-Versioned ranking/explanations using profit/ROI/max buy, figure-value coverage, sales activity/freshness/confidence, top-figure concentration, residual-estimate dependence, listings/orders, and operational burden.
+Decomposable Hunt components for asking-price economics or labeled hypothetical targets, POV premium/recoverable/Liquid/Fast Cash/dead-stock, Gems/figure/part/top-5/top-10/high-liquidity concentration, proxy/velocity/supply/absorption distributions, break-even lots, density/burden/listings/orders, rarity, competition and price/activity/mapping/sample/freshness confidence.
+
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 8 checkpoint. Retain figure coverage/concentration and residual-estimate dependence; include low-value-lot percentage, expected orders, Fast Cash/Dead-Stock shares, value per lot/piece and infinite/unknown distribution buckets. Explain overlapping metrics and competition versus rarity versus liquidity. Do not lock arbitrary weights or silently redistribute missing critical components.
 
 ## Exclusions
 
@@ -22,7 +24,7 @@ Scraping for deals, automatic purchases/contact, invented asking prices, theoret
 
 ## Acceptance evidence
 
-Reproducible results identify supported split-sale opportunities and explain every score, with insufficient/stale evidence reducing confidence or blocking ranking instead of producing false precision.
+Reproducible rankings compare supported strategies and expose each input/component/version/tie rule and evidence blocker. Phase 4-reviewed calibration governs any combined score; missing critical data, high theoretical price or rarity alone cannot create a precise supported high rank.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 

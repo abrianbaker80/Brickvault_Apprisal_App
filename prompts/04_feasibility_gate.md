@@ -2,7 +2,7 @@
 
 **Mode:** Plan first; implement only on a separate explicit request
 
-**Expected result:** A reproducible report demonstrates usable whole-set and minifigure new/used evidence coverage, documents every gap and request/display/retention constraint, and states whether deterministic sourcing is supported, partial, or blocked.
+**Expected result:** A reproducible representative real-set report establishes whole-set/minifigure NEW/USED coverage and whether deterministic sourcing is supported, partial or blocked, then records four-view numerical agreement or comparison gaps/reasons, rights and coverage, cold/warm/shared-set budgets and liquidity behavior. It validates or blocks candidate recovery/liquidity/Gem/burden/Hunt policies with sensitivity evidence; fixtures cannot certify live feasibility or final thresholds.
 
 ## Instructions
 
@@ -14,9 +14,9 @@ Catalog/mapping versions, normalized market adapter, permitted observations, and
 
 ## Scope
 
-Evaluate modern/retired, zero/one/many/repeated figures, one valuable dominant figure, suffixed variants, unresolved mappings, missing prices, stale/thin evidence, and supported residual-build assumptions.
+Benchmark modern/retired and suffixed variants, zero/one/many/repeated figures including dominant figures, unresolved mappings, missing/stale/thin evidence and supported residual-build assumptions alongside representative inventories and four POV views, authorized BrickLink-displayed equivalence/differences, price/activity coverage, proxy/velocity/supply/absorption semantics, large-set call budgets/cache/stale behavior, recovery assumptions, Gem/Liquid/Fast Cash/dead-stock/concentration/burden metrics and candidate Hunt normalization/weighting.
 
-Evaluate [R-11 part-out feasibility](../docs/plans/005-set-part-out-values.md): inventory flag/matching-group semantics, exact component/color coverage in each condition, request cost/latency and comparable website settings. Report live rights and coverage separately from fixtures; explain differences and keep partial totals explicit.
+Follow [the D-025 part-out plan](../docs/plans/005-set-part-out-values.md) and its Phase 4 checkpoint. Include small/very-large/current/retired, few-lot/high-value, many-lot/low-value, repeated/alternate/extra, figure-heavy/valuable-nonfigure, high-value/high-velocity, high-value/low-velocity, low-value/high-velocity, missing-price, zero-sale, high-supply and thin-sample cases. Match website condition/side/statistic/currency/window/inclusions where authorized and practical; record absent comparison honestly. Separate calibration/validation and test threshold sensitivity/correlated Hunt inputs; do not choose cutoffs to maximize results.
 
 ## Exclusions
 
@@ -24,7 +24,7 @@ Recognition benchmarks, scaling imports instead of evaluating coverage, fabricat
 
 ## Acceptance evidence
 
-A reproducible report demonstrates usable whole-set and minifigure new/used evidence coverage, documents every gap and request/display/retention constraint, and states whether deterministic sourcing is supported, partial, or blocked.
+A reproducible representative real-set report establishes whole-set/minifigure NEW/USED coverage and whether deterministic sourcing is supported, partial or blocked, then records four-view numerical agreement or comparison gaps/reasons, rights and coverage, cold/warm/shared-set budgets and liquidity behavior. It validates or blocks candidate recovery/liquidity/Gem/burden/Hunt policies with sensitivity evidence; fixtures cannot certify live feasibility or final thresholds.
 
 Record actual relevant checks, commands/results, and limitations; distinguish fixtures, live calls, builds, browser checks, and physical-device evidence. Do not fabricate unavailable verification.
 
