@@ -1,0 +1,27 @@
+P10-03 r3 closeout validation — 2026-09-28, Windows PowerShell
+
+Newly run for the accepted closeout (no qualification rerun)
+- git branch --show-current; git rev-parse HEAD; git status --short --branch; git diff --cached --name-only
+  Before commit: main at 6b844b757ec2df2dd3ebcdbc32f2e6ccbf7ddb19; empty index; nine reviewed task changes and three protected pre-existing dirty files.
+- Separate temporary GIT_INDEX_FILE: git read-tree 6b844b75...; git --literal-pathspecs add -- <the nine task paths>; git diff --cached --binary --no-ext-diff 6b844b75... -- <the nine task paths>.
+  Result: exact byte match with accepted r2 changes.patch; both SHA-256 c90c1c94259230d6ea13c43fcb4b8b7ed06538b5672709fdf500880a8823ebea. The separate index was discarded; the implementation index was untouched. Final staged source blobs matched all five accepted r2 source files. The local scripts/package_api.py working copy uses CRLF; its reviewed Git blob is identical.
+- Get-FileHash AGENTS.md, services/api/tests/integration/test_catalog_search.py, services/api/tests/unit/test_catalog_parser.py -Algorithm SHA256
+  Result: respectively f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4, d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7, 0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041; unchanged and unstaged.
+- git --literal-pathspecs add -- <exact nine reviewed paths>; git diff --cached --name-status; git diff --cached --numstat; git diff --cached -- CODEX_WORKFLOW.md docs/ROADMAP.md; inspected complete staged ExecPlan 089 status and limits.
+  Result: exactly nine task files staged. Only the three authorized governance documents received closeout status edits; five source/test files and LOCAL_DEVELOPMENT.md matched accepted r2. No protected file staged.
+- git diff --cached --check -> exit 0. No new Markdown link was introduced or changed after the accepted r2 link checks.
+- git commit -m "Close Phase 10 local release readiness" -> exit 0, 03ab154a7dbbf9b6aaee3c877c3a400732c6fd96; exactly nine files, 979 insertions and one deletion against 6b844b75.... Final index empty; only protected files remain dirty. No main push.
+- In the separate publication index, the 14 staged r3 files were inventoried and screened for private keys, absolute user paths, bearer tokens, credential assignments and prohibited artifacts; none was found. The staged changes.patch exactly matches the Git-generated cumulative diff, and its five source copies match the implementation commit. A package-level git diff --cached --check HEAD flags 11 literal `+ ` blank-line lines inside changes.patch because the unified diff is embedded as a text file; the implementation diff check above passed. The embedded patch was preserved byte-for-byte.
+
+Reused from accepted P10-03 r2; none of these commands was rerun for r3
+- Environment then: Windows, Node v24.14.0, pnpm 11.8.0, Python 3.13.12, repository-local uv 0.12.10.
+- pnpm build -> exit 0. One locked offline API wheel/sdist and isolated install/migration probe, one normal Vite web/PWA production build, frontend verifier pass.
+- pnpm test:packaged-release -- .local/package-check/<new-build-run-id>/result.json -> exit 0, 18 HTTP checks, two referenced built assets, three static-root exclusions, 19 safe request events, installed wheel import under the selected venv, exact API/database cleanup, prior TEST service state restored, zero leftovers. Earlier corrected invocation failures and their cleanup are recorded in r2 validation.txt; the successful build was reused.
+- services/api/.venv/Scripts/python.exe scripts/test_packaged_release_smoke.py -v -> five passed.
+- services/api/.venv/Scripts/python.exe -m ruff check --config services/api/pyproject.toml scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass.
+- services/api/.venv/Scripts/python.exe -m ruff format --check scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass.
+- services/api/.venv/Scripts/python.exe -m mypy --config-file services/api/pyproject.toml scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass.
+- pnpm exec prettier --check scripts/tasks.mjs package.json -> pass; pnpm exec eslint scripts/tasks.mjs -> exit 0. New Markdown link targets and complete r2 task patch whitespace check passed.
+- Earlier P10-01, P10-02, Phase 7B/8/9 and foundation evidence was accepted and reused as described in REVIEW.md; it was not rerun.
+
+Skipped for r3: tests, builds, repeat HTTP smoke, backup/restore, databases, services, devices, providers, security/dependency scans, home access and deployment. No main push. No raw private log, dump, credential, verifier, cookie, token, APK or .local artifact is published.
