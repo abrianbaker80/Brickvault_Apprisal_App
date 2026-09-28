@@ -1,0 +1,35 @@
+P10-01 r2 closeout evidence — 2026-09-27
+
+Implementation: main
+Baseline: fff17f21c8cecf0303b075430c98471217f2b8ed
+Final local commit: 0621ee095eec60fa4a4551d54ce10d58cdee9ce4
+Subject: Harden frontend release-artifact verification
+
+Newly performed for r2:
+- Compared implementation/test file bytes to the r1 published source and
+  compared the entire pre-closeout cumulative diff to r1 changes.patch:
+  exact matches.
+- Updated only the current P10-01 status note; Phase 10 stays IN PROGRESS.
+- git diff --cached --name-only: exactly CODEX_WORKFLOW.md,
+  scripts/frontend_artifact.test.mjs, scripts/tasks.mjs.
+- Inspected the complete staged diff for those three files.
+- git diff --cached --check: exit 0, no diagnostics.
+- Protected-file SHA-256 checks: all three equal their supplied values;
+  protected files stayed unstaged.
+- After the local commit, HEAD is 0621ee095eec60fa4a4551d54ce10d58cdee9ce4;
+  the implementation index is empty and only the three protected files
+  remain modified.
+
+Reused from accepted r1; not rerun for r2:
+- Windows Node v24.14.0: node --test scripts/frontend_artifact.test.mjs
+  exit 0, 6 passed, 0 failed.
+- pnpm 11.8.0: pnpm exec prettier --check scripts/tasks.mjs
+  scripts/frontend_artifact.test.mjs — exit 0.
+- pnpm exec eslint scripts/tasks.mjs scripts/frontend_artifact.test.mjs
+  — exit 0.
+- git diff --check — exit 0, no whitespace errors.
+- User-described Linux/Node 22 prior candidate: six passed after the fix;
+  four failed on the original verifier. Historical reproduction not rerun.
+
+Not run for this checkpoint: tests, builds, full suites, databases, services,
+device checks, provider calls, deployment, or dependency installation.
