@@ -1,0 +1,74 @@
+P10-02 r2 local validation — 2026-09-28 (Windows, repository-relative commands)
+
+Environment: Windows PowerShell; Node v24.14.0; pnpm 11.8.0;
+Python 3.13.12; pytest 9.1.1; Ruff 0.16.6; mypy 1.20.2;
+Docker CLI 29.7.2; Git 2.54.0.windows.1. The existing local owned
+TEST container used the repository-pinned PostgreSQL 18.6 image.
+No tool or dependency was installed or downloaded.
+
+Initial state: main HEAD 0621ee095eec60fa4a4551d54ce10d58cdee9ce4;
+index empty; only the three protected files modified. TEST container stopped.
+All three protected SHA-256 hashes matched the task's recorded values.
+
+Newly run for r2 — focused guard tests:
+  $env:PYTHONPATH = 'scripts;services/api/src'
+  services/api/.venv/Scripts/python.exe -m pytest -c services/api/pyproject.toml scripts/test_recovery_runner.py -q
+  exit 0; 8 passed in 1.51 s. The added test reserves an ignored task-owned
+  temporary path, verifies exclusive creation refuses a pre-existing file
+  without adopting/overwriting it, then removes only that test-created file.
+
+Newly run for r2 — real backup/restore rehearsal on corrected final source:
+  pnpm test:recovery
+  exit 0; 1 focused integration test passed in 17.68 s;
+  3 dependency/test-runner warnings. Real pg_dump custom backup and pg_restore
+  completed. Normal runtime login, Watchlist readback, forecast load/replay,
+  migration readiness and grants passed. Selected source rows remained equal.
+  Final ledger: status passed; 2 databases removed; dump removed; 0 leftovers;
+  TEST container restored to its initially stopped state. The final dump path
+  was absent. No real provider contact or official catalog import occurred.
+
+Newly run for r2 — targeted static checks on corrected files:
+  services/api/.venv/Scripts/python.exe -m ruff check scripts/recovery_runner.py scripts/test_recovery_runner.py
+  exit 0; both files passed.
+  services/api/.venv/Scripts/python.exe -m ruff format --check scripts/recovery_runner.py scripts/test_recovery_runner.py
+  exit 0; both files formatted.
+  services/api/.venv/Scripts/python.exe -m mypy --config-file services/api/pyproject.toml scripts/recovery_runner.py scripts/test_recovery_runner.py
+  exit 0; no issues in 2 files.
+  git diff --check
+  exit 0; Git emitted only CRLF conversion advisories for existing worktree files.
+
+Reused from r1 — focused collection after renaming the proof file:
+  $env:PYTHONPATH = 'scripts;services/api/src'
+  services/api/.venv/Scripts/python.exe -m pytest -c services/api/pyproject.toml --collect-only services/api/tests/integration/recovery_proof.py -q
+  exit 0; exactly 1 test collected. The ordinary directory selection only
+  matches test_*.py, so this explicitly selected proof is not included there.
+  No database was started for this collection check.
+
+Reused from r1 — unchanged file checks:
+  Proof file Ruff check/format and mypy passed (3-file targeted commands in r1).
+  pnpm exec prettier --check scripts/tasks.mjs package.json
+  exit 0; both files matched.
+  pnpm exec eslint scripts/tasks.mjs
+  exit 0; no findings.
+
+Historical corrected first attempt, retained for transparency:
+  The first r1 `pnpm test:recovery` attempt exited 1 at pg_dump before restore.
+  A schema-only maintenance-database smoke diagnosed local socket password
+  authentication. Both exact databases and the dump were removed, and TEST
+  returned to stopped. The configured TEST bootstrap password is now supplied
+  over process stdin; no plaintext was printed or persisted. A targeted
+  pg_dump authentication smoke exited 0, followed by r1 and r2 successful
+  focused database rehearsals. The r1 success does not substitute for the
+  corrected r2 run reported above.
+
+Package patch: git apply --stat reported exactly 7 task paths and 604 insertions.
+git apply --cached --check against the exact baseline in a disposable alternate
+index exited 0; the implementation index was unchanged.
+The tracked-file patch is against baseline 0621ee09; the three new files have
+new-file unified diff entries. Exact baseline blobs for scripts/tasks.mjs,
+package.json and docs/LOCAL_DEVELOPMENT.md were checked with git hash-object.
+The private baseline CODEX_WORKFLOW.md was intentionally omitted.
+
+Skipped by scope: full integration/unit suites, application/API/Android builds,
+browser/phone/device checks, databases other than the two owned disposable TEST
+targets, provider calls, dependency installs, deployment and main push.
