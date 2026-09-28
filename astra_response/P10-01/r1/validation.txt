@@ -1,0 +1,36 @@
+P10-01 targeted validation — 2026-09-27
+
+Environment: Windows local checkout; Node v24.14.0; pnpm 11.8.0;
+Git 2.54.0.windows.1. Implementation branch main at
+fff17f21c8cecf0303b075430c98471217f2b8ed; index empty.
+
+Newly run, final results:
+- node --test scripts/frontend_artifact.test.mjs
+  Exit 0. 6 tests, 6 passed, 0 failed, 0 skipped.
+- pnpm exec prettier --check scripts/tasks.mjs scripts/frontend_artifact.test.mjs
+  Exit 0. Both files use Prettier code style.
+- pnpm exec eslint scripts/tasks.mjs scripts/frontend_artifact.test.mjs
+  Exit 0. No diagnostics.
+- git diff --check
+  Exit 0. No whitespace errors; Git printed line-ending normalization warnings
+  for existing Windows working-copy files.
+
+Same-scope correction during local validation:
+- Initial focused run: 4 passed, 2 failed. One asset-name case conflicted
+  with an existing filename on the case-insensitive Windows filesystem; the
+  linked-assets fixture also left an extra top-level build directory. Both
+  test fixtures were corrected. Final focused run passed 6/6.
+- Initial Prettier check found one layout issue in scripts/tasks.mjs; final
+  check passed after the focused edit.
+- Initial ESLint check found six unawaited test declarations; final check
+  passed after awaiting the six Node test calls.
+
+Evidence reused, not newly run:
+- User-described prior Linux/Node 22 container check: six focused tests passed
+  after the supplied candidate fix; four failed against the original verifier.
+  The named validation attachment was not available as a standalone file, so
+  these counts are attributed to the user-provided task statement.
+
+Skipped by task scope: test:unit, frontend/Android builds, full suites,
+databases, services, device tests, provider calls, dependency installation,
+and historical before/after reproduction. No release qualification claimed.

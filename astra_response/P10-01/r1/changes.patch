@@ -1,0 +1,240 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index abfea42..5fa2789 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,35 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Targeted development and GitHub review packages — 2026-09-27
++
++For each explicitly authorized bounded task, use a small implementation slice,
++targeted validation, and one review boundary. Reuse accepted evidence; expand
++testing only for a concrete change or failure. Preserve unrelated work and
++protected files. A completed, partial, or blocked task gets a self-contained
++`astra_response/<task-id>/r<N>/` package on `astra-response`, with an unused
++revision each time and cumulative changes against the same implementation
++baseline for corrections. Include `REVIEW.md`, a complete task patch including
++new files, concise `validation.txt`, final implementation/test files under
++`source/`, and only necessary `context/` or baseline files. Distinguish newly
++run checks from reused evidence and state limitations and requested review.
++
++Publish only review-package files from an isolated checkout and separate index;
++leave the implementation branch, HEAD, index, and unrelated work intact. Append
++to remote `astra-response` history, or create a report-only orphan branch if it
++does not exist. Inspect the exact staged package for private data, never force
++push, push once, verify the remote commit, and read back `REVIEW.md`. This
++authorization does not commit or push application code or authorize deployment.
++
++## Phase 10 P10-01 — frontend release-artifact verification — 2026-09-27
++
++**Phase 10 is IN PROGRESS; P10-01 is implemented for review.** Frontend build
++verification now rejects asset names outside the flat JS/CSS allowlist, linked
++build or assets directories, and non-regular or hard-linked output files before
++reading their bytes. Existing private-value and sentinel checks and normal
++web/PWA acceptance remain. Six focused Windows Node tests, targeted Prettier,
++and targeted ESLint passed. This source-only fix does not establish complete
++runtime-loader parity or qualify the Phase 10 release.
++
+ ## Phase 9 closed — 2026-09-26
+ 
+ **Phase 9 is CLOSED.** Brian accepted the final physical qualification recorded
+diff --git a/scripts/tasks.mjs b/scripts/tasks.mjs
+index 2088650..6abe7a5 100644
+--- a/scripts/tasks.mjs
++++ b/scripts/tasks.mjs
+@@ -501,10 +501,34 @@ function webTask(root, task) {
+ export function verifyFrontend(root, directory = join(root, 'apps/web/dist')) {
+   initializeConfig(root);
+   const pwa = ['icon-192.png', 'icon-512.png', 'manifest.webmanifest', 'sw.js'];
+-  const entries = readdirSync(directory).sort().join(',');
++  if (!lstatSync(directory).isDirectory())
++    throw new SetupError('Frontend build contains an unsafe directory.');
++  const entryNames = readdirSync(directory).sort();
++  const entries = entryNames.join(',');
+   if (!['assets,index.html', ['assets', 'index.html', ...pwa].sort().join(',')].includes(entries)) {
+     throw new SetupError('Frontend build contains unexpected public files.');
+   }
++  const assetDirectory = join(directory, 'assets');
++  if (!lstatSync(assetDirectory).isDirectory())
++    throw new SetupError('Frontend build contains an unsafe directory.');
++  const assets = readdirSync(assetDirectory);
++  if (assets.some((name) => !/^[A-Za-z0-9_-]+\.(?:js|css)$/u.test(name)))
++    throw new SetupError('Frontend build contains an unsupported asset name.');
++  const outputs = [
++    join(directory, 'index.html'),
++    ...pwa.filter((name) => entryNames.includes(name)).map((name) => join(directory, name)),
++    ...assets.map((name) => join(assetDirectory, name)),
++  ];
++  const realDirectory = realpathSync(directory);
++  for (const filename of outputs) {
++    const info = lstatSync(filename);
++    if (
++      !info.isFile() ||
++      info.nlink !== 1 ||
++      !realpathSync(filename).startsWith(realDirectory + sep)
++    )
++      throw new SetupError('Frontend output contains an unsafe path.');
++  }
+   const privateValues =
+     readFileSync(join(root, '.env.local'), 'utf8').match(/[a-f0-9]{64}/gu) ?? [];
+   const forbidden = [
+@@ -513,19 +537,9 @@ export function verifyFrontend(root, directory = join(root, 'apps/web/dist')) {
+     'postgresql+psycopg://',
+     'BVA_DEV_RUNTIME_DATABASE_URL',
+   ];
+-  const outputs = [
+-    join(directory, 'index.html'),
+-    ...pwa.filter((name) => existsSync(join(directory, name))).map((name) => join(directory, name)),
+-    ...readdirSync(join(directory, 'assets')).map((name) => join(directory, 'assets', name)),
+-  ];
+   if (outputs.length < 3 || !readFileSync(outputs[0] ?? '', 'utf8').includes('/assets/'))
+     throw new SetupError('Frontend build output is incomplete.');
+   for (const filename of outputs) {
+-    if (
+-      lstatSync(filename).isSymbolicLink() ||
+-      !realpathSync(filename).startsWith(realpathSync(directory) + sep)
+-    )
+-      throw new SetupError('Frontend output contains an unsafe path.');
+     const bytes = readFileSync(filename);
+     if (forbidden.some((value) => bytes.includes(value)) || filename.endsWith('.map'))
+       throw new SetupError('Frontend output contains private configuration or source maps.');
+@@ -654,7 +668,15 @@ export function dispatch(args, root = repositoryRoot(), log = console.log) {
+     case 'test:unit':
+       return (
+         webTask(root, 'unit') ||
+-        runChild(process.execPath, ['--test', join(root, 'scripts/tasks.test.mjs')], root) ||
++        runChild(
++          process.execPath,
++          [
++            '--test',
++            join(root, 'scripts/tasks.test.mjs'),
++            join(root, 'scripts/frontend_artifact.test.mjs'),
++          ],
++          root,
++        ) ||
+         runPython(root, [
+           '-m',
+           'pytest',
+diff --git a/scripts/frontend_artifact.test.mjs b/scripts/frontend_artifact.test.mjs
+new file mode 100644
+index 0000000..e49d053
+--- /dev/null
++++ b/scripts/frontend_artifact.test.mjs
+@@ -0,0 +1,117 @@
++import assert from 'node:assert/strict';
++import { spawnSync } from 'node:child_process';
++import {
++  linkSync,
++  mkdirSync,
++  mkdtempSync,
++  readFileSync,
++  renameSync,
++  rmSync,
++  rmdirSync,
++  symlinkSync,
++  unlinkSync,
++  writeFileSync,
++} from 'node:fs';
++import { join, resolve, sep } from 'node:path';
++import { test } from 'node:test';
++import { initializeConfig, repositoryRoot, verifyFrontend } from './tasks.mjs';
++
++const scratch = join(repositoryRoot(), '.local', 'tests');
++
++/** @param {import('node:test').TestContext} t */
++function fixture(t) {
++  mkdirSync(scratch, { recursive: true });
++  const root = mkdtempSync(join(scratch, 'frontend artifact '));
++  t.after(() => {
++    assert.ok(resolve(root).startsWith(resolve(scratch) + sep));
++    rmSync(root, { recursive: true, force: true });
++  });
++  const git = spawnSync('git', ['init', '--quiet', root], {
++    encoding: 'utf8',
++    windowsHide: true,
++  });
++  assert.equal(git.status, 0);
++  writeFileSync(join(root, '.gitignore'), '.env\n.env.*\n!.env.example\n.local/\n');
++  initializeConfig(root);
++  const build = join(root, 'apps/web/dist');
++  const assets = join(build, 'assets');
++  mkdirSync(assets, { recursive: true });
++  writeFileSync(join(build, 'index.html'), '<script src="/assets/app.js"></script>');
++  writeFileSync(join(assets, 'app.js'), 'console.log("public");');
++  writeFileSync(join(assets, 'app.css'), 'body { color: black; }');
++  return { root, build, assets };
++}
++
++await test('ordinary web and PWA builds pass, while private bytes still fail', (t) => {
++  const { root, build, assets } = fixture(t);
++  verifyFrontend(root, build);
++  for (const name of ['sw.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png']) {
++    writeFileSync(join(build, name), 'public');
++  }
++  verifyFrontend(root, build);
++  const privateValue = readFileSync(join(root, '.env.local'), 'utf8').match(/[a-f0-9]{64}/u)?.[0];
++  assert.ok(privateValue);
++  writeFileSync(join(assets, 'app.js'), privateValue);
++  assert.throws(() => verifyFrontend(root, build), /private configuration/u);
++  writeFileSync(join(assets, 'app.js'), 'console.log("public");');
++  writeFileSync(join(build, 'sw.js'), 'BVA_BUILD_CREDENTIAL_SENTINEL_1C');
++  assert.throws(() => verifyFrontend(root, build), /private configuration/u);
++});
++
++await test('asset names outside flat JS/CSS allowlist fail', (t) => {
++  const { root, build, assets } = fixture(t);
++  for (const name of ['app.txt', 'app.js.map', 'caps.JS', 'app.js.extra']) {
++    const path = join(assets, name);
++    writeFileSync(path, 'public');
++    assert.throws(() => verifyFrontend(root, build), /unsupported asset name/u);
++    unlinkSync(path);
++  }
++});
++
++await test('linked build directory fails', (t) => {
++  const { root, build } = fixture(t);
++  const original = join(root, 'apps/web/dist-original');
++  renameSync(build, original);
++  symlinkSync(original, build, process.platform === 'win32' ? 'junction' : 'dir');
++  assert.throws(() => verifyFrontend(root, build), /unsafe directory/u);
++});
++
++await test('linked assets directory fails', (t) => {
++  const { root, build, assets } = fixture(t);
++  const original = join(root, 'assets-original');
++  renameSync(assets, original);
++  symlinkSync(original, assets, process.platform === 'win32' ? 'junction' : 'dir');
++  assert.throws(() => verifyFrontend(root, build), /unsafe directory/u);
++});
++
++await test('non-regular entry and asset files fail before content reads', (t) => {
++  const { root, build, assets } = fixture(t);
++  const index = join(build, 'index.html');
++  unlinkSync(index);
++  mkdirSync(index);
++  assert.throws(() => verifyFrontend(root, build), /unsafe path/u);
++  rmdirSync(index);
++  writeFileSync(index, '<script src="/assets/app.js"></script>');
++  const asset = join(assets, 'app.js');
++  unlinkSync(asset);
++  mkdirSync(asset);
++  assert.throws(() => verifyFrontend(root, build), /unsafe path/u);
++});
++
++await test('hard-linked entry, asset and PWA files fail', (t) => {
++  const { root, build, assets } = fixture(t);
++  const index = join(build, 'index.html');
++  const linkedIndex = join(root, 'linked-index.html');
++  linkSync(index, linkedIndex);
++  assert.throws(() => verifyFrontend(root, build), /unsafe path/u);
++  unlinkSync(linkedIndex);
++  const asset = join(assets, 'app.js');
++  linkSync(asset, join(root, 'linked-app.js'));
++  assert.throws(() => verifyFrontend(root, build), /unsafe path/u);
++  unlinkSync(join(root, 'linked-app.js'));
++  for (const name of ['sw.js', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png']) {
++    writeFileSync(join(build, name), 'public');
++  }
++  linkSync(join(build, 'sw.js'), join(root, 'linked-sw.js'));
++  assert.throws(() => verifyFrontend(root, build), /unsafe path/u);
++});
