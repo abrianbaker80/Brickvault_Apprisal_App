@@ -1,0 +1,71 @@
+P10-02 r3 closeout validation — 2026-09-28, Windows PowerShell
+
+Newly run for this checkpoint (no tests or database commands):
+
+1. Initial Git and preservation checks:
+   git status --short --branch
+   git rev-parse HEAD
+   git diff --cached --name-only
+   Get-FileHash AGENTS.md,services/api/tests/integration/test_catalog_search.py,services/api/tests/unit/test_catalog_parser.py -Algorithm SHA256
+   Results: main at 0621ee095eec60fa4a4551d54ce10d58cdee9ce4; index empty;
+   seven task files dirty/untracked plus exactly the three protected files.
+   Protected SHA-256 values matched those recorded in REVIEW.md.
+
+2. Accepted r2 identity check before editing:
+   Generated the cumulative seven-file working-tree patch against 0621ee09
+   with git diff --binary for tracked files and git diff --no-index --binary
+   for the three new files. Its Git blob ID matched r2 changes.patch exactly:
+   0155aeb9f9d1336c8849ef02a25a65893deaee7d. The five full source files
+   also matched the reviewed r2 commit blobs. Result: no substantive drift.
+
+3. Edited only the current CODEX_WORKFLOW.md status line to ACCEPTED / CLOSED.
+   Its Phase 10 IN PROGRESS status, limitations, historical entries and standing
+   publication rules remained. No links were introduced or changed.
+
+4. Exact staging and review:
+   git --literal-pathspecs add -- scripts/recovery_runner.py services/api/tests/integration/recovery_proof.py scripts/test_recovery_runner.py scripts/tasks.mjs package.json docs/LOCAL_DEVELOPMENT.md CODEX_WORKFLOW.md
+   git diff --cached --name-only
+   git diff --cached --stat
+   git diff --cached -- CODEX_WORKFLOW.md docs/LOCAL_DEVELOPMENT.md package.json scripts/tasks.mjs
+   git diff --cached --check
+   Results: exactly seven approved paths staged; 604 insertions; cached diff
+   check exit 0. LF/CRLF notices were informational. No approved path had an
+   unstaged residual difference. Protected files were unstaged and hash-matched.
+
+5. Local commit and post-commit audit:
+   git commit -m 'Add guarded local database recovery rehearsal'
+   git show --name-only --format= HEAD
+   git diff --cached --name-only
+   git diff --name-only -- scripts/recovery_runner.py services/api/tests/integration/recovery_proof.py scripts/test_recovery_runner.py scripts/tasks.mjs package.json docs/LOCAL_DEVELOPMENT.md CODEX_WORKFLOW.md
+   Results: exit 0; commit 6b844b757ec2df2dd3ebcdbc32f2e6ccbf7ddb19,
+   parent 0621ee095eec60fa4a4551d54ce10d58cdee9ce4, exactly seven approved
+   paths, empty index, zero residual differences in approved paths. Final
+   working tree contains only the three byte-preserved protected modifications.
+   No push to main.
+
+6. Cumulative publication patch:
+   git diff --binary 0621ee095eec60fa4a4551d54ce10d58cdee9ce4 6b844b757ec2df2dd3ebcdbc32f2e6ccbf7ddb19 -- scripts/recovery_runner.py services/api/tests/integration/recovery_proof.py scripts/test_recovery_runner.py scripts/tasks.mjs package.json docs/LOCAL_DEVELOPMENT.md CODEX_WORKFLOW.md
+   git apply --stat -- astra_response/P10-02/r3/changes.patch
+   Results: from the isolated publication checkout root, seven paths and 604
+   insertions, including all three new files. A disposable alternate index
+   loaded from 0621ee09 passed git apply --cached --check; five final source
+   blobs matched the implementation commit and three base blobs matched 0621ee09.
+   An initial stat-only invocation from inside r3 reported zero because Git
+   filtered paths outside that subdirectory; the checkout-root command above
+   resolved the invocation and reported all seven paths.
+   Exact base blobs for scripts/tasks.mjs, package.json and
+   docs/LOCAL_DEVELOPMENT.md are retained; private CODEX_WORKFLOW baseline
+   history is omitted.
+
+Reused from accepted r2; not rerun for this checkpoint:
+- Final Windows real pg_dump/pg_restore rehearsal: exit 0, one focused
+  integration test passed, both owned disposable databases and dump removed,
+  zero leftovers, TEST container restored stopped.
+- Eight focused runner guard tests passed; targeted Ruff, mypy, Prettier,
+  ESLint, focused proof collection and git diff --check passed.
+- Environment recorded in r2: Node 24.14.0, pnpm 11.8.0, Python 3.13.12,
+  pytest 9.1.1, Ruff 0.16.6, mypy 1.20.2, Docker CLI 29.7.2, and the
+  repository-pinned PostgreSQL 18.6 TEST image.
+
+Skipped by instruction: any new tests, backups/restores, builds, databases,
+services, devices, provider calls, dependency installs, deployment and main push.
