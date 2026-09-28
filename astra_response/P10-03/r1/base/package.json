@@ -1,0 +1,52 @@
+{
+  "name": "brickvault-appraisal-app",
+  "private": true,
+  "type": "module",
+  "version": "0.0.0",
+  "packageManager": "pnpm@11.8.0",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "auth:bootstrap": "node scripts/tasks.mjs auth:bootstrap",
+    "auth:reset": "node scripts/tasks.mjs auth:reset",
+    "catalog:download": "node scripts/tasks.mjs catalog:download",
+    "catalog:smoke": "node scripts/tasks.mjs catalog:smoke",
+    "catalog:validate": "node scripts/tasks.mjs catalog:validate",
+    "catalog:import": "node scripts/tasks.mjs catalog:import",
+    "catalog:activate": "node scripts/tasks.mjs catalog:activate",
+    "catalog:status": "node scripts/tasks.mjs catalog:status",
+    "dev:web": "node scripts/tasks.mjs dev:web",
+    "serve": "node scripts/tasks.mjs serve",
+    "build": "node scripts/tasks.mjs build",
+    "test:e2e": "node scripts/tasks.mjs test:e2e",
+    "db:up": "node scripts/tasks.mjs db:up",
+    "db:migrate": "node scripts/tasks.mjs db:migrate",
+    "db:status": "node scripts/tasks.mjs db:status",
+    "db:stop": "node scripts/tasks.mjs db:stop",
+    "test:integration": "node scripts/tasks.mjs test:integration",
+    "test:recovery": "node scripts/tasks.mjs test:recovery",
+    "dev:api": "node scripts/tasks.mjs dev:api",
+    "contracts:generate": "node scripts/tasks.mjs contracts:generate",
+    "contracts:check": "node scripts/tasks.mjs contracts:check",
+    "build:api": "node scripts/tasks.mjs build:api",
+    "dev:init": "node scripts/tasks.mjs dev:init",
+    "toolchain:check": "node scripts/tasks.mjs toolchain:check",
+    "uv:sync": "node scripts/tasks.mjs uv:sync",
+    "uv:check": "node scripts/tasks.mjs uv:check",
+    "uv:cache": "node scripts/tasks.mjs uv:cache",
+    "format:check": "node scripts/tasks.mjs format:check",
+    "lint": "node scripts/tasks.mjs lint",
+    "typecheck": "node scripts/tasks.mjs typecheck",
+    "test:unit": "node scripts/tasks.mjs test:unit"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.3",
+    "eslint": "10.10.0",
+    "prettier": "3.9.6",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.69.0"
+  }
+}
