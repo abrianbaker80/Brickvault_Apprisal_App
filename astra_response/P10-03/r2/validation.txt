@@ -1,0 +1,36 @@
+P10-03 r2 validation — 2026-09-28, Windows PowerShell
+
+r2 reporting correction: r1 REVIEW.md transcribed one protected SHA-256 incorrectly. The file itself and the original preservation checks match the corrected full value in r2. No application/source changes, build or smoke rerun; changes.patch and source/ are cumulative and unchanged.
+
+Initial state and preservation
+- git branch --show-current; git rev-parse HEAD; git status --short --branch; git diff --cached --name-only
+  Result: main at 6b844b757ec2df2dd3ebcdbc32f2e6ccbf7ddb19; empty index; exactly three protected dirty files before work.
+- Get-FileHash AGENTS.md, services/api/tests/integration/test_catalog_search.py, services/api/tests/unit/test_catalog_parser.py -Algorithm SHA256
+  Result: all three matched their recorded hashes at task start and end, and match the corrected r2 REVIEW.md; they remain unstaged.
+
+New build (one successful build; no repeat)
+- node --version -> v24.14.0
+- pnpm --version -> 11.8.0
+- services/api/.venv/Scripts/python.exe --version -> Python 3.13.12
+- pnpm build -> exit 0. API wheel/sdist contents and installed-package migration/schema probe passed; exact locked dependencies installed offline from repository cache in one new isolated package-check venv. Vite 8.2.2 production build transformed 57 modules and emitted index, two JS and one CSS asset; frontend artifact/private-byte verifier passed. The printed package-check result.json was selected for smoke. No lockfile, dependency or development-environment change.
+
+New packaged HTTP smoke
+- pnpm test:packaged-release -- .local/package-check/<new-build-run-id>/result.json
+  Final exit 0. Installed-package import verified under the selected venv's Lib/site-packages/brickvault_api/__init__.py, not services/api/src. Real loopback HTTP: 18 checks, two referenced built assets, three static-root exclusions, pre-login 401, login 200, authenticated readiness 200/current, Settings read 200, missing-CSRF PUT 403, valid-CSRF PUT/readback 200, unknown /api 404 JSON, logout 204, post-logout protected read 401. Private responses were no-store. The API log contained 19 structured request events with route/status metadata and none of the TEST password, database URL/password, session cookie, CSRF or run nonce values. One exact run-owned TEST database removed; exact API worker/listener stopped; TEST container restored to its initially stopped state; zero leftovers.
+- Routine correction attempts before final success: initial receipt comparison rejected Windows backslashes before DB creation; the next relative receipt failed the existing private-path guard before DB creation; another attempt exposed Windows venv launcher/worker PID divergence, then removed its one owned TEST database, restored the TEST container and reported zero leftovers. Receipt path normalization, absolute private-path selection and an OS handle to the actual worker corrected these issues. The successful build was reused; no second build or historical reproduction campaign.
+
+New focused checks
+- services/api/.venv/Scripts/python.exe scripts/test_packaged_release_smoke.py -v -> 5 passed (receipt exactness, Windows separators, outside/unverified receipt, hard link, source import refusal).
+- services/api/.venv/Scripts/python.exe -m ruff check --config services/api/pyproject.toml scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass.
+- services/api/.venv/Scripts/python.exe -m ruff format --check scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass after formatting.
+- services/api/.venv/Scripts/python.exe -m mypy --config-file services/api/pyproject.toml scripts/packaged_release_smoke.py scripts/test_packaged_release_smoke.py scripts/package_api.py -> pass. After the Windows worker correction, the two changed runner/test files passed again; package_api.py was unchanged after its earlier pass.
+- pnpm exec prettier --check scripts/tasks.mjs package.json -> pass; pnpm exec eslint scripts/tasks.mjs -> exit 0. These files were unchanged after the check.
+- git diff --check and separate-index git diff --cached --check 6b844b75... -> pass; the latter includes all three new files. Both new Markdown link targets exist.
+- Complete task patch: nine paths, 955 insertions and one deletion against 6b844b75...; no protected path. The implementation HEAD and actual index stayed unchanged.
+
+Reused, not rerun
+- P10-01: six focused frontend verifier tests and targeted formatting/lint.
+- P10-02: one successful real PostgreSQL custom dump/restore proof, eight runner guard tests, and owned cleanup.
+- Accepted Phase 7B auth/CSRF/expiry/revocation and Phase 8 current-head migration/downgrade TEST results; accepted Phase 9 physical Android TLS/offline/expiry/privacy/sync evidence; foundation safe errors/logging and owned-resource results.
+
+Skipped by scope: full suites, browser/device campaign, Android rebuild/sync, repeated backup/restore, catalog import, provider and dependency-audit network calls, development/production databases, home access, deployment, application commit and main push. No raw private log, dump, credential, verifier, cookie, token, APK or .local artifact is published.

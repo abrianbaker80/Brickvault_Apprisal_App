@@ -1,0 +1,1040 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 34d1ea5..5e305df 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -20,6 +20,17 @@ does not exist. Inspect the exact staged package for private data, never force
+ push, push once, verify the remote commit, and read back `REVIEW.md`. This
+ authorization does not commit or push application code or authorize deployment.
+ 
++## Phase 10 P10-03 — local packaged-release readiness — 2026-09-28
++
++**Phase 10 remains IN PROGRESS; P10-03 is implemented for review.** One normal
++offline-locked API/web build and one HTTP smoke of the installed wheel and built
++frontend passed with an owned disposable TEST database and loopback API. The
++smoke checked public assets, auth/Settings/CSRF/logout, current readiness,
++private cache policy, safe errors, static-root exclusions and redacted structured
++logs. Cleanup restored the prior TEST service state. [ExecPlan 089](docs/plans/089-local-packaged-release-readiness.md)
++reconciles the existing Phase 10 evidence. This is local closeout-review
++readiness, not Phase 10 closure, production recovery or deployment authority.
++
+ ## Phase 10 P10-01 — frontend release-artifact verification — 2026-09-27
+ 
+ **Phase 10 is IN PROGRESS; P10-01 is ACCEPTED / CLOSED.** Frontend build
+diff --git a/docs/LOCAL_DEVELOPMENT.md b/docs/LOCAL_DEVELOPMENT.md
+index 0be01d2..0dbc4fb 100644
+--- a/docs/LOCAL_DEVELOPMENT.md
++++ b/docs/LOCAL_DEVELOPMENT.md
+@@ -278,6 +278,32 @@ Roles, role passwords, instance configuration, named volumes and external infras
+ are provisioned separately and are outside the dump. This local proof does not establish
+ production disaster recovery, retention, off-host storage or full release readiness.
+ 
++### Bounded packaged-release HTTP smoke
++
++From the repository root, run one normal `pnpm build`. Its API package check
++installs the exact locked dependencies offline into an ignored, isolated
++`.local/package-check/<run-id>/venv` and prints that run's `result.json` path.
++Then run `pnpm test:packaged-release -- <printed-result.json-path>`. Select the
++receipt printed by this build, not an older package-check directory. The runner
++refuses another path and verifies the server imports `brickvault_api` from that
++installed venv using Python isolated mode. No source-checkout API import is used
++by the HTTP server.
++
++The smoke starts one owned loopback TEST API on an OS-assigned port and one
++run-recorded, migrated, disposable TEST database. It creates an in-memory
++synthetic password, serves the normal built frontend, checks public assets,
++authentication/readiness, a CSRF-protected Settings update and readback,
++logout, unknown API JSON errors, static-root exclusions, no-store headers and
++safe operational logs. The database and exact API process are removed, and the
++pre-existing TEST container returns to its initial running or stopped state.
++Only sanitized results should be shared; raw logs and the run ledger remain
++ignored under `.local/database/runs`. Inspect the exact ledger before any
++manual recovery and never clean resources by name prefix.
++
++This local HTTP smoke reuses the accepted Android, migration, authentication
++and backup/restore evidence where unchanged. It does not establish a broad
++security audit, production recovery or deployment readiness.
++
+ To stop both owned services without deleting volumes:
+ 
+     pnpm db:stop
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 1f79791..417fb50 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -785,7 +785,8 @@ evidence is recorded in [ExecPlan 088](plans/088-android-https-auth-source.md).
+ 
+ ## Phase 10 — Local release and security hardening
+ 
+-**Status: NEXT / NOT STARTED.**
++**Status: IN PROGRESS.** P10-01 and P10-02 are accepted; P10-03 local packaged-release
++readiness is implemented for review in [ExecPlan 089](plans/089-local-packaged-release-readiness.md).
+ 
+ - **Inputs:** Feature-complete core web/PWA/Android, auth, migrations, versioned data, and disposable local release fixtures.
+ - **Scope:** Local release packaging, security/auth/secret review, migration/rollback checks, backup/restore rehearsal, observability, and release/check documentation.
+diff --git a/docs/plans/089-local-packaged-release-readiness.md b/docs/plans/089-local-packaged-release-readiness.md
+new file mode 100644
+index 0000000..0a3bca0
+--- /dev/null
++++ b/docs/plans/089-local-packaged-release-readiness.md
+@@ -0,0 +1,134 @@
++# ExecPlan 089 — P10-03 local packaged-release readiness
++
++## Goal and user-visible outcome
++
++Run one local HTTP smoke against the installed release wheel and normal built
++web/PWA assets, then reconcile the existing Phase 10 acceptance requirements.
++Phase 10 remains in progress pending review.
++
++## Why now
++
++P10-01 corrected frontend artifact verification and P10-02 proved a bounded
++TEST backup/restore. Neither exercised the packaged API and built frontend
++together through actual HTTP.
++
++## In scope
++
++- One normal `pnpm build` using the locked offline API package check.
++- One owned, loopback TEST API and disposable current-migration database.
++- Public assets, authentication, readiness, Settings read/write, logout,
++  unknown API errors, static-root privacy and safe operational logs.
++- A compact requirement-to-evidence reconciliation and local run instructions.
++
++## Explicit non-goals
++
++No Android rebuild/device run, provider call, catalog import, development or
++production database operation, home access, dependency download, deployment,
++application commit or main push. This is not a full security audit or production
++disaster-recovery test.
++
++## Current repository state
++
++Start from `main` at `6b844b757ec2df2dd3ebcdbc32f2e6ccbf7ddb19` with an
++empty index. The three pre-existing protected dirty files remain untouched.
++P10-01 and P10-02 are accepted and closed; Phase 10 remains in progress.
++
++## Decisions and assumptions
++
++Use the existing `pnpm build` path, its isolated `.local/package-check` venv,
++and the existing owned TEST database helpers. Select the exact new package-check
++receipt from this build. A child started with that venv's `python -I` binds an
++OS-assigned loopback port and reports its installed-package import path. The
++runner owns the child handle and exact disposable database, and leaves private
++evidence only under ignored `.local` paths.
++
++## Data model and API/interface changes
++
++No product schema or API change. Add a root-only `test:packaged-release` task
++that takes the selected package-check `result.json` path; it is a release check,
++not a development-serving path.
++
++## Implementation sequence
++
++1. Add the guarded packaged HTTP runner and focused refusal tests.
++2. Add its task entrypoint and concise local instructions.
++3. Run one current build, select its new package receipt, and run one smoke.
++4. Record results, limits and the existing Phase 10 evidence table; publish the
++   review package without committing implementation files.
++
++## Validation and acceptance criteria
++
++The installed `brickvault_api` import must resolve inside the isolated venv,
++never `services/api/src`. HTTP must serve the actual built shell/assets,
++deny protected reads before and after the authenticated session, permit one
++CSRF-protected Settings update and readback, keep unknown `/api` errors JSON,
++keep private responses uncached, reject static-root probes, and log operational
++metadata without secret values. Run focused new-tooling tests, targeted static
++checks and `git diff --check`; reuse unchanged accepted evidence.
++
++## Security, privacy and data integrity
++
++Generate the TEST password only in memory. Pass the database target to the
++child through a restricted environment, never command arguments or reports.
++Keep raw logs and ledgers ignored. Preserve all three protected dirty files
++byte-for-byte and unstaged. Never publish a dump, credential, cookie, token,
++private record or raw private log.
++
++## Failure modes, rollback and recovery
++
++Refuse package receipts outside the exact ignored package-check tree, unverified
++receipts or source-checkout imports. On failure, stop the exact child, remove
++only the run-recorded ownership-marked database, return the existing TEST
++container to its initial state and retain a private cleanup ledger. If cleanup
++cannot be proved, report the exact ledger and stop rather than deleting by
++prefix or touching another service.
++
++## Progress log
++
++- [x] 2026-09-28: Scope and initial state inspected; implementation authorized.
++- [x] 2026-09-28: One current build and packaged HTTP smoke completed.
++- [x] 2026-09-28: Five focused refusal tests and targeted Python/JavaScript
++  checks passed; evidence reconciled for the review package.
++
++## Open questions or physical-device/manual checks
++
++The accepted Phase 9 physical Android result is reused. This task does not
++run another device check. Any unsupported Phase 10 requirement remains an
++explicit closeout-review gap rather than being inferred from this smoke.
++
++## Requirement-to-evidence reconciliation
++
++| Existing Phase 10 requirement | Accepted evidence reused | Evidence added in P10-03 | Remaining local gap |
++| --- | --- | --- | --- |
++| Release packaging | P10-01's six focused frontend verifier regressions and existing locked wheel/package checks. | `pnpm build` passed: isolated offline wheel/sdist install and migration/schema probe, normal Vite production build, and final frontend byte/privacy verifier. The HTTP server imported `brickvault_api` from the new package-check venv's `Lib/site-packages`, and served the built shell and two referenced JS/CSS assets byte-for-byte. | None for this local packaging gate. No Android rebuild or deployment is claimed. |
++| Authentication, security and secret handling | Accepted Phase 7B auth integration covers expiry/revocation, rotation, privilege, CSRF and redacted logs; Phase 9 physical Android covers direct TLS/cookies, expiry, offline privacy and sync conflict; P10-01 covers artifact names/types/private-value scan. | Real packaged HTTP denied pre-login and post-logout reads, logged in, required CSRF for Settings write, returned no-store on private responses, rejected three static-root probes, and found no TEST password/DSN/session/CSRF value in public bytes or logs. | None for these bounded local checks. This is not a comprehensive security or dependency audit. |
++| Migration and recovery | Phase 8's accepted current-head `0016_hunt_cached_runs` guarded selection included disposable downgrade/re-upgrade, readiness mismatch and Hunt downgrade-refusal tests; the foundation and Phase 7B evidence cover owned rollback/refusal and unavailable-state recovery. | One new disposable TEST database migrated to the current head; the installed wheel's HTTP readiness returned `database: ok, migrations: current` through the runtime role. | None for local migration/recovery checks; no development/production migration or new rollback campaign was run. |
++| Backup and restore | P10-02's accepted real PostgreSQL custom dump/restore passed one focused TEST integration proof, eight guard tests and exact cleanup. | No repeat; the packaged smoke uses a fresh disposable database. | None for the requested disposable proof. Production retention, off-host backup, role/configuration backup and disaster recovery remain outside this local gate. |
++| Observability and release operation | Accepted foundation HTTP/request-ID, Host/Origin, JSON error, safe-log and owned-resource cleanup evidence. | Nineteen structured request events included useful route/status results without TEST secrets; unknown `/api` returned JSON, and the exact API child/database were removed with the TEST container restored. The local command and limits are documented in `LOCAL_DEVELOPMENT.md`. | None for local operation. Centralized monitoring, deployment and production rollback belong to later approval. |
++
++## Actual P10-03 run and limits
++
++On Windows with Node 24.14.0, pnpm 11.8.0 and Python 3.13.12, the single
++`pnpm build` succeeded. The new isolated package-check receipt selected the
++installed wheel, and one successful `pnpm test:packaged-release` smoke passed
++18 HTTP checks, including two referenced built assets and three static-root
++probes. The child import was verified under the selected venv's
++`Lib/site-packages/brickvault_api/__init__.py`, not `services/api/src`. Its
++ignored ledger reports 19 safe request events, one exact database removed,
++API stopped, prior TEST service state restored and zero leftovers. The TEST
++password existed only in memory. No provider, development/production database,
++home server, Android build/device, deployment or main push was used.
++
++The first smoke invocation refused Windows separators in the package receipt
++before creating a database. The next invocation rejected a relative receipt
++at the existing private-path guard, also before provisioning. A later
++invocation exposed the Windows venv launcher/worker PID distinction; its owned
++TEST database was removed and the service state restored. The runner now
++retains an OS handle to the exact installed worker and confirms listener
++closure. The final successful smoke
++used the unchanged successful build; no second build or historical test
++campaign was run.
++
++**Verdict: READY FOR PHASE 10 CLOSEOUT REVIEW.** This is a request to review
++the existing local Phase 10 evidence, not a claim that Phase 10 is closed or
++that production deployment and disaster recovery are qualified. Stop here.
+diff --git a/package.json b/package.json
+index 8d45705..bfc285b 100644
+--- a/package.json
++++ b/package.json
+@@ -27,6 +27,7 @@
+     "db:stop": "node scripts/tasks.mjs db:stop",
+     "test:integration": "node scripts/tasks.mjs test:integration",
+     "test:recovery": "node scripts/tasks.mjs test:recovery",
++    "test:packaged-release": "node scripts/tasks.mjs test:packaged-release",
+     "dev:api": "node scripts/tasks.mjs dev:api",
+     "contracts:generate": "node scripts/tasks.mjs contracts:generate",
+     "contracts:check": "node scripts/tasks.mjs contracts:check",
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index 60de248..832692f 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -268,6 +268,7 @@ print('Independent installed wheel import, migration graph and credential-free s
+     print(
+         "API wheel and sdist verified; artifacts and independent environment remain ignored inside repository."
+     )
++    print(f"Package check receipt: {(scratch / 'result.json').relative_to(ROOT)}")
+ 
+ 
+ if __name__ == "__main__":
+diff --git a/scripts/packaged_release_smoke.py b/scripts/packaged_release_smoke.py
+new file mode 100644
+index 0000000..e59b0bc
+--- /dev/null
++++ b/scripts/packaged_release_smoke.py
+@@ -0,0 +1,677 @@
++"""One owned TEST HTTP smoke of the installed wheel and normal web build."""
++
++import argparse
++import ctypes
++import json
++import os
++import re
++import secrets
++import signal
++import socket
++import stat
++import subprocess
++import sys
++import time
++from pathlib import Path
++from types import FrameType
++from typing import Any, cast
++from uuid import uuid4
++
++
++class SmokeError(RuntimeError):
++    """Safe, operator-facing failure category."""
++
++
++class WorkerHandle:
++    """Retain the exact Python worker, including behind Windows venv redirectors."""
++
++    def __init__(self, pid: int, launcher: subprocess.Popen[bytes]) -> None:
++        if type(pid) is not int or pid <= 0:
++            raise SmokeError(
++                "Installed API worker reported an invalid process identity."
++            )
++        self.launcher = launcher
++        self.handle: int | None = None
++        if os.name == "nt":
++            kernel = ctypes.WinDLL("kernel32", use_last_error=True)
++            kernel.OpenProcess.argtypes = [
++                ctypes.c_uint32,
++                ctypes.c_int,
++                ctypes.c_uint32,
++            ]
++            kernel.OpenProcess.restype = ctypes.c_void_p
++            handle = kernel.OpenProcess(0x00100000 | 0x1000 | 0x0001, 0, pid)
++            if not handle:
++                raise SmokeError("Installed API worker process is unavailable.")
++            self.handle = handle
++        elif pid != launcher.pid:
++            raise SmokeError("Installed API worker is not the owned child process.")
++
++    def alive(self) -> bool:
++        if self.handle is None:
++            return self.launcher.poll() is None
++        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
++        kernel.GetExitCodeProcess.argtypes = [
++            ctypes.c_void_p,
++            ctypes.POINTER(ctypes.c_uint32),
++        ]
++        kernel.GetExitCodeProcess.restype = ctypes.c_int
++        status = ctypes.c_uint32()
++        if not kernel.GetExitCodeProcess(self.handle, ctypes.byref(status)):
++            raise SmokeError("Installed API worker status is unavailable.")
++        return status.value == 259  # STILL_ACTIVE
++
++    def stop(self) -> None:
++        if self.handle is None:
++            return
++        kernel = ctypes.WinDLL("kernel32", use_last_error=True)
++        kernel.TerminateProcess.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
++        kernel.TerminateProcess.restype = ctypes.c_int
++        kernel.WaitForSingleObject.argtypes = [ctypes.c_void_p, ctypes.c_uint32]
++        kernel.WaitForSingleObject.restype = ctypes.c_uint32
++        kernel.CloseHandle.argtypes = [ctypes.c_void_p]
++        kernel.CloseHandle.restype = ctypes.c_int
++        try:
++            if self.alive() and not kernel.TerminateProcess(self.handle, 1):
++                raise SmokeError("Exact installed API worker could not be stopped.")
++            if kernel.WaitForSingleObject(self.handle, 10000) != 0:
++                raise SmokeError("Exact installed API worker did not exit.")
++        finally:
++            kernel.CloseHandle(self.handle)
++            self.handle = None
++
++
++def select_package(root: Path, receipt: Path) -> tuple[Path, Path]:
++    """Select one exact package-check venv, never a checkout or arbitrary Python."""
++    root = root.resolve(strict=True)
++    receipt = receipt.absolute()
++    scratch = receipt.parent
++    package_checks = root / ".local" / "package-check"
++    if (
++        receipt.name != "result.json"
++        or scratch.parent != package_checks
++        or re.fullmatch(r"[a-f0-9]{32}", scratch.name) is None
++        or any(
++            path.is_symlink() or path.is_junction()
++            for path in (package_checks, scratch, receipt)
++        )
++        or not receipt.is_file()
++        or not stat.S_ISREG(receipt.lstat().st_mode)
++        or receipt.lstat().st_nlink != 1
++    ):
++        raise SmokeError("Expected one ordinary, exact package-check receipt.")
++    try:
++        result = json.loads(receipt.read_text(encoding="utf-8"))
++    except (OSError, ValueError):
++        raise SmokeError("Package-check receipt is unreadable or invalid.") from None
++    if not isinstance(result, dict) or not all(
++        isinstance(result.get(key), str) for key in ("wheel", "sdist")
++    ):
++        raise SmokeError(
++            "Package-check receipt does not prove the locked wheel install."
++        )
++    normalized = {
++        **result,
++        "wheel": result["wheel"].replace("\\", "/"),
++        "sdist": result["sdist"].replace("\\", "/"),
++    }
++    if normalized != {
++        "wheel": "services/api/dist/brickvault_api-0.0.0-py3-none-any.whl",
++        "sdist": "services/api/dist/brickvault_api-0.0.0.tar.gz",
++        "installed_wheel_verified": True,
++    }:
++        raise SmokeError(
++            "Package-check receipt does not prove the locked wheel install."
++        )
++    python = (
++        scratch / "venv" / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
++    )
++    if not python.is_file() or not (root / normalized["wheel"]).is_file():
++        raise SmokeError("Selected package environment or wheel is unavailable.")
++    return scratch, python
++
++
++def child_environment(runtime_url: str, marker: str, build: Path) -> dict[str, str]:
++    allowed = {
++        "PATH",
++        "PATHEXT",
++        "SYSTEMROOT",
++        "WINDIR",
++        "COMSPEC",
++        "TEMP",
++        "TMP",
++        "USERPROFILE",
++        "LOCALAPPDATA",
++        "APPDATA",
++        "HOME",
++        "TMPDIR",
++    }
++    result = {key: value for key, value in os.environ.items() if key.upper() in allowed}
++    result.update(
++        {
++            "PYTHONNOUSERSITE": "1",
++            "BVA_RUNTIME_DATABASE_URL": runtime_url,
++            "BVA_DATABASE_OWNERSHIP_MARKER": marker,
++            "BVA_WEB_BUILD_DIR": str(build),
++        }
++    )
++    return result
++
++
++def serve_installed(ready: Path) -> None:
++    """Executed only by the selected venv Python with -I."""
++    import brickvault_api
++    import uvicorn
++    from brickvault_api.main import create_app
++    from brickvault_api.observability import logging_config
++    from brickvault_api.settings import RuntimeSettings
++    from pydantic import SecretStr
++
++    package_file = Path(brickvault_api.__file__).resolve(strict=True)
++    prefix = Path(sys.prefix).resolve(strict=True)
++    if not sys.flags.isolated or not package_file.is_relative_to(prefix):
++        raise SmokeError("API did not import from its isolated installed package.")
++    listener = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
++    if os.name == "nt":
++        listener.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
++    try:
++        listener.bind(("127.0.0.1", 0))
++        port = listener.getsockname()[1]
++        settings = RuntimeSettings(
++            purpose="test",
++            port=port,
++            database_url=SecretStr(os.environ["BVA_RUNTIME_DATABASE_URL"]),
++            database_ownership_marker=SecretStr(
++                os.environ["BVA_DATABASE_OWNERSHIP_MARKER"]
++            ),
++            static_enabled=True,
++            web_build_dir=os.environ["BVA_WEB_BUILD_DIR"],
++            auth_allow_loopback_http=True,
++        )
++        settings.target()
++        app = create_app(settings)
++        with ready.open("x", encoding="utf-8") as output:
++            json.dump(
++                {
++                    "pid": os.getpid(),
++                    "port": port,
++                    "prefix": str(prefix),
++                    "package_file": str(package_file),
++                    "isolated": bool(sys.flags.isolated),
++                    "nonce": os.environ["BVA_PACKAGE_NONCE"],
++                },
++                output,
++            )
++        uvicorn.Server(
++            uvicorn.Config(
++                app,
++                host="127.0.0.1",
++                port=port,
++                access_log=False,
++                proxy_headers=False,
++                log_config=logging_config("INFO"),
++            )
++        ).run(sockets=[listener])
++    finally:
++        listener.close()
++
++
++def verify_child_identity(ready: dict[str, Any], scratch: Path, pid: int) -> int:
++    venv = (scratch / "venv").resolve(strict=True)
++    try:
++        port = ready["port"]
++        prefix = Path(ready["prefix"]).resolve(strict=True)
++        package_file = Path(ready["package_file"]).resolve(strict=True)
++        checks = {
++            "pid": type(ready["pid"]) is int
++            and ready["pid"] > 0
++            and (os.name == "nt" or ready["pid"] == pid),
++            "port": type(port) is int and 1 <= port <= 65535,
++            "isolated": ready["isolated"] is True,
++            "prefix": prefix == venv,
++            "package_root": package_file.is_relative_to(venv),
++            "site_packages": "site-packages" in package_file.parts,
++            "package_module": package_file.name == "__init__.py"
++            and package_file.parent.name == "brickvault_api",
++        }
++    except (KeyError, OSError, TypeError, ValueError):
++        raise SmokeError("Server import identity record is incomplete.") from None
++    failed = [name for name, passed in checks.items() if not passed]
++    if failed:
++        raise SmokeError("Server import identity failed: " + ", ".join(failed))
++    return cast(int, port)
++
++
++def require_response(
++    response: Any, status: int, label: str, *, private: bool = False
++) -> None:
++    if response.status_code != status:
++        raise SmokeError(
++            f"{label}: expected HTTP {status}, got {response.status_code}."
++        )
++    if private and response.headers.get("cache-control") != "no-store":
++        raise SmokeError(f"{label}: private response lacks no-store.")
++
++
++def run_http(
++    origin: str, build: Path, password: str, secrets_to_check: list[str]
++) -> dict[str, Any]:
++    import httpx
++
++    checks = 0
++    public_bodies: list[bytes] = []
++    with httpx.Client(base_url=origin, timeout=3, trust_env=False) as client:
++        shell = client.get("/")
++        require_response(shell, 200, "public shell")
++        if (
++            not shell.headers.get("content-type", "").startswith("text/html")
++            or shell.content != (build / "index.html").read_bytes()
++        ):
++            raise SmokeError("HTTP shell differs from the selected built frontend.")
++        public_bodies.append(shell.content)
++        checks += 1
++        assets = sorted(
++            set(re.findall(rb"/assets/[A-Za-z0-9_-]+\.(?:js|css)", shell.content))
++        )
++        if not assets or not any(path.endswith(b".js") for path in assets):
++            raise SmokeError("Built shell has no representative JavaScript asset.")
++        for raw_path in assets:
++            path = raw_path.decode("ascii")
++            response = client.get(path)
++            require_response(response, 200, "built asset")
++            if response.content != (build / path.lstrip("/")).read_bytes():
++                raise SmokeError("HTTP asset differs from the selected built frontend.")
++            public_bodies.append(response.content)
++            checks += 1
++        for path in ("/manifest.webmanifest", "/sw.js"):
++            if (build / path.lstrip("/")).exists():
++                response = client.get(path)
++                require_response(response, 200, "PWA file")
++                if response.content != (build / path.lstrip("/")).read_bytes():
++                    raise SmokeError("HTTP PWA file differs from the selected build.")
++                public_bodies.append(response.content)
++                checks += 1
++
++        denied = client.get("/api/settings")
++        require_response(denied, 401, "pre-login protected read", private=True)
++        checks += 1
++        login = client.post(
++            "/api/auth/login",
++            json={"password": password},
++            headers={"Origin": origin, "X-BrickVault-Login": "1"},
++        )
++        require_response(login, 200, "login", private=True)
++        csrf = login.json().get("csrf_token")
++        cookie = client.cookies.get("bva_session")
++        if not isinstance(csrf, str) or not csrf or not cookie:
++            raise SmokeError("Login did not establish a private session.")
++        secrets_to_check.extend((csrf, cookie))
++        checks += 1
++        ready = client.get("/api/ready")
++        require_response(ready, 200, "authenticated readiness", private=True)
++        if ready.json() != {
++            "status": "ready",
++            "database": "ok",
++            "migrations": "current",
++        }:
++            raise SmokeError("Packaged runtime is not current and ready.")
++        checks += 1
++        current = client.get("/api/settings")
++        require_response(current, 200, "Settings read", private=True)
++        settings = current.json()
++        if not isinstance(settings.get("revision"), int) or not isinstance(
++            settings.get("defaults"), dict
++        ):
++            raise SmokeError("Settings response is incomplete.")
++        checks += 1
++        update = {
++            "expected_revision": settings["revision"],
++            "default_profile_id": settings["default_profile_id"],
++            "defaults": {**settings["defaults"], "sale_basis": "MANUAL"},
++        }
++        refused = client.put("/api/settings", json=update, headers={"Origin": origin})
++        require_response(refused, 403, "Settings CSRF refusal", private=True)
++        checks += 1
++        saved = client.put(
++            "/api/settings",
++            json=update,
++            headers={"Origin": origin, "X-CSRF-Token": csrf},
++        )
++        require_response(saved, 200, "Settings CSRF update", private=True)
++        if saved.json()["revision"] != settings["revision"] + 1:
++            raise SmokeError("Settings update did not advance its revision.")
++        checks += 1
++        readback = client.get("/api/settings")
++        require_response(readback, 200, "Settings readback", private=True)
++        if (
++            readback.json() != saved.json()
++            or readback.json()["defaults"]["sale_basis"] != "MANUAL"
++        ):
++            raise SmokeError("Settings update was not read back.")
++        checks += 1
++        unknown = client.get("/api/p10-03-unknown")
++        require_response(unknown, 404, "unknown API route", private=True)
++        if (
++            not unknown.headers.get("content-type", "").startswith("application/json")
++            or b"<html" in unknown.content.lower()
++        ):
++            raise SmokeError("Unknown API route returned frontend HTML.")
++        checks += 1
++        for path in ("/.env.local", "/assets/.env.local", "/scripts/database.py"):
++            exposed = client.get(path)
++            require_response(exposed, 404, "static-root exclusion", private=True)
++            public_bodies.append(exposed.content)
++            checks += 1
++        logout = client.post(
++            "/api/auth/logout", headers={"Origin": origin, "X-CSRF-Token": csrf}
++        )
++        require_response(logout, 204, "logout", private=True)
++        checks += 1
++        denied_again = client.get("/api/settings")
++        require_response(denied_again, 401, "post-logout protected read", private=True)
++        checks += 1
++    for value in secrets_to_check:
++        if value and any(value.encode("utf-8") in body for body in public_bodies):
++            raise SmokeError("Public HTTP bytes contain a private value.")
++    return {"http_checks": checks, "asset_count": len(assets), "static_root_probes": 3}
++
++
++def check_log(log: Path, secrets_to_check: list[str]) -> int:
++    content = log.read_text(encoding="utf-8")
++    if any(value and value in content for value in secrets_to_check):
++        raise SmokeError("Packaged API log contains a private value.")
++    events: list[dict[str, Any]] = []
++    for line in content.splitlines():
++        try:
++            parsed = json.loads(line)
++        except ValueError:
++            raise SmokeError(
++                "Packaged API log is not structured safe metadata."
++            ) from None
++        if isinstance(parsed, dict) and parsed.get("category") == "request":
++            events.append(parsed)
++    if not any(
++        event.get("route") == "/api/settings" and event.get("status") == 200
++        for event in events
++    ):
++        raise SmokeError("Packaged API log lacks Settings operation results.")
++    if not any(
++        event.get("route") == "/api/settings" and event.get("status") == 401
++        for event in events
++    ):
++        raise SmokeError("Packaged API log lacks protected-read denial results.")
++    return len(events)
++
++
++def smoke(receipt: Path) -> None:
++    import httpx
++    from brickvault_api.auth import AuthService
++    from brickvault_api.catalog.connection import CatalogDatabase
++    from brickvault_api.settings import TEST_DATABASE
++    from database import (
++        LOCAL,
++        ROOT,
++        DatabaseError,
++        cleanup_database,
++        database_marker,
++        instance,
++        migrate,
++        private_path,
++        provision,
++        runner_lock,
++        write_record,
++    )
++
++    scratch, python = select_package(ROOT, receipt)
++    private_path(scratch / "result.json")
++    build = ROOT / "apps/web/dist"
++    if not (build / "index.html").is_file():
++        raise SmokeError("Normal built frontend is unavailable.")
++    with runner_lock():
++        selected = instance("test")
++        before = selected.verify(required=False)
++        if before is None:
++            raise SmokeError("Existing owned TEST container is required.")
++        before_resources = selected.inventory()
++        running_before = bool(before["State"]["Running"])
++        run_id = uuid4().hex
++        database = "brickvault_test_" + uuid4().hex
++        if TEST_DATABASE.fullmatch(database) is None:
++            raise SmokeError("Invalid disposable TEST database name.")
++        journal = LOCAL / "runs" / f"{run_id}.json"
++        log = LOCAL / "runs" / f"{run_id}.packaged-api.log"
++        ready_file = LOCAL / "runs" / f"{run_id}.packaged-api.ready.json"
++        for path in (journal, log, ready_file):
++            private_path(path)
++            if path.exists():
++                raise SmokeError(
++                    "Owned smoke path collision; existing evidence preserved."
++                )
++        record: dict[str, Any] = {
++            "run_id": run_id,
++            "kind": "P10-03-packaged-release",
++            "project": selected.project,
++            "instance_owner": selected.owner,
++            "running_before": running_before,
++            "resources_before": before_resources,
++            "recorded_databases": [database],
++            "status": "starting",
++            "leftovers": [],
++        }
++        write_record(journal, record)
++        previous_handler = signal.getsignal(signal.SIGTERM)
++
++        def interrupted(signum: int, frame: FrameType | None) -> None:
++            raise KeyboardInterrupt
++
++        signal.signal(signal.SIGTERM, interrupted)
++        cleanup_failures: list[str] = []
++        child: subprocess.Popen[bytes] | None = None
++        worker: WorkerHandle | None = None
++        port: int | None = None
++        password = ""
++        secrets_to_check: list[str] = []
++        try:
++            selected.up()
++            if selected.inventory() != before_resources:
++                raise SmokeError("Owned TEST resource inventory changed unexpectedly.")
++            with selected.bootstrap() as connection:
++                if connection.execute(
++                    "SELECT 1 FROM pg_database WHERE datname=%s", (database,)
++                ).fetchone():
++                    raise SmokeError("Disposable TEST target already exists.")
++            record["status"] = "provisioning"
++            write_record(journal, record)
++            provision(selected, database, run_id)
++            migrate(selected, database, run_id=run_id)
++            password = secrets.token_urlsafe(32)
++            marker = database_marker(selected, run_id)
++            owner_url = selected.target(database, "owner")
++            runtime_url = selected.target(database, "runtime")
++            secrets_to_check = [
++                password,
++                owner_url,
++                runtime_url,
++                *(value for key, value in selected.config.items() if "PASSWORD" in key),
++            ]
++            AuthService(
++                CatalogDatabase(owner_url, "test", marker, role="owner")
++            ).provision(password)
++            record["status"] = "testing"
++            write_record(journal, record)
++            environment = child_environment(runtime_url, marker, build)
++            nonce = secrets.token_hex(16)
++            environment["BVA_PACKAGE_NONCE"] = nonce
++            secrets_to_check.append(nonce)
++            with log.open("x", encoding="utf-8") as output:
++                child = subprocess.Popen(
++                    [
++                        str(python),
++                        "-I",
++                        str(Path(__file__).resolve()),
++                        "--serve",
++                        str(ready_file),
++                    ],
++                    cwd=scratch,
++                    env=environment,
++                    stdout=output,
++                    stderr=subprocess.STDOUT,
++                    creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
++                )
++            deadline = time.monotonic() + 20
++            while not ready_file.exists():
++                if child.poll() is not None or time.monotonic() >= deadline:
++                    raise SmokeError(
++                        "Installed API exited or timed out during startup."
++                    )
++                time.sleep(0.05)
++            while True:
++                try:
++                    ready = json.loads(ready_file.read_text(encoding="utf-8"))
++                    break
++                except (OSError, ValueError):
++                    if child.poll() is not None or time.monotonic() >= deadline:
++                        raise SmokeError(
++                            "Installed API readiness record is incomplete."
++                        ) from None
++                    time.sleep(0.05)
++            if ready.get("nonce") != nonce:
++                raise SmokeError(
++                    "Installed API readiness nonce does not match this run."
++                )
++            worker = WorkerHandle(ready.get("pid"), child)
++            port = verify_child_identity(ready, scratch, child.pid)
++            origin = f"http://127.0.0.1:{port}"
++            with httpx.Client(base_url=origin, timeout=2, trust_env=False) as client:
++                while True:
++                    if not worker.alive() or time.monotonic() >= deadline:
++                        raise SmokeError("Installed API did not reach HTTP health.")
++                    try:
++                        health = client.get("/api/health")
++                        require_response(health, 200, "startup health")
++                        break
++                    except httpx.ConnectError:
++                        time.sleep(0.05)
++            if not worker.alive():
++                raise SmokeError("Installed API exited before HTTP smoke.")
++            record["installed_package_verified"] = True
++            record["installed_import"] = str(
++                Path(ready["package_file"]).relative_to(ROOT)
++            )
++            record.update(run_http(origin, build, password, secrets_to_check))
++            record["status"] = "passed"
++        except BaseException:
++            record["status"] = "failed_or_interrupted"
++            raise
++        finally:
++            if worker is not None:
++                try:
++                    worker.stop()
++                except SmokeError:
++                    cleanup_failures.append("api_worker")
++            if child is not None:
++                try:
++                    if child.poll() is None:
++                        child.terminate()
++                    child.wait(timeout=10)
++                except subprocess.TimeoutExpired:
++                    child.kill()
++                    child.wait(timeout=5)
++                if child.poll() is None:
++                    cleanup_failures.append("api_process")
++                elif port is not None:
++                    with socket.socket() as probe:
++                        if probe.connect_ex(("127.0.0.1", port)) == 0:
++                            cleanup_failures.append("api_listener")
++                record["api_stopped"] = (
++                    "api_worker" not in cleanup_failures
++                    and worker is not None
++                    and "api_process" not in cleanup_failures
++                    and "api_listener" not in cleanup_failures
++                )
++            try:
++                if ready_file.exists():
++                    ready_file.unlink()
++            except OSError:
++                cleanup_failures.append("api_readiness_record")
++            log_failure: SmokeError | None = None
++            if log.exists() and record["status"] == "passed":
++                try:
++                    record["safe_log_events"] = check_log(log, secrets_to_check)
++                except SmokeError as error:
++                    record["status"] = "failed_log_check"
++                    log_failure = error
++            try:
++                selected.up()
++                if cleanup_database(
++                    selected, database, run_id, record["recorded_databases"]
++                ):
++                    record["removed_databases"] = [database]
++            except Exception:
++                cleanup_failures.append("database")
++            try:
++                if not running_before:
++                    selected.stop()
++                after = selected.verify()
++                if after is None:
++                    raise SmokeError("Owned TEST container disappeared during cleanup.")
++                record["running_after"] = bool(after["State"]["Running"])
++                if selected.inventory() != before_resources:
++                    cleanup_failures.append("resources")
++            except Exception:
++                cleanup_failures.append("service")
++            record["leftovers"] = cleanup_failures
++            if cleanup_failures:
++                record["status"] = "cleanup_incomplete"
++            write_record(journal, record)
++            signal.signal(signal.SIGTERM, previous_handler)
++            print(
++                json.dumps(
++                    {
++                        "packaged_smoke": record["status"],
++                        "installed_package_verified": record.get(
++                            "installed_package_verified", False
++                        ),
++                        "http_checks": record.get("http_checks", 0),
++                        "assets": record.get("asset_count", 0),
++                        "safe_log_events": record.get("safe_log_events", 0),
++                        "databases_removed": len(record.get("removed_databases", [])),
++                        "test_service_restored": record.get("running_after")
++                        == running_before,
++                        "leftovers": cleanup_failures,
++                        "ledger": str(journal.relative_to(ROOT)),
++                    }
++                )
++            )
++        if log_failure is not None:
++            raise log_failure
++        if cleanup_failures:
++            raise DatabaseError(
++                "Owned packaged-smoke cleanup incomplete; inspect exact ledger."
++            )
++        if record["status"] != "passed":
++            raise SmokeError("Packaged HTTP smoke did not pass.")
++
++
++if __name__ == "__main__":
++    try:
++        parser = argparse.ArgumentParser(
++            description="Owned packaged release HTTP smoke"
++        )
++        parser.add_argument("package_check", type=Path, nargs="?")
++        parser.add_argument("--serve", type=Path, help=argparse.SUPPRESS)
++        args = parser.parse_args()
++        if args.serve is not None:
++            serve_installed(args.serve)
++        elif args.package_check is not None:
++            smoke(args.package_check)
++        else:
++            raise SmokeError("Select the current build's package-check result.json.")
++    except SmokeError as error:
++        print(f"Packaged release smoke failed: {error}", file=sys.stderr)
++        sys.exit(1)
++    except Exception:
++        print(
++            "Packaged release smoke failed; private details redacted.", file=sys.stderr
++        )
++        sys.exit(1)
+diff --git a/scripts/tasks.mjs b/scripts/tasks.mjs
+index c8995db..f8b9ad9 100644
+--- a/scripts/tasks.mjs
++++ b/scripts/tasks.mjs
+@@ -579,6 +579,14 @@ export function dispatch(args, root = repositoryRoot(), log = console.log) {
+     }
+     return runUv(task, root, args[1] === '--offline', log);
+   }
++  if (task === 'test:packaged-release') {
++    if (process.cwd() !== root)
++      throw new SetupError('Run the packaged release smoke from the repository root.');
++    const rest = args[1] === '--' ? args.slice(2) : args.slice(1);
++    if (rest.length !== 1)
++      throw new SetupError('Select exactly one current package-check result.json.');
++    return runPython(root, [join(root, 'scripts/packaged_release_smoke.py'), rest[0]]);
++  }
+   if (args.length !== 1)
+     throw new SetupError('Expected one foundation task name. See package.json.');
+   switch (task) {
+diff --git a/scripts/test_packaged_release_smoke.py b/scripts/test_packaged_release_smoke.py
+new file mode 100644
+index 0000000..23d2167
+--- /dev/null
++++ b/scripts/test_packaged_release_smoke.py
+@@ -0,0 +1,95 @@
++"""Focused refusal checks for selecting and identifying a packaged API."""
++
++import json
++import os
++import tempfile
++import unittest
++from pathlib import Path
++
++from packaged_release_smoke import (
++    SmokeError,
++    select_package,
++    verify_child_identity,
++)
++
++
++class PackageSelectionTests(unittest.TestCase):
++    def setUp(self) -> None:
++        self.temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temporary.cleanup)
++        self.root = Path(self.temporary.name)
++        self.scratch = self.root / ".local" / "package-check" / ("a" * 32)
++        self.scratch.mkdir(parents=True)
++        self.receipt = self.scratch / "result.json"
++        self.receipt.write_text(
++            json.dumps(
++                {
++                    "wheel": "services/api/dist/brickvault_api-0.0.0-py3-none-any.whl",
++                    "sdist": "services/api/dist/brickvault_api-0.0.0.tar.gz",
++                    "installed_wheel_verified": True,
++                }
++            ),
++            encoding="utf-8",
++        )
++        python = (
++            self.scratch
++            / "venv"
++            / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
++        )
++        python.parent.mkdir(parents=True)
++        python.touch()
++        wheel = self.root / "services/api/dist/brickvault_api-0.0.0-py3-none-any.whl"
++        wheel.parent.mkdir(parents=True)
++        wheel.touch()
++
++    def test_accepts_exact_verified_package_receipt(self) -> None:
++        scratch, python = select_package(self.root, self.receipt)
++        self.assertEqual(scratch, self.scratch)
++        self.assertTrue(python.is_file())
++
++    def test_accepts_native_windows_receipt_separators(self) -> None:
++        result = json.loads(self.receipt.read_text(encoding="utf-8"))
++        result["wheel"] = result["wheel"].replace("/", "\\")
++        result["sdist"] = result["sdist"].replace("/", "\\")
++        self.receipt.write_text(json.dumps(result), encoding="utf-8")
++        self.assertEqual(select_package(self.root, self.receipt)[0], self.scratch)
++
++    def test_rejects_unverified_or_external_receipt(self) -> None:
++        self.receipt.write_text('{"installed_wheel_verified": false}', encoding="utf-8")
++        with self.assertRaises(SmokeError):
++            select_package(self.root, self.receipt)
++        external = self.root / "other" / "result.json"
++        external.parent.mkdir()
++        external.write_text("{}", encoding="utf-8")
++        with self.assertRaises(SmokeError):
++            select_package(self.root, external)
++
++    def test_rejects_hard_linked_receipt(self) -> None:
++        copy = self.scratch / "other.json"
++        os.link(self.receipt, copy)
++        with self.assertRaises(SmokeError):
++            select_package(self.root, self.receipt)
++
++    def test_rejects_source_import_identity(self) -> None:
++        venv = self.scratch / "venv"
++        installed = venv / "Lib" / "site-packages" / "brickvault_api" / "__init__.py"
++        installed.parent.mkdir(parents=True)
++        installed.touch()
++        ready = {
++            "pid": 1234,
++            "port": 18001,
++            "prefix": str(venv),
++            "package_file": str(installed),
++            "isolated": True,
++        }
++        self.assertEqual(verify_child_identity(ready, self.scratch, 1234), 18001)
++        source = self.root / "services/api/src/brickvault_api/__init__.py"
++        source.parent.mkdir(parents=True)
++        source.touch()
++        ready["package_file"] = str(source)
++        with self.assertRaises(SmokeError):
++            verify_child_identity(ready, self.scratch, 1234)
++
++
++if __name__ == "__main__":
++    unittest.main()
