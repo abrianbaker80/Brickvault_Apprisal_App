@@ -1,0 +1,44 @@
+P12-02 r2 documentation-only closeout — 2026-09-29
+
+Local baseline and commit
+  Parent HEAD before staging: c91f0bb2f76497dcf69a5f9887c885871871ddb9
+  Local closeout commit: 01db616d503b66c30b7fe95fc8e0259102ca2618
+  Exactly six documentation files staged and committed; no main push.
+  Main index empty after commit.
+
+Documentation checks
+  Complete staged six-file diff, including new ExecPlan 092: reviewed.
+  git diff --cached --check: passed before local commit.
+  Changed-document local Markdown targets: 299 checked, 0 missing.
+  P12-02 ACCEPTED / CLOSED; Phase 12 IN PROGRESS; P12-03 NEXT / NOT STARTED.
+  P12-03 contains only new-VM/base-Ubuntu steps after fresh checks and an
+    authoritative exact-ISO SHA-256 match. Python/PostgreSQL/Caddy/backup,
+    DNS/certificate and live acceptance remain P12-04/P12-05 gates.
+
+Protected SHA-256 before and after (all unchanged and unstaged)
+  AGENTS.md
+    F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+  services/api/tests/integration/test_catalog_search.py
+    D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+  services/api/tests/unit/test_catalog_parser.py
+    0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
+
+Execution boundary
+  No Proxmox reconnection, discovery rerun, ISO download/hash on the host,
+    tests, builds, database, Android, provider, backup, Google Drive or
+    infrastructure mutation occurred in this closeout.
+
+Package checks
+  Cumulative patch: exactly six diff headers; git apply --cached --check
+    passed against baseline c91f0bb2 in a separate temporary index.
+  Five source/ document hashes match the final local committed documents.
+    source/CODEX_WORKFLOW.md differs only by one disclosed historical private
+    filename redaction; ExecPlan-092.md differs only by its package-local link.
+  Review narrative local links: 9 checked, 0 missing.
+  Public package (13 files): 0 non-loopback IPv4 literals, 0 MAC literals,
+    0 private-key blocks, 0 Windows user paths, 0 credential assignments.
+  Staged package diff --check excluding changes.patch: passed. The full
+    package check flags blank context lines required by the exact unified
+    diff in changes.patch; the patch itself applies cleanly to baseline.
+  Review worktree branch was astra-response at accepted r1
+    639b10dc483da27d85cd983b204d281e218b5b6c; r1 was preserved.
