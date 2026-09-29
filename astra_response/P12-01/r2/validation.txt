@@ -1,0 +1,25 @@
+P12-01 r2 — sanitized closeout validation
+
+Accepted r1: 9942fe1bca86922dc8077b2d4bad9c6e206a6f0c.
+Before closeout edits, the exact 27-file working-tree patch matched accepted
+r1 byte-for-byte; ExecPlan 091 was also byte-identical. The main index was empty.
+After closeout edits, the staged inventory was exactly those 27 files, including
+the Capacitor JSON deletion. All 22 non-closeout diff sections were identical
+to accepted r1. The other five contained only status/authorization limitations
+and the later provider credential-directory/permissions verification note.
+No P12-01 change remained unstaged.
+git diff --cached --check: passed.
+One local main commit was created: c91f0bb2f76497dcf69a5f9887c885871871ddb9.
+Main was not pushed. Final main index is empty. Only the three pre-existing
+protected files remain dirty and unstaged; each matches its previously recorded
+SHA-256 value.
+
+Reused accepted r1 evidence: 94 initial Python tests, 24 final focused
+production tests, 12 web tests, disposable production-style HTTP/PostgreSQL
+proof with zero leftovers, targeted Ruff/mypy/TypeScript/Prettier/ESLint,
+one synthetic Android web/config build, Gradle production TEST-CA guard,
+Markdown links and source diff checks. These were not rerun for closeout.
+
+No test, build, PostgreSQL operation, Gradle, device check, provider call,
+remote infrastructure command, discovery or infrastructure mutation was
+performed during this closeout.
