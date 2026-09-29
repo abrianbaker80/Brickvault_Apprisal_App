@@ -1,0 +1,60 @@
+P12-03 r1 validation — 2026-09-29
+
+VERDICT: BLOCKED — MANUAL INSTALLER STEP REQUIRED.
+Partial VM attachments provisioned for review; no installed base OS.
+
+LIVE INFRASTRUCTURE
+  Node/VMID/nextid/name/RAM/storage/bridge gates: PASS.
+  Exact Ubuntu official HTTPS-source checksum: MATCH.
+  Seven mutation readbacks: PASS; expected configuration, stopped state.
+  All 17 prior guest inventory/configuration hashes: UNCHANGED.
+  Prior local-zfs volume inventory across seven snapshots: UNCHANGED.
+  Exactly VM115 plus EFI 1 MiB, OS32 GiB, DATA128 GiB fresh volumes,
+    one untagged VirtIO NIC and verified existing ISO.
+  Data probes: PASS; 137438953472 bytes; no partitions, filesystem/LVM
+    signature or mount. Guest never booted.
+  Final status: stopped. onboot: 0.
+  Legacy VM107: running/unchanged; never accessed or mutated.
+  Console: BLOCKED by ERR_CERT_AUTHORITY_INVALID; no bypass/login/boot.
+  Ubuntu release/KVM/root/DHCP/SSH/sockets/package absence: NOT RUN.
+  No later-phase guest actions. No-OS state is not base-OS acceptance.
+
+DOCUMENTATION / PRESERVATION
+  Five task documents; new Plan093 included in changes.patch.
+  Local Markdown path targets: 208 checked, 0 missing.
+  git diff --check: PASS.
+  Main HEAD: 01db616d503b66c30b7fe95fc8e0259102ca2618 unchanged.
+  Main index: EMPTY. No main commit/push.
+  Protected files unchanged and unstaged, verified SHA-256 before/after:
+  AGENTS.md
+    F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+  services/api/tests/integration/test_catalog_search.py
+    D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+  services/api/tests/unit/test_catalog_parser.py
+    0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
+
+SOURCE SNAPSHOTS
+  Four documents match main bytes. CODEX_WORKFLOW.md has one disclosed
+  historical private ZIP filename redaction. No task patch line is redacted.
+  Raw management evidence is excluded. No credentials/keys/private addresses.
+
+NOT RUN
+  Application tests/builds; Android; database proof; provider calls; benchmarks;
+  Ubuntu installation; P12-04; snapshots/backups/destructive rollback.
+
+PACKAGE CHECKS
+  11 files scanned: no private IP, MAC, SSH key, private key, password hash,
+  token, private Windows path or actual generated VM identity found.
+  Existing historical application run UUIDs were inspected and retained;
+  they are not infrastructure/device identities.
+  10 narrative local links resolve. Source-context links checked in main.
+  Five source snapshots match expected bytes, including the disclosed redaction.
+  changes.patch matches the separate-index diff byte-for-byte and passes
+    git apply --cached --check against original main HEAD in another index.
+  Main index and protected hashes remain unchanged after package preparation.
+  Independent commit-boundary review: approved as partial/blocked, no actionable
+    findings. Reviewer inspected saved evidence only; no infrastructure access.
+  Isolated staged package diff check excluding changes.patch: PASS.
+  Full staged diff check reports eight normal blank-context prefix spaces
+    inside the embedded unified patch. The documentation diff itself passes;
+    the unchanged patch bytes pass separate-index apply verification.

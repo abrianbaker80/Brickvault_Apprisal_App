@@ -1,0 +1,236 @@
+# ExecPlan 093 — P12-03 dedicated base VM provisioning
+
+## Goal and user-visible outcome
+
+Create VM 115 `brickvault-appraisal` on `pve`, install base Ubuntu Server
+24.04.2 on its fresh 32-GiB OS disk, verify disk separation and administrator
+access, and leave it stopped for review. P12-03 is authorized by Brian's
+2026-09-29 request. P12-01/P12-02 remain CLOSED; Phase 12 remains IN PROGRESS.
+
+## Why now and scope
+
+[ExecPlan 092](092-exact-infrastructure-pre-mutation-review.md) accepted the
+conditional topology. This slice executes only fresh preflight, authenticated
+ISO verification, creation of the dedicated VM, and normal base installation
+if console access is available. The explicit manual-installer boundary permits
+stopping with the new VM and media attached, without booting.
+
+## Explicit non-goals
+
+No P12-04 work: no application, PostgreSQL, Python 3.13, uv, Caddy, restic,
+rclone, external repository, service account, production secret, DNS,
+certificate, firewall/router change, backup job or snapshot. No legacy guest
+access or existing disk adoption. No application tests/builds or provider calls.
+
+## Current repository state
+
+Main HEAD remains `01db616d503b66c30b7fe95fc8e0259102ca2618`; index empty.
+The only starting changes are these protected files, whose SHA-256 values
+match the accepted P12-02 record:
+
+| File | SHA-256 |
+| --- | --- |
+| `AGENTS.md` | `F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4` |
+| `services/api/tests/integration/test_catalog_search.py` | `D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7` |
+| `services/api/tests/unit/test_catalog_parser.py` | `0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041` |
+
+## Decisions and assumptions
+
+Preserve the accepted 1-socket/4-host-vCPU, fixed 8192-MiB RAM, q35/OVMF,
+VirtIO SCSI, new EFI/32-GiB OS/128-GiB data disks on `local-zfs`, one
+untagged VirtIO NIC on `vmbr1`, and disabled onboot. The data disk remains
+unpartitioned, unformatted, unmounted and unused. Proxmox firewall is disabled;
+no NIC flag is treated as protection. Temporary DHCP is allowed only after boot.
+No prior human administrator name is established in Plans 091/092; use Brian's
+specified `brickvault-admin` when the normal installer is completed. This does
+not create or replace the future application service account.
+
+## Data model and API/interface changes
+
+None. Only the dedicated VM and documentation are in scope.
+
+## Fresh pre-mutation checks
+
+Configured-key `ssh proxmox` authenticated to standalone node `pve`, PVE
+`9.1.6/71482d1833ded40a`, kernel `6.17.13-2-pve`. VMID 115 was absent,
+cluster nextid was 115, and no QEMU/LXC name collision existed. RAM was
+202,691,530,752 bytes total and 159,514,533,888 bytes available (about
+148.6 GiB). `local-zfs` was active with 398,886,824 KiB available (about
+380.4 GiB), leaving approximately 220.4 GiB after allowing the full 160-GiB
+OS/data allocation plus minimal EFI space. `rpool` was ONLINE with zero
+read/write/checksum errors and no known data errors; its last scrub repaired
+0 B with zero errors. The pool reported optional features not enabled; no
+upgrade was performed. The reviewed untagged private `vmbr1` bridge was active
+with the same physical uplink. No bridge or network configuration was changed.
+
+Existing guest inventory and host-side configuration hashes are retained in
+ignored local evidence for comparison after each mutation. This does not read
+guest files or disks; VM 107 remains outside the guest-access scope.
+
+## Authoritative ISO verification
+
+- Filename: `ubuntu-24.04.2-live-server-amd64.iso`.
+- Proxmox reference: `local:iso/ubuntu-24.04.2-live-server-amd64.iso`.
+- Resolved path: `/var/lib/vz/template/iso/ubuntu-24.04.2-live-server-amd64.iso`.
+- Local SHA-256: `d6dab0c3a657988501b4bd76f1297c053df710e06e0c3aece60dead24f270b4d`.
+- Expected SHA-256: `d6dab0c3a657988501b4bd76f1297c053df710e06e0c3aece60dead24f270b4d`.
+- Source: [Ubuntu-operated archive SHA256SUMS](https://old-releases.ubuntu.com/releases/24.04.2/SHA256SUMS), exact filename line retrieved directly over HTTPS.
+- Result: **MATCH**. No replacement ISO was downloaded; detached signature
+  verification was not performed or required by this slice's HTTPS-source gate.
+
+## Implementation sequence
+
+1. Pass repository, fresh host/capacity/network/VMID and ISO gates.
+2. Immediately recheck VMID/nextid/name; create only VM 115 stopped.
+3. Attach fresh EFI, OS and data disks, one NIC, and verified media, reading
+   back VM configuration and comparing existing guests after every mutation.
+4. Use normal Proxmox console only if safely available. Otherwise stop with
+   media attached and VM stopped, following Brian's explicit manual boundary.
+5. If installed, verify base OS, key access and untouched data disk, then
+   gracefully shut down VM 115. Do not destroy resources on failure.
+6. Validate docs and preservation, then publish only a sanitized review package
+   from an isolated checkout/index; leave main uncommitted.
+
+## Validation and acceptance criteria
+
+Infrastructure only. Verify exact new configuration, stopped state/onboot,
+new-volume ownership and existing guest isolation after every mutation. If the
+installer cannot run, record OS/SSH/guest filesystem checks as NOT RUN.
+Check documentation diff, local Markdown links, protected hashes and empty
+main index. Publication never closes P12-03 or authorizes P12-04.
+
+## Security, privacy and data integrity
+
+Keep raw management outputs in ignored local evidence. Public artifacts exclude
+addresses, MACs, UUIDs/serials, keys, hashes of passwords, tokens, raw management
+configurations and unrelated guest details. Never read/publish the SSH private
+key. No public-key transfer or administrator account has occurred yet.
+
+## Failure modes, rollback and recovery
+
+Stop on a failed gate, unexpected configuration/inventory change or uncertain
+disk identity. Preserve created resources stopped. VM/disk destruction,
+volume deletion or destructive cleanup requires separate explicit approval.
+Never touch VM 107 or use an existing unowned disk to recover provisioning.
+
+## Progress log
+
+- [x] 2026-09-29: Repository and protected-file gates passed.
+- [x] 2026-09-29: Fresh Proxmox/capacity/network/name/VMID checks passed.
+- [x] 2026-09-29: Existing ISO SHA-256 matched the official Ubuntu archive.
+- [x] 2026-09-29: Browser console access failed with
+  `ERR_CERT_AUTHORITY_INVALID`; no warning bypass, login, console boot or
+  unattended installation was attempted.
+- [x] 2026-09-29: Created and verified dedicated stopped VM and fresh attachments;
+  all seven mutation readbacks passed existing guest and volume isolation checks.
+- [ ] Install and validate base Ubuntu, administrator SSH and guest disk state.
+- [x] 2026-09-29: Prepared sanitized partial review package for the isolated
+  `astra-response` publication boundary; publication receipt is supplied with
+  the review handoff.
+
+## Open questions and manual checks
+
+The normal Proxmox console currently requires Brian to resolve its certificate
+warning and authenticate through the trusted management UI. Do not replace it
+with a custom ISO, autoinstall, PXE or cloud-init framework. Manual installation
+and post-install verification remain outstanding.
+
+## Exact created resources and final configuration
+
+| Resource | Created / observed state |
+| --- | --- |
+| VM | 115, `brickvault-appraisal`, node `pve`; stopped throughout; `onboot=0` |
+| Compute | `machine=q35`, `bios=ovmf`, `cpu=host`, `sockets=1`, `cores=4`, `memory=8192`, `balloon=0`, `ostype=l26` |
+| Controller | `scsihw=virtio-scsi-single` |
+| EFI | `efidisk0=local-zfs:vm-115-disk-0`, `efitype=4m`, `pre-enrolled-keys=1`, automatic `ms-cert=2023w`, actual `size=1M` (1,048,576 bytes) |
+| OS | `scsi0=local-zfs:vm-115-disk-1`, 32 GiB (34,359,738,368 bytes), `discard=on,iothread=1,ssd=1` |
+| Data | `scsi1=local-zfs:vm-115-disk-2`, 128 GiB (137,438,953,472 bytes), `discard=on,iothread=1,ssd=1` |
+| Network | Exactly one `net0` VirtIO NIC, `bridge=vmbr1`; no VLAN tag or firewall flag; MAC omitted |
+| Media | `ide2=local:iso/ubuntu-24.04.2-live-server-amd64.iso,media=cdrom`, 3,137,758 KiB |
+| Boot | `order=ide2;scsi0` for the pending installation |
+
+The requested `local-zfs:1,efitype=4m,pre-enrolled-keys=1` allocation became
+Proxmox's normal minimal 1-MiB EFI variables volume; this is the permitted
+minimal EFI allocation, not a 1-GiB OS/data deviation. Proxmox generated normal
+VM UUID/generation metadata and a MAC, retained only in ignored local evidence.
+No pre-existing disk was attached. Exactly three new local-zfs volumes appeared;
+the pre-existing volume inventory remained unchanged after every mutation.
+The disks are thin provisioned: final available space was 398,887,708 KiB,
+not a full 160-GiB physical reservation. The headroom check budgeted full growth.
+
+## Untouched data-disk evidence
+
+The verified `scsi1` volume resolves to `/dev/zvol/rpool/data/vm-115-disk-2`.
+With VM 115 stopped, `blockdev --getsize64` returned 137,438,953,472 bytes.
+`lsblk --json --bytes` reported one disk, no child partitions, null filesystem,
+and an empty mountpoints list. `wipefs --no-act --json` returned an empty
+signatures array; `blkid -p` returned status 2 (no identifiable signature,
+including no LVM member signature); `findmnt -rn -S` found no host mount.
+These were read-only probes. No partitioning, formatting, LVM initialization,
+mounting or guest boot occurred. Guest-side post-install checks remain NOT RUN.
+
+## Manual installer handoff
+
+**MANUAL INSTALLER STEP REQUIRED.** Browser selection initially timed out;
+runtime discovery then found Edge, whose direct Proxmox navigation failed with
+`ERR_CERT_AUTHORITY_INVALID`. A follow-up page inspection could not attach.
+No usable authenticated console was established. No certificate exception,
+new trust, credentials, custom installer media or alternate console framework
+was created. Brian's explicit boundary requires leaving the prepared VM stopped.
+
+When Brian resumes installation through his trusted Proxmox management console:
+
+1. Resolve/verify the management certificate locally and sign in privately.
+   Select **pve → 115 (brickvault-appraisal)**. Confirm the hardware table above,
+   then start only 115 and open its normal console.
+2. Boot the attached Ubuntu Server ISO. Use the normal Server installer and
+   temporary DHCP. Keep proxy blank; add no external repositories. Do not opt
+   into Ubuntu Pro or additional server snaps/application roles.
+3. On storage, select **only the 32-GiB disk corresponding to scsi0**. Leave the
+   128-GiB scsi1 disk entirely available/unused. Before confirming destructive
+   installation, verify every proposed partition/filesystem/LVM action targets
+   the 32-GiB OS disk. Stop if disk identities are ambiguous. An ordinary guided
+   layout on the OS disk is acceptable; no data-disk action is permitted.
+4. Set hostname `brickvault-appraisal` and human administrator username
+   `brickvault-admin`. Enter any required local sudo/console password privately
+   in the installer; never send it or a password hash to ChatGPT.
+5. Select OpenSSH server and disable password authentication. Import only the
+   already approved laptop public key if the normal installer supports that
+   key source. Do not upload the key elsewhere or select an unrelated identity.
+   If direct import is unavailable, complete the install and use the local VM
+   console to place that existing public key in the administrator's
+   `~/.ssh/authorized_keys` (directory mode 700, file mode 600, administrator
+   ownership). Keep SSH password authentication disabled. Do not create `brickvault`.
+6. After installer completion, eject the ISO or change VM boot order to scsi0,
+   reboot only 115 into Ubuntu, and record its DHCP address privately. Stop for
+   the authorized base-OS validation: release/hostname/KVM/vCPU/RAM/root disk,
+   DHCP/route, SSH key login/sudo and effective SSH password settings, sockets,
+   and `lsblk -f` proving the 128-GiB disk has no children/filesystem/mount/LVM.
+   Verify no later-phase packages, services, checkout or backup configuration.
+7. After successful validation, gracefully shut down only 115 and verify
+   `qm status 115` is stopped and `onboot: 0`. No snapshot or backup job.
+
+These are **unexecuted continuation instructions**. No DHCP lease, administrator,
+SSH authorization, Ubuntu installation or guest filesystem exists from this run.
+
+## Outcome and follow-up
+
+**BLOCKED — installer/manual console required.** The VM definition and fresh
+attachments are **PROVISIONED FOR REVIEW (partial)**; base Ubuntu is **NOT
+INSTALLED**. P12-03 overall is not implemented or CLOSED. No administrator SSH
+was established or tested. Final `qm status 115` reported `status: stopped` and
+`onboot: 0`; no shutdown was needed because no start command was issued.
+All 17 existing guests retained their inventory/configuration hashes, including
+legacy VM 107, which remained running and was never accessed or mutated.
+No P12-04 work occurred. Next work is the manual P12-03 installation and its
+base-OS validation, followed by a new review package; publication does not
+authorize P12-04. No destructive rollback was performed.
+
+## Documentation and preservation validation
+
+The five task documents passed local Markdown path checks (208 targets,
+zero missing), and `git diff --check` passed. All three protected SHA-256
+values and the empty main index were rechecked. No application tests, builds,
+Android work, provider requests, database proof or guest package installs ran.
+The public review package carries only sanitized evidence and these documentation
+changes; main remains at its original uncommitted review baseline.

@@ -1,0 +1,85 @@
+P12-03 sanitized executed command receipt — 2026-09-29
+
+LOCAL REPOSITORY GATE
+  git branch --show-current
+  git rev-parse HEAD
+  git status --short
+  git diff --cached --name-only
+  Get-FileHash (the three explicitly protected paths) -Algorithm SHA256
+  Compared hashes with accepted P12-02 record.
+
+READ-ONLY via ssh -o BatchMode=yes -o ConnectTimeout=10 proxmox
+  hostname
+  pveversion
+  uname -r
+  free -h
+  free -b
+  uptime
+  qm list
+  qm config 115                     # expected absence before creation
+  pvesh get /cluster/nextid
+  pvesh get /cluster/resources --type vm --output-format json
+  pvesm status
+  pvesm status --storage local-zfs
+  zpool status rpool
+  pvesh get /nodes/pve/network --output-format json
+  test ! -e /etc/pve/corosync.conf    # standalone check
+  test ! -e /etc/pve/qemu-server/115.conf
+  pvesm path local:iso/ubuntu-24.04.2-live-server-amd64.iso
+  sha256sum /var/lib/vz/template/iso/ubuntu-24.04.2-live-server-amd64.iso
+  HTTPS read: https://old-releases.ubuntu.com/releases/24.04.2/SHA256SUMS
+
+CONSOLE CAPABILITY CHECK
+  Supported browser selection initially timed out; discovery then found Edge
+  and in-app browser. Edge navigation to the management URL returned
+  ERR_CERT_AUTHORITY_INVALID; follow-up page inspection could not attach.
+  No warning bypass, login or VM boot occurred.
+
+READ-ONLY SNAPSHOTS before creation and after every mutation
+  Inline Python through SSH calls pvesh /cluster/resources (VM inventory),
+  compares sorted vmid/node/type/name/status/maxcpu/maxmem/maxdisk/template
+  fields excluding 115; hashes host-side QEMU/LXC *.conf files excluding 115.
+  pvesh get /nodes/pve/qemu/115/config --output-format json  # after creation
+  qm status 115
+  pvesm list local-zfs
+  Existing guest files/disks were never accessed. Raw metadata stays local.
+
+MUTATIONS — EXACT ORDER, VM115 ONLY
+  Immediately before creation: set -eu; verify hostname pve, QEMU/LXC 115
+  config absent, cluster nextid 115, and no inventory ID/name collision.
+  1. qm create 115 --name brickvault-appraisal --memory 8192 --balloon 0 --cores 4 --sockets 1 --cpu host --machine q35 --bios ovmf --scsihw virtio-scsi-single --ostype l26 --onboot 0
+  2. qm set 115 --efidisk0 local-zfs:1,efitype=4m,pre-enrolled-keys=1
+  3. qm set 115 --scsi0 local-zfs:32,discard=on,iothread=1,ssd=1
+  4. qm set 115 --scsi1 local-zfs:128,discard=on,iothread=1,ssd=1
+  5. qm set 115 --net0 virtio,bridge=vmbr1
+  6. qm set 115 --ide2 local:iso/ubuntu-24.04.2-live-server-amd64.iso,media=cdrom
+  7. qm set 115 --boot 'order=ide2;scsi0'
+  After EACH mutation: qm config 115 and the above snapshot/assertions.
+  All seven snapshots preserve old guest inventory/configuration and old volumes.
+
+FINAL READ-ONLY CHECKS
+  qm status 115
+  qm config 115                     # onboot field inspected
+  pvesm path local-zfs:vm-115-disk-2
+    Returned path checked exactly: /dev/zvol/rpool/data/vm-115-disk-2
+  blockdev --getsize64 <verified-new-data-path>
+  lsblk --json --bytes --output NAME,SIZE,TYPE,FSTYPE,MOUNTPOINTS <same-path>
+  wipefs --no-act --json <same-path> # READ ONLY
+  blkid -p <same-path>              # status 2, no signature
+  findmnt -rn -S <same-path>        # status 1, no source mount
+  pvesm status --storage local-zfs
+  zfs get -Hp -o name,property,value volsize,used,referenced rpool/data/vm-115-disk-0 rpool/data/vm-115-disk-1 rpool/data/vm-115-disk-2
+
+LOCAL VALIDATION / PUBLICATION
+  Complete task documentation diff and new Plan093 inspected.
+  git diff --check; local Markdown checks; protected SHA-256 checks.
+  Separate temporary GIT_INDEX_FILE used for the five-document patch;
+  main index remains empty. Clean isolated astra-response worktree reused.
+  Package staged under its own index after review; main never staged/pushed.
+  The actual package commit and remote verification are in the final handoff.
+
+NOT EXECUTED
+  qm start/shutdown/stop/destroy; guest shell; package installation; application
+  tests/builds; Android/database/provider work; data-disk partition/format/mount;
+  network/DNS/firewall/certificate changes; snapshot/backup; P12-04; main commit.
+  Manual continuation in Plan093 is unexecuted.
