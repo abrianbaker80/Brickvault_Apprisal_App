@@ -1,0 +1,14 @@
+P12-03 r3 accepted closeout validation — 2026-09-29
+
+Local main commit: 96b84359078632fef7a7193add663734cec8ba2c
+Subject: Close P12-03 base VM provisioning
+Committed documentation files: exactly five (listed in REVIEW.md)
+Staged diff: inspected in full; git diff --cached --check passed before commit
+Local Markdown links: 214 checked, 0 missing
+Protected SHA-256 values: matched accepted values; files left unstaged
+Final main index: empty
+Final main worktree: only the three pre-existing protected dirty files
+Infrastructure/guest/application tests/builds: not rerun; accepted r2 reused
+Main push: none
+
+Status: P12-03 ACCEPTED / CLOSED; Phase 12 IN PROGRESS; P12-04 NEXT / NOT STARTED
