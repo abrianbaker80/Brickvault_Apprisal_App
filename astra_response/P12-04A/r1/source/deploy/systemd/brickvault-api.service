@@ -1,0 +1,30 @@
+[Unit]
+Description=BrickVault Appraisal API
+Wants=network-online.target
+After=network-online.target postgresql@18-main.service
+Requires=postgresql@18-main.service
+RequiresMountsFor=/var/lib/postgresql /opt/brickvault
+
+[Service]
+Type=simple
+User=brickvault
+Group=brickvault
+WorkingDirectory=/opt/brickvault/current/api
+Environment=BVA_MODE=production BVA_BIND_HOST=127.0.0.1 BVA_API_PORT=18080
+EnvironmentFile=/etc/brickvault/api.env
+ExecStart=/opt/brickvault/current/api/venv/bin/python -m brickvault_api.main
+Restart=on-failure
+RestartSec=5s
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/brickvault
+
+[Install]
+WantedBy=multi-user.target

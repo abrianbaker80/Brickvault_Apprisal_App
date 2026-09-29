@@ -1,0 +1,55 @@
+P12-04A sanitized command record (2026-09-29)
+Placeholders below deliberately omit the VM DHCP address, filesystem UUID, SSH key path, and host key. This is an execution summary, not a replay script.
+
+Repository gate
+  git branch --show-current
+  git rev-parse HEAD
+  git diff --cached --name-only
+  Get-FileHash <three-protected-worktree-files> -Algorithm SHA256
+
+Accepted VM 115 path
+  ssh proxmox 'qm status 115; qm config 115'
+  ssh proxmox 'qm start 115'
+  ssh proxmox 'qm agent 115 ping'
+  ssh proxmox 'qm guest cmd 115 network-get-interfaces'   # private output retained locally
+  ssh -i <approved-laptop-key> brickvault-admin@<private-vm-address> <reviewed-command>
+
+Storage and PostgreSQL
+  lsblk; wipefs --no-act <verified-scsi1>; blkid -p <verified-scsi1>; findmnt
+  printf 'label: gpt\nstart=2048, type=linux\n' | sudo sfdisk <verified-scsi1>
+  sudo mkfs.ext4 -L brickvault-pgdata <verified-scsi1-partition>
+  # ext4 truncated that overlong label; the step stopped before mount/fstab.
+  sudo e2label <same-ext4-partition> brickvault-db
+  sudo mount <same-ext4-partition> /var/lib/postgresql
+  # fstab uses UUID=<private-fs-uuid> /var/lib/postgresql ext4 defaults 0 2
+  sudo umount /var/lib/postgresql; sudo mount /var/lib/postgresql
+  # Verified official PGDG Noble signing key before signed apt package install.
+  sudo apt-get install postgresql-18=18.6-1.pgdg24.04+2
+  sudo pg_createcluster 18 main --datadir=/var/lib/postgresql/18/main
+  sudo systemctl enable --now postgresql@18-main.service
+
+Verified runtimes and release
+  sha256sum -c <Python.org-3.13.15-xz-checksum>
+  gpg --verify Python-3.13.15.tar.xz.asc Python-3.13.15.tar.xz
+  ./configure --prefix=/opt/python/3.13.15 --enable-optimizations --with-lto --with-system-libmpdec=no
+  make -j2; sudo make altinstall
+  sha256sum -c <official-Astral-uv-0.12.10-checksum>
+  pnpm build
+  python scripts/release_manifest.py source-id
+  python scripts/release_manifest.py create --release-id p12-04a-r1 --source-id <reviewed-source-id>
+  # Only the hash-verified artifact archive and reviewed unit were copied to VM 115.
+  python scripts/release_manifest.py verify <staged-vm-bundle> --manifest-sha256 <reviewed-manifest-sha256> --release-id p12-04a-r1 --source-id <reviewed-source-id>
+  sudo /opt/python/3.13.15/bin/python3.13 -m venv --without-pip <release>/api/venv
+  sudo env -i UV_NO_MANAGED_PYTHON=1 UV_PYTHON_DOWNLOADS=never uv pip install --python <release>/api/venv/bin/python --require-hashes --no-deps --only-binary :all: -r <release>/api/requirements.txt
+  sudo env -i UV_NO_MANAGED_PYTHON=1 UV_PYTHON_DOWNLOADS=never uv pip install --python <release>/api/venv/bin/python --no-deps --no-build <reviewed-wheel>
+  sudo env -i UV_NO_MANAGED_PYTHON=1 UV_PYTHON_DOWNLOADS=never uv pip check --python <release>/api/venv/bin/python
+  sudo systemd-analyze verify /etc/systemd/system/brickvault-api.service
+  sudo systemctl disable --now brickvault-api.service
+
+One controlled guest reboot and post-boot checks
+  sudo systemctl reboot                     # VM 115 only
+  ssh proxmox 'qm status 115; qm agent 115 ping; qm config 115'
+  findmnt /var/lib/postgresql; pg_isready -h 127.0.0.1 -p 5432
+  sshd -t; sshd -T; ss -ltn; timedatectl
+  # Verified a changed boot ID, installed-wheel import, account/unit state,
+  # no production DB/roles/config, and no VM-address TCP connection to PostgreSQL.

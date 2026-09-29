@@ -1,0 +1,31 @@
+P12-04A validation — 2026-09-29
+
+REPOSITORY
+main HEAD: 96b84359078632fef7a7193add663734cec8ba2c
+main commit/push: none
+main index: empty
+protected pre-existing dirty files: AGENTS.md, test_catalog_search.py, test_catalog_parser.py; original SHA-256 values rechecked at closeout
+production admin: 30 focused unit tests passed; Ruff and strict mypy passed
+release manifest/admin combined: 35 focused tests passed; Ruff, format, mypy, offline uv lock and hash export passed
+real disposable PostgreSQL 18.6 credential proof: PASS; correct/wrong SCRAM auth, success/duplicate failures, SET ROLE controls; five sensitive values absent from 104,226 logged bytes; owned test container removed
+directly affected real-database grants: 3 tests passed, 1 pytest plugin warning; one disposable database created/removed; owned test runner returned to stopped state, no leftovers
+pnpm build: PASS; API wheel/sdist, independent installed-wheel import/entrypoint/migration graph, Vite production build and frontend private-value verifier
+release source ID: c65188e2f3bfeecc140175e52f5ecab9a64c850710513c7a2c5aaf3ce9c7bc4c
+release manifest SHA-256: bfc6608efa56d1625f4493fe5e491b587ef95accacacf399fd44de38c6998ce9
+API wheel SHA-256: ec3e2ec4716046fae481aa85c76bc0eda1b6d81033c45c1c7548f7c7b16a9cf8
+cumulative main-baseline patch SHA-256: 8d31c16a9c74ecd0de48a28a1b7e1aae3a4365aa8c5e0440ff28a36dcc6fb204; zero-context reverse apply check passed against the working implementation
+changed source/doc snapshot: 16 literal task files copied byte-for-byte; 233 local Markdown links checked, none missing
+
+VM 115
+source checks: Python.org 3.13.15 SHA-256 and detached signature PASS; Astral uv 0.12.10 SHA-256 PASS; PGDG Noble key/repository signature PASS
+versions: Python 3.13.15 from /opt/python/3.13.15; Ubuntu Python 3.12 unchanged; uv 0.12.10; PostgreSQL 18.6-1.pgdg24.04+2
+storage: reviewed scsi1 128 GiB, GPT/one ext4 partition label brickvault-db; UUID-based required fstab mount at /var/lib/postgresql; root still scsi0
+PostgreSQL: 18/main active and enabled, data directory on scsi1, only 127.0.0.1:5432 TCP; workstation VM-address TCP attempt refused/unreachable
+release: reviewed archive hash and extracted manifest verified on VM; 26 hash-locked dependencies plus API wheel installed in system-Python venv; uv pip check and brickvault-user installed import/entrypoint PASS
+account/layout: locked nologin brickvault, private group, no sudo; root:brickvault 0750 release/config parents and brickvault:brickvault 0700 empty state directory
+unit: reviewed brickvault-api.service passed systemd-analyze verify; disabled/inactive; mandatory api.env absent; no API or Caddy listener
+reboot: one guest reboot, boot ID changed; mounted data/PG, approved-key SSH hardening, QEMU agent, time sync, listeners, permissions, installed import and empty config/state checks PASS
+final state: VM 115 RUNNING, onboot=0, scsi0 boot
+
+BOUNDARY
+No production database/roles, migration, grant-runtime, bootstrap principal, ownership marker or secret was created on VM 115. No Caddy/restic/rclone, backup, DNS, TLS, firewall/router, provider or legacy VM 107 work occurred. P12-04 remains IN PROGRESS; P12-05 NOT STARTED. Publication/review acceptance is separate from this implementation evidence.
