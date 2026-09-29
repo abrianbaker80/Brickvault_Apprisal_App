@@ -1,0 +1,1066 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 3592406..27c9158 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,21 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## P12-04B accepted closeout — 2026-09-29
++
++**P12-04B is ACCEPTED / CLOSED after review of the
++[r1 dual-recovery package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/f179992addabb2fc7eb666280c2b218ba1474bfb/astra_response/P12-04B/r1/REVIEW.md).
++P12-04 remains IN PROGRESS; P12-04C is NEXT / NOT STARTED; P12-05 has not
++started.** [ExecPlan 095](docs/plans/095-dual-recovery-foundation.md)
++records the separately encrypted Proxmox supplemental and Google Drive off-host
++repositories, restricted access, protected VM/Windows recovery credentials,
++and synthetic Windows restores that passed from both destinations. The
++production backup runner and inactive service/timer definitions are source-only.
++No production database, roles, migrations, API startup, Caddy, DNS, TLS or
++backup timer activation occurred. Before the first production migration,
++P12-04C must bridge the verified backup receipt to the protected admin recovery
++proof and establish offline custody that survives simultaneous VM/laptop loss.
++The accepted P12-04A record below remains historical.
++
+ ## P12-04A accepted closeout — 2026-09-29
+ 
+ **P12-01/P12-02/P12-03 are CLOSED; Phase 12 and P12-04 are IN PROGRESS;
+diff --git a/deploy/systemd/brickvault-backup.service b/deploy/systemd/brickvault-backup.service
+new file mode 100644
+index 0000000..6ce364f
+--- /dev/null
++++ b/deploy/systemd/brickvault-backup.service
+@@ -0,0 +1,31 @@
++[Unit]
++Description=BrickVault encrypted dual-destination production backup
++Wants=network-online.target
++After=network-online.target postgresql@18-main.service
++Requires=postgresql@18-main.service
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault /var/lib/brickvault/backups
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++WorkingDirectory=/opt/brickvault/current/api
++ExecStart=/opt/brickvault/current/api/venv/bin/brickvault-production-backup backup
++TimeoutStartSec=4h
++UMask=0077
++StateDirectory=brickvault/backups
++StateDirectoryMode=0700
++CacheDirectory=brickvault-backup
++CacheDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++PrivateDevices=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault/backups /var/cache/brickvault-backup
++
++# Intentionally no [Install] section: the timer is the future operator gate.
+diff --git a/deploy/systemd/brickvault-backup.timer b/deploy/systemd/brickvault-backup.timer
+new file mode 100644
+index 0000000..b2a2b48
+--- /dev/null
++++ b/deploy/systemd/brickvault-backup.timer
+@@ -0,0 +1,11 @@
++[Unit]
++Description=Schedule BrickVault encrypted dual-destination production backup
++
++[Timer]
++OnCalendar=*-*-* 03:15:00
++Persistent=true
++RandomizedDelaySec=30m
++Unit=brickvault-backup.service
++
++[Install]
++WantedBy=timers.target
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 01e879d..fee212b 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,18 @@
+ # Valuation-First Roadmap
+ 
++## P12-04B accepted closeout — 2026-09-29
++
++**P12-04B is ACCEPTED / CLOSED after review of the
++[r1 dual-recovery package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/f179992addabb2fc7eb666280c2b218ba1474bfb/astra_response/P12-04B/r1/REVIEW.md).
++P12-04 remains IN PROGRESS; P12-04C is NEXT / NOT STARTED; P12-05 has not
++started.** [ExecPlan 095](plans/095-dual-recovery-foundation.md)
++records separately encrypted Proxmox supplemental and Google Drive off-host
++repositories. Windows independently restored and verified the synthetic canary
++from both. Production backup source and inactive unit definitions are prepared;
++no production database, application service, proxy or timer is active. Backup/admin
++receipt integration and offline recovery credential custody are hard pre-migration
++gates for P12-04C.
++
+ ## P12-04A accepted closeout — 2026-09-29
+ 
+ **P12-01/P12-02/P12-03 are CLOSED; Phase 12 and P12-04 are IN PROGRESS;
+@@ -932,9 +945,9 @@ read-only preflight only; infrastructure or production change remains gated.
+ ## Phase 12 — Approved home-server deployment
+ 
+ - **Status:** IN PROGRESS; P12-01, P12-02 and P12-03 ACCEPTED / CLOSED.
+-  P12-04 is NEXT / NOT STARTED; its prerequisites and the accepted base VM
+-  evidence are in [ExecPlan 093](plans/093-base-vm-provisioning.md).
+-  P12-04/P12-05 deployment and acceptance are not authorized.
++  P12-04A and P12-04B are ACCEPTED / CLOSED; P12-04C is NEXT / NOT STARTED;
++  P12-04 remains IN PROGRESS and P12-05 has not started. The recovery
++  foundation and remaining gates are in [ExecPlan 095](plans/095-dual-recovery-foundation.md).
+ - **Inputs:** Phase 11 actual findings, local release artifacts, reviewed deployment/backup/rollback plan, exact approved hostname and targets, and distinct explicit execution authorization.
+ - **Scope:** Execute only the approved deployment steps and validate private application operation under the selected abrianbaker.com subdomain.
+ - **Exclusions:** Unapproved host/network/DNS changes, public PostgreSQL, unrelated systems, recognition scope, and implicit staging/commits.
+diff --git a/docs/plans/095-dual-recovery-foundation.md b/docs/plans/095-dual-recovery-foundation.md
+new file mode 100644
+index 0000000..4ad7968
+--- /dev/null
++++ b/docs/plans/095-dual-recovery-foundation.md
+@@ -0,0 +1,58 @@
++# P12-04B: dual encrypted recovery foundation
++
++Status: **P12-04B ACCEPTED / CLOSED** after review of the [r1 package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/f179992addabb2fc7eb666280c2b218ba1474bfb/astra_response/P12-04B/r1/REVIEW.md). P12-04 remains IN PROGRESS; P12-04C is NEXT / NOT STARTED; P12-05 has not started.
++
++## Scope and guardrails
++
++This slice prepared independently encrypted Proxmox and Google Drive recovery repositories before a production database exists. It did not create a production database or roles, run migrations, bootstrap an owner, start the API, install Caddy, request TLS, or enable the backup timer. The three protected dirty files remained outside this slice. The reviewed implementation left the repository index and `main` commit unchanged before this accepted closeout.
++
++## Verified tooling
++
++| Tool | Version | Source and verification |
++| --- | --- | --- |
++| restic | 0.19.1 | [Official GitHub release](https://github.com/restic/restic/releases/tag/v0.19.1). The project's published checksum file had a valid signature from fingerprint `CF8F18F2844575973F79D4E191A6868BD3F7A907`; Linux and Windows archive digests matched. Root owns the VM executable. |
++| rclone | 1.75.1 | [Official rclone release](https://rclone.org/downloads/). The published checksum file had a valid signature from fingerprint `FBF737ECE9F8AB18604BD2AC93935E02FF3B54FA`; the Linux archive digest matched. Root owns the VM executable. |
++
++The Windows recovery context uses the verified restic 0.19.1 archive and installed rclone 1.75.1. No installer pipe was used. Proxmox required no package installation.
++
++## Proxmox supplemental repository
++
++The same-host copy is supplemental and does not satisfy off-host disaster recovery. The healthy `rpool` had about 375 GiB available before creation. The dedicated `rpool/brickvault-backup` child mounts at `/var/lib/brickvault-backup` with a 64 GiB quota, compression enabled, and atime disabled. It is not general VM storage. The quota can be changed without relocating the repository.
++
++The `bva-backup` account has a locked password, no sudo or login shell, and an `internal-sftp` chroot. Only `/repository` inside the chroot is writable. A dedicated sshd fragment disables forwarding and TTY use and requires public-key authentication. The exact prior sshd state was saved privately. `sshd -t` passed before reload, and the existing root SSH path was retested afterward. VM and Windows recovery keys are distinct; only their public keys reside on Proxmox. Shell, password authentication, chroot-root writes, and access outside the chroot were denied in focused tests.
++
++The independently encrypted restic repository is `sftp:bva-proxmox-repository:/repository`. Its repository ID begins `db58f878c2`. A restic snapshot listing and repository check passed.
++
++## Google Drive boundary
++
++The off-host target is `Brickvault_Apprisal_App_Backup/restic-production`. Rclone's shared Google client ID is being retired, so Brian authorized a dedicated Google OAuth client. The project already had a separate client and rclone remote with full Drive scope. Those files and the existing remote were preserved. A new Desktop client was created for this slice; its separate rclone remote requests only `drive.file`, which limits access to files the app creates or opens. The project is in production publishing status, and Google Drive API was already enabled. Brian completed the interactive Google authorization. The new encrypted rclone configuration contains the resulting token. No Google credential is in Git or the review package.
++
++The target folder did not exist in a scoped exact-path check before creation. VM 115 created only `Brickvault_Apprisal_App_Backup/restic-production` with the new remote. The separate Drive restic repository ID begins `a82ca12e8252`; initialization, empty snapshot listing, and `restic check` passed.
++
++## Credential custody and recovery qualification
++
++The VM holds two distinct high-entropy restic passfiles, its dedicated Proxmox transport key, an encrypted rclone configuration, a root-only rclone unlock file, and a root-only repository identity record under `/etc/brickvault/backup`. The separate Windows recovery set is under Brian's local profile in `AppData/Local/BrickVault/Recovery`, with ACLs limited to Brian, SYSTEM, and Administrators. It contains the Proxmox recovery key, pinned host identity, both restic passwords, the new OAuth client record, and the separate encrypted `drive.file` rclone configuration. Windows protects its rclone unlock material with the existing user-bound DPAPI mechanism. VM 115 is not the sole holder of either repository's access. Recovery from simultaneous VM and laptop loss still requires an offline custody decision before production migration.
++
++A task-owned synthetic canary with a random run ID, timestamp, manifest, and SHA-256 was backed up separately from VM 115 to both repositories. The Proxmox snapshot begins `51a00359234d`; the Drive snapshot begins `be729419380a`. In two independent Windows-only restic restores, each snapshot was opened with its own recovery credentials, restored into a fresh private temporary directory, and checked against the exact pre-recorded manifest, file bytes, size, and SHA-256. Each task-owned restored tree was removed after success. **Proxmox independent Windows restore: PASS. Google Drive independent Windows restore: PASS.** The Proxmox copy remains same-host supplemental recovery; only the Drive copy is off-host.
++
++## Future production backup runner
++
++`brickvault-production-backup` is source-only in this slice. Its preflight requires root, protected configuration and credential files, the reviewed PostgreSQL cluster/data directory, provisioned production database and role ownership markers, exact repository IDs, and the expected narrow Drive client/scope. It streams one `pg_dump` custom-format output to two restic children with bounded queues, cancellation, exit-code checks, byte count, and SHA-256. PostgreSQL globals and required production configuration are separate encrypted artifacts under the same run ID. Each artifact is read back from both repositories and hashed before a protected receipt is written. No normal-disk plaintext dump is created.
++
++The service and timer definitions are prepared in `deploy/systemd`. They have not been installed, started, or enabled on VM 115. The service runs as root to read protected inputs and uses systemd filesystem and process restrictions; its runner refuses execution before production provisioning. The proposed retention remains 30 daily, 8 weekly, and 12 monthly. The `retention-plan` command verifies a complete run and states the policy without deletion. Complete-run deletion and pruning remain a separate future operator step; restic's simple path-grouped forget would be incorrect because each snapshot path contains a unique run ID. No prune or destructive retention ran in this slice.
++
++Focused validation passed: nine new backup tests and five release-manifest tests, targeted Ruff and mypy checks, and a live Linux restic stdin path probe. `systemd-analyze verify` parsed the two future unit files but warned that the backup executable is not installed on VM 115, as required by the inactive boundary. The package build and broader accepted P12-04A checks were not rerun. The source runner remains unqualified against a production database because that database does not exist.
++
++## Required P12-04C receipt integration before migration
++
++The accepted backup runner writes a detailed dual-backup receipt with `schema`, `purpose`, `database`, `ownership_marker`, `run_id`, `verified_at_utc`, `repositories`, and per-artifact byte counts, SHA-256 values, and destination snapshot IDs. `brickvault-production-admin` requires a different migration recovery proof: `purpose`, `database`, `ownership_marker`, `revisions_at_backup`, `proxmox_snapshot`, `drive_snapshot`, and `verified_at_utc`. A successful backup does not yet directly satisfy the migration, runtime-grant, or owner-bootstrap gates.
++
++Before the first production migration, P12-04C must implement a guarded conversion/finalization step. It must verify the complete backup receipt and both repository copies/readbacks, bind the exact production ownership marker and pre-migration Alembic revision tuple, derive stable recovery identifiers from the verified backup, and write a new root-owned protected admin proof subject to the existing recency limit. It must reject a missing destination or readback and arbitrary operator-entered snapshot hashes. The production activation sequence must test this end to end. Do not fabricate a proof or weaken the admin gate.
++
++## Required offline custody before migration
++
++The current VM and protected Windows recovery sets permit recovery after either one is lost. They do not cover simultaneous loss of both. Before the first production migration, establish a durable offline copy of the minimum credentials needed to restore both repositories. Resolve the mechanism in P12-04C without putting secrets in Git, ChatGPT, email, Downloads, the repository, or the VM's sole copy. No actual offline secret is created or published by this closeout.
++
++## Remaining P12-04 and P12-05 gates
++
++P12-04C remains next and unstarted. Open P12-04 gates are offline credential custody; backup/admin receipt integration; packaged backup runner installation on VM 115; production database provisioning; first real dual backup and readback; protected recovery proof; migration; runtime grants; owner bootstrap; complete-run retention deletion and review; backup timer installation and activation; production API secrets and configuration; API startup; private DNS; trusted certificate; Caddy; firewall/client-source policy; monitoring and alerts; and production VM onboot behavior. P12-05 real restore, browser, PWA, Android, and rollback acceptance has not started. No production database or API startup is authorized by this closeout.
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index a9f5811..e586b94 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -6,12 +6,12 @@ import os
+ import subprocess
+ import sys
+ import tarfile
+-import tomllib
+ import venv
+ import zipfile
+ from pathlib import Path
+ from uuid import uuid4
+ 
++import tomllib
+ from database import ROOT, DatabaseError, private_path
+ 
+ 
+@@ -68,6 +68,7 @@ def package() -> None:
+     sdist = ROOT / "services/api/dist/brickvault_api-0.0.0.tar.gz"
+     required = {
+         "brickvault_api/production_admin.py",
++        "brickvault_api/production_backup.py",
+         "brickvault_api/persistence/runtime_grants.py",
+         "brickvault_api/migrations/versions/0012_product_identity_qualifiers.py",
+         "brickvault_api/migrations/sql/0012_product_identity_qualifiers_up.sql",
+@@ -229,10 +230,13 @@ import brickvault_api
+ from importlib.metadata import distribution
+ from brickvault_api.persistence.database import expected_revisions
+ from brickvault_api.production_admin import parse_config
++from brickvault_api.production_backup import main as backup_main
+ from brickvault_api.contracts import export
+ assert pathlib.Path(brickvault_api.__file__).resolve().is_relative_to(pathlib.Path(sys.prefix).resolve())
+ admin_entry = [entry for entry in distribution('brickvault-api').entry_points if entry.group == 'console_scripts' and entry.name == 'brickvault-production-admin']
+ assert len(admin_entry) == 1 and admin_entry[0].load() is not None
++backup_entry = [entry for entry in distribution('brickvault-api').entry_points if entry.group == 'console_scripts' and entry.name == 'brickvault-production-backup']
++assert len(backup_entry) == 1 and backup_entry[0].load() is backup_main
+ from alembic.script import ScriptDirectory
+ from brickvault_api.persistence.database import migration_config
+ from brickvault_api.catalog.models import CATALOG_TABLES
+@@ -267,6 +271,12 @@ print('Independent installed wheel import, migration graph and credential-free s
+         else "bin/brickvault-production-admin"
+     )
+     assert "provision-db" in execute([str(admin_executable), "--help"], scratch)
++    backup_executable = installed / (
++        "Scripts/brickvault-production-backup.exe"
++        if sys.platform == "win32"
++        else "bin/brickvault-production-backup"
++    )
++    assert "verify" in execute([str(backup_executable), "--help"], scratch)
+     (scratch / "result.json").write_text(
+         json.dumps(
+             {
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index d7b829e..0734d39 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -33,9 +33,11 @@ SAFE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{1,63}\Z")
+ HEX_40 = re.compile(r"[a-f0-9]{40}\Z")
+ HEX_64 = re.compile(r"[a-f0-9]{64}\Z")
+ MAX_WEB_BYTES = 32 * 1024 * 1024
+-P12_04A_SOURCE_PATHS = (
++RELEASE_SOURCE_PATHS = (
+     "apps/web/package.json",
+     "deploy/systemd/brickvault-api.service",
++    "deploy/systemd/brickvault-backup.service",
++    "deploy/systemd/brickvault-backup.timer",
+     "package.json",
+     "pnpm-lock.yaml",
+     "scripts/database.py",
+@@ -46,7 +48,9 @@ P12_04A_SOURCE_PATHS = (
+     "services/api/pyproject.toml",
+     "services/api/src/brickvault_api/persistence/runtime_grants.py",
+     "services/api/src/brickvault_api/production_admin.py",
++    "services/api/src/brickvault_api/production_backup.py",
+     "services/api/tests/unit/test_production_admin.py",
++    "services/api/tests/unit/test_production_backup.py",
+     "services/api/uv.lock",
+ )
+ DOCUMENTATION_PATHS = {
+@@ -56,6 +60,7 @@ DOCUMENTATION_PATHS = {
+     "docs/plans/092-exact-infrastructure-pre-mutation-review.md",
+     "docs/plans/093-base-vm-provisioning.md",
+     "docs/plans/094-production-foundation.md",
++    "docs/plans/095-dual-recovery-foundation.md",
+ }
+ PROTECTED_PATHS = {
+     "AGENTS.md",
+@@ -160,7 +165,7 @@ def _source_commit(root: Path) -> str:
+     return commit
+ 
+ 
+-def _source_id(root: Path, paths: tuple[str, ...] = P12_04A_SOURCE_PATHS) -> str:
++def _source_id(root: Path, paths: tuple[str, ...] = RELEASE_SOURCE_PATHS) -> str:
+     """Digest the literal release input list and reject other dirty workspace paths."""
+     if len(paths) != len(set(paths)):
+         raise ReleaseError("Release source inventory contains duplicate paths.")
+@@ -191,7 +196,7 @@ def _source_id(root: Path, paths: tuple[str, ...] = P12_04A_SOURCE_PATHS) -> str
+         if name not in allowed:
+             raise ReleaseError("Release source state includes an unreviewed path.")
+     digest = hashlib.sha256()
+-    digest.update(b"brickvault-p12-04a-source-v1\0")
++    digest.update(b"brickvault-p12-04b-source-v1\0")
+     digest.update(_source_commit(root).encode("ascii") + b"\0")
+     for name in sorted(paths):
+         path = root / name
+diff --git a/services/api/pyproject.toml b/services/api/pyproject.toml
+index f76659f..f412ea5 100644
+--- a/services/api/pyproject.toml
++++ b/services/api/pyproject.toml
+@@ -16,6 +16,7 @@ dependencies = [
+ 
+ [project.scripts]
+ brickvault-production-admin = "brickvault_api.production_admin:main"
++brickvault-production-backup = "brickvault_api.production_backup:main"
+ 
+ [build-system]
+ requires = ["hatchling==1.32.0"]
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+new file mode 100644
+index 0000000..c966323
+--- /dev/null
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -0,0 +1,595 @@
++"""Guarded dual-destination production backups and encrypted readback.
++
++The command is deliberately unavailable until the production descriptor,
++database, and both repository credentials have been provisioned. No plaintext
++database artifact is written to a persistent file.
++"""
++
++import argparse
++import hashlib
++import json
++import os
++import queue
++import re
++import stat
++import subprocess
++import sys
++import threading
++import time
++from collections.abc import Mapping, Sequence
++from dataclasses import dataclass
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any, NoReturn
++
++from brickvault_api import production_admin as admin
++
++DATABASE = admin.DATABASE
++BACKUP_DIR = Path("/etc/brickvault/backup")
++RECEIPT_DIR = Path("/var/lib/brickvault/backups/receipts")
++PROXMOX_REPO = "sftp:bva-proxmox-repository:/repository"
++DRIVE_REPO = "rclone:bva-drive:Brickvault_Apprisal_App_Backup/restic-production"
++RESTIC = "/usr/local/bin/restic"
++RCLONE = "/usr/local/bin/rclone"
++PG_DUMP = "/usr/lib/postgresql/18/bin/pg_dump"
++PG_DUMPALL = "/usr/lib/postgresql/18/bin/pg_dumpall"
++RUNUSER = "/usr/sbin/runuser"
++TAR = "/usr/bin/tar"
++TIMEOUT = "/usr/bin/timeout"
++SSH_COMMAND = "ssh -F /etc/brickvault/backup/proxmox-ssh-config bva-proxmox-repository -s sftp"
++ARTIFACTS = ("database.dump", "globals.sql", "configuration.tar")
++RUN_ID = re.compile(r"[a-f0-9]{32}\Z")
++SNAPSHOT_ID = re.compile(r"[a-f0-9]{64}\Z")
++CHUNK = 256 * 1024
++STREAM_DEADLINE_SECONDS = 4 * 60 * 60
++
++
++class BackupError(RuntimeError):
++    """Generic, credential-free operator failure."""
++
++
++@dataclass(frozen=True)
++class Destination:
++    name: str
++    repository: str
++    password_file: Path
++    options: tuple[str, ...]
++
++    def environment(self) -> dict[str, str]:
++        environment = {
++            "PATH": "/usr/local/bin:/usr/bin:/bin",
++            "HOME": "/var/lib/brickvault/backups",
++            "RESTIC_PASSWORD_FILE": str(self.password_file),
++            "RESTIC_CACHE_DIR": "/var/cache/brickvault-backup/restic",
++            "RCLONE_CONFIG": str(BACKUP_DIR / "rclone.conf"),
++            "RCLONE_CACHE_DIR": "/var/cache/brickvault-backup/rclone",
++        }
++        if self.name == "drive":
++            environment["RCLONE_CONFIG_PASS"] = (
++                (BACKUP_DIR / "rclone-config.pass").read_text(encoding="ascii").strip()
++            )
++        return environment
++
++    def command(self, *arguments: str) -> list[str]:
++        return [RESTIC, *self.options, "-r", self.repository, *arguments]
++
++
++DESTINATIONS = (
++    Destination(
++        "proxmox",
++        PROXMOX_REPO,
++        BACKUP_DIR / "proxmox-restic.pass",
++        ("-o", f"sftp.command={SSH_COMMAND}"),
++    ),
++    Destination("drive", DRIVE_REPO, BACKUP_DIR / "drive-restic.pass", ()),
++)
++
++
++def _validated_identity(value: Any) -> tuple[dict[str, str], str]:
++    if (
++        not isinstance(value, dict)
++        or set(value) != {"schema", "purpose", "repositories", "rclone_client_sha256"}
++        or type(value["schema"]) is not int
++        or value["schema"] != 1
++        or value["purpose"] != "brickvault-production-backup"
++        or not isinstance(value["repositories"], dict)
++        or set(value["repositories"]) != {destination.name for destination in DESTINATIONS}
++        or not isinstance(value["rclone_client_sha256"], str)
++        or SNAPSHOT_ID.fullmatch(value["rclone_client_sha256"]) is None
++    ):
++        raise BackupError("Backup destination identity record is invalid.")
++    identities: dict[str, str] = {}
++    for destination in DESTINATIONS:
++        record = value["repositories"][destination.name]
++        if (
++            not isinstance(record, dict)
++            or set(record) != {"uri", "id"}
++            or record["uri"] != destination.repository
++            or not isinstance(record["id"], str)
++            or SNAPSHOT_ID.fullmatch(record["id"]) is None
++        ):
++            raise BackupError("Backup repository identity differs.")
++        identities[destination.name] = record["id"]
++    return identities, value["rclone_client_sha256"]
++
++
++def _verify_destination_identity() -> None:
++    identities, client_hash = _validated_identity(
++        json.loads(admin._protected_file(BACKUP_DIR / "repositories.json"))
++    )
++    environment = DESTINATIONS[1].environment()
++    result = subprocess.run(
++        [RCLONE, "config", "dump"],
++        env=environment,
++        stdout=subprocess.PIPE,
++        stderr=subprocess.DEVNULL,
++        timeout=30,
++        check=False,
++    )
++    if result.returncode:
++        raise BackupError("Drive configuration cannot be opened.")
++    remotes = json.loads(result.stdout)
++    if not isinstance(remotes, dict) or set(remotes) != {"bva-drive"}:
++        raise BackupError("Drive remote identity differs.")
++    remote = remotes["bva-drive"]
++    if not isinstance(remote, dict):
++        raise BackupError("Drive remote identity differs.")
++    client_id = remote.get("client_id")
++    if (
++        remote.get("type") != "drive"
++        or remote.get("scope") != "drive.file"
++        or not remote.get("client_secret")
++        or not remote.get("token")
++        or not isinstance(client_id, str)
++        or not client_id.isascii()
++        or hashlib.sha256(client_id.encode("ascii")).hexdigest() != client_hash
++    ):
++        raise BackupError("Drive client or scope differs.")
++    for destination in DESTINATIONS:
++        repository = json.loads(_restic(destination, "cat", "config", capture=True))
++        if not isinstance(repository, dict) or repository.get("id") != identities[destination.name]:
++            raise BackupError("Encrypted repository identity differs.")
++
++
++def _regular_root_file(path: Path, modes: tuple[int, ...] = (0o400, 0o600)) -> None:
++    if not path.is_absolute():
++        raise BackupError("Backup input path is not absolute.")
++    for parent in (path.parent, *path.parent.parents):
++        info = parent.lstat()
++        if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
++            raise BackupError("Backup input directory is unsafe.")
++    info = path.lstat()
++    if (
++        not stat.S_ISREG(info.st_mode)
++        or info.st_uid != 0
++        or stat.S_IMODE(info.st_mode) not in modes
++    ):
++        raise BackupError("Backup input file is unsafe.")
++
++
++def _tool(path: str) -> None:
++    info = Path(path).lstat()
++    if not stat.S_ISREG(info.st_mode) or info.st_uid != 0 or stat.S_IMODE(info.st_mode) != 0o755:
++        raise BackupError("Backup tool identity is unsafe.")
++
++
++def _preflight() -> admin.AdminConfig:
++    admin._require_root()
++    config = admin._load_config(admin.CONFIG_PATH)
++    for executable in (RESTIC, RCLONE, PG_DUMP, PG_DUMPALL, RUNUSER, TAR, TIMEOUT):
++        _tool(executable)
++    for destination in DESTINATIONS:
++        _regular_root_file(destination.password_file)
++    _regular_root_file(BACKUP_DIR / "rclone.conf")
++    _regular_root_file(BACKUP_DIR / "rclone-config.pass")
++    _regular_root_file(BACKUP_DIR / "repositories.json")
++    _regular_root_file(BACKUP_DIR / "proxmox-ssh-config")
++    _regular_root_file(BACKUP_DIR / "proxmox-known-hosts")
++    _regular_root_file(BACKUP_DIR / "proxmox-transport_ed25519")
++    if (BACKUP_DIR / "proxmox-restic.pass").read_bytes() == (
++        BACKUP_DIR / "drive-restic.pass"
++    ).read_bytes():
++        raise BackupError("Repository credentials are not distinct.")
++    _verify_destination_identity()
++    with admin._maintenance() as maintenance:
++        admin._require_provisioned(maintenance, config)
++        directory = maintenance.execute("SHOW data_directory").fetchone()
++        if directory is None or directory["data_directory"] != "/var/lib/postgresql/18/main":
++            raise BackupError("Production PostgreSQL data location differs.")
++    return config
++
++
++def _run_id() -> str:
++    import secrets
++
++    return secrets.token_hex(16)
++
++
++def _producer(artifact: str, configuration: Sequence[str]) -> list[str]:
++    if artifact == "database.dump":
++        return [
++            RUNUSER,
++            "-u",
++            "postgres",
++            "--",
++            PG_DUMP,
++            "--format=custom",
++            "--host=/var/run/postgresql",
++            "--username=postgres",
++            f"--dbname={DATABASE}",
++        ]
++    if artifact == "globals.sql":
++        return [
++            RUNUSER,
++            "-u",
++            "postgres",
++            "--",
++            PG_DUMPALL,
++            "--globals-only",
++            "--host=/var/run/postgresql",
++            "--username=postgres",
++        ]
++    if artifact == "configuration.tar":
++        return [TAR, "-C", "/", "-cf", "-", "--", *configuration]
++    raise BackupError("Unknown backup artifact.")
++
++
++def _configuration_files() -> tuple[str, ...]:
++    required = [
++        Path("/etc/brickvault/production-admin.json"),
++        Path("/opt/brickvault/current/manifest.json"),
++    ]
++    optional = [Path("/etc/brickvault/api.env"), Path("/etc/brickvault/caddy.env")]
++    if any(not path.is_file() for path in required):
++        raise BackupError("Required production recovery configuration is absent.")
++    for path in (*required, *optional):
++        if path.exists() and path != Path("/opt/brickvault/current/manifest.json"):
++            _regular_root_file(path, (0o400, 0o600, 0o640))
++    return tuple(
++        str(path).lstrip("/") for path in (*required, *(p for p in optional if p.exists()))
++    )
++
++
++def stream_to_two(
++    source_command: Sequence[str],
++    sink_commands: Sequence[Sequence[str]],
++    sink_environments: Sequence[Mapping[str, str]],
++    *,
++    deadline_seconds: float = STREAM_DEADLINE_SECONDS,
++) -> tuple[int, str]:
++    """Copy identical bounded chunks to both children; fail closed on any ambiguity."""
++    if len(sink_commands) != 2 or len(sink_environments) != 2:
++        raise BackupError("Exactly two backup destinations are required.")
++    deadline = time.monotonic() + deadline_seconds
++    source = subprocess.Popen(
++        source_command,
++        stdout=subprocess.PIPE,
++        stderr=subprocess.DEVNULL,
++        env={"PATH": "/usr/bin:/bin", "HOME": "/root"},
++    )
++    sinks: list[subprocess.Popen[bytes]] = []
++    errors: queue.Queue[BaseException] = queue.Queue()
++    source_chunks: queue.Queue[bytes | None] = queue.Queue(maxsize=4)
++    sink_chunks: list[queue.Queue[bytes | None]] = [queue.Queue(maxsize=4), queue.Queue(maxsize=4)]
++    cancelled = threading.Event()
++
++    def send(channel: queue.Queue[bytes | None], value: bytes | None) -> None:
++        while not cancelled.is_set():
++            try:
++                channel.put(value, timeout=0.2)
++                return
++            except queue.Full:
++                if time.monotonic() >= deadline:
++                    raise BackupError("Backup stream timed out.") from None
++        raise BackupError("Backup stream was cancelled.")
++
++    def read_source() -> None:
++        try:
++            assert source.stdout is not None
++            while not cancelled.is_set():
++                chunk = source.stdout.read(CHUNK)
++                if not chunk:
++                    break
++                send(source_chunks, chunk)
++            if not cancelled.is_set():
++                send(source_chunks, None)
++        except BaseException as exc:
++            errors.put(exc)
++            cancelled.set()
++
++    def write_sink(process: subprocess.Popen[bytes], channel: queue.Queue[bytes | None]) -> None:
++        try:
++            assert process.stdin is not None
++            while not cancelled.is_set():
++                try:
++                    chunk = channel.get(timeout=0.2)
++                except queue.Empty:
++                    if time.monotonic() >= deadline:
++                        raise BackupError("Backup stream timed out.") from None
++                    continue
++                if chunk is None:
++                    break
++                process.stdin.write(chunk)
++                process.stdin.flush()
++            process.stdin.close()
++        except BaseException as exc:
++            errors.put(exc)
++            cancelled.set()
++
++    threads: list[threading.Thread] = []
++    try:
++        for command, environment in zip(sink_commands, sink_environments, strict=True):
++            sinks.append(
++                subprocess.Popen(
++                    command,
++                    stdin=subprocess.PIPE,
++                    stdout=subprocess.DEVNULL,
++                    stderr=subprocess.DEVNULL,
++                    env=dict(environment),
++                )
++            )
++        threads = [
++            threading.Thread(target=read_source, daemon=True),
++            *(
++                threading.Thread(target=write_sink, args=(sink, channel), daemon=True)
++                for sink, channel in zip(sinks, sink_chunks, strict=True)
++            ),
++        ]
++        for thread in threads:
++            thread.start()
++        digest = hashlib.sha256()
++        total = 0
++        while True:
++            if (
++                not errors.empty()
++                or time.monotonic() >= deadline
++                or any(sink.poll() not in (None, 0) for sink in sinks)
++            ):
++                raise BackupError("Backup stream failed or timed out.")
++            try:
++                chunk = source_chunks.get(timeout=0.2)
++            except queue.Empty:
++                continue
++            if chunk is None:
++                break
++            digest.update(chunk)
++            total += len(chunk)
++            for channel in sink_chunks:
++                send(channel, chunk)
++        for channel in sink_chunks:
++            send(channel, None)
++        for thread in threads:
++            thread.join(timeout=max(0.1, min(30.0, deadline - time.monotonic())))
++        if any(thread.is_alive() for thread in threads) or not errors.empty():
++            raise BackupError("Backup stream workers did not finish.")
++        if (
++            source.wait(timeout=30) != 0
++            or any(sink.wait(timeout=30) != 0 for sink in sinks)
++            or total == 0
++        ):
++            raise BackupError("Backup source or destination failed.")
++        return total, digest.hexdigest()
++    except BaseException:
++        cancelled.set()
++        for process in (source, *sinks):
++            if process.poll() is None:
++                process.terminate()
++        for process in (source, *sinks):
++            try:
++                process.wait(timeout=5)
++            except subprocess.TimeoutExpired:
++                process.kill()
++                process.wait(timeout=5)
++        raise BackupError("Dual-destination backup did not complete.") from None
++    finally:
++        for thread in threads:
++            thread.join(timeout=1)
++
++
++def _restic(destination: Destination, *arguments: str, capture: bool = False) -> bytes:
++    result = subprocess.run(
++        destination.command(*arguments),
++        env=destination.environment(),
++        stdout=subprocess.PIPE if capture else subprocess.DEVNULL,
++        stderr=subprocess.DEVNULL,
++        timeout=STREAM_DEADLINE_SECONDS,
++        check=False,
++    )
++    if result.returncode:
++        raise BackupError("Encrypted repository operation failed.")
++    return result.stdout if capture and isinstance(result.stdout, bytes) else b""
++
++
++def _snapshot(destination: Destination, run_id: str, artifact: str) -> str:
++    rows = json.loads(_restic(destination, "snapshots", "--json", "--tag", run_id, capture=True))
++    matches = [
++        row["id"]
++        for row in rows
++        if row.get("paths") == [f"/{run_id}/{artifact}"]
++        or row.get("paths") == [f"{run_id}/{artifact}"]
++    ]
++    if len(matches) != 1 or SNAPSHOT_ID.fullmatch(matches[0]) is None:
++        raise BackupError("Backup snapshot identity is ambiguous.")
++    return matches[0]
++
++
++def _readback(
++    destination: Destination,
++    snapshot: str,
++    artifact: str,
++    expected_size: int,
++    expected_sha: str,
++    run_id: str,
++) -> None:
++    if (
++        SNAPSHOT_ID.fullmatch(snapshot) is None
++        or RUN_ID.fullmatch(run_id) is None
++        or artifact not in ARTIFACTS
++    ):
++        raise BackupError("Backup receipt identity is invalid.")
++    process = subprocess.Popen(
++        [
++            TIMEOUT,
++            "--signal=TERM",
++            "--kill-after=10s",
++            "4h",
++            *destination.command("dump", snapshot, f"/{run_id}/{artifact}"),
++        ],
++        stdout=subprocess.PIPE,
++        stderr=subprocess.DEVNULL,
++        env=destination.environment(),
++    )
++    digest = hashlib.sha256()
++    count = 0
++    try:
++        assert process.stdout is not None
++        while chunk := process.stdout.read(CHUNK):
++            digest.update(chunk)
++            count += len(chunk)
++        if (
++            process.wait(timeout=120) != 0
++            or count != expected_size
++            or digest.hexdigest() != expected_sha
++        ):
++            raise BackupError("Encrypted readback digest differs.")
++    finally:
++        if process.poll() is None:
++            process.terminate()
++            process.wait(timeout=5)
++
++
++def _receipt_path(run_id: str) -> Path:
++    if RUN_ID.fullmatch(run_id) is None:
++        raise BackupError("Backup run ID is invalid.")
++    return RECEIPT_DIR / f"{run_id}.json"
++
++
++def backup() -> str:
++    config = _preflight()
++    files = _configuration_files()
++    run_id = _run_id()
++    artifacts: dict[str, Any] = {}
++    for artifact in ARTIFACTS:
++        stream_name = f"{run_id}/{artifact}"
++        commands = [
++            destination.command(
++                "backup", "--stdin", "--stdin-filename", stream_name, "--tag", run_id
++            )
++            for destination in DESTINATIONS
++        ]
++        size, sha = stream_to_two(
++            _producer(artifact, files), commands, [d.environment() for d in DESTINATIONS]
++        )
++        snapshots = {
++            destination.name: _snapshot(destination, run_id, artifact)
++            for destination in DESTINATIONS
++        }
++        for destination in DESTINATIONS:
++            _readback(destination, snapshots[destination.name], artifact, size, sha, run_id)
++        artifacts[artifact] = {"bytes": size, "sha256": sha, "snapshots": snapshots}
++    for destination in DESTINATIONS:
++        _restic(destination, "check")
++    receipt: dict[str, Any] = {
++        "schema": 1,
++        "purpose": "production",
++        "database": DATABASE,
++        "ownership_marker": config.marker,
++        "run_id": run_id,
++        "verified_at_utc": datetime.now(UTC).isoformat(),
++        "repositories": {d.name: d.repository for d in DESTINATIONS},
++        "artifacts": artifacts,
++    }
++    RECEIPT_DIR.mkdir(mode=0o700, parents=True, exist_ok=True)
++    if RECEIPT_DIR.stat().st_uid != 0 or RECEIPT_DIR.stat().st_mode & 0o077:
++        raise BackupError("Backup receipt directory is unsafe.")
++    path = _receipt_path(run_id)
++    nofollow = getattr(os, "O_NOFOLLOW", None)
++    if not isinstance(nofollow, int):
++        raise BackupError("Safe receipt creation is unavailable.")
++    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | nofollow, 0o600)
++    with os.fdopen(fd, "w", encoding="utf-8") as output:
++        json.dump(receipt, output, sort_keys=True)
++        output.write("\n")
++        output.flush()
++        os.fsync(output.fileno())
++    return run_id
++
++
++def verify(run_id: str) -> None:
++    config = _preflight()
++    receipt = json.loads(admin._protected_file(_receipt_path(run_id)))
++    if (
++        receipt.get("schema") != 1
++        or receipt.get("purpose") != "production"
++        or receipt.get("database") != DATABASE
++        or receipt.get("ownership_marker") != config.marker
++        or receipt.get("run_id") != run_id
++        or receipt.get("repositories") != {d.name: d.repository for d in DESTINATIONS}
++        or set(receipt.get("artifacts", {})) != set(ARTIFACTS)
++    ):
++        raise BackupError("Backup receipt identity differs.")
++    for artifact in ARTIFACTS:
++        row = receipt["artifacts"][artifact]
++        if (
++            type(row.get("bytes")) is not int
++            or row["bytes"] <= 0
++            or not SNAPSHOT_ID.fullmatch(row.get("sha256", ""))
++            or set(row.get("snapshots", {})) != {d.name for d in DESTINATIONS}
++        ):
++            raise BackupError("Backup receipt artifact is invalid.")
++        for destination in DESTINATIONS:
++            _readback(
++                destination,
++                row["snapshots"][destination.name],
++                artifact,
++                row["bytes"],
++                row["sha256"],
++                run_id,
++            )
++    for destination in DESTINATIONS:
++        _restic(destination, "check")
++
++
++def retention_plan(run_id: str) -> None:
++    """Recheck a full run before any future retention policy is considered.
++
++    Snapshot filenames contain the run ID, so restic's simple per-path forget
++    grouping would keep every run. Deletion needs an explicit complete-run
++    algorithm and remains outside the inactive P12-04B foundation.
++    """
++    verify(run_id)
++
++
++class _Parser(argparse.ArgumentParser):
++    def error(self, message: str) -> NoReturn:
++        raise BackupError("Invalid production backup command.")
++
++
++def main(argv: list[str] | None = None) -> int:
++    parser = _Parser(description=__doc__, allow_abbrev=False)
++    commands = parser.add_subparsers(dest="command", required=True)
++    commands.add_parser("backup")
++    verify_parser = commands.add_parser("verify")
++    verify_parser.add_argument("run_id")
++    retain_parser = commands.add_parser("retention-plan")
++    retain_parser.add_argument("run_id")
++    try:
++        args = parser.parse_args(argv)
++        if args.command == "backup":
++            print("Verified dual backup run: " + backup())
++        elif args.command == "verify":
++            verify(args.run_id)
++            print("Both encrypted copies passed readback.")
++        elif args.command == "retention-plan":
++            retention_plan(args.run_id)
++            print(
++                "Verified run; proposed retention is 30 daily, 8 weekly, 12 monthly. No snapshots deleted."
++            )
++        return 0
++    except Exception:  # noqa: BLE001 - no credentials, paths or driver errors in logs.
++        print("Production backup refused; inspect protected local state.", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/services/api/tests/unit/test_production_backup.py b/services/api/tests/unit/test_production_backup.py
+new file mode 100644
+index 0000000..3b957a5
+--- /dev/null
++++ b/services/api/tests/unit/test_production_backup.py
+@@ -0,0 +1,161 @@
++"""Backup transport behavior without production PostgreSQL or remote services."""
++
++import hashlib
++import json
++import os
++import subprocess
++import sys
++from pathlib import Path
++
++import pytest
++
++from brickvault_api import production_backup as backup
++
++
++def _source(size: int) -> list[str]:
++    return [
++        sys.executable,
++        "-c",
++        "import sys;sys.stdout.buffer.write(bytes(range(256))*" + str(size // 256) + ")",
++    ]
++
++
++def _sink(path: Path) -> list[str]:
++    return [
++        sys.executable,
++        "-c",
++        "import pathlib,sys;pathlib.Path(sys.argv[1]).write_bytes(sys.stdin.buffer.read())",
++        str(path),
++    ]
++
++
++def test_dual_stream_has_identical_bytes_and_digest(tmp_path: Path) -> None:
++    first, second = tmp_path / "first", tmp_path / "second"
++    size, digest = backup.stream_to_two(
++        _source(1024 * 1024),
++        [_sink(first), _sink(second)],
++        [os.environ, os.environ],
++        deadline_seconds=30,
++    )
++    expected = bytes(range(256)) * 4096
++    assert first.read_bytes() == second.read_bytes() == expected
++    assert size == len(expected)
++    assert digest == hashlib.sha256(expected).hexdigest()
++
++
++def test_one_failed_destination_fails_entire_run(tmp_path: Path) -> None:
++    first = tmp_path / "first"
++    failed = [sys.executable, "-c", "import sys;sys.stdin.buffer.read();sys.exit(4)"]
++    with pytest.raises(backup.BackupError):
++        backup.stream_to_two(
++            _source(1024 * 1024),
++            [_sink(first), failed],
++            [os.environ, os.environ],
++            deadline_seconds=30,
++        )
++
++
++def test_source_failure_is_not_reported_as_success(tmp_path: Path) -> None:
++    first, second = tmp_path / "first", tmp_path / "second"
++    source = [sys.executable, "-c", "import sys;sys.stdout.buffer.write(b'x');sys.exit(2)"]
++    with pytest.raises(backup.BackupError):
++        backup.stream_to_two(
++            source,
++            [_sink(first), _sink(second)],
++            [os.environ, os.environ],
++            deadline_seconds=30,
++        )
++
++
++def test_cli_redacts_underlying_error(
++    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
++) -> None:
++    def refused() -> str:
++        raise RuntimeError("sensitive credential material")
++
++    monkeypatch.setattr(backup, "backup", refused)
++    assert backup.main(["backup"]) == 1
++    output = capsys.readouterr()
++    assert "sensitive" not in output.out + output.err
++    assert "refused" in output.err
++
++
++def test_preflight_refuses_without_root(monkeypatch: pytest.MonkeyPatch) -> None:
++    def refused() -> None:
++        raise backup.BackupError("root required")
++
++    monkeypatch.setattr(backup.admin, "_require_root", refused)
++    with pytest.raises(backup.BackupError, match="root required"):
++        backup._preflight()
++
++
++def test_producer_does_not_use_plaintext_output_path() -> None:
++    for artifact in backup.ARTIFACTS:
++        command = backup._producer(artifact, ("etc/brickvault/production-admin.json",))
++        assert command[0].startswith("/")
++        assert "-f" not in command or artifact == "configuration.tar"
++        if artifact == "configuration.tar":
++            assert command[command.index("-cf") + 1] == "-"
++
++
++def test_rclone_unlock_is_limited_to_drive_child(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    (tmp_path / "rclone-config.pass").write_text("synthetic-config-key\n", encoding="ascii")
++    monkeypatch.setattr(backup, "BACKUP_DIR", tmp_path)
++    proxmox, drive = backup.DESTINATIONS
++    assert "RCLONE_CONFIG_PASS" not in proxmox.environment()
++    assert drive.environment()["RCLONE_CONFIG_PASS"] == "synthetic-config-key"
++
++
++def _identity() -> dict[str, object]:
++    return {
++        "schema": 1,
++        "purpose": "brickvault-production-backup",
++        "repositories": {
++            destination.name: {
++                "uri": destination.repository,
++                "id": ("a" if destination.name == "proxmox" else "b") * 64,
++            }
++            for destination in backup.DESTINATIONS
++        },
++        "rclone_client_sha256": hashlib.sha256(b"synthetic-client").hexdigest(),
++    }
++
++
++def test_repository_identity_rejects_wrong_uri() -> None:
++    identity = _identity()
++    ids, client_hash = backup._validated_identity(identity)
++    assert set(ids) == {"proxmox", "drive"}
++    assert client_hash == hashlib.sha256(b"synthetic-client").hexdigest()
++    identity["repositories"]["drive"]["uri"] = "rclone:unreviewed:other"  # type: ignore[index]
++    with pytest.raises(backup.BackupError, match="repository identity"):
++        backup._validated_identity(identity)
++
++
++def test_destination_identity_rejects_broader_drive_scope(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    (tmp_path / "rclone-config.pass").write_text("synthetic-config-key\n", encoding="ascii")
++    monkeypatch.setattr(backup, "BACKUP_DIR", tmp_path)
++    monkeypatch.setattr(
++        backup.admin, "_protected_file", lambda _: json.dumps(_identity()).encode("utf-8")
++    )
++    remote = {
++        "bva-drive": {
++            "type": "drive",
++            "scope": "drive",
++            "client_id": "synthetic-client",
++            "client_secret": "synthetic",
++            "token": "synthetic",
++        }
++    }
++    monkeypatch.setattr(
++        backup.subprocess,
++        "run",
++        lambda *args, **kwargs: subprocess.CompletedProcess(
++            args[0], 0, json.dumps(remote).encode("utf-8"), b""
++        ),
++    )
++    with pytest.raises(backup.BackupError, match="scope differs"):
++        backup._verify_destination_identity()

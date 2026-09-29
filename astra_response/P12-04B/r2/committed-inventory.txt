@@ -1,0 +1,14 @@
+Main commit: 5b0fc9919d6755d1414527c27592b7df1068c96d
+Subject: Close P12-04B dual recovery foundation
+Base: ef7eba53ff2a8c63bd15db1adb589b2e8c3f8449
+Committed files (10):
+  CODEX_WORKFLOW.md
+  deploy/systemd/brickvault-backup.service
+  deploy/systemd/brickvault-backup.timer
+  docs/ROADMAP.md
+  docs/plans/095-dual-recovery-foundation.md
+  scripts/package_api.py
+  scripts/release_manifest.py
+  services/api/pyproject.toml
+  services/api/src/brickvault_api/production_backup.py
+  services/api/tests/unit/test_production_backup.py

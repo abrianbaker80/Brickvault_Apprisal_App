@@ -1,0 +1,29 @@
+P12-04B/r2 accepted closeout validation — 2026-09-29
+
+Local main commit:
+  5b0fc9919d6755d1414527c27592b7df1068c96d
+  Close P12-04B dual recovery foundation
+  base: ef7eba53ff2a8c63bd15db1adb589b2e8c3f8449
+  exactly 10 committed files; see committed-inventory.txt
+  main was not pushed
+
+Closeout-only checks:
+  exact staged inventory: PASS (10 allowlisted files; no protected file)
+  complete staged diff: reviewed; three status documents inspected in full
+  seven accepted source/deployment files: identical to r1 after Git line-ending normalization
+  git diff --cached --check: PASS
+  newly added local Markdown links: PASS; accepted r1 link target present
+  protected SHA-256 hashes: all three match accepted baseline
+  final main index: empty
+  final main worktree: only the three protected pre-existing dirty files
+  review r1: preserved
+
+Reused r1 evidence; no live systems, Google Drive, restic/rclone, canary restore,
+tests, Ruff, or mypy were rerun. Backup units were not installed or enabled.
+No production database, migration, owner bootstrap, or API startup occurred.
+
+Status:
+  P12-04B ACCEPTED / CLOSED
+  P12-04 IN PROGRESS
+  P12-04C NEXT / NOT STARTED
+  P12-05 NOT STARTED
