@@ -1,0 +1,42 @@
+P11-01 r2 closeout validation
+
+Accepted baseline and preservation:
+  main starting HEAD: 03ab154a7dbbf9b6aaee3c877c3a400732c6fd96
+  accepted r1 package: 80379f6c4b275207f0902fe4711afeb2ca59b037
+  before closeout edits, exact six-file patch comparison with r1: PASS
+  no unexpected substantive divergence
+
+Local documentation commit:
+  5a0b94a190ab3aabc52f5ea17afdf5e96cf6cc51
+  Close Phase 11 home infrastructure discovery
+  exactly six documentation files committed; main not pushed
+  cumulative changes.patch is against 03ab154a7dbbf9b6aaee3c877c3a400732c6fd96
+  final ExecPlan 090 copy matches local committed source bytes
+
+Requested checks:
+  complete six-file staged documentation diff inspected: PASS
+  exact staged file inventory: PASS
+  git diff --cached --check: PASS
+  no closeout edit introduced or changed a Markdown link target
+  no application test/build, database rehearsal, device check or discovery rerun
+  no infrastructure, service, DNS, Cloudflare, router or firewall command
+
+Protected files (SHA-256 matched previous P10-03 r2 values):
+  AGENTS.md
+    f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4
+  services/api/tests/integration/test_catalog_search.py
+    d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7
+  services/api/tests/unit/test_catalog_parser.py
+    0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041
+  all three byte-for-byte unchanged and unstaged
+
+Final main checkout:
+  HEAD: 5a0b94a190ab3aabc52f5ea17afdf5e96cf6cc51
+  index: empty
+  working tree: exactly the three pre-existing protected dirty files
+
+Publication package check:
+  package-authored Markdown links and whitespace: PASS
+  mirrored ExecPlan links are unchanged repository-relative source links
+  private-address/path/key-material pattern scan: PASS
+  exact staged review-package inventory: PASS (five r2 paths only)

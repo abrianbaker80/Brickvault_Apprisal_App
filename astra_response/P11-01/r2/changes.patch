@@ -1,0 +1,371 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index c91191c..d592822 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,17 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 11 P11-01 — home infrastructure discovery — 2026-09-28
++
++**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. Phase 12 is NEXT / NOT
++STARTED.** ChatGPT accepted the published r1 discovery evidence. Brian
++authorized one read-only pass over the current workstation and existing home
++VM/Proxmox access. [ExecPlan 090](docs/plans/090-home-infrastructure-discovery.md)
++records the observed guest, access gap to the Proxmox node, source-level
++production runtime blockers, and a conditional Phase 12 design. No
++infrastructure, application, database, DNS, certificate, or service was
++changed. Phase 12 requires separate explicit authorization before any
++infrastructure or production change.
++
+ ## Targeted development and GitHub review packages — 2026-09-27
+ 
+ For each explicitly authorized bounded task, use a small implementation slice,
+diff --git a/docs/PROJECT_CONTEXT.md b/docs/PROJECT_CONTEXT.md
+index 45f8cdf..cbc4b66 100644
+--- a/docs/PROJECT_CONTEXT.md
++++ b/docs/PROJECT_CONTEXT.md
+@@ -139,7 +139,7 @@ Brian previously reported having OpenAI/Gemini keys for the later recognition ex
+ 
+ The eventual service should run on Brian's home server under an approved subdomain of abrianbaker.com. The exact hostname, architecture, and access path are not selected by this document.
+ 
+-No home-server, Proxmox, router, DNS, Cloudflare, or production access is currently authorized. Phase 11 requires separate read-only discovery authorization; Phase 12 requires a reviewed deployment plan and distinct execution approval. Local development must isolate this app from the existing PostgreSQL service on port 5432.
++The separately authorized Phase 11 P11-01 read-only home discovery is recorded in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). It grants no infrastructure or production change. Phase 12 still requires a reviewed deployment plan and distinct execution approval. Local development must isolate this app from the existing PostgreSQL service on port 5432.
+ 
+ ## Current checkpoint and future possibilities
+ 
+diff --git a/docs/REQUIREMENTS_TRACEABILITY.md b/docs/REQUIREMENTS_TRACEABILITY.md
+index e118657..86fa82e 100644
+--- a/docs/REQUIREMENTS_TRACEABILITY.md
++++ b/docs/REQUIREMENTS_TRACEABILITY.md
+@@ -671,7 +671,7 @@ The full product requirements below remain planned. Phase 1 and Phase 2 local ca
+ | R-07 Saved sets/watchlists/targets/URLs/asking/notes/deals/settings; later outcomes | PRODUCT_SPEC R-07; DATA_MODEL Phase 7 and later outcomes | saved_set, watchlist_item, saved_deal, user_settings, selling_profile, valuation_snapshot; later deal_outcome | Private CRUD, revision conflicts, reopen reproducible analysis, URLs as metadata; later outcome append | 7 saved work/auth; 9 cache/sync; 16 actual outcomes | Save/reload/edit-conflict/auth tests, unchanged historical calculation on price refresh, no URL fetch, later outcomes do not rewrite forecasts | Phase 7C and Phase 9 cache/reconnect/expiry/conflict evidence accepted; R-07 PARTIAL only because Phase 16 actual outcomes remain |
+ | R-08 Sets to Hunt | PRODUCT_SPEC R-08/R-36; VALUATION_RULES strategies and reproducibility | hunt_run, hunt_score_snapshot, hunt_score_component_snapshot, valuation_snapshot, profiles, observations | /api/hunts ranked supported strategy opportunities with preserved split-sale signals plus R-36 part-level components, max-buy and missing-data outcomes | 8 | Versioned deterministic rank/ties; confidence/coverage/stale/thin/concentration/residual/order-burden and R-36 calibration fixtures; no fabricated asking price or theoretical cash | Planned; dedicated phase, no scores produced |
+ | R-09 Chrome/PWA/Android shared primary UI/API/database | PRODUCT_SPEC R-09; ARCHITECTURE client/offline; D-019 | One authoritative PostgreSQL, private principal/session, saved-record revisions; permitted dated client caches | Same React UI in Chrome/PWA/Android, /api, private auth, read-only offline cache with dates and explicit reconnect needs | 1 shell; 6–8 core flows; 7 auth; 9 PWA/Android/sync | Responsive browser and physical Android search/detail/deal/watchlist checks, package spike, cache/session/date/conflict tests, no client financial/provider logic | SATISFIED for the shared Chrome/PWA/Android requirement; Phase 9 source, package, core flow, transport/auth, offline/reconnect, expiry, and conflict evidence accepted |
+-| R-10 Eventual home/subdomain, no current infrastructure work | PRODUCT_SPEC R-10; SECURITY_PRIVACY; ROADMAP Phases 10–12 | Existing authoritative database under approved private deployment; backup/release evidence | Approved abrianbaker.com hostname, authenticated HTTPS, monitoring/recovery; database never public | 10 local hardening; 11 read-only discovery; 12 separately approved deployment | Local disposable restore/release evidence, separately authorized read-only actual infrastructure report, reviewed/authorized deployment with TLS/auth/backup/monitoring/rollback checks | Planned; no hostname/access/production action authorized |
++| R-10 Private home/subdomain deployment | PRODUCT_SPEC R-10; SECURITY_PRIVACY; ROADMAP Phases 10–12 | Existing authoritative database under approved private deployment; backup/release evidence | Approved abrianbaker.com hostname, authenticated HTTPS, monitoring/recovery; database never public | 10 local hardening; 11 read-only discovery; 12 separately approved deployment | Local disposable restore/release evidence, separately authorized read-only actual infrastructure report, reviewed/authorized deployment with TLS/auth/backup/monitoring/rollback checks | P11-01 ACCEPTED / CLOSED; Phase 11 CLOSED in [ExecPlan 090](plans/090-home-infrastructure-discovery.md), with Proxmox/backup unknowns; Phase 12 NEXT / NOT STARTED and requires separate explicit authorization before any infrastructure or production change |
+ 
+ ## Part-out and liquidity requirements — D-025
+ 
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 3e4d741..d276b36 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,14 @@
+ # Valuation-First Roadmap
+ 
++## Phase 11 discovery checkpoint — 2026-09-28
++
++**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. Phase 12 is NEXT / NOT
++STARTED.** The accepted read-only pass and conditional Phase 12 topology are
++in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). Proxmox node,
++backup and proxy details remain unverified where configured access was absent.
++Phase 12 requires separate explicit authorization before any infrastructure
++or production change.
++
+ ## Phase 9 closed — 2026-09-26
+ 
+ **Phase 9 is CLOSED.** All four slices and the governing physical Android gate
+@@ -803,12 +812,16 @@ and remaining R-36 capabilities stay outstanding and unassigned.
+ 
+ ## Phase 11 — Read-only home-server discovery
+ 
+-**Status: NEXT / NOT STARTED.** Separate explicit authorization naming discovery
+-targets and access is required before any connection.
++**Status: P11-01 ACCEPTED / CLOSED; Phase 11 CLOSED.** Brian separately
++authorized P11-01 read-only access to the workstation and existing home hosting
++environment. ChatGPT accepted the published r1 evidence. The observed facts
++and unknowns are in [ExecPlan 090](plans/090-home-infrastructure-discovery.md).
++Phase 12 is NEXT / NOT STARTED and still needs separate explicit authorization
++before any infrastructure or production change.
+ 
+ - **Inputs:** Completed local release evidence and Brian's separate explicit authorization naming discovery targets/access.
+ - **Scope:** Read-only discovery of actual Proxmox, networking, storage, proxy/tunnel, backup, monitoring, and rollback constraints; document facts and unknowns.
+-- **Exclusions:** Any remote/local configuration mutation, installs, service starts/restarts, deployments, database writes, DNS/Cloudflare/router changes, staging, and commits.
++- **Exclusions:** Any remote/local infrastructure configuration mutation, installs, service starts/restarts, deployments, database writes, DNS/Cloudflare/router changes, or application commit. P11-01 separately authorizes the isolated, report-only GitHub review-package publication described in the workflow.
+ - **Acceptance:** A read-only report identifies actual infrastructure constraints and a proposed deployment boundary without making changes.
+ - **Gate:** Separate explicit discovery authorization is mandatory before any connection; discovery permission is never deployment permission.
+ - **Access and evidence:** Only explicitly authorized home/network/control-plane read access; no credentials in chat or broad exploratory target discovery.
+diff --git a/docs/SECURITY_PRIVACY.md b/docs/SECURITY_PRIVACY.md
+index 6dee66d..6c9fa93 100644
+--- a/docs/SECURITY_PRIVACY.md
++++ b/docs/SECURITY_PRIVACY.md
+@@ -169,9 +169,9 @@ remain later work. Saved evidence permission is still unresolved, not prohibited
+ 
+ ## Current scope and authorization
+ 
+-This is one private application for Brian. The current task is documentation realignment only: no application/configuration changes, installs, services, external calls/network resources, staging, or commits.
++This is one private application for Brian. Earlier documentation-only task boundaries below are historical; the current Phase 11 P11-01 scope is recorded in [ExecPlan 090](plans/090-home-infrastructure-discovery.md).
+ 
+-No home-server, Proxmox, networking/router, DNS, Cloudflare, or production access is authorized. Phase 10 is local hardening. Phase 11 requires separate read-only discovery approval; Phase 12 requires a reviewed deployment plan and distinct execution approval. Never expose PostgreSQL publicly.
++Brian authorized one read-only discovery pass over the named workstation and existing home hosting access. P11-01 is ACCEPTED / CLOSED and Phase 11 is CLOSED. No home-server, Proxmox, networking/router, DNS, Cloudflare, or production modification is authorized. Phase 12 is NEXT / NOT STARTED and requires a reviewed deployment plan and separate explicit authorization before any infrastructure or production change. Never expose PostgreSQL publicly.
+ 
+ ## Local and private application access
+ 
+diff --git a/docs/plans/090-home-infrastructure-discovery.md b/docs/plans/090-home-infrastructure-discovery.md
+new file mode 100644
+index 0000000..3737e4c
+--- /dev/null
++++ b/docs/plans/090-home-infrastructure-discovery.md
+@@ -0,0 +1,262 @@
++# ExecPlan 090 — P11-01 read-only home infrastructure discovery
++
++**Status: P11-01 ACCEPTED / CLOSED; Phase 11 CLOSED.** ChatGPT accepted the
++published r1 discovery evidence. Phase 12 is NEXT / NOT STARTED and requires
++separate explicit authorization before any infrastructure or production change.
++
++## Goal and user-visible outcome
++
++Record one bounded read-only inspection of the existing home hosting path and
++give Brian one concrete, conditional private deployment design to review for
++Phase 12. The observations below describe a reachable guest, not the unseen
++Proxmox node or a qualified production service.
++
++## Why this work is being done now
++
++[Phase 10](089-local-packaged-release-readiness.md) closed local packaging,
++security and disposable recovery checks. Home placement, backup and HTTPS
++depend on actual infrastructure. P11-01 separately authorized read-only
++discovery of the workstation and existing home Proxmox/Dell hosting access;
++it did not authorize installation, configuration, deployment or production
++data access.
++
++## In scope
++
++- Existing workstation SSH/network configuration and one already configured,
++  authenticated home VM connection.
++- Read-only guest facts relevant to compute, storage, network, existing
++  services, proxy and backup patterns.
++- Existing public authoritative DNS provider and repository production
++  prerequisites, without provider login or changes.
++- A conditional Phase 12 topology, change sequence, approval boundary and
++  unresolved facts.
++- A sanitized report-only review package on `astra-response`, explicitly
++  authorized for P11-01.
++
++## Explicit non-goals
++
++No Proxmox/router/firewall/switch/Cloudflare login beyond access already
++configured and working; no subnet or unknown-host scan; no raw configuration
++or credential collection; no benchmark. No package install, pull, service
++start/restart, VM/storage/network/DNS/certificate change, database query or
++migration, deployment, application test/build, main push or Phase 12 work.
++
++## Current repository state
++
++At discovery start, `main` HEAD was
++`03ab154a7dbbf9b6aaee3c877c3a400732c6fd96` (Phase 10 closeout), and the
++index was empty. `AGENTS.md` and two catalog tests were pre-existing dirty
++files; their original bytes and unstaged state are protected. Phase 10's local
++release and TEST-only recovery evidence is reused, not rerun. Source remains
++restricted to local development and TEST runtime targets.
++
++## Observed environment
++
++Evidence labels below are sanitized command summaries. Guest measurements
++were one-time readings and do not establish physical host capacity.
++
++| Component | Observed fact | Evidence/command | Confidence |
++| --- | --- | --- | --- |
++| Workstation path | Windows has OpenSSH and an existing private-address SSH target for a home VM. The configured Proxmox alias contains a placeholder hostname; the known `proxmox` name had no A record. No new login was attempted. | Filtered `~/.ssh/config`, `Get-Command ssh`, `Resolve-DnsName proxmox`. | High for local state; no conclusion about the node itself. |
++| Guest identity | The reachable guest is Ubuntu 24.04.4 LTS under KVM. It has 64 assigned vCPUs and 125 GiB assigned RAM; `free` reported 122 GiB available at observation time. These are guest allocations, not spare Dell/Proxmox resources. | Existing SSH with batch/strict host-key checking; `/etc/os-release`, `systemd-detect-virt`, `nproc`, `free -h`. | High for guest; host capacity unknown. |
++| Guest storage | Root is ext4 on LVM over a 300 GB virtual disk, with 292 GB filesystem size and 199 GB free. A separate 200 GB virtual disk is unmounted and has no filesystem shown by `lsblk`; its ownership and contents were not examined. No NFS/CIFS/ZFS/Btrfs guest mount was listed. | `df -hT /`, `lsblk`, `findmnt` for named filesystem types. | High for current guest view; disk and host-pool ownership unknown. |
++| Guest network | The VM uses a private `/24` address via a gateway that also supplies DNS. The workstation reaches it through its explicit SSH address; workstation DNS did not resolve the VM alias. Bridge, VLAN, firewall and WAN exposure are not visible from these facts. | `ip -br -4 addr`, `ip -4 route`, `resolvectl dns`, targeted workstation DNS check. | High for guest address model; low for wider network. |
++| Existing workload | A legacy BrickVault backend runs as a systemd service with automatic restart. PostgreSQL 16 is active and listens on guest loopback port 5432. Other listeners include the legacy app ports. The existing database/service were not queried or altered. | `systemctl list-units`, filtered `systemctl show`, `ss -ltn`, `psql --version`. | High for guest service state at inspection. |
++| Proxy/HTTPS | Caddy, nginx, Traefik and Apache units were inactive on this guest, and no guest port 80/443 listener appeared. This does not rule out a proxy on another host. | `systemctl is-active` for four named units, `ss -ltn`. | High for this guest only. |
++| DNS authority | The existing public domain resolves publicly and its authoritative nameservers are Cloudflare. No private subdomain, split-DNS override, DNS-01 rights or certificate deployment was inspected. | Targeted `Resolve-DnsName` A/NS queries; no Cloudflare login. | High for current public DNS delegation only. |
++| Backup | `pg_dump` is present. No Restic/Borg or application backup unit/timer, and no remote filesystem mount, was observed on this guest. The routine package database timer is not an application backup. Proxmox VM backup, off-host targets and retention remain unknown. | `command -v`, filtered `systemctl list-unit-files/list-timers`, `findmnt`. | Medium: absence is limited to inspected guest mechanisms. |
++| Application release boundary | API settings accept only `development`/`test`, fixed loopback database ports/targets and loopback bind/Host/Origin. Android's special HTTPS target is a localhost TEST qualification path. The ordinary web transport uses same origin. | `services/api/src/brickvault_api/settings.py`, `observability.py`, `apps/web/src/api-transport.ts`, `apps/android/capacitor.config.json`. | High for checked-out source; no production runtime tested. |
++
++## Unknown / not authorized
++
++1. **Proxmox node:** identity/version, real CPU/RAM headroom and contention,
++   VM/LXC inventory, bridge/VLAN attachment, firewall, storage pools/types,
++   free capacity, backup jobs and restore targets. The workstation's
++   `proxmox` alias has a placeholder rather than a usable hostname, and
++   targeted DNS did not resolve it. Access must be separately restored or
++   those facts supplied for review; no host guess or network scan is allowed.
++2. **Guest's extra disk:** the 200 GB device has no displayed mount/filesystem;
++   it was not opened, initialized or treated as free space. Ownership and
++   intended use need owner/Proxmox confirmation before any storage decision.
++3. **Proxy and internal DNS elsewhere:** no proxy runs on the inspected guest,
++   but another host, gateway or tunnel could host one. The gateway's split-DNS
++   capability, current certificates and WAN rules were not inspected because
++   router/firewall and external control-plane logins were outside this pass.
++4. **Backup destination:** Proxmox backup schedules, off-host storage,
++   retention, restore permissions and available capacity were inaccessible.
++   The guest's `pg_dump` binary does not prove a functioning backup system.
++5. **Production identity and data:** exact private hostname, initial data
++   selection (fresh production database versus an approved migration), account
++   bootstrap method and provider credential activation require Phase 12
++   decisions and approval. No production data or credentials were accessed.
++
++## Decisions and assumptions for the Phase 12 proposal
++
++**Choose a dedicated Ubuntu VM on the existing Proxmox estate, subject to
++node capacity and backup-pool confirmation.** The observed Ubuntu/KVM guest
++proves that this guest pattern works locally; co-hosting the new app with its
++active legacy backend and PostgreSQL would create avoidable service and data
++coupling. An LXC offers no demonstrated benefit for this single-user workload.
++This is a design choice, not an assertion that the unseen node has capacity.
++
++Initial reservation proposal: **4 vCPU, 8 GiB RAM, 32 GiB OS volume and
++128 GiB PostgreSQL data volume** on a pool that the later backup design can
++protect. The existing catalog acceptance database measured about 6.4 GB with
++retained staging ([catalog operations](../CATALOG_IMPORT.md)); the proposed
++data volume is headroom, not a measured production maximum. Confirm host
++contention, growth and usable pool before VM creation. Do not use the
++existing guest's unmounted disk by inference.
++
++## Recommended Phase 12 topology
++
++- **Network:** attach the new VM to the confirmed private home bridge/VLAN,
++  with a stable private address. No WAN forwarding. Permit HTTPS only from
++  Brian's approved private clients; permit management only from the approved
++  admin path. The precise bridge/VLAN and firewall mechanism await node review.
++- **Application:** install a pinned release of the single FastAPI API plus
++  verified React build in separate release directories on the new VM. Run one
++  restricted systemd API service bound to guest loopback. It serves the built
++  web/PWA assets and `/api`; no separate worker, queue, broker or object store.
++- **Database:** use one dedicated PostgreSQL cluster/data volume on that VM,
++  reachable by the application over a Unix socket or loopback only. Keep it
++  distinct from the existing VM's PostgreSQL 16 service and never publish a
++  database port. Use reviewed Alembic migrations and least-privilege roles.
++- **HTTPS and name:** one private DNS name under the approved domain resolves
++  only on the home network to the new VM. Place Caddy on that VM as the sole
++  HTTPS entry point, proxying to loopback FastAPI. Use a publicly trusted
++  certificate via DNS-01 with a narrowly scoped Cloudflare token, subject to
++  verified rights and an approved credential path; do not rely on the Android
++  localhost TEST trust mechanism. No public A record or inbound WAN port is
++  proposed. Verify the home DNS resolver can serve the private override.
++- **Operations:** systemd starts/restarts the pinned app service; journald
++  retains sanitized operational logs. A private monitor checks non-sensitive
++  `/api/health` and an authenticated readiness check, with disk and backup
++  failure alerts. Preserve the prior application release for quick app rollback.
++- **Backup/recovery:** take scheduled encrypted PostgreSQL custom-format
++  backups plus required role/configuration material to a verified off-host
++  destination, with retention and an approved restore drill. A Proxmox VM
++  backup may complement this, but a VM snapshot alone does not prove a
++  consistent database restore. Back up before schema changes and validate a
++  disposable restore against current migration/runtime grants and private
++  saved-work readback, as Phase 10 demonstrated only with TEST data.
++
++## Data model and API/interface changes
++
++No Phase 11 schema, API or application change. **Phase 12 cannot deploy this
++checkout unchanged:** `settings.py` and database target validation have no
++production purpose, while `observability.py` rejects a private subdomain's
++Host/Origin and has no reviewed single-proxy HTTPS trust path. Phase 12 must
++implement and verify a production configuration mode, exact hostname/Origin,
++Secure cookie and trusted-proxy behavior, database ownership/least privilege,
++and a production Android transport to the approved HTTPS origin. Keep the
++current development/TEST restrictions intact and do not promote qualification
++exceptions to production. Any new schema migration needs its own reviewed
++scope; none is proposed by discovery.
++
++## Phase 12 change plan (not executed)
++
++| Category | Required later change and gate |
++| --- | --- |
++| Workload creation/config | Verify node resources and pool, then create the dedicated VM/disks; install OS, pinned PostgreSQL, API release and Caddy; create restricted service accounts and systemd units. |
++| Network | Approve exact bridge/VLAN, private address, host/guest firewall rules, management path and client reachability; verify no WAN ingress and no PostgreSQL listener outside loopback/socket. |
++| DNS/HTTPS | Approve exact hostname, private DNS override, Cloudflare DNS-01 rights/token storage, certificate issuance/renewal and proxy configuration. Confirm HTTPS from browser and Android with normal platform trust. |
++| Secrets | Generate/store production DB/auth/provider and DNS-01 credentials outside source/static assets/logs; approve owner bootstrap and rotation/revocation procedure. Do not copy TEST secrets. |
++| Database/data | Create dedicated cluster, roles and database; apply reviewed migrations after backup; decide explicitly whether to start empty or migrate approved existing data. No access to the legacy PostgreSQL service is implied. |
++| Backup | Select and verify off-host destination/retention/encryption; configure scheduled database plus role/config backups and optional VM backup; complete an owned disposable restore before acceptance. |
++| Monitoring | Configure service and backup alerts, private liveness/readiness, disk capacity thresholds and log retention/redaction. |
++| Validation | Implement/verify production runtime and Android transport first; review package hashes, test Host/Origin/CSRF/cookie/TLS boundaries, migration/readiness, private DNS/no WAN/no DB exposure, browser/PWA/approved Android path, backup restore and app rollback. |
++
++## Implementation sequence for later approval
++
++1. Resolve Proxmox, proxy, DNS and backup unknowns; reconcile this topology
++   with actual node capacity and existing home hosting standards.
++2. Review and implement the production runtime/transport changes with focused
++   security tests and a normal release build. Keep development/TEST behavior.
++3. Present exact VM, storage, network, DNS, secrets, data and backup changes
++   with rollback steps to Brian for **distinct Phase 12 execution approval**.
++4. Only after approval, provision the VM/private path, install the pinned
++   release, initialize owned data, back it up and validate HTTPS/auth/restore.
++5. Record actual results and only then decide whether Phase 12 can close.
++
++## Validation and acceptance criteria
++
++For **P11-01**, inspect the complete documentation diff including this new
++file, check Markdown links and roadmap/workflow/traceability consistency, run
++`git diff --check`, and verify original HEAD/index and protected SHA-256 bytes.
++Publish only sanitized review-package files, then verify remote commit and
++read back `REVIEW.md`. No application build, test, device check or production
++probe belongs to P11-01. Phase 12 acceptance requires the separate live checks
++above; this plan provides no such evidence.
++
++## Security, privacy and data integrity
++
++The public repository and review package must omit SSH keys, credentials,
++MACs, serials, public/exact externally identifying addresses, raw configs,
++full network inventories and unnecessary device IDs. The table therefore
++generalizes the private subnet and SSH destination. PostgreSQL stays private;
++provider secrets remain server-side. Application auth, CSRF, Host/Origin and
++Secure cookie checks must succeed through the approved HTTPS path before any
++non-loopback access. Android TEST certificate/localhost mechanics provide no
++production trust or routing evidence.
++
++## Failure modes, rollback and recovery
++
++This discovery made no infrastructure change to roll back. Phase 12 must
++preserve the prior release, take a verified pre-migration database backup,
++define schema compatibility before app rollback, and use a tested restore
++procedure for incompatible changes. If capacity, off-host backup, private
++DNS/certificates or the production runtime gate cannot be proven, stop before
++exposure or cutover. Do not substitute the existing VM's unverified spare disk
++or a VM snapshot for those missing prerequisites.
++
++## Phase 12 approval boundary
++
++Brian must approve the exact host/VM and resource allocation; VM/disk creation;
++OS/package and application installation; service starts/restarts; bridge,
++address, firewall and routing changes; private/public DNS and Cloudflare
++access; certificate issuance/renewal; credential generation/placement and
++account bootstrap; database/role creation, migration and any data copy;
++backup target/retention and restore drill; monitoring; release cutover and
++rollback; and any Android device/network qualification. P11-01 authorizes none
++of these operations. Publication of this report is not such approval.
++
++## Risks / blockers grounded in this pass
++
++- **Host-placement gate:** the Proxmox alias is unusable, so node capacity,
++  pools, VM conflicts and backup policy are not verified. The proposed new VM
++  must not be created until those facts are reviewed.
++- **Operational gate:** no existing proxy or application backup was observed
++  on the reachable guest, and equivalent services elsewhere remain unknown.
++  The private DNS/certificate and off-host backup paths need confirmation.
++- **Release gate:** current source rejects production database/hostname
++  configuration; the Android route is TEST-only. Phase 12 needs reviewed
++  implementation and validation before exposure, not a configuration bypass.
++- **Legacy isolation:** the reachable guest already hosts a live backend and
++  loopback PostgreSQL. Do not reuse its database, ports or unmounted disk.
++
++## Progress log
++
++- [x] 2026-09-28: Confirmed Phase 10 HEAD, empty index and original protected
++  hashes; read current repository guidance and local release handoff.
++- [x] 2026-09-28: Completed one bounded read-only workstation/home VM and
++  source prerequisite pass; recorded inaccessible Proxmox facts as unknown.
++- [x] 2026-09-28: Drafted conditional Phase 12 topology and explicit approval
++  boundary for review; no Phase 12 action performed.
++- [x] ChatGPT accepted the published P11-01 r1 evidence and authorized this
++  documentation-only Phase 11 closeout.
++
++## Open questions and manual checks
++
++Obtain the Proxmox node facts, bridge/pool and backup inventory through
++approved access or a supplied read-only export; identify any existing proxy,
++private DNS and off-host backup standard. Brian must select the exact hostname,
++initial data policy and intended Android production access before Phase 12's
++execution plan is final. These are review prerequisites, not requests for
++credentials in chat.
++
++## Outcome and follow-up
++
++P11-01 is ACCEPTED / CLOSED and Phase 11 is CLOSED with the unknowns above.
++The proposed deployment remains conditional. Phase 12 is NEXT / NOT STARTED;
++this document provides no authorization for infrastructure or production
++change.
