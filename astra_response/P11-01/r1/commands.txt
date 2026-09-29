@@ -1,0 +1,65 @@
+P11-01 sanitized command and result record — 2026-09-28 local
+
+Notation: [existing-vm] is the preconfigured authenticated SSH target. Exact
+private address and SSH identity path are omitted. No raw configuration,
+credentials, key material, public IP, MAC, serial or complete network dump is
+included. All commands below were read-only; SSH used BatchMode, strict host
+key checking and an eight-second connection timeout.
+
+1. Local repository and protected state
+   git rev-parse HEAD
+   git status --short --branch
+   git diff --cached --name-only
+   Get-FileHash -Algorithm SHA256 <three protected files>
+   Result: main HEAD 03ab154a7dbbf9b6aaee3c877c3a400732c6fd96;
+   empty index; only the three protected files dirty at start. Their full
+   values matched the previously published P10-03 r2 record and remained
+   unchanged at the final prepublication check (see validation.txt).
+
+2. Workstation access and DNS
+   Filter ~/.ssh/config for Host, HostName, User, Port and IdentityFile;
+   Get-Command ssh; Get-NetRoute -DestinationPrefix 0.0.0.0/0;
+   Resolve-DnsName proxmox -Type A -DnsOnly;
+   Resolve-DnsName <existing-domain> -Type A/NS -DnsOnly.
+   Result: OpenSSH present; the existing VM uses an explicit private SSH
+   address. The Proxmox alias holds a placeholder hostname and the known
+   proxmox name had no A record. The workstation has a private default
+   gateway. The domain resolves publicly and its NS provider is Cloudflare.
+
+3. Guest identity, compute and network
+   ssh [existing-vm] '. /etc/os-release; systemd-detect-virt; nproc;
+   free -h; ip -br -4 addr show scope global; ip -4 route show default;
+   resolvectl dns'
+   Result: Ubuntu 24.04.4 LTS, KVM, 64 assigned vCPUs, 125 GiB RAM with
+   122 GiB available at observation. One private /24 interface; gateway
+   also supplies DNS. These are guest facts, not Proxmox free capacity.
+
+4. Guest storage
+   ssh [existing-vm] 'df -hT /; lsblk -o NAME,TYPE,FSTYPE,SIZE,MOUNTPOINTS;
+   findmnt -rn -t nfs,nfs4,cifs,zfs,btrfs -o TARGET,SOURCE,FSTYPE'
+   Result: root ext4 on LVM, 292 GB filesystem with 199 GB free; one
+   separate unmounted 200 GB virtual disk, ownership/content unknown;
+   no listed guest mount of the named remote/filesystem types.
+
+5. Guest workloads, HTTPS and backups
+   ssh [existing-vm] 'systemctl list-units --type=service --state=running;
+   systemctl show brickvault-backend.service -p User -p Restart;
+   systemctl is-active caddy nginx traefik apache2; ss -ltn;
+   systemctl list-timers --all; command -v pg_dump restic borg'
+   Result: existing legacy backend systemd unit with Restart=always;
+   PostgreSQL 16 listening only on guest loopback port 5432; legacy app
+   ports present. Caddy/nginx/Traefik/Apache inactive on this guest;
+   no 80/443 guest listener. pg_dump present; no observed app backup
+   unit/timer, Restic/Borg or off-host mount. Proxmox backup unknown.
+
+6. Checked-out production prerequisites
+   Read services/api/src/brickvault_api/settings.py and observability.py;
+   read apps/web/src/api-transport.ts and apps/android/capacitor.config.json.
+   Result: database purpose is development/test only, with fixed local
+   targets; API bind/Host/Origin are loopback-only; ordinary web uses same
+   origin; Android qualification targets localhost TEST HTTPS.
+
+No ssh login to the Proxmox node, router, switch or Cloudflare was made. No
+port scanner, benchmark, service/package/database-changing command, app test,
+build or device check was run. DNS requests were targeted at the known node
+name and existing domain; no address range or unknown host was queried.

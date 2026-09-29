@@ -1,0 +1,35 @@
+P11-01 validation — 2026-09-28 local
+
+Local implementation baseline:
+  main HEAD: 03ab154a7dbbf9b6aaee3c877c3a400732c6fd96
+  main index: empty and byte-identical before/after patch generation
+  documentation changes: CODEX_WORKFLOW.md, docs/ROADMAP.md,
+    docs/PROJECT_CONTEXT.md, docs/SECURITY_PRIVACY.md,
+    docs/REQUIREMENTS_TRACEABILITY.md,
+    docs/plans/090-home-infrastructure-discovery.md (new)
+  application/source changes: none made for P11-01
+
+Checks completed:
+  git diff --check: PASS
+  temporary-index git diff --cached --check, all six docs: PASS
+  complete tracked documentation diff and new ExecPlan: inspected
+  changed Markdown local links and trailing whitespace: PASS (six files)
+  roadmap/workflow/traceability Phase 11 and Phase 12 status: checked
+  changes.patch: complete six-file Git patch, including new ExecPlan
+  package Markdown links/trailing whitespace: PASS
+  package private-address, local-path and key-material pattern scan: PASS
+  exact staged-name inspection: PASS (five P11-01 r1 files only)
+
+Protected pre-existing dirty files, SHA-256, matching P10-03 r2:
+  AGENTS.md
+    f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4
+  services/api/tests/integration/test_catalog_search.py
+    d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7
+  services/api/tests/unit/test_catalog_parser.py
+    0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041
+  State: all byte-for-byte unchanged and unstaged.
+
+Scope limits:
+  No application tests/builds, database rehearsal, phone/device check,
+  provider login, infrastructure mutation or deployment. Guest observations
+  do not establish Proxmox node state or off-host recovery capability.
