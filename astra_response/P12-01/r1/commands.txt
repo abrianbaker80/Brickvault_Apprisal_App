@@ -1,0 +1,9 @@
+P12-01 sanitized read-only infrastructure command record
+
+Local command: ssh -G proxmox
+Selected local configuration result: hostname RESTORE_ORIGINAL_PROXMOX_HOSTNAME
+Interpretation: target remains a placeholder; stop before connecting.
+
+Remote commands: none.
+Home guest, Proxmox node, DNS, Cloudflare, router and firewall access: none.
+Infrastructure mutation: none.

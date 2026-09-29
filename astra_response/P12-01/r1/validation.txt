@@ -1,0 +1,41 @@
+P12-01 r1 — sanitized validation record (local source/disposable resources only)
+
+Main branch baseline: 5a0b94a190ab3aabc52f5ea17afdf5e96cf6cc51
+Main index: empty. Main implementation/docs: uncommitted.
+Protected dirty files: AGENTS.md and two catalog tests retained byte-for-byte
+and unstaged at their previously recorded SHA-256 values.
+
+Python focused tests: 94 passed initially (settings, request boundary and
+unchanged local/Android cases). After final missing-Origin and provider-root
+hardening: 24 production tests passed. Two existing upstream test-client
+deprecation warnings; no failure.
+Web/Android focused tests: 12 passed.
+Targeted Ruff format/check, mypy, TypeScript, Prettier and ESLint: passed.
+Disposable production-mode HTTP proof: passed; zero recorded leftovers;
+local TEST PostgreSQL prior running state restored. Current migrations applied
+as owner, runtime least privilege/DDL denial verified. Exact Host/Origin/proxy,
+forwarded-header refusal, Secure Strict cookies, CSRF, private no-store,
+browser and derived Android CORS/session, and secret-free responses/static/log
+checks passed. Synthetic request harness, not a live TLS/reverse-proxy test.
+Android production web/config build and existing frontend byte/privacy verifier:
+passed with synthetic app.example.test origin; no APK built. Production bundle
+excluded the Phase 9 localhost TEST API literal. Copied Capacitor config used
+the derived Android hostname and system trust only. Normal offline Gradle
+configuration passed; the opt-in TEST certificate property was rejected with
+that production hostname. No physical device test.
+No API contract change; contracts check was not needed.
+git diff --check: passed (Git emitted only line-ending advisories).
+Changed-document local Markdown targets: 383 resolved, zero missing.
+Task patch: 27 files, 1538 insertions and 84 deletions, excluding protected
+dirty work. Patch/public content inspected for credentials, private addresses,
+keys and infrastructure identifiers; only synthetic example and loopback
+values are present.
+git apply --check --reverse against the uncommitted main working tree: passed.
+Review-branch staged whitespace check excluding changes.patch: passed. A raw
+whitespace check of changes.patch as a text file flags the standard leading
+space on blank context lines in unified diff format; the task diff itself
+passed git diff --check.
+
+No remote infrastructure command, provider call, production database contact,
+application deployment, VM creation, DNS/certificate/firewall/service change,
+APK build, or physical Android campaign occurred.

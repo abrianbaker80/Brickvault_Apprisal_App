@@ -1,0 +1,2022 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index d592822..bb139e6 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,9 +1,23 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 12 P12-01 — production runtime and deployment preflight — 2026-09-28
++
++**Phase 10 and Phase 11 are CLOSED. Phase 12 is IN PROGRESS at P12-01.** Brian
++authorized only the local production runtime/Android HTTPS source work, focused
++disposable proof, and a minimum read-only retry of existing Proxmox access.
++[ExecPlan 091](docs/plans/091-production-runtime-and-deployment.md) governs this
++slice. The Proxmox alias still resolves to a placeholder, so no node connection
++was attempted and capacity/network/backup facts remain unknown. Application
++changes stay uncommitted on main with an empty index for review; only a
++sanitized isolated `astra-response/P12-01/r1/` package may be published.
++**P12-02 and all infrastructure/production mutations remain unauthorized**
++until this slice is reviewed and separately approved.
++
+ ## Phase 11 P11-01 — home infrastructure discovery — 2026-09-28
+ 
+-**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. Phase 12 is NEXT / NOT
+-STARTED.** ChatGPT accepted the published r1 discovery evidence. Brian
++**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. At this closeout, Phase 12
++was NEXT / NOT STARTED; the P12-01 section above now governs.** ChatGPT
++accepted the published r1 discovery evidence. Brian
+ authorized one read-only pass over the current workstation and existing home
+ VM/Proxmox access. [ExecPlan 090](docs/plans/090-home-infrastructure-discovery.md)
+ records the observed guest, access gap to the Proxmox node, source-level
+diff --git a/apps/android/README.md b/apps/android/README.md
+index 926a37d..f312fbd 100644
+--- a/apps/android/README.md
++++ b/apps/android/README.md
+@@ -1,5 +1,28 @@
+ # Bounded Capacitor feasibility — Phase 9 Slice 1
+ 
++## Phase 12 P12-01 production Android source path — 2026-09-28
++
++Phase 9's localhost TLS certificate and USB reverse rule were TEST-only.
++[ExecPlan 091](../../docs/plans/091-production-runtime-and-deployment.md)
++adds a separate production source path. `pnpm build:android-production`
++requires a process-supplied approved `BVA_ANDROID_PRODUCTION_ORIGIN` with one
++canonical HTTPS DNS origin. It builds the shared React UI and copies a matching
++Capacitor config with bundled WebView origin
++`https://android.<approved-host>`. The API transport sends credentialed HTTPS
++requests to `https://<approved-host>`, where the backend permits only this
++derived native Origin for CORS and keeps host-only SameSite=Strict session
++cookies plus CSRF. Browser/PWA remains same-origin. The ordinary configuration
++still uses `https://localhost` for Phase 9 TEST qualification.
++
++No `server.url` live-reload path, app-scoped TEST CA, cleartext, native bearer
++auth, native HTTP/cookie override or adb reverse is part of production. Android's
++main network security config trusts system certificates only. If the TEST
++certificate Gradle property is supplied while a production hostname is copied,
++configuration fails. P12-01 built and copied only a synthetic production web
++bundle/config; it did not build an APK or use a device. The real hostname,
++certificate trust, private network path, cookie behavior on a phone and release
++signing require later review/acceptance.
++
+ ## Phase 9 closed — 2026-09-26
+ 
+ Phase 9 is **CLOSED**. The accepted physical Android qualification used run
+diff --git a/apps/android/android/app/build.gradle b/apps/android/android/app/build.gradle
+index caa0e5e..ee5dfd8 100644
+--- a/apps/android/android/app/build.gradle
++++ b/apps/android/android/app/build.gradle
+@@ -1,3 +1,4 @@
++import groovy.json.JsonSlurper
+ apply plugin: 'com.android.application'
+ 
+ android {
+@@ -48,6 +49,13 @@ apply from: 'capacitor.build.gradle'
+ // Ordinary debug/release resources contain system trust only. Never trust user CAs.
+ def qualificationCertificate = providers.gradleProperty('brickvaultQualificationCertificate')
+ if (qualificationCertificate.isPresent()) {
++    def copiedConfig = file('src/main/assets/capacitor.config.json')
++    if (copiedConfig.exists()) {
++        def copiedServer = new JsonSlurper().parse(copiedConfig).server
++        if (copiedServer?.hostname != 'localhost' || copiedServer?.url) {
++            throw new GradleException('TEST certificate trust is forbidden for production Android')
++        }
++    }
+     def generatedTrust = layout.buildDirectory.dir('generated/qualificationTrust')
+     android.sourceSets.debug.res.srcDir(generatedTrust)
+     def generateTrust = tasks.register('generateQualificationTrust') {
+diff --git a/apps/android/capacitor.config.json b/apps/android/capacitor.config.json
+deleted file mode 100644
+index 3607884..0000000
+--- a/apps/android/capacitor.config.json
++++ /dev/null
+@@ -1,25 +0,0 @@
+-{
+-  "appId": "com.abrianbaker.brickvault.appraisal",
+-  "appName": "BrickVault Appraisal App",
+-  "webDir": "../web/dist",
+-  "loggingBehavior": "none",
+-  "server": {
+-    "hostname": "localhost",
+-    "androidScheme": "https",
+-    "cleartext": false
+-  },
+-  "android": {
+-    "allowMixedContent": false
+-  },
+-  "plugins": {
+-    "CapacitorHttp": {
+-      "enabled": false
+-    },
+-    "CapacitorCookies": {
+-      "enabled": false
+-    },
+-    "App": {
+-      "disableBackButtonHandler": true
+-    }
+-  }
+-}
+diff --git a/apps/web/src/ApiTransport.test.tsx b/apps/web/src/ApiTransport.test.tsx
+index 4909e66..1c720c7 100644
+--- a/apps/web/src/ApiTransport.test.tsx
++++ b/apps/web/src/ApiTransport.test.tsx
+@@ -16,15 +16,67 @@ it('ordinary browser and PWA retain same-origin credentials and no-store', async
+   expect(await request.text()).toBe('sentinel');
+ });
+ it('qualification accepts only the exact document and API origins', () => {
+-  expect(apiDestination('https://localhost/api/auth/session', 'https://localhost', true)).toEqual({
++  vi.stubEnv('MODE', 'android-qualification');
++  expect(
++    apiDestination(
++      'https://localhost/api/auth/session',
++      'https://localhost',
++      'android-qualification',
++    ),
++  ).toEqual({
+     url: 'https://localhost:18443/api/auth/session',
+     credentials: 'include',
+   });
+   expect(() =>
+-    apiDestination('http://localhost/api/auth/session', 'http://localhost', true),
++    apiDestination(
++      'http://localhost/api/auth/session',
++      'http://localhost',
++      'android-qualification',
++    ),
++  ).toThrow();
++  expect(() =>
++    apiDestination('https://localhost:443/api/a', 'https://localhost:444', 'android-qualification'),
++  ).toThrow();
++});
++it('production Android uses only the exact same-site HTTPS API destination', () => {
++  expect(
++    apiDestination(
++      'https://android.app.example.test/api/auth/session',
++      'https://android.app.example.test',
++      'android-production',
++      'https://app.example.test',
++    ),
++  ).toEqual({ url: 'https://app.example.test/api/auth/session', credentials: 'include' });
++  for (const apiOrigin of [
++    undefined,
++    'http://app.example.test',
++    'https://localhost:18443',
++    'https://app.example.test:443',
++  ]) {
++    expect(() =>
++      apiDestination(
++        'https://android.app.example.test/api/a',
++        'https://android.app.example.test',
++        'android-production',
++        apiOrigin,
++      ),
++    ).toThrow();
++  }
++  expect(() =>
++    apiDestination(
++      'https://localhost/api/a',
++      'https://localhost',
++      'android-production',
++      'https://app.example.test',
++    ),
+   ).toThrow();
+   expect(() =>
+-    apiDestination('https://localhost:443/api/a', 'https://localhost:444', true),
++    apiDestination(
++      'https://localhost/api/a',
++      'https://localhost',
++      'android-qualification',
++      'https://app.example.test',
++    ),
+   ).toThrow();
+ });
+ it.each([
+diff --git a/apps/web/src/api-transport.ts b/apps/web/src/api-transport.ts
+index 6fa5192..ea1a081 100644
+--- a/apps/web/src/api-transport.ts
++++ b/apps/web/src/api-transport.ts
+@@ -1,11 +1,16 @@
+ /** The only credential destination policy, shared by auth and business clients. */
+-export const QUALIFICATION_API = 'https://localhost:18443';
++const configuredProductionOrigin: unknown = import.meta.env.VITE_BVA_PRODUCTION_ORIGIN;
+ 
+ export function apiDestination(
+   requestUrl: string,
+   documentOrigin = window.location.origin,
+-  qualification = import.meta.env.MODE === 'android-qualification',
++  mode = import.meta.env.MODE,
++  productionOrigin: string | undefined = typeof configuredProductionOrigin === 'string'
++    ? configuredProductionOrigin
++    : undefined,
+ ): { url: string; credentials: RequestCredentials } {
++  const qualificationApi =
++    import.meta.env.MODE === 'android-qualification' ? 'https://localhost:18443' : undefined;
+   const input = new URL(requestUrl);
+   if (
+     input.origin !== documentOrigin ||
+@@ -15,11 +20,36 @@ export function apiDestination(
+     !input.pathname.startsWith('/api/')
+   )
+     throw new Error('Unapproved API destination');
++  if (
++    mode.startsWith('android-') &&
++    !['android-qualification', 'android-production'].includes(mode)
++  )
++    throw new Error('Unapproved Android transport mode');
++  const qualification = mode === 'android-qualification';
++  const production = mode === 'android-production';
+   if (qualification && documentOrigin !== 'https://localhost')
+     throw new Error('Unapproved qualification document origin');
++  if (qualification && qualificationApi === undefined)
++    throw new Error('Qualification API is unavailable outside its TEST build');
++  if (production) {
++    if (
++      productionOrigin === undefined ||
++      !/^https:\/\/(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$/.test(
++        productionOrigin,
++      ) ||
++      productionOrigin.endsWith('.localhost') ||
++      documentOrigin !== 'https://android.' + new URL(productionOrigin).hostname
++    )
++      throw new Error('Unapproved production Android origin');
++  } else if (productionOrigin !== undefined) {
++    throw new Error('Production Android origin outside production mode');
++  }
+   return {
+-    url: (qualification ? QUALIFICATION_API : documentOrigin) + input.pathname + input.search,
+-    credentials: qualification ? 'include' : 'same-origin',
++    url:
++      (qualification ? qualificationApi : production ? productionOrigin : documentOrigin) +
++      input.pathname +
++      input.search,
++    credentials: qualification || production ? 'include' : 'same-origin',
+   };
+ }
+ 
+diff --git a/apps/web/vite.config.ts b/apps/web/vite.config.ts
+index c9c086d..d3cbbe5 100644
+--- a/apps/web/vite.config.ts
++++ b/apps/web/vite.config.ts
+@@ -3,24 +3,39 @@ import react from '@vitejs/plugin-react';
+ import { defineConfig } from 'vitest/config';
+ import { publicShell } from './pwa/build.ts';
+ 
+-export default defineConfig({
+-  plugins: [react(), publicShell()],
+-  // Never load the repository's private dotenv configuration into frontend tooling.
+-  envDir: false,
+-  server: {
+-    host: '127.0.0.1',
+-    port: 5173,
+-    strictPort: true,
+-    cors: false,
+-    fs: { strict: true, allow: [fileURLToPath(new URL('.', import.meta.url))] },
+-    proxy: { '/api': { target: 'http://127.0.0.1:8000', changeOrigin: true } },
+-  },
+-  build: { sourcemap: false },
+-  test: {
+-    environment: 'jsdom',
+-    environmentOptions: { jsdom: { url: 'http://127.0.0.1:5173/' } },
+-    setupFiles: ['./src/test/setup.ts'],
+-    include: ['src/**/*.test.tsx'],
+-    restoreMocks: true,
+-  },
++export default defineConfig(({ mode }) => {
++  const androidOrigin = process.env.VITE_BVA_PRODUCTION_ORIGIN;
++  if (mode === 'android-production') {
++    if (
++      androidOrigin === undefined ||
++      !/^https:\/\/(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$/.test(
++        androidOrigin,
++      ) ||
++      androidOrigin.endsWith('.localhost')
++    )
++      throw new Error('Invalid production Android HTTPS origin');
++  } else if (androidOrigin !== undefined) {
++    throw new Error('Production Android origin requires android-production mode');
++  }
++  return {
++    plugins: [react(), publicShell()],
++    // Never load the repository's private dotenv configuration into frontend tooling.
++    envDir: false,
++    server: {
++      host: '127.0.0.1',
++      port: 5173,
++      strictPort: true,
++      cors: false,
++      fs: { strict: true, allow: [fileURLToPath(new URL('.', import.meta.url))] },
++      proxy: { '/api': { target: 'http://127.0.0.1:8000', changeOrigin: true } },
++    },
++    build: { sourcemap: false },
++    test: {
++      environment: 'jsdom',
++      environmentOptions: { jsdom: { url: 'http://127.0.0.1:5173/' } },
++      setupFiles: ['./src/test/setup.ts'],
++      include: ['src/**/*.test.tsx'],
++      restoreMocks: true,
++    },
++  };
+ });
+diff --git a/docs/ARCHITECTURE.md b/docs/ARCHITECTURE.md
+index 9782668..b63ca70 100644
+--- a/docs/ARCHITECTURE.md
++++ b/docs/ARCHITECTURE.md
+@@ -371,6 +371,30 @@ The shared React Part-Out Analysis area shows the four-view matrix, recoverable
+ 
+ ## Client, authentication, and offline boundaries
+ 
++### Phase 12 production source contract
++
++[ExecPlan 091](plans/091-production-runtime-and-deployment.md) governs the
++P12-01 source/local preflight. Production runtime requires explicit
++`BVA_MODE=production`, one canonical HTTPS application origin, loopback bind and
++port, an absolute built frontend directory, a dedicated loopback PostgreSQL
++database/runtime role with distinct owner/migration role, an ownership marker,
++and a protected proxy identity secret. Caddy terminates HTTPS and forwards to
++loopback FastAPI; it overwrites the identity header. Uvicorn keeps
++`proxy_headers=False`. FastAPI requires exact Host, exact approved browser or
++derived native Origin and the proxy identity before processing requests.
++Production auth emits Secure, HttpOnly, host-only, SameSite=Strict cookies and
++retains CSRF. Unknown `/api` routes remain JSON; private responses remain
++`no-store` and static bytes remain on the existing build allowlist.
++
++Production Android packages the shared React UI under the exact
++`https://android.<approved-host>` WebView origin and sends credentialed requests
++to `https://<approved-host>` under normal platform certificate validation.
++The two origins are same-site for Strict cookies. Backend credentialed CORS
++permits only that exact derived native origin. There is no production use of
++Capacitor `server.url`, TEST CA, localhost qualification transport, adb reverse,
++cleartext or native bearer replacement. These are source/local findings;
++production host, certificate and physical Android behavior remain later gates.
++
+ Phase 7 introduces private authentication before any non-loopback access; current loopback Phase 1 contains no authentication. Choose and review the exact browser/wrapper session mechanism in Phase 7/9, keeping provider secrets server-side and protecting state changes.
+ 
+ Phase 9 prefers Capacitor and packages the same React interface. Native Android code is limited to needed device extensions; overlay/Share are Phase 15. No separate catalog or financial database lives on the phone.
+diff --git a/docs/LOCAL_DEVELOPMENT.md b/docs/LOCAL_DEVELOPMENT.md
+index 0dbc4fb..88b5858 100644
+--- a/docs/LOCAL_DEVELOPMENT.md
++++ b/docs/LOCAL_DEVELOPMENT.md
+@@ -1,5 +1,58 @@
+ # Local development
+ 
++## Phase 12 P12-01 production source proof — 2026-09-28
++
++P12-01 is source/local preflight under [ExecPlan 091](plans/091-production-runtime-and-deployment.md),
++not deployment. Production startup uses `python -m brickvault_api.main` from
++the reviewed installed package after later provisioning. It requires explicit
++`BVA_MODE=production`, `BVA_BIND_HOST=127.0.0.1`, `BVA_API_PORT`,
++`BVA_PRODUCTION_ORIGIN=https://<approved-host>`, `BVA_RUNTIME_DATABASE_URL`,
++`BVA_DATABASE_OWNERSHIP_MARKER`, `BVA_PROXY_SHARED_SECRET`,
++`BVA_STATIC_ENABLED=true` and an absolute `BVA_WEB_BUILD_DIR`.
++The database URL is a canonical `postgresql+psycopg` URL with a dedicated
++`brickvault_<name>_runtime` role, explicit `127.0.0.1` port and dedicated
++`brickvault_<name>` database; migration uses the distinct matching `_owner`
++role. Both passwords and the proxy secret are generated 64-character lowercase
++hex values. The marker format is
++`brickvault-appraisal:<32-lowercase-hex>:<32-lowercase-hex>` and must match the
++database comment and actual owner. Dev/TEST database names/roles and remote
++hosts are rejected. This describes inputs; do not put real values in source,
++`.env.local`, a frontend build or a review package.
++
++The intended service receives environment values from an admin-protected local
++file outside the checkout (for example via systemd `EnvironmentFile`) with
++restrictive ownership/mode. A separate protected Caddy setting supplies the
++same proxy secret to `header_up X-BrickVault-Proxy` so it overwrites any client
++value. The Caddy route must retain the exact HTTPS Host when proxying to the
++loopback API. Uvicorn keeps `proxy_headers=False`, and the application ignores
++`X-Forwarded-*`. Neither Caddy nor FastAPI may expose the internal proxy
++header in access logs. The optional provider credential root, if enabled in a
++later reviewed slice, must be an absolute admin-protected server directory;
++provider calls were not used in this proof.
++
++`services/api/.venv/Scripts/python.exe scripts/production_runtime_proof.py`
++performs one bounded proof on the owned local TEST PostgreSQL service. It
++creates recorded, run-specific production-style owner/runtime roles and one
++database, migrates the current graph, provisions only an ephemeral synthetic
++principal, tests the synthetic Caddy-to-HTTP request path, checks runtime DDL
++denial, then removes those exact owned resources and restores the TEST service's
++prior state. Its ignored ledger is under `.local/database/runs`; inspect that
++exact ledger before any manual recovery. No real production DB is contacted.
++The proof checks Host/Origin/proxy refusal, Secure Strict cookies, CSRF,
++readiness, private no-store and safe bytes/logs. It is not a certificate or
++real reverse-proxy acceptance test.
++
++For a later reviewed Android build, set only the exact approved HTTPS origin
++as `BVA_ANDROID_PRODUCTION_ORIGIN` in the local process environment and run
++`pnpm build:android-production`. The command builds the shared Vite app in
++`android-production` mode, verifies the public bytes, copies the matching
++Capacitor config/assets and checks that the TEST API and TEST trust are absent.
++The configured WebView origin is the derived `https://android.<approved-host>`;
++the API target is the real approved origin. The P12-01 run used only the
++synthetic `https://app.example.test` origin and built **no APK**. Production
++signing, normal Android certificate validation and physical operation need
++P12-05 acceptance after actual DNS/HTTPS selection.
++
+ ## Phase 7B-1 authentication — accepted source checkpoint, 2026-09-17
+ 
+ The current source requires migration 0009 for protected operations. This task does
+diff --git a/docs/PROJECT_CONTEXT.md b/docs/PROJECT_CONTEXT.md
+index cbc4b66..60d1730 100644
+--- a/docs/PROJECT_CONTEXT.md
++++ b/docs/PROJECT_CONTEXT.md
+@@ -139,7 +139,7 @@ Brian previously reported having OpenAI/Gemini keys for the later recognition ex
+ 
+ The eventual service should run on Brian's home server under an approved subdomain of abrianbaker.com. The exact hostname, architecture, and access path are not selected by this document.
+ 
+-The separately authorized Phase 11 P11-01 read-only home discovery is recorded in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). It grants no infrastructure or production change. Phase 12 still requires a reviewed deployment plan and distinct execution approval. Local development must isolate this app from the existing PostgreSQL service on port 5432.
++The accepted Phase 11 P11-01 read-only discovery is recorded in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). Brian has separately authorized only Phase 12 P12-01 production runtime/Android source work, disposable local proof and a minimum read-only preflight under [ExecPlan 091](plans/091-production-runtime-and-deployment.md). Infrastructure and production mutation need a later reviewed plan and distinct execution approval. The existing guest's allocations do not prove spare Proxmox capacity, and its unowned extra disk cannot be adopted. Local development remains isolated from the existing PostgreSQL service on port 5432.
+ 
+ ## Current checkpoint and future possibilities
+ 
+diff --git a/docs/REQUIREMENTS_TRACEABILITY.md b/docs/REQUIREMENTS_TRACEABILITY.md
+index 86fa82e..48ec9db 100644
+--- a/docs/REQUIREMENTS_TRACEABILITY.md
++++ b/docs/REQUIREMENTS_TRACEABILITY.md
+@@ -671,7 +671,7 @@ The full product requirements below remain planned. Phase 1 and Phase 2 local ca
+ | R-07 Saved sets/watchlists/targets/URLs/asking/notes/deals/settings; later outcomes | PRODUCT_SPEC R-07; DATA_MODEL Phase 7 and later outcomes | saved_set, watchlist_item, saved_deal, user_settings, selling_profile, valuation_snapshot; later deal_outcome | Private CRUD, revision conflicts, reopen reproducible analysis, URLs as metadata; later outcome append | 7 saved work/auth; 9 cache/sync; 16 actual outcomes | Save/reload/edit-conflict/auth tests, unchanged historical calculation on price refresh, no URL fetch, later outcomes do not rewrite forecasts | Phase 7C and Phase 9 cache/reconnect/expiry/conflict evidence accepted; R-07 PARTIAL only because Phase 16 actual outcomes remain |
+ | R-08 Sets to Hunt | PRODUCT_SPEC R-08/R-36; VALUATION_RULES strategies and reproducibility | hunt_run, hunt_score_snapshot, hunt_score_component_snapshot, valuation_snapshot, profiles, observations | /api/hunts ranked supported strategy opportunities with preserved split-sale signals plus R-36 part-level components, max-buy and missing-data outcomes | 8 | Versioned deterministic rank/ties; confidence/coverage/stale/thin/concentration/residual/order-burden and R-36 calibration fixtures; no fabricated asking price or theoretical cash | Planned; dedicated phase, no scores produced |
+ | R-09 Chrome/PWA/Android shared primary UI/API/database | PRODUCT_SPEC R-09; ARCHITECTURE client/offline; D-019 | One authoritative PostgreSQL, private principal/session, saved-record revisions; permitted dated client caches | Same React UI in Chrome/PWA/Android, /api, private auth, read-only offline cache with dates and explicit reconnect needs | 1 shell; 6–8 core flows; 7 auth; 9 PWA/Android/sync | Responsive browser and physical Android search/detail/deal/watchlist checks, package spike, cache/session/date/conflict tests, no client financial/provider logic | SATISFIED for the shared Chrome/PWA/Android requirement; Phase 9 source, package, core flow, transport/auth, offline/reconnect, expiry, and conflict evidence accepted |
+-| R-10 Private home/subdomain deployment | PRODUCT_SPEC R-10; SECURITY_PRIVACY; ROADMAP Phases 10–12 | Existing authoritative database under approved private deployment; backup/release evidence | Approved abrianbaker.com hostname, authenticated HTTPS, monitoring/recovery; database never public | 10 local hardening; 11 read-only discovery; 12 separately approved deployment | Local disposable restore/release evidence, separately authorized read-only actual infrastructure report, reviewed/authorized deployment with TLS/auth/backup/monitoring/rollback checks | P11-01 ACCEPTED / CLOSED; Phase 11 CLOSED in [ExecPlan 090](plans/090-home-infrastructure-discovery.md), with Proxmox/backup unknowns; Phase 12 NEXT / NOT STARTED and requires separate explicit authorization before any infrastructure or production change |
++| R-10 Private home/subdomain deployment | PRODUCT_SPEC R-10; SECURITY_PRIVACY; ROADMAP Phases 10–12 | Existing authoritative database under approved private deployment; backup/release evidence | Approved abrianbaker.com hostname, authenticated HTTPS, monitoring/recovery; database never public | 10 local hardening; 11 read-only discovery; 12 separately approved deployment | Local disposable restore/release evidence, separately authorized read-only actual infrastructure report, reviewed/authorized deployment with TLS/auth/backup/monitoring/rollback checks | Phase 11 CLOSED in [ExecPlan 090](plans/090-home-infrastructure-discovery.md); Phase 12 IN PROGRESS at P12-01 source/local preflight in [ExecPlan 091](plans/091-production-runtime-and-deployment.md). Proxmox/backup/DNS/hostname and live HTTPS/device/restore evidence remain open; P12-02+ mutation is not authorized |
+ 
+ ## Part-out and liquidity requirements — D-025
+ 
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index d276b36..c6ace6a 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,9 +1,21 @@
+ # Valuation-First Roadmap
+ 
++## Phase 12 P12-01 source checkpoint — 2026-09-28
++
++**Phase 10 CLOSED; Phase 11 CLOSED; Phase 12 IN PROGRESS at P12-01.** Brian
++authorized the bounded production runtime, Android HTTPS source transport,
++disposable local proof and minimal read-only deployment preflight in
++[ExecPlan 091](plans/091-production-runtime-and-deployment.md). P12-01 stops for
++review. The configured Proxmox target remains unusable, so actual host capacity,
++storage/network inventory and off-host backup facts still gate placement.
++P12-02 and later infrastructure or production mutation require separate
++review and explicit authorization. PostgreSQL is never public.
++
+ ## Phase 11 discovery checkpoint — 2026-09-28
+ 
+-**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. Phase 12 is NEXT / NOT
+-STARTED.** The accepted read-only pass and conditional Phase 12 topology are
++**P11-01 is ACCEPTED / CLOSED; Phase 11 is CLOSED. At this historical closeout,
++Phase 12 was NEXT / NOT STARTED; P12-01 now governs above.** The accepted
++read-only pass and conditional Phase 12 topology are
+ in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). Proxmox node,
+ backup and proxy details remain unverified where configured access was absent.
+ Phase 12 requires separate explicit authorization before any infrastructure
+@@ -816,8 +828,9 @@ and remaining R-36 capabilities stay outstanding and unassigned.
+ authorized P11-01 read-only access to the workstation and existing home hosting
+ environment. ChatGPT accepted the published r1 evidence. The observed facts
+ and unknowns are in [ExecPlan 090](plans/090-home-infrastructure-discovery.md).
+-Phase 12 is NEXT / NOT STARTED and still needs separate explicit authorization
+-before any infrastructure or production change.
++At Phase 11 closeout, Phase 12 was NEXT / NOT STARTED and still needed separate
++authorization. The P12-01 authorization above permits source/local work and
++read-only preflight only; infrastructure or production change remains gated.
+ 
+ - **Inputs:** Completed local release evidence and Brian's separate explicit authorization naming discovery targets/access.
+ - **Scope:** Read-only discovery of actual Proxmox, networking, storage, proxy/tunnel, backup, monitoring, and rollback constraints; document facts and unknowns.
+@@ -828,6 +841,8 @@ before any infrastructure or production change.
+ 
+ ## Phase 12 — Approved home-server deployment
+ 
++- **Status:** IN PROGRESS at P12-01 source/local preflight only. P12-02 exact
++  pre-mutation review and P12-03–05 execution/acceptance are not authorized.
+ - **Inputs:** Phase 11 actual findings, local release artifacts, reviewed deployment/backup/rollback plan, exact approved hostname and targets, and distinct explicit execution authorization.
+ - **Scope:** Execute only the approved deployment steps and validate private application operation under the selected abrianbaker.com subdomain.
+ - **Exclusions:** Unapproved host/network/DNS changes, public PostgreSQL, unrelated systems, recognition scope, and implicit staging/commits.
+diff --git a/docs/SECURITY_PRIVACY.md b/docs/SECURITY_PRIVACY.md
+index 6c9fa93..e449229 100644
+--- a/docs/SECURITY_PRIVACY.md
++++ b/docs/SECURITY_PRIVACY.md
+@@ -169,9 +169,11 @@ remain later work. Saved evidence permission is still unresolved, not prohibited
+ 
+ ## Current scope and authorization
+ 
+-This is one private application for Brian. Earlier documentation-only task boundaries below are historical; the current Phase 11 P11-01 scope is recorded in [ExecPlan 090](plans/090-home-infrastructure-discovery.md).
++This is one private application for Brian. Earlier documentation-only task boundaries below are historical; Phase 11 P11-01 is accepted in [ExecPlan 090](plans/090-home-infrastructure-discovery.md). Phase 12 P12-01 is governed by [ExecPlan 091](plans/091-production-runtime-and-deployment.md).
+ 
+-Brian authorized one read-only discovery pass over the named workstation and existing home hosting access. P11-01 is ACCEPTED / CLOSED and Phase 11 is CLOSED. No home-server, Proxmox, networking/router, DNS, Cloudflare, or production modification is authorized. Phase 12 is NEXT / NOT STARTED and requires a reviewed deployment plan and separate explicit authorization before any infrastructure or production change. Never expose PostgreSQL publicly.
++P11-01 is ACCEPTED / CLOSED and Phase 11 is CLOSED. Brian authorized bounded P12-01 local production runtime/Android transport implementation and disposable proof plus a minimal read-only Proxmox retry. Phase 12 is IN PROGRESS. No home-server, Proxmox, networking/router, DNS, Cloudflare, service or production database modification is authorized in P12-01. P12-02 and later mutations need separate review and explicit authorization. Never expose PostgreSQL publicly.
++
++Production requires one exact HTTPS application Host and Origin, a derived exact same-site packaged Android Origin, Secure/HttpOnly/SameSite=Strict cookies, existing CSRF, and a loopback FastAPI listener behind the approved Caddy path. The proxy overwrites an internal secret header; Uvicorn does not trust forwarded headers. The production database URL must identify a dedicated loopback database/runtime role with a separate owner/migration role and verified ownership marker. Real secrets belong in admin-protected local service configuration outside the checkout and static build. This source contract is not live transport, certificate, backup or device evidence.
+ 
+ ## Local and private application access
+ 
+diff --git a/package.json b/package.json
+index bfc285b..1339c63 100644
+--- a/package.json
++++ b/package.json
+@@ -9,6 +9,7 @@
+     "pnpm": ">=11 <12"
+   },
+   "scripts": {
++    "build:android-production": "node scripts/android_production.mjs",
+     "auth:bootstrap": "node scripts/tasks.mjs auth:bootstrap",
+     "auth:reset": "node scripts/tasks.mjs auth:reset",
+     "catalog:download": "node scripts/tasks.mjs catalog:download",
+diff --git a/scripts/database.py b/scripts/database.py
+index 849897d..65cf6ff 100644
+--- a/scripts/database.py
++++ b/scripts/database.py
+@@ -548,8 +548,32 @@ def migrate(
+     downgrade: bool = False,
+     run_id: str = "development",
+     revision: str = "head",
++    proof_targets: tuple[str, str] | None = None,
+ ) -> None:
+     instance.verify()
++    if proof_targets is not None and (
++        instance.purpose != "test" or downgrade or revision != "head"
++    ):
++        raise DatabaseError(
++            "Production-style targets require owned TEST migration proof."
++        )
++    target_purpose: Purpose = (
++        "production" if proof_targets is not None else instance.purpose
++    )
++    owner_target = (
++        proof_targets[0]
++        if proof_targets is not None
++        else instance.target(database, "owner")
++    )
++    runtime_target = (
++        proof_targets[1]
++        if proof_targets is not None
++        else instance.target(database, "runtime")
++    )
++    owner_url = validate_target(owner_target, target_purpose, "owner")
++    runtime_url = validate_target(runtime_target, target_purpose, "runtime")
++    if owner_url.database != database or runtime_url.database != database:
++        raise DatabaseError("Migration targets must name the recorded database.")
+     if revision != "head" and (
+         instance.purpose != "test"
+         or TEST_DATABASE.fullmatch(database) is None
+@@ -575,16 +599,10 @@ def migrate(
+             "SELECT shobj_description(oid, 'pg_database'), pg_get_userbyid(datdba) FROM pg_database WHERE datname=%s",
+             (database,),
+         ).fetchone()
+-        expected_owner = (
+-            "brickvault_dev_owner"
+-            if instance.purpose == "development"
+-            else "brickvault_test_owner"
+-        )
++        expected_owner = owner_url.username
+         if row != (database_marker(instance, run_id), expected_owner):
+             raise DatabaseError("Migration requires verified database ownership.")
+-    engine = create_database_engine(
+-        instance.target(database, "owner"), instance.purpose, "owner"
+-    )
++    engine = create_database_engine(owner_target, target_purpose, "owner")
+     try:
+         with engine.begin() as connection:
+             config = migration_config()
+@@ -593,9 +611,7 @@ def migrate(
+                 command.downgrade(config, "base")
+             else:
+                 command.upgrade(config, revision)
+-                role = validate_target(
+-                    instance.target(database, "runtime"), instance.purpose, "runtime"
+-                ).username
++                role = runtime_url.username
+                 connection.execute(
+                     text(f'REVOKE ALL ON public.alembic_version FROM PUBLIC, "{role}"')
+                 )
+diff --git a/scripts/tasks.mjs b/scripts/tasks.mjs
+index f8b9ad9..d969f55 100644
+--- a/scripts/tasks.mjs
++++ b/scripts/tasks.mjs
+@@ -456,6 +456,7 @@ export function contractsTask(root, check, expectedDirectory = join(root, 'packa
+ 
+ /** Only minimal OS/runtime settings reach frontend processes. No dotenv or secrets.
+  * @param {NodeJS.ProcessEnv} [environment]
++ * @returns {NodeJS.ProcessEnv}
+  */
+ export function frontendEnvironment(environment = process.env) {
+   return Object.fromEntries(
+diff --git a/services/api/src/brickvault_api/api/auth.py b/services/api/src/brickvault_api/api/auth.py
+index 8ede3fb..4ec42df 100644
+--- a/services/api/src/brickvault_api/api/auth.py
++++ b/services/api/src/brickvault_api/api/auth.py
+@@ -34,9 +34,13 @@ def service(request: Request) -> AuthService:
+ 
+ 
+ def transport(request: Request) -> bool:
++    settings = getattr(request.app.state, "settings", None)
++    if settings is not None and settings.purpose == "production":
++        if not getattr(request.state, "production_proxy_verified", False):
++            raise HTTPException(503)
++        return True
+     if request.url.scheme == "https":
+         return True
+-    settings = getattr(request.app.state, "settings", None)
+     if (
+         settings is None
+         or not settings.auth_allow_loopback_http
+diff --git a/services/api/src/brickvault_api/catalog/connection.py b/services/api/src/brickvault_api/catalog/connection.py
+index 0e7ad45..1f539df 100644
+--- a/services/api/src/brickvault_api/catalog/connection.py
++++ b/services/api/src/brickvault_api/catalog/connection.py
+@@ -66,9 +66,20 @@ class CatalogDatabase:
+             application_name="brickvault-catalog",
+         )
+         try:
+-            owner = (
+-                "brickvault_dev_owner" if self.purpose == "development" else "brickvault_test_owner"
+-            )
++            if self.purpose == "production":
++                if target.username is None:
++                    raise SourceError("database_ownership")
++                owner = (
++                    target.username.replace("_runtime", "_owner")
++                    if self.role == "runtime"
++                    else target.username
++                )
++            else:
++                owner = (
++                    "brickvault_dev_owner"
++                    if self.purpose == "development"
++                    else "brickvault_test_owner"
++                )
+             record = connection.execute(
+                 "SELECT shobj_description(oid,'pg_database') AS marker,pg_get_userbyid(datdba) AS owner FROM pg_database WHERE datname=current_database()"
+             ).fetchone()
+diff --git a/services/api/src/brickvault_api/observability.py b/services/api/src/brickvault_api/observability.py
+index 534d9ba..9776c6e 100644
+--- a/services/api/src/brickvault_api/observability.py
++++ b/services/api/src/brickvault_api/observability.py
+@@ -2,6 +2,7 @@
+ 
+ import json
+ import logging
++import secrets
+ import time
+ from datetime import UTC, datetime
+ from typing import Any
+@@ -69,6 +70,7 @@ class RequestBoundary:
+         sent = False
+         category = "request"
+         native_cors = False
++        cors_origin = NATIVE_ORIGIN
+ 
+         async def safe_send(message: Message) -> None:
+             nonlocal sent, status
+@@ -88,7 +90,7 @@ class RequestBoundary:
+                 if native_cors:
+                     headers.extend(
+                         [
+-                            (b"access-control-allow-origin", NATIVE_ORIGIN),
++                            (b"access-control-allow-origin", cors_origin),
+                             (b"access-control-allow-credentials", b"true"),
+                             (b"access-control-expose-headers", CORS_EXPOSE),
+                             (b"vary", b"Origin"),
+@@ -110,20 +112,49 @@ class RequestBoundary:
+             for port_number in (8000, 5173, 18000, port)
+         }
+         qualification = bool(runtime is not None and runtime.android_qualification)
++        production = bool(runtime is not None and runtime.purpose == "production")
+         if qualification:
+             # Narrower than browser defaults: never approve a different loopback
+             # alias, port or scheme, including preflight and error responses.
+             allowed_hosts = {b"localhost:18443"} if scope.get("scheme") == "https" else set()
+             allowed_origins = {NATIVE_ORIGIN, b"https://localhost:18443"}
++        if production:
++            assert runtime is not None and runtime.production_origin is not None
++            host = runtime.production_origin.removeprefix("https://")
++            allowed_hosts = {host.encode("ascii")}
++            cors_origin = f"https://android.{host}".encode("ascii")
++            allowed_origins = {runtime.production_origin.encode("ascii"), cors_origin}
++        proxy_identity = [value for key, value in headers if key.lower() == b"x-brickvault-proxy"]
++        proxy_valid = not production
++        if production:
++            assert runtime is not None and runtime.proxy_shared_secret is not None
++            proxy_valid = len(proxy_identity) == 1 and secrets.compare_digest(
++                proxy_identity[0], runtime.proxy_shared_secret.get_secret_value().encode("ascii")
++            )
+         try:
+             if len(hosts) != 1 or hosts[0] not in allowed_hosts:
+                 category = "host_rejected"
+                 await error_response(400, request_id)(scope, receive, safe_send)
+-            elif len(origins) > 1 or (origins and origins[0] not in allowed_origins):
++            elif not proxy_valid:
++                category = "proxy_rejected"
++                await error_response(403, request_id)(scope, receive, safe_send)
++            elif (
++                len(origins) > 1
++                or (origins and origins[0] not in allowed_origins)
++                or (
++                    production
++                    and scope["method"] in {"POST", "PUT", "PATCH", "DELETE"}
++                    and not origins
++                )
++            ):
+                 category = "origin_rejected"
+                 await error_response(403, request_id)(scope, receive, safe_send)
+             else:
+-                native_cors = qualification and origins == [NATIVE_ORIGIN]
++                if production:
++                    scope["state"]["production_proxy_verified"] = True
++                native_cors = (qualification and origins == [NATIVE_ORIGIN]) or (
++                    production and origins == [cors_origin]
++                )
+                 if native_cors and scope["method"] == "OPTIONS":
+                     requested_methods = [
+                         v for k, v in headers if k.lower() == b"access-control-request-method"
+diff --git a/services/api/src/brickvault_api/settings.py b/services/api/src/brickvault_api/settings.py
+index 0991791..c7354f8 100644
+--- a/services/api/src/brickvault_api/settings.py
++++ b/services/api/src/brickvault_api/settings.py
+@@ -1,17 +1,27 @@
+-"""Strict local configuration. No credential loading or connections at import time."""
++"""Strict runtime configuration. No credential loading or connections at import time."""
+ 
+ import os
+ import re
+ from collections.abc import Mapping
++from pathlib import Path
+ from typing import Literal
+ from uuid import UUID
+ 
+ from pydantic import BaseModel, ConfigDict, Field, SecretStr
+ from sqlalchemy.engine import URL, make_url
+ 
+-Purpose = Literal["development", "test"]
++Purpose = Literal["development", "test", "production"]
+ Role = Literal["owner", "runtime"]
+ TEST_DATABASE = re.compile(r"brickvault_test_[0-9a-f]{32}\Z")
++PRODUCTION_TARGET = re.compile(
++    r"postgresql\+psycopg://brickvault_(?P<stem>[a-z][a-z0-9_]{0,30})_"
++    r"(?P<role>owner|runtime):[a-f0-9]{64}@127\.0\.0\.1:"
++    r"(?P<port>[1-9][0-9]{0,4})/(?P<database>brickvault_[a-z][a-z0-9_]{0,50})\Z"
++)
++PRODUCTION_ORIGIN = re.compile(
++    r"https://(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+"
++    r"[a-z](?:[a-z0-9-]*[a-z0-9])?\Z"
++)
+ 
+ 
+ class ConfigurationError(ValueError):
+@@ -30,8 +40,23 @@ def validate_target(
+ ) -> URL:
+     """Require canonical bytes before URL parsing, which can silently normalize input."""
+     reject_pg_environment()
+-    if purpose not in ("development", "test") or role not in ("owner", "runtime"):
++    if purpose not in ("development", "test", "production") or role not in (
++        "owner",
++        "runtime",
++    ):
+         raise ConfigurationError("Unsupported database purpose or role.")
++    if purpose == "production":
++        match = PRODUCTION_TARGET.fullmatch(value)
++        if (
++            config_template
++            or match is None
++            or match.group("role") != role
++            or match.group("stem").startswith(("dev", "test"))
++            or match.group("database").startswith(("brickvault_dev", "brickvault_test"))
++            or int(match.group("port")) > 65535
++        ):
++            raise ConfigurationError("Invalid dedicated loopback production database target.")
++        return make_url(value)
+     prefix, port = ("dev", 55432) if purpose == "development" else ("test", 55433)
+     database = "brickvault_dev" if purpose == "development" else r"brickvault_test_[0-9a-f]{32}"
+     if purpose == "test" and config_template:
+@@ -47,6 +72,21 @@ def validate_target(
+     return make_url(value)
+ 
+ 
++def validate_production_origin(value: str) -> str:
++    """Require one canonical DNS HTTPS origin, without path, port or normalization."""
++    if PRODUCTION_ORIGIN.fullmatch(value) is None or value.endswith(".localhost"):
++        raise ConfigurationError("Invalid production HTTPS application origin.")
++    return value.removeprefix("https://")
++
++
++def production_credentials_root_is_safe(value: str) -> bool:
++    """Keep provider credential files outside Git checkouts."""
++    root = Path(value)
++    return root.is_absolute() and not any(
++        (directory / ".git").exists() for directory in (root, *root.parents)
++    )
++
++
+ class RuntimeSettings(BaseModel):
+     model_config = ConfigDict(frozen=True, strict=True, extra="forbid", hide_input_in_errors=True)
+ 
+@@ -63,8 +103,39 @@ class RuntimeSettings(BaseModel):
+     market_credentials_root: str | None = None
+     auth_allow_loopback_http: bool = False
+     android_qualification: bool = False
++    production_origin: str | None = None
++    proxy_shared_secret: SecretStr | None = None
+ 
+     def target(self) -> URL:
++        if self.purpose == "production":
++            if (
++                "port" not in self.model_fields_set
++                or self.production_origin is None
++                or self.proxy_shared_secret is None
++                or re.fullmatch(r"[a-f0-9]{64}", self.proxy_shared_secret.get_secret_value())
++                is None
++                or self.database_ownership_marker is None
++                or re.fullmatch(
++                    r"brickvault-appraisal:[a-f0-9]{32}:[a-f0-9]{32}",
++                    self.database_ownership_marker.get_secret_value(),
++                )
++                is None
++                or not self.static_enabled
++                or self.web_build_dir is None
++                or not Path(self.web_build_dir).is_absolute()
++                or self.auth_allow_loopback_http
++                or self.android_qualification
++                or (self.market_account_scope is None) != (self.market_credentials_root is None)
++                or (
++                    self.market_credentials_root is not None
++                    and not production_credentials_root_is_safe(self.market_credentials_root)
++                )
++            ):
++                raise ConfigurationError("Incomplete or unsafe production runtime settings.")
++            validate_production_origin(self.production_origin)
++            return validate_target(self.database_url.get_secret_value(), self.purpose, "runtime")
++        if self.production_origin is not None or self.proxy_shared_secret is not None:
++            raise ConfigurationError("Production settings are forbidden in local modes.")
+         if self.android_qualification and (
+             self.purpose != "test"
+             or self.port != 18443
+@@ -92,14 +163,35 @@ class RuntimeSettings(BaseModel):
+             "BVA_MARKET_ACCOUNT_SCOPE",
+             "BVA_MARKET_CREDENTIALS_ROOT",
+             "BVA_AUTH_ALLOW_LOOPBACK_HTTP",
++            "BVA_PRODUCTION_ORIGIN",
++            "BVA_PROXY_SHARED_SECRET",
+         }
+         try:
+             if any(key.startswith("BVA_") and key not in allowed for key in os.environ):
+                 raise ConfigurationError("Unexpected runtime setting.")
++            production = os.environ.get("BVA_MODE") == "production"
++            if production and any(
++                key not in os.environ
++                for key in (
++                    "BVA_BIND_HOST",
++                    "BVA_API_PORT",
++                    "BVA_RUNTIME_DATABASE_URL",
++                    "BVA_DATABASE_OWNERSHIP_MARKER",
++                    "BVA_PRODUCTION_ORIGIN",
++                    "BVA_PROXY_SHARED_SECRET",
++                    "BVA_STATIC_ENABLED",
++                    "BVA_WEB_BUILD_DIR",
++                )
++            ):
++                raise ConfigurationError("Missing required production runtime setting.")
+             if os.environ.get("BVA_BIND_HOST", "127.0.0.1") != "127.0.0.1":
+                 raise ConfigurationError("API must bind to loopback.")
+             port = os.environ.get("BVA_API_PORT", "8000")
+-            if port not in ("8000", "18000"):
++            if (
++                re.fullmatch(r"[1-9][0-9]{0,4}", port) is None
++                or int(port) > 65535
++                or (not production and port not in ("8000", "18000"))
++            ):
+                 raise ConfigurationError("Unsupported API port.")
+             enabled = os.environ.get("BVA_STATIC_ENABLED", "false")
+             auth_http = os.environ.get("BVA_AUTH_ALLOW_LOOPBACK_HTTP", "false")
+@@ -125,6 +217,10 @@ class RuntimeSettings(BaseModel):
+                     else None,
+                     "market_credentials_root": os.environ.get("BVA_MARKET_CREDENTIALS_ROOT"),
+                     "auth_allow_loopback_http": auth_http == "true",
++                    "production_origin": os.environ.get("BVA_PRODUCTION_ORIGIN"),
++                    "proxy_shared_secret": SecretStr(os.environ["BVA_PROXY_SHARED_SECRET"])
++                    if "BVA_PROXY_SHARED_SECRET" in os.environ
++                    else None,
+                 }
+             )
+             if result.purpose == "test" and result.port != 18000:
+diff --git a/apps/android/capacitor.config.ts b/apps/android/capacitor.config.ts
+new file mode 100644
+index 0000000..6785f09
+--- /dev/null
++++ b/apps/android/capacitor.config.ts
+@@ -0,0 +1,53 @@
++import type { CapacitorConfig } from '@capacitor/cli';
++
++const LOCAL_SERVER = {
++  hostname: 'localhost',
++  androidScheme: 'https',
++  cleartext: false,
++} as const;
++
++/** The network API origin is also the parent of the bundled WebView origin. */
++export function productionAndroidOrigin(value: string | undefined): string {
++  if (
++    value === undefined ||
++    !/^https:\/\/(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$/.test(value) ||
++    value.endsWith('.localhost')
++  ) {
++    throw new Error('Invalid production Android HTTPS origin');
++  }
++  return value;
++}
++
++export function capacitorConfig(environment: NodeJS.ProcessEnv): CapacitorConfig {
++  const mode = environment.BVA_ANDROID_MODE;
++  if (mode !== undefined && mode !== 'production') {
++    throw new Error('Invalid Android configuration mode');
++  }
++  if (mode !== 'production' && environment.BVA_ANDROID_PRODUCTION_ORIGIN !== undefined) {
++    throw new Error('Production Android origin requires production mode');
++  }
++  const server =
++    mode === 'production'
++      ? {
++          ...LOCAL_SERVER,
++          hostname:
++            'android.' +
++            new URL(productionAndroidOrigin(environment.BVA_ANDROID_PRODUCTION_ORIGIN)).hostname,
++        }
++      : LOCAL_SERVER;
++  return {
++    appId: 'com.abrianbaker.brickvault.appraisal',
++    appName: 'BrickVault Appraisal App',
++    webDir: '../web/dist',
++    loggingBehavior: 'none',
++    server,
++    android: { allowMixedContent: false },
++    plugins: {
++      CapacitorHttp: { enabled: false },
++      CapacitorCookies: { enabled: false },
++      App: { disableBackButtonHandler: true },
++    },
++  };
++}
++
++export default capacitorConfig(process.env);
+diff --git a/apps/web/src/AndroidProductionConfig.test.tsx b/apps/web/src/AndroidProductionConfig.test.tsx
+new file mode 100644
+index 0000000..d7be212
+--- /dev/null
++++ b/apps/web/src/AndroidProductionConfig.test.tsx
+@@ -0,0 +1,41 @@
++import { expect, it } from 'vitest';
++import { capacitorConfig } from '../../android/capacitor.config';
++
++it('retains the localhost TEST WebView configuration outside production', () => {
++  expect(capacitorConfig({}).server).toEqual({
++    hostname: 'localhost',
++    androidScheme: 'https',
++    cleartext: false,
++  });
++  expect(() =>
++    capacitorConfig({ BVA_ANDROID_PRODUCTION_ORIGIN: 'https://app.example.test' }),
++  ).toThrow();
++});
++
++it('requires an exact production HTTPS API origin and bundled same-site WebView', () => {
++  expect(
++    capacitorConfig({
++      BVA_ANDROID_MODE: 'production',
++      BVA_ANDROID_PRODUCTION_ORIGIN: 'https://app.example.test',
++    }).server,
++  ).toEqual({
++    hostname: 'android.app.example.test',
++    androidScheme: 'https',
++    cleartext: false,
++  });
++  for (const origin of [
++    undefined,
++    'http://app.example.test',
++    'https://localhost',
++    'https://localhost:18443',
++    'https://app.localhost',
++    'https://127.0.0.1',
++    'https://app.example.test:443',
++    'https://app.example.test/path',
++    'https://*.example.test',
++  ]) {
++    expect(() =>
++      capacitorConfig({ BVA_ANDROID_MODE: 'production', BVA_ANDROID_PRODUCTION_ORIGIN: origin }),
++    ).toThrow();
++  }
++});
+diff --git a/docs/plans/091-production-runtime-and-deployment.md b/docs/plans/091-production-runtime-and-deployment.md
+new file mode 100644
+index 0000000..639086a
+--- /dev/null
++++ b/docs/plans/091-production-runtime-and-deployment.md
+@@ -0,0 +1,237 @@
++# ExecPlan 091 — Production runtime and deployment
++
++## Goal and current authorization
++
++Phase 10 and Phase 11 are closed. Brian authorized Phase 12 **P12-01 only**:
++implement and locally prove a private production application runtime and Android
++HTTPS transport, then make a minimum read-only attempt to resolve hosting facts.
++P12-01 is in progress and stops for review. No production VM, database, service,
++DNS, certificate, firewall, backup, provider or device change is authorized by
++this slice. P12-02 and later slices need separate review and authorization.
++
++## Why now and accepted baseline
++
++The accepted [Phase 11 discovery](090-home-infrastructure-discovery.md) found an
++existing Ubuntu 24.04 KVM guest hosting a legacy BrickVault backend and
++loopback PostgreSQL 16. Its 64 assigned vCPUs and 125 GiB RAM describe that
++guest only, not spare Proxmox capacity. Its unmounted 200 GB disk has unknown
++ownership and cannot be adopted. No active reverse proxy was observed on that
++guest; a proxy elsewhere was not ruled out. Proxmox node/version/capacity,
++storage, inventory, network and backup policy, plus off-host retention, remained
++unknown. The dedicated Ubuntu VM and initial 4-vCPU, 8-GiB RAM, 32-GiB OS and
++128-GiB data sizing are conditional proposals. PostgreSQL must never be public.
++The Phase 9 localhost TEST certificate and transport do not qualify production.
++The [Phase 10 packaged release](089-local-packaged-release-readiness.md) provides
++accepted local build/static/API evidence; production configuration changes need
++their own focused proof.
++
++## Scope and non-goals
++
++P12-01 adds explicit production settings, database-target validation, one exact
++HTTPS Host/Origin contract, Secure cookies and existing CSRF enforcement across
++one Caddy-to-loopback-FastAPI path. It adds an explicit Android production origin
++configuration using normal platform TLS validation and the same web/backend
++origin. It uses only an owned, disposable local PostgreSQL database for the
++production-style HTTP proof, and checks the existing configured Proxmox target
++read-only if usable. No schema migration or API contract change is expected.
++Production provisioning, real secrets, DNS, certificates, backups, data migration,
++Android build/device acceptance and deployment are outside this slice.
++
++## Current application state and decisions
++
++At the start of P12-01 the API accepted only development/TEST database targets and local
++Host/Origin values; Uvicorn disables proxy-header trust. Auth uses HttpOnly,
++host-only, SameSite=Strict cookies and CSRF. Normal web/PWA requests are
++same-origin. Android's Phase 9 qualification uses a packaged localhost origin,
++localhost TEST API and opt-in debug-only TEST certificate.
++
++Production will require explicit loopback bind, API port, HTTPS application
++origin, runtime database URL, ownership marker, proxy shared secret, static
++serving and absolute build directory. The URL identifies a dedicated database
++and runtime role; the matched owner/migration role is distinct. Both roles and
++database must be provisioned by a later reviewed mutation slice. Local TEST
++proof may use the existing owned TEST PostgreSQL service with run-specific
++production-style database and roles; it does not make that service production.
++
++The proxy will overwrite an internal identity header on every upstream request.
++FastAPI accepts the exact configured Host and Origin and only that proxy identity.
++Uvicorn remains bound to loopback with `proxy_headers=False`; no
++`X-Forwarded-*` field controls application authorization, scheme or cookies.
++Production auth emits Secure cookies by the reviewed HTTPS proxy contract.
++Browser/PWA assets and API remain same-origin. Production Android packages the
++same React build at an exact `https://android.<approved-host>` WebView origin
++and calls `https://<approved-host>` over the normal WebView network stack.
++These origins are same-site for Strict cookies; the API allows only this derived
++native Origin for credentialed CORS. Capacitor's `server.url` live-reload
++setting is not used. The APK must use system certificate trust only; physical
++cookie/WebView behavior remains for P12-05 acceptance.
++
++The application source now implements this contract. Production target
++validation requires canonical `127.0.0.1` with an explicit port, dedicated
++`brickvault_<name>` database, matched `_owner` and `_runtime` roles, 64-character
++lowercase hex passwords and a marker matching the recorded database owner.
++It rejects development/TEST names, remote/ambiguous targets and libpq PG*
++overrides. The runtime role's enumerated grants remain the existing migration
++policy; no schema migration was added. Production also requires an absolute
++static build path, no loopback HTTP auth shortcut, no Android TEST qualification,
++and an explicit proxy secret. Optional provider credentials remain server-side,
++  from a separately approved protected absolute directory outside Git checkouts.
++
++The proposed Caddy route has one HTTPS site name and one loopback FastAPI
++upstream. Its upstream request must retain the exact original Host and
++overwrite `X-BrickVault-Proxy` from a protected Caddy setting, even when a
++client supplied that header. This is a configuration contract, not an applied
++Caddyfile. Caddy's HTTP-to-HTTPS redirect, certificate challenge/renewal and
++private DNS route depend on P12-02 facts. Uvicorn never interprets forwarded
++headers, and the application derives Secure-cookie behavior only from the
++validated production proxy path.
++
++## P12-01 implementation sequence
++
++1. Add strict production settings/target and proxy-origin validation without
++   changing development/TEST acceptance.
++2. Apply the production boundary to Host, Origin, auth transport, Secure cookies
++   and database ownership checks. Keep static allowlist and private no-store.
++3. Add explicit production Capacitor origin configuration and focused checks;
++   retain the TEST localhost path only outside production mode.
++4. Run focused settings/boundary/Android tests and one disposable local
++   production-mode HTTP/database proof. Run targeted format, lint and type checks,
++   and inspect the task diff. Reuse accepted packaging evidence unless changed
++   source requires one build.
++5. Make only the minimum read-only configured Proxmox check; record inaccessible
++   access or newly observed facts without guessing targets.
++6. Publish a sanitized P12-01 review package from an isolated checkout. Leave
++   implementation uncommitted on main with an empty index.
++
++## Validation and acceptance
++
++Prove refusal of missing/HTTP production origin, missing database/ownership/proxy
++inputs, wrong Host/Origin, duplicate headers, direct loopback requests without
++proxy identity and arbitrary forwarded-header bypasses. Prove the exact origin
++works, Secure/HttpOnly/Strict cookies and CSRF remain enforced, private responses
++remain no-store, current migrations and the least-privilege runtime role work,
++and secrets do not enter static bytes, responses or safe logs. Android checks
++must reject HTTP, localhost/TEST and malformed production origins while ordinary
++web/PWA and TEST behavior remain intact. No provider or physical-device calls.
++
++### Actual P12-01 local results
++
++- Focused Python settings, request-boundary and unchanged local/Android tests:
++  **94 passed** initially; the **24** focused production tests passed after the
++  final missing-Origin and credential-root hardening. Two already-known upstream
++  test-client deprecations were reported.
++- Focused web/Android configuration tests: **12 passed**. Targeted Ruff,
++  mypy, Prettier, ESLint and TypeScript checks passed.
++- The final run-owned PostgreSQL proof migrated the current graph under a
++  separate owner role, authenticated browser and native-origin requests through
++  the synthetic proxy path, preserved Secure/Strict cookies and CSRF, returned
++  private no-store responses, denied runtime DDL and removed the exact database
++  and roles with zero leftovers. Its private ledger stays ignored.
++- A synthetic `android-production` Vite build, existing frontend byte/privacy
++  verifier and Capacitor copy/config check passed. The first build exposed an
++  unwanted TEST API literal in the production bundle; the build-time gate was
++  corrected and the final bundle excludes it. No APK was built.
++- The production copied hostname rejected opt-in TEST certificate trust during
++  Gradle configuration. Ordinary offline `gradlew help` passed; neither command
++  compiled or packaged Android. An initial offline configuration attempt lacked
++  cached pinned Android plugins; they were retrieved for the subsequent guard
++  check. No phone, certificate infrastructure or provider was used.
++- `git diff --check` passed. Local Markdown targets in changed documentation
++  resolved. Main HEAD/index and the three protected dirty-file hashes were
++  preserved. No Proxmox connection or infrastructure mutation occurred.
++
++## Deployment topology proposed for later review
++
++Conditional on actual Proxmox capacity, storage, network and backup facts:
++dedicated Ubuntu VM on a reviewed private bridge/VLAN; Caddy serving one exact
++approved HTTPS name; Caddy proxies to FastAPI bound to `127.0.0.1` on an
++explicit internal port; PostgreSQL bound only to a workload-local socket or
++loopback with a dedicated database and separate owner/migration and runtime
++roles. Browser/PWA load the trusted HTTPS site; bundled Android assets use the
++derived same-site origin and call that trusted site for `/api`. Never expose
++PostgreSQL publicly or reuse the legacy guest's unowned disk/database.
++
++## Later mutation sequence and per-slice gates
++
++1. **P12-02 — exact pre-mutation review:** verify Proxmox capacity, storage,
++   inventory, bridge/VLAN/firewall and backup target; select VM placement,
++   hostname, private DNS/HTTPS validation and renewal path, data/bootstrap
++   policy, secrets placement and rollback. Present exact commands/targets and
++   require Brian/ChatGPT review before any mutation.
++2. **P12-03 — separately approved base provisioning:** create only the reviewed
++   VM/disks/network placement; install reviewed pinned base software, create
++   protected local service configuration and role separation. Check capacity,
++   isolation and restore point before each irreversible step. No legacy guest
++   changes.
++3. **P12-04 — separately approved deployment:** create owned PostgreSQL
++   database/roles, apply the current Alembic graph as owner, grant only the
++   enumerated runtime privileges, bootstrap Brian's principal through an
++   approved private input, install the reviewed artifact/systemd unit, configure
++   Caddy/private DNS/certificate and monitoring, then configure off-host backup
++   and retention. Verify database is workload-only before enabling the path.
++4. **P12-05 — private acceptance and closeout:** verify browser/PWA/Android
++   normal certificate validation, auth/CSRF/Host/Origin, private access,
++   monitoring, an off-host restore rehearsal and rollback. Only actual evidence
++   can close Phase 12.
++
++## Secrets, backup, recovery and rollback
++
++P12-02 must approve a root/admin-owned local environment or credential file
++outside the checkout, with restrictive permissions and systemd `EnvironmentFile`
++or equivalent simple local loading. Caddy's internal proxy secret and the API
++must receive the same value through protected configuration. Database passwords,
++provider credentials and bootstrap inputs remain server-side, outside static
++assets and review packages. P12-01 provisions no real secret.
++The initial proposal is a new empty dedicated database at the current Alembic
++head with no copy from the legacy guest. P12-02 must decide whether any
++pre-existing data is actually required, approve the database/role creation and
++credential rotation policy, and specify a hidden-input owner bootstrap/reset
++procedure. The current local `auth:bootstrap` helper is not a production
++provisioner; P12-04 must implement or approve its production counterpart before
++account creation.
++
++Before any later data/schema change, capture and verify an off-host database
++backup plus role/configuration recovery material under a selected retention
++policy. A VM snapshot alone is insufficient. Preserve the prior release and
++record migration compatibility; for incompatible schema/data changes, restore
++the verified backup before rolling the application back. Reverse Caddy/private
++DNS changes only against their exact reviewed prior state. Stop cutover if
++backup, certificate, private routing, database isolation or rollback checks fail.
++
++## Read-only preflight facts and remaining questions
++
++The configured Proxmox SSH alias still resolves to a placeholder, so P12-01
++made no remote Proxmox connection. Node version/capacity/usage, storage pools,
++VM/LXC inventory, bridge/VLAN and firewall status, backup jobs/retention and
++off-host target remain unknown. Proxy service elsewhere and private DNS
++mechanism remain unknown. Brian must choose/approve the exact private hostname,
++Android reachability, data/bootstrap policy and backup target before mutation.
++Do not infer spare host capacity from the existing guest allocation.
++
++| Prerequisite | P12-01 status | Next gate |
++| --- | --- | --- |
++| Proxmox node, capacity, pools, inventory, bridge/VLAN, firewall | Unknown; configured target is a placeholder | Read-only authenticated facts before VM placement |
++| Exact private hostname, DNS and HTTPS challenge/renewal path | Unknown | Brian/P12-02 selection and certificate plan |
++| Off-host backup target and retention | Unknown | P12-02 selection plus P12-05 restore proof |
++| Production runtime and database target | Implemented and locally exercised with disposable PostgreSQL | Actual VM/database/role creation separately authorized |
++| Exact Host/Origin/proxy/Secure-cookie contract | Implemented and locally exercised under a synthetic proxy request path | Real Caddy/TLS acceptance in P12-04/05 |
++| Android production HTTPS source transport | Implemented and focused-tested with a synthetic origin and system trust config | Real hostname/cert/device acceptance in P12-05 |
++| Initial database/data/bootstrap/secrets policy | Proposed only; no real secret or account provisioned | Exact P12-02 decision, later guarded execution |
++
++## Progress log
++
++- [x] 2026-09-28: Confirmed expected main HEAD, empty index and the three
++  protected file hashes; reviewed Phase 11/10 history and current runtime.
++- [x] 2026-09-28: Checked only the configured Proxmox SSH target; it remains a
++  placeholder, so stopped that read-only subsection without remote commands.
++- [x] 2026-09-28: Production settings, database/Host/Origin/proxy/cookie path,
++  Android build/transport and current-grant proof implemented. Focused unit,
++  HTTP and config checks passed using only synthetic/disposable local values.
++- [x] 2026-09-28: Sanitized isolated P12-01 review package prepared for
++  publication on `astra-response` without staging or committing main.
++
++## Outcome
++
++P12-01 implementation and local validation are complete and ready for review.
++The sanitized isolated package is prepared for publication. This plan is a
++proposal and record, not approval for P12-02 or infrastructure mutation.
+diff --git a/scripts/android_production.mjs b/scripts/android_production.mjs
+new file mode 100644
+index 0000000..c492e22
+--- /dev/null
++++ b/scripts/android_production.mjs
+@@ -0,0 +1,85 @@
++/** Build one reviewed Android web bundle and copy only its matching Capacitor config. */
++import { spawnSync } from 'node:child_process';
++import { readFileSync, readdirSync } from 'node:fs';
++import { dirname, join, resolve } from 'node:path';
++import { fileURLToPath } from 'node:url';
++import { frontendEnvironment, verifyFrontend } from './tasks.mjs';
++
++const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
++const origin = process.env.BVA_ANDROID_PRODUCTION_ORIGIN;
++
++if (
++  origin === undefined ||
++  !/^https:\/\/(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z](?:[a-z0-9-]*[a-z0-9])?$/.test(origin) ||
++  origin.endsWith('.localhost') ||
++  process.env.BVA_ANDROID_MODE !== undefined ||
++  process.env.VITE_BVA_PRODUCTION_ORIGIN !== undefined
++) {
++  throw new Error('An explicit approved Android HTTPS origin is required');
++}
++
++const safe = frontendEnvironment();
++const web = join(root, 'apps/web');
++const android = join(root, 'apps/android');
++
++/** @param {string} cwd @param {string} script @param {string[]} args @param {NodeJS.ProcessEnv} environment */
++function run(cwd, script, args, environment) {
++  const result = spawnSync(process.execPath, [script, ...args], {
++    cwd,
++    env: environment,
++    stdio: 'inherit',
++    windowsHide: true,
++  });
++  if (result.error || result.status !== 0) throw new Error('Android production packaging failed');
++}
++
++run(web, join(web, 'node_modules/vite/bin/vite.js'), ['build', '--mode', 'android-production'], {
++  ...safe,
++  VITE_BVA_PRODUCTION_ORIGIN: origin,
++});
++verifyFrontend(root);
++const assets = join(web, 'dist/assets');
++const js = readdirSync(assets)
++  .filter((name) => name.endsWith('.js'))
++  .map((name) => readFileSync(join(assets, name), 'utf8'))
++  .join('');
++if (!js.includes(origin) || js.includes('https://localhost:18443')) {
++  throw new Error('Android production frontend contains an unsafe transport');
++}
++
++run(android, join(android, 'node_modules/@capacitor/cli/bin/capacitor'), ['copy', 'android'], {
++  ...safe,
++  BVA_ANDROID_MODE: 'production',
++  BVA_ANDROID_PRODUCTION_ORIGIN: origin,
++});
++/** @type {unknown} */
++const parsed = JSON.parse(
++  readFileSync(join(android, 'android/app/src/main/assets/capacitor.config.json'), 'utf8'),
++);
++const copied =
++  /** @type {{server?: {hostname?: unknown, androidScheme?: unknown, cleartext?: unknown, url?: unknown, allowNavigation?: unknown}, plugins?: {CapacitorHttp?: {enabled?: unknown}, CapacitorCookies?: {enabled?: unknown}}}} */ (
++    parsed
++  );
++const expectedHost = 'android.' + new URL(origin).hostname;
++if (
++  copied.server?.hostname !== expectedHost ||
++  copied.server?.androidScheme !== 'https' ||
++  copied.server?.cleartext !== false ||
++  copied.server?.url !== undefined ||
++  copied.server?.allowNavigation !== undefined ||
++  copied.plugins?.CapacitorHttp?.enabled !== false ||
++  copied.plugins?.CapacitorCookies?.enabled !== false
++) {
++  throw new Error('Copied Android production configuration does not match the approved origin');
++}
++const trust = readFileSync(
++  join(android, 'android/app/src/main/res/xml/network_security_config.xml'),
++  'utf8',
++);
++if (
++  !trust.includes('certificates src="system"') ||
++  trust.includes('@raw/qualification_certificate')
++) {
++  throw new Error('Android production trust configuration is unsafe');
++}
++console.log('Android production web/config bundle verified; no APK built.');
+diff --git a/scripts/production_runtime_proof.py b/scripts/production_runtime_proof.py
+new file mode 100644
+index 0000000..756e0ac
+--- /dev/null
++++ b/scripts/production_runtime_proof.py
+@@ -0,0 +1,455 @@
++"""One owned local PostgreSQL proof of the production-style runtime contract."""
++
++import json
++import logging
++import secrets
++from uuid import uuid4
++
++import psycopg
++from brickvault_api.auth import AuthService
++from brickvault_api.catalog.connection import CatalogDatabase
++from brickvault_api.main import create_app
++from brickvault_api.observability import SafeFormatter
++from brickvault_api.persistence.database import create_database_engine
++from brickvault_api.settings import RuntimeSettings
++from database import (
++    LOCAL,
++    ROOT,
++    DatabaseError,
++    Instance,
++    database_marker,
++    instance,
++    migrate,
++    runner_lock,
++    write_record,
++)
++from fastapi.testclient import TestClient
++from psycopg import sql
++from pydantic import SecretStr
++from sqlalchemy import text
++
++ORIGIN = "https://app.example.test"
++NATIVE_ORIGIN = "https://android.app.example.test"
++PROXY = "b" * 64  # Synthetic proof value; never a deployment secret.
++
++
++def targets(
++    stem: str, database: str, owner_password: str, runtime_password: str
++) -> tuple[str, str]:
++    base = f"@127.0.0.1:55433/{database}"
++    return (
++        f"postgresql+psycopg://brickvault_{stem}_owner:{owner_password}{base}",
++        f"postgresql+psycopg://brickvault_{stem}_runtime:{runtime_password}{base}",
++    )
++
++
++def provision_proof_database(
++    owned: Instance,
++    database: str,
++    owner_role: str,
++    runtime_role: str,
++    owner_password: str,
++    runtime_password: str,
++    marker: str,
++    role_marker: str,
++) -> None:
++    with owned.bootstrap() as connection, connection.transaction():
++        for role, password in (
++            (owner_role, owner_password),
++            (runtime_role, runtime_password),
++        ):
++            if connection.execute(
++                "SELECT 1 FROM pg_roles WHERE rolname=%s", (role,)
++            ).fetchone():
++                raise DatabaseError("Production proof role already exists.")
++            connection.execute(
++                sql.SQL(
++                    "CREATE ROLE {} LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE "
++                    "NOREPLICATION NOBYPASSRLS PASSWORD {}"
++                ).format(sql.Identifier(role), sql.Literal(password))
++            )
++            connection.execute(
++                sql.SQL("COMMENT ON ROLE {} IS {}").format(
++                    sql.Identifier(role), sql.Literal(role_marker)
++                )
++            )
++    with owned.bootstrap() as connection:
++        if connection.execute(
++            "SELECT 1 FROM pg_database WHERE datname=%s", (database,)
++        ).fetchone():
++            raise DatabaseError("Production proof database already exists.")
++        connection.execute(
++            sql.SQL("CREATE DATABASE {} OWNER {} TEMPLATE template0").format(
++                sql.Identifier(database), sql.Identifier(owner_role)
++            )
++        )
++        connection.execute(
++            sql.SQL("COMMENT ON DATABASE {} IS {}").format(
++                sql.Identifier(database), sql.Literal(marker)
++            )
++        )
++        connection.execute(
++            sql.SQL("REVOKE ALL ON DATABASE {} FROM PUBLIC").format(
++                sql.Identifier(database)
++            )
++        )
++        connection.execute(
++            sql.SQL("GRANT CONNECT ON DATABASE {} TO {}").format(
++                sql.Identifier(database), sql.Identifier(runtime_role)
++            )
++        )
++
++
++def cleanup_proof_database(
++    owned: Instance,
++    database: str,
++    owner_role: str,
++    runtime_role: str,
++    marker: str,
++    role_marker: str,
++) -> None:
++    with owned.bootstrap() as connection:
++        row = connection.execute(
++            "SELECT shobj_description(oid,'pg_database'),pg_get_userbyid(datdba) "
++            "FROM pg_database WHERE datname=%s",
++            (database,),
++        ).fetchone()
++        if row is not None:
++            if row != (marker, owner_role):
++                raise DatabaseError(
++                    "Production proof database ownership changed; cleanup refused."
++                )
++            connection.execute(
++                sql.SQL("DROP DATABASE {} WITH (FORCE)").format(
++                    sql.Identifier(database)
++                )
++            )
++        for role in (runtime_role, owner_role):
++            record = connection.execute(
++                "SELECT shobj_description(oid,'pg_authid') FROM pg_roles WHERE rolname=%s",
++                (role,),
++            ).fetchone()
++            if record is not None:
++                if record != (role_marker,):
++                    raise DatabaseError(
++                        "Production proof role ownership changed; cleanup refused."
++                    )
++                connection.execute(sql.SQL("DROP ROLE {}").format(sql.Identifier(role)))
++
++
++def http_proof(owner_url: str, runtime_url: str, marker: str) -> None:
++    owner = CatalogDatabase(owner_url, "production", marker, role="owner")
++    runtime = CatalogDatabase(runtime_url, "production", marker, role="runtime")
++    password = secrets.token_urlsafe(32)
++    AuthService(owner).provision(password)
++    with runtime.connect() as connection:
++        identity = connection.execute("SELECT current_user").fetchone()
++        assert identity is not None
++        role = identity["current_user"]
++        assert role.endswith("_runtime")
++        privilege = connection.execute(
++            "SELECT has_database_privilege(current_user,current_database(),'CREATE') AS allowed"
++        ).fetchone()
++        assert privilege is not None and not privilege["allowed"]
++        try:
++            connection.execute("CREATE TABLE public.proof_forbidden(id integer)")
++        except psycopg.errors.InsufficientPrivilege:
++            pass
++        else:
++            raise AssertionError("Runtime role gained DDL privilege")
++    settings = RuntimeSettings(
++        purpose="production",
++        port=8600,
++        database_url=SecretStr(runtime_url),
++        database_ownership_marker=SecretStr(marker),
++        production_origin=ORIGIN,
++        proxy_shared_secret=SecretStr(PROXY),
++        static_enabled=True,
++        web_build_dir=str((ROOT / "apps/web/dist").resolve()),
++    )
++    settings.target()
++    request_logger = logging.getLogger("brickvault.requests")
++    prior_level = request_logger.level
++    records: list[logging.LogRecord] = []
++
++    class Capture(logging.Handler):
++        def emit(self, record: logging.LogRecord) -> None:
++            records.append(record)
++
++    handler = Capture()
++    request_logger.addHandler(handler)
++    request_logger.setLevel(logging.INFO)
++    application = create_app(settings)
++    try:
++        with TestClient(application, base_url="http://app.example.test") as client:
++            proxy = {"X-BrickVault-Proxy": PROXY}
++            assert client.get("/api/health").status_code == 403
++            assert (
++                client.get(
++                    "/api/health", headers={"X-Forwarded-Proto": "https"}
++                ).status_code
++                == 403
++            )
++            assert (
++                client.get(
++                    "/api/health",
++                    headers={
++                        **proxy,
++                        "Host": "evil.example.test",
++                        "X-Forwarded-Host": "app.example.test",
++                    },
++                ).status_code
++                == 400
++            )
++            assert (
++                client.get(
++                    "/api/health",
++                    headers={
++                        **proxy,
++                        "Origin": "https://evil.example.test",
++                        "X-Forwarded-Proto": "https",
++                    },
++                ).status_code
++                == 403
++            )
++            assert (
++                client.get(
++                    "/api/health", headers={**proxy, "Origin": ORIGIN}
++                ).status_code
++                == 200
++            )
++            preflight = client.options(
++                "/api/auth/login",
++                headers={
++                    **proxy,
++                    "Origin": NATIVE_ORIGIN,
++                    "Access-Control-Request-Method": "POST",
++                    "Access-Control-Request-Headers": "content-type,x-brickvault-login",
++                },
++            )
++            assert preflight.status_code == 204
++            assert preflight.headers["access-control-allow-origin"] == NATIVE_ORIGIN
++            assert (
++                client.post(
++                    "/api/auth/login", json={"password": password}, headers=proxy
++                ).status_code
++                == 403
++            )
++            login = client.post(
++                "/api/auth/login",
++                json={"password": password},
++                headers={**proxy, "Origin": ORIGIN, "X-BrickVault-Login": "1"},
++            )
++            assert login.status_code == 200
++            assert all(
++                "Secure" in header
++                and "HttpOnly" in header
++                and "SameSite=strict" in header
++                for header in login.headers.get_list("set-cookie")
++            )
++            session = login.cookies.get("bva_session")
++            csrf_cookie = login.cookies.get("bva_csrf")
++            csrf = login.json()["csrf_token"]
++            assert session and csrf_cookie and csrf
++            cookies = {
++                **proxy,
++                "Cookie": f"bva_session={session}; bva_csrf={csrf_cookie}",
++            }
++            ready = client.get("/api/ready", headers=cookies)
++            assert ready.status_code == 200 and ready.json()["migrations"] == "current"
++            assert ready.headers["cache-control"] == "no-store"
++            assert (
++                client.post(
++                    "/api/auth/logout", headers={**cookies, "Origin": ORIGIN}
++                ).status_code
++                == 403
++            )
++            assert (
++                client.post(
++                    "/api/auth/logout",
++                    headers={
++                        **cookies,
++                        "Origin": "https://evil.example.test",
++                        "X-CSRF-Token": csrf,
++                    },
++                ).status_code
++                == 403
++            )
++            assert client.get("/api/missing", headers=cookies).status_code == 404
++            page = client.get("/", headers=proxy)
++            assert page.status_code == 200
++            assert all(
++                value not in page.content
++                for value in (
++                    password.encode(),
++                    session.encode(),
++                    csrf.encode(),
++                    runtime_url.encode(),
++                    PROXY.encode(),
++                )
++            )
++            assert (
++                client.post(
++                    "/api/auth/logout",
++                    headers={**cookies, "Origin": ORIGIN, "X-CSRF-Token": csrf},
++                ).status_code
++                == 204
++            )
++            native_login = client.post(
++                "/api/auth/login",
++                json={"password": password},
++                headers={**proxy, "Origin": NATIVE_ORIGIN, "X-BrickVault-Login": "1"},
++            )
++            assert native_login.status_code == 200
++            assert native_login.headers["access-control-allow-origin"] == NATIVE_ORIGIN
++            assert native_login.headers["access-control-allow-credentials"] == "true"
++            assert all(
++                "Secure" in header
++                for header in native_login.headers.get_list("set-cookie")
++            )
++            native_session = native_login.cookies.get("bva_session")
++            native_csrf_cookie = native_login.cookies.get("bva_csrf")
++            native_csrf = native_login.json()["csrf_token"]
++            assert native_session and native_csrf_cookie and native_csrf
++            native_cookies = {
++                **proxy,
++                "Cookie": f"bva_session={native_session}; bva_csrf={native_csrf_cookie}",
++                "Origin": NATIVE_ORIGIN,
++            }
++            native_state = client.get("/api/auth/session", headers=native_cookies)
++            assert native_state.status_code == 200
++            assert native_state.headers["access-control-allow-origin"] == NATIVE_ORIGIN
++            assert native_state.headers["cache-control"] == "no-store"
++            for content, _media in application.state.build.values():
++                assert all(
++                    value not in content
++                    for value in (
++                        password.encode(),
++                        session.encode(),
++                        native_session.encode(),
++                        csrf.encode(),
++                        native_csrf.encode(),
++                        runtime_url.encode(),
++                        PROXY.encode(),
++                    )
++                )
++            assert (
++                client.post(
++                    "/api/auth/logout",
++                    headers={**native_cookies, "X-CSRF-Token": native_csrf},
++                ).status_code
++                == 204
++            )
++    finally:
++        request_logger.removeHandler(handler)
++        request_logger.setLevel(prior_level)
++    formatted = "\n".join(SafeFormatter().format(record) for record in records)
++    assert all(
++        value not in formatted
++        for value in (
++            password,
++            session,
++            native_session,
++            csrf,
++            native_csrf,
++            runtime_url,
++            PROXY,
++        )
++    )
++
++
++def main() -> None:
++    with runner_lock():
++        owned = instance("test")
++        run_id = uuid4().hex
++        stem = "p12" + run_id[:16]
++        database = "brickvault_" + stem
++        owner_role, runtime_role = (
++            f"brickvault_{stem}_owner",
++            f"brickvault_{stem}_runtime",
++        )
++        owner_password, runtime_password = secrets.token_hex(32), secrets.token_hex(32)
++        owner_url, runtime_url = targets(
++            stem, database, owner_password, runtime_password
++        )
++        marker = database_marker(owned, run_id)
++        role_marker = database_marker(owned, run_id + ":role")
++        journal = LOCAL / "runs" / f"{run_id}-production.json"
++        before = owned.verify(required=False)
++        running_before = bool(before and before["State"]["Running"])
++        record: dict[str, object] = {
++            "run_id": run_id,
++            "purpose": "disposable-production-style-proof",
++            "database": database,
++            "roles": [owner_role, runtime_role],
++            "running_before": running_before,
++            "status": "starting",
++            "leftovers": [],
++        }
++        write_record(journal, record)
++        leftovers: list[str] = []
++        try:
++            owned.up()
++            provision_proof_database(
++                owned,
++                database,
++                owner_role,
++                runtime_role,
++                owner_password,
++                runtime_password,
++                marker,
++                role_marker,
++            )
++            record["status"] = "migrating"
++            write_record(journal, record)
++            engine = create_database_engine(owner_url, "production", "owner")
++            try:
++                with engine.begin() as connection:
++                    connection.execute(text("REVOKE ALL ON SCHEMA public FROM PUBLIC"))
++                    connection.execute(
++                        text(f'GRANT USAGE ON SCHEMA public TO "{runtime_role}"')
++                    )
++            finally:
++                engine.dispose()
++            migrate(
++                owned, database, run_id=run_id, proof_targets=(owner_url, runtime_url)
++            )
++            record["status"] = "testing"
++            write_record(journal, record)
++            http_proof(owner_url, runtime_url, marker)
++            record["status"] = "passed"
++        except BaseException:
++            record["status"] = "failed_or_interrupted"
++            raise
++        finally:
++            try:
++                owned.up()
++                cleanup_proof_database(
++                    owned, database, owner_role, runtime_role, marker, role_marker
++                )
++            except (DatabaseError, OSError, psycopg.Error):
++                leftovers.append("recorded-proof-database-or-roles")
++            try:
++                if not running_before:
++                    owned.stop()
++            except (DatabaseError, OSError, psycopg.Error):
++                leftovers.append("owned-test-service-state")
++            record["leftovers"] = leftovers
++            write_record(journal, record)
++            print(
++                json.dumps(
++                    {
++                        "proof_status": record["status"],
++                        "leftovers": leftovers,
++                        "ledger": str(journal.relative_to(ROOT)),
++                    }
++                )
++            )
++        if leftovers:
++            raise DatabaseError(
++                "Owned proof cleanup incomplete; inspect the exact private ledger."
++            )
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/services/api/tests/unit/test_production_boundary.py b/services/api/tests/unit/test_production_boundary.py
+new file mode 100644
+index 0000000..1bb9ba2
+--- /dev/null
++++ b/services/api/tests/unit/test_production_boundary.py
+@@ -0,0 +1,85 @@
++from pathlib import Path
++
++import pytest
++from fastapi.testclient import TestClient
++from pydantic import SecretStr
++
++from brickvault_api.main import create_app
++from brickvault_api.settings import RuntimeSettings
++
++ORIGIN = "https://app.example.test"
++NATIVE = "https://android.app.example.test"
++PROXY = "b" * 64
++MARKER = "brickvault-appraisal:" + "1" * 32 + ":" + "2" * 32
++
++
++@pytest.fixture
++def client(tmp_path: Path) -> TestClient:
++    settings = RuntimeSettings(
++        purpose="production",
++        port=8600,
++        database_url=SecretStr(
++            "postgresql+psycopg://brickvault_app_runtime:"
++            + "a" * 64
++            + "@127.0.0.1:55433/brickvault_appraisal"
++        ),
++        database_ownership_marker=SecretStr(MARKER),
++        production_origin=ORIGIN,
++        proxy_shared_secret=SecretStr(PROXY),
++        static_enabled=True,
++        web_build_dir=str(tmp_path),
++    )
++    settings.target()
++    app = create_app(settings)
++    app.state.settings = settings
++    return TestClient(app, base_url=ORIGIN)
++
++
++def test_exact_host_origin_and_proxy_identity(client: TestClient) -> None:
++    approved = {"X-BrickVault-Proxy": PROXY}
++    assert client.get("/api/health", headers=approved).status_code == 200
++    assert client.get("/api/health").status_code == 403
++    assert (
++        client.get("/api/health", headers={**approved, "Host": "evil.example.test"}).status_code
++        == 400
++    )
++    assert (
++        client.get(
++            "/api/health", headers={**approved, "Origin": "https://evil.example.test"}
++        ).status_code
++        == 403
++    )
++    assert client.get("/api/health", headers={**approved, "Origin": ORIGIN}).status_code == 200
++    assert client.post("/api/missing", headers=approved).status_code == 403
++    assert client.post("/api/missing", headers={**approved, "Origin": ORIGIN}).status_code == 404
++    for header in ("X-Forwarded-Host", "X-Forwarded-Proto", "Forwarded"):
++        assert client.get("/api/health", headers={header: ORIGIN}).status_code == 403
++    assert (
++        client.get(
++            "/api/health", headers=[("X-BrickVault-Proxy", PROXY), ("X-BrickVault-Proxy", PROXY)]
++        ).status_code
++        == 403
++    )
++
++
++def test_exact_native_cors_only_after_proxy_identity(client: TestClient) -> None:
++    headers = {
++        "Host": "app.example.test",
++        "Origin": NATIVE,
++        "X-BrickVault-Proxy": PROXY,
++        "Access-Control-Request-Method": "POST",
++        "Access-Control-Request-Headers": "content-type,x-csrf-token",
++    }
++    response = client.options("/api/auth/login", headers=headers)
++    assert response.status_code == 204
++    assert response.headers["access-control-allow-origin"] == NATIVE
++    assert response.headers["access-control-allow-credentials"] == "true"
++    assert response.headers["cache-control"] == "no-store"
++    for changed in (
++        {"Origin": "https://localhost"},
++        {"Host": "android.app.example.test"},
++        {"X-BrickVault-Proxy": "invalid"},
++    ):
++        response = client.options("/api/auth/login", headers={**headers, **changed})
++        assert response.status_code in (400, 403)
++        assert "access-control-allow-origin" not in response.headers
+diff --git a/services/api/tests/unit/test_production_settings.py b/services/api/tests/unit/test_production_settings.py
+new file mode 100644
+index 0000000..d4185e8
+--- /dev/null
++++ b/services/api/tests/unit/test_production_settings.py
+@@ -0,0 +1,127 @@
++import os
++from pathlib import Path
++from uuid import UUID
++
++import pytest
++from pydantic import SecretStr
++
++from brickvault_api.settings import (
++    ConfigurationError,
++    RuntimeSettings,
++    validate_production_origin,
++    validate_target,
++)
++
++OWNER = "brickvault_app_owner"
++RUNTIME = "brickvault_app_runtime"
++DATABASE = "brickvault_appraisal"
++PASSWORD = "a" * 64
++URL = f"postgresql+psycopg://{RUNTIME}:{PASSWORD}@127.0.0.1:55433/{DATABASE}"
++PROXY = "b" * 64
++ORIGIN = "https://app.example.test"
++MARKER = "brickvault-appraisal:" + "1" * 32 + ":" + "2" * 32
++
++
++def configured(tmp_path: Path, **changes: object) -> RuntimeSettings:
++    return RuntimeSettings.model_validate(
++        {
++            "purpose": "production",
++            "port": 8600,
++            "database_url": SecretStr(URL),
++            "database_ownership_marker": SecretStr(MARKER),
++            "static_enabled": True,
++            "web_build_dir": str(tmp_path),
++            "production_origin": ORIGIN,
++            "proxy_shared_secret": SecretStr(PROXY),
++            **changes,
++        }
++    )
++
++
++def test_explicit_production_settings_and_database_roles(tmp_path: Path) -> None:
++    settings = configured(tmp_path)
++    assert settings.target().username == RUNTIME
++    assert validate_target(URL.replace(RUNTIME, OWNER), "production", "owner").database == DATABASE
++    assert validate_production_origin(ORIGIN) == "app.example.test"
++    assert "a" * 64 not in repr(settings)
++    assert PROXY not in repr(settings)
++
++
++@pytest.mark.parametrize(
++    "change",
++    [
++        {"production_origin": None},
++        {"production_origin": "http://app.example.test"},
++        {"production_origin": "https://localhost"},
++        {"production_origin": "https://app.example.test:443"},
++        {"production_origin": "https://*.example.test"},
++        {"proxy_shared_secret": None},
++        {"proxy_shared_secret": SecretStr("short")},
++        {"database_ownership_marker": None},
++        {"database_url": SecretStr(URL.replace(RUNTIME, OWNER))},
++        {"database_url": SecretStr(URL.replace("brickvault_appraisal", "brickvault_dev"))},
++        {"database_url": SecretStr(URL.replace("brickvault_appraisal", "brickvault_test_shadow"))},
++        {"database_url": SecretStr(URL.replace("127.0.0.1", "192.0.2.10"))},
++        {"database_url": SecretStr(URL + "?host=remote.invalid")},
++        {"static_enabled": False},
++        {"web_build_dir": "relative"},
++        {"auth_allow_loopback_http": True},
++        {"android_qualification": True},
++    ],
++)
++def test_production_refuses_unsafe_values(tmp_path: Path, change: dict[str, object]) -> None:
++    with pytest.raises(ConfigurationError) as caught:
++        configured(tmp_path, **change).target()
++    assert PASSWORD not in str(caught.value) and PROXY not in str(caught.value)
++
++
++def test_production_requires_explicit_api_port(tmp_path: Path) -> None:
++    settings = configured(tmp_path).model_copy(update={"port": 8000})
++    assert settings.target().database == DATABASE
++    fields = configured(tmp_path).model_dump(exclude={"port"})
++    with pytest.raises(ConfigurationError):
++        RuntimeSettings.model_validate(fields).target()
++
++
++def test_environment_requires_each_production_input(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    for key in list(os.environ):
++        if key.startswith(("BVA_", "PG")):
++            monkeypatch.delenv(key)
++    values = {
++        "BVA_MODE": "production",
++        "BVA_BIND_HOST": "127.0.0.1",
++        "BVA_API_PORT": "8600",
++        "BVA_RUNTIME_DATABASE_URL": URL,
++        "BVA_DATABASE_OWNERSHIP_MARKER": MARKER,
++        "BVA_PRODUCTION_ORIGIN": ORIGIN,
++        "BVA_PROXY_SHARED_SECRET": PROXY,
++        "BVA_STATIC_ENABLED": "true",
++        "BVA_WEB_BUILD_DIR": str(tmp_path),
++    }
++    for key, value in values.items():
++        monkeypatch.setenv(key, value)
++    assert RuntimeSettings.from_environment().target().database == DATABASE
++    for key in values:
++        monkeypatch.delenv(key)
++        with pytest.raises(ConfigurationError) as caught:
++            RuntimeSettings.from_environment()
++        assert PASSWORD not in str(caught.value) and PROXY not in str(caught.value)
++        monkeypatch.setenv(key, values[key])
++
++
++def test_local_modes_reject_production_inputs(tmp_path: Path) -> None:
++    settings = configured(tmp_path, purpose="test")
++    with pytest.raises(ConfigurationError):
++        settings.target()
++
++
++def test_production_provider_credentials_cannot_be_under_git(tmp_path: Path) -> None:
++    (tmp_path / ".git").mkdir()
++    with pytest.raises(ConfigurationError):
++        configured(
++            tmp_path,
++            market_account_scope=UUID("00000000-0000-4000-8000-000000000001"),
++            market_credentials_root=str(tmp_path / "secrets"),
++        ).target()
