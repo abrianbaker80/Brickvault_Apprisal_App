@@ -1,0 +1,31 @@
+[Unit]
+Description=BrickVault encrypted dual-destination production backup
+Wants=network-online.target
+After=network-online.target postgresql@18-main.service
+Requires=postgresql@18-main.service
+RequiresMountsFor=/var/lib/postgresql /opt/brickvault /var/lib/brickvault/backups
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+WorkingDirectory=/opt/brickvault/current/api
+ExecStart=/opt/brickvault/current/api/venv/bin/brickvault-production-backup backup
+TimeoutStartSec=4h
+UMask=0077
+StateDirectory=brickvault/backups
+StateDirectoryMode=0700
+CacheDirectory=brickvault-backup
+CacheDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/brickvault/backups /var/cache/brickvault-backup
+
+# Intentionally no [Install] section: the timer is the future operator gate.

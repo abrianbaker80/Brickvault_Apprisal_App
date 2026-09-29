@@ -1,0 +1,41 @@
+P12-04B/r1 point-in-time validation — 2026-09-29
+
+Repository:
+  main HEAD: ef7eba53ff2a8c63bd15db1adb589b2e8c3f8449
+  main index: empty
+  protected AGENTS.md and two parser/search test SHA-256 values: match accepted baseline
+  changed source files: 10; no protected file included
+  Ruff check/format: pass
+  targeted mypy: pass
+  focused pytest: 14 passed (9 backup tests, 5 release-manifest tests)
+  full P12-04A suite/build: not rerun
+
+Live foundation:
+  VM 115: Ubuntu 24.04.5; qemu agent active; PostgreSQL 18.6 active on dedicated data mount
+  PostgreSQL listen: 127.0.0.1 only
+  production DB count: 0; production role count: 0
+  API unit: disabled/inactive; API listener count: 0
+  Caddy: absent; production descriptor/api.env: absent
+  backup service/timer: not installed or enabled
+  systemd-analyze verify: unit syntax parsed; warned that future backup executable is absent
+
+Proxmox supplemental copy:
+  rpool healthy; dedicated child quota: 64 GiB
+  bva-backup restricted internal-SFTP account: key access passed; shell/password/chroot escape denied
+  existing root/admin SSH: pass after sshd reload and final retest
+  repository identity, canary snapshot and restic check: pass
+  independent Windows canary restore/hash: PASS
+
+Google Drive off-host copy:
+  new separate Desktop OAuth client: created; requested rclone scope: drive.file
+  encrypted VM/Windows config and protected Windows DPAPI unlock: pass
+  target folder creation, repository initialization and restic check: pass
+  repository identity and VM canary snapshot: pass
+  independent Windows canary restore/hash: PASS
+  existing broader Drive client/config: preserved
+
+Remaining gates:
+  P12-04B independent review/acceptance
+  offline custody for simultaneous VM/laptop loss before production migration
+  first production database/dump/readback and packaged executable validation in a separately authorized slice
+  complete-run retention deletion, timer activation, API, DNS/TLS and P12-05 acceptance later

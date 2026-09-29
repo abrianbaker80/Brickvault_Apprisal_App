@@ -1,0 +1,42 @@
+P12-04B sanitized command record (identities, keys, tokens and private addresses omitted)
+
+Read-only foundation:
+  git rev-parse HEAD
+  git status --porcelain=v1
+  ssh proxmox 'zpool status rpool'
+  ssh proxmox 'zfs get available rpool'
+  VM 115: psql -Atqc 'show listen_addresses'
+  VM 115: systemctl is-active postgresql@18-main.service brickvault-api.service
+
+Restricted Proxmox repository:
+  zfs create -o mountpoint=/var/lib/brickvault-backup -o quota=64G rpool/brickvault-backup
+  install dedicated bva-backup internal-SFTP chroot and public keys
+  sshd -t
+  systemctl reload sshd
+  ssh proxmox true
+  test key-only SFTP, deny shell/password/forwarding/chroot-root writes
+  restic -r sftp:<restricted-backup-alias>:/repository init
+  restic -r sftp:<restricted-backup-alias>:/repository check
+
+Drive repository:
+  authorize dedicated Desktop OAuth client with rclone scope=drive.file
+  rclone --config <protected-config> mkdir bva-drive:Brickvault_Apprisal_App_Backup/restic-production
+  restic -r rclone:bva-drive:Brickvault_Apprisal_App_Backup/restic-production init
+  restic -r rclone:bva-drive:Brickvault_Apprisal_App_Backup/restic-production check
+
+Qualification:
+  VM 115: restic backup <synthetic-canary> to each repository
+  Windows: restic restore <proxmox-snapshot> --target <fresh-private-directory>
+  Windows: restic restore <drive-snapshot> --target <fresh-private-directory>
+  Windows: compare exact manifest, bytes, size and SHA-256; remove only task-owned restore output
+
+Source verification:
+  ruff check <P12-04B Python allowlist>
+  ruff format --check <P12-04B Python allowlist>
+  mypy <production_backup.py>
+  pytest -q <backup tests> <release-manifest tests>
+  systemd-analyze verify <future backup service and timer files>
+
+No production-admin provision-db/migrate/grant-runtime/bootstrap-owner command ran.
+No API/Caddy/DNS/TLS or backup timer start/enable command ran.
+No restic forget or prune command ran.
