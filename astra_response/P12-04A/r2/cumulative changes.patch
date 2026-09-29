@@ -1,0 +1,3132 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 60a0e29..3592406 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -2,0 +3,17 @@
++## P12-04A accepted closeout — 2026-09-29
++
++**P12-01/P12-02/P12-03 are CLOSED; Phase 12 and P12-04 are IN PROGRESS;
++P12-04A is ACCEPTED / CLOSED; the next P12-04 checkpoint and P12-05 are NOT
++STARTED.** VM 115 is
++running with `onboot=0`. Its dedicated ext4 PostgreSQL data filesystem is
++mounted on `scsi1`; PostgreSQL 18.6 uses that filesystem and listens only on
++`127.0.0.1:5432`. Versioned source-built Python 3.13.15 and uv 0.12.10 support the
++staged, installed-wheel and web release. The API systemd unit is prepared but
++disabled, with no API listener. [ExecPlan 094](docs/plans/094-production-foundation.md)
++records the sources, implementation and focused validation. No BrickVault
++production database, application secrets, backup destination, DNS, certificate
++or TLS deployment exists. The P12-03 closeout below remains its dated record.
++The [accepted r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md)
++closes P12-04A only. P12-04 remains IN PROGRESS. Before Phase 12 closes,
++resolve production startup behavior: VM 115 still has `onboot=0`.
++
+diff --git a/deploy/systemd/brickvault-api.service b/deploy/systemd/brickvault-api.service
+new file mode 100644
+index 0000000..2c8dae6
+--- /dev/null
++++ b/deploy/systemd/brickvault-api.service
+@@ -0,0 +1,30 @@
++[Unit]
++Description=BrickVault Appraisal API
++Wants=network-online.target
++After=network-online.target postgresql@18-main.service
++Requires=postgresql@18-main.service
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault
++
++[Service]
++Type=simple
++User=brickvault
++Group=brickvault
++WorkingDirectory=/opt/brickvault/current/api
++Environment=BVA_MODE=production BVA_BIND_HOST=127.0.0.1 BVA_API_PORT=18080
++EnvironmentFile=/etc/brickvault/api.env
++ExecStart=/opt/brickvault/current/api/venv/bin/python -m brickvault_api.main
++Restart=on-failure
++RestartSec=5s
++UMask=0077
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 1a8a900..01e879d 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -2,0 +3,15 @@
++## P12-04A accepted closeout — 2026-09-29
++
++**P12-01/P12-02/P12-03 are CLOSED; Phase 12 and P12-04 are IN PROGRESS;
++P12-04A is ACCEPTED / CLOSED; the next P12-04 checkpoint and P12-05 are NOT
++STARTED.** VM 115 is
++running with `onboot=0`, a dedicated ext4 PostgreSQL data mount, PostgreSQL
++18.6 bound to loopback, versioned source-built Python 3.13.15 and uv 0.12.10. The
++packaged API wheel and web release are staged; the API unit is disabled and
++serves no traffic. [ExecPlan 094](plans/094-production-foundation.md) records
++the foundation and validation. Production database creation, secrets, backups,
++DNS, certificates and TLS remain later P12-04 work. The
++[accepted r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md)
++closes only P12-04A. Resolve VM `onboot=0` deliberately before Phase 12 closes.
++The accepted P12-03 closeout below remains historical.
++
+diff --git a/docs/plans/091-production-runtime-and-deployment.md b/docs/plans/091-production-runtime-and-deployment.md
+index 8516a2b..3fe8a4b 100644
+--- a/docs/plans/091-production-runtime-and-deployment.md
++++ b/docs/plans/091-production-runtime-and-deployment.md
+@@ -2,0 +3,10 @@
++## P12-04A foundation status — 2026-09-29
++
++**P12-04 is IN PROGRESS; P12-04A is ACCEPTED / CLOSED; the next P12-04 checkpoint
++and P12-05 are NOT STARTED.** P12-01/P12-02/P12-03 remain CLOSED. VM 115 has a private,
++packaged runtime foundation; the API unit is disabled and no production
++database, secrets, backup, DNS or TLS exist. [ExecPlan 094](094-production-foundation.md)
++is the current implementation record. The P12-03 closeout below remains a
++dated record. The [accepted P12-04A r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md)
++closes only the foundation checkpoint.
++
+diff --git a/docs/plans/092-exact-infrastructure-pre-mutation-review.md b/docs/plans/092-exact-infrastructure-pre-mutation-review.md
+index ce12fd4..e3e579d 100644
+--- a/docs/plans/092-exact-infrastructure-pre-mutation-review.md
++++ b/docs/plans/092-exact-infrastructure-pre-mutation-review.md
+@@ -2,0 +3,12 @@
++## P12-04A foundation status — 2026-09-29
++
++**P12-04 is IN PROGRESS; P12-04A is ACCEPTED / CLOSED; the next P12-04 checkpoint
++and P12-05 are NOT STARTED.** P12-01/P12-02/P12-03 remain CLOSED. VM 115 has its
++dedicated ext4 PostgreSQL filesystem and loopback-only PostgreSQL 18.6;
++Python 3.13.15, uv 0.12.10 and a packaged BrickVault release are staged.
++The API unit is disabled. [ExecPlan 094](094-production-foundation.md) records
++the new foundation. The P12-03 closeout below remains historical; production
++database, secrets, backup, DNS and TLS are still pending P12-04 work. The
++[accepted P12-04A r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md)
++closes only the foundation checkpoint.
++
+diff --git a/docs/plans/093-base-vm-provisioning.md b/docs/plans/093-base-vm-provisioning.md
+index 7c0bbda..7bebf67 100644
+--- a/docs/plans/093-base-vm-provisioning.md
++++ b/docs/plans/093-base-vm-provisioning.md
+@@ -2,0 +3,12 @@
++## P12-04A foundation status — 2026-09-29
++
++**P12-04 is IN PROGRESS; P12-04A is ACCEPTED / CLOSED; the next P12-04 checkpoint
++and P12-05 are NOT STARTED.** P12-01/P12-02/P12-03 remain CLOSED. VM 115 now runs with
++`onboot=0`, a dedicated ext4 PostgreSQL data mount, loopback-only PostgreSQL
++18.6, Python 3.13.15, uv 0.12.10 and an installed-wheel/web release. The API
++unit is disabled, with no production database, secrets, backup, DNS or TLS.
++[ExecPlan 094](094-production-foundation.md) is the current record. The
++P12-03 accepted closeout below remains historical. The
++[accepted P12-04A r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md)
++closes only the foundation checkpoint.
++
+diff --git a/docs/plans/094-production-foundation.md b/docs/plans/094-production-foundation.md
+new file mode 100644
+index 0000000..87f453e
+--- /dev/null
++++ b/docs/plans/094-production-foundation.md
+@@ -0,0 +1,96 @@
++# ExecPlan 094 — P12-04A production foundation
++
++## Goal and user-visible outcome
++
++VM 115 now has a private production foundation for BrickVault: dedicated PostgreSQL storage, Python 3.13, pinned uv, PostgreSQL 18, a guarded production administration CLI, a hash-verified packaged release and an inactive API unit. Production data, secrets, backup, DNS and TLS remain for later P12-04 checkpoints. P12-04A is ACCEPTED / CLOSED after the [r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/22f80286b1b82d7862b922fe2d66fd06fa84cf9b/astra_response/P12-04A/r1/REVIEW.md). P12-04 remains IN PROGRESS; its next checkpoint and P12-05 are NOT STARTED.
++
++## Why this work is being done now
++
++Brian explicitly authorized P12-04A after accepting P12-03. The accepted Ubuntu base VM is ready for foundation work, while first production migration/bootstrap still requires reviewed encrypted recovery paths. [Plan 091](091-production-runtime-and-deployment.md), [Plan 092](092-exact-infrastructure-pre-mutation-review.md) and [Plan 093](093-base-vm-provisioning.md) retain the earlier decisions and evidence.
++
++## In scope
++
++- Reverify VM and blank `scsi1`, format only that disk as GPT/ext4 and mount by UUID at `/var/lib/postgresql` without `nofail`.
++- Install official, integrity-verified CPython 3.13 in a versioned system path, official uv 0.12.10 and signed PGDG PostgreSQL 18.
++- Keep PostgreSQL local to `127.0.0.1:5432` with cluster data on the mounted disk and restrictive local authentication.
++- Implement and test the packaged production administration CLI with exact production-target and ownership guards.
++- Build a locked API/web release with hashes, stage only reviewed artifacts, create the no-login service account, release layout and inactive systemd unit.
++- Recheck storage persistence, SSH, guest agent, listeners, account permissions and absence of production secrets and database.
++
++## Explicit non-goals
++
++No production BrickVault database, roles, migration, owner bootstrap, password, ownership marker or proxy secret. No Caddy, private DNS, certificate, backup repository/job, Google Drive, Cloudflare, firewall/router change, provider call or legacy VM 107 access. No main commit/push or P12-05 work.
++
++## Current repository state
++
++Main is `96b84359078632fef7a7193add663734cec8ba2c` with an empty index at entry. `AGENTS.md` and the catalog search/parser test files are the only starting worktree changes; their accepted SHA-256 values were confirmed and will remain byte-for-byte unchanged and unstaged.
++
++## Decisions and assumptions
++
++The trusted Proxmox readback found VM 115 stopped, `onboot=0`, q35/OVMF, four host vCPUs, 8192 MiB RAM, `scsi0` 32 GiB, `scsi1` 128 GiB, one `vmbr1` NIC and guest agent enabled. Only VM 115 was started. Its changed DHCP address was obtained from the agent. Laptop SSH was allowed only after the ED25519 network key matched the guest-agent-proven fingerprint. The guest reports Ubuntu 24.04.5 LTS, hostname `brickvault-appraisal`, root on `scsi0` `/dev/sda2`, and the originally unpartitioned 137,438,953,472-byte `scsi1` disk with the expected stable SCSI serial. Read-only `lsblk`, `wipefs`, `blkid`, mount and fstab checks found no prior data-disk use. No BrickVault, PostgreSQL or Caddy installation was present before foundation changes.
++
++The reviewed `scsi1` is now GPT with one ext4 partition, `/dev/sdb1`. An initial filesystem label request exceeded ext4's 16-byte limit and was truncated; after inspecting the partial state, the label was explicitly corrected to `brickvault-db`. The filesystem is mounted at `/var/lib/postgresql` through a UUID `fstab` entry with required-mount behavior (no `nofail`). The actual UUID and raw host evidence stay in ignored local records. Remount and boot-ID-proven reboot checks confirmed that the root and data filesystems return on their intended disks.
++
++The [official CPython 3.13.15 xz source](https://www.python.org/ftp/python/3.13.15/Python-3.13.15.tar.xz) matched SHA-256 `1e66a7945a48390ee4c2a4268a0e4185884059a13c4aab6d148aa208deea4a76`, and its detached signature verified against Thomas Wouters's release key fingerprint `7169605F62C751356D054A26A821E680E5FA6305`. Its build and installation into `/opt/python/3.13.15` completed; the installed interpreter reports Python 3.13.15 with OpenSSL 3.0.13 and passed the required runtime checks. Ubuntu's system `/usr/bin/python3` remained unchanged. This source-built interpreter requires explicit monitoring of 3.13 security releases and a verified signed-source rebuild into a new versioned prefix; unattended apt alone cannot patch it.
++
++The official Astral uv 0.12.10 Linux GNU archive matched its published SHA-256 `173d95a0c32d18c896c46ba6fafbf3cf9c14ab74b033f81b76c883ef492a976b`; uv is installed at `/usr/local/bin/uv`. No uv-managed Python is permitted. The PGDG Noble signing key fingerprint was verified as `B97B0AFCAA1A47F044F244A07FCC7D46ACCC4CF8`; the signed installed PostgreSQL package is `postgresql-18=18.6-1.pgdg24.04+2`.
++
++The `18/main` cluster is active and enabled with data at `/var/lib/postgresql/18/main` on `/dev/sdb1`. A systemd mount dependency requires `/var/lib/postgresql` before cluster startup. TCP binds only `127.0.0.1:5432`, with SCRAM authentication on loopback; IPv6 loopback is rejected. The local socket maps OS `root` and `postgres` to database `postgres` through `brickvault_maintenance`, and ordinary local users retain peer authentication. Cluster-wide credential logging controls are `log_statement=none`, `log_min_error_statement=panic`, `log_parameter_max_length=0` and `log_parameter_max_length_on_error=0`. Post-reboot checks confirmed cluster location, readiness and loopback-only listener. A laptop-origin PostgreSQL TCP check found no reachable external endpoint. Checks found no production BrickVault database or production roles.
++
++The locked, no-login `brickvault` system account has only its own group and no sudo rights. `/opt/brickvault`, `/opt/brickvault/releases` and `/etc/brickvault` are `root:brickvault` mode `0750`; `/var/lib/brickvault` is `brickvault:brickvault` mode `0700`. Release `p12-04a-r1` and its virtualenv were installed under the protected release layout. The API unit is installed but disabled and inactive; its mandatory production environment file is absent, and no API listener exists. VM 115 remains running with Proxmox `onboot=0`.
++
++The reviewed release source ID is `c65188e2f3bfeecc140175e52f5ecab9a64c850710513c7a2c5aaf3ce9c7bc4c`. Release `p12-04a-r1` has manifest SHA-256 `bfc6608efa56d1625f4493fe5e491b587ef95accacacf399fd44de38c6998ce9` and API wheel SHA-256 `ec3e2ec4716046fae481aa85c76bc0eda1b6d81033c45c1c7548f7c7b16a9cf8`. The pnpm release build, independent installed-wheel import and frontend verification passed locally; the transferred manifest hashes verified on VM 115. The VM virtualenv installed 26 hash-locked dependencies plus that wheel. Installed-wheel import and `brickvault-production-admin` entrypoint checks passed as the `brickvault` user.
++
++## Data model and API/interface changes
++
++No schema or API route changes. The new packaged `brickvault-production-admin` interface has `preflight`, `provision-db`, `migrate`, `grant-runtime`, `bootstrap-owner` and `verify` commands. Its source accepts only the exact production database/owner/runtime names and loopback target from a protected, root-owned local descriptor; the descriptor and recovery receipt do not exist on VM 115 in P12-04A. Maintenance requires OS root, the local PostgreSQL socket and a verified `postgres` session through the narrow peer map; it rejects PostgreSQL and application environment overrides. Provisioning refuses existing or partial target state. Migration, runtime grants and bootstrap require an operator-verified, recent two-copy recovery receipt bound to the database marker and revision state. Bootstrap also requires a local TTY with hidden password input and an empty principal table.
++
++Credential-bearing SQL uses a guarded maintenance session that sets and reads back effective PostgreSQL logging and activity settings and refuses unreviewed preload libraries. Role provisioning computes distinct SCRAM-SHA-256 verifiers client-side, so plaintext role passwords never enter the SQL statement. The owner bootstrap writes its Argon2 hash through a guarded peer session switched to the owner role. The CLI prints generic errors rather than driver, path or credential details. Thirty focused, synthetic unit tests passed for target and ownership guards, recovery receipt, credential sentinel handling, logging refusal and CLI redaction. A separate disposable PostgreSQL 18 logging proof and three focused local PostgreSQL runtime-grant tests passed; their disposable database was removed and runner stopped. The installed-wheel import and admin entrypoint passed as the `brickvault` user on VM 115. VM 115 has not executed any CLI production mutation.
++
++## Implementation sequence
++
++1. Complete: verify package sources and blank-disk target, then create GPT/ext4 on the reviewed `scsi1`; correct the ext4 label to `brickvault-db`, mount by UUID and verify remount from `fstab`.
++2. Complete: install signed PGDG PostgreSQL 18.6 only after the data mount; create the 18/main cluster on that filesystem; constrain its listener and local authentication; verify active service, data location, socket and absence of BrickVault database/roles.
++3. Complete: verify signed CPython 3.13.15 source and official uv 0.12.10 archive; install both without replacing the Ubuntu system Python or downloading an uv-managed Python.
++4. Complete: implement and test the admin CLI; build the installed-wheel/web release from locked inputs, independently verify its frontend and wheel, and produce the content-hash manifest.
++5. Complete: create the restricted `brickvault` account and directories; transfer verified release artifacts, install 26 hash-locked dependencies and the wheel, and install a disabled/inactive API unit without its mandatory environment file.
++6. Complete: perform targeted repository and server validation. One boot-ID-proven reboot checked root/data mounts, PostgreSQL, SSH, guest agent, time, account, listener and absence of production secrets/database/roles. Leave VM 115 running with `onboot=0`.
++7. Pending: prepare a sanitized `astra-response` r1 package for independent review; leave main uncommitted and its index empty.
++
++## Validation and acceptance criteria
++
++The boot-ID-proven reboot confirmed that the data mount persists and PostgreSQL's data directory resolves onto `scsi1`. PostgreSQL binds only 127.0.0.1, and laptop-origin TCP access to its port was refused or unreachable. Exact CPython/uv/PGDG provenance and versions are recorded above. The pnpm build, frontend verifier, manifest hashes, independent installed-wheel import, VM wheel import and admin entrypoint passed. Thirty admin CLI synthetic unit tests, a separate disposable credential-logging proof and three local PostgreSQL grant tests passed. The API unit remains disabled and inactive, with no listener or populated production environment file. Post-reboot checks also covered SSH, guest agent, time, account permissions and absence of production database, roles and secrets. The three protected file hashes still match the accepted values and the main Git index is empty.
++
++## Security, privacy and data integrity
++
++All raw VM addresses, host keys, filesystem UUIDs and operational outputs remain in ignored local evidence; the public review package contains sanitized summaries. No production secret, database, role, marker or account principal has been created. Only the reviewed `scsi1` was partitioned and formatted. The production admin interface rejects ambiguous ownership/target state, protects credential-bearing SQL at the database-session boundary and redacts errors. Foundation and test evidence do not establish that first production mutation or backup recovery is ready.
++
++## Failure modes, rollback and recovery
++
++The disk write was gated on matching serial, size, partition/signature/mount state and root-disk identity. The overlong ext4 label caused a stopped partial disk step; the next step inspected its GPT/ext4 state and corrected only the label before mounting. Stop future installation if source integrity or repository signature fails. Keep any partially prepared VM private; do not fabricate acceptance or move PostgreSQL from an accidental OS-disk cluster. No destructive rollback, VM deletion or legacy guest operation is in scope. A source-build maintenance owner must be explicit because apt does not patch it.
++
++## Progress log
++
++- [x] 2026-09-29: Main HEAD/index and three protected hashes matched the accepted checkpoint.
++- [x] 2026-09-29: Trusted host readback matched VM 115's accepted stopped configuration; started only VM 115.
++- [x] 2026-09-29: Guest host key was verified through Proxmox agent before approved-key SSH.
++- [x] 2026-09-29: Guest read-only OS/root/data disk and absence checks passed.
++- [x] 2026-09-29: Reviewed `scsi1` was partitioned and formatted; the ext4 label was corrected to `brickvault-db` after a safe stop, then the UUID mount and remount passed.
++- [x] 2026-09-29: Python.org CPython 3.13.15 source hash/signature and official uv 0.12.10 archive hash passed. The versioned Python build and uv installation passed; Ubuntu system Python remained unchanged.
++- [x] 2026-09-29: Signed PGDG `postgresql-18=18.6-1.pgdg24.04+2` and the disk-backed, local-only 18/main cluster passed; production database and roles are absent.
++- [x] 2026-09-29: Locked `brickvault` account and protected base directories passed account/permission checks.
++- [x] 2026-09-29: Admin CLI source and 30 focused synthetic tests passed, including the credential logging guard; a separate disposable PostgreSQL 18 logging proof passed. No real production CLI mutation was run.
++- [x] 2026-09-29: pnpm release build, independent wheel import and frontend verification passed; release `p12-04a-r1` and its manifest hashes verified on VM 115. Twenty-six locked dependencies and the wheel were installed; the `brickvault` user imported the wheel and invoked the admin entrypoint.
++- [x] 2026-09-29: Three focused local PostgreSQL grant tests passed; their disposable database was removed and test runner stopped.
++- [x] 2026-09-29: The API unit was installed disabled/inactive without its mandatory environment file or any listener.
++- [x] 2026-09-29: One boot-ID-proven VM reboot passed root/data mounts, local PostgreSQL, SSH, agent, time, account, listener and no-production-state checks; external PostgreSQL TCP was not reachable from the laptop. VM 115 remains running with `onboot=0`.
++- [x] 2026-09-29: The three protected SHA-256 values still match and main's index remains empty; the sanitized r1 review package was assembled from the literal 16-file task inventory.
++- [x] 2026-09-29: Independent review accepted the published r1 package at `22f80286b1b82d7862b922fe2d66fd06fa84cf9b`; P12-04A is CLOSED. Closeout reused the accepted implementation, test and server evidence without rerunning it.
++
++## Open questions and manual checks
++
++The later backup, DNS/TLS and first production-data gates remain unresolved. The CLI recovery receipt is only a guard; do not create it until two independently encrypted recovery copies have actually been created and verified under the later P12-04 backup step. It is not itself backup or restore proof. Track CPython 3.13 security releases explicitly and upgrade through a newly verified, signed-source, versioned installation; do not replace Ubuntu `/usr/bin/python3`. VM 115 remains `onboot=0` during deployment; resolve its production startup behavior deliberately before Phase 12 closure. The accepted ext4 label is `brickvault-db`; do not rename or reformat the filesystem. No browser, PWA, Android or restore acceptance is part of P12-04A.
++
++## Outcome and follow-up
++
++P12-04A is ACCEPTED / CLOSED. Runtime, release, installation and reboot checks passed in the accepted r1 evidence. No production database, roles, migration, owner bootstrap or later backup/DNS/TLS work was performed. P12-04 remains IN PROGRESS; its next checkpoint and P12-05 are NOT STARTED.
+diff --git a/scripts/database.py b/scripts/database.py
+index 65cf6ff..b08f209 100644
+--- a/scripts/database.py
++++ b/scripts/database.py
+@@ -23,0 +24 @@ from brickvault_api.persistence.database import (
++from brickvault_api.persistence.runtime_grants import grant_runtime
+@@ -614,228 +615,3 @@ def migrate(
+-                role = runtime_url.username
+-                connection.execute(
+-                    text(f'REVOKE ALL ON public.alembic_version FROM PUBLIC, "{role}"')
+-                )
+-                connection.execute(
+-                    text(f'GRANT SELECT ON public.alembic_version TO "{role}"')
+-                )
+-                from brickvault_api.catalog.models import (
+-                    CATALOG_TABLES,
+-                    RUNTIME_CATALOG_TABLES,
+-                )
+-
+-                # Enumerated catalog objects only. Future tables get no default grant.
+-                for name in CATALOG_TABLES:
+-                    if (
+-                        connection.scalar(
+-                            text("SELECT to_regclass(:name)"),
+-                            {"name": "public." + name},
+-                        )
+-                        is not None
+-                    ):
+-                        connection.execute(
+-                            text(f'REVOKE ALL ON public."{name}" FROM PUBLIC, "{role}"')
+-                        )
+-                        if name in RUNTIME_CATALOG_TABLES:
+-                            connection.execute(
+-                                text(f'GRANT SELECT ON public."{name}" TO "{role}"')
+-                            )
+-                from brickvault_api.market.models import (
+-                    MARKET_TABLES,
+-                    OPERATIONAL_TABLES,
+-                )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.auth_principal')")
+-                ):
+-                    for name, privileges in (
+-                        ("auth_principal", "SELECT"),
+-                        ("auth_control", "SELECT, UPDATE"),
+-                        ("auth_session", "SELECT, INSERT, DELETE"),
+-                    ):
+-                        connection.execute(
+-                            text(f'REVOKE ALL ON public.{name} FROM PUBLIC, "{role}"')
+-                        )
+-                        connection.execute(
+-                            text(f'GRANT {privileges} ON public.{name} TO "{role}"')
+-                        )
+-                    connection.execute(
+-                        text(
+-                            f'GRANT UPDATE(last_activity_at,revoked_at) ON public.auth_session TO "{role}"'
+-                        )
+-                    )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.deal_forecast')")
+-                ):
+-                    connection.execute(
+-                        text(
+-                            f'REVOKE ALL ON public.deal_forecast FROM PUBLIC, "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f'GRANT SELECT, INSERT, UPDATE(saved_at) ON public.deal_forecast TO "{role}"'
+-                        )
+-                    )
+-                    for signature in (
+-                        "forecast_clock()",
+-                        "forecast_cleanup(uuid)",
+-                        "forecast_lock_context(uuid)",
+-                    ):
+-                        connection.execute(
+-                            text(
+-                                f'GRANT EXECUTE ON FUNCTION public.{signature} TO "{role}"'
+-                            )
+-                        )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.watchlist_item')")
+-                ):
+-                    connection.execute(
+-                        text(
+-                            f'REVOKE ALL ON public.watchlist_item FROM PUBLIC, "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f'GRANT SELECT, DELETE ON public.watchlist_item TO "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f"GRANT INSERT(id,owner_id,canonical_set_id,set_number,target_purchase_price) "
+-                            f'ON public.watchlist_item TO "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f"GRANT UPDATE(target_purchase_price,note,revision) "
+-                            f'ON public.watchlist_item TO "{role}"'
+-                        )
+-                    )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.deal_lineage_metadata')")
+-                ):
+-                    connection.execute(
+-                        text(
+-                            f'REVOKE ALL ON public.deal_lineage_metadata FROM PUBLIC, "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f"GRANT SELECT, INSERT(owner_id,root_forecast_id,note,source_url), "
+-                            f'UPDATE(note,source_url,revision) ON public.deal_lineage_metadata TO "{role}"'
+-                        )
+-                    )
+-
+-                if connection.scalar(text("SELECT to_regclass('public.hunt_run')")):
+-                    connection.execute(
+-                        text(f'REVOKE ALL ON public.hunt_run FROM PUBLIC, "{role}"')
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f"GRANT SELECT, INSERT(id,owner_id,idempotency_key,request_digest,"
+-                            f"run_version,sort_policy_version,default_sort_by,"
+-                            f"default_sort_direction,settings_snapshot,candidate_count), "
+-                            f'UPDATE(completed_at) ON public.hunt_run TO "{role}"'
+-                        )
+-                    )
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.hunt_candidate')")
+-                ):
+-                    connection.execute(
+-                        text(
+-                            f'REVOKE ALL ON public.hunt_candidate FROM PUBLIC, "{role}"'
+-                        )
+-                    )
+-                    connection.execute(
+-                        text(
+-                            f"GRANT SELECT, INSERT(id,run_id,owner_id,candidate_position,"
+-                            f"canonical_set_id,set_number,set_name,snapshot_version,snapshot) "
+-                            f'ON public.hunt_candidate TO "{role}"'
+-                        )
+-                    )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.selling_profile')")
+-                ):
+-                    for table, insert_columns, update_columns in (
+-                        (
+-                            "selling_profile",
+-                            "id,owner_id,name,assumptions",
+-                            "name,assumptions,revision",
+-                        ),
+-                        (
+-                            "application_settings",
+-                            "id,owner_id,default_profile_id,defaults",
+-                            "default_profile_id,defaults,revision",
+-                        ),
+-                    ):
+-                        connection.execute(
+-                            text(f'REVOKE ALL ON public.{table} FROM PUBLIC, "{role}"')
+-                        )
+-                        connection.execute(
+-                            text(
+-                                f'GRANT SELECT, INSERT({insert_columns}), UPDATE({update_columns}) ON public.{table} TO "{role}"'
+-                            )
+-                        )
+-                    connection.execute(
+-                        text(f'GRANT DELETE ON public.selling_profile TO "{role}"')
+-                    )
+-
+-                for name in MARKET_TABLES:
+-                    if (
+-                        connection.scalar(
+-                            text("SELECT to_regclass(:name)"),
+-                            {"name": "public." + name},
+-                        )
+-                        is not None
+-                    ):
+-                        connection.execute(
+-                            text(f'REVOKE ALL ON public."{name}" FROM PUBLIC, "{role}"')
+-                        )
+-                        privileges = "SELECT"
+-                        if (
+-                            name in OPERATIONAL_TABLES
+-                            and name != "provider_scope_state"
+-                        ):
+-                            privileges += ", INSERT, UPDATE"
+-                        elif name == "market_observation":
+-                            privileges += ", INSERT"
+-                        connection.execute(
+-                            text(f'GRANT {privileges} ON public."{name}" TO "{role}"')
+-                        )
+-                        if name == "provider_scope_state":
+-                            connection.execute(
+-                                text(
+-                                    f'GRANT UPDATE(suspended,next_dispatch_at,lease_owner,lease_token,lease_until) ON public.provider_scope_state TO "{role}"'
+-                                )
+-                            )
+-                from brickvault_api.market.product_refresh_models import (
+-                    PRODUCT_COLUMNS,
+-                    PRODUCT_FUNCTIONS,
+-                )
+-
+-                if connection.scalar(
+-                    text("SELECT to_regclass('public.product_refresh_operation')")
+-                ):
+-                    for name, columns in PRODUCT_COLUMNS.items():
+-                        connection.execute(
+-                            text(
+-                                f'GRANT UPDATE({columns}) ON public.{name} TO "{role}"'
+-                            )
+-                        )
+-                    connection.execute(
+-                        text(
+-                            "GRANT INSERT(attempt_id,operation_id,item_type,item_no,item_name,classification,"
+-                            "received_at,completed_at,adapter_version,normalization_version,evidence_digest,retained_until) "
+-                            f'ON public.provider_discovery_evidence TO "{role}"'
+-                        )
+-                    )
+-                    for signature in PRODUCT_FUNCTIONS:
+-                        connection.execute(
+-                            text(
+-                                f'GRANT EXECUTE ON FUNCTION public.{signature} TO "{role}"'
+-                            )
+-                        )
++                if runtime_url.username is None:
++                    raise DatabaseError("Runtime role is missing.")
++                grant_runtime(connection, runtime_url.username)
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index 832692f..a9f5811 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -69,0 +70,2 @@ def package() -> None:
++        "brickvault_api/production_admin.py",
++        "brickvault_api/persistence/runtime_grants.py",
+@@ -226,0 +229 @@ import brickvault_api
++from importlib.metadata import distribution
+@@ -227,0 +231 @@ from brickvault_api.persistence.database import expected_revisions
++from brickvault_api.production_admin import parse_config
+@@ -229,0 +234,2 @@ assert pathlib.Path(brickvault_api.__file__).resolve().is_relative_to(pathlib.Pa
++admin_entry = [entry for entry in distribution('brickvault-api').entry_points if entry.group == 'console_scripts' and entry.name == 'brickvault-production-admin']
++assert len(admin_entry) == 1 and admin_entry[0].load() is not None
+@@ -257,0 +264,6 @@ print('Independent installed wheel import, migration graph and credential-free s
++    admin_executable = installed / (
++        "Scripts/brickvault-production-admin.exe"
++        if sys.platform == "win32"
++        else "bin/brickvault-production-admin"
++    )
++    assert "provision-db" in execute([str(admin_executable), "--help"], scratch)
+diff --git a/scripts/production_admin_secret_proof.py b/scripts/production_admin_secret_proof.py
+new file mode 100644
+index 0000000..0e4896a
+--- /dev/null
++++ b/scripts/production_admin_secret_proof.py
+@@ -0,0 +1,375 @@
++"""Explicit local PostgreSQL 18 proof of credential SQL and logging controls.
++
++Run with the API virtualenv's Python. This creates one uniquely owned Docker
++container from the already cached, repository-pinned image and removes only
++that container. It never connects to a production server or an existing test
++database. Only sanitized proof results are written under .local.
++"""
++
++from __future__ import annotations
++
++import hashlib
++import json
++import secrets
++import socket
++import subprocess
++import sys
++import time
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any
++from uuid import uuid4
++
++import psycopg
++from brickvault_api import production_admin as admin
++from brickvault_api.auth import PASSWORDS
++from brickvault_api.settings import reject_pg_environment
++from database import IMAGE, ROOT, local_context
++from psycopg import sql
++from psycopg.rows import dict_row
++
++
++class ProofError(RuntimeError):
++    """Failure messages must never contain SQL, logs, passwords or verifiers."""
++
++
++def _docker(context: str, *args: str, input_text: str | None = None) -> str:
++    result = subprocess.run(
++        ["docker", "--context", context, *args],
++        input=input_text,
++        capture_output=True,
++        text=True,
++        encoding="utf-8",
++        errors="replace",
++        timeout=60,
++        check=False,
++    )
++    if result.returncode:
++        raise ProofError("Local Docker operation failed; output withheld.")
++    return result.stdout + result.stderr
++
++
++def _port() -> int:
++    for candidate in range(55434, 55444):
++        try:
++            with socket.socket() as probe:
++                if hasattr(socket, "SO_EXCLUSIVEADDRUSE"):
++                    probe.setsockopt(socket.SOL_SOCKET, socket.SO_EXCLUSIVEADDRUSE, 1)
++                probe.bind(("127.0.0.1", candidate))
++                return candidate
++        except OSError:
++            continue
++    raise ProofError("No approved disposable loopback port is free.")
++
++
++def _owned(context: str, name: str, owner: str) -> dict[str, Any]:
++    rows: list[dict[str, Any]] = json.loads(
++        _docker(context, "container", "inspect", name)
++    )
++    if (
++        len(rows) != 1
++        or rows[0]["Name"] != "/" + name
++        or rows[0]["Config"]["Labels"].get("app.brickvault.secret-proof") != owner
++        or rows[0]["Config"]["Image"] != IMAGE
++        or any(item.get("Type") == "volume" for item in rows[0]["Mounts"])
++    ):
++        raise ProofError("Disposable container ownership differs; cleanup refused.")
++    return rows[0]
++
++
++def _connect(port: int, user: str, password: str | None = None) -> Any:
++    return psycopg.connect(
++        host="127.0.0.1",
++        port=port,
++        dbname="postgres",
++        user=user,
++        password=password,
++        autocommit=True,
++        row_factory=dict_row,
++        connect_timeout=2,
++        sslmode="disable",
++        gssencmode="disable",
++    )
++
++
++def _expect_error(
++    connection: Any, statement: Any, code: str, params: Any = None
++) -> None:
++    try:
++        connection.execute(statement, params)
++    except psycopg.Error as error:
++        if error.sqlstate != code:
++            raise ProofError(
++                "SQL failure did not have the expected category."
++            ) from None
++    else:
++        raise ProofError("Expected SQL failure did not occur.")
++
++
++def prove() -> Path:
++    reject_pg_environment()
++    context = local_context()
++    image = json.loads(_docker(context, "image", "inspect", IMAGE))[0]
++    if image["Os"] != "linux" or IMAGE.split("@", 1)[1] not in image["RepoDigests"][0]:
++        raise ProofError("Cached PostgreSQL image identity differs.")
++    run_id = uuid4().hex
++    name = "bva-secret-proof-" + run_id
++    bootstrap = "proof_bootstrap_" + run_id[:12]
++    login = "proof_login_" + run_id[:12]
++    owner_role = "proof_owner_" + run_id[:12]
++    port = _port()
++    receipt = ROOT / ".local" / "p12-04a-secret-proof" / run_id / "result.json"
++    receipt.parent.mkdir(parents=True, exist_ok=False)
++    result: dict[str, Any] = {
++        "run_id": run_id,
++        "started_at_utc": datetime.now(UTC).isoformat(),
++        "image": IMAGE,
++        "target": "new disposable local container; loopback only",
++        "port": port,
++        "production_access": False,
++        "status": "FAILED",
++        "checks": [],
++        "container_removed": False,
++    }
++    created = False
++    primary_error: BaseException | None = None
++    sensitive: list[str] = []
++    controls = ["SAFE_SQL_CONTROL_" + run_id, "SAFE_ERROR_CONTROL_" + run_id]
++    try:
++        _docker(
++            context,
++            "run",
++            "--detach",
++            "--pull",
++            "never",
++            "--name",
++            name,
++            "--label",
++            "app.brickvault.secret-proof=" + run_id,
++            "--restart",
++            "no",
++            "--memory",
++            "512m",
++            "--cpus",
++            "1",
++            "--tmpfs",
++            "/var/lib/postgresql:rw,nosuid,nodev,size=384m",
++            "--publish",
++            f"127.0.0.1:{port}:5432",
++            "--env",
++            "POSTGRES_USER=" + bootstrap,
++            "--env",
++            "POSTGRES_DB=postgres",
++            "--env",
++            "POSTGRES_HOST_AUTH_METHOD=trust",
++            IMAGE,
++            "postgres",
++            "-c",
++            "shared_buffers=32MB",
++            "-c",
++            "log_statement=all",
++            "-c",
++            "log_min_error_statement=error",
++            "-c",
++            "log_min_messages=warning",
++            "-c",
++            "log_error_verbosity=verbose",
++            "-c",
++            "log_min_duration_statement=0",
++            "-c",
++            "log_min_duration_sample=0",
++            "-c",
++            "log_statement_sample_rate=1",
++            "-c",
++            "log_transaction_sample_rate=1",
++            "-c",
++            "log_duration=on",
++            "-c",
++            "log_parameter_max_length=-1",
++            "-c",
++            "log_parameter_max_length_on_error=-1",
++            "-c",
++            "debug_print_parse=on",
++            "-c",
++            "debug_print_rewritten=on",
++            "-c",
++            "debug_print_plan=on",
++        )
++        created = True
++        item = _owned(context, name, run_id)
++        if item["HostConfig"]["PortBindings"] != {
++            "5432/tcp": [{"HostIp": "127.0.0.1", "HostPort": str(port)}]
++        }:
++            raise ProofError("Disposable container is not exclusively loopback-bound.")
++        deadline = time.monotonic() + 45
++        while True:
++            try:
++                connection = _connect(port, bootstrap)
++                break
++            except psycopg.OperationalError:
++                if time.monotonic() >= deadline:
++                    raise ProofError(
++                        "Disposable PostgreSQL did not become ready."
++                    ) from None
++                time.sleep(0.5)
++        with connection:
++            identity = connection.execute(
++                "SELECT current_setting('server_version_num')::integer AS version,"
++                "current_setting('data_directory') AS data,current_user AS role"
++            ).fetchone()
++            if (
++                identity["version"] != 180006
++                or identity["role"] != bootstrap
++                or identity["data"] != "/var/lib/postgresql/18/docker"
++            ):
++                raise ProofError("Disposable PostgreSQL identity differs.")
++            result["postgres_version_num"] = identity["version"]
++            # Trust is confined to the synthetic bootstrap identity. All new
++            # login roles must complete SCRAM; no real credential is involved.
++            hba = (
++                "local all all trust\n"
++                f"host all {bootstrap} 0.0.0.0/0 trust\n"
++                "host all all 0.0.0.0/0 scram-sha-256\n"
++            )
++            _docker(
++                context,
++                "exec",
++                "--interactive",
++                name,
++                "sh",
++                "-c",
++                'cat > "$PGDATA/pg_hba.conf"',
++                input_text=hba,
++            )
++            connection.execute("SELECT pg_reload_conf()")
++            rules = connection.execute(
++                "SELECT auth_method FROM pg_hba_file_rules WHERE type='host' ORDER BY rule_number"
++            ).fetchall()
++            if rules != [{"auth_method": "trust"}, {"auth_method": "scram-sha-256"}]:
++                raise ProofError("SCRAM host authentication rule differs.")
++            connection.execute(
++                sql.SQL("SELECT {}::text").format(sql.Literal(controls[0]))
++            )
++            _expect_error(
++                connection,
++                sql.SQL("SELECT {}::integer").format(sql.Literal(controls[1])),
++                "22P02",
++            )
++            iterations = admin._credential_session_guard(connection)
++            password = secrets.token_hex(32)
++            verifier = admin._scram_verifier(
++                password, iterations, secrets.token_bytes(16)
++            )
++            account_password = secrets.token_urlsafe(32)
++            account_hash = PASSWORDS.hash(account_password)
++            sensitive.extend((password, verifier, account_password, account_hash))
++            statement = sql.SQL(
++                "CREATE ROLE {} LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE "
++                "NOREPLICATION NOBYPASSRLS PASSWORD {}"
++            ).format(sql.Identifier(login), sql.Literal(verifier))
++            connection.execute(statement)
++            _expect_error(connection, statement, "42710")
++            result["checks"].append("credential_guard_and_role_success_duplicate_error")
++            with _connect(port, login, password) as authenticated:
++                if authenticated.execute("SELECT current_user AS role").fetchone() != {
++                    "role": login
++                }:
++                    raise ProofError("SCRAM authenticated an unexpected role.")
++            incorrect = secrets.token_hex(32)
++            sensitive.append(incorrect)
++            try:
++                wrong_connection = _connect(port, login, incorrect)
++            except psycopg.OperationalError:
++                # A successful connection immediately afterwards distinguishes
++                # authentication refusal from a general outage.
++                with _connect(port, login, password) as authenticated:
++                    authenticated.execute("SELECT 1")
++            else:
++                wrong_connection.close()
++                raise ProofError("Incorrect SCRAM password was accepted.")
++            result["checks"].append(
++                "scram_correct_password_success_incorrect_password_refused"
++            )
++            connection.execute(
++                sql.SQL("CREATE ROLE {} NOLOGIN").format(sql.Identifier(owner_role))
++            )
++            connection.execute(
++                "CREATE TABLE public.credential_proof(id integer PRIMARY KEY, "
++                "password_hash text NOT NULL CHECK (password_hash LIKE '$argon2id$%'))"
++            )
++            connection.execute(
++                sql.SQL("ALTER TABLE public.credential_proof OWNER TO {}").format(
++                    sql.Identifier(owner_role)
++                )
++            )
++            connection.execute(
++                sql.SQL("SET ROLE {}").format(sql.Identifier(owner_role))
++            )
++            admin._verify_credential_logging(connection)
++            if connection.execute("SELECT current_user AS role").fetchone() != {
++                "role": owner_role
++            }:
++                raise ProofError("Guarded role switch failed.")
++            insert = (
++                "INSERT INTO public.credential_proof(id,password_hash) VALUES (%s,%s)"
++            )
++            connection.execute(insert, (1, account_hash))
++            _expect_error(connection, insert, "23505", (1, account_hash))
++            result["checks"].append("owner_role_guard_and_hash_insert_success_error")
++    except BaseException as error:  # noqa: BLE001 - clean up on interruption without exposing driver details.
++        primary_error = error
++        result["failure_category"] = type(error).__name__
++    finally:
++        try:
++            if created:
++                item = _owned(context, name, run_id)
++                _docker(context, "stop", "--time", "10", item["Id"])
++                logs = _docker(context, "logs", item["Id"])
++                result["log_bytes"] = len(logs.encode("utf-8"))
++                result["log_sha256"] = hashlib.sha256(logs.encode("utf-8")).hexdigest()
++                result["control_markers_present"] = all(
++                    value in logs for value in controls
++                )
++                result["sensitive_values_scanned"] = len(sensitive)
++                result["sensitive_log_matches"] = sum(
++                    value in logs for value in sensitive
++                )
++                if primary_error is None and (
++                    not result["control_markers_present"]
++                    or len(sensitive) != 5
++                    or result["sensitive_log_matches"] != 0
++                ):
++                    primary_error = ProofError(
++                        "Log control or credential redaction proof failed."
++                    )
++                    result["failure_category"] = "LogVerificationFailure"
++                _owned(context, name, run_id)
++                _docker(context, "rm", item["Id"])
++                result["container_removed"] = True
++        except BaseException as error:  # noqa: BLE001 - retain a sanitized cleanup receipt on every failure.
++            result["cleanup_failure_category"] = type(error).__name__
++            if primary_error is None:
++                primary_error = error
++        result["finished_at_utc"] = datetime.now(UTC).isoformat()
++        if primary_error is None and result["container_removed"]:
++            result["status"] = "PASS"
++        receipt.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
++    if primary_error is not None:
++        raise ProofError(
++            "Disposable credential proof failed; inspect the sanitized receipt."
++        ) from None
++    return receipt
++
++
++if __name__ == "__main__":
++    try:
++        report = prove()
++    except Exception:  # noqa: BLE001 - driver errors can contain synthetic credentials.
++        print(
++            "Disposable credential proof failed; sensitive details withheld.",
++            file=sys.stderr,
++        )
++        raise SystemExit(1) from None
++    print(
++        f"PASS: disposable PostgreSQL credential/log proof; {report.relative_to(ROOT)}"
++    )
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+new file mode 100644
+index 0000000..d7b829e
+--- /dev/null
++++ b/scripts/release_manifest.py
+@@ -0,0 +1,500 @@
++"""Stage and verify a reviewed, hash-bound production release bundle.
++
++Run ``pnpm build`` first. This tool copies only its API artifacts and verified web
++build, then exports production dependencies from the unchanged uv lockfile. It
++does not install packages, contact a server, or start the application.
++
++``source-id`` binds HEAD and the literal build, test, lock and unit inputs below.
++It excludes the status documents that will record the resulting release digest,
++and the three preserved dirty files. All other dirty paths cause refusal.
++"""
++
++import argparse
++import hashlib
++import json
++import os
++import re
++import shutil
++import stat
++import subprocess
++import sys
++import zipfile
++from pathlib import Path, PurePosixPath
++from typing import Any
++
++ROOT = Path(__file__).resolve().parents[1]
++WHEEL = "brickvault_api-0.0.0-py3-none-any.whl"
++SDIST = "brickvault_api-0.0.0.tar.gz"
++UV_VERSION = "0.12.10"
++PWA_FILES = {"icon-192.png", "icon-512.png", "manifest.webmanifest", "sw.js"}
++BASE_WEB = {"index.html", "assets"}
++ASSET_NAME = re.compile(r"[A-Za-z0-9_-]+\.(?:js|css)\Z")
++SAFE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{1,63}\Z")
++HEX_40 = re.compile(r"[a-f0-9]{40}\Z")
++HEX_64 = re.compile(r"[a-f0-9]{64}\Z")
++MAX_WEB_BYTES = 32 * 1024 * 1024
++P12_04A_SOURCE_PATHS = (
++    "apps/web/package.json",
++    "deploy/systemd/brickvault-api.service",
++    "package.json",
++    "pnpm-lock.yaml",
++    "scripts/database.py",
++    "scripts/package_api.py",
++    "scripts/production_admin_secret_proof.py",
++    "scripts/release_manifest.py",
++    "scripts/test_release_manifest.py",
++    "services/api/pyproject.toml",
++    "services/api/src/brickvault_api/persistence/runtime_grants.py",
++    "services/api/src/brickvault_api/production_admin.py",
++    "services/api/tests/unit/test_production_admin.py",
++    "services/api/uv.lock",
++)
++DOCUMENTATION_PATHS = {
++    "CODEX_WORKFLOW.md",
++    "docs/ROADMAP.md",
++    "docs/plans/091-production-runtime-and-deployment.md",
++    "docs/plans/092-exact-infrastructure-pre-mutation-review.md",
++    "docs/plans/093-base-vm-provisioning.md",
++    "docs/plans/094-production-foundation.md",
++}
++PROTECTED_PATHS = {
++    "AGENTS.md",
++    "services/api/tests/integration/test_catalog_search.py",
++    "services/api/tests/unit/test_catalog_parser.py",
++}
++
++
++class ReleaseError(RuntimeError):
++    """Public errors contain no file contents or private configuration."""
++
++
++def _ordinary_file(path: Path) -> None:
++    try:
++        info = path.lstat()
++    except OSError:
++        raise ReleaseError("Required release file is unavailable.") from None
++    if (
++        path.is_symlink()
++        or path.is_junction()
++        or not stat.S_ISREG(info.st_mode)
++        or info.st_nlink != 1
++    ):
++        raise ReleaseError("Release file is not an ordinary single-link file.")
++
++
++def _ordinary_directory(path: Path) -> None:
++    try:
++        info = path.lstat()
++    except OSError:
++        raise ReleaseError("Required release directory is unavailable.") from None
++    if path.is_symlink() or path.is_junction() or not stat.S_ISDIR(info.st_mode):
++        raise ReleaseError("Release directory is unsafe.")
++
++
++def _ordinary_parents(path: Path, boundary: Path) -> None:
++    parent = path.parent
++    while parent != boundary:
++        if boundary not in parent.parents:
++            raise ReleaseError("Release path leaves its expected directory.")
++        _ordinary_directory(parent)
++        parent = parent.parent
++    _ordinary_directory(boundary)
++
++
++def _web_files(directory: Path) -> list[Path]:
++    _ordinary_directory(directory)
++    names = {entry.name for entry in directory.iterdir()}
++    if names not in (BASE_WEB, BASE_WEB | PWA_FILES):
++        raise ReleaseError("Web build has unexpected root files.")
++    assets = directory / "assets"
++    _ordinary_directory(assets)
++    asset_files = sorted(assets.iterdir())
++    if not asset_files or any(
++        ASSET_NAME.fullmatch(path.name) is None for path in asset_files
++    ):
++        raise ReleaseError("Web build has unsupported asset files.")
++    files = [
++        directory / "index.html",
++        *(directory / name for name in sorted(PWA_FILES & names)),
++    ]
++    files.extend(asset_files)
++    if len(files) > 100:
++        raise ReleaseError("Web build exceeds the supported file count.")
++    total = 0
++    for path in files:
++        _ordinary_file(path)
++        total += path.stat().st_size
++    if total > MAX_WEB_BYTES:
++        raise ReleaseError("Web build exceeds the supported size.")
++    return files
++
++
++def _sha256(path: Path) -> str:
++    digest = hashlib.sha256()
++    with path.open("rb") as source:
++        for chunk in iter(lambda: source.read(1024 * 1024), b""):
++            digest.update(chunk)
++    return digest.hexdigest()
++
++
++def _record(bundle: Path, path: Path) -> dict[str, str | int]:
++    _ordinary_file(path)
++    return {
++        "path": path.relative_to(bundle).as_posix(),
++        "size": path.stat().st_size,
++        "sha256": _sha256(path),
++    }
++
++
++def _source_commit(root: Path) -> str:
++    result = subprocess.run(
++        ["git", "rev-parse", "HEAD"],
++        cwd=root,
++        capture_output=True,
++        text=True,
++        check=False,
++    )
++    commit = result.stdout.strip()
++    if result.returncode or HEX_40.fullmatch(commit) is None:
++        raise ReleaseError("Source commit could not be identified.")
++    return commit
++
++
++def _source_id(root: Path, paths: tuple[str, ...] = P12_04A_SOURCE_PATHS) -> str:
++    """Digest the literal release input list and reject other dirty workspace paths."""
++    if len(paths) != len(set(paths)):
++        raise ReleaseError("Release source inventory contains duplicate paths.")
++    allowed = set(paths) | PROTECTED_PATHS | DOCUMENTATION_PATHS
++    state = subprocess.run(
++        ["git", "status", "--porcelain=v1", "--untracked-files=all", "-z"],
++        cwd=root,
++        capture_output=True,
++        check=False,
++    )
++    if state.returncode:
++        raise ReleaseError("Release source state could not be checked.")
++    for record in state.stdout.split(b"\0"):
++        if not record:
++            continue
++        if (
++            len(record) < 4
++            or record[2:3] != b" "
++            or any(marker in record[:2] for marker in (b"R", b"C", b"D", b"U"))
++            or record[:1] not in (b" ", b"?")
++            or (record[:1] == b"?" and record[:2] != b"??")
++        ):
++            raise ReleaseError("Release source state includes an unsupported change.")
++        try:
++            name = record[3:].decode("utf-8")
++        except UnicodeError:
++            raise ReleaseError("Release source path is invalid.") from None
++        if name not in allowed:
++            raise ReleaseError("Release source state includes an unreviewed path.")
++    digest = hashlib.sha256()
++    digest.update(b"brickvault-p12-04a-source-v1\0")
++    digest.update(_source_commit(root).encode("ascii") + b"\0")
++    for name in sorted(paths):
++        path = root / name
++        _ordinary_parents(path, root)
++        _ordinary_file(path)
++        digest.update(name.encode("utf-8") + b"\0")
++        digest.update(str(path.stat().st_size).encode("ascii") + b"\0")
++        digest.update(bytes.fromhex(_sha256(path)))
++    return digest.hexdigest()
++
++
++def _verify_wheel_source(root: Path, wheel: Path) -> None:
++    """Refuse a wheel whose packaged code differs from the reviewed checkout."""
++    package = root / "services" / "api" / "src" / "brickvault_api"
++    _ordinary_parents(package, root)
++    _ordinary_directory(package)
++    source_files: dict[str, Path] = {}
++    for path in package.rglob("*"):
++        if "__pycache__" in path.parts or path.suffix == ".pyc":
++            continue
++        if path.is_dir():
++            _ordinary_directory(path)
++            continue
++        _ordinary_parents(path, package)
++        _ordinary_file(path)
++        source_files["brickvault_api/" + path.relative_to(package).as_posix()] = path
++    try:
++        with zipfile.ZipFile(wheel) as archive:
++            packaged = {
++                item.filename
++                for item in archive.infolist()
++                if item.filename.startswith("brickvault_api/") and not item.is_dir()
++            }
++            if (
++                not source_files
++                or packaged != set(source_files)
++                or archive.testzip() is not None
++            ):
++                raise ReleaseError(
++                    "API wheel contents differ from the reviewed source."
++                )
++            for name, path in source_files.items():
++                if hashlib.sha256(archive.read(name)).hexdigest() != _sha256(path):
++                    raise ReleaseError(
++                        "API wheel contents differ from the reviewed source."
++                    )
++    except (OSError, zipfile.BadZipFile, KeyError):
++        raise ReleaseError("API wheel could not be verified against source.") from None
++
++
++def _verify_frontend(root: Path) -> None:
++    # Reuse the accepted frontend verifier, including its private-value scan.
++    command = (
++        "import { verifyFrontend } from './scripts/tasks.mjs'; "
++        "verifyFrontend(process.cwd());"
++    )
++    result = subprocess.run(
++        ["node", "--input-type=module", "-e", command],
++        cwd=root,
++        capture_output=True,
++        check=False,
++    )
++    if result.returncode:
++        raise ReleaseError("Accepted frontend release verification failed.")
++
++
++def _export_requirements(root: Path, destination: Path) -> None:
++    uv = (
++        root
++        / ".local"
++        / "tooling"
++        / "uv"
++        / UV_VERSION
++        / ("uv.exe" if os.name == "nt" else "uv")
++    )
++    _ordinary_file(uv)
++    environment = {
++        key: value
++        for key, value in os.environ.items()
++        if not key.upper().startswith(
++            ("UV_", "BVA_", "PG", "PYTHONPATH", "VIRTUAL_ENV")
++        )
++    }
++    commands = [
++        [str(uv), "--version"],
++        [
++            str(uv),
++            "export",
++            "--offline",
++            "--locked",
++            "--no-dev",
++            "--no-emit-project",
++            "--no-header",
++            "--project",
++            "services/api",
++            "--format",
++            "requirements.txt",
++            "--output-file",
++            str(destination),
++        ],
++    ]
++    version = subprocess.run(
++        commands[0],
++        cwd=root,
++        env=environment,
++        capture_output=True,
++        text=True,
++        check=False,
++    )
++    if version.returncode or not version.stdout.startswith(f"uv {UV_VERSION} "):
++        raise ReleaseError("Required repository-local uv version is unavailable.")
++    exported = subprocess.run(
++        commands[1], cwd=root, env=environment, capture_output=True, check=False
++    )
++    if exported.returncode:
++        raise ReleaseError("Locked production requirements export failed.")
++    _ordinary_file(destination)
++    text = destination.read_text(encoding="utf-8")
++    if "--hash=sha256:" not in text or "brickvault-api==" in text:
++        raise ReleaseError("Exported production requirements are incomplete.")
++
++
++def _copy_checked(source: Path, destination: Path) -> None:
++    _ordinary_file(source)
++    original_hash = _sha256(source)
++    destination.parent.mkdir(parents=True, exist_ok=True)
++    with source.open("rb") as source_file, destination.open("xb") as target_file:
++        shutil.copyfileobj(source_file, target_file, length=1024 * 1024)
++    if _sha256(destination) != original_hash:
++        raise ReleaseError("Release input changed while being staged.")
++
++
++def create(root: Path, release_id: str, source_id: str) -> tuple[Path, str]:
++    """Make one fresh ignored bundle from a completed repository build."""
++    if SAFE_ID.fullmatch(release_id) is None or HEX_64.fullmatch(source_id) is None:
++        raise ReleaseError("Invalid reviewed release or source identifier.")
++    root = root.resolve(strict=True)
++    if _source_id(root) != source_id:
++        raise ReleaseError("Release source differs from the reviewed source digest.")
++    wheel = root / "services" / "api" / "dist" / WHEEL
++    sdist = root / "services" / "api" / "dist" / SDIST
++    web = root / "apps" / "web" / "dist"
++    for source in (wheel, sdist, web):
++        _ordinary_parents(source, root)
++    _ordinary_file(wheel)
++    _ordinary_file(sdist)
++    _verify_wheel_source(root, wheel)
++    web_files = _web_files(web)
++    _verify_frontend(root)
++    commit = _source_commit(root)
++
++    local = root / ".local"
++    _ordinary_directory(local)
++    ignored = subprocess.run(
++        ["git", "check-ignore", "--quiet", "--", ".local/releases/probe"],
++        cwd=root,
++        capture_output=True,
++        check=False,
++    )
++    if ignored.returncode:
++        raise ReleaseError("Release staging directory must be ignored by Git.")
++    releases = local / "releases"
++    if releases.exists():
++        _ordinary_directory(releases)
++    bundle = releases / release_id
++    try:
++        bundle.mkdir(parents=True, exist_ok=False)
++    except OSError:
++        raise ReleaseError(
++            "Release staging directory already exists or is unavailable."
++        ) from None
++    _copy_checked(wheel, bundle / "api" / WHEEL)
++    _copy_checked(sdist, bundle / "api" / SDIST)
++    for path in web_files:
++        _copy_checked(path, bundle / "web" / path.relative_to(web))
++    _export_requirements(root, bundle / "api" / "requirements.txt")
++    files = sorted(
++        (_record(bundle, path) for path in bundle.rglob("*") if path.is_file()),
++        key=lambda item: str(item["path"]),
++    )
++    manifest = {
++        "schema": 1,
++        "release_id": release_id,
++        "source": {"commit": commit, "reviewed_id": source_id},
++        "uv_version": UV_VERSION,
++        "files": files,
++    }
++    if _source_id(root) != source_id:
++        raise ReleaseError("Release source changed while artifacts were staged.")
++    manifest_path = bundle / "manifest.json"
++    with manifest_path.open("x", encoding="utf-8", newline="\n") as output:
++        json.dump(manifest, output, indent=2, sort_keys=True)
++        output.write("\n")
++    digest = _sha256(manifest_path)
++    verify(bundle, digest, release_id, source_id)
++    return bundle, digest
++
++
++def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str) -> None:
++    """Verify every staged byte using a separately reviewed manifest digest."""
++    if (
++        HEX_64.fullmatch(expected_digest) is None
++        or SAFE_ID.fullmatch(release_id) is None
++        or HEX_64.fullmatch(source_id) is None
++    ):
++        raise ReleaseError("Invalid expected release identity or manifest digest.")
++    _ordinary_directory(bundle)
++    manifest_path = bundle / "manifest.json"
++    _ordinary_file(manifest_path)
++    if _sha256(manifest_path) != expected_digest:
++        raise ReleaseError("Release manifest digest does not match the reviewed value.")
++    try:
++        manifest: Any = json.loads(manifest_path.read_text(encoding="utf-8"))
++    except (OSError, UnicodeError, ValueError):
++        raise ReleaseError("Release manifest is unreadable.") from None
++    source = manifest.get("source") if isinstance(manifest, dict) else None
++    if (
++        not isinstance(manifest, dict)
++        or set(manifest) != {"schema", "release_id", "source", "uv_version", "files"}
++        or manifest["schema"] != 1
++        or manifest["release_id"] != release_id
++        or manifest["uv_version"] != UV_VERSION
++        or not isinstance(source, dict)
++        or set(source) != {"commit", "reviewed_id"}
++        or source["reviewed_id"] != source_id
++        or not isinstance(source["commit"], str)
++        or HEX_40.fullmatch(source["commit"]) is None
++        or not isinstance(manifest["files"], list)
++    ):
++        raise ReleaseError("Release manifest identity or schema is invalid.")
++    records = manifest["files"]
++    expected_paths: set[str] = set()
++    for item in records:
++        if not isinstance(item, dict) or set(item) != {"path", "size", "sha256"}:
++            raise ReleaseError("Release manifest file record is invalid.")
++        name, size, digest = item["path"], item["size"], item["sha256"]
++        if not isinstance(name, str) or PurePosixPath(name).as_posix() != name:
++            raise ReleaseError("Release manifest path is invalid.")
++        parts = PurePosixPath(name).parts
++        if (
++            name in expected_paths
++            or not parts
++            or parts[0] not in ("api", "web")
++            or any(part in (".", "..") for part in parts)
++            or type(size) is not int
++            or size < 0
++            or not isinstance(digest, str)
++            or HEX_64.fullmatch(digest) is None
++        ):
++            raise ReleaseError("Release manifest path or hash is invalid.")
++        expected_paths.add(name)
++        path = bundle.joinpath(*parts)
++        _ordinary_parents(path, bundle)
++        _ordinary_file(path)
++        if path.stat().st_size != size or _sha256(path) != digest:
++            raise ReleaseError("Release file differs from its reviewed manifest.")
++    required = {f"api/{WHEEL}", f"api/{SDIST}", "api/requirements.txt"}
++    web = bundle / "web"
++    web_paths = {"web/" + path.relative_to(web).as_posix() for path in _web_files(web)}
++    if expected_paths != required | web_paths:
++        raise ReleaseError("Release manifest omits or adds required files.")
++    actual_paths: set[str] = set()
++    for path in bundle.rglob("*"):
++        if path.is_dir():
++            _ordinary_directory(path)
++        else:
++            _ordinary_file(path)
++            actual_paths.add(path.relative_to(bundle).as_posix())
++    if actual_paths != expected_paths | {"manifest.json"}:
++        raise ReleaseError("Release bundle contains an unreviewed file.")
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    commands = parser.add_subparsers(dest="command", required=True)
++    commands.add_parser("source-id")
++    create_parser = commands.add_parser("create")
++    create_parser.add_argument("--release-id", required=True)
++    create_parser.add_argument("--source-id", required=True)
++    verify_parser = commands.add_parser("verify")
++    verify_parser.add_argument("bundle", type=Path)
++    verify_parser.add_argument("--manifest-sha256", required=True)
++    verify_parser.add_argument("--release-id", required=True)
++    verify_parser.add_argument("--source-id", required=True)
++    args = parser.parse_args()
++    try:
++        if args.command == "source-id":
++            print(_source_id(ROOT))
++        elif args.command == "create":
++            bundle, digest = create(ROOT, args.release_id, args.source_id)
++            print(f"Release bundle: {bundle.relative_to(ROOT)}")
++            print(f"Manifest SHA-256: {digest}")
++        else:
++            verify(args.bundle, args.manifest_sha256, args.release_id, args.source_id)
++            print("Release bundle verified against the reviewed manifest digest.")
++    except (ReleaseError, OSError, ValueError):
++        print(
++            "Release bundle operation failed; details and private values redacted.",
++            file=sys.stderr,
++        )
++        return 1
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/test_release_manifest.py b/scripts/test_release_manifest.py
+new file mode 100644
+index 0000000..11a3536
+--- /dev/null
++++ b/scripts/test_release_manifest.py
+@@ -0,0 +1,160 @@
++"""Focused release-bundle integrity and refusal checks."""
++
++import json
++import sys
++import tempfile
++import unittest
++import zipfile
++from pathlib import Path
++from types import SimpleNamespace
++from unittest.mock import patch
++
++sys.path.insert(0, str(Path(__file__).resolve().parent))
++import release_manifest  # noqa: E402
++
++
++class ReleaseManifestTests(unittest.TestCase):
++    def setUp(self) -> None:
++        temporary = tempfile.TemporaryDirectory()
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        (self.root / ".local").mkdir()
++        api = self.root / "services" / "api" / "dist"
++        api.mkdir(parents=True)
++        (api / release_manifest.WHEEL).write_bytes(b"wheel-bytes")
++        (api / release_manifest.SDIST).write_bytes(b"sdist-bytes")
++        web = self.root / "apps" / "web" / "dist"
++        (web / "assets").mkdir(parents=True)
++        (web / "index.html").write_bytes(
++            b'<script src="/assets/main-01234567.js"></script>'
++        )
++        (web / "assets" / "main-01234567.js").write_bytes(b"const ready = true;")
++        self.web = web
++        self.release_id = "p12-04a-r1"
++        self.source_id = "a" * 64
++
++    def _create(self) -> tuple[Path, str]:
++        def export(_root: Path, destination: Path) -> None:
++            destination.write_text("alembic==1.19.2 --hash=sha256:" + "a" * 64 + "\n")
++
++        with (
++            patch.object(release_manifest, "_verify_frontend"),
++            patch.object(release_manifest, "_source_commit", return_value="b" * 40),
++            patch.object(release_manifest, "_source_id", return_value=self.source_id),
++            patch.object(release_manifest, "_verify_wheel_source"),
++            patch.object(release_manifest, "_export_requirements", side_effect=export),
++            patch(
++                "release_manifest.subprocess.run",
++                return_value=SimpleNamespace(returncode=0),
++            ),
++        ):
++            return release_manifest.create(self.root, self.release_id, self.source_id)
++
++    def test_manifest_binds_all_artifacts_and_rejects_changed_bytes(self) -> None:
++        bundle, digest = self._create()
++        release_manifest.verify(bundle, digest, self.release_id, self.source_id)
++        manifest = json.loads((bundle / "manifest.json").read_text())
++        self.assertEqual(
++            {item["path"] for item in manifest["files"]},
++            {
++                "api/" + release_manifest.WHEEL,
++                "api/" + release_manifest.SDIST,
++                "api/requirements.txt",
++                "web/index.html",
++                "web/assets/main-01234567.js",
++            },
++        )
++        (bundle / "api" / "requirements.txt").write_text("changed\n")
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(bundle, digest, self.release_id, self.source_id)
++
++    def test_manifest_requires_external_digest_and_exact_identity(self) -> None:
++        bundle, digest = self._create()
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(bundle, "0" * 64, self.release_id, self.source_id)
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(bundle, digest, self.release_id, "c" * 64)
++        (bundle / "extra.txt").write_text("unexpected")
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(bundle, digest, self.release_id, self.source_id)
++
++    def test_unexpected_frontend_file_is_refused_before_staging(self) -> None:
++        (self.web / "private.json").write_text("private")
++        with self.assertRaises(release_manifest.ReleaseError):
++            self._create()
++        self.assertFalse((self.root / ".local" / "releases").exists())
++
++    def test_source_digest_ignores_protected_bytes_and_rejects_unreviewed_paths(
++        self,
++    ) -> None:
++        scripts = self.root / "scripts"
++        scripts.mkdir()
++        included = scripts / "release_manifest.py"
++        included.write_bytes(b"reviewed source")
++        protected = self.root / "AGENTS.md"
++        protected.write_bytes(b"original protected bytes")
++        plan = self.root / "docs" / "plans" / "094-production-foundation.md"
++        plan.parent.mkdir(parents=True)
++        plan.write_bytes(b"status pending")
++        state = SimpleNamespace(
++            returncode=0,
++            stdout=(
++                b" M AGENTS.md\0?? docs/plans/094-production-foundation.md\0"
++                b"?? scripts/release_manifest.py\0"
++            ),
++        )
++        with (
++            patch.object(release_manifest, "_source_commit", return_value="b" * 40),
++            patch("release_manifest.subprocess.run", return_value=state),
++        ):
++            first = release_manifest._source_id(
++                self.root, ("scripts/release_manifest.py",)
++            )
++            protected.write_bytes(b"changed protected bytes")
++            plan.write_bytes(b"manifest recorded")
++            self.assertEqual(
++                first,
++                release_manifest._source_id(
++                    self.root, ("scripts/release_manifest.py",)
++                ),
++            )
++            included.write_bytes(b"changed reviewed source")
++            self.assertNotEqual(
++                first,
++                release_manifest._source_id(
++                    self.root, ("scripts/release_manifest.py",)
++                ),
++            )
++        state.stdout = b"?? unexpected.txt\0"
++        with (
++            patch.object(release_manifest, "_source_commit", return_value="b" * 40),
++            patch("release_manifest.subprocess.run", return_value=state),
++            self.assertRaises(release_manifest.ReleaseError),
++        ):
++            release_manifest._source_id(self.root, ("scripts/release_manifest.py",))
++        state.stdout = b"M  scripts/release_manifest.py\0"
++        with (
++            patch.object(release_manifest, "_source_commit", return_value="b" * 40),
++            patch("release_manifest.subprocess.run", return_value=state),
++            self.assertRaises(release_manifest.ReleaseError),
++        ):
++            release_manifest._source_id(self.root, ("scripts/release_manifest.py",))
++
++    def test_wheel_must_contain_exact_current_package_source(self) -> None:
++        package = self.root / "services" / "api" / "src" / "brickvault_api"
++        package.mkdir(parents=True)
++        (package / "__init__.py").write_bytes(b"package")
++        admin = package / "production_admin.py"
++        admin.write_bytes(b"reviewed admin")
++        wheel = self.root / "services" / "api" / "dist" / release_manifest.WHEEL
++        with zipfile.ZipFile(wheel, "w") as archive:
++            archive.writestr("brickvault_api/__init__.py", b"package")
++            archive.writestr("brickvault_api/production_admin.py", b"reviewed admin")
++        release_manifest._verify_wheel_source(self.root, wheel)
++        admin.write_bytes(b"new admin change")
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest._verify_wheel_source(self.root, wheel)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/services/api/pyproject.toml b/services/api/pyproject.toml
+index bf3720c..f76659f 100644
+--- a/services/api/pyproject.toml
++++ b/services/api/pyproject.toml
+@@ -16,0 +17,3 @@ dependencies = [
++[project.scripts]
++brickvault-production-admin = "brickvault_api.production_admin:main"
++
+diff --git a/services/api/src/brickvault_api/persistence/runtime_grants.py b/services/api/src/brickvault_api/persistence/runtime_grants.py
+new file mode 100644
+index 0000000..1323609
+--- /dev/null
++++ b/services/api/src/brickvault_api/persistence/runtime_grants.py
+@@ -0,0 +1,165 @@
++"""Enumerated runtime grants shared by local proofs and production administration."""
++
++import re
++
++from sqlalchemy import Connection, text
++
++
++def grant_runtime(connection: Connection, role: str) -> None:
++    """Apply the reviewed least-privilege policy without default future-table grants."""
++    if re.fullmatch(r"brickvault_[a-z][a-z0-9_]{0,50}_runtime", role) is None:
++        raise ValueError("Invalid runtime role.")
++    connection.execute(text(f'REVOKE ALL ON public.alembic_version FROM PUBLIC, "{role}"'))
++    connection.execute(text(f'GRANT SELECT ON public.alembic_version TO "{role}"'))
++    from brickvault_api.catalog.models import (
++        CATALOG_TABLES,
++        RUNTIME_CATALOG_TABLES,
++    )
++
++    # Enumerated catalog objects only. Future tables get no default grant.
++    for name in CATALOG_TABLES:
++        if (
++            connection.scalar(
++                text("SELECT to_regclass(:name)"),
++                {"name": "public." + name},
++            )
++            is not None
++        ):
++            connection.execute(text(f'REVOKE ALL ON public."{name}" FROM PUBLIC, "{role}"'))
++            if name in RUNTIME_CATALOG_TABLES:
++                connection.execute(text(f'GRANT SELECT ON public."{name}" TO "{role}"'))
++    from brickvault_api.market.models import (
++        MARKET_TABLES,
++        OPERATIONAL_TABLES,
++    )
++
++    if connection.scalar(text("SELECT to_regclass('public.auth_principal')")):
++        for name, privileges in (
++            ("auth_principal", "SELECT"),
++            ("auth_control", "SELECT, UPDATE"),
++            ("auth_session", "SELECT, INSERT, DELETE"),
++        ):
++            connection.execute(text(f'REVOKE ALL ON public.{name} FROM PUBLIC, "{role}"'))
++            connection.execute(text(f'GRANT {privileges} ON public.{name} TO "{role}"'))
++        connection.execute(
++            text(f'GRANT UPDATE(last_activity_at,revoked_at) ON public.auth_session TO "{role}"')
++        )
++
++    if connection.scalar(text("SELECT to_regclass('public.deal_forecast')")):
++        connection.execute(text(f'REVOKE ALL ON public.deal_forecast FROM PUBLIC, "{role}"'))
++        connection.execute(
++            text(f'GRANT SELECT, INSERT, UPDATE(saved_at) ON public.deal_forecast TO "{role}"')
++        )
++        for signature in (
++            "forecast_clock()",
++            "forecast_cleanup(uuid)",
++            "forecast_lock_context(uuid)",
++        ):
++            connection.execute(text(f'GRANT EXECUTE ON FUNCTION public.{signature} TO "{role}"'))
++
++    if connection.scalar(text("SELECT to_regclass('public.watchlist_item')")):
++        connection.execute(text(f'REVOKE ALL ON public.watchlist_item FROM PUBLIC, "{role}"'))
++        connection.execute(text(f'GRANT SELECT, DELETE ON public.watchlist_item TO "{role}"'))
++        connection.execute(
++            text(
++                f"GRANT INSERT(id,owner_id,canonical_set_id,set_number,target_purchase_price) "
++                f'ON public.watchlist_item TO "{role}"'
++            )
++        )
++        connection.execute(
++            text(
++                f"GRANT UPDATE(target_purchase_price,note,revision) "
++                f'ON public.watchlist_item TO "{role}"'
++            )
++        )
++
++    if connection.scalar(text("SELECT to_regclass('public.deal_lineage_metadata')")):
++        connection.execute(
++            text(f'REVOKE ALL ON public.deal_lineage_metadata FROM PUBLIC, "{role}"')
++        )
++        connection.execute(
++            text(
++                f"GRANT SELECT, INSERT(owner_id,root_forecast_id,note,source_url), "
++                f'UPDATE(note,source_url,revision) ON public.deal_lineage_metadata TO "{role}"'
++            )
++        )
++
++    if connection.scalar(text("SELECT to_regclass('public.hunt_run')")):
++        connection.execute(text(f'REVOKE ALL ON public.hunt_run FROM PUBLIC, "{role}"'))
++        connection.execute(
++            text(
++                f"GRANT SELECT, INSERT(id,owner_id,idempotency_key,request_digest,"
++                f"run_version,sort_policy_version,default_sort_by,"
++                f"default_sort_direction,settings_snapshot,candidate_count), "
++                f'UPDATE(completed_at) ON public.hunt_run TO "{role}"'
++            )
++        )
++    if connection.scalar(text("SELECT to_regclass('public.hunt_candidate')")):
++        connection.execute(text(f'REVOKE ALL ON public.hunt_candidate FROM PUBLIC, "{role}"'))
++        connection.execute(
++            text(
++                f"GRANT SELECT, INSERT(id,run_id,owner_id,candidate_position,"
++                f"canonical_set_id,set_number,set_name,snapshot_version,snapshot) "
++                f'ON public.hunt_candidate TO "{role}"'
++            )
++        )
++
++    if connection.scalar(text("SELECT to_regclass('public.selling_profile')")):
++        for table, insert_columns, update_columns in (
++            (
++                "selling_profile",
++                "id,owner_id,name,assumptions",
++                "name,assumptions,revision",
++            ),
++            (
++                "application_settings",
++                "id,owner_id,default_profile_id,defaults",
++                "default_profile_id,defaults,revision",
++            ),
++        ):
++            connection.execute(text(f'REVOKE ALL ON public.{table} FROM PUBLIC, "{role}"'))
++            connection.execute(
++                text(
++                    f'GRANT SELECT, INSERT({insert_columns}), UPDATE({update_columns}) ON public.{table} TO "{role}"'
++                )
++            )
++        connection.execute(text(f'GRANT DELETE ON public.selling_profile TO "{role}"'))
++
++    for name in MARKET_TABLES:
++        if (
++            connection.scalar(
++                text("SELECT to_regclass(:name)"),
++                {"name": "public." + name},
++            )
++            is not None
++        ):
++            connection.execute(text(f'REVOKE ALL ON public."{name}" FROM PUBLIC, "{role}"'))
++            privileges = "SELECT"
++            if name in OPERATIONAL_TABLES and name != "provider_scope_state":
++                privileges += ", INSERT, UPDATE"
++            elif name == "market_observation":
++                privileges += ", INSERT"
++            connection.execute(text(f'GRANT {privileges} ON public."{name}" TO "{role}"'))
++            if name == "provider_scope_state":
++                connection.execute(
++                    text(
++                        f'GRANT UPDATE(suspended,next_dispatch_at,lease_owner,lease_token,lease_until) ON public.provider_scope_state TO "{role}"'
++                    )
++                )
++    from brickvault_api.market.product_refresh_models import (
++        PRODUCT_COLUMNS,
++        PRODUCT_FUNCTIONS,
++    )
++
++    if connection.scalar(text("SELECT to_regclass('public.product_refresh_operation')")):
++        for name, columns in PRODUCT_COLUMNS.items():
++            connection.execute(text(f'GRANT UPDATE({columns}) ON public.{name} TO "{role}"'))
++        connection.execute(
++            text(
++                "GRANT INSERT(attempt_id,operation_id,item_type,item_no,item_name,classification,"
++                "received_at,completed_at,adapter_version,normalization_version,evidence_digest,retained_until) "
++                f'ON public.provider_discovery_evidence TO "{role}"'
++            )
++        )
++        for signature in PRODUCT_FUNCTIONS:
++            connection.execute(text(f'GRANT EXECUTE ON FUNCTION public.{signature} TO "{role}"'))
+diff --git a/services/api/src/brickvault_api/production_admin.py b/services/api/src/brickvault_api/production_admin.py
+new file mode 100644
+index 0000000..701341b
+--- /dev/null
++++ b/services/api/src/brickvault_api/production_admin.py
+@@ -0,0 +1,765 @@
++"""Guarded, interactive administration of the dedicated production database.
++
++The protected input and recovery receipt are deliberately absent from a new
++installation. Provisioning and migration are explicit later operations.
++"""
++
++import argparse
++import base64
++import getpass
++import hashlib
++import hmac
++import json
++import os
++import re
++import secrets
++import stat
++import sys
++import warnings
++from collections.abc import Iterator, Mapping
++from contextlib import contextmanager
++from dataclasses import dataclass, field
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from typing import Any, NoReturn
++
++import psycopg
++from alembic import command
++from psycopg import sql
++from psycopg.rows import dict_row
++from sqlalchemy import Connection, text
++
++from brickvault_api.auth import AuthService, password_valid
++from brickvault_api.catalog.connection import CatalogConnection, CatalogDatabase
++from brickvault_api.persistence.database import (
++    create_database_engine,
++    expected_revisions,
++    migration_config,
++)
++from brickvault_api.persistence.runtime_grants import grant_runtime
++from brickvault_api.settings import reject_pg_environment, validate_target
++
++DATABASE = "brickvault_appraisal_prod"
++OWNER = "brickvault_appraisal_prod_owner"
++RUNTIME = "brickvault_appraisal_prod_runtime"
++CONFIG_PATH = Path("/etc/brickvault/production-admin.json")
++SOCKET = "/var/run/postgresql"
++PORT = 5432
++MARKER = re.compile(r"brickvault-appraisal:[a-f0-9]{32}:[a-f0-9]{32}\Z")
++SNAPSHOT = re.compile(r"[a-f0-9]{64}\Z")
++_CREDENTIAL_LOGGING = {
++    "log_statement": "none",
++    "log_min_error_statement": "panic",
++    "log_min_messages": "panic",
++    "log_min_duration_statement": "-1",
++    "log_min_duration_sample": "-1",
++    "log_transaction_sample_rate": "0",
++    "log_statement_sample_rate": "0",
++    "log_duration": "off",
++    "log_parameter_max_length": "0",
++    "log_parameter_max_length_on_error": "0",
++    "log_error_verbosity": "terse",
++    "debug_print_parse": "off",
++    "debug_print_rewritten": "off",
++    "debug_print_plan": "off",
++    "track_activities": "off",
++    "log_statement_stats": "off",
++    "log_parser_stats": "off",
++    "log_planner_stats": "off",
++    "log_executor_stats": "off",
++}
++
++
++class AdminError(RuntimeError):
++    """Safe failure category; the CLI never prints underlying driver exceptions."""
++
++
++@dataclass(frozen=True)
++class AdminConfig:
++    owner_url: str = field(repr=False)
++    runtime_url: str = field(repr=False)
++    marker: str = field(repr=False)
++
++
++def _object_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    result: dict[str, Any] = {}
++    for key, value in pairs:
++        if key in result:
++            raise AdminError("Duplicate protected configuration key.")
++        result[key] = value
++    return result
++
++
++def _parse_json(raw: bytes) -> Mapping[str, Any]:
++    try:
++        value = json.loads(raw.decode("utf-8"), object_pairs_hook=_object_pairs)
++    except (UnicodeError, ValueError) as exc:
++        raise AdminError("Invalid protected JSON.") from exc
++    if type(value) is not dict:
++        raise AdminError("Protected input must be an object.")
++    return value
++
++
++def parse_config(raw: bytes) -> AdminConfig:
++    """Validate exact production identity before any connection or mutation."""
++    value = _parse_json(raw)
++    if set(value) != {"purpose", "database", "owner_url", "runtime_url", "ownership_marker"}:
++        raise AdminError("Unexpected production configuration fields.")
++    if value["purpose"] != "production" or value["database"] != DATABASE:
++        raise AdminError("Incorrect production purpose or database.")
++    if any(type(value[key]) is not str for key in ("owner_url", "runtime_url", "ownership_marker")):
++        raise AdminError("Invalid production descriptor type.")
++    owner = validate_target(value["owner_url"], "production", "owner")
++    runtime = validate_target(value["runtime_url"], "production", "runtime")
++    if (
++        owner.username != OWNER
++        or runtime.username != RUNTIME
++        or owner.database != DATABASE
++        or runtime.database != DATABASE
++        or owner.port != PORT
++        or runtime.port != PORT
++        or owner.password == runtime.password
++        or MARKER.fullmatch(value["ownership_marker"]) is None
++    ):
++        raise AdminError("Production database identity does not match the approved contract.")
++    return AdminConfig(value["owner_url"], value["runtime_url"], value["ownership_marker"])
++
++
++def _protected_file(path: Path) -> bytes:
++    """Read one root-owned regular file without following a final-component symlink."""
++    get_euid = getattr(os, "geteuid", None)
++    nofollow = getattr(os, "O_NOFOLLOW", 0)
++    closexec = getattr(os, "O_CLOEXEC", 0)
++    if (
++        not path.is_absolute()
++        or os.name != "posix"
++        or get_euid is None
++        or get_euid() != 0
++        or not nofollow
++    ):
++        raise AdminError("Root and an absolute protected input path are required.")
++    for parent in (path.parent, *path.parent.parents):
++        status = parent.lstat()
++        if not stat.S_ISDIR(status.st_mode) or status.st_uid != 0 or status.st_mode & 0o022:
++            raise AdminError("Protected input directory is unsafe.")
++    descriptor = os.open(path, os.O_RDONLY | nofollow | closexec)
++    try:
++        status = os.fstat(descriptor)
++        if (
++            not stat.S_ISREG(status.st_mode)
++            or status.st_uid != 0
++            or stat.S_IMODE(status.st_mode) not in (0o400, 0o600)
++            or status.st_size > 16 * 1024
++        ):
++            raise AdminError("Protected input file is unsafe.")
++        with os.fdopen(descriptor, "rb", closefd=False) as source:
++            content = source.read(16 * 1024 + 1)
++            if len(content) > 16 * 1024:
++                raise AdminError("Protected input file is too large.")
++            return content
++    finally:
++        os.close(descriptor)
++
++
++def _load_config(path: Path) -> AdminConfig:
++    reject_pg_environment()
++    if any(key.startswith("BVA_") for key in os.environ):
++        raise AdminError("Runtime environment must not enter administration.")
++    return parse_config(_protected_file(path))
++
++
++def _role_marker(config: AdminConfig) -> str:
++    return config.marker + ":role"
++
++
++def _require_root() -> None:
++    get_euid = getattr(os, "geteuid", None)
++    if os.name != "posix" or get_euid is None or get_euid() != 0:
++        raise AdminError("Production peer maintenance requires OS root.")
++
++
++@contextmanager
++def _maintenance() -> Iterator[psycopg.Connection[dict[str, Any]]]:
++    """Use only the reviewed root-to-postgres peer map and local Unix socket."""
++    reject_pg_environment()
++    _require_root()
++    with psycopg.connect(
++        host=SOCKET,
++        port=PORT,
++        dbname="postgres",
++        user="postgres",
++        row_factory=dict_row,
++        autocommit=True,
++        connect_timeout=2,
++        sslmode="disable",
++        gssencmode="disable",
++        application_name="brickvault-production-admin",
++    ) as connection:
++        row = connection.execute(
++            "SELECT current_user AS role, session_user AS login, "
++            "current_database() AS database, inet_server_addr() IS NULL AS socket, "
++            "current_setting('server_version_num')::integer AS version, "
++            "current_setting('listen_addresses') AS listen, "
++            "current_setting('port')::integer AS port, "
++            "pg_is_in_recovery() AS recovery"
++        ).fetchone()
++        validate_maintenance_session(row)
++        yield connection
++
++
++def validate_maintenance_session(
++    row: Mapping[str, Any] | None, expected_database: str = "postgres"
++) -> None:
++    if (
++        row is None
++        or row.get("role") != "postgres"
++        or row.get("login") != "postgres"
++        or row.get("database") != expected_database
++        or row.get("socket") is not True
++        or row.get("listen") != "127.0.0.1"
++        or row.get("port") != PORT
++        or row.get("recovery") is not False
++        or type(row.get("version")) is not int
++        or not 180000 <= row["version"] < 190000
++    ):
++        raise AdminError("Maintenance session is not the approved local PostgreSQL 18 cluster.")
++
++
++def _credential_session_guard(connection: psycopg.Connection[dict[str, Any]]) -> int:
++    """Refuse credential SQL unless this session cannot expose statements in normal logs.
++
++    PostgreSQL 18 documents both statement logging and error-statement logging
++    as possible secret disclosures. Client-generated SCRAM still carries a
++    verifier in SQL, so disable all standard statement and query observability
++    paths before sending it, then read back the effective settings.
++    """
++    preloads = connection.execute(
++        "SELECT current_setting('shared_preload_libraries') AS shared,"
++        "current_setting('session_preload_libraries') AS session,"
++        "current_setting('local_preload_libraries') AS local"
++    ).fetchone()
++    if preloads != {"shared": "", "session": "", "local": ""}:
++        raise AdminError(
++            "Unreviewed PostgreSQL preload library prevents credential administration."
++        )
++    for name, value in _CREDENTIAL_LOGGING.items():
++        connection.execute(sql.SQL("SET {} = {}").format(sql.Identifier(name), sql.Literal(value)))
++    _verify_credential_logging(connection)
++    password_settings = connection.execute(
++        "SELECT current_setting('password_encryption') AS encryption,"
++        "current_setting('scram_iterations')::integer AS iterations"
++    ).fetchone()
++    if (
++        password_settings is None
++        or password_settings["encryption"] != "scram-sha-256"
++        or type(password_settings["iterations"]) is not int
++        or not 4096 <= password_settings["iterations"] <= 1000000
++    ):
++        raise AdminError("PostgreSQL SCRAM settings are outside the reviewed range.")
++    return password_settings["iterations"]
++
++
++def _verify_credential_logging(connection: psycopg.Connection[dict[str, Any]]) -> None:
++    settings = connection.execute(
++        "SELECT name,setting FROM pg_settings WHERE name = ANY(%s)",
++        (list(_CREDENTIAL_LOGGING),),
++    ).fetchall()
++    effective = {row["name"]: row["setting"].lower() for row in settings}
++    if effective != _CREDENTIAL_LOGGING:
++        raise AdminError("Credential-session logging controls did not take effect.")
++
++
++def _scram_verifier(password: str, iterations: int, salt: bytes) -> str:
++    """Build PostgreSQL's RFC 5803 SCRAM-SHA-256 secret on the client.
++
++    Production passwords are canonical ASCII hex, so SASLprep is the identity
++    transformation. The cleartext password never enters a SQL statement.
++    """
++    if (
++        re.fullmatch(r"[a-f0-9]{64}", password) is None
++        or not 4096 <= iterations <= 1000000
++        or len(salt) != 16
++    ):
++        raise AdminError("Invalid SCRAM credential input.")
++    salted = hashlib.pbkdf2_hmac("sha256", password.encode("ascii"), salt, iterations)
++    client_key = hmac.new(salted, b"Client Key", hashlib.sha256).digest()
++    stored_key = hashlib.sha256(client_key).digest()
++    server_key = hmac.new(salted, b"Server Key", hashlib.sha256).digest()
++    salt64 = base64.b64encode(salt).decode("ascii")
++    stored64 = base64.b64encode(stored_key).decode("ascii")
++    server64 = base64.b64encode(server_key).decode("ascii")
++    return f"SCRAM-SHA-256${iterations}:{salt64}${stored64}:{server64}"
++
++
++def _snapshot(
++    connection: psycopg.Connection[dict[str, Any]], config: AdminConfig
++) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
++    roles = connection.execute(
++        "SELECT rolname,rolcanlogin,rolsuper,rolcreatedb,rolcreaterole,"
++        "rolreplication,rolbypassrls,shobj_description(oid,'pg_authid') AS marker "
++        "FROM pg_roles WHERE rolname IN (%s,%s) ORDER BY rolname",
++        (OWNER, RUNTIME),
++    ).fetchall()
++    database = connection.execute(
++        "SELECT datname,pg_get_userbyid(datdba) AS owner,"
++        "shobj_description(oid,'pg_database') AS marker,datacl,datdba "
++        "FROM pg_database WHERE datname=%s",
++        (DATABASE,),
++    ).fetchone()
++    return roles, database
++
++
++def _require_provisioned(
++    connection: psycopg.Connection[dict[str, Any]], config: AdminConfig
++) -> None:
++    roles, database = _snapshot(connection, config)
++    if len(roles) != 2 or database is None:
++        raise AdminError("Production database and both roles must already exist.")
++    if database["owner"] != OWNER or database["marker"] != config.marker:
++        raise AdminError("Production database owner or marker differs.")
++    for role in roles:
++        if (
++            role["rolname"] not in (OWNER, RUNTIME)
++            or not role["rolcanlogin"]
++            or any(
++                role[name]
++                for name in (
++                    "rolsuper",
++                    "rolcreatedb",
++                    "rolcreaterole",
++                    "rolreplication",
++                    "rolbypassrls",
++                )
++            )
++            or role["marker"] != _role_marker(config)
++        ):
++            raise AdminError("Production role ownership or privilege differs.")
++    membership = connection.execute(
++        "SELECT EXISTS(SELECT 1 FROM pg_auth_members WHERE "
++        "member IN (SELECT oid FROM pg_roles WHERE rolname IN (%s,%s)) "
++        "OR roleid IN (SELECT oid FROM pg_roles WHERE rolname IN (%s,%s)))",
++        (OWNER, RUNTIME, OWNER, RUNTIME),
++    ).fetchone()
++    if membership is None or bool(next(iter(membership.values()))):
++        raise AdminError("Production roles have unexpected membership.")
++    privileges = connection.execute(
++        "SELECT has_database_privilege(%s,%s,'CONNECT') AS connect,"
++        "has_database_privilege(%s,%s,'CREATE') AS create,"
++        "has_database_privilege(%s,%s,'TEMPORARY') AS temporary,"
++        "EXISTS(SELECT 1 FROM aclexplode(coalesce(datacl,acldefault('d',datdba))) "
++        "WHERE grantee=0) AS public_access FROM pg_database WHERE datname=%s",
++        (RUNTIME, DATABASE, RUNTIME, DATABASE, RUNTIME, DATABASE, DATABASE),
++    ).fetchone()
++    if privileges != {
++        "connect": True,
++        "create": False,
++        "temporary": False,
++        "public_access": False,
++    }:
++        raise AdminError("Production database grants differ from the approved contract.")
++
++
++@contextmanager
++def _owner_connection(config: AdminConfig) -> Iterator[Connection]:
++    engine = create_database_engine(config.owner_url, "production", "owner")
++    try:
++        with engine.begin() as connection:
++            row = (
++                connection.execute(
++                    text(
++                        "SELECT current_user AS role,current_database() AS database,"
++                        "shobj_description(oid,'pg_database') AS marker,"
++                        "pg_get_userbyid(datdba) AS owner "
++                        "FROM pg_database WHERE datname=current_database()"
++                    )
++                )
++                .mappings()
++                .one()
++            )
++            if dict(row) != {
++                "role": OWNER,
++                "database": DATABASE,
++                "marker": config.marker,
++                "owner": OWNER,
++            }:
++                raise AdminError("Owner connection does not match production ownership.")
++            yield connection
++    finally:
++        engine.dispose()
++
++
++class _GuardedOwnerDatabase(CatalogDatabase):
++    """Run account creation as effective owner under a protected peer session."""
++
++    def connect(self) -> CatalogConnection:
++        reject_pg_environment()
++        _require_root()
++        connection: CatalogConnection = psycopg.connect(
++            host=SOCKET,
++            port=PORT,
++            dbname=DATABASE,
++            user="postgres",
++            row_factory=dict_row,
++            autocommit=True,
++            connect_timeout=2,
++            sslmode="disable",
++            gssencmode="disable",
++            application_name="brickvault-production-admin-bootstrap",
++        )
++        try:
++            row = connection.execute(
++                "SELECT current_user AS role,session_user AS login,"
++                "current_database() AS database,inet_server_addr() IS NULL AS socket,"
++                "current_setting('server_version_num')::integer AS version,"
++                "current_setting('listen_addresses') AS listen,"
++                "current_setting('port')::integer AS port,"
++                "pg_is_in_recovery() AS recovery,"
++                "shobj_description(oid,'pg_database') AS marker,"
++                "pg_get_userbyid(datdba) AS owner "
++                "FROM pg_database WHERE datname=current_database()"
++            ).fetchone()
++            validate_maintenance_session(row, DATABASE)
++            if row is None or row["marker"] != self.ownership_marker or row["owner"] != OWNER:
++                raise AdminError("Guarded owner session targets unexpected ownership.")
++            _credential_session_guard(connection)
++            connection.execute(sql.SQL("SET ROLE {}").format(sql.Identifier(OWNER)))
++            identity = connection.execute(
++                "SELECT current_user AS role,session_user AS login,current_database() AS database"
++            ).fetchone()
++            if identity != {"role": OWNER, "login": "postgres", "database": DATABASE}:
++                raise AdminError("Guarded owner role switch failed.")
++            _verify_credential_logging(connection)
++            revisions = connection.execute(
++                "SELECT version_num FROM public.alembic_version"
++            ).fetchall()
++            if sorted(item["version_num"] for item in revisions) != list(expected_revisions()):
++                raise AdminError("Guarded owner session requires the packaged migration head.")
++            return connection
++        except BaseException:
++            connection.close()
++            raise
++
++
++def _schema_guard(connection: Connection) -> None:
++    row = (
++        connection.execute(
++            text(
++                "SELECT has_schema_privilege(:role,'public','USAGE') AS usage,"
++                "has_schema_privilege(:role,'public','CREATE') AS create,"
++                "EXISTS(SELECT 1 FROM pg_namespace n,"
++                "LATERAL aclexplode(coalesce(n.nspacl,acldefault('n',n.nspowner))) a "
++                "WHERE n.nspname='public' AND a.grantee=0) AS public_access"
++            ),
++            {"role": RUNTIME},
++        )
++        .mappings()
++        .one()
++    )
++    if dict(row) != {"usage": True, "create": False, "public_access": False}:
++        raise AdminError("Production schema grants differ from the approved contract.")
++
++
++def _runtime_identity(config: AdminConfig) -> None:
++    """Check the protected runtime descriptor before migrations can change data."""
++    target = validate_target(config.runtime_url, "production", "runtime")
++    with psycopg.connect(
++        host=target.host,
++        port=target.port,
++        dbname=target.database,
++        user=target.username,
++        password=target.password,
++        row_factory=dict_row,
++        autocommit=True,
++        connect_timeout=2,
++        sslmode="disable",
++        gssencmode="disable",
++        application_name="brickvault-production-admin-preflight",
++    ) as connection:
++        row = connection.execute(
++            "SELECT current_user AS role,current_database() AS database,"
++            "shobj_description(oid,'pg_database') AS marker,"
++            "pg_get_userbyid(datdba) AS owner "
++            "FROM pg_database WHERE datname=current_database()"
++        ).fetchone()
++        if row != {
++            "role": RUNTIME,
++            "database": DATABASE,
++            "marker": config.marker,
++            "owner": OWNER,
++        }:
++            raise AdminError("Runtime connection does not match production ownership.")
++
++
++def _revisions(connection: Connection) -> tuple[str, ...]:
++    if connection.scalar(text("SELECT to_regclass('public.alembic_version')")) is None:
++        return ()
++    values = tuple(
++        sorted(connection.scalars(text("SELECT version_num FROM public.alembic_version")))
++    )
++    from alembic.script import ScriptDirectory
++
++    known = {
++        script.revision
++        for script in ScriptDirectory.from_config(migration_config()).walk_revisions()
++    }
++    if len(values) > 1 or any(value not in known for value in values):
++        raise AdminError("Migration state is ambiguous or outside the packaged graph.")
++    return values
++
++
++def _recovery_proof(path: Path, config: AdminConfig, revisions: tuple[str, ...] | None) -> None:
++    """Gate mutations on an operator-verified dual-copy receipt bound to this DB."""
++    value = _parse_json(_protected_file(path))
++    if (
++        set(value)
++        != {
++            "purpose",
++            "database",
++            "ownership_marker",
++            "revisions_at_backup",
++            "proxmox_snapshot",
++            "drive_snapshot",
++            "verified_at_utc",
++        }
++        or any(
++            type(value[key]) is not str
++            for key in (
++                "purpose",
++                "database",
++                "ownership_marker",
++                "proxmox_snapshot",
++                "drive_snapshot",
++                "verified_at_utc",
++            )
++        )
++        or type(value["revisions_at_backup"]) is not list
++    ):
++        raise AdminError("Recovery receipt shape is invalid.")
++    if (
++        value["purpose"] != "production"
++        or value["database"] != DATABASE
++        or value["ownership_marker"] != config.marker
++        or any(type(item) is not str for item in value["revisions_at_backup"])
++        or (revisions is not None and tuple(value["revisions_at_backup"]) != revisions)
++        or SNAPSHOT.fullmatch(value["proxmox_snapshot"]) is None
++        or SNAPSHOT.fullmatch(value["drive_snapshot"]) is None
++        or value["proxmox_snapshot"] == value["drive_snapshot"]
++    ):
++        raise AdminError("Recovery receipt does not match the target and copies.")
++    try:
++        stamp = datetime.fromisoformat(value["verified_at_utc"])
++    except ValueError as exc:
++        raise AdminError("Recovery receipt time is invalid.") from exc
++    now = datetime.now(UTC)
++    if (
++        stamp.tzinfo is None
++        or stamp.utcoffset() != timedelta(0)
++        or not now - timedelta(hours=24) <= stamp <= now
++    ):
++        raise AdminError("Recovery receipt is missing, stale or future-dated.")
++
++
++def preflight(config: AdminConfig) -> str:
++    with _maintenance() as maintenance:
++        roles, database = _snapshot(maintenance, config)
++        if not roles and database is None:
++            return "Approved production names are unused; database creation may be reviewed."
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as owner:
++        _schema_guard(owner)
++        _revisions(owner)
++    _runtime_identity(config)
++    return "Production database ownership and configuration are recognized."
++
++
++def provision_db(config: AdminConfig) -> None:
++    """Create only unused approved names; partial failures require manual review."""
++    with _maintenance() as maintenance:
++        roles, database = _snapshot(maintenance, config)
++        if roles or database is not None:
++            raise AdminError("Provisioning refuses existing or partial production state.")
++        owner = validate_target(config.owner_url, "production", "owner")
++        runtime = validate_target(config.runtime_url, "production", "runtime")
++        iterations = _credential_session_guard(maintenance)
++        with maintenance.transaction():
++            for role, password in ((OWNER, owner.password), (RUNTIME, runtime.password)):
++                if password is None:
++                    raise AdminError("Production role credential is missing.")
++                verifier = _scram_verifier(password, iterations, secrets.token_bytes(16))
++                maintenance.execute(
++                    sql.SQL(
++                        "CREATE ROLE {} LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE "
++                        "NOREPLICATION NOBYPASSRLS PASSWORD {}"
++                    ).format(sql.Identifier(role), sql.Literal(verifier))
++                )
++                maintenance.execute(
++                    sql.SQL("COMMENT ON ROLE {} IS {}").format(
++                        sql.Identifier(role), sql.Literal(_role_marker(config))
++                    )
++                )
++        maintenance.execute(
++            sql.SQL("CREATE DATABASE {} OWNER {} TEMPLATE template0").format(
++                sql.Identifier(DATABASE), sql.Identifier(OWNER)
++            )
++        )
++        maintenance.execute(
++            sql.SQL("COMMENT ON DATABASE {} IS {}").format(
++                sql.Identifier(DATABASE), sql.Literal(config.marker)
++            )
++        )
++        maintenance.execute(
++            sql.SQL("REVOKE ALL ON DATABASE {} FROM PUBLIC").format(sql.Identifier(DATABASE))
++        )
++        maintenance.execute(
++            sql.SQL("GRANT CONNECT ON DATABASE {} TO {}").format(
++                sql.Identifier(DATABASE), sql.Identifier(RUNTIME)
++            )
++        )
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as connection:
++        connection.execute(text("REVOKE ALL ON SCHEMA public FROM PUBLIC"))
++        connection.execute(text(f'GRANT USAGE ON SCHEMA public TO "{RUNTIME}"'))
++        _schema_guard(connection)
++    _runtime_identity(config)
++
++
++def migrate(config: AdminConfig, receipt: Path) -> None:
++    with _maintenance() as maintenance:
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as owner:
++        _schema_guard(owner)
++        _runtime_identity(config)
++        before = _revisions(owner)
++        if before == expected_revisions():
++            raise AdminError("Migration is already current; no operation was performed.")
++        _recovery_proof(receipt, config, before)
++        alembic = migration_config()
++        alembic.attributes["connection"] = owner
++        command.upgrade(alembic, "head")
++        if _revisions(owner) != expected_revisions():
++            raise AdminError("Migration did not reach the packaged head.")
++
++
++def grant_runtime_role(config: AdminConfig, receipt: Path) -> None:
++    with _maintenance() as maintenance:
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as owner:
++        _schema_guard(owner)
++        if _revisions(owner) != expected_revisions():
++            raise AdminError("Runtime grants require the packaged migration head.")
++        _recovery_proof(receipt, config, None)
++        grant_runtime(owner, RUNTIME)
++
++
++def _runtime_guard(config: AdminConfig) -> None:
++    database = CatalogDatabase(config.runtime_url, "production", config.marker, "runtime")
++    with database.connect() as connection:
++        row = connection.execute(
++            "SELECT has_schema_privilege(current_user,'public','CREATE') AS schema_create,"
++            "has_database_privilege(current_user,current_database(),'CREATE') AS db_create,"
++            "has_database_privilege(current_user,current_database(),'TEMPORARY') AS temporary,"
++            "has_table_privilege(current_user,'public.alembic_version','SELECT') AS revision_read,"
++            "has_table_privilege(current_user,'public.alembic_version','UPDATE') AS revision_write,"
++            "has_table_privilege(current_user,'public.auth_principal','SELECT') AS principal_read,"
++            "has_table_privilege(current_user,'public.auth_principal','INSERT') AS principal_write"
++        ).fetchone()
++        if row != {
++            "schema_create": False,
++            "db_create": False,
++            "temporary": False,
++            "revision_read": True,
++            "revision_write": False,
++            "principal_read": True,
++            "principal_write": False,
++        }:
++            raise AdminError("Runtime privileges differ from the approved minimum checks.")
++
++
++def bootstrap_owner(config: AdminConfig, receipt: Path) -> None:
++    with _maintenance() as maintenance:
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as owner:
++        _schema_guard(owner)
++        if _revisions(owner) != expected_revisions():
++            raise AdminError("Owner bootstrap requires the packaged migration head.")
++        _recovery_proof(receipt, config, None)
++        if owner.scalar(text("SELECT count(*) FROM public.auth_principal")) != 0:
++            raise AdminError("Owner account already exists; bootstrap refuses repetition.")
++    _runtime_guard(config)
++    if not sys.stdin.isatty():
++        raise AdminError("Owner bootstrap requires a local interactive TTY.")
++    with warnings.catch_warnings():
++        warnings.simplefilter("error", getpass.GetPassWarning)
++        password = getpass.getpass("New owner password: ")
++        confirmation = getpass.getpass("Repeat owner password: ")
++    if not password_valid(password) or password != confirmation:
++        raise AdminError("Owner password length or confirmation is invalid.")
++    database = _GuardedOwnerDatabase(config.owner_url, "production", config.marker, "owner")
++    AuthService(database).provision(password)
++
++
++def verify(config: AdminConfig) -> None:
++    with _maintenance() as maintenance:
++        _require_provisioned(maintenance, config)
++    with _owner_connection(config) as owner:
++        _schema_guard(owner)
++        if _revisions(owner) != expected_revisions():
++            raise AdminError("Packaged migration head is not current.")
++        if owner.scalar(text("SELECT count(*) FROM public.auth_principal")) != 1:
++            raise AdminError("Expected exactly one private owner account.")
++    _runtime_guard(config)
++
++
++class _SafeParser(argparse.ArgumentParser):
++    def error(self, message: str) -> NoReturn:
++        raise AdminError("Invalid administration command or options.")
++
++
++def main(argv: list[str] | None = None) -> int:
++    parser = _SafeParser(description=__doc__, allow_abbrev=False)
++    parser.add_argument(
++        "--config", type=Path, default=CONFIG_PATH, help="root-owned local descriptor"
++    )
++    commands = parser.add_subparsers(dest="command", required=True, parser_class=_SafeParser)
++    for name in (
++        "preflight",
++        "provision-db",
++        "migrate",
++        "grant-runtime",
++        "bootstrap-owner",
++        "verify",
++    ):
++        command_parser = commands.add_parser(name, allow_abbrev=False)
++        if name in ("migrate", "grant-runtime", "bootstrap-owner"):
++            command_parser.add_argument("--recovery-proof", required=True, type=Path)
++    try:
++        options = parser.parse_args(argv)
++        config = _load_config(options.config)
++        match options.command:
++            case "preflight":
++                print(preflight(config))
++            case "provision-db":
++                provision_db(config)
++                print(
++                    "Production database and roles provisioned; review backup gates before migration."
++                )
++            case "migrate":
++                migrate(config, options.recovery_proof)
++                print("Packaged production migrations reached the current head.")
++            case "grant-runtime":
++                grant_runtime_role(config, options.recovery_proof)
++                print("Enumerated runtime grants applied.")
++            case "bootstrap-owner":
++                bootstrap_owner(config, options.recovery_proof)
++                print("Private owner account created.")
++            case "verify":
++                verify(config)
++                print("Production ownership, migration, account and core grants verified.")
++        return 0
++    except Exception:  # noqa: BLE001 - never print driver, parser, file or credential details.
++        print("Production administration refused; inspect protected local state.", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/services/api/tests/unit/test_production_admin.py b/services/api/tests/unit/test_production_admin.py
+new file mode 100644
+index 0000000..ea425cb
+--- /dev/null
++++ b/services/api/tests/unit/test_production_admin.py
+@@ -0,0 +1,635 @@
++"""Offline production-admin guards; no test opens a real database connection."""
++
++import getpass
++import json
++import re
++import secrets
++import sys
++from contextlib import nullcontext
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from types import SimpleNamespace
++from typing import Any
++
++import psycopg
++import pytest
++from alembic import command
++from brickvault_api import production_admin as admin
++from brickvault_api.persistence.database import expected_revisions
++
++MARKER = "brickvault-appraisal:" + "1" * 32 + ":" + "2" * 32
++OWNER_URL = (
++    "postgresql+psycopg://brickvault_appraisal_prod_owner:"
++    + "a" * 64
++    + "@127.0.0.1:5432/brickvault_appraisal_prod"
++)
++RUNTIME_URL = (
++    "postgresql+psycopg://brickvault_appraisal_prod_runtime:"
++    + "b" * 64
++    + "@127.0.0.1:5432/brickvault_appraisal_prod"
++)
++
++
++def descriptor(**changes: object) -> bytes:
++    return json.dumps(
++        {
++            "purpose": "production",
++            "database": admin.DATABASE,
++            "owner_url": OWNER_URL,
++            "runtime_url": RUNTIME_URL,
++            "ownership_marker": MARKER,
++            **changes,
++        }
++    ).encode()
++
++
++def test_exact_production_descriptor_and_redacted_representation() -> None:
++    config = admin.parse_config(descriptor())
++    assert config.marker == MARKER
++    assert config.owner_url == OWNER_URL
++    assert OWNER_URL not in repr(config)
++    assert MARKER not in repr(config)
++
++
++@pytest.mark.parametrize(
++    "change",
++    [
++        {"purpose": "test"},
++        {"database": "brickvault_dev"},
++        {"owner_url": OWNER_URL.replace("_owner:", "_runtime:")},
++        {"owner_url": OWNER_URL.replace("127.0.0.1", "192.0.2.10")},
++        {"runtime_url": RUNTIME_URL.replace(":5432/", ":55433/")},
++        {"runtime_url": OWNER_URL},
++        {"ownership_marker": "wrong"},
++        {"owner_url": 4},
++        {"extra": "value"},
++    ],
++)
++def test_descriptor_refuses_nonapproved_targets(change: dict[str, object]) -> None:
++    with pytest.raises((admin.AdminError, ValueError)) as caught:
++        admin.parse_config(descriptor(**change))
++    assert "a" * 64 not in str(caught.value)
++    assert "b" * 64 not in str(caught.value)
++
++
++def test_duplicate_and_nonobject_json_refused() -> None:
++    with pytest.raises(admin.AdminError):
++        admin.parse_config(descriptor().replace(b'"purpose":', b'"purpose":"test","purpose":'))
++    with pytest.raises(admin.AdminError):
++        admin.parse_config(b"[]")
++
++
++def test_maintenance_session_requires_peer_socket_and_loopback_pg18() -> None:
++    expected = {
++        "role": "postgres",
++        "login": "postgres",
++        "database": "postgres",
++        "socket": True,
++        "listen": "127.0.0.1",
++        "port": 5432,
++        "recovery": False,
++        "version": 180006,
++    }
++    admin.validate_maintenance_session(expected)
++    for change in (
++        {"role": "other"},
++        {"socket": False},
++        {"listen": "*"},
++        {"port": 55433},
++        {"recovery": True},
++        {"version": 170006},
++    ):
++        with pytest.raises(admin.AdminError):
++            admin.validate_maintenance_session({**expected, **change})
++
++
++def test_invalid_invocation_redacts_secret_and_stops_before_config(
++    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
++) -> None:
++    def forbidden(*args: Any, **kwargs: Any) -> None:
++        pytest.fail("Invalid invocation read production configuration")
++
++    monkeypatch.setattr(admin, "_load_config", forbidden)
++    sentinel = "synthetic-secret-sentinel"
++    assert admin.main(["provision-db", "--password", sentinel]) == 1
++    assert admin.main(["migrate", "--recovery-proof", sentinel, "--owner-password", sentinel]) == 1
++    result = capsys.readouterr()
++    assert sentinel not in result.out + result.err
++
++
++def test_cli_redacts_underlying_credential_failure(
++    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
++) -> None:
++    config = admin.parse_config(descriptor())
++    sentinel = "synthetic-secret-sentinel"
++    monkeypatch.setattr(admin, "_load_config", lambda *_: config)
++
++    def fail(*_: Any) -> None:
++        raise RuntimeError("driver detail included " + sentinel)
++
++    monkeypatch.setattr(admin, "provision_db", fail)
++    assert admin.main(["provision-db"]) == 1
++    output = capsys.readouterr()
++    assert sentinel not in output.out + output.err
++    assert "refused" in output.err
++
++
++def test_preflight_recognizes_only_fully_absent_or_verified_state(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    config = admin.parse_config(descriptor())
++    connection = object()
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(connection))
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: ([], None))
++    assert "unused" in admin.preflight(config)
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: ([{"rolname": admin.OWNER}], None))
++    with pytest.raises(admin.AdminError):
++        admin.preflight(config)
++
++
++def test_provisioned_state_checks_role_flags_marker_membership_and_acl(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    config = admin.parse_config(descriptor())
++    roles = [
++        {
++            "rolname": name,
++            "rolcanlogin": True,
++            "rolsuper": False,
++            "rolcreatedb": False,
++            "rolcreaterole": False,
++            "rolreplication": False,
++            "rolbypassrls": False,
++            "marker": MARKER + ":role",
++        }
++        for name in (admin.OWNER, admin.RUNTIME)
++    ]
++    database = {"owner": admin.OWNER, "marker": MARKER}
++    grants = {
++        "connect": True,
++        "create": False,
++        "temporary": False,
++        "public_access": False,
++    }
++
++    class Result:
++        def __init__(self, row: dict[str, Any]) -> None:
++            self.row = row
++
++        def fetchone(self) -> dict[str, Any]:
++            return self.row
++
++    class Maintenance:
++        def execute(self, query: str, *_: Any) -> Result:
++            return Result({"exists": False} if "pg_auth_members" in query else grants)
++
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: (roles, database))
++    connection = Maintenance()
++    admin._require_provisioned(connection, config)  # type: ignore[arg-type]
++    database["owner"] = "postgres"
++    with pytest.raises(admin.AdminError, match="owner or marker"):
++        admin._require_provisioned(connection, config)  # type: ignore[arg-type]
++    database["owner"] = admin.OWNER
++    roles[1]["rolsuper"] = True
++    with pytest.raises(admin.AdminError, match="role ownership"):
++        admin._require_provisioned(connection, config)  # type: ignore[arg-type]
++    roles[1]["rolsuper"] = False
++    grants["public_access"] = True
++    with pytest.raises(admin.AdminError, match="grants"):
++        admin._require_provisioned(connection, config)  # type: ignore[arg-type]
++
++
++def test_provision_refuses_existing_role_before_any_sql(monkeypatch: pytest.MonkeyPatch) -> None:
++    config = admin.parse_config(descriptor())
++
++    class NoMutation:
++        def execute(self, *_: Any, **__: Any) -> None:
++            pytest.fail("Existing role reached provisioning SQL")
++
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(NoMutation()))
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: ([{"rolname": admin.OWNER}], None))
++    with pytest.raises(admin.AdminError, match="existing or partial"):
++        admin.provision_db(config)
++
++
++def test_scram_verifier_matches_postgresql_format_without_plaintext() -> None:
++    verifier = admin._scram_verifier("a" * 64, 4096, bytes(range(16)))
++    assert verifier == (
++        "SCRAM-SHA-256$4096:AAECAwQFBgcICQoLDA0ODw==$"
++        "HdrLQKlGCF6BYVPVDo1W42SrzG2w7U3LkMEWU/Rhlxs=:"
++        "hKfY4QZft7Vi1wQiz9MvToq8CBi2+Wb1+1VTNTnG3w8="
++    )
++    assert "a" * 64 not in verifier
++    with pytest.raises(admin.AdminError):
++        admin._scram_verifier("synthetic-secret-sentinel", 4096, bytes(range(16)))
++
++
++def test_provision_sends_only_verifiers_after_effective_logging_guard(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    owner_sentinel = "deadbeef" * 8
++    runtime_sentinel = "cafebabe" * 8
++    config = admin.parse_config(
++        descriptor(
++            owner_url=OWNER_URL.replace("a" * 64, owner_sentinel),
++            runtime_url=RUNTIME_URL.replace("b" * 64, runtime_sentinel),
++        )
++    )
++    events: list[str] = []
++    role_sql: list[str] = []
++
++    class Result:
++        def __init__(
++            self, row: dict[str, Any] | None = None, rows: list[dict[str, Any]] | None = None
++        ):
++            self.row, self.rows = row, rows or []
++
++        def fetchone(self) -> dict[str, Any] | None:
++            return self.row
++
++        def fetchall(self) -> list[dict[str, Any]]:
++            return self.rows
++
++    class Maintenance:
++        def __init__(self) -> None:
++            self.settings: dict[str, str] = {}
++
++        def transaction(self) -> Any:
++            return nullcontext()
++
++        def execute(self, query: Any, params: Any = None) -> Result:
++            statement = query.as_string(None) if hasattr(query, "as_string") else query
++            if "shared_preload_libraries" in statement:
++                return Result({"shared": "", "session": "", "local": ""})
++            if statement.startswith("SET "):
++                match = re.fullmatch(r'SET "([a-z_]+)" = \'([^\']+)\'', statement)
++                assert match is not None
++                self.settings[match[1]] = match[2]
++                events.append("setting")
++                return Result()
++            if "FROM pg_settings" in statement:
++                events.append("logging_readback")
++                return Result(
++                    rows=[{"name": key, "setting": value} for key, value in self.settings.items()]
++                )
++            if "scram_iterations" in statement:
++                return Result({"encryption": "scram-sha-256", "iterations": 4096})
++            if statement.startswith("CREATE ROLE "):
++                assert "logging_readback" in events
++                role_sql.append(statement)
++                events.append("create_role")
++            return Result()
++
++    maintenance = Maintenance()
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(maintenance))
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: ([], None))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: None)
++    monkeypatch.setattr(
++        admin,
++        "_owner_connection",
++        lambda *_: nullcontext(SimpleNamespace(execute=lambda *_: None)),
++    )
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: None)
++    monkeypatch.setattr(admin, "_runtime_identity", lambda *_: None)
++    salts = iter((bytes(range(16)), bytes(range(16, 32))))
++    monkeypatch.setattr(secrets, "token_bytes", lambda size: next(salts))
++    admin.provision_db(config)
++    assert len(role_sql) == 2
++    assert all("SCRAM-SHA-256$4096:" in statement for statement in role_sql)
++    assert all(
++        owner_sentinel not in statement and runtime_sentinel not in statement
++        for statement in role_sql
++    )
++    assert events.index("logging_readback") < events.index("create_role")
++
++
++def test_provision_refuses_when_logging_readback_differs_before_verifier_sql(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    owner_sentinel = "deadbeef" * 8
++    runtime_sentinel = "cafebabe" * 8
++    config = admin.parse_config(
++        descriptor(
++            owner_url=OWNER_URL.replace("a" * 64, owner_sentinel),
++            runtime_url=RUNTIME_URL.replace("b" * 64, runtime_sentinel),
++        )
++    )
++    statements: list[str] = []
++
++    class Result:
++        def __init__(self, row: dict[str, Any] | None = None):
++            self.row = row
++
++        def fetchone(self) -> dict[str, Any] | None:
++            return self.row
++
++        def fetchall(self) -> list[dict[str, Any]]:
++            return []  # Effective settings could not be confirmed.
++
++    class Maintenance:
++        def execute(self, query: Any, params: Any = None) -> Result:
++            statement = query.as_string(None) if hasattr(query, "as_string") else query
++            statements.append(statement)
++            if "shared_preload_libraries" in statement:
++                return Result({"shared": "", "session": "", "local": ""})
++            return Result()
++
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(Maintenance()))
++    monkeypatch.setattr(admin, "_snapshot", lambda *_: ([], None))
++    with pytest.raises(admin.AdminError, match="logging controls"):
++        admin.provision_db(config)
++    assert not any(
++        "CREATE ROLE" in statement or "SCRAM-SHA-256$" in statement for statement in statements
++    )
++    assert all(
++        owner_sentinel not in statement and runtime_sentinel not in statement
++        for statement in statements
++    )
++
++
++def test_unreviewed_preload_refuses_before_any_secret_session_sql() -> None:
++    statements: list[str] = []
++
++    class Connection:
++        def execute(self, statement: str) -> Any:
++            statements.append(statement)
++            return SimpleNamespace(
++                fetchone=lambda: {"shared": "pgaudit", "session": "", "local": ""}
++            )
++
++    with pytest.raises(admin.AdminError, match="preload"):
++        admin._credential_session_guard(Connection())  # type: ignore[arg-type]
++    assert len(statements) == 1
++    assert "shared_preload_libraries" in statements[0]
++
++
++def test_runtime_descriptor_connects_only_to_exact_loopback_identity(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    config = admin.parse_config(descriptor())
++    observed: list[dict[str, Any]] = []
++    row = {
++        "role": admin.RUNTIME,
++        "database": admin.DATABASE,
++        "marker": MARKER,
++        "owner": admin.OWNER,
++    }
++
++    class Connection:
++        def __enter__(self) -> "Connection":
++            return self
++
++        def __exit__(self, *_: Any) -> None:
++            return None
++
++        def execute(self, _: str) -> Any:
++            return SimpleNamespace(fetchone=lambda: row)
++
++    def connect(**kwargs: Any) -> Connection:
++        observed.append(kwargs)
++        return Connection()
++
++    monkeypatch.setattr(psycopg, "connect", connect)
++    admin._runtime_identity(config)
++    assert observed[0]["host"] == "127.0.0.1"
++    assert observed[0]["port"] == 5432
++    assert observed[0]["dbname"] == admin.DATABASE
++    row["owner"] = "postgres"
++    with pytest.raises(admin.AdminError):
++        admin._runtime_identity(config)
++
++
++def test_migration_requires_receipt_before_alembic(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    owner = object()
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: None)
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: None)
++    monkeypatch.setattr(admin, "_runtime_identity", lambda *_: None)
++    monkeypatch.setattr(admin, "_revisions", lambda *_: ())
++
++    def no_receipt(*_: Any) -> None:
++        raise admin.AdminError("No verified backup receipt")
++
++    monkeypatch.setattr(admin, "_recovery_proof", no_receipt)
++    monkeypatch.setattr(command, "upgrade", lambda *_: pytest.fail("Migration ran"))
++    with pytest.raises(admin.AdminError, match="receipt"):
++        admin.migrate(config, tmp_path / "absent.json")
++
++
++def test_grant_command_uses_shared_enumerated_policy_after_guards(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    owner = object()
++    events: list[str] = []
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: events.append("ownership"))
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: events.append("schema"))
++    monkeypatch.setattr(admin, "_revisions", lambda *_: expected_revisions())
++    monkeypatch.setattr(admin, "_recovery_proof", lambda *_: events.append("recovery"))
++    monkeypatch.setattr(admin, "grant_runtime", lambda *_: events.append("enumerated_grants"))
++    admin.grant_runtime_role(config, tmp_path / "receipt.json")
++    assert events == ["ownership", "schema", "recovery", "enumerated_grants"]
++
++
++def test_recovery_receipt_binds_two_copies_and_current_revision(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    receipt = {
++        "purpose": "production",
++        "database": admin.DATABASE,
++        "ownership_marker": MARKER,
++        "revisions_at_backup": ["0016_hunt_cached_runs"],
++        "proxmox_snapshot": "a" * 64,
++        "drive_snapshot": "b" * 64,
++        "verified_at_utc": datetime.now(UTC).isoformat(),
++    }
++    monkeypatch.setattr(admin, "_protected_file", lambda _: json.dumps(receipt).encode())
++    admin._recovery_proof(tmp_path / "proof.json", config, ("0016_hunt_cached_runs",))
++    with pytest.raises(admin.AdminError):
++        admin._recovery_proof(tmp_path / "proof.json", config, ())
++    receipt["drive_snapshot"] = receipt["proxmox_snapshot"]
++    with pytest.raises(admin.AdminError):
++        admin._recovery_proof(tmp_path / "proof.json", config, None)
++    receipt["drive_snapshot"] = "b" * 64
++    receipt["verified_at_utc"] = (datetime.now(UTC) - timedelta(days=2)).isoformat()
++    with pytest.raises(admin.AdminError):
++        admin._recovery_proof(tmp_path / "proof.json", config, None)
++
++
++def test_bootstrap_refuses_existing_account_before_hidden_input(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    owner = SimpleNamespace(scalar=lambda *_: 1)
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: None)
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: None)
++    monkeypatch.setattr(admin, "_revisions", lambda *_: expected_revisions())
++    monkeypatch.setattr(admin, "_recovery_proof", lambda *_: None)
++    monkeypatch.setattr(getpass, "getpass", lambda *_: pytest.fail("Hidden input reached"))
++    with pytest.raises(admin.AdminError, match="already exists"):
++        admin.bootstrap_owner(config, tmp_path / "proof.json")
++
++
++def test_bootstrap_routes_hash_write_through_guarded_peer_owner(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    owner = SimpleNamespace(scalar=lambda *_: 0)
++    sentinel = "synthetic-hidden-input"
++    observed: list[str] = []
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: None)
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: None)
++    monkeypatch.setattr(admin, "_revisions", lambda *_: expected_revisions())
++    monkeypatch.setattr(admin, "_recovery_proof", lambda *_: None)
++    monkeypatch.setattr(admin, "_runtime_guard", lambda *_: None)
++    monkeypatch.setattr(sys.stdin, "isatty", lambda: True)
++    monkeypatch.setattr(getpass, "getpass", lambda *_: sentinel)
++
++    class SpyAuthService:
++        def __init__(self, database: Any) -> None:
++            assert isinstance(database, admin._GuardedOwnerDatabase)
++
++        def provision(self, password: str) -> None:
++            assert password == sentinel
++            observed.append("guarded_owner_auth")
++
++    monkeypatch.setattr(admin, "AuthService", SpyAuthService)
++    admin.bootstrap_owner(config, tmp_path / "receipt.json")
++    assert observed == ["guarded_owner_auth"]
++
++
++def test_guarded_owner_session_switches_role_only_after_logging_guard(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    config = admin.parse_config(descriptor())
++    events: list[str] = []
++
++    class Result:
++        def __init__(
++            self, row: dict[str, Any] | None = None, rows: list[dict[str, Any]] | None = None
++        ):
++            self.row, self.rows = row, rows or []
++
++        def fetchone(self) -> dict[str, Any] | None:
++            return self.row
++
++        def fetchall(self) -> list[dict[str, Any]]:
++            return self.rows
++
++    class Connection:
++        closed = False
++
++        def close(self) -> None:
++            self.closed = True
++
++        def execute(self, query: Any, params: Any = None) -> Result:
++            statement = query.as_string(None) if hasattr(query, "as_string") else query
++            if "server_version_num" in statement:
++                return Result(
++                    {
++                        "role": "postgres",
++                        "login": "postgres",
++                        "database": admin.DATABASE,
++                        "socket": True,
++                        "version": 180006,
++                        "listen": "127.0.0.1",
++                        "port": 5432,
++                        "recovery": False,
++                        "marker": MARKER,
++                        "owner": admin.OWNER,
++                    }
++                )
++            if statement.startswith("SET ROLE "):
++                assert events == ["guard"]
++                events.append("set_role")
++                return Result()
++            if "session_user" in statement:
++                return Result(
++                    {"role": admin.OWNER, "login": "postgres", "database": admin.DATABASE}
++                )
++            if "alembic_version" in statement:
++                return Result(rows=[{"version_num": "0016_hunt_cached_runs"}])
++            pytest.fail("Unexpected guarded owner SQL")
++
++    connection = Connection()
++    monkeypatch.setattr(admin, "_require_root", lambda: None)
++    monkeypatch.setattr(psycopg, "connect", lambda **_: connection)
++    monkeypatch.setattr(admin, "_credential_session_guard", lambda *_: events.append("guard"))
++    monkeypatch.setattr(admin, "_verify_credential_logging", lambda *_: events.append("verify"))
++    database = admin._GuardedOwnerDatabase(config.owner_url, "production", MARKER, "owner")
++    assert id(database.connect()) == id(connection)
++    assert events == ["guard", "set_role", "verify"]
++    assert connection.closed is False
++
++
++def test_guarded_owner_failure_closes_session_before_account_sql(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    config = admin.parse_config(descriptor())
++    statements: list[str] = []
++
++    class Connection:
++        closed = False
++
++        def close(self) -> None:
++            self.closed = True
++
++        def execute(self, query: Any, params: Any = None) -> Any:
++            statement = query.as_string(None) if hasattr(query, "as_string") else query
++            statements.append(statement)
++            return SimpleNamespace(
++                fetchone=lambda: {
++                    "role": "postgres",
++                    "login": "postgres",
++                    "database": admin.DATABASE,
++                    "socket": True,
++                    "version": 180006,
++                    "listen": "127.0.0.1",
++                    "port": 5432,
++                    "recovery": False,
++                    "marker": MARKER,
++                    "owner": admin.OWNER,
++                }
++            )
++
++    connection = Connection()
++    monkeypatch.setattr(admin, "_require_root", lambda: None)
++    monkeypatch.setattr(psycopg, "connect", lambda **_: connection)
++    monkeypatch.setattr(
++        admin,
++        "_credential_session_guard",
++        lambda *_: (_ for _ in ()).throw(admin.AdminError("logging guard failed")),
++    )
++    database = admin._GuardedOwnerDatabase(config.owner_url, "production", MARKER, "owner")
++    with pytest.raises(admin.AdminError, match="logging guard failed"):
++        database.connect()
++    assert connection.closed is True
++    assert not any(
++        "SET ROLE" in statement or "auth_principal" in statement for statement in statements
++    )
++
++
++def test_verify_is_read_only_and_checks_single_account(monkeypatch: pytest.MonkeyPatch) -> None:
++    config = admin.parse_config(descriptor())
++    owner = SimpleNamespace(scalar=lambda *_: 1)
++    seen: list[str] = []
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: seen.append("ownership"))
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: seen.append("schema"))
++    monkeypatch.setattr(admin, "_revisions", lambda *_: expected_revisions())
++    monkeypatch.setattr(admin, "_runtime_guard", lambda *_: seen.append("runtime"))
++    admin.verify(config)
++    admin.verify(config)
++    assert seen == ["ownership", "schema", "runtime"] * 2
