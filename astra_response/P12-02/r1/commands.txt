@@ -1,0 +1,47 @@
+P12-02 SANITIZED READ-ONLY COMMAND RECEIPT — 2026-09-29
+
+Access check from Windows:
+  ssh -G proxmox
+  ssh -o BatchMode=yes -o ConnectTimeout=8 proxmox 'hostname; id -un'
+The first noninteractive authentication succeeded. No alternate user, key,
+password prompt or host-verification override was attempted.
+
+Each subsequent remote line used the same configured alias with BatchMode and
+ConnectTimeout=8. Commands below are unique forms; selected inventory queries
+were repeated only to produce a narrower sanitized summary. All were reads:
+
+  pveversion
+  uname -r
+  lscpu
+  free -b
+  uptime
+  pvesh get /cluster/resources --type vm --output-format json
+  pvesm status
+  pvesm config                         [invalid command; no change]
+  pvecm status                         [no cluster config; no change]
+  pvesh get /storage --output-format json
+  pvesh get /cluster/backup --output-format json
+  pvesh get /nodes/pve/network --output-format json
+  pvesh get /cluster/firewall/options --output-format json
+  pvesh get /nodes/pve/firewall/options --output-format json
+  pvesh get /nodes/pve/qemu/107/firewall/options --output-format json
+  pve-firewall status
+  zpool list -o name,size,alloc,free,health
+  zpool status rpool
+  qm config 107
+  qm config 112
+  pct config 110
+  pct config 113
+  pvesh get /cluster/nextid
+  cat /etc/network/interfaces
+  pvesm list local --content iso
+
+Additional local Windows reads used Resolve-DnsName for the known pve.local
+name and Get-DnsClientServerAddress/Get-NetRoute for the active workstation
+resolver/gateway relationship. These were not a LAN scan. No raw command
+output, management address, MAC, device serial, firewall file or secret is
+included in this public review package.
+
+No qm create/set/start/stop/destroy, pct mutation, pvesm allocation, backup,
+package install, DNS/certificate change, service change or database command
+was executed.

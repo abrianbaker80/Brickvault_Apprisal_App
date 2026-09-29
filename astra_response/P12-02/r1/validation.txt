@@ -1,0 +1,41 @@
+P12-02 documentation-only validation — 2026-09-29
+
+Baseline
+  main HEAD: c91f0bb2f76497dcf69a5f9887c885871871ddb9
+  main index: empty
+  unrelated dirty files: AGENTS.md and two catalog tests only
+
+Protected SHA-256 before/after (all unchanged and unstaged)
+  AGENTS.md
+    F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+  services/api/tests/integration/test_catalog_search.py
+    D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+  services/api/tests/unit/test_catalog_parser.py
+    0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
+
+Checks
+  Complete six-document task diff, including new ExecPlan 092: reviewed.
+  git diff --check: passed (exit 0; only Git CRLF normalization notices).
+  Separate temporary-index task diff --check: passed.
+  Review-package staged diff --check excluding changes.patch: passed. Full
+    staged check reports unified-diff blank context lines inside changes.patch;
+    the patch itself passed git apply --cached --check against main HEAD in a
+    separate temporary index.
+  Changed-document local Markdown targets: 296 checked, 0 missing.
+  New ExecPlan 092 trailing-whitespace lines: 0.
+  Review narrative Markdown targets: 13 checked, 0 missing.
+  Public package (13 files): 0 non-loopback IPv4 literals, 0 MAC literals,
+    0 private-key/Cloudflare-token patterns and 0 Windows user paths.
+  Five source/ document hashes match the final main documentation files;
+    source/CODEX_WORKFLOW.md has one disclosed historical private-filename
+    redaction for publication. No P12-02 changed line was altered.
+    changes.patch matches the isolated-index patch byte-for-byte.
+  Roadmap/workflow/security/traceability current status: P12-02 in review,
+    P12-03–05 not authorized; earlier P12-01 entries remain dated history.
+  Commands: all remote operations in commands.txt were direct read-only reads.
+  No application tests, builds, PostgreSQL tests, Android work, provider calls,
+    benchmarks, backup execution or infrastructure mutation were run.
+
+Publication boundary
+  Review package only on isolated astra-response worktree.
+  No main staging, commit or push. P12-02 is not closed by publication.
