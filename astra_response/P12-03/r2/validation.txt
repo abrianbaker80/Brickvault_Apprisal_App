@@ -1,0 +1,25 @@
+P12-03 r2 validation and preservation
+======================================
+PASS  VM115 stopped, onboot=0, boot order=scsi0, agent configured, no seed/installer ISO attached.
+PASS  Verified Ubuntu 24.04.2 ISO checksum; installed OS now Ubuntu 24.04.5 LTS after updates.
+PASS  90 official Ubuntu upgrades, four new packages; no pending upgrades; dpkg audit empty.
+PASS  Laptop public-key SSH, sudo, password lock, sshd syntax/effective settings, post-reload key-only login.
+PASS  Guest agent active and Proxmox ping/interface query succeeds.
+PASS  DHCP/default route, DNS, synchronized time, CPU/RAM, root capacity, discard and swap checks.
+PASS  No unexpected network-bound TCP listener beyond SSH.
+PASS  128-GiB disk: guest zero partitions/signatures/LVM/mount/fstab; stopped host zero signatures/children.
+PASS  Task-owned seed/extraction files removed; shared verified Ubuntu ISO retained.
+PASS  Existing 17 guest configuration hashes and 28 r1 storage inventory entries unchanged.
+PASS  Five task-document local Markdown link check: 212 targets, zero missing.
+PASS  Cumulative five-document patch checked; git diff --check; main HEAD/index preserved.
+PASS  Three protected file SHA-256 hashes match accepted P12-02 values.
+NOT RUN  Application tests/builds, database/provider calls, P12-04/P12-05 deployment, device/physical acceptance.
+
+The review branch's whitespace check passes for the six narrative/source
+files. Applying it to changes.patch itself reports the leading context
+marker on blank lines of the embedded unified diff as trailing whitespace;
+the cumulative patch passes git apply --cached --check against main HEAD,
+and the source documentation passes git diff --check.
+
+Private DHCP, MAC, VM UUID/serial, key content and installer password/hash are
+excluded from this package. The r1 partial package remains unchanged.

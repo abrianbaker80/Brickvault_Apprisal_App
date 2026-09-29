@@ -1,0 +1,45 @@
+P12-03 r2 sanitized command sequence
+=====================================
+Placeholders below replace private key paths, DHCP address, serials and seed data.
+These are the executed command forms and checks, with diagnostic retries noted.
+
+1. Host and media gates:
+   qm status 115; qm config 115
+   blockdev --getsize64 <vm115-os-zvol> <vm115-data-zvol>
+   wipefs -n <vm115-os-zvol>; wipefs -n <vm115-data-zvol>
+   sha256sum <shared-ubuntu-24.04.2-iso>
+   Compare 17 existing guest config hashes and storage inventory with r1 baseline.
+
+2. Private one-VM seed:
+   Generate a random installer password in process memory; hash with openssl passwd -6.
+   Write private NoCloud user-data/meta-data with exact scsi0 udev match and disk guards.
+   genisoimage -V cidata -r -J -o <vm115-task-seed.iso> user-data meta-data
+   Validate YAML/ISO and attach only to VM 115 at ide0.
+
+3. Install:
+   qm start 115
+   qm monitor 115: edit the signed ISO GRUB entry to add autoinstall ds=nocloud.
+   Diagnose initial Secure Boot direct-kernel and storage-serial failures before writes.
+   Correct seed match after read-only live-installer udev inspection; repeat stopped gate.
+   Boot corrected normal signed-ISO entry; wait for installer poweroff.
+   Verify OS disk GPT/EFI/ext4 and blank data disk.
+
+4. Base OS:
+   qm set 115 --boot order=scsi0; detach ide0 and ide2; qm start 115
+   ssh -o BatchMode=yes -i <approved-laptop-private-key-path> brickvault-admin@<private-DHCP-address>
+   sudo apt-get update
+   sudo env DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
+   sudo env DEBIAN_FRONTEND=noninteractive apt-get -y full-upgrade
+   sudo env DEBIAN_FRONTEND=noninteractive apt-get -y install --no-install-recommends qemu-guest-agent
+   Install SSH/cloud-init hardening files; sudo sshd -t; sudo systemctl reload ssh.
+   Reconnect with PreferredAuthentications=publickey; sudo passwd -l brickvault-admin.
+   qm set 115 --agent enabled=1; graceful guest poweroff/start to add the channel.
+   qm agent 115 ping; qm agent 115 network-get-interfaces
+
+5. Final validation and cleanup:
+   Guest: os-release, sshd -T, sudo, apt/dpkg, QEMU agent, time, route/DNS,
+   listeners, lsblk, wipefs, blkid, pvs, findmnt, fstab, discard and swap.
+   sudo systemctl poweroff; qm status 115; qm config 115
+   Stopped host: wipefs -n and lsblk on the VM115 data zvol.
+   Confirm seed is task-owned and unreferenced; remove only its ISO and task dir.
+   Preserve the shared Ubuntu ISO and all VM disks/NIC.
