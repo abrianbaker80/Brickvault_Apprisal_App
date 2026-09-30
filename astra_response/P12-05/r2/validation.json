@@ -1,0 +1,174 @@
+{
+  "artifactCorroboration": {
+    "acceptedWheelSha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+    "manualSelectionLine": 394,
+    "marketAdmissionGuardLine": 391,
+    "v1SourceMemberEqualsAcceptedMain": true
+  },
+  "blocker": {
+    "actual": {
+      "estimated_net": null,
+      "estimated_profit": null,
+      "expected_sale": null,
+      "gross_proceeds": null,
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "missing_or_incompatible_or_ambiguous_mapping"
+      ],
+      "roi_percent": null,
+      "selling_costs": "25.00",
+      "status": "UNKNOWN",
+      "total_acquisition": "105.00"
+    },
+    "endpoint": "/api/sets/75331-1/forecast-preview",
+    "expectedManualArithmetic": {
+      "estimated_net": "185.00",
+      "estimated_profit": "80.00",
+      "expected_sale": "200.00",
+      "gross_proceeds": "210.00",
+      "roi_percent": "76.2",
+      "selling_costs": "25.00",
+      "total_acquisition": "105.00"
+    },
+    "forecastCapture": {
+      "normalExpiryCleanupRequired": true,
+      "saved": false,
+      "state": "PENDING_AT_CREATION"
+    },
+    "gate": 5,
+    "name": "Manual Deal Economics requires supported market basis despite explicit manual sale",
+    "request": {
+      "acquisition_costs": "5",
+      "manual_sale_price": "200",
+      "other_selling_costs": "2",
+      "purchase_price": "100",
+      "sale_basis": "MANUAL",
+      "selling_fees": "15",
+      "shipping_charged": "10",
+      "shipping_paid": "8"
+    },
+    "status": 200
+  },
+  "cleanup": {
+    "allTemporaryDataAbsent": false,
+    "androidSession": "NOT_CREATED",
+    "authCookiesRemoved": true,
+    "browserLogout": "PASS",
+    "oldSessionReplay": "PASS",
+    "privateUiCleared": true,
+    "settingsDefaultsRestored": true,
+    "settingsRevisionAdvancedNormally": true,
+    "unsavedForecastCapture": "RETAINED_UNSAVED_PENDING_NORMAL_EXPIRY",
+    "watchlistRemoved": true
+  },
+  "date": "2026-09-30",
+  "directApiPort": "INACCESSIBLE_TIMEOUT",
+  "finalBackupInvocations": 0,
+  "gates": {
+    "1": "PASS",
+    "10": "PARTIAL_WINDOWS_CLEANUP_PASS_UNSAVED_PREVIEW_RETAINED",
+    "11": "NOT_RUN",
+    "12": "NOT_RUN",
+    "13": "BLOCKED_REVIEW_PACKAGE",
+    "2": "PASS",
+    "3": "PASS",
+    "4": "PASS",
+    "5": "BLOCKED",
+    "6": "NOT_RUN_AFTER_GATE_5_BLOCKER",
+    "7": "NOT_RUN_AFTER_GATE_5_BLOCKER",
+    "8": "NOT_RUN_AFTER_GATE_5_BLOCKER",
+    "9": "NOT_RUN_AFTER_GATE_5_BLOCKER"
+  },
+  "ownerSession": {
+    "cookieFlags": [
+      {
+        "hostOnly": true,
+        "httpOnly": true,
+        "name": "bva_csrf",
+        "path": "/",
+        "sameSite": "Strict",
+        "secure": true
+      },
+      {
+        "hostOnly": true,
+        "httpOnly": true,
+        "name": "bva_session",
+        "path": "/",
+        "sameSite": "Strict",
+        "secure": true
+      }
+    ],
+    "freshProfile": true,
+    "noStore": true,
+    "ownerLocalLoginConfirmedByUser": true,
+    "sessionReloadStatus": 200
+  },
+  "positiveSettingsSave": 200,
+  "security": [
+    {
+      "cacheControl": "no-store",
+      "status": 401,
+      "test": "unauthenticated Settings"
+    },
+    {
+      "cacheControl": "no-store",
+      "status": 403,
+      "test": "missing CSRF"
+    },
+    {
+      "cacheControl": "no-store",
+      "status": 403,
+      "test": "wrong CSRF"
+    },
+    {
+      "cacheControl": "no-store",
+      "status": 403,
+      "test": "wrong Origin"
+    },
+    {
+      "cacheControl": "no-store",
+      "status": 403,
+      "test": "forged proxy with wrong Origin"
+    },
+    {
+      "status": 421,
+      "test": "wrong Host with normal production TLS SNI"
+    }
+  ],
+  "settingsBaseline": {
+    "defaultProfileAbsent": true,
+    "defaults": {
+      "purchase_limits": false,
+      "sale_basis": null,
+      "targets": {
+        "minimum_profit": null,
+        "profit_enabled": false,
+        "roi_enabled": false,
+        "roi_percent": null
+      }
+    }
+  },
+  "temporarySettings": {
+    "saleBasis": "MANUAL"
+  },
+  "watchlist": {
+    "cleanup": "PASS",
+    "create": "PASS",
+    "navigation": "PASS",
+    "note": "P12-05 acceptance temporary entry - remove after qualification.",
+    "reload": "PASS",
+    "target": "123.45",
+    "temporarySet": "75331-1",
+    "unique": true
+  },
+  "windows": {
+    "dealFormLoaded": true,
+    "exactVariant": "75331-1",
+    "marketUnavailableHonest": true,
+    "nameMatchCount": 6,
+    "nameQuery": "Razor Crest",
+    "setDetail": "PASS",
+    "settingsNavigationReloadPersistence": true,
+    "watchlistInitiallyEmpty": true
+  }
+}

@@ -1,0 +1,163 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 582bf44..e22ae31 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,26 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## P12-05 remaining acceptance stop, 2026-09-30
++
++**Catalog importer repair and production catalog activation prerequisite ACCEPTED /
++CLOSED. P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS.**
++From accepted main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`, the real fresh-profile
++owner session/security checks, Windows shell/search/detail/Settings, and unique
++temporary Watchlist create/update/persistence passed. The manual-sale forecast
++preview received the explicit price but returned null sale/net/profit/ROI because
++the existing v1 backend requires supported market evidence before selecting MANUAL.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records the exact stop.
++No application repair, provider activation, schema/configuration change or deployment
++was performed. A repair requires separate authorization and replay/version review.
++
++Settings defaults were restored, the temporary Watchlist item removed, and the
++browser signed out; old-session replay returned 401. One unsaved preview remains
++under normal expiry/cleanup rules, so complete temporary-data cleanup is not claimed.
++PWA, physical Android, rollback/forward, VM stop/start, final backup and final
++operations qualification remain unrun. The blocked review is published separately
++under `astra_response/P12-05/r2/`; main remains uncommitted/unpushed, index empty,
++and protected dirty files unchanged. Earlier sections retain dated history.
++
+ ## Accepted repair closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index b2a5a0b..77a4541 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,26 @@
+ # Valuation-First Roadmap
+ 
++## P12-05 remaining acceptance stop, 2026-09-30
++
++**Catalog importer repair and production catalog activation prerequisite ACCEPTED /
++CLOSED. P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS.**
++From accepted main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`, the real fresh-profile
++owner session/security checks, Windows shell/search/detail/Settings, and unique
++temporary Watchlist create/update/persistence passed. The manual-sale forecast
++preview received the explicit price but returned null sale/net/profit/ROI because
++the existing v1 backend requires supported market evidence before selecting MANUAL.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records the exact stop.
++No application repair, provider activation, schema/configuration change or deployment
++was performed. A repair requires separate authorization and replay/version review.
++
++Settings defaults were restored, the temporary Watchlist item removed, and the
++browser signed out; old-session replay returned 401. One unsaved preview remains
++under normal expiry/cleanup rules, so complete temporary-data cleanup is not claimed.
++PWA, physical Android, rollback/forward, VM stop/start, final backup and final
++operations qualification remain unrun. The blocked review is published separately
++under `astra_response/P12-05/r2/`; main remains uncommitted/unpushed, index empty,
++and protected dirty files unchanged. Earlier sections retain dated history.
++
+ ## Accepted repair closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
+diff --git a/docs/plans/099-phase-12-production-acceptance.md b/docs/plans/099-phase-12-production-acceptance.md
+index ea1db0c..6db2a0a 100644
+--- a/docs/plans/099-phase-12-production-acceptance.md
++++ b/docs/plans/099-phase-12-production-acceptance.md
+@@ -1,5 +1,96 @@
+ # ExecPlan 099 — Phase 12 production acceptance
+ 
++## Remaining production acceptance resumed, 2026-09-30
++
++**P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS. Catalog importer repair
++and production catalog activation prerequisite remain ACCEPTED / CLOSED.**
++
++Brian separately authorizes the remaining Plan 099 acceptance gates from local
++main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af` and the
++[accepted catalog r6 closeout](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/2542eb2462614f1e8505df5e215243105ed19ef9/astra_response/P12-05-catalog/r6/REVIEW.md).
++Reuse accepted P12-01 through P12-04 and catalog evidence. This resumption
++supersedes earlier remaining-gate prohibitions and historical production identities
++below only for the newly authorized ordered acceptance sequence.
++
++Expected current release is `p12-05-catalog-repair-r1`, revision
++`0016_hunt_cached_runs`, sole accepted catalog generation 1 with 28,278 sets.
++Do not reopen catalog/importer work, change source/schema/PostgreSQL settings or
++VM resources, activate market providers, push/commit main, or begin Phase 13.
++A material application/source/deployment defect stops acceptance with its exact
++blocker; no silent patch or workaround is authorized.
++
++### Current gate and local interaction
++
++Brian completed fresh, unsynced Chrome profile/extension setup and local owner
++login at `https://appraisal.abrianbaker.com`, then replied ready. Live session
++reload returned 200 with `Cache-Control: no-store`; both session and CSRF cookies
++are Secure, HttpOnly, SameSite=Strict, host-only and Path=/. No credential values
++were printed or saved. The earlier automatic profile-launch rejection was
++resolved through Brian's local Chrome setup; no alternate launch was attempted.
++
++Gate 2 live controls passed: unauthenticated Settings 401, missing/wrong CSRF 403,
++wrong Origin 403, wrong Host with real production SNI 421, and forged proxy headers
++with wrong Origin 403. Correct browser Origin/CSRF Settings save returned 200 and
++preserved all default values. Direct API port was inaccessible from Windows.
++Authenticated Settings/profile reads also returned 200 and no-store. Original
++Settings defaults were captured before a reversible UI change to manual-sale
++mode. Browser shell, exact/name search, Set Detail, Deal form, Settings
++read/change/navigation/reload and Watchlist read passed. Gate 4 created only an
++initially absent set, then proved target/note update and reload/navigation
++persistence with exactly one temporary item.
++
++Gate 5 STOPPED on a material acceptance-contract blocker. The live forecast-preview
++request carried `sale_basis=MANUAL` and `manual_sale_price=200`, but HTTP 200
++returned UNKNOWN with null expected sale/gross/net/profit/ROI. Costs were recognized:
++selling costs 25.00 and total acquisition 105.00. Stated assumptions would imply
++sale 200.00, gross 210.00, net 185.00, profit 80.00 and ROI 76.2%; market evidence
++must remain honestly unavailable. In `economics_v1.calculate_v1`, an unsupported
++or absent market price returns before the MANUAL sale selection. The current
++version deliberately retains that evidence-admission contract; changing it
++requires a separately authorized repair and review, including saved-replay/version
++compatibility. No patch, workaround, provider activation or deployment was performed.
++
++Only necessary acceptance cleanup followed the stop: original Settings defaults
++and default profile were restored through the UI (revision advanced normally),
++the exact temporary Watchlist item was removed through its authenticated API,
++and the browser signed out. Old session replay returned 401/no-store, auth cookies
++were absent and private UI content cleared. No Android session was created.
++The calculation created one UNSAVED/PENDING forecast capture. Its existing guard
++prevents deletion before expiry; normal owner-scoped cleanup runs on a later
++preview. It was not saved, forcibly deleted, or replaced with another calculation.
++Thus no temporary Watchlist remains, but complete temporary-data cleanup is not
++claimed. Remaining qualification gates and final backup were not run.
++
++### Remaining gates, in authorized order
++
++1. Real owner login/session/cookie qualification — PASS.
++2. CSRF/Origin/Host positive and negative checks — PASS.
++3. Windows shell/search/detail/Deal form/Settings/Watchlist read — PASS; manual calculation is Gate 5.
++4. Unique temporary Watchlist create/update/persistence — PASS; item subsequently removed.
++5. Deal Economics with manual sale assumption and honest unavailable market — BLOCKED.
++6. Production PWA install/offline/reconnect/update — NOT RUN after Gate 5 stop.
++7. Physical Android production TLS/auth/offline/reconnect — NOT RUN after Gate 5 stop.
++8. Exact immutable `p12-04d-r1` rollback and forward return — NOT RUN after Gate 5 stop.
++9. Graceful VM 115 cold stop/start after startup-order verification — NOT RUN after Gate 5 stop.
++10. Windows Settings/Watchlist/logout/replay cleanup — PASS; full gate NOT COMPLETE (unsaved preview retained; Android unrun).
++11. Exactly one final normal dual backup — NOT RUN; invocation count zero.
++12. Final security/operations review — NOT RUN; accepted historical evidence is reused only.
++13. Independent-review blocked package — published at `astra_response/P12-05/r2/`.
++
++Forward return must restore exactly `p12-05-catalog-repair-r1` and its exact
++absolute immutable web path. A failed rollback first returns to that repaired
++release and verifies recovery, then stops. Cold-start authority covers only
++VM 115; no Proxmox reboot or firewall VM mutation. Final backup runs only after
++forward return, cold recovery and cleanup; no retention apply/prune.
++
++Publish the actual sanitized outcome under `astra_response/P12-05/r2/`, preserving
++the existing r1 catalog blocker and referencing accepted catalog r6 minimally.
++The r2 package reports the actual Gate 5 blocker, passed checks, cleanup residual
++and all unrun gates. Main remains uncommitted at the accepted HEAD with an empty
++index; protected dirty hashes are unchanged. Only documentation/status and ignored
++task evidence record the acceptance attempt.
++Earlier sections below retain accepted and dated historical evidence.
++
+ ## Accepted production catalog activation closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
