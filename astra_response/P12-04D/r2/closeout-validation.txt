@@ -1,0 +1,18 @@
+Closeout-only validation
+Exact staged ten-file inventory: PASS
+Complete staged diff review: PASS; seven implementation files retain accepted r1 bytes.
+git diff --cached --check: PASS
+Local Markdown links in three changed documents: PASS
+Main index after commit: empty
+Main worktree: only the three protected files remain modified, unstaged.
+Protected SHA-256 matches accepted values:
+AGENTS.md: F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+services/api/tests/integration/test_catalog_search.py: D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+services/api/tests/unit/test_catalog_parser.py: 0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
+
+No live infrastructure/DNS/TLS/renewal/API/Caddy/firewall/Windows smoke work rerun.
+No tests, Ruff, formatting, mypy or builds rerun.
+Reused accepted r1: 12 focused tests, targeted Ruff/format/mypy, deployment,
+Windows HTTPS transport, CORS, TLS renewal and log-secret scans.
+Only external contact is the explicitly authorized astra-response publication.
+Main not pushed. r1 preserved. No next checkpoint begun.

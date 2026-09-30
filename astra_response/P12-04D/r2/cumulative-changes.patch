@@ -1,0 +1,950 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 8ceb1d5..31c9a62 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,18 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## P12-04D accepted closeout, 2026-09-29
++
++[ExecPlan 097](docs/plans/097-private-https-application-activation.md) records the
++verified stable DHCP reservation/private DNS, trusted DNS-01 certificate, guarded
++renewal, immutable `p12-04d-r1`, loopback API and private-LAN UFW policy. API/Caddy,
++Certbot renewal and the existing backup timer were enabled/active at accepted verification. Windows trusted
++HTTPS and synthetic Android-Origin HTTP smoke passed; owner login/cookie issuance,
++full browser/PWA and physical Android acceptance were not exercised. **P12-04D is
++ACCEPTED / CLOSED**.
++P12-04 remains IN PROGRESS; P12-05 is NOT STARTED. Earlier checkpoints below are historical.
++
++Brian accepted the [accepted r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/aff388fd89fd935c5d9ab61f7a3cf4490196b58f/astra_response/P12-04D/r1/REVIEW.md). This closeout reuses that evidence without live, test or build reruns. The next P12-04 operational-hardening checkpoint is NEXT / NOT STARTED. Plan 097 retains all P12-04 and P12-05 gates; the absent ACME contact email is an operational note, and the unrelated legacy backup identity is not a deployment blocker.
++
+ ## P12-04C accepted closeout, 2026-09-29
+ 
+ **P12-04C is ACCEPTED / CLOSED.** Brian accepted the r1 blocked checkpoint and authorized its continuation. [ExecPlan 096](docs/plans/096-production-database-activation.md) records direct root-to-postgres peer authentication, removal of `runuser`, retained `NoNewPrivileges=true` and the immutable `p12-04c-r4` release. Offline custody, the single pre-migration backup retry, backup-derived proof, migration to `0016_hunt_cached_runs`, runtime grants, one owner bootstrap through hidden local input, independent admin verification and the post-bootstrap dual backup passed. Both real runs and the synthetic canaries are retained. The daily timer is enabled/active; the API stays disabled/inactive with PostgreSQL loopback-only. P12-04 remains IN PROGRESS; P12-04D is NEXT / NOT STARTED; P12-05 is NOT STARTED. Real restore/browser/PWA/Android/rollback acceptance and remaining production exposure/operations gates remain open.
+diff --git a/deploy/caddy/Caddyfile b/deploy/caddy/Caddyfile
+new file mode 100644
+index 0000000..3089019
+--- /dev/null
++++ b/deploy/caddy/Caddyfile
+@@ -0,0 +1,28 @@
++{
++	auto_https off
++	admin unix//run/caddy/brickvault-admin.sock
++	persist_config off
++	servers {
++		protocols h1 h2
++		strict_sni_host on
++	}
++	log default {
++		format filter {
++			wrap json
++			fields {
++				request delete
++				resp_headers delete
++			}
++		}
++	}
++}
++
++https://appraisal.abrianbaker.com {
++	tls /etc/caddy/brickvault-tls/current/fullchain.pem /etc/caddy/brickvault-tls/current/privkey.pem
++	reverse_proxy 127.0.0.1:18080 {
++		header_up X-BrickVault-Proxy {$BVA_PROXY_SHARED_SECRET}
++		header_up -Forwarded
++		header_up -X-Forwarded-*
++		header_up -X-Real-IP
++	}
++}
+diff --git a/deploy/certbot/renewal-hooks/deploy/brickvault-certificate b/deploy/certbot/renewal-hooks/deploy/brickvault-certificate
+new file mode 100644
+index 0000000..2858a83
+--- /dev/null
++++ b/deploy/certbot/renewal-hooks/deploy/brickvault-certificate
+@@ -0,0 +1,3 @@
++#!/bin/sh
++set -eu
++exec /opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/deploy_certificate.py
+diff --git a/deploy/systemd/caddy.service.d/brickvault.conf b/deploy/systemd/caddy.service.d/brickvault.conf
+new file mode 100644
+index 0000000..97b0d41
+--- /dev/null
++++ b/deploy/systemd/caddy.service.d/brickvault.conf
+@@ -0,0 +1,21 @@
++[Service]
++# The packaged --environ flag would disclose the proxy secret in journald.
++EnvironmentFile=/etc/caddy/brickvault.env
++ExecStart=
++ExecStart=/usr/bin/caddy run --config /etc/caddy/Caddyfile --adapter caddyfile
++ExecReload=
++ExecReload=/usr/bin/caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile --address unix//run/caddy/brickvault-admin.sock --force
++RuntimeDirectory=caddy
++RuntimeDirectoryMode=0700
++UMask=0077
++AmbientCapabilities=
++AmbientCapabilities=CAP_NET_BIND_SERVICE
++CapabilityBoundingSet=CAP_NET_BIND_SERVICE
++NoNewPrivileges=true
++ProtectHome=true
++ProtectSystem=strict
++ReadWritePaths=/var/lib/caddy /run/caddy
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 81c93b9..16eebf4 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,16 @@
+ # Valuation-First Roadmap
+ 
++## P12-04D accepted closeout, 2026-09-29
++
++[ExecPlan 097](plans/097-private-https-application-activation.md) records the stable
++DHCP reservation/private DNS, normally trusted DNS-01 certificate and renewal,
++immutable `p12-04d-r1`, active loopback API/Caddy and private-LAN UFW policy.
++Windows HTTPS and synthetic Android-Origin HTTP smoke passed. P12-04D is
++**ACCEPTED / CLOSED**. P12-04 remains IN PROGRESS; P12-05 is
++NOT STARTED. Earlier checkpoints below are historical.
++
++Brian accepted the [accepted r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/aff388fd89fd935c5d9ab61f7a3cf4490196b58f/astra_response/P12-04D/r1/REVIEW.md). This closeout reuses that evidence without live, test or build reruns. The next P12-04 operational-hardening checkpoint is NEXT / NOT STARTED. Plan 097 retains all P12-04 and P12-05 gates; the absent ACME contact email is an operational note, and the unrelated legacy backup identity is not a deployment blocker.
++
+ ## P12-04C accepted closeout, 2026-09-29
+ 
+ **P12-04C is ACCEPTED / CLOSED**, recorded in [ExecPlan 096](plans/096-production-database-activation.md). The corrected `p12-04c-r4` runner uses accepted root-to-postgres peer authentication and retains `NoNewPrivileges=true`. Offline custody, both real dual backups and readbacks, the generated migration proof, migration to `0016_hunt_cached_runs`, runtime grants, one owner bootstrap and independent admin verification passed. The daily backup timer is enabled/active, both real runs and synthetic canaries remain, and the API is disabled/inactive with PostgreSQL loopback-only. P12-04 remains IN PROGRESS; P12-04D is NEXT / NOT STARTED; P12-05 is NOT STARTED. Production exposure/operations and P12-05 acceptance gates remain open.
+@@ -952,7 +963,7 @@ read-only preflight only; infrastructure or production change remains gated.
+ 
+ - **Status:** IN PROGRESS; P12-01, P12-02 and P12-03 ACCEPTED / CLOSED.
+   P12-04A, P12-04B and P12-04C are ACCEPTED / CLOSED;
+-  P12-04D is NEXT / NOT STARTED;
++  P12-04D is ACCEPTED / CLOSED;
+   P12-04 remains IN PROGRESS and P12-05 has not started. The recovery
+   foundation is in [ExecPlan 095](plans/095-dual-recovery-foundation.md); activation
+   and remaining gates are in [ExecPlan 096](plans/096-production-database-activation.md).
+diff --git a/docs/plans/097-private-https-application-activation.md b/docs/plans/097-private-https-application-activation.md
+new file mode 100644
+index 0000000..fd00d09
+--- /dev/null
++++ b/docs/plans/097-private-https-application-activation.md
+@@ -0,0 +1,254 @@
++# ExecPlan 097 — P12-04D private HTTPS application activation
++
++## Goal and user-visible outcome
++
++Activate BrickVault Appraisal App on VM 115 at `https://appraisal.abrianbaker.com`
++for the approved home LAN, using normal public-CA trust and private DNS. P12-04D
++is authorized within P12-04. P12-04 remains IN PROGRESS; P12-05 is NOT STARTED.
++
++## Why this work is being done now
++
++[Plan 096](096-production-database-activation.md) is accepted/closed. Its immutable
++`p12-04c-r4` release, production database, single owner and dual backup foundation
++are the accepted baseline. This slice activates the private application transport.
++
++## In scope
++
++One stable DHCP reservation, one private DNS host override, signed official Caddy
++and supported DNS-01 tooling, protected Cloudflare and proxy secrets, normal TLS
++issuance/renewal, immutable deployment definitions, loopback API startup, guest
++firewall, and bounded Windows/Android-Origin HTTP smoke checks.
++
++## Original implementation non-goals
++
++No public application A/AAAA, WAN forwarding, HTTP-01, port 80 redirect listener,
++self-signed application trust, provider credentials, APK/device/PWA acceptance,
++restore/rollback rehearsal, backup deletion, retention, alert destination,
++VM onboot change, unrelated backup rotation, main commit/push, or P12-05.
++
++The subsequent accepted closeout authorizes the exact ten-file local main commit
++and r2 publication only; all other non-goals remain unchanged.
++
++## Current repository state
++
++Implementation entry: `main` at `0d29d5f7f07f379ade834ee22cfaf4e7da9587c4`, empty index.
++The pre-existing modified `AGENTS.md`, catalog-search integration test and
++catalog-parser unit test match their accepted SHA-256 values and remain protected.
++Live release manifest SHA-256 matches
++`980b7d9894eeee745bd8c7e8222714790f8ac6a56e7812d1d0c6d9fd29ae96a8`.
++
++## Decisions and assumptions
++
++- Authenticated OPNsense 26.1.10 inspection proves Kea DHCPv4 serves the LAN.
++  The VM lease matches the NIC independently reported by Proxmox's guest agent.
++  Dnsmasq has no DHCP ranges and uses DNS port 53053. Unbound serves port 53.
++  Windows and VM use the same private gateway as DHCP server and DNS resolver.
++- The original VM address lay in a dynamic pool. Excluded only that address from
++  dynamic allocation, retained every other pool address and existing reservation,
++  then created one reservation. Renewal and Kea's assigned-static lease confirm it.
++- Unbound initially had no host overrides. Added only the exact application A
++  override, TTL 300, without PTR/aliases. No Android synthetic-origin DNS record.
++- Stock Caddy consumes externally issued certificate files. Certbot with the
++  Cloudflare plugin is the preferred issuer after package/source review.
++- Source policy is deny inbound, allow outbound, SSH from the proven private
++  admin subnet and HTTPS from the proven private client subnet; no public scope.
++- Live private addresses, NIC identifiers and credentials stay out of this plan
++  and all public review artifacts.
++- TLS files and the proxy environment use `/etc/caddy/brickvault-tls` and
++  `/etc/caddy/brickvault.env` so Caddy can read them without broadening access to
++  the existing root:brickvault 0750 `/etc/brickvault` parent directory.
++- The stock Caddy service used `--environ`. The reviewed drop-in removes it before
++  secret installation, confines its admin API to a protected Unix socket, disables
++  adapted-config persistence, and filters request/response-header log fields.
++- Manifest schema 2 includes the literal deployment file inventory. Verification
++  remains compatible with accepted schema-1 bundles; application/wheel/lock/frontend
++  bytes are unchanged. This is a deployment identity change, not an API migration.
++
++## Data model and API/interface changes
++
++No migration, account or application API changes. The exact environment contract
++is `BVA_MODE`, `BVA_BIND_HOST`, `BVA_API_PORT`, `BVA_RUNTIME_DATABASE_URL`,
++`BVA_DATABASE_OWNERSHIP_MARKER`, `BVA_PRODUCTION_ORIGIN`,
++`BVA_PROXY_SHARED_SECRET`, `BVA_STATIC_ENABLED`, and `BVA_WEB_BUILD_DIR`.
++Production origin is `https://appraisal.abrianbaker.com`; the existing boundary
++derives credentialed CORS for `https://android.appraisal.abrianbaker.com`.
++Preserve Secure/HttpOnly/SameSite=Strict cookies and required mutation Origin.
++
++## Implementation sequence
++
++1. Verify preservation and the minimum live foundation. Inspect authoritative
++   DHCP/DNS configuration read-only through Brian's authenticated OPNsense session.
++2. Safely reserve the current VM address and add its one Unbound host override.
++   Verify renewal, route/DNS and Windows normal-resolver results.
++3. Review official package provenance; install Caddy without starting it and
++   supported DNS-01 tooling. Stop for scoped Cloudflare token placement when needed.
++4. Add reviewed Caddy/service/certificate helper definitions and focused tests.
++   Bind changed deployment inputs into a fresh immutable release; never edit r4.
++5. Issue the exact-host certificate through DNS-01; verify chain, key pairing,
++   cleaned challenge, protected installation and automatic renewal/dry run.
++6. Derive protected runtime configuration locally from the production descriptor;
++   generate one fresh proxy secret locally for both API and Caddy. Preflight and
++   start the API only on `127.0.0.1:18080`; stop on startup failure.
++7. Apply reviewed guest firewall with a retained SSH session and rollback on
++   failed fresh connection. Validate Caddy before enabling HTTPS on 443 only.
++8. Run bounded real-hostname trust, Host/Origin/proxy/no-store and synthetic
++   Android-Origin HTTP checks, plus public-exposure negatives and service checks.
++9. Update actual evidence and publish sanitized `astra_response/P12-04D/r1/`
++   on `astra-response`, leaving main uncommitted with an empty index.
++
++## Validation and acceptance criteria
++
++Use focused deployment/helper and manifest checks only when affected. Verify
++exact release/source/lock/frontend/installed identities. Require normal Windows
++TLS trust, private DNS, loopback PostgreSQL/API, exact proxy-header overwrite,
++rejected wrong Host/Origin, no wildcard CORS, protected secrets, firewall source
++restriction, API/Caddy enabled/active and backup timer enabled/active. Preserve
++`onboot=0`. Transport smoke is not browser/PWA/physical Android acceptance.
++
++## Security, privacy, and data-integrity considerations
++
++Do not read credentials into chat. Cloudflare token must be zone-scoped DNS Edit,
++with Zone Read only if required. Use hidden local installation, not command argv.
++API config is root:brickvault 0640; Caddy secret is root:caddy 0640. TLS
++directory is root:caddy 0750 and certificate/key files are root:caddy 0640. Never publish private
++IPs/MACs, tokens, database marker/password, proxy secret, key, owner hash, recovery
++credentials or browser session material. Do not trust client forwarding headers.
++
++## Failure modes, rollback, and recovery
++
++Stop on ambiguous network authority, unsafe reservation, missing login/token,
++untrusted certificate, startup failure, SSH lockout risk, unexpected public exposure
++or transport-boundary failure. Preserve accepted release and recovery material.
++Do not retry migration/bootstrap/backups, weaken trust, or install a workaround.
++Rollback only exact task-owned changes from recorded prior state when authorized;
++retain failed evidence and keep application exposure disabled on failed gates.
++
++## Progress log
++
++- [x] 2026-09-29: Verified requested main HEAD, empty index and protected hashes.
++- [x] VM running, Ubuntu 24.04.5, guest agent, accepted release manifest,
++  production-admin verification (including exactly one owner), loopback PostgreSQL,
++  inactive/disabled API, absent api.env/Caddy/API listener, and active backup timer.
++  Both accepted protected backup receipts remain available. No backup was triggered.
++- [x] 2026-09-29: Browser connection repaired through Brian's local extension
++  reinstall; authenticated OPNsense DHCP/DNS inspection resumed.
++- [x] Excluded only the VM's existing address from Kea's dynamic pools, preserving
++  all other addresses and four existing reservations; added the one VM reservation.
++  Renewal retained its address, gateway and resolver; Kea reports assigned static.
++- [x] Added one Unbound A host override with TTL 300, no PTR or aliases. Windows
++  normal-resolver and VM lookups both match the reserved private address. Both
++  public authoritative nameservers returned no application A/AAAA. Destination
++  NAT and one-to-one NAT have no configured forwarding entries; no WAN rule added.
++- [x] Installed stock Caddy 2.11.4 from its signed official Cloudsmith stable
++  repository (signing key fingerprint `65760C51EDEA2017CEA2CA15155B6D79CA56EA34`).
++  Installed Certbot 2.9.0-1, python3-certbot-dns-cloudflare 2.0.0-1 and
++  python3-cloudflare 2.11.1-1ubuntu1 from signed Ubuntu noble repositories.
++  Package audit is clean. `caddy.service`, `caddy-api.service` and Certbot units were masked before
++  installation and remain inactive; no web/API listener appeared.
++- [x] Initially stopped because the Cloudflare credential was absent.
++  Prepared an ignored, one-time hidden-input helper on Windows and root-owned
++  VM helper; transferred bytes match SHA-256, Python compilation passes, and a
++  noninteractive invocation refuses before writing credentials. It requires a
++  terminal, refuses overwrites/symlinks, and writes root-only 0600 credentials in
++  a root-owned 0700 directory. No token was requested through chat.
++- [x] Brian confirmed local token placement. Directory root:root 0700 and file
++  root:root 0600 passed. DNS-01 functional access passed using the requested
++  Zone/DNS/Edit scope for the single parent zone; no Global API Key or extra
++  Zone Read permission was requested. Broader account policy was not enumerated.
++- [x] Let's Encrypt YE2 issued the exact-host ECDSA certificate, valid from
++  2026-09-30 02:45:59 UTC to 2026-12-29 02:45:58 UTC. Chain, SAN, key pairing,
++  validity, normal VM/Windows trust and served-leaf identity passed. Leaf DER
++  SHA-256: `33e8fc2d09ee705d536c739aeebe439ebf24eb5ef33d78fc2710c533ecc50fb7`.
++  ACME registered without a contact email; external alerting remains deferred.
++- [x] Immutable `p12-04d-r1` installed. Source ID:
++  `b704133a4754365ac96cb282902bcd14aa9a6a75bd572cb0df38816b968ce6bc`.
++  Manifest SHA-256: `25cbb51ec895640f2ed27ab36afac8ebcd11590aa52f96015b15e460502b6f36`.
++  Wheel SHA-256 remains `02dc2675632ffc72ffd11a797aab11b52fee5820b5966bc582864baf9ce8fc97`.
++  CPython 3.13.15, uv 0.12.10, hashed dependency install/check, entrypoints,
++  migration graph and installed deployment-byte comparisons passed. Accepted r4
++  is preserved; no migration, account bootstrap or manual backup was repeated.
++- [x] Production API configuration derived locally from the protected descriptor,
++  with a new random 64-hex proxy secret shared through two protected files.
++  Configuration and admin verification passed. API enabled/active on loopback
++  18080 only; runtime DB readiness and nine local boundary cases passed.
++- [x] UFW enabled with deny incoming/allow outgoing and exactly two source-scoped
++  TCP rules: SSH 22 from the proven private admin /24 and HTTPS 443 from the proven
++  private client /24 (the same LAN). Retained SSH session stayed open until fresh
++  SSH passed. IPv6 has no inbound allow rule. Windows 22/443 reachable; 80/18080/5432
++  denied. These are host-rule and approved-client checks, not a separate WAN probe.
++- [x] Caddy enabled/active on TCP 443 only, HTTP/1.1 and HTTP/2. No TCP 80,
++  UDP 443 or TCP admin listener. Protected Unix admin socket verified.
++- [x] Windows normal DNS and normal .NET platform TLS trust passed. Health/app
++  shell, private-route 401, unknown-API JSON 404/no-store, overwritten forged and
++  duplicate proxy headers, wrong Host with real SNI (421), direct-IP TLS refusal,
++  missing/wrong Origin (403), accepted browser Origin and exact native credentialed
++  CORS preflight/auth-error behavior passed. No owner login or session was created.
++- [x] Certbot renewal dry run with deploy hooks passed; the hook validated the
++  production certificate and successfully reloaded Caddy. Certbot timer is
++  enabled/active; the next recorded trigger was 2026-09-30 15:42:51 UTC. Both
++  authoritative nameservers confirm challenge TXT cleanup and no application A/AAAA.
++- [x] API/Caddy/Certbot journal and issuance-log checks found no token, DB password,
++  ownership marker, proxy secret or private-key disclosure. Adapted Caddy autosave
++  is absent. Backup timer remains enabled/active; Proxmox VM onboot remains 0.
++- [x] The separate exposed identity is a legacy application's age identity, with
++  no reference in this app's deployment/recovery scripts and no match in its
++  restic/SSH access material. The appraisal OAuth client is also distinct. This
++  identity is OUTSIDE this deployment, is not a blocker, and was not modified.
++- [x] Seven release-manifest tests and five Linux certificate-deployment tests
++  passed, including artifact tamper/omission refusal, schema-1 compatibility,
++  protected permissions, idempotence and failed validation/reload restoration.
++  Targeted Ruff/format and strict Linux-target mypy passed for four Python files.
++- [x] Source and live evidence are complete for the sanitized review package at
++  `astra_response/P12-04D/r1/` on `astra-response`. Protected hashes and the empty
++  main index were rechecked; final publication verification accompanies the review link.
++
++- [x] Closeout: Brian accepted the [accepted r1 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/aff388fd89fd935c5d9ab61f7a3cf4490196b58f/astra_response/P12-04D/r1/REVIEW.md) after ChatGPT review. The exact ten-file local checkpoint and r2 review publication reuse accepted evidence. No live, test, lint, typecheck, format or build work was rerun.
++
++## Open questions or physical-device/manual checks
++
++No outstanding activation blocker. Owner login/session-cookie issuance was not
++exercised; the unchanged accepted source still specifies Secure/HttpOnly/SameSite
++Strict cookies. The safe requests created no session and emitted no Set-Cookie.
++Browser/PWA behavior and physical Android trust remain P12-05 acceptance work.
++No real restore or release rollback rehearsal, retention deletion, alerting,
++provider-credential setup, onboot change or CPython automation was performed.
++
++## Outcome and follow-up
++
++**P12-04D ACCEPTED / CLOSED.** The accepted r1 evidence establishes private HTTPS
++at `https://appraisal.abrianbaker.com`, stable Kea reservation/private Unbound DNS,
++normal Let's Encrypt DNS-01 trust, guarded renewal, exact Caddy proxy boundary,
++private-LAN UFW policy, loopback API/PostgreSQL and Windows/Android-Origin transport
++smoke. API, Caddy, renewal and backup timers were enabled/active at accepted
++verification; VM onboot remains recorded as 0. These are accepted results, not
++new live observations. Immutable `p12-04d-r1`, source/manifest/wheel identities
++above and the prior r4 release are preserved.
++
++The ten-file closeout creates one local main commit; main is not pushed. The
++index is empty afterward and all three protected files remain unchanged and
++unstaged. The closeout review package is `astra_response/P12-04D/r2/`, preserving
++r1. **P12-04 IN PROGRESS. Next P12-04 operational-hardening checkpoint NEXT / NOT
++STARTED. P12-05 NOT STARTED.** No next checkpoint is authorized by this closeout.
++
++Remaining P12-04 gates stay OPEN:
++
++- Complete-run destructive backup retention implementation/review.
++- External operational alerting.
++- Deliberate production VM onboot behavior.
++- CPython 3.13 security-release/update maintenance.
++- ACME contact/renewal operational notification decision. The account currently
++  has no contact email; this is an operational note, not a P12-04D defect.
++- Remaining production service health/maintenance automation.
++
++Keep for P12-05:
++
++- Owner login/session/cookie issuance; no new Set-Cookie evidence exists.
++- Full browser acceptance.
++- Full PWA install/offline/reconnect acceptance.
++- Physical Android production-TLS acceptance; accepted CORS checks are transport only.
++- Real production restore rehearsal.
++- Release rollback rehearsal.
++- End-to-end disaster-recovery acceptance.
++
++The legacy protected backup identity is separate from this application's recovery
++authority, was not changed, and is not a BrickVault deployment blocker.
+diff --git a/scripts/deploy_certificate.py b/scripts/deploy_certificate.py
+new file mode 100644
+index 0000000..ff10c1d
+--- /dev/null
++++ b/scripts/deploy_certificate.py
+@@ -0,0 +1,278 @@
++"""Install only the approved, trusted Certbot lineage and safely reload Caddy.
++
++Executed as root by Certbot's deploy hook. No credentials appear in arguments,
++output or persistent adapted Caddy JSON. Old certificate generations are retained.
++"""
++
++import hashlib
++import os
++import re
++import stat
++import subprocess
++import sys
++from pathlib import Path
++
++HOST = "appraisal.abrianbaker.com"
++LINEAGE = Path("/etc/letsencrypt/live") / HOST
++ARCHIVE = Path("/etc/letsencrypt/archive") / HOST
++DESTINATION = Path("/etc/caddy/brickvault-tls")
++CADDY_ENV = Path("/etc/caddy/brickvault.env")
++GENERATION = re.compile(r"cert-[a-f0-9]{64}\Z")
++
++
++class CertificateError(RuntimeError):
++    """Safe error category, with no underlying command output."""
++
++
++def run(arguments: list[str], *, environment: dict[str, str] | None = None) -> bytes:
++    result = subprocess.run(
++        arguments, env=environment, capture_output=True, check=False, timeout=60
++    )
++    if result.returncode:
++        raise CertificateError("Certificate command failed; private details withheld.")
++    return result.stdout
++
++
++def safe_parents(path: Path) -> None:
++    for parent in (path.parent, *path.parent.parents):
++        info = parent.lstat()
++        if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
++            raise CertificateError("Unsafe protected directory.")
++
++
++def read_protected(path: Path, *, private: bool = False) -> bytes:
++    safe_parents(path)
++    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
++    try:
++        info = os.fstat(descriptor)
++        if (
++            not stat.S_ISREG(info.st_mode)
++            or info.st_uid != 0
++            or info.st_nlink != 1
++            or info.st_mode & (0o077 if private else 0o022)
++            or info.st_size > 65536
++        ):
++            raise CertificateError("Unsafe certificate input.")
++        with os.fdopen(descriptor, "rb", closefd=False) as source:
++            return source.read(65537)
++    finally:
++        os.close(descriptor)
++
++
++def certificate_inputs(lineage: Path) -> dict[str, bytes]:
++    if lineage != LINEAGE:
++        raise CertificateError("Unexpected Certbot lineage.")
++    files = {}
++    paths = {}
++    for name in ("cert.pem", "chain.pem", "fullchain.pem", "privkey.pem"):
++        path = (lineage / name).resolve(strict=True)
++        if path.parent != ARCHIVE:
++            raise CertificateError("Certificate input escaped its approved archive.")
++        files[name] = read_protected(path, private=name == "privkey.pem")
++        paths[name] = str(path)
++    if files["fullchain.pem"] != files["cert.pem"] + files["chain.pem"]:
++        raise CertificateError("Full chain does not match the verified leaf and chain.")
++    run(
++        [
++            "/usr/bin/openssl",
++            "verify",
++            "-CAfile",
++            "/etc/ssl/certs/ca-certificates.crt",
++            "-untrusted",
++            paths["chain.pem"],
++            "-purpose",
++            "sslserver",
++            "-verify_hostname",
++            HOST,
++            paths["cert.pem"],
++        ]
++    )
++    run(
++        [
++            "/usr/bin/openssl",
++            "x509",
++            "-in",
++            paths["cert.pem"],
++            "-checkend",
++            "604800",
++            "-noout",
++        ]
++    )
++    sans = (
++        run(
++            [
++                "/usr/bin/openssl",
++                "x509",
++                "-in",
++                paths["cert.pem"],
++                "-noout",
++                "-ext",
++                "subjectAltName",
++            ]
++        )
++        .decode("ascii")
++        .splitlines()
++    )
++    if "".join(line.strip() for line in sans[1:]) != "DNS:" + HOST:
++        raise CertificateError(
++            "Certificate SANs differ from the single approved hostname."
++        )
++    public = run(
++        ["/usr/bin/openssl", "x509", "-in", paths["cert.pem"], "-pubkey", "-noout"]
++    )
++    key_public = run(
++        ["/usr/bin/openssl", "pkey", "-in", paths["privkey.pem"], "-pubout"]
++    )
++    if public != key_public:
++        raise CertificateError("Certificate and private key differ.")
++    return {name: files[name] for name in ("fullchain.pem", "privkey.pem")}
++
++
++def caddy_environment() -> dict[str, str]:
++    import grp
++
++    data = read_protected(CADDY_ENV)
++    info = CADDY_ENV.stat()
++    if (
++        info.st_gid != grp.getgrnam("caddy").gr_gid
++        or stat.S_IMODE(info.st_mode) != 0o640
++    ):
++        raise CertificateError("Unsafe Caddy environment permissions.")
++    match = re.fullmatch(rb"BVA_PROXY_SHARED_SECRET=([a-f0-9]{64})\n", data)
++    if match is None:
++        raise CertificateError("Unexpected Caddy environment format.")
++    return {
++        "PATH": "/usr/bin:/bin",
++        "HOME": "/var/lib/caddy",
++        "BVA_PROXY_SHARED_SECRET": match[1].decode("ascii"),
++    }
++
++
++def protected_directory(path: Path, group: int) -> None:
++    safe_parents(path)
++    try:
++        path.mkdir(mode=0o700)
++    except FileExistsError:
++        info = path.lstat()
++        if (
++            not stat.S_ISDIR(info.st_mode)
++            or info.st_uid != 0
++            or info.st_gid != group
++            or stat.S_IMODE(info.st_mode) != 0o750
++        ):
++            raise CertificateError("Unsafe certificate destination directory.")
++    else:
++        os.chown(path, 0, group)
++        path.chmod(0o750)
++
++
++def install(files: dict[str, bytes], group: int) -> bool:
++    """Switch one verified certificate pair atomically; restore disk state on failure."""
++    protected_directory(DESTINATION, group)
++    generation = "cert-" + hashlib.sha256(files["fullchain.pem"]).hexdigest()
++    target = DESTINATION / generation
++    protected_directory(target, group)
++    for name, content in files.items():
++        path = target / name
++        try:
++            descriptor = os.open(
++                path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600
++            )
++        except FileExistsError:
++            info = path.lstat()
++            if (
++                read_protected(path) != content
++                or info.st_gid != group
++                or stat.S_IMODE(info.st_mode) != 0o640
++            ):
++                raise CertificateError("Existing certificate generation differs.")
++        else:
++            with os.fdopen(descriptor, "wb") as output:
++                output.write(content)
++                output.flush()
++                os.fchown(output.fileno(), 0, group)
++                os.fchmod(output.fileno(), 0o640)
++                os.fsync(output.fileno())
++    current = DESTINATION / "current"
++    previous = None
++    if current.is_symlink():
++        previous = os.readlink(current)
++        if GENERATION.fullmatch(previous) is None:
++            raise CertificateError("Unexpected current certificate target.")
++    elif current.exists():
++        raise CertificateError("Current certificate pointer is not a symlink.")
++    pending = DESTINATION / ".next"
++    pending.symlink_to(generation)
++    pending.replace(current)
++    try:
++        run(
++            [
++                "/usr/sbin/runuser",
++                "-u",
++                "caddy",
++                "--",
++                "/usr/bin/caddy",
++                "validate",
++                "--config",
++                "/etc/caddy/Caddyfile",
++                "--adapter",
++                "caddyfile",
++            ],
++            environment=caddy_environment(),
++        )
++        active = (
++            subprocess.run(
++                ["/usr/bin/systemctl", "is-active", "--quiet", "caddy.service"],
++                capture_output=True,
++                check=False,
++                timeout=10,
++            ).returncode
++            == 0
++        )
++        if active:
++            run(["/usr/bin/systemctl", "reload", "caddy.service"])
++        return active
++    except BaseException:
++        if previous is None:
++            current.unlink()
++        else:
++            pending.symlink_to(previous)
++            pending.replace(current)
++        raise
++
++
++def main() -> int:
++    try:
++        if os.name != "posix" or os.geteuid() != 0:
++            raise CertificateError("Root is required.")
++        if os.environ.get("RENEWED_DOMAINS", HOST).split() != [HOST]:
++            raise CertificateError("Unexpected renewed domain set.")
++        import fcntl
++        import grp
++
++        with Path("/run/brickvault-certificate.lock").open("a") as lock:
++            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
++            files = certificate_inputs(
++                Path(os.environ.get("RENEWED_LINEAGE", str(LINEAGE)))
++            )
++            active = install(files, grp.getgrnam("caddy").gr_gid)
++        print(
++            "Trusted certificate installed; Caddy "
++            + ("reloaded." if active else "remains stopped.")
++        )
++        return 0
++    except (
++        CertificateError,
++        OSError,
++        ValueError,
++        KeyError,
++        subprocess.SubprocessError,
++    ):
++        print(
++            "Certificate deployment failed; private details withheld.", file=sys.stderr
++        )
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index 8d3a06a..3825d93 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -33,7 +33,14 @@ SAFE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{1,63}\Z")
+ HEX_40 = re.compile(r"[a-f0-9]{40}\Z")
+ HEX_64 = re.compile(r"[a-f0-9]{64}\Z")
+ MAX_WEB_BYTES = 32 * 1024 * 1024
++DEPLOYMENT_FILES = {
++    "deploy/caddy/Caddyfile": "deploy/caddy/Caddyfile",
++    "deploy/systemd/caddy.service.d/brickvault.conf": "deploy/systemd/caddy.service.d/brickvault.conf",
++    "deploy/certbot/renewal-hooks/deploy/brickvault-certificate": "deploy/certbot/renewal-hooks/deploy/brickvault-certificate",
++    "scripts/deploy_certificate.py": "deploy/deploy_certificate.py",
++}
+ RELEASE_SOURCE_PATHS = (
++    *DEPLOYMENT_FILES,
+     "apps/web/package.json",
+     "deploy/systemd/brickvault-api.service",
+     "deploy/systemd/brickvault-backup.service",
+@@ -45,6 +52,7 @@ RELEASE_SOURCE_PATHS = (
+     "scripts/production_admin_secret_proof.py",
+     "scripts/release_manifest.py",
+     "scripts/test_release_manifest.py",
++    "scripts/test_deploy_certificate.py",
+     "services/api/pyproject.toml",
+     "services/api/src/brickvault_api/persistence/runtime_grants.py",
+     "services/api/src/brickvault_api/production_admin.py",
+@@ -62,6 +70,7 @@ DOCUMENTATION_PATHS = {
+     "docs/plans/094-production-foundation.md",
+     "docs/plans/095-dual-recovery-foundation.md",
+     "docs/plans/096-production-database-activation.md",
++    "docs/plans/097-private-https-application-activation.md",
+ }
+ PROTECTED_PATHS = {
+     "AGENTS.md",
+@@ -373,13 +382,16 @@ def create(root: Path, release_id: str, source_id: str) -> tuple[Path, str]:
+     _copy_checked(sdist, bundle / "api" / SDIST)
+     for path in web_files:
+         _copy_checked(path, bundle / "web" / path.relative_to(web))
++    for source_name, destination_name in DEPLOYMENT_FILES.items():
++        _ordinary_parents(root / source_name, root)
++        _copy_checked(root / source_name, bundle / destination_name)
+     _export_requirements(root, bundle / "api" / "requirements.txt")
+     files = sorted(
+         (_record(bundle, path) for path in bundle.rglob("*") if path.is_file()),
+         key=lambda item: str(item["path"]),
+     )
+     manifest = {
+-        "schema": 1,
++        "schema": 2,
+         "release_id": release_id,
+         "source": {"commit": commit, "reviewed_id": source_id},
+         "uv_version": UV_VERSION,
+@@ -417,7 +429,7 @@ def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str)
+     if (
+         not isinstance(manifest, dict)
+         or set(manifest) != {"schema", "release_id", "source", "uv_version", "files"}
+-        or manifest["schema"] != 1
++        or manifest["schema"] not in (1, 2)
+         or manifest["release_id"] != release_id
+         or manifest["uv_version"] != UV_VERSION
+         or not isinstance(source, dict)
+@@ -440,7 +452,7 @@ def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str)
+         if (
+             name in expected_paths
+             or not parts
+-            or parts[0] not in ("api", "web")
++            or parts[0] not in ("api", "web", "deploy")
+             or any(part in (".", "..") for part in parts)
+             or type(size) is not int
+             or size < 0
+@@ -455,6 +467,8 @@ def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str)
+         if path.stat().st_size != size or _sha256(path) != digest:
+             raise ReleaseError("Release file differs from its reviewed manifest.")
+     required = {f"api/{WHEEL}", f"api/{SDIST}", "api/requirements.txt"}
++    if manifest["schema"] == 2:
++        required.update(DEPLOYMENT_FILES.values())
+     web = bundle / "web"
+     web_paths = {"web/" + path.relative_to(web).as_posix() for path in _web_files(web)}
+     if expected_paths != required | web_paths:
+diff --git a/scripts/test_deploy_certificate.py b/scripts/test_deploy_certificate.py
+new file mode 100644
+index 0000000..8c89ed0
+--- /dev/null
++++ b/scripts/test_deploy_certificate.py
+@@ -0,0 +1,108 @@
++"""Linux root-only certificate deployment tests; all service commands are mocked."""
++
++import os
++import tempfile
++import unittest
++from pathlib import Path
++from types import SimpleNamespace
++from unittest.mock import patch
++
++import deploy_certificate as deploy
++
++
++@unittest.skipUnless(
++    os.name == "posix" and getattr(os, "geteuid", lambda: -1)() == 0,
++    "Run in an isolated root-owned Linux temporary directory",
++)
++class CertificateDeploymentTests(unittest.TestCase):
++    def setUp(self) -> None:
++        temporary = tempfile.TemporaryDirectory(dir="/root")
++        self.addCleanup(temporary.cleanup)
++        self.root = Path(temporary.name)
++        self.destination = self.root / "tls"
++        self.files = {
++            "fullchain.pem": b"trusted certificate",
++            "privkey.pem": b"matching key",
++        }
++        for name, value in (("DESTINATION", self.destination),):
++            patcher = patch.object(deploy, name, value)
++            patcher.start()
++            self.addCleanup(patcher.stop)
++        environment_patch = patch.object(
++            deploy, "caddy_environment", return_value={"PATH": "/usr/bin:/bin"}
++        )
++        environment_patch.start()
++        self.addCleanup(environment_patch.stop)
++
++    def install(self, *, active: bool = False) -> bool:
++        with patch(
++            "deploy_certificate.subprocess.run",
++            return_value=SimpleNamespace(returncode=0 if active else 3),
++        ):
++            return deploy.install(self.files, 0)
++
++    def test_stopped_service_pair_permissions_and_idempotence(self) -> None:
++        with patch.object(deploy, "run") as command:
++            self.assertFalse(self.install())
++            first = os.readlink(self.destination / "current")
++            self.assertFalse(self.install())
++            self.assertEqual(first, os.readlink(self.destination / "current"))
++            for name, expected in self.files.items():
++                path = self.destination / "current" / name
++                self.assertEqual(path.read_bytes(), expected)
++                self.assertEqual(path.stat().st_mode & 0o777, 0o640)
++            self.assertTrue(
++                all("reload" not in call.args[0] for call in command.call_args_list)
++            )
++
++    def test_validation_failure_removes_first_pointer(self) -> None:
++        with (
++            patch.object(deploy, "run", side_effect=deploy.CertificateError()),
++            self.assertRaises(deploy.CertificateError),
++        ):
++            self.install()
++        self.assertFalse((self.destination / "current").is_symlink())
++
++    def test_reload_failure_restores_previous_pair_and_retains_generations(
++        self,
++    ) -> None:
++        with patch.object(deploy, "run"):
++            self.install()
++        previous = os.readlink(self.destination / "current")
++        self.files = {
++            "fullchain.pem": b"renewed certificate",
++            "privkey.pem": b"renewed key",
++        }
++        with (
++            patch.object(deploy, "run", side_effect=[b"", deploy.CertificateError()]),
++            self.assertRaises(deploy.CertificateError),
++        ):
++            self.install(active=True)
++        self.assertEqual(previous, os.readlink(self.destination / "current"))
++        self.assertEqual(len(list(self.destination.glob("cert-*"))), 2)
++
++    def test_symlink_destination_and_changed_generation_refused(self) -> None:
++        other = self.root / "other"
++        other.mkdir()
++        self.destination.symlink_to(other, target_is_directory=True)
++        with self.assertRaises(deploy.CertificateError):
++            self.install()
++        self.destination.unlink()
++        with patch.object(deploy, "run"):
++            self.install()
++        (self.destination / "current" / "privkey.pem").write_bytes(b"replaced key")
++        with self.assertRaises(deploy.CertificateError):
++            self.install()
++
++    def test_other_lineage_and_unsafe_private_permissions_refused(self) -> None:
++        with self.assertRaises(deploy.CertificateError):
++            deploy.certificate_inputs(self.root)
++        private = self.root / "key"
++        private.write_bytes(b"private")
++        private.chmod(0o644)
++        with self.assertRaises(deploy.CertificateError):
++            deploy.read_protected(private, private=True)
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_release_manifest.py b/scripts/test_release_manifest.py
+index 11a3536..6aacd7b 100644
+--- a/scripts/test_release_manifest.py
++++ b/scripts/test_release_manifest.py
+@@ -10,7 +10,7 @@ from types import SimpleNamespace
+ from unittest.mock import patch
+ 
+ sys.path.insert(0, str(Path(__file__).resolve().parent))
+-import release_manifest  # noqa: E402
++import release_manifest
+ 
+ 
+ class ReleaseManifestTests(unittest.TestCase):
+@@ -32,6 +32,10 @@ class ReleaseManifestTests(unittest.TestCase):
+         self.web = web
+         self.release_id = "p12-04a-r1"
+         self.source_id = "a" * 64
++        for name in release_manifest.DEPLOYMENT_FILES:
++            source = self.root / name
++            source.parent.mkdir(parents=True, exist_ok=True)
++            source.write_bytes(b"reviewed deployment bytes")
+ 
+     def _create(self) -> tuple[Path, str]:
+         def export(_root: Path, destination: Path) -> None:
+@@ -62,12 +66,55 @@ class ReleaseManifestTests(unittest.TestCase):
+                 "api/requirements.txt",
+                 "web/index.html",
+                 "web/assets/main-01234567.js",
++                *release_manifest.DEPLOYMENT_FILES.values(),
+             },
+         )
+         (bundle / "api" / "requirements.txt").write_text("changed\n")
+         with self.assertRaises(release_manifest.ReleaseError):
+             release_manifest.verify(bundle, digest, self.release_id, self.source_id)
+ 
++    def test_deployment_tampering_and_omission_are_rejected(self) -> None:
++        bundle, digest = self._create()
++        path = bundle / "deploy/caddy/Caddyfile"
++        original = path.read_bytes()
++        path.write_bytes(b"unexpected public proxy")
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(bundle, digest, self.release_id, self.source_id)
++        path.write_bytes(original)
++        manifest_path = bundle / "manifest.json"
++        manifest = json.loads(manifest_path.read_text())
++        manifest["files"] = [
++            item
++            for item in manifest["files"]
++            if item["path"] != "deploy/caddy/Caddyfile"
++        ]
++        manifest_path.write_text(json.dumps(manifest))
++        with self.assertRaises(release_manifest.ReleaseError):
++            release_manifest.verify(
++                bundle,
++                release_manifest._sha256(manifest_path),
++                self.release_id,
++                self.source_id,
++            )
++
++    def test_accepted_schema_one_bundle_remains_verifiable(self) -> None:
++        bundle, _ = self._create()
++        manifest_path = bundle / "manifest.json"
++        manifest = json.loads(manifest_path.read_text())
++        manifest["schema"] = 1
++        manifest["files"] = [
++            item for item in manifest["files"] if not item["path"].startswith("deploy/")
++        ]
++        for name in release_manifest.DEPLOYMENT_FILES.values():
++            (bundle / name).unlink()
++        manifest_path.write_text(json.dumps(manifest))
++        release_manifest.verify(
++            bundle,
++            release_manifest._sha256(manifest_path),
++            self.release_id,
++            self.source_id,
++        )
++
+     def test_manifest_requires_external_digest_and_exact_identity(self) -> None:
+         bundle, digest = self._create()
+         with self.assertRaises(release_manifest.ReleaseError):
+@@ -88,7 +135,7 @@ class ReleaseManifestTests(unittest.TestCase):
+         self,
+     ) -> None:
+         scripts = self.root / "scripts"
+-        scripts.mkdir()
++        scripts.mkdir(exist_ok=True)
+         included = scripts / "release_manifest.py"
+         included.write_bytes(b"reviewed source")
+         protected = self.root / "AGENTS.md"
