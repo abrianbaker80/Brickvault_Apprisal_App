@@ -1,0 +1,32 @@
+{
+  "branch": "main",
+  "commit": "0ea8e0e21156bebb9aa4150c270643a0a5d0d571",
+  "parent": "5c673e81a4f1caa13a0909a746d6ba0fffca075e",
+  "tree": "6558faeb3d8999ebe320d16408f24b01567519c5",
+  "subject": "Close P12-05 catalog importer repair",
+  "exact_committed_files": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/099-phase-12-production-acceptance.md",
+    "docs/plans/100-production-catalog-activation.md",
+    "docs/plans/101-catalog-importer-performance-repair.md",
+    "scripts/production_catalog.py",
+    "scripts/test_production_catalog.py",
+    "scripts/release_manifest.py",
+    "scripts/test_release_manifest.py",
+    "services/api/src/brickvault_api/catalog/builder.py",
+    "services/api/src/brickvault_api/catalog/importer.py",
+    "services/api/src/brickvault_api/catalog/recovery.py",
+    "services/api/tests/unit/test_catalog_recovery.py",
+    "services/api/tests/integration/test_catalog_recovery.py",
+    "services/api/tests/integration/test_catalog_inventory_batches.py"
+  ],
+  "one_local_commit": true,
+  "main_pushed": false,
+  "index": "empty",
+  "residual_unstaged_files": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ]
+}

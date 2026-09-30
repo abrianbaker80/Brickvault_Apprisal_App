@@ -1,0 +1,95 @@
+--- accepted-r2/CODEX_WORKFLOW.md
++++ closeout/CODEX_WORKFLOW.md
+@@ -1,4 +1,16 @@
+ # Codex Workflow for BrickVault Appraisal App
++
++## Accepted repair closeout, 2026-09-30
++
++**Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED pending separately authorized production recovery/retry/activation.
++P12-05 BLOCKED; Phase 12 IN PROGRESS.** Brian accepted the
++[r2 repair package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/REVIEW.md)
++and authorized only the exact 15-file local closeout checkpoint and r3 publication.
++Reuse accepted r2 qualification; this closeout performs no live connections,
++tests, builds, production recovery/retry/activation or candidate release install.
++Remaining P12-05 client/device gates stay blocked. The implementation scopes,
++repository snapshots and review-ready statements below are dated pre-closeout history.
+ 
+ ## P12-05 catalog repair review, 2026-09-30
+ 
+--- accepted-r2/docs/ROADMAP.md
++++ closeout/docs/ROADMAP.md
+@@ -1,4 +1,16 @@
+ # Valuation-First Roadmap
++
++## Accepted repair closeout, 2026-09-30
++
++**Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED pending separately authorized production recovery/retry/activation.
++P12-05 BLOCKED; Phase 12 IN PROGRESS.** Brian accepted the
++[r2 repair package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/REVIEW.md)
++and authorized only the exact 15-file local closeout checkpoint and r3 publication.
++Reuse accepted r2 qualification; this closeout performs no live connections,
++tests, builds, production recovery/retry/activation or candidate release install.
++Remaining P12-05 client/device gates stay blocked. The implementation scopes,
++repository snapshots and review-ready statements below are dated pre-closeout history.
+ 
+ ## P12-05 catalog repair review, 2026-09-30
+ 
+--- accepted-r2/docs/plans/099-phase-12-production-acceptance.md
++++ closeout/docs/plans/099-phase-12-production-acceptance.md
+@@ -1,4 +1,16 @@
+ # ExecPlan 099 — Phase 12 production acceptance
++
++## Accepted repair closeout, 2026-09-30
++
++**Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED pending separately authorized production recovery/retry/activation.
++P12-05 BLOCKED; Phase 12 IN PROGRESS.** Brian accepted the
++[r2 repair package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/REVIEW.md)
++and authorized only the exact 15-file local closeout checkpoint and r3 publication.
++Reuse accepted r2 qualification; this closeout performs no live connections,
++tests, builds, production recovery/retry/activation or candidate release install.
++Remaining P12-05 client/device gates stay blocked. The implementation scopes,
++repository snapshots and review-ready statements below are dated pre-closeout history.
+ 
+ ## Goal and user-visible outcome
+ 
+--- accepted-r2/docs/plans/100-production-catalog-activation.md
++++ closeout/docs/plans/100-production-catalog-activation.md
+@@ -1,4 +1,16 @@
+ # ExecPlan 100 — Production catalog activation prerequisite
++
++## Accepted repair closeout, 2026-09-30
++
++**Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED pending separately authorized production recovery/retry/activation.
++P12-05 BLOCKED; Phase 12 IN PROGRESS.** Brian accepted the
++[r2 repair package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/REVIEW.md)
++and authorized only the exact 15-file local closeout checkpoint and r3 publication.
++Reuse accepted r2 qualification; this closeout performs no live connections,
++tests, builds, production recovery/retry/activation or candidate release install.
++Remaining P12-05 client/device gates stay blocked. The implementation scopes,
++repository snapshots and review-ready statements below are dated pre-closeout history.
+ 
+ ## Goal and user-visible outcome
+ 
+--- accepted-r2/docs/plans/101-catalog-importer-performance-repair.md
++++ closeout/docs/plans/101-catalog-importer-performance-repair.md
+@@ -1,4 +1,16 @@
+ # ExecPlan 101 — Catalog importer performance repair
++
++## Accepted repair closeout, 2026-09-30
++
++**Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED pending separately authorized production recovery/retry/activation.
++P12-05 BLOCKED; Phase 12 IN PROGRESS.** Brian accepted the
++[r2 repair package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/REVIEW.md)
++and authorized only the exact 15-file local closeout checkpoint and r3 publication.
++Reuse accepted r2 qualification; this closeout performs no live connections,
++tests, builds, production recovery/retry/activation or candidate release install.
++Remaining P12-05 client/device gates stay blocked. The implementation scopes,
++repository snapshots and review-ready statements below are dated pre-closeout history.
+ 
+ ## Goal and user-visible outcome
+ 

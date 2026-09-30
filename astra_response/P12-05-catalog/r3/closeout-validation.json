@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "scope": "Git inventory/diff/whitespace, Markdown links, hashes and final checkout state only",
+  "local_commit": "0ea8e0e21156bebb9aa4150c270643a0a5d0d571",
+  "accepted_review_commit": "3d17ff6da2b0ec7748ea5a886a1341fbf583aaea",
+  "exact_15_staged_and_committed": true,
+  "complete_staged_diff_inspected": true,
+  "complete_staged_diff_lines": 3505,
+  "complete_staged_diff_sha256": "5545863e98695208b44d0047081ce4777d0ce0e519e35909f54c719f8d1a8be4",
+  "cached_diff_check": "PASS",
+  "changed_main_markdown_local_links_checked": 231,
+  "standalone_review_local_links_checked": 16,
+  "plan_copies": {
+    "Plan-099.md": {
+      "committed_source": "docs/plans/099-phase-12-production-acceptance.md",
+      "committed_blob_sha256": "e4592d0581a8a9a96448761f359c74a9404585f72ee8640d4ef8bdd5cfdc0a8a",
+      "standalone_copy_sha256": "bf18e865a4dfc8aeda5ad2c369111b248b3b9f0893110814f6140c3b72dc537e",
+      "only_markdown_links_rewritten": true
+    },
+    "Plan-100.md": {
+      "committed_source": "docs/plans/100-production-catalog-activation.md",
+      "committed_blob_sha256": "79d8080fd54984efa959f4f1dc6f7f6a4a429f35adc6ca8df1a13a6ffd274537",
+      "standalone_copy_sha256": "73a6092d535bac685f1583297779440642a395eb09c1933443c95c245d77180a",
+      "only_markdown_links_rewritten": true
+    },
+    "Plan-101.md": {
+      "committed_source": "docs/plans/101-catalog-importer-performance-repair.md",
+      "committed_blob_sha256": "2dc3064443c88207d72d65955a6773e4cfd77be5485161cbc267c9afc474bc03",
+      "standalone_copy_sha256": "8df12a18a73125c5304ad49abd3294c7812c4230ad223605330934cd1ad9d255",
+      "only_markdown_links_rewritten": true
+    }
+  },
+  "accepted_executable_files_equal": true,
+  "importer_line_endings": "accepted worktree CRLF; committed Git blob LF; content equivalent",
+  "main_branch": "main",
+  "main_index": "empty",
+  "main_pushed": false,
+  "residual_unstaged_files": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "protected_sha256_verified": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "accepted_r1_r2_tree_ids": {
+    "r1": "229ea623a1135ba6560a7e2870061664047acf46",
+    "r2": "5c6dce93dd70e5413dbbdcac420b5bee1ce9d8c4"
+  },
+  "reused_r2_validation": "177 focused unit/wrapper tests; 20 real PostgreSQL tests; Ruff/format/strict mypy; normal package/frontend/release; exact reconstruction; independent review PASS",
+  "new_test_build_or_live_qualification": false,
+  "production_contacted": false,
+  "production_recovery_retry_activation": false,
+  "catalog_importer_repair": "ACCEPTED / CLOSED",
+  "catalog_activation_prerequisite": "BLOCKED pending separately authorized production recovery/retry/activation",
+  "P12-05": "BLOCKED",
+  "Phase_12": "IN PROGRESS"
+}

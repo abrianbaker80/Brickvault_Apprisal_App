@@ -1,0 +1,10 @@
+{
+  "evidence": "Accepted r2; reused without build, recalculation, installation or activation",
+  "release_id": "p12-05-catalog-repair-r1",
+  "source_id": "33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344",
+  "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+  "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+  "qualification": "local and isolated only",
+  "installed_during_closeout": false,
+  "activated_during_closeout": false
+}

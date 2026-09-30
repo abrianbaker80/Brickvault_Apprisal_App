@@ -1,0 +1,15 @@
+CODEX_WORKFLOW.md
+docs/ROADMAP.md
+docs/plans/099-phase-12-production-acceptance.md
+docs/plans/100-production-catalog-activation.md
+docs/plans/101-catalog-importer-performance-repair.md
+scripts/production_catalog.py
+scripts/test_production_catalog.py
+scripts/release_manifest.py
+scripts/test_release_manifest.py
+services/api/src/brickvault_api/catalog/builder.py
+services/api/src/brickvault_api/catalog/importer.py
+services/api/src/brickvault_api/catalog/recovery.py
+services/api/tests/unit/test_catalog_recovery.py
+services/api/tests/integration/test_catalog_recovery.py
+services/api/tests/integration/test_catalog_inventory_batches.py
