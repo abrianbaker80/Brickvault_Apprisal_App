@@ -1,0 +1,10 @@
+CODEX_WORKFLOW.md
+docs/ROADMAP.md
+docs/plans/097-private-https-application-activation.md
+deploy/caddy/Caddyfile
+deploy/systemd/caddy.service.d/brickvault.conf
+deploy/certbot/renewal-hooks/deploy/brickvault-certificate
+scripts/deploy_certificate.py
+scripts/test_deploy_certificate.py
+scripts/release_manifest.py
+scripts/test_release_manifest.py

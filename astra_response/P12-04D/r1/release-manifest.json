@@ -1,0 +1,86 @@
+{
+  "files": [
+    {
+      "path": "api/brickvault_api-0.0.0-py3-none-any.whl",
+      "sha256": "02dc2675632ffc72ffd11a797aab11b52fee5820b5966bc582864baf9ce8fc97",
+      "size": 356210
+    },
+    {
+      "path": "api/brickvault_api-0.0.0.tar.gz",
+      "sha256": "8e8936695d09e52ed83bef5795b6cc5c752039b57172b0fff2e10c0b5fdf5a98",
+      "size": 290493
+    },
+    {
+      "path": "api/requirements.txt",
+      "sha256": "26b6b014320a29683278a4248bee4918df94b3dd3b53251b48172d29bfeaee03",
+      "size": 13091
+    },
+    {
+      "path": "deploy/caddy/Caddyfile",
+      "sha256": "567b2700709c248cc9b239a922aaab7e7056f62b0ad4491a7f18c50904bdd485",
+      "size": 556
+    },
+    {
+      "path": "deploy/certbot/renewal-hooks/deploy/brickvault-certificate",
+      "sha256": "331a8232672f2b5c17d37c4a6bae3719f87fe1bd5c6901dbd593d41fa6471316",
+      "size": 120
+    },
+    {
+      "path": "deploy/deploy_certificate.py",
+      "sha256": "b7852a76991f4de41585bfda2723b2ab4e1f394eae88c72c0cf40b4e1f38cc58",
+      "size": 8997
+    },
+    {
+      "path": "deploy/systemd/caddy.service.d/brickvault.conf",
+      "sha256": "7d138774fd553c54bc4b17ba6f6680ba568fc7296f2ba9c39110ec8bde98c458",
+      "size": 734
+    },
+    {
+      "path": "web/assets/index-B3HcPfbe.css",
+      "sha256": "79da5515a54d718ea804b09bcf10b4ee73bc0799a7dd07008f3226dc6138ec70",
+      "size": 37418
+    },
+    {
+      "path": "web/assets/index-c5nVxxSk.js",
+      "sha256": "08b144bed6f936f3436d312769564351723708f664d8e236c77e38e5fc2a3cbe",
+      "size": 380521
+    },
+    {
+      "path": "web/assets/web-BGz34vD4.js",
+      "sha256": "e011e6ab248a5e8f035f4c5c09157d1bc8b272b82639d51368d35c8a8738834e",
+      "size": 844
+    },
+    {
+      "path": "web/icon-192.png",
+      "sha256": "70c2b912417313f74596384f91bcb336f0fd303604df994017353ab1b85732ea",
+      "size": 2037
+    },
+    {
+      "path": "web/icon-512.png",
+      "sha256": "19a28e2b1de1f41c7b549d4c13d2f1227a908057b142032a802d882dff23ea73",
+      "size": 7234
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "a4c4c03752d95d5a3394de5ce9c9c226eea02a74f20c05092161599519457cb2",
+      "size": 578
+    },
+    {
+      "path": "web/manifest.webmanifest",
+      "sha256": "0b8302d5769d1ef6e55731ba92b3eb0f9a7bc6ec1438b835bda1c42d66bb435d",
+      "size": 496
+    },
+    {
+      "path": "web/sw.js",
+      "sha256": "ced49f090dbd63dd3c3e71bcfbe9f75161e35f20ecefda07033184361a5e58f6",
+      "size": 4308
+    }
+  ],
+  "release_id": "p12-04d-r1",
+  "schema": 2,
+  "source": {
+    "commit": "0d29d5f7f07f379ade834ee22cfaf4e7da9587c4",
+    "reviewed_id": "b704133a4754365ac96cb282902bcd14aa9a6a75bd572cb0df38816b968ce6bc"
+  },
+  "uv_version": "0.12.10"
+}

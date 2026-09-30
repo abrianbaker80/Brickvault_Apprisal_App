@@ -1,0 +1,28 @@
+{
+	auto_https off
+	admin unix//run/caddy/brickvault-admin.sock
+	persist_config off
+	servers {
+		protocols h1 h2
+		strict_sni_host on
+	}
+	log default {
+		format filter {
+			wrap json
+			fields {
+				request delete
+				resp_headers delete
+			}
+		}
+	}
+}
+
+https://appraisal.abrianbaker.com {
+	tls /etc/caddy/brickvault-tls/current/fullchain.pem /etc/caddy/brickvault-tls/current/privkey.pem
+	reverse_proxy 127.0.0.1:18080 {
+		header_up X-BrickVault-Proxy {$BVA_PROXY_SHARED_SECRET}
+		header_up -Forwarded
+		header_up -X-Forwarded-*
+		header_up -X-Real-IP
+	}
+}

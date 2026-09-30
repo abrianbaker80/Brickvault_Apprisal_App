@@ -1,0 +1,30 @@
+P12-04D scoped acceptance evidence, 2026-09-29 local / 2026-09-30 UTC.
+PASS repository main HEAD 0d29d5f7f07f379ade834ee22cfaf4e7da9587c4; empty index; protected accepted hashes unchanged.
+PASS VM identity, SSH key-only path, guest agent, ownership/admin/migration foundation.
+PASS Kea authority, one stable reservation, unchanged route/DNS, Unbound private A override.
+PASS Windows normal private DNS; authoritative public application A/AAAA absent.
+PASS official signed Caddy and signed Ubuntu certificate tooling; clean dpkg audit.
+PASS token protected permissions and functional DNS-01; no token value captured.
+PASS certificate normal trust, exact SAN, key pairing, validity and served-leaf equality.
+PASS 7 release-manifest tests; 5 Linux certificate-deployment tests; Ruff/format/strict mypy.
+PASS reviewed source b704133a4754365ac96cb282902bcd14aa9a6a75bd572cb0df38816b968ce6bc; new immutable release; unchanged wheel/source/lock/frontend.
+PASS manifest 25cbb51ec895640f2ed27ab36afac8ebcd11590aa52f96015b15e460502b6f36; installed entrypoints/migration graph/deployment bytes.
+PASS protected production settings, random shared secret, startup and DB readiness.
+PASS local HTTP status sequence: 200,401,401,404,403,403,400,403,403; JSON/no-store.
+PASS UFW source restrictions, retained/fresh SSH, approved-client port reachability/denials.
+PASS Windows platform TLS, app shell, private-route refusals, unknown API JSON/no-store.
+PASS forged/duplicate proxy overwrite; wrong Host with real SNI 421; direct-IP TLS refusal.
+PASS missing/wrong Origin 403; browser Origin accepted to body validation 422.
+PASS Android production-origin OPTIONS 204 and auth-error 401 with exact credentialed CORS.
+PASS wrong TEST Origin refused; no wildcard CORS, session creation or Set-Cookie.
+PASS renewal dry run and real production-certificate deploy-hook reload; timer active.
+PASS both authoritative servers report ACME TXT cleanup; no public application A/AAAA.
+PASS API/Caddy/Certbot log secret checks; no adapted Caddy autosave.
+PASS API/Caddy/renewal/backup enabled and active; VM onboot=0; prior r4 preserved.
+PASS legacy backup age identity separate from appraisal recovery authority; no rotation.
+NOT RUN owner login/cookie issuance, full browser/PWA, physical Android, APK build,
+real production restore, release rollback rehearsal, destructive retention or alerting.
+NOT CLAIMED separate WAN-origin penetration test or independent acceptance review.
+PROTECTED SHA256 F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4 AGENTS.md
+PROTECTED SHA256 D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7 services/api/tests/integration/test_catalog_search.py
+PROTECTED SHA256 0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041 services/api/tests/unit/test_catalog_parser.py

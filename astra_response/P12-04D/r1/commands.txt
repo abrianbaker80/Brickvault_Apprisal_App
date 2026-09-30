@@ -1,0 +1,36 @@
+Sanitized command/evidence outline; placeholders are deliberate, not executable values.
+All VM SSH used BatchMode, StrictHostKeyChecking=yes and the accepted pinned host-key file.
+Authenticated OPNsense UI: inspect Kea/Unbound/pools/leases/NAT; exclude only VM address;
+add one reservation; Apply; networkctl renew enp6s18; add one Unbound A override; Apply.
+Resolve-DnsName appraisal.abrianbaker.com -Type A -DnsOnly
+Public A/AAAA and ACME TXT queries against both observed Cloudflare authoritative servers.
+Official Caddy signed repository setup; apt-get update; pinned apt-get install:
+caddy=2.11.4 certbot=2.9.0-1 python3-certbot-dns-cloudflare=2.0.0-1
+Mask Caddy and Certbot units before package installation; dpkg --audit.
+Brian's local hidden-input credential install; stat only for credential verification.
+certbot certonly --non-interactive --agree-tos --register-unsafely-without-email
+  --dns-cloudflare --dns-cloudflare-credentials /etc/brickvault/acme/cloudflare.ini
+  --dns-cloudflare-propagation-seconds 60 --cert-name appraisal.abrianbaker.com
+  -d appraisal.abrianbaker.com --key-type ecdsa
+python -m unittest discover -s scripts -p test_release_manifest.py : 7 passed
+Root Linux temporary-directory test_deploy_certificate.py : 5 passed; service commands mocked
+python -m ruff check <four changed Python files>
+python -m ruff format --check <four changed Python files>
+python -m mypy --strict --platform linux <four changed Python files>
+release_manifest.py source-id / create / verify; frontend verifier and wheel-source checks.
+Verified archive transfer; new immutable release; frozen Python/uv; hashed pip install/check.
+Protected local descriptor transformation; new shared secret; no values in arguments/output.
+brickvault-production-admin verify; RuntimeSettings preflight; guarded certificate install.
+systemctl start brickvault-api.service; loopback health/readiness/boundary HTTP checks.
+ufw default deny incoming; ufw default allow outgoing
+ufw allow proto tcp from <approved-private-admin-CIDR> to any port 22
+ufw allow proto tcp from <approved-private-client-CIDR> to any port 443
+ufw show added; ufw --force enable; fresh pinned SSH while retained session stays open.
+systemd-analyze verify caddy.service; systemctl enable --now caddy.service
+systemctl enable brickvault-api.service
+Windows normal-trust HTTPS/Host/Origin/CORS checks; targeted 22/443/80/18080/5432 checks.
+certbot renew --dry-run --run-deploy-hooks --cert-name appraisal.abrianbaker.com
+  --non-interactive --no-random-sleep-on-renew
+systemctl enable --now certbot.timer; verify actual deploy-hook reload and TXT cleanup.
+Final installed-byte, service, socket, normal-trust and secret-log checks; onboot readback.
+Publication only on astra-response; literal task inventory; no main commit/push.
