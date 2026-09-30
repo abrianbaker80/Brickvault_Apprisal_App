@@ -1,0 +1,38 @@
+P12-04C r2: READY FOR REVIEW.
+
+Direct-root peer pg_dump and pg_dumpall under NoNewPrivileges=true: PASS.
+Focused backup/admin tests: 49 passed.
+Focused release-manifest tests: 5 passed.
+Targeted Ruff, format and strict mypy: PASS.
+Package build, independent installed wheel, frontend, source inventory, lock and release manifest: PASS.
+Installed release p12-04c-r4 and entrypoints/migration graph: PASS.
+Installed unit: NoNewPrivileges=true, RestrictSUIDSGID=true; systemd-analyze verify PASS.
+Pre-retry database/repository/receipt/proof gate: PASS.
+One pre-migration production backup retry: PASS.
+Guarded recovery proof finalization: PASS.
+Migration: 0016_hunt_cached_runs.
+Runtime least privilege: PASS.
+One owner via local hidden-input TTY and independent admin verify: PASS.
+One post-bootstrap dual backup: PASS.
+Both real runs and synthetic canaries retained: PASS; seven snapshots per repository.
+Timer: enabled/active; next trigger 2026-09-30 03:22:03 UTC.
+Backup service: inactive after successful oneshot.
+API: disabled/inactive; no API listener/api.env/Caddy.
+PostgreSQL: loopback-only 127.0.0.1:5432.
+SSH key-only/root disabled, reviewed data mount, clock and guest agent: PASS.
+
+Main base HEAD: 5b0fc9919d6755d1414527c27592b7df1068c96d.
+Main index: empty. No main commit/push.
+Protected dirty files excluded:
+AGENTS.md SHA256 F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+services/api/tests/integration/test_catalog_search.py SHA256 D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+services/api/tests/unit/test_catalog_parser.py SHA256 0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
+
+No synthetic restore, broad historical suite, destructive retention, API/Caddy/DNS/TLS activation or P12-05 work ran.
+Patch-file whitespace attributes preserve the required single-space blank context lines in literal Git patches.
+
+Publication preparation: exact nine-file source copies and cumulative patch inventory PASS.
+Patch applies to the base HEAD in an isolated temporary index: PASS.
+Status/review Markdown file links: PASS.
+Protected hashes, unchanged r1 package, main HEAD and empty main index: PASS.
+Package scan matches were only code field names, synthetic test values and existing documentation links; no live secret/private identifier was published.

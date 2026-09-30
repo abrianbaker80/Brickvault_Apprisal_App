@@ -1,0 +1,1026 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 27c9158..706e920 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,9 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## P12-04C production activation — ready for review, 2026-09-29
++
++**P12-04C is IMPLEMENTED / READY FOR REVIEW.** Brian accepted the r1 blocked checkpoint and authorized its continuation. [ExecPlan 096](docs/plans/096-production-database-activation.md) records direct root-to-postgres peer authentication, removal of `runuser`, retained `NoNewPrivileges=true` and the immutable `p12-04c-r4` release. Offline custody, the single pre-migration backup retry, backup-derived proof, migration to `0016_hunt_cached_runs`, runtime grants, one owner bootstrap through hidden local input, independent admin verification and the post-bootstrap dual backup passed. Both real runs and the synthetic canaries are retained. The daily timer is enabled/active; the API stays disabled/inactive with PostgreSQL loopback-only. P12-04 remains IN PROGRESS; P12-04D and P12-05 have not started. Real restore/browser/PWA/Android/rollback acceptance and remaining production exposure/operations gates remain open.
++
+ ## P12-04B accepted closeout — 2026-09-29
+ 
+ **P12-04B is ACCEPTED / CLOSED after review of the
+diff --git a/deploy/systemd/brickvault-backup.service b/deploy/systemd/brickvault-backup.service
+index 6ce364f..cbdda5a 100644
+--- a/deploy/systemd/brickvault-backup.service
++++ b/deploy/systemd/brickvault-backup.service
+@@ -3,7 +3,7 @@ Description=BrickVault encrypted dual-destination production backup
+ Wants=network-online.target
+ After=network-online.target postgresql@18-main.service
+ Requires=postgresql@18-main.service
+-RequiresMountsFor=/var/lib/postgresql /opt/brickvault /var/lib/brickvault/backups
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault
+ 
+ [Service]
+ Type=oneshot
+@@ -13,7 +13,7 @@ WorkingDirectory=/opt/brickvault/current/api
+ ExecStart=/opt/brickvault/current/api/venv/bin/brickvault-production-backup backup
+ TimeoutStartSec=4h
+ UMask=0077
+-StateDirectory=brickvault/backups
++StateDirectory=brickvault-backup-runner
+ StateDirectoryMode=0700
+ CacheDirectory=brickvault-backup
+ CacheDirectoryMode=0700
+@@ -26,6 +26,6 @@ ProtectKernelTunables=true
+ ProtectKernelModules=true
+ ProtectControlGroups=true
+ RestrictSUIDSGID=true
+-ReadWritePaths=/var/lib/brickvault/backups /var/cache/brickvault-backup
++ReadWritePaths=/var/lib/brickvault-backup-runner /var/cache/brickvault-backup /etc/brickvault/backup/receipts /etc/brickvault/backup/proofs
+ 
+ # Intentionally no [Install] section: the timer is the future operator gate.
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index fee212b..6978bbe 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,9 @@
+ # Valuation-First Roadmap
+ 
++## P12-04C production activation — ready for review, 2026-09-29
++
++**P12-04C is IMPLEMENTED / READY FOR REVIEW**, recorded in [ExecPlan 096](plans/096-production-database-activation.md). The corrected `p12-04c-r4` runner uses accepted root-to-postgres peer authentication and retains `NoNewPrivileges=true`. Offline custody, both real dual backups and readbacks, the generated migration proof, migration to `0016_hunt_cached_runs`, runtime grants, one owner bootstrap and independent admin verification passed. The daily backup timer is enabled/active, both real runs and synthetic canaries remain, and the API is disabled/inactive with PostgreSQL loopback-only. P12-04 remains IN PROGRESS; P12-04D and P12-05 have not started. Production exposure/operations and P12-05 acceptance gates remain open.
++
+ ## P12-04B accepted closeout — 2026-09-29
+ 
+ **P12-04B is ACCEPTED / CLOSED after review of the
+@@ -945,7 +949,7 @@ read-only preflight only; infrastructure or production change remains gated.
+ ## Phase 12 — Approved home-server deployment
+ 
+ - **Status:** IN PROGRESS; P12-01, P12-02 and P12-03 ACCEPTED / CLOSED.
+-  P12-04A and P12-04B are ACCEPTED / CLOSED; P12-04C is NEXT / NOT STARTED;
++  P12-04A and P12-04B are ACCEPTED / CLOSED; P12-04C is IN PROGRESS;
+   P12-04 remains IN PROGRESS and P12-05 has not started. The recovery
+   foundation and remaining gates are in [ExecPlan 095](plans/095-dual-recovery-foundation.md).
+ - **Inputs:** Phase 11 actual findings, local release artifacts, reviewed deployment/backup/rollback plan, exact approved hostname and targets, and distinct explicit execution authorization.
+diff --git a/docs/plans/096-production-database-activation.md b/docs/plans/096-production-database-activation.md
+new file mode 100644
+index 0000000..d08e438
+--- /dev/null
++++ b/docs/plans/096-production-database-activation.md
+@@ -0,0 +1,110 @@
++# ExecPlan 096 — P12-04C production database activation
++
++## Goal and user-visible outcome
++
++Activate the private BrickVault production database on VM 115 with two verified real recovery points: one before migration and one after owner bootstrap. Leave the API disabled and inactive. P12-04 remains IN PROGRESS; P12-05 has not started.
++
++## Why this work is being done now
++
++[P12-04A](094-production-foundation.md) established the private VM, PostgreSQL and inactive packaged API. [P12-04B](095-dual-recovery-foundation.md) qualified two independently encrypted synthetic recovery paths but left offline credential custody and the mismatch between backup receipts and admin recovery proofs open. Those gates must close before the first production migration.
++
++## In scope
++
++- Put the minimum two-repository recovery material on Brian's selected removable SD card in an authenticated encrypted bundle; locally verify decryption, manifest hashes and access to both repositories.
++- Derive a protected migration proof only from a fresh, complete, dual-readback production backup receipt and the exact Alembic revision state.
++- Build and install one new immutable release, provision the exact production database/roles/descriptor, run the guarded pre-migration backup, migrate, grant runtime access, bootstrap one owner through hidden local input, verify, then run the post-bootstrap backup.
++- Install the reviewed backup units; enable the daily timer only after the second backup succeeds.
++- Publish sanitized P12-04C review evidence to `astra-response` without committing or pushing `main`.
++
++## Explicit non-goals
++
++No Caddy, DNS, TLS, API secret or startup, public listener, firewall/router change, destructive restic retention, VM onboot change, real restore drill, browser/PWA/Android acceptance, or P12-04D/P12-05 work. Do not copy production DB passwords directly into the offline recovery bundle.
++
++## Current repository state
++
++At entry, `main` is `5b0fc9919d6755d1414527c27592b7df1068c96d` with an empty index. The pre-existing modified `AGENTS.md`, `services/api/tests/integration/test_catalog_search.py` and `services/api/tests/unit/test_catalog_parser.py` have their accepted SHA-256 values and remain outside this slice. P12-04A and P12-04B are accepted. The corrected P12-04C r4 release is installed on VM 115, with the API inactive. The r1 blocked package is accepted as a correct fail-closed checkpoint and remains intact.
++
++The first two local bundles were superseded before any VM transfer: r1 preceded the focused grant/bootstrap integration test, and r2 preceded backup state-directory isolation. The previous `p12-04c-r3` release remains intact; its source ID was `abb75b857c38212837b2f559aa58adebb5832295e4aab17acad6fac4947ccb0e`, manifest SHA-256 `aef807e362b162700d9df46573a7bd519034c5c73f9c876181061df98ae2d54f` and API wheel SHA-256 `06aba11e7004b3f2ab8d79848c60ef2d3e4690f4b5f2509a8d2ce9a779bef521`.
++
++The current immutable release is `p12-04c-r4`, source ID `6c0ca52d142b2018c2a4b7a72342705196e1cb72e883cb352e91a3f167cb6536`, manifest SHA-256 `980b7d9894eeee745bd8c7e8222714790f8ac6a56e7812d1d0c6d9fd29ae96a8`, API wheel SHA-256 `02dc2675632ffc72ffd11a797aab11b52fee5820b5966bc582864baf9ce8fc97`. Local manifest/wheel/source/frontend/lock verification, hash-pinned transfer, VM dependency installation, installed-wheel import, CLI entrypoints and migration graph passed. The corrected unit retains `NoNewPrivileges=true`; its SHA-256 is `69f868c85113ea3ea340c4fcd204374863148d3060c5d2a6dec4e9ff5bbb33e4`.
++
++## Decisions and assumptions
++
++Brian identified an attached removable SD card for offline custody. A local-only helper under ignored `.local/p12-04c/` prepared and verified the encrypted bundle. The first attempt failed because temporary Windows OpenSSH key permissions were too broad; the helper's temporary extraction ACL was corrected. The first attempt's unlock phrase appeared in chat, so its bundle was disqualified. Brian confirmed that card was destroyed or permanently retired. A different clean removable card and fresh private phrase passed on-media decryption, manifest hashes and independent access to both accepted repositories. Brian confirmed physical custody of the new phrase away from VM/laptop; the replacement card was removed. **Offline custody PASS**, manifest digest `7b0257c774c5a88c4bbe56f2946d103f957dc06a75ad9568346a9ed9673822e0`. No phrase, media identity or secret material is included here.
++
++The backup receipt becomes schema 2. It records the production marker, run ID, exact revision tuple, repository URIs/IDs and each artifact's bytes, digest and separate destination snapshot IDs. Protected receipts and proofs reside under `/etc/brickvault/backup`, whose root-owned parents satisfy the production admin reader; `/var/lib/brickvault` belongs to the API account and cannot safely hold these root-only proofs. The backup unit uses its own root-owned `/var/lib/brickvault-backup-runner` state rather than systemd creating a nested state directory under the API account's tree. `brickvault-production-backup finalize-proof <run-id>` rereads all six encrypted artifacts, checks both repositories and the protected receipt, confirms the current revisions and recency, then creates a root-owned proof with exclusive creation. The admin commands revalidate the proof against the detailed receipt and both repositories. Operators supply only a run ID or generated proof path, never arbitrary snapshot hashes.
++
++## Data model and API/interface changes
++
++### r2 continuation: preserve the service sandbox
++
++Brian accepted r1 as a correct blocked checkpoint and authorized one corrected first-backup retry. The r1 proposal to set `NoNewPrivileges=false` was not installed and is superseded. The accepted PostgreSQL `brickvault_maintenance` peer map already lets OS root authenticate as database `postgres` on the local Unix socket. A transient service with `NoNewPrivileges=true`, `RestrictSUIDSGID=true` and the other accepted protections successfully ran direct `pg_dump` and `pg_dumpall` without passwords or inherited credential environment. Its read-only checks confirmed the exact peer identity, empty revision state, no principal, no new snapshots and no receipt/proof.
++
++The corrected runner removes `runuser` from producers, tool preflight and constants. It invokes the absolute PostgreSQL executables directly with the exact socket/user/database, `--no-password`, closed standard input, an isolated environment and `/dev/null` as the password-file location. Both producer streams remain memory-only. The service retains `NoNewPrivileges=true` and every other accepted sandbox setting. Fifty-four focused tests, targeted Ruff, format and mypy passed before building the new immutable `p12-04c-r4` release. The single production retry may run only after the new release and unit pass their gates; a retry failure requires another stop.
++
++No application schema or HTTP API change is planned. The production backup CLI adds `finalize-proof <run-id>` and upgrades future detailed receipts to schema 2. The production admin proof uses schema 2 with a SHA-256 binding to the exact protected backup receipt, six snapshot identities, both repository identities, the ownership marker, run ID, revision tuple and verification time. Existing legacy proof-shaped files are refused.
++
++## Implementation sequence
++
++1. Confirm the selected SD card, produce the encrypted recovery bundle through a visible local terminal, and verify it from the removable media. Record only the safe PASS/FAIL summary and digest. Stop before database provisioning if this gate fails.
++2. Complete backup/admin source integration and focused tests for missing destination, tampering, readback failure, digest/revision/staleness binding, CLI redaction and refusal of operator-provided hashes. Run targeted pytest, Ruff, format and mypy.
++3. Read-only verify VM 115, loopback PostgreSQL, absence of production names/API listener, inactive API, reviewed storage and repository identities. Stop on target drift.
++4. Build a new immutable P12-04C release using the accepted manifest/package pipeline. The current release is `p12-04c-r4`; r1/r2 were superseded locally before transfer, and r3 remains intact after the accepted blocked checkpoint. Check the source ID, wheel/lock/frontend, manifest digest and entrypoints. Transfer only reviewed artifacts; install under `/opt/brickvault/releases/` and atomically select `/opt/brickvault/current` while the API stays inactive.
++5. Install and verify the backup service/timer definitions without enabling the timer. Generate the root-only production descriptor and distinct credentials locally on VM 115 without printing them. Pass `brickvault-production-admin preflight` before provisioning.
++6. Provision only `brickvault_appraisal_prod`, its owner role and runtime role. Verify exact marker, privileges, no memberships or migration, and stop on partial state.
++7. Run one real pre-migration dual backup and validate all artifacts/readbacks/checks. Finalize one protected proof from its run ID; verify the proof is recent and bound to the empty pre-migration revision tuple.
++8. Use that proof for guarded migration to the packaged head, runtime grants and one owner bootstrap through a local hidden-input TTY. Run `brickvault-production-admin verify`. If no secure local TTY is available, stop at `OWNER PASSWORD INPUT REQUIRED` and resume after Brian completes the one local command.
++9. Run one real post-bootstrap dual backup and verify both destinations. Preserve both runs and all synthetic canaries. Enable and inspect the reviewed daily timer. Recheck API inactivity, loopback database, SSH, guest agent, clock and data mount.
++10. Update this plan and minimum status references with actual results. Publish sanitized r1 review artifacts from the exact P12-04C diff, leaving `main` uncommitted and its index empty.
++
++## Validation and acceptance criteria
++
++The offline bundle must decrypt from the SD card and independently open both accepted repository identities. Focused source tests and static checks must pass before live mutation. The new release must have verified source, wheel, frontend and manifest identities on both machines. The production DB must be owned by the exact guarded role/marker, migrated to the packaged head, have least-privilege runtime grants and exactly one owner principal. Both real backups must have protected detailed receipts after six matching encrypted readbacks and repository checks. The first must produce the only proof used for migration/grants/bootstrap. The timer may be active only after the post-bootstrap backup passes. The API must remain disabled/inactive, with no API/Caddy listener.
++
++## Security, privacy and data integrity
++
++Keep raw credentials, ownership marker, private addresses, SD media identity, OAuth tokens, repository IDs and production configuration out of terminal capture and review artifacts. The offline unlock phrase stays outside VM/laptop/chat. The release is immutable; do not modify the installed P12-04A tree. The production backup streams the DB dump directly to independently encrypted repositories; no persistent plaintext dump. The proof gate requires a current, fully read-back receipt and fails closed on any mismatch. Do not delete any snapshot in P12-04C.
++
++During local recovery inventory, the contents of an unrelated protected backup identity appeared in one Codex tool result. It is not part of this offline package or review artifact. Its separate rotation review remains open; P12-04C does not alter that unrelated backup system.
++
++## Failure modes, rollback and recovery
++
++Stop if offline custody or either repository check fails, release identity drifts, descriptor protection is uncertain, provisioning is partial, backup/readback fails, proof cannot be derived, migration/grants/account checks differ, the owner TTY is unavailable, the second backup fails, the timer cannot be safely enabled, or the API starts unexpectedly. Preserve exact state and diagnose; do not auto-delete production objects, fabricate a proof, weaken the admin gate, or run destructive retention. The pre-migration real backup is the recovery boundary for later production changes.
++
++## Progress log
++
++- [x] 2026-09-29: Confirmed the expected `main` HEAD, empty index and accepted hashes of the three protected dirty files.
++- [x] 2026-09-29: Identified Brian's selected removable SD card and prepared a local encrypted-bundle helper without putting secrets in Git. The local custody proof is pending.
++- [x] 2026-09-29: Implemented the schema 2 receipt/proof integration source and passed 45 focused backup/admin unit tests plus targeted Ruff. Found and corrected the protected receipt/proof parent ownership mismatch before any real backup; post-correction checks remain pending.
++- [x] 2026-09-29: After the protected-path and state-directory corrections, 46 focused backup/admin tests, five release-manifest tests, targeted Ruff, format and mypy passed. The pnpm build verified the independent installed wheel, migration graph and frontend; the current `p12-04c-r3` local release manifest verified.
++- [x] 2026-09-29: Proxmox guest-agent identity matched VM 115 to the pinned P12 target after an unrelated SSH alias was found to point elsewhere. Read-only VM checks passed Ubuntu, guest agent, time, mount, PostgreSQL/version/loopback, absent production names, inactive API/no listener and absent Caddy. Both accepted recovery repository IDs matched protected VM records. No production mutation occurred.
++- [x] 2026-09-29: Read-only release preinstall checks confirmed the accepted P12-04A current symlink, expected root/service-account directory ownership, protected backup configuration parent, Python 3.13.15, uv 0.12.10, no r3 release path and inactive API. P12-04C artifacts have not been transferred.
++- [x] 2026-09-29: The first SD-card bundle was created but its readback verification failed. A safe local diagnostic traced this to inherited Windows OpenSSH permissions on the temporary copied recovery key. The helper was corrected to restrict extraction directory and file ACLs; diagnostic access to both repositories then passed. The first bundle's unlock phrase appeared in chat, so that bundle is disqualified and a clean replacement removable device is pending.
++- [x] 2026-09-29: Brian attached a replacement removable card. Windows read-only checks found a healthy, ready exFAT volume with no v1 bundle and only the normal system metadata directory. The v2 helper uses a fresh bundle/status name and clears the visible console after Brian confirms separate physical phrase storage. On-media decryption, manifest verification and both repository access checks passed. The no-secret manifest digest is `7b0257c774c5a88c4bbe56f2946d103f957dc06a75ad9568346a9ed9673822e0`; the replacement card was removed from the laptop afterward.
++- [x] Offline custody PASS, including Brian's separate physical unlock-secret custody confirmation and first-card retirement.
++- [x] Final source validation and read-only live foundation gate.
++- [x] New r3 release built, hash-pinned, installed and verified; API remains inactive.
++- [x] Protected descriptor, preflight and exact DB/role provisioning. The descriptor was generated locally on VM 115, root-owned and mode 0600. Distinct owner/runtime credentials and the marker were not printed. The DB is unmigrated with no application principal.
++- [x] Backup service/timer definitions installed and verified; timer remains disabled/inactive.
++- [x] 2026-09-29: The one authorized first real backup service start failed with exit code 1 before creating a protected receipt or either destination snapshot. Read-only snapshot counts remained at one synthetic canary per repository. The service stays failed; the API and timer stay inactive. No second backup attempt, proof finalization, migration, grant or bootstrap ran.
++- [x] 2026-09-29, historical r1: Read-only transient service probes passed descriptor, revision and configuration checks, then isolated failure to `runuser -u postgres` (`cannot set user id: Operation not permitted`). With the otherwise matching sandbox, disabling `NoNewPrivileges` alone let `runuser`, `pg_dump`, `pg_dumpall` and configuration tar streams complete. `RestrictSUIDSGID=true` and the other unit protections remained enabled. The r1 local proposal set `NoNewPrivileges=false`; it was **never installed** and was superseded by the direct peer correction below.
++- [x] r2 continuation: direct root peer `pg_dump` and `pg_dumpall` passed under the complete intended sandbox with `NoNewPrivileges=true`. Removed the unnecessary `runuser` dependency and retained the accepted hardening. Fifty-four focused tests, targeted Ruff, format and mypy passed.
++- [x] r2 continuation: new immutable r4 release installed and selected atomically; installed-wheel bytes and corrected unit verified. Only the failed oneshot state was reset. The pre-retry gate confirmed unchanged canary-only repositories, empty receipt/proof directories and an unmigrated database with no principal.
++- [x] The single authorized first-backup retry passed all three artifacts, both destinations, six encrypted readbacks, size/digest equality, repository checks and protected schema-2 receipt creation. The run ID is recorded privately.
++- [x] Guarded proof finalization reread all six encrypted copies and both repositories, bound the exact marker/receipt digest/empty revision tuple, and exclusively created a root-owned 0600 proof with a fresh timestamp.
++- [x] Guarded migration with the generated proof reached `0016_hunt_cached_runs`. Runtime grants using the same proof passed the minimum privilege guard, production identity/role checks, schema ownership and no-principal checks.
++- [x] Brian bootstrapped exactly one owner using the local interactive SSH TTY and hidden password prompts. The password was not requested or received in chat. Independent `brickvault-production-admin verify` passed production ownership, migration, one principal and runtime core privileges.
++- [x] The one post-bootstrap dual backup passed all three artifacts and six encrypted readbacks, matching sizes/hashes and both repository checks. Its separate protected receipt binds `0016_hunt_cached_runs`; its run ID is stored privately. Both real runs and each prior canary remain, with seven snapshots per destination.
++- [x] After the post-bootstrap backup passed, the reviewed daily timer was enabled and started. It is active with next trigger `2026-09-30 03:22:03 UTC`, within the accepted 03:15 plus up-to-30-minute randomized schedule. The backup service is inactive after successful completion. No extra manual scheduled backup was run.
++- [x] Final checks passed API disabled/inactive, no api.env/Caddy/API listener, PostgreSQL only `127.0.0.1:5432`, no unexpected externally bound TCP service, key-only SSH with root login disabled, guest agent, synchronized clock and reviewed PostgreSQL data mount.
++- [x] The sanitized r1 blocked package was published and accepted. Its evidence remains intact; the successful continuation is prepared as a separate r2 package. Main remains uncommitted, with an empty index and the protected files excluded.
++
++## Open questions and manual checks
++
++Brian identified a different, clean removable device and completed its private v2 verification. He confirmed that the first card with the exposed-phrase bundle is destroyed or permanently retired under his control. He also completed owner account creation through local hidden-input SSH TTY prompts. Neither new secret entered chat or review evidence.
++
++## Outcome and follow-up
++
++**P12-04C is IMPLEMENTED / READY FOR REVIEW.** The accepted r1 blocked checkpoint is preserved. Direct root peer authentication removed the unnecessary privilege transition; `NoNewPrivileges=true` remains installed. Offline custody, corrected r4 release, the one authorized pre-migration backup retry, guarded proof, migration to `0016_hunt_cached_runs`, runtime grants, exactly one owner through hidden local input, independent admin verification, the post-bootstrap dual backup and timer activation passed. Both protected receipts and the pre-migration proof remain; both real runs and synthetic canaries are retained. The API remains disabled/inactive and unexposed. No production restore drill has been claimed. P12-04 remains IN PROGRESS; P12-04D and P12-05 have not started.
++
++Remaining P12-04 gates after this checkpoint are complete-run retention deletion review, production API secrets/configuration and startup, private DNS, trusted certificate, Caddy, firewall/client-source policy, monitoring/alerts and deliberate VM onboot behavior. P12-05 real restore/browser/PWA/Android/rollback acceptance remains separate. No gate is silently closed by the successful pre-migration backup.
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index 0734d39..8d3a06a 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -61,6 +61,7 @@ DOCUMENTATION_PATHS = {
+     "docs/plans/093-base-vm-provisioning.md",
+     "docs/plans/094-production-foundation.md",
+     "docs/plans/095-dual-recovery-foundation.md",
++    "docs/plans/096-production-database-activation.md",
+ }
+ PROTECTED_PATHS = {
+     "AGENTS.md",
+diff --git a/services/api/src/brickvault_api/production_admin.py b/services/api/src/brickvault_api/production_admin.py
+index 701341b..170c39c 100644
+--- a/services/api/src/brickvault_api/production_admin.py
++++ b/services/api/src/brickvault_api/production_admin.py
+@@ -508,55 +508,90 @@ def _revisions(connection: Connection) -> tuple[str, ...]:
+ 
+ 
+ def _recovery_proof(path: Path, config: AdminConfig, revisions: tuple[str, ...] | None) -> None:
+-    """Gate mutations on an operator-verified dual-copy receipt bound to this DB."""
++    """Gate mutations on a backup-derived proof and fresh dual readback."""
++    from brickvault_api import production_backup as backup
++
+     value = _parse_json(_protected_file(path))
+     if (
+         set(value)
+         != {
++            "schema",
+             "purpose",
+             "database",
+             "ownership_marker",
++            "run_id",
++            "backup_receipt_sha256",
+             "revisions_at_backup",
++            "repositories",
++            "artifact_snapshots",
+             "proxmox_snapshot",
+             "drive_snapshot",
+             "verified_at_utc",
+         }
++        or type(value["schema"]) is not int
++        or value["schema"] != 2
+         or any(
+             type(value[key]) is not str
+             for key in (
+                 "purpose",
+                 "database",
+                 "ownership_marker",
++                "run_id",
++                "backup_receipt_sha256",
+                 "proxmox_snapshot",
+                 "drive_snapshot",
+                 "verified_at_utc",
+             )
+         )
+         or type(value["revisions_at_backup"]) is not list
++        or type(value["repositories"]) is not dict
++        or type(value["artifact_snapshots"]) is not dict
+     ):
+-        raise AdminError("Recovery receipt shape is invalid.")
++        raise AdminError("Recovery proof shape is invalid.")
+     if (
+         value["purpose"] != "production"
+         or value["database"] != DATABASE
+         or value["ownership_marker"] != config.marker
+         or any(type(item) is not str for item in value["revisions_at_backup"])
+         or (revisions is not None and tuple(value["revisions_at_backup"]) != revisions)
++        or backup.RUN_ID.fullmatch(value["run_id"]) is None
++        or path != backup._proof_path(value["run_id"])
++        or SNAPSHOT.fullmatch(value["backup_receipt_sha256"]) is None
+         or SNAPSHOT.fullmatch(value["proxmox_snapshot"]) is None
+         or SNAPSHOT.fullmatch(value["drive_snapshot"]) is None
+         or value["proxmox_snapshot"] == value["drive_snapshot"]
+     ):
+-        raise AdminError("Recovery receipt does not match the target and copies.")
++        raise AdminError("Recovery proof does not match the target and copies.")
+     try:
+         stamp = datetime.fromisoformat(value["verified_at_utc"])
+     except ValueError as exc:
+-        raise AdminError("Recovery receipt time is invalid.") from exc
++        raise AdminError("Recovery proof time is invalid.") from exc
+     now = datetime.now(UTC)
+     if (
+         stamp.tzinfo is None
+         or stamp.utcoffset() != timedelta(0)
+         or not now - timedelta(hours=24) <= stamp <= now
+     ):
+-        raise AdminError("Recovery receipt is missing, stale or future-dated.")
++        raise AdminError("Recovery proof is missing, stale or future-dated.")
++    receipt, raw = backup.verified_receipt(value["run_id"])
++    backup_stamp = datetime.fromisoformat(receipt["verified_at_utc"])
++    if not now - timedelta(hours=24) <= backup_stamp <= stamp:
++        raise AdminError("Verified backup is stale or newer than its proof.")
++    artifact_snapshots = {
++        artifact: receipt["artifacts"][artifact]["snapshots"] for artifact in backup.ARTIFACTS
++    }
++    if (
++        hashlib.sha256(raw).hexdigest() != value["backup_receipt_sha256"]
++        or receipt["purpose"] != value["purpose"]
++        or receipt["database"] != value["database"]
++        or receipt["ownership_marker"] != value["ownership_marker"]
++        or receipt["revisions_at_backup"] != value["revisions_at_backup"]
++        or receipt["repositories"] != value["repositories"]
++        or artifact_snapshots != value["artifact_snapshots"]
++        or artifact_snapshots["database.dump"]["proxmox"] != value["proxmox_snapshot"]
++        or artifact_snapshots["database.dump"]["drive"] != value["drive_snapshot"]
++    ):
++        raise AdminError("Recovery proof does not match verified backup artifacts.")
+ 
+ 
+ def preflight(config: AdminConfig) -> str:
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index c966323..9d8e3de 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -18,22 +18,23 @@ import threading
+ import time
+ from collections.abc import Mapping, Sequence
+ from dataclasses import dataclass
+-from datetime import UTC, datetime
++from datetime import UTC, datetime, timedelta
+ from pathlib import Path
+-from typing import Any, NoReturn
++from typing import Any, NoReturn, cast
+ 
+ from brickvault_api import production_admin as admin
++from brickvault_api.persistence.database import expected_revisions
+ 
+ DATABASE = admin.DATABASE
+ BACKUP_DIR = Path("/etc/brickvault/backup")
+-RECEIPT_DIR = Path("/var/lib/brickvault/backups/receipts")
++RECEIPT_DIR = Path("/etc/brickvault/backup/receipts")
++PROOF_DIR = Path("/etc/brickvault/backup/proofs")
+ PROXMOX_REPO = "sftp:bva-proxmox-repository:/repository"
+ DRIVE_REPO = "rclone:bva-drive:Brickvault_Apprisal_App_Backup/restic-production"
+ RESTIC = "/usr/local/bin/restic"
+ RCLONE = "/usr/local/bin/rclone"
+ PG_DUMP = "/usr/lib/postgresql/18/bin/pg_dump"
+ PG_DUMPALL = "/usr/lib/postgresql/18/bin/pg_dumpall"
+-RUNUSER = "/usr/sbin/runuser"
+ TAR = "/usr/bin/tar"
+ TIMEOUT = "/usr/bin/timeout"
+ SSH_COMMAND = "ssh -F /etc/brickvault/backup/proxmox-ssh-config bva-proxmox-repository -s sftp"
+@@ -58,7 +59,7 @@ class Destination:
+     def environment(self) -> dict[str, str]:
+         environment = {
+             "PATH": "/usr/local/bin:/usr/bin:/bin",
+-            "HOME": "/var/lib/brickvault/backups",
++            "HOME": "/var/lib/brickvault-backup-runner",
+             "RESTIC_PASSWORD_FILE": str(self.password_file),
+             "RESTIC_CACHE_DIR": "/var/cache/brickvault-backup/restic",
+             "RCLONE_CONFIG": str(BACKUP_DIR / "rclone.conf"),
+@@ -176,7 +177,7 @@ def _tool(path: str) -> None:
+ def _preflight() -> admin.AdminConfig:
+     admin._require_root()
+     config = admin._load_config(admin.CONFIG_PATH)
+-    for executable in (RESTIC, RCLONE, PG_DUMP, PG_DUMPALL, RUNUSER, TAR, TIMEOUT):
++    for executable in (RESTIC, RCLONE, PG_DUMP, PG_DUMPALL, TAR, TIMEOUT):
+         _tool(executable)
+     for destination in DESTINATIONS:
+         _regular_root_file(destination.password_file)
+@@ -206,26 +207,21 @@ def _run_id() -> str:
+ 
+ 
+ def _producer(artifact: str, configuration: Sequence[str]) -> list[str]:
++    # OS root uses the reviewed local root-to-postgres peer map directly.
+     if artifact == "database.dump":
+         return [
+-            RUNUSER,
+-            "-u",
+-            "postgres",
+-            "--",
+             PG_DUMP,
+             "--format=custom",
++            "--no-password",
+             "--host=/var/run/postgresql",
+             "--username=postgres",
+             f"--dbname={DATABASE}",
+         ]
+     if artifact == "globals.sql":
+         return [
+-            RUNUSER,
+-            "-u",
+-            "postgres",
+-            "--",
+             PG_DUMPALL,
+             "--globals-only",
++            "--no-password",
+             "--host=/var/run/postgresql",
+             "--username=postgres",
+         ]
+@@ -263,9 +259,10 @@ def stream_to_two(
+     deadline = time.monotonic() + deadline_seconds
+     source = subprocess.Popen(
+         source_command,
++        stdin=subprocess.DEVNULL,
+         stdout=subprocess.PIPE,
+         stderr=subprocess.DEVNULL,
+-        env={"PATH": "/usr/bin:/bin", "HOME": "/root"},
++        env={"PATH": "/usr/bin:/bin", "HOME": "/nonexistent", "PGPASSFILE": "/dev/null"},
+     )
+     sinks: list[subprocess.Popen[bytes]] = []
+     errors: queue.Queue[BaseException] = queue.Queue()
+@@ -410,7 +407,7 @@ def _snapshot(destination: Destination, run_id: str, artifact: str) -> str:
+     ]
+     if len(matches) != 1 or SNAPSHOT_ID.fullmatch(matches[0]) is None:
+         raise BackupError("Backup snapshot identity is ambiguous.")
+-    return matches[0]
++    return cast(str, matches[0])
+ 
+ 
+ def _readback(
+@@ -464,8 +461,31 @@ def _receipt_path(run_id: str) -> Path:
+     return RECEIPT_DIR / f"{run_id}.json"
+ 
+ 
++def _proof_path(run_id: str) -> Path:
++    if RUN_ID.fullmatch(run_id) is None:
++        raise BackupError("Backup run ID is invalid.")
++    return PROOF_DIR / f"{run_id}.json"
++
++
++def _protected_output_dir(path: Path) -> None:
++    path.mkdir(mode=0o700, exist_ok=True)
++    for directory in (path, *path.parents):
++        info = directory.lstat()
++        if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
++            raise BackupError("Protected backup output directory is unsafe.")
++    if path.stat().st_mode & 0o077:
++        raise BackupError("Protected backup output directory is too permissive.")
++
++
++def _current_revisions(config: admin.AdminConfig) -> tuple[str, ...]:
++    with admin._owner_connection(config) as owner:
++        admin._schema_guard(owner)
++        return admin._revisions(owner)
++
++
+ def backup() -> str:
+     config = _preflight()
++    revisions = _current_revisions(config)
+     files = _configuration_files()
+     run_id = _run_id()
+     artifacts: dict[str, Any] = {}
+@@ -489,19 +509,25 @@ def backup() -> str:
+         artifacts[artifact] = {"bytes": size, "sha256": sha, "snapshots": snapshots}
+     for destination in DESTINATIONS:
+         _restic(destination, "check")
++    if _current_revisions(config) != revisions:
++        raise BackupError("Migration state changed during backup.")
++    identities, _ = _validated_identity(
++        admin._parse_json(admin._protected_file(BACKUP_DIR / "repositories.json"))
++    )
+     receipt: dict[str, Any] = {
+-        "schema": 1,
++        "schema": 2,
+         "purpose": "production",
+         "database": DATABASE,
+         "ownership_marker": config.marker,
+         "run_id": run_id,
++        "revisions_at_backup": list(revisions),
+         "verified_at_utc": datetime.now(UTC).isoformat(),
+-        "repositories": {d.name: d.repository for d in DESTINATIONS},
++        "repositories": {
++            d.name: {"uri": d.repository, "id": identities[d.name]} for d in DESTINATIONS
++        },
+         "artifacts": artifacts,
+     }
+-    RECEIPT_DIR.mkdir(mode=0o700, parents=True, exist_ok=True)
+-    if RECEIPT_DIR.stat().st_uid != 0 or RECEIPT_DIR.stat().st_mode & 0o077:
+-        raise BackupError("Backup receipt directory is unsafe.")
++    _protected_output_dir(RECEIPT_DIR)
+     path = _receipt_path(run_id)
+     nofollow = getattr(os, "O_NOFOLLOW", None)
+     if not isinstance(nofollow, int):
+@@ -515,28 +541,69 @@ def backup() -> str:
+     return run_id
+ 
+ 
+-def verify(run_id: str) -> None:
++def verified_receipt(run_id: str) -> tuple[dict[str, Any], bytes]:
++    """Read and verify one complete protected receipt against both repositories."""
+     config = _preflight()
+-    receipt = json.loads(admin._protected_file(_receipt_path(run_id)))
++    raw = admin._protected_file(_receipt_path(run_id))
++    receipt = dict(admin._parse_json(raw))
++    identities, _ = _validated_identity(
++        admin._parse_json(admin._protected_file(BACKUP_DIR / "repositories.json"))
++    )
++    repositories = {d.name: {"uri": d.repository, "id": identities[d.name]} for d in DESTINATIONS}
+     if (
+-        receipt.get("schema") != 1
++        set(receipt)
++        != {
++            "schema",
++            "purpose",
++            "database",
++            "ownership_marker",
++            "run_id",
++            "revisions_at_backup",
++            "verified_at_utc",
++            "repositories",
++            "artifacts",
++        }
++        or type(receipt["schema"]) is not int
++        or receipt["schema"] != 2
+         or receipt.get("purpose") != "production"
+         or receipt.get("database") != DATABASE
+         or receipt.get("ownership_marker") != config.marker
+         or receipt.get("run_id") != run_id
+-        or receipt.get("repositories") != {d.name: d.repository for d in DESTINATIONS}
++        or type(receipt["revisions_at_backup"]) is not list
++        or any(type(value) is not str for value in receipt["revisions_at_backup"])
++        or tuple(receipt["revisions_at_backup"]) not in ((), expected_revisions())
++        or type(receipt["verified_at_utc"]) is not str
++        or receipt.get("repositories") != repositories
++        or type(receipt["artifacts"]) is not dict
+         or set(receipt.get("artifacts", {})) != set(ARTIFACTS)
+     ):
+         raise BackupError("Backup receipt identity differs.")
++    try:
++        stamp = datetime.fromisoformat(receipt["verified_at_utc"])
++    except ValueError as exc:
++        raise BackupError("Backup receipt time is invalid.") from exc
++    if stamp.tzinfo is None or stamp.utcoffset() != timedelta(0) or stamp > datetime.now(UTC):
++        raise BackupError("Backup receipt time is invalid.")
++    snapshot_ids: list[str] = []
+     for artifact in ARTIFACTS:
+         row = receipt["artifacts"][artifact]
+         if (
+-            type(row.get("bytes")) is not int
++            type(row) is not dict
++            or set(row) != {"bytes", "sha256", "snapshots"}
++            or type(row.get("bytes")) is not int
+             or row["bytes"] <= 0
+-            or not SNAPSHOT_ID.fullmatch(row.get("sha256", ""))
+-            or set(row.get("snapshots", {})) != {d.name for d in DESTINATIONS}
++            or type(row["sha256"]) is not str
++            or SNAPSHOT_ID.fullmatch(row["sha256"]) is None
++            or type(row["snapshots"]) is not dict
++            or set(row["snapshots"]) != {d.name for d in DESTINATIONS}
++            or any(
++                type(row["snapshots"][d.name]) is not str
++                or SNAPSHOT_ID.fullmatch(row["snapshots"][d.name]) is None
++                for d in DESTINATIONS
++            )
+         ):
+             raise BackupError("Backup receipt artifact is invalid.")
++        snapshot_ids.extend(row["snapshots"][d.name] for d in DESTINATIONS)
+         for destination in DESTINATIONS:
+             _readback(
+                 destination,
+@@ -546,8 +613,75 @@ def verify(run_id: str) -> None:
+                 row["sha256"],
+                 run_id,
+             )
++    if len(set(snapshot_ids)) != len(ARTIFACTS) * len(DESTINATIONS):
++        raise BackupError("Backup snapshots are not independent.")
+     for destination in DESTINATIONS:
+         _restic(destination, "check")
++    if admin._protected_file(_receipt_path(run_id)) != raw:
++        raise BackupError("Backup receipt changed during verification.")
++    return receipt, raw
++
++
++def verify(run_id: str) -> None:
++    verified_receipt(run_id)
++
++
++def _proof_from_receipt(
++    run_id: str, receipt: dict[str, Any], raw: bytes, revisions: tuple[str, ...], now: datetime
++) -> dict[str, Any]:
++    artifact_snapshots = {
++        name: {
++            destination.name: receipt["artifacts"][name]["snapshots"][destination.name]
++            for destination in DESTINATIONS
++        }
++        for name in ARTIFACTS
++    }
++    return {
++        "schema": 2,
++        "purpose": "production",
++        "database": DATABASE,
++        "ownership_marker": receipt["ownership_marker"],
++        "run_id": run_id,
++        "backup_receipt_sha256": hashlib.sha256(raw).hexdigest(),
++        "revisions_at_backup": list(revisions),
++        "repositories": receipt["repositories"],
++        "artifact_snapshots": artifact_snapshots,
++        "proxmox_snapshot": artifact_snapshots["database.dump"]["proxmox"],
++        "drive_snapshot": artifact_snapshots["database.dump"]["drive"],
++        "verified_at_utc": now.isoformat(),
++    }
++
++
++def _write_proof(run_id: str, proof: dict[str, Any]) -> Path:
++    _protected_output_dir(PROOF_DIR)
++    path = _proof_path(run_id)
++    nofollow = getattr(os, "O_NOFOLLOW", None)
++    if not isinstance(nofollow, int):
++        raise BackupError("Safe recovery proof creation is unavailable.")
++    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | nofollow, 0o600)
++    with os.fdopen(fd, "w", encoding="utf-8") as output:
++        json.dump(proof, output, sort_keys=True)
++        output.write("\n")
++        output.flush()
++        os.fsync(output.fileno())
++    return path
++
++
++def finalize_proof(run_id: str) -> Path:
++    """Create a protected admin proof only from fresh, fully verified copies."""
++    receipt, raw = verified_receipt(run_id)
++    config = admin._load_config(admin.CONFIG_PATH)
++    now = datetime.now(UTC)
++    backup_time = datetime.fromisoformat(receipt["verified_at_utc"])
++    if not now - timedelta(hours=24) <= backup_time <= now:
++        raise BackupError("Backup is too old for migration proof.")
++    revisions = _current_revisions(config)
++    if (
++        receipt["ownership_marker"] != config.marker
++        or tuple(receipt["revisions_at_backup"]) != revisions
++    ):
++        raise BackupError("Backup does not match current production revisions.")
++    return _write_proof(run_id, _proof_from_receipt(run_id, receipt, raw, revisions, now))
+ 
+ 
+ def retention_plan(run_id: str) -> None:
+@@ -573,6 +707,8 @@ def main(argv: list[str] | None = None) -> int:
+     verify_parser.add_argument("run_id")
+     retain_parser = commands.add_parser("retention-plan")
+     retain_parser.add_argument("run_id")
++    proof_parser = commands.add_parser("finalize-proof")
++    proof_parser.add_argument("run_id")
+     try:
+         args = parser.parse_args(argv)
+         if args.command == "backup":
+@@ -585,6 +721,8 @@ def main(argv: list[str] | None = None) -> int:
+             print(
+                 "Verified run; proposed retention is 30 daily, 8 weekly, 12 monthly. No snapshots deleted."
+             )
++        elif args.command == "finalize-proof":
++            print("Protected recovery proof created: " + str(finalize_proof(args.run_id)))
+         return 0
+     except Exception:  # noqa: BLE001 - no credentials, paths or driver errors in logs.
+         print("Production backup refused; inspect protected local state.", file=sys.stderr)
+diff --git a/services/api/tests/unit/test_production_admin.py b/services/api/tests/unit/test_production_admin.py
+index ea425cb..8d80e4c 100644
+--- a/services/api/tests/unit/test_production_admin.py
++++ b/services/api/tests/unit/test_production_admin.py
+@@ -1,6 +1,7 @@
+ """Offline production-admin guards; no test opens a real database connection."""
+ 
+ import getpass
++import hashlib
+ import json
+ import re
+ import secrets
+@@ -14,7 +15,9 @@ from typing import Any
+ import psycopg
+ import pytest
+ from alembic import command
++
+ from brickvault_api import production_admin as admin
++from brickvault_api import production_backup as backup
+ from brickvault_api.persistence.database import expected_revisions
+ 
+ MARKER = "brickvault-appraisal:" + "1" * 32 + ":" + "2" * 32
+@@ -437,30 +440,121 @@ def test_grant_command_uses_shared_enumerated_policy_after_guards(
+     assert events == ["ownership", "schema", "recovery", "enumerated_grants"]
+ 
+ 
+-def test_recovery_receipt_binds_two_copies_and_current_revision(
++def test_generated_recovery_proof_binds_verified_receipt_copies_and_revision(
+     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+ ) -> None:
+     config = admin.parse_config(descriptor())
+-    receipt = {
++    run_id = "3" * 32
++    receipt: dict[str, Any] = {
++        "schema": 2,
+         "purpose": "production",
+         "database": admin.DATABASE,
+         "ownership_marker": MARKER,
++        "run_id": run_id,
+         "revisions_at_backup": ["0016_hunt_cached_runs"],
+-        "proxmox_snapshot": "a" * 64,
+-        "drive_snapshot": "b" * 64,
+         "verified_at_utc": datetime.now(UTC).isoformat(),
++        "repositories": {
++            "proxmox": {"uri": backup.PROXMOX_REPO, "id": "a" * 64},
++            "drive": {"uri": backup.DRIVE_REPO, "id": "b" * 64},
++        },
++        "artifacts": {
++            name: {
++                "bytes": 5,
++                "sha256": "c" * 64,
++                "snapshots": {"proxmox": str(index) * 64, "drive": str(index + 3) * 64},
++            }
++            for index, name in enumerate(backup.ARTIFACTS, start=4)
++        },
+     }
+-    monkeypatch.setattr(admin, "_protected_file", lambda _: json.dumps(receipt).encode())
+-    admin._recovery_proof(tmp_path / "proof.json", config, ("0016_hunt_cached_runs",))
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    proof = backup._proof_from_receipt(
++        run_id, receipt, raw, ("0016_hunt_cached_runs",), datetime.now(UTC)
++    )
++    monkeypatch.setattr(backup, "PROOF_DIR", tmp_path)
++    monkeypatch.setattr(admin, "_protected_file", lambda _: json.dumps(proof).encode())
++    monkeypatch.setattr(backup, "verified_receipt", lambda _: (receipt, raw))
++    path = tmp_path / f"{run_id}.json"
++    admin._recovery_proof(path, config, ("0016_hunt_cached_runs",))
++    with pytest.raises(admin.AdminError):
++        admin._recovery_proof(path, config, ())
++    proof["backup_receipt_sha256"] = "f" * 64
+     with pytest.raises(admin.AdminError):
+-        admin._recovery_proof(tmp_path / "proof.json", config, ())
+-    receipt["drive_snapshot"] = receipt["proxmox_snapshot"]
++        admin._recovery_proof(path, config, None)
++    proof["backup_receipt_sha256"] = hashlib.sha256(raw).hexdigest()
++    proof["artifact_snapshots"]["database.dump"].pop("drive")
+     with pytest.raises(admin.AdminError):
+-        admin._recovery_proof(tmp_path / "proof.json", config, None)
+-    receipt["drive_snapshot"] = "b" * 64
++        admin._recovery_proof(path, config, None)
++    proof["artifact_snapshots"] = {
++        name: row["snapshots"] for name, row in receipt["artifacts"].items()
++    }
++    proof["verified_at_utc"] = (datetime.now(UTC) - timedelta(days=2)).isoformat()
++    with pytest.raises(admin.AdminError, match="stale"):
++        admin._recovery_proof(path, config, None)
++    proof["verified_at_utc"] = datetime.now(UTC).isoformat()
+     receipt["verified_at_utc"] = (datetime.now(UTC) - timedelta(days=2)).isoformat()
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    proof["backup_receipt_sha256"] = hashlib.sha256(raw).hexdigest()
++    with pytest.raises(admin.AdminError, match="Verified backup is stale"):
++        admin._recovery_proof(path, config, None)
++
++
++def test_grant_and_bootstrap_require_generated_dual_backup_proof(
++    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
++) -> None:
++    config = admin.parse_config(descriptor())
++    run_id = "8" * 32
++    receipt = {
++        "purpose": "production",
++        "database": admin.DATABASE,
++        "ownership_marker": MARKER,
++        "run_id": run_id,
++        "revisions_at_backup": [],
++        "verified_at_utc": datetime.now(UTC).isoformat(),
++        "repositories": {
++            "proxmox": {"uri": backup.PROXMOX_REPO, "id": "a" * 64},
++            "drive": {"uri": backup.DRIVE_REPO, "id": "b" * 64},
++        },
++        "artifacts": {
++            name: {
++                "bytes": 5,
++                "sha256": "c" * 64,
++                "snapshots": {"proxmox": str(index) * 64, "drive": str(index + 3) * 64},
++            }
++            for index, name in enumerate(backup.ARTIFACTS, start=4)
++        },
++    }
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    proof = backup._proof_from_receipt(run_id, receipt, raw, (), datetime.now(UTC))
++    path = tmp_path / f"{run_id}.json"
++    owner = SimpleNamespace(scalar=lambda *_: 0)
++    grants: list[str] = []
++    monkeypatch.setattr(backup, "PROOF_DIR", tmp_path)
++    monkeypatch.setattr(backup, "verified_receipt", lambda _: (receipt, raw))
++    monkeypatch.setattr(admin, "_protected_file", lambda _: json.dumps(proof).encode())
++    monkeypatch.setattr(admin, "_maintenance", lambda: nullcontext(object()))
++    monkeypatch.setattr(admin, "_require_provisioned", lambda *_: None)
++    monkeypatch.setattr(admin, "_owner_connection", lambda *_: nullcontext(owner))
++    monkeypatch.setattr(admin, "_schema_guard", lambda *_: None)
++    monkeypatch.setattr(admin, "_revisions", lambda *_: expected_revisions())
++    monkeypatch.setattr(admin, "grant_runtime", lambda *_: grants.append("applied"))
++    monkeypatch.setattr(admin, "_runtime_guard", lambda *_: None)
++    monkeypatch.setattr(sys.stdin, "isatty", lambda: True)
++    monkeypatch.setattr(
++        getpass, "getpass", lambda *_: (_ for _ in ()).throw(RuntimeError("hidden input reached"))
++    )
++
++    proof["backup_receipt_sha256"] = "f" * 64
++    with pytest.raises(admin.AdminError):
++        admin.grant_runtime_role(config, path)
+     with pytest.raises(admin.AdminError):
+-        admin._recovery_proof(tmp_path / "proof.json", config, None)
++        admin.bootstrap_owner(config, path)
++    assert grants == []
++
++    proof["backup_receipt_sha256"] = hashlib.sha256(raw).hexdigest()
++    admin.grant_runtime_role(config, path)
++    assert grants == ["applied"]
++    with pytest.raises(RuntimeError, match="hidden input reached"):
++        admin.bootstrap_owner(config, path)
+ 
+ 
+ def test_bootstrap_refuses_existing_account_before_hidden_input(
+diff --git a/services/api/tests/unit/test_production_backup.py b/services/api/tests/unit/test_production_backup.py
+index 3b957a5..2a96b15 100644
+--- a/services/api/tests/unit/test_production_backup.py
++++ b/services/api/tests/unit/test_production_backup.py
+@@ -5,10 +5,12 @@ import json
+ import os
+ import subprocess
+ import sys
++from datetime import UTC, datetime, timedelta
+ from pathlib import Path
+ 
+ import pytest
+ 
++from brickvault_api import production_admin as admin
+ from brickvault_api import production_backup as backup
+ 
+ 
+@@ -98,6 +100,54 @@ def test_producer_does_not_use_plaintext_output_path() -> None:
+             assert command[command.index("-cf") + 1] == "-"
+ 
+ 
++@pytest.mark.parametrize(
++    ("artifact", "executable", "options"),
++    [
++        ("database.dump", "/usr/lib/postgresql/18/bin/pg_dump", ["--format=custom"]),
++        ("globals.sql", "/usr/lib/postgresql/18/bin/pg_dumpall", ["--globals-only"]),
++    ],
++)
++def test_database_producers_use_direct_local_peer_without_privilege_transition(
++    artifact: str, executable: str, options: list[str]
++) -> None:
++    expected = [
++        executable,
++        *options,
++        "--no-password",
++        "--host=/var/run/postgresql",
++        "--username=postgres",
++    ]
++    if artifact == "database.dump":
++        expected.append("--dbname=brickvault_appraisal_prod")
++    assert backup._producer(artifact, ()) == expected
++
++
++def test_source_cannot_inherit_credentials_or_request_input(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    monkeypatch.setenv("PGPASSWORD", "synthetic-password")
++    monkeypatch.setenv("PGSERVICE", "synthetic-service")
++    first, second = tmp_path / "first", tmp_path / "second"
++    source = [
++        sys.executable,
++        "-c",
++        "import json,os,sys; print(json.dumps({'stdin':sys.stdin.read(),"
++        "'home':os.getenv('HOME'),'passfile':os.getenv('PGPASSFILE'),"
++        "'password':os.getenv('PGPASSWORD'),'service':os.getenv('PGSERVICE')}))",
++    ]
++    backup.stream_to_two(
++        source, [_sink(first), _sink(second)], [os.environ, os.environ], deadline_seconds=30
++    )
++    assert first.read_bytes() == second.read_bytes()
++    assert json.loads(first.read_bytes()) == {
++        "stdin": "",
++        "home": "/nonexistent",
++        "passfile": "/dev/null",
++        "password": None,
++        "service": None,
++    }
++
++
+ def test_rclone_unlock_is_limited_to_drive_child(
+     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+ ) -> None:
+@@ -159,3 +209,168 @@ def test_destination_identity_rejects_broader_drive_scope(
+     )
+     with pytest.raises(backup.BackupError, match="scope differs"):
+         backup._verify_destination_identity()
++
++
++RUN = "1" * 32
++MARKER = "brickvault-appraisal:" + "2" * 32 + ":" + "3" * 32
++
++
++def _complete_receipt() -> dict[str, object]:
++    snapshots = iter("456789")
++    return {
++        "schema": 2,
++        "purpose": "production",
++        "database": backup.DATABASE,
++        "ownership_marker": MARKER,
++        "run_id": RUN,
++        "revisions_at_backup": [],
++        "verified_at_utc": datetime.now(UTC).isoformat(),
++        "repositories": {
++            d.name: {"uri": d.repository, "id": ("a" if d.name == "proxmox" else "b") * 64}
++            for d in backup.DESTINATIONS
++        },
++        "artifacts": {
++            name: {
++                "bytes": 7,
++                "sha256": "c" * 64,
++                "snapshots": {d.name: next(snapshots) * 64 for d in backup.DESTINATIONS},
++            }
++            for name in backup.ARTIFACTS
++        },
++    }
++
++
++def _mock_receipt_context(
++    monkeypatch: pytest.MonkeyPatch, receipt: dict[str, object]
++) -> list[tuple[str, str]]:
++    config = admin.AdminConfig("synthetic-owner-url", "synthetic-runtime-url", MARKER)
++    monkeypatch.setattr(backup, "_preflight", lambda: config)
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    identity = json.dumps(_identity()).encode()
++    monkeypatch.setattr(
++        backup.admin,
++        "_protected_file",
++        lambda path: identity if path.name == "repositories.json" else raw,
++    )
++    observed: list[tuple[str, str]] = []
++    monkeypatch.setattr(
++        backup,
++        "_readback",
++        lambda dest, _snap, artifact, *_: observed.append((dest.name, artifact)),
++    )
++    monkeypatch.setattr(backup, "_restic", lambda dest, *_: observed.append((dest.name, "check")))
++    return observed
++
++
++def test_complete_receipt_requires_six_readbacks_and_two_checks(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    receipt = _complete_receipt()
++    observed = _mock_receipt_context(monkeypatch, receipt)
++    verified, raw = backup.verified_receipt(RUN)
++    assert verified == receipt
++    assert (
++        hashlib.sha256(raw).hexdigest()
++        == hashlib.sha256(json.dumps(receipt, sort_keys=True).encode()).hexdigest()
++    )
++    assert observed == [
++        (destination.name, artifact)
++        for artifact in backup.ARTIFACTS
++        for destination in backup.DESTINATIONS
++    ] + [(destination.name, "check") for destination in backup.DESTINATIONS]
++
++
++def test_missing_destination_or_tampered_receipt_refuses_proof(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    receipt = _complete_receipt()
++    receipt["artifacts"]["database.dump"]["snapshots"].pop("drive")  # type: ignore[index]
++    observed = _mock_receipt_context(monkeypatch, receipt)
++    with pytest.raises(backup.BackupError, match="artifact"):
++        backup.verified_receipt(RUN)
++    assert not observed
++
++
++def test_failed_encrypted_readback_never_finishes_receipt_verification(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    receipt = _complete_receipt()
++    observed = _mock_receipt_context(monkeypatch, receipt)
++
++    def readback(
++        destination: backup.Destination, _snapshot: str, artifact: str, *_: object
++    ) -> None:
++        observed.append((destination.name, artifact))
++        if destination.name == "drive":
++            raise backup.BackupError("Encrypted readback digest differs.")
++
++    monkeypatch.setattr(backup, "_readback", readback)
++    with pytest.raises(backup.BackupError, match="readback"):
++        backup.verified_receipt(RUN)
++    assert observed == [("proxmox", "database.dump"), ("drive", "database.dump")]
++
++
++def test_receipt_change_during_readback_is_rejected(monkeypatch: pytest.MonkeyPatch) -> None:
++    receipt = _complete_receipt()
++    observed = _mock_receipt_context(monkeypatch, receipt)
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    reads = 0
++
++    def protected(path: Path) -> bytes:
++        nonlocal reads
++        if path.name == "repositories.json":
++            return json.dumps(_identity()).encode()
++        reads += 1
++        return raw if reads == 1 else raw + b" "
++
++    monkeypatch.setattr(backup.admin, "_protected_file", protected)
++    with pytest.raises(backup.BackupError, match="changed"):
++        backup.verified_receipt(RUN)
++    assert len(observed) == 8
++    receipt = _complete_receipt()
++    receipt["ownership_marker"] = "brickvault-appraisal:" + "f" * 32 + ":" + "e" * 32
++    observed = _mock_receipt_context(monkeypatch, receipt)
++    with pytest.raises(backup.BackupError, match="identity"):
++        backup.verified_receipt(RUN)
++    assert not observed
++
++
++def test_finalize_proof_derives_only_verified_snapshots_and_receipt_digest(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    receipt = _complete_receipt()
++    raw = json.dumps(receipt, sort_keys=True).encode()
++    config = admin.AdminConfig("synthetic-owner-url", "synthetic-runtime-url", MARKER)
++    monkeypatch.setattr(backup, "verified_receipt", lambda _: (receipt, raw))
++    monkeypatch.setattr(backup.admin, "_load_config", lambda _: config)
++    monkeypatch.setattr(backup, "_current_revisions", lambda _: ())
++    stored: list[dict[str, object]] = []
++    monkeypatch.setattr(
++        backup,
++        "_write_proof",
++        lambda _run, proof: (stored.append(proof), tmp_path / "proof.json")[1],
++    )
++    assert backup.finalize_proof(RUN) == tmp_path / "proof.json"
++    assert len(stored) == 1
++    proof = stored[0]
++    assert proof["backup_receipt_sha256"] == hashlib.sha256(raw).hexdigest()
++    assert (
++        proof["proxmox_snapshot"] == receipt["artifacts"]["database.dump"]["snapshots"]["proxmox"]
++    )  # type: ignore[index]
++    assert proof["drive_snapshot"] == receipt["artifacts"]["database.dump"]["snapshots"]["drive"]  # type: ignore[index]
++    assert proof["revisions_at_backup"] == []
++
++    receipt["verified_at_utc"] = (datetime.now(UTC) - timedelta(days=2)).isoformat()
++    with pytest.raises(backup.BackupError, match="too old"):
++        backup.finalize_proof(RUN)
++    assert len(stored) == 1
++
++
++def test_finalize_cli_rejects_operator_snapshot_argument(
++    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str]
++) -> None:
++    monkeypatch.setattr(backup, "finalize_proof", lambda _: pytest.fail("Finalization reached"))
++    assert backup.main(["finalize-proof", RUN, "--proxmox-snapshot", "f" * 64]) == 1
++    output = capsys.readouterr()
++    assert "refused" in output.err
++    assert "f" * 64 not in output.out + output.err

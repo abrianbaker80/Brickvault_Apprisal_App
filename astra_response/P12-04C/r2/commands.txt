@@ -1,0 +1,49 @@
+Sanitized P12-04C r2 operations:
+
+1. Read-only direct peer probe in transient service with NoNewPrivileges=true:
+   pg_dump --format=custom --no-password --host=/var/run/postgresql --username=postgres --dbname=brickvault_appraisal_prod
+   pg_dumpall --globals-only --no-password --host=/var/run/postgresql --username=postgres
+   Output consumed only in volatile memory; no snapshot or receipt created.
+
+2. Focused source validation:
+   54 focused tests; targeted Ruff, format and mypy; pnpm build.
+
+3. Release:
+   release_manifest.py source-id/create/verify for p12-04c-r4
+   hash-pinned transfer/staging, hash-locked dependency installation
+   installed wheel, admin/backup entrypoint and migration graph verification
+   atomic current symlink switch
+
+4. Unit:
+   install reviewed brickvault-backup.service
+   systemd-analyze verify; daemon-reload
+   reset only the previous failed service state
+   NoNewPrivileges=true and RestrictSUIDSGID=true confirmed
+
+5. Pre-migration backup:
+   exactly one authorized retry of systemctl start brickvault-backup.service
+   protected schema-2 receipt with both repository checks and six verified readbacks
+
+6. Recovery proof and migration:
+   accepted finalize_proof entrypoint for the private run ID
+   brickvault-production-admin migrate --recovery-proof <generated protected proof>
+   brickvault-production-admin grant-runtime --recovery-proof <same proof>
+   exact packaged head and least-privilege checks passed
+
+Private addresses, run IDs, repository IDs, marker values and all credentials are omitted.
+
+7. Owner bootstrap:
+   brickvault-production-admin bootstrap-owner --recovery-proof <same generated proof>
+   executed by Brian through a local interactive SSH TTY with hidden password prompts
+   brickvault-production-admin verify -> PASS, exactly one owner
+
+8. Post-bootstrap backup:
+   one systemctl start brickvault-backup.service -> PASS
+   both repositories, all artifacts, six matching encrypted readbacks, both checks, protected receipt
+
+9. Timer and final state:
+   confirm both real runs and synthetic canaries retained
+   systemctl enable --now brickvault-backup.timer
+   enabled/active with next trigger 2026-09-30 03:22:03 UTC
+   backup service inactive after success; no additional manual backup
+   final API/network/SSH/mount/clock/guest-agent checks PASS
