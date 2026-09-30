@@ -1,0 +1,2713 @@
+{
+  "isolated_current": {
+    "indexes": [
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_creation_evidence_id ON public.catalog_color USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_color_creation_evidence_id",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color ON public.catalog_color USING btree (id)",
+        "indexname": "pk_catalog_color",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_color_namespace_identifier ON public.catalog_color USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_color_namespace_identifier",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_color_id ON public.catalog_color_fact USING btree (color_id)",
+        "indexname": "ix_catalog_color_fact_color_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_evidence_id_source_version_id ON public.catalog_color_fact USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_evidence_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_snapshot_id_source_version_id ON public.catalog_color_fact USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_snapshot_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color_fact ON public.catalog_color_fact USING btree (snapshot_id, color_id)",
+        "indexname": "pk_catalog_color_fact",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_provider_identity_id_canonical_kind ON public.catalog_inventory USING btree (provider_identity_id, canonical_kind)",
+        "indexname": "ix_catalog_inventory_provider_identity_id_canonical_kind",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory ON public.catalog_inventory USING btree (id)",
+        "indexname": "pk_catalog_inventory",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_provider_identity_id ON public.catalog_inventory USING btree (provider_identity_id)",
+        "indexname": "uq_catalog_inventory_provider_identity_id",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_evidence_id_source_version_id ON public.catalog_inventory_line USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_part_color_id_part_id_color_id ON public.catalog_inventory_line USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_part_color_id_part_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_color_id ON public.catalog_inventory_line USING btree (snapshot_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, nested_set_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_part_id ON public.catalog_inventory_line USING btree (snapshot_id, part_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_part_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_source_version_id ON public.catalog_inventory_line USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_unresolved_identity_id ON public.catalog_inventory_line USING btree (unresolved_identity_id)",
+        "indexname": "ix_catalog_inventory_line_unresolved_identity_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_line ON public.catalog_inventory_line USING btree (id)",
+        "indexname": "pk_catalog_inventory_line",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_revision_id_source_locator ON public.catalog_inventory_line USING btree (revision_id, source_locator)",
+        "indexname": "uq_catalog_inventory_line_revision_id_source_locator",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, id, nested_set_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_revision_id_id ON public.catalog_inventory_line USING btree (snapshot_id, revision_id, id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_revision_id_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_evidence_id_source_version_id ON public.catalog_inventory_revision USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_inventory_id ON public.catalog_inventory_revision USING btree (inventory_id)",
+        "indexname": "ix_catalog_inventory_revision_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, set_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_source_version_id ON public.catalog_inventory_revision USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_revision ON public.catalog_inventory_revision USING btree (id)",
+        "indexname": "pk_catalog_inventory_revision",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id ON public.catalog_inventory_revision USING btree (snapshot_id, id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, set_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_inventory_id ON public.catalog_inventory_revision USING btree (snapshot_id, inventory_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_part_creation_evidence_id ON public.catalog_part USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_part_creation_evidence_id",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_part ON public.catalog_part USING btree (id)",
+        "indexname": "pk_catalog_part",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_part_namespace_identifier ON public.catalog_part USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_part_namespace_identifier",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_native ON public.catalog_stage_colors USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_colors_native",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_run_id_source_version_id ON public.catalog_stage_colors USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_run_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_source_file_id_source_version_id ON public.catalog_stage_colors USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_source_file_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_colors ON public.catalog_stage_colors USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_colors",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_native ON public.catalog_stage_inventories USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_inventories_native",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_run_id_source_version_id ON public.catalog_stage_inventories USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_run_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_source_file_id_source_version_id ON public.catalog_stage_inventories USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_source_file_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventories ON public.catalog_stage_inventories USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventories",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_native ON public.catalog_stage_inventory_parts USING btree (run_id, inventory_id, part_num, color_id, is_spare)",
+        "indexname": "ix_catalog_stage_inventory_parts_native",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_run_id_source_version_id ON public.catalog_stage_inventory_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_source_file_id_source__b368 ON public.catalog_stage_inventory_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_source_file_id_source__b368",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventory_parts ON public.catalog_stage_inventory_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventory_parts",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_native ON public.catalog_stage_parts USING btree (run_id, part_num)",
+        "indexname": "ix_catalog_stage_parts_native",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_run_id_source_version_id ON public.catalog_stage_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_source_file_id_source_version_id ON public.catalog_stage_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_source_file_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_parts ON public.catalog_stage_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_parts",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_color_id ON public.part_color_identity USING btree (color_id)",
+        "indexname": "ix_part_color_identity_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_creation_evidence_id ON public.part_color_identity USING btree (creation_evidence_id)",
+        "indexname": "ix_part_color_identity_creation_evidence_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_identity ON public.part_color_identity USING btree (id)",
+        "indexname": "pk_part_color_identity",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_id_part_id_color_id ON public.part_color_identity USING btree (id, part_id, color_id)",
+        "indexname": "uq_part_color_identity_id_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_part_id_color_id ON public.part_color_identity USING btree (part_id, color_id)",
+        "indexname": "uq_part_color_identity_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_evidence_id_source_version_id ON public.part_color_observation USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_part_color_observation_evidence_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_part_color_id_part_id_color_id ON public.part_color_observation USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_part_color_observation_part_color_id_part_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_color_id ON public.part_color_observation USING btree (snapshot_id, color_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_part_id ON public.part_color_observation USING btree (snapshot_id, part_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_part_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_source_version_id ON public.part_color_observation USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_observation ON public.part_color_observation USING btree (snapshot_id, part_color_id, evidence_id)",
+        "indexname": "pk_part_color_observation",
+        "tablename": "part_color_observation"
+      }
+    ],
+    "planner_statistics": [
+      {
+        "attname": "diagnostics",
+        "avg_width": 42,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.0023069156,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "id",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "is_trans",
+        "avg_width": 1,
+        "correlation": 0.6692686,
+        "histogram_count": null,
+        "mcv_count": 2,
+        "n_distinct": 2.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "name",
+        "avg_width": 14,
+        "correlation": -0.08431147,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 24,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 150,
+        "correlation": -0.4770803,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": -0.12019561,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": -0.02275699,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "rgb",
+        "avg_width": 7,
+        "correlation": -0.041479472,
+        "histogram_count": 101,
+        "mcv_count": 32,
+        "n_distinct": -0.84727275,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": -0.0065185656,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 84,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 5,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.00010133594,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "id",
+        "avg_width": 8,
+        "correlation": 0.9999786,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 26,
+        "correlation": 0.9999786,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 59,
+        "correlation": -0.14936402,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": 0.0069413497,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": -0.011382061,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 0.9999786,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": 0.0020791239,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 72,
+        "correlation": 0.9999786,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "set_num",
+        "avg_width": 9,
+        "correlation": 0.3123596,
+        "histogram_count": 101,
+        "mcv_count": 79,
+        "n_distinct": -0.94362724,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "version",
+        "avg_width": 8,
+        "correlation": 0.95550215,
+        "histogram_count": 2,
+        "mcv_count": 9,
+        "n_distinct": 11.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "color_id",
+        "avg_width": 8,
+        "correlation": 0.108350046,
+        "histogram_count": 54,
+        "mcv_count": 69,
+        "n_distinct": 123.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": 0.0012203387,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "inventory_id",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": 100,
+        "n_distinct": 4340.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "is_spare",
+        "avg_width": 1,
+        "correlation": 0.89048696,
+        "histogram_count": null,
+        "mcv_count": 2,
+        "n_distinct": 2.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 94,
+        "correlation": 0.01839594,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 183,
+        "correlation": 0.010589205,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "part_num",
+        "avg_width": 5,
+        "correlation": 0.0015206608,
+        "histogram_count": 101,
+        "mcv_count": 100,
+        "n_distinct": 4229.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "quantity",
+        "avg_width": 8,
+        "correlation": 0.2576667,
+        "histogram_count": 67,
+        "mcv_count": 37,
+        "n_distinct": 104.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": 0.0013040798,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": 0.0022324477,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": -0.0055950284,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 118,
+        "correlation": 0.018087205,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 22,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.004627824,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "name",
+        "avg_width": 64,
+        "correlation": 0.2825953,
+        "histogram_count": 101,
+        "mcv_count": 9,
+        "n_distinct": -0.9733674,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 31,
+        "correlation": 0.9985696,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 158,
+        "correlation": 0.2825953,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "part_cat_id",
+        "avg_width": 8,
+        "correlation": 0.1390342,
+        "histogram_count": null,
+        "mcv_count": 76,
+        "n_distinct": 76.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "part_num",
+        "avg_width": 11,
+        "correlation": 0.9985696,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": 0.00019413863,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": 0.0019829648,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 0.9985696,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": 0.0028608162,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 137,
+        "correlation": 0.2825953,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      }
+    ],
+    "relations": [
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color_fact",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_line",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 114688
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_revision",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 90112
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_part",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 262144,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_colors",
+        "relpages": 32,
+        "reltuples": 275.0,
+        "total_bytes": 393216
+      },
+      {
+        "bytes": 19464192,
+        "relallvisible": 2336,
+        "relkind": "r",
+        "relname": "catalog_stage_inventories",
+        "relpages": 2376,
+        "reltuples": 47452.0,
+        "total_bytes": 24928256
+      },
+      {
+        "bytes": 247398400,
+        "relallvisible": 20847,
+        "relkind": "r",
+        "relname": "catalog_stage_inventory_parts",
+        "relpages": 24124,
+        "reltuples": 289275.0,
+        "total_bytes": 298516480
+      },
+      {
+        "bytes": 42598400,
+        "relallvisible": 5191,
+        "relkind": "r",
+        "relname": "catalog_stage_parts",
+        "relpages": 5200,
+        "reltuples": 64620.0,
+        "total_bytes": 50896896
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_identity",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_observation",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 49152
+      }
+    ],
+    "settings": {
+      "autovacuum": "on",
+      "autovacuum_analyze_scale_factor": "0.1",
+      "autovacuum_analyze_threshold": "50",
+      "autovacuum_max_workers": "3",
+      "autovacuum_naptime": "1min",
+      "autovacuum_vacuum_scale_factor": "0.2",
+      "autovacuum_vacuum_threshold": "50",
+      "autovacuum_work_mem": "-1",
+      "checkpoint_completion_target": "0.9",
+      "checkpoint_timeout": "5min",
+      "cpu_index_tuple_cost": "0.005",
+      "cpu_operator_cost": "0.0025",
+      "cpu_tuple_cost": "0.01",
+      "default_statistics_target": "100",
+      "effective_cache_size": "4GB",
+      "effective_io_concurrency": "16",
+      "enable_bitmapscan": "on",
+      "enable_hashjoin": "on",
+      "enable_incremental_sort": "on",
+      "enable_indexonlyscan": "on",
+      "enable_indexscan": "on",
+      "enable_material": "on",
+      "enable_memoize": "on",
+      "enable_mergejoin": "on",
+      "enable_nestloop": "on",
+      "enable_seqscan": "on",
+      "from_collapse_limit": "8",
+      "geqo": "on",
+      "geqo_threshold": "12",
+      "io_method": "worker",
+      "jit": "on",
+      "jit_above_cost": "100000",
+      "jit_inline_above_cost": "500000",
+      "jit_optimize_above_cost": "500000",
+      "join_collapse_limit": "8",
+      "maintenance_io_concurrency": "16",
+      "maintenance_work_mem": "64MB",
+      "max_connections": "100",
+      "max_parallel_maintenance_workers": "2",
+      "max_parallel_workers": "8",
+      "max_parallel_workers_per_gather": "2",
+      "max_wal_size": "1GB",
+      "max_worker_processes": "8",
+      "min_wal_size": "80MB",
+      "random_page_cost": "4",
+      "seq_page_cost": "1",
+      "shared_buffers": "128MB",
+      "synchronous_commit": "on",
+      "temp_buffers": "8MB",
+      "wal_compression": "off",
+      "work_mem": "4MB"
+    }
+  },
+  "isolated_initial": {
+    "indexes": [
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_creation_evidence_id ON public.catalog_color USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_color_creation_evidence_id",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color ON public.catalog_color USING btree (id)",
+        "indexname": "pk_catalog_color",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_color_namespace_identifier ON public.catalog_color USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_color_namespace_identifier",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_color_id ON public.catalog_color_fact USING btree (color_id)",
+        "indexname": "ix_catalog_color_fact_color_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_evidence_id_source_version_id ON public.catalog_color_fact USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_evidence_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_snapshot_id_source_version_id ON public.catalog_color_fact USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_snapshot_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color_fact ON public.catalog_color_fact USING btree (snapshot_id, color_id)",
+        "indexname": "pk_catalog_color_fact",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_provider_identity_id_canonical_kind ON public.catalog_inventory USING btree (provider_identity_id, canonical_kind)",
+        "indexname": "ix_catalog_inventory_provider_identity_id_canonical_kind",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory ON public.catalog_inventory USING btree (id)",
+        "indexname": "pk_catalog_inventory",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_provider_identity_id ON public.catalog_inventory USING btree (provider_identity_id)",
+        "indexname": "uq_catalog_inventory_provider_identity_id",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_evidence_id_source_version_id ON public.catalog_inventory_line USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_part_color_id_part_id_color_id ON public.catalog_inventory_line USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_part_color_id_part_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_color_id ON public.catalog_inventory_line USING btree (snapshot_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, nested_set_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_part_id ON public.catalog_inventory_line USING btree (snapshot_id, part_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_part_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_source_version_id ON public.catalog_inventory_line USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_unresolved_identity_id ON public.catalog_inventory_line USING btree (unresolved_identity_id)",
+        "indexname": "ix_catalog_inventory_line_unresolved_identity_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_line ON public.catalog_inventory_line USING btree (id)",
+        "indexname": "pk_catalog_inventory_line",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_revision_id_source_locator ON public.catalog_inventory_line USING btree (revision_id, source_locator)",
+        "indexname": "uq_catalog_inventory_line_revision_id_source_locator",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, id, nested_set_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_revision_id_id ON public.catalog_inventory_line USING btree (snapshot_id, revision_id, id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_revision_id_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_evidence_id_source_version_id ON public.catalog_inventory_revision USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_inventory_id ON public.catalog_inventory_revision USING btree (inventory_id)",
+        "indexname": "ix_catalog_inventory_revision_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, set_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_source_version_id ON public.catalog_inventory_revision USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_revision ON public.catalog_inventory_revision USING btree (id)",
+        "indexname": "pk_catalog_inventory_revision",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id ON public.catalog_inventory_revision USING btree (snapshot_id, id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, set_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_inventory_id ON public.catalog_inventory_revision USING btree (snapshot_id, inventory_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_part_creation_evidence_id ON public.catalog_part USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_part_creation_evidence_id",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_part ON public.catalog_part USING btree (id)",
+        "indexname": "pk_catalog_part",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_part_namespace_identifier ON public.catalog_part USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_part_namespace_identifier",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_native ON public.catalog_stage_colors USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_colors_native",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_run_id_source_version_id ON public.catalog_stage_colors USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_run_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_source_file_id_source_version_id ON public.catalog_stage_colors USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_source_file_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_colors ON public.catalog_stage_colors USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_colors",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_native ON public.catalog_stage_inventories USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_inventories_native",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_run_id_source_version_id ON public.catalog_stage_inventories USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_run_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_source_file_id_source_version_id ON public.catalog_stage_inventories USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_source_file_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventories ON public.catalog_stage_inventories USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventories",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_native ON public.catalog_stage_inventory_parts USING btree (run_id, inventory_id, part_num, color_id, is_spare)",
+        "indexname": "ix_catalog_stage_inventory_parts_native",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_run_id_source_version_id ON public.catalog_stage_inventory_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_source_file_id_source__b368 ON public.catalog_stage_inventory_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_source_file_id_source__b368",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventory_parts ON public.catalog_stage_inventory_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventory_parts",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_native ON public.catalog_stage_parts USING btree (run_id, part_num)",
+        "indexname": "ix_catalog_stage_parts_native",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_run_id_source_version_id ON public.catalog_stage_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_source_file_id_source_version_id ON public.catalog_stage_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_source_file_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_parts ON public.catalog_stage_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_parts",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_color_id ON public.part_color_identity USING btree (color_id)",
+        "indexname": "ix_part_color_identity_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_creation_evidence_id ON public.part_color_identity USING btree (creation_evidence_id)",
+        "indexname": "ix_part_color_identity_creation_evidence_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_identity ON public.part_color_identity USING btree (id)",
+        "indexname": "pk_part_color_identity",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_id_part_id_color_id ON public.part_color_identity USING btree (id, part_id, color_id)",
+        "indexname": "uq_part_color_identity_id_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_part_id_color_id ON public.part_color_identity USING btree (part_id, color_id)",
+        "indexname": "uq_part_color_identity_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_evidence_id_source_version_id ON public.part_color_observation USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_part_color_observation_evidence_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_part_color_id_part_id_color_id ON public.part_color_observation USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_part_color_observation_part_color_id_part_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_color_id ON public.part_color_observation USING btree (snapshot_id, color_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_part_id ON public.part_color_observation USING btree (snapshot_id, part_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_part_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_source_version_id ON public.part_color_observation USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_observation ON public.part_color_observation USING btree (snapshot_id, part_color_id, evidence_id)",
+        "indexname": "pk_part_color_observation",
+        "tablename": "part_color_observation"
+      }
+    ],
+    "planner_statistics": [],
+    "relations": [
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color_fact",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_line",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 114688
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_revision",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 90112
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_part",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 24576
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_colors",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_inventories",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_inventory_parts",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_parts",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_identity",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 40960
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_observation",
+        "relpages": 0,
+        "reltuples": -1.0,
+        "total_bytes": 49152
+      }
+    ],
+    "settings": {
+      "autovacuum": "on",
+      "autovacuum_analyze_scale_factor": "0.1",
+      "autovacuum_analyze_threshold": "50",
+      "autovacuum_max_workers": "3",
+      "autovacuum_naptime": "1min",
+      "autovacuum_vacuum_scale_factor": "0.2",
+      "autovacuum_vacuum_threshold": "50",
+      "autovacuum_work_mem": "-1",
+      "checkpoint_completion_target": "0.9",
+      "checkpoint_timeout": "5min",
+      "cpu_index_tuple_cost": "0.005",
+      "cpu_operator_cost": "0.0025",
+      "cpu_tuple_cost": "0.01",
+      "default_statistics_target": "100",
+      "effective_cache_size": "4GB",
+      "effective_io_concurrency": "16",
+      "enable_bitmapscan": "on",
+      "enable_hashjoin": "on",
+      "enable_incremental_sort": "on",
+      "enable_indexonlyscan": "on",
+      "enable_indexscan": "on",
+      "enable_material": "on",
+      "enable_memoize": "on",
+      "enable_mergejoin": "on",
+      "enable_nestloop": "on",
+      "enable_seqscan": "on",
+      "from_collapse_limit": "8",
+      "geqo": "on",
+      "geqo_threshold": "12",
+      "io_method": "worker",
+      "jit": "on",
+      "jit_above_cost": "100000",
+      "jit_inline_above_cost": "500000",
+      "jit_optimize_above_cost": "500000",
+      "join_collapse_limit": "8",
+      "maintenance_io_concurrency": "16",
+      "maintenance_work_mem": "64MB",
+      "max_connections": "100",
+      "max_parallel_maintenance_workers": "2",
+      "max_parallel_workers": "8",
+      "max_parallel_workers_per_gather": "2",
+      "max_wal_size": "1GB",
+      "max_worker_processes": "8",
+      "min_wal_size": "80MB",
+      "random_page_cost": "4",
+      "seq_page_cost": "1",
+      "shared_buffers": "128MB",
+      "synchronous_commit": "on",
+      "temp_buffers": "8MB",
+      "wal_compression": "off",
+      "work_mem": "4MB"
+    }
+  },
+  "production_initial": {
+    "indexes": [
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_creation_evidence_id ON public.catalog_color USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_color_creation_evidence_id",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color ON public.catalog_color USING btree (id)",
+        "indexname": "pk_catalog_color",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_color_namespace_identifier ON public.catalog_color USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_color_namespace_identifier",
+        "tablename": "catalog_color"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_color_id ON public.catalog_color_fact USING btree (color_id)",
+        "indexname": "ix_catalog_color_fact_color_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_evidence_id_source_version_id ON public.catalog_color_fact USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_evidence_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_color_fact_snapshot_id_source_version_id ON public.catalog_color_fact USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_color_fact_snapshot_id_source_version_id",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_color_fact ON public.catalog_color_fact USING btree (snapshot_id, color_id)",
+        "indexname": "pk_catalog_color_fact",
+        "tablename": "catalog_color_fact"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_provider_identity_id_canonical_kind ON public.catalog_inventory USING btree (provider_identity_id, canonical_kind)",
+        "indexname": "ix_catalog_inventory_provider_identity_id_canonical_kind",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory ON public.catalog_inventory USING btree (id)",
+        "indexname": "pk_catalog_inventory",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_provider_identity_id ON public.catalog_inventory USING btree (provider_identity_id)",
+        "indexname": "uq_catalog_inventory_provider_identity_id",
+        "tablename": "catalog_inventory"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_evidence_id_source_version_id ON public.catalog_inventory_line USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_part_color_id_part_id_color_id ON public.catalog_inventory_line USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_part_color_id_part_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_color_id ON public.catalog_inventory_line USING btree (snapshot_id, color_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_color_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, nested_set_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_part_id ON public.catalog_inventory_line USING btree (snapshot_id, part_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_part_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_snapshot_id_source_version_id ON public.catalog_inventory_line USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_line_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_line_unresolved_identity_id ON public.catalog_inventory_line USING btree (unresolved_identity_id)",
+        "indexname": "ix_catalog_inventory_line_unresolved_identity_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_line ON public.catalog_inventory_line USING btree (id)",
+        "indexname": "pk_catalog_inventory_line",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_revision_id_source_locator ON public.catalog_inventory_line USING btree (revision_id, source_locator)",
+        "indexname": "uq_catalog_inventory_line_revision_id_source_locator",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_minifigure_id ON public.catalog_inventory_line USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_id_nested_set_id ON public.catalog_inventory_line USING btree (snapshot_id, id, nested_set_id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_id_nested_set_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_line_snapshot_id_revision_id_id ON public.catalog_inventory_line USING btree (snapshot_id, revision_id, id)",
+        "indexname": "uq_catalog_inventory_line_snapshot_id_revision_id_id",
+        "tablename": "catalog_inventory_line"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_evidence_id_source_version_id ON public.catalog_inventory_revision USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_evidence_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_inventory_id ON public.catalog_inventory_revision USING btree (inventory_id)",
+        "indexname": "ix_catalog_inventory_revision_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, minifigure_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, set_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_inventory_revision_snapshot_id_source_version_id ON public.catalog_inventory_revision USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_catalog_inventory_revision_snapshot_id_source_version_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_inventory_revision ON public.catalog_inventory_revision USING btree (id)",
+        "indexname": "pk_catalog_inventory_revision",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id ON public.catalog_inventory_revision USING btree (snapshot_id, id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_minifigure_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, minifigure_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_minifigure_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_id_set_id ON public.catalog_inventory_revision USING btree (snapshot_id, id, set_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_id_set_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_inventory_revision_snapshot_id_inventory_id ON public.catalog_inventory_revision USING btree (snapshot_id, inventory_id)",
+        "indexname": "uq_catalog_inventory_revision_snapshot_id_inventory_id",
+        "tablename": "catalog_inventory_revision"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_part_creation_evidence_id ON public.catalog_part USING btree (creation_evidence_id)",
+        "indexname": "ix_catalog_part_creation_evidence_id",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_part ON public.catalog_part USING btree (id)",
+        "indexname": "pk_catalog_part",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_catalog_part_namespace_identifier ON public.catalog_part USING btree (namespace, identifier)",
+        "indexname": "uq_catalog_part_namespace_identifier",
+        "tablename": "catalog_part"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_native ON public.catalog_stage_colors USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_colors_native",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_run_id_source_version_id ON public.catalog_stage_colors USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_run_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_colors_source_file_id_source_version_id ON public.catalog_stage_colors USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_colors_source_file_id_source_version_id",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_colors ON public.catalog_stage_colors USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_colors",
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_native ON public.catalog_stage_inventories USING btree (run_id, id)",
+        "indexname": "ix_catalog_stage_inventories_native",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_run_id_source_version_id ON public.catalog_stage_inventories USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_run_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventories_source_file_id_source_version_id ON public.catalog_stage_inventories USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventories_source_file_id_source_version_id",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventories ON public.catalog_stage_inventories USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventories",
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_native ON public.catalog_stage_inventory_parts USING btree (run_id, inventory_id, part_num, color_id, is_spare)",
+        "indexname": "ix_catalog_stage_inventory_parts_native",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_run_id_source_version_id ON public.catalog_stage_inventory_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_inventory_parts_source_file_id_source__b368 ON public.catalog_stage_inventory_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_inventory_parts_source_file_id_source__b368",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_inventory_parts ON public.catalog_stage_inventory_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_inventory_parts",
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_native ON public.catalog_stage_parts USING btree (run_id, part_num)",
+        "indexname": "ix_catalog_stage_parts_native",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_run_id_source_version_id ON public.catalog_stage_parts USING btree (run_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_run_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_catalog_stage_parts_source_file_id_source_version_id ON public.catalog_stage_parts USING btree (source_file_id, source_version_id)",
+        "indexname": "ix_catalog_stage_parts_source_file_id_source_version_id",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_catalog_stage_parts ON public.catalog_stage_parts USING btree (run_id, source_file_id, row_number)",
+        "indexname": "pk_catalog_stage_parts",
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_color_id ON public.part_color_identity USING btree (color_id)",
+        "indexname": "ix_part_color_identity_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_identity_creation_evidence_id ON public.part_color_identity USING btree (creation_evidence_id)",
+        "indexname": "ix_part_color_identity_creation_evidence_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_identity ON public.part_color_identity USING btree (id)",
+        "indexname": "pk_part_color_identity",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_id_part_id_color_id ON public.part_color_identity USING btree (id, part_id, color_id)",
+        "indexname": "uq_part_color_identity_id_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX uq_part_color_identity_part_id_color_id ON public.part_color_identity USING btree (part_id, color_id)",
+        "indexname": "uq_part_color_identity_part_id_color_id",
+        "tablename": "part_color_identity"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_evidence_id_source_version_id ON public.part_color_observation USING btree (evidence_id, source_version_id)",
+        "indexname": "ix_part_color_observation_evidence_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_part_color_id_part_id_color_id ON public.part_color_observation USING btree (part_color_id, part_id, color_id)",
+        "indexname": "ix_part_color_observation_part_color_id_part_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_color_id ON public.part_color_observation USING btree (snapshot_id, color_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_color_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_part_id ON public.part_color_observation USING btree (snapshot_id, part_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_part_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE INDEX ix_part_color_observation_snapshot_id_source_version_id ON public.part_color_observation USING btree (snapshot_id, source_version_id)",
+        "indexname": "ix_part_color_observation_snapshot_id_source_version_id",
+        "tablename": "part_color_observation"
+      },
+      {
+        "indexdef": "CREATE UNIQUE INDEX pk_part_color_observation ON public.part_color_observation USING btree (snapshot_id, part_color_id, evidence_id)",
+        "indexname": "pk_part_color_observation",
+        "tablename": "part_color_observation"
+      }
+    ],
+    "planner_statistics": [
+      {
+        "attname": "diagnostics",
+        "avg_width": 42,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": 0.024583248,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "id",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "is_trans",
+        "avg_width": 1,
+        "correlation": 0.6692686,
+        "histogram_count": null,
+        "mcv_count": 2,
+        "n_distinct": 2.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "name",
+        "avg_width": 14,
+        "correlation": -0.08431147,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 24,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 150,
+        "correlation": -0.4770803,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": 0.058095265,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": -0.07258994,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "rgb",
+        "avg_width": 7,
+        "correlation": -0.041479472,
+        "histogram_count": 101,
+        "mcv_count": 32,
+        "n_distinct": -0.84727275,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": -0.0065185656,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 84,
+        "correlation": 1.0,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_colors"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 5,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.0012617913,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "id",
+        "avg_width": 8,
+        "correlation": 0.99997777,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 26,
+        "correlation": 0.99997777,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 59,
+        "correlation": -0.14144331,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": -0.0036543643,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": 0.0016611961,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 0.99997777,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": 0.007954616,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 72,
+        "correlation": 0.99997777,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "set_num",
+        "avg_width": 9,
+        "correlation": 0.31039885,
+        "histogram_count": 101,
+        "mcv_count": 75,
+        "n_distinct": -0.94225746,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "version",
+        "avg_width": 8,
+        "correlation": 0.95638144,
+        "histogram_count": 2,
+        "mcv_count": 10,
+        "n_distinct": 12.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventories"
+      },
+      {
+        "attname": "color_id",
+        "avg_width": 8,
+        "correlation": 0.21342215,
+        "histogram_count": 83,
+        "mcv_count": 71,
+        "n_distinct": 154.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.0012859162,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "inventory_id",
+        "avg_width": 8,
+        "correlation": 0.99999994,
+        "histogram_count": 101,
+        "mcv_count": 100,
+        "n_distinct": 12024.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "is_spare",
+        "avg_width": 1,
+        "correlation": 0.88510597,
+        "histogram_count": null,
+        "mcv_count": 2,
+        "n_distinct": 2.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 96,
+        "correlation": 0.14345025,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 185,
+        "correlation": 0.26888332,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "part_num",
+        "avg_width": 6,
+        "correlation": 0.01729054,
+        "histogram_count": 101,
+        "mcv_count": 100,
+        "n_distinct": 5624.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "quantity",
+        "avg_width": 8,
+        "correlation": 0.25334522,
+        "histogram_count": 63,
+        "mcv_count": 35,
+        "n_distinct": 98.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": -0.0021619012,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": 0.0035202561,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 0.99999994,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": 0.0015906525,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 120,
+        "correlation": 0.14328916,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_inventory_parts"
+      },
+      {
+        "attname": "diagnostics",
+        "avg_width": 22,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "evidence_id",
+        "avg_width": 16,
+        "correlation": -0.0004992056,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "name",
+        "avg_width": 64,
+        "correlation": 0.29138696,
+        "histogram_count": 101,
+        "mcv_count": 14,
+        "n_distinct": -0.97494584,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "native_key",
+        "avg_width": 31,
+        "correlation": 0.99877864,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "native_values",
+        "avg_width": 159,
+        "correlation": 0.29138696,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "part_cat_id",
+        "avg_width": 8,
+        "correlation": 0.14469202,
+        "histogram_count": null,
+        "mcv_count": 76,
+        "n_distinct": 76.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "part_num",
+        "avg_width": 11,
+        "correlation": 0.99877864,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "reserved_id",
+        "avg_width": 16,
+        "correlation": -0.0005425958,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "reserved_provider_id",
+        "avg_width": 16,
+        "correlation": -0.0050503737,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "row_number",
+        "avg_width": 8,
+        "correlation": 0.99877864,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "row_sha256",
+        "avg_width": 65,
+        "correlation": 0.004937444,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "run_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "semantic_values",
+        "avg_width": 137,
+        "correlation": 0.29138696,
+        "histogram_count": 101,
+        "mcv_count": null,
+        "n_distinct": -1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "source_file_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      },
+      {
+        "attname": "source_version_id",
+        "avg_width": 16,
+        "correlation": 1.0,
+        "histogram_count": null,
+        "mcv_count": 1,
+        "n_distinct": 1.0,
+        "null_frac": 0.0,
+        "tablename": "catalog_stage_parts"
+      }
+    ],
+    "relations": [
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 81920
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_color_fact",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 139264
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 7159808
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_line",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 757514240
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_inventory_revision",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 25141248
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_part",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 9658368
+      },
+      {
+        "bytes": 262144,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "catalog_stage_colors",
+        "relpages": 32,
+        "reltuples": 275.0,
+        "total_bytes": 393216
+      },
+      {
+        "bytes": 19464192,
+        "relallvisible": 2336,
+        "relkind": "r",
+        "relname": "catalog_stage_inventories",
+        "relpages": 2376,
+        "reltuples": 47452.0,
+        "total_bytes": 24928256
+      },
+      {
+        "bytes": 1067155456,
+        "relallvisible": 120416,
+        "relkind": "r",
+        "relname": "catalog_stage_inventory_parts",
+        "relpages": 130268,
+        "reltuples": 1557371.0,
+        "total_bytes": 1287184384
+      },
+      {
+        "bytes": 42598400,
+        "relallvisible": 5191,
+        "relkind": "r",
+        "relname": "catalog_stage_parts",
+        "relpages": 5200,
+        "reltuples": 64620.0,
+        "total_bytes": 50896896
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_identity",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 25460736
+      },
+      {
+        "bytes": 0,
+        "relallvisible": 0,
+        "relkind": "r",
+        "relname": "part_color_observation",
+        "relpages": 0,
+        "reltuples": 0.0,
+        "total_bytes": 326393856
+      }
+    ],
+    "settings": {
+      "autovacuum": "on",
+      "autovacuum_analyze_scale_factor": "0.1",
+      "autovacuum_analyze_threshold": "50",
+      "autovacuum_max_workers": "3",
+      "autovacuum_naptime": "1min",
+      "autovacuum_vacuum_scale_factor": "0.2",
+      "autovacuum_vacuum_threshold": "50",
+      "autovacuum_work_mem": "-1",
+      "checkpoint_completion_target": "0.9",
+      "checkpoint_timeout": "5min",
+      "cpu_index_tuple_cost": "0.005",
+      "cpu_operator_cost": "0.0025",
+      "cpu_tuple_cost": "0.01",
+      "default_statistics_target": "100",
+      "effective_cache_size": "4GB",
+      "effective_io_concurrency": "16",
+      "enable_bitmapscan": "on",
+      "enable_hashjoin": "on",
+      "enable_incremental_sort": "on",
+      "enable_indexonlyscan": "on",
+      "enable_indexscan": "on",
+      "enable_material": "on",
+      "enable_memoize": "on",
+      "enable_mergejoin": "on",
+      "enable_nestloop": "on",
+      "enable_seqscan": "on",
+      "from_collapse_limit": "8",
+      "geqo": "on",
+      "geqo_threshold": "12",
+      "io_method": "worker",
+      "jit": "on",
+      "jit_above_cost": "100000",
+      "jit_inline_above_cost": "500000",
+      "jit_optimize_above_cost": "500000",
+      "join_collapse_limit": "8",
+      "maintenance_io_concurrency": "16",
+      "maintenance_work_mem": "64MB",
+      "max_connections": "100",
+      "max_parallel_maintenance_workers": "2",
+      "max_parallel_workers": "8",
+      "max_parallel_workers_per_gather": "2",
+      "max_wal_size": "1GB",
+      "max_worker_processes": "8",
+      "min_wal_size": "80MB",
+      "random_page_cost": "4",
+      "seq_page_cost": "1",
+      "shared_buffers": "128MB",
+      "synchronous_commit": "on",
+      "temp_buffers": "8MB",
+      "wal_compression": "off",
+      "work_mem": "4MB"
+    }
+  }
+}

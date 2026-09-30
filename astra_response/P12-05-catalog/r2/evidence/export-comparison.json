@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "baseline-statistics-comparison-evidence.json": {
+      "exported_value_sha256": "8152394fe5d6b0cb767cbcf255fb83133893723e1fddad477eae67a0721ac3b3",
+      "published_file_basename": "baseline-statistics-comparison-evidence.json",
+      "published_file_sha256": "18f9d0a92e1c41ecbc1c99e3db9ffb2cded0b6bd7d92233343dd39c17519ef54",
+      "source_file_sha256": "9409e994491446a505c85335fba0e92588d018d1b0a4ff9cc30d01964304e3d5"
+    },
+    "baseline-statistics-comparison.json": {
+      "exported_value_sha256": "72b272d4041ef296c8cf41f492282005bc241ec323e0caa1501fc2e4802f4f72",
+      "published_file_basename": "baseline-statistics-comparison.json",
+      "published_file_sha256": "40239c5f7de507306ada4f2cf4685df21610180e2cbc370bc6bad55036acef1b",
+      "source_file_sha256": "26b3f7e6a9edf34ba570f81ab477b982defe532cad846870a1258beecf6f26a7"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "comparison",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

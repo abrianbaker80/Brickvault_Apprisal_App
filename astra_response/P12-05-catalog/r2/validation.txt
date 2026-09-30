@@ -1,0 +1,21 @@
+FOCUSED VALIDATION — PASS
+177 pytest unit/wrapper/release-manifest/build-telemetry/semantic tests passed.
+20 real PostgreSQL18 tests passed in43.64s:17 recovery/lifecycle/refusal +3 batching cases.
+Ruff check and format --check passed on10 changed executable/test files.
+Strict mypy passed on10 files, Linux target on Windows, explicit source/script import roots.
+pnpm build passed: normal API wheel/sdist, independent installed wheel/migration/schema proof,
+Vite production frontend and accepted frontend verifier. No production deployment.
+Normal release source-id/create/verify passed; immutable source/wheel and locked requirements bound.
+Candidate task-only Linux package install and exact catalog module SHA binding passed.
+Full retained-source unchanged-timeout baseline reproduced exact failure.
+Full INSERT EXPLAIN ANALYZE BUFFERS WAL SETTINGS plus100kfirst/last probes captured.
+One full repaired retained-source linked retry and structural validation passed.
+Production wrapper authority/configuration/release/dispatch guards: source review +unit tests.
+Real PostgreSQL/full-source recovery/retry proof executes the shared transaction core on TEST.
+No production CLI against live fixed paths/configuration or deployed repair qualification ran.
+Independent CSV/canonical identity, inventory, line tuples and quantity/digest comparison passed.
+Clean candidate-build repeat and deterministic inventory digest equality passed.
+Isolated owned target cleanup and final unchanged production read-only checks passed.
+No broad historical suite was run; physical-device/client/release-deployment evidence is excluded.
+Package exact source hashes, cumulative-patch reconstruction, Markdown links, privacy scan,
+independent final review and exact review-only publication are recorded separately.

@@ -1,0 +1,232 @@
+{
+  "comparison_sha256": "72b272d4041ef296c8cf41f492282005bc241ec323e0caa1501fc2e4802f4f72",
+  "index_definitions_equal": true,
+  "isolated_initial_relations": [
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_color",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 24576
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_color_fact",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 24576
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory_line",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 114688
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory_revision",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 90112
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_part",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 24576
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_stage_colors",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_stage_inventories",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_stage_inventory_parts",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_stage_parts",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "part_color_identity",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 40960
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "part_color_observation",
+      "relpages": 0,
+      "reltuples": -1.0,
+      "total_bytes": 49152
+    }
+  ],
+  "isolated_initial_statistics_rows": 0,
+  "label": "baseline",
+  "native_values_emitted": false,
+  "production_mutation": false,
+  "production_relations": [
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_color",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 81920
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_color_fact",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 139264
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 7159808
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory_line",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 757514240
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_inventory_revision",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 25141248
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_part",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 9658368
+    },
+    {
+      "bytes": 262144,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "catalog_stage_colors",
+      "relpages": 32,
+      "reltuples": 275.0,
+      "total_bytes": 393216
+    },
+    {
+      "bytes": 19464192,
+      "relallvisible": 2336,
+      "relkind": "r",
+      "relname": "catalog_stage_inventories",
+      "relpages": 2376,
+      "reltuples": 47452.0,
+      "total_bytes": 24928256
+    },
+    {
+      "bytes": 1067155456,
+      "relallvisible": 120416,
+      "relkind": "r",
+      "relname": "catalog_stage_inventory_parts",
+      "relpages": 130268,
+      "reltuples": 1557371.0,
+      "total_bytes": 1287184384
+    },
+    {
+      "bytes": 42598400,
+      "relallvisible": 5191,
+      "relkind": "r",
+      "relname": "catalog_stage_parts",
+      "relpages": 5200,
+      "reltuples": 64620.0,
+      "total_bytes": 50896896
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "part_color_identity",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 25460736
+    },
+    {
+      "bytes": 0,
+      "relallvisible": 0,
+      "relkind": "r",
+      "relname": "part_color_observation",
+      "relpages": 0,
+      "reltuples": 0.0,
+      "total_bytes": 326393856
+    }
+  ],
+  "production_statistics_rows": 63,
+  "settings_equal": true,
+  "statistics_shape_equal": false,
+  "status": "PASS"
+}

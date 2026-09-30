@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "base_commit": "5c673e81a4f1caa13a0909a746d6ba0fffca075e",
+  "review_parent": "99bc5225686c42905930df545f8fc58d6b1a11ff",
+  "exact_changed_source_files": 15,
+  "sanitized_evidence_files": 83,
+  "verified_evidence_digest_bindings": 67,
+  "cumulative_patch_reconstructs_exact_source_bytes": true,
+  "protected_files_byte_identical_and_main_index_empty": true,
+  "main_and_package_markdown_links": "PASS",
+  "review_document_and_evidence_privacy": "PASS",
+  "release_source_id_unchanged": "33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344",
+  "production_mutation": false
+}

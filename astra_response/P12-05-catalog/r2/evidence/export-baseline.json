@@ -1,0 +1,58 @@
+{
+  "artifacts": {
+    "baseline-candidate_build-147-inventory_lines_parts-plan.json": {
+      "exported_value_sha256": "4dcb0e9403775d56518a531373ce7a0b190e51984960730b1605d076aa6ca090",
+      "published_file_basename": "baseline-candidate_build-147-inventory_lines_parts-plan.json",
+      "published_file_sha256": "845baa8d5f8a796bc14079874aeddb5618f514a55d51bb2226dc02dc1cd67e5d",
+      "source_file_sha256": "18d67e16d813b446dd8154901ea948dfea6b742fb4d4b1ef2d4e52a623d9c179"
+    },
+    "baseline-candidate_build-147-inventory_lines_parts-statistics.json": {
+      "exported_value_sha256": "dc11e35bc1fd608b2beee4711f1af1bf1180cec3b0eec2c25f8657690cce0e25",
+      "published_file_basename": "baseline-candidate_build-147-inventory_lines_parts-statistics.json",
+      "published_file_sha256": "8b030d27ca1e17fd7dd75e8f6526dfb1654ea4a739cd0c06edb3cb6704c1fb84",
+      "source_file_sha256": "570da949e291534edbe10e1a38b127248db8ab5176b44881e4547c70ed6c533c"
+    },
+    "baseline-events.jsonl": {
+      "exported_value_sha256": "47d29d26cdcec2f7f9e7343ab029c5950ab7917c37aa75fe25ec65d82760775c",
+      "published_file_basename": "baseline-events-trace.json",
+      "published_file_sha256": "89d18efbfac35a392628da0dc027ff0ed1c45f66198884efd047e0474f1e3f22",
+      "source_file_sha256": "a483082a454d8bc41ffd3f2c5ba5a02c9dcaf97c72a95206a1e51a463221a5be"
+    },
+    "baseline-summary.json": {
+      "exported_value_sha256": "8519839e598f50de84dab372b130e4c22500ff3a36b179d6e4d375cc93aa3e82",
+      "published_file_basename": "baseline-summary.json",
+      "published_file_sha256": "59fa6b05549ed1756ad24fb54fcf7b901f08e41faea3224470e5e937e7ac9484",
+      "source_file_sha256": "2aaa02f7e7a4f2afc1b53fbbd5b98bdab66845e4cd4e400ca924302fa13e8cd7"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "baseline",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

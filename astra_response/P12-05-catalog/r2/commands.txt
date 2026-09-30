@@ -1,0 +1,26 @@
+SANITIZED COMMAND / OPERATION RECORD —2026-09-30
+Read repair authorization, current guidance/ExecPlans and exact catalog/recovery contracts.
+Verify main5c673e81..., empty index, literal dirty allowlist and all three protected SHA256s.
+Named-target pinned SSH; installed-r6 read-only production state/settings/schema/statistics/log review.
+Create task-owned PostgreSQL18 socket-only cluster, different data/socket/port, no production credentials.
+Migrate current packaged schema to0016; verify production planner settings and300000/10000 limits.
+Run unmodified retained-source importer/builder with existing named telemetry and sanitized EXPLAIN.
+Capture inventory_lines:parts57014 timeout300.012s; preserve terminal failed state/staging.
+Rollback-only full INSERT ANALYZE/BUFFERS/WAL/SETTINGS at isolated diagnostic900000 ceiling.
+Rollback-only revision and revision+inventory statistics counterfactuals at300000.
+Prepare clean marked TEST sibling by fixed-table binary copy of actual failed metadata/staging.
+Correct isolated COPY source-transaction lifetime after initial idle-session refusal; no timeout change.
+Measure first/last100k INSERT spans at300000; all canonical writes rollback.
+Implement atomic100k source-span batching, truthful guarded retirement and explicit linked retry.
+Run focused pytest/Ruff/format/strict mypy; normal pnpm build and release source-id/create/verify.
+Install exact normal wheel +hashed locked runtime/test dependencies into task-owned test venv only.
+Run20 function-scoped owned socket-only PostgreSQL tests; drop exact test databases after each case.
+Run guarded full-source retirement in clean TEST sibling; run one normal retained-source linked retry.
+Independently stream gzip CSV and canonical native identities/inventories/line tuples, compare digests.
+Copy verified typed staging into fresh TEST database; repeat atomic full candidate build; rollback/drop.
+Export fixed protected evidence allowlists with complete plans/timers and private-string refusal.
+Remove only positively verified owned qualified sibling/cluster; preserve evidence and retained source.
+Final production read-only equality/security/operations/health/timeouts; no live catalog mutation.
+Prepare literal r2 source/docs/tests/evidence and cumulative patch from accepted main; preserve r1.
+Validate reconstruction, links, redaction and final independent review; publish onlyastra-response r2.
+No source bytes, private paths, markers, live recovery identities, credentials or private network identifiers.

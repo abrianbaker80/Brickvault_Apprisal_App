@@ -1,0 +1,7 @@
+{
+  "no_catalog_data_existed": true,
+  "production_mutation": false,
+  "protected_identity_preserved": true,
+  "reason": "Untouched isolated bootstrap SQL_ASCII caused bytes-valued connection metadata; recreate with production UTF8/locale",
+  "status": "PASS"
+}

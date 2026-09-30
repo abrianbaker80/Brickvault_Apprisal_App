@@ -1,0 +1,45 @@
+{
+  "activation": false,
+  "all_candidate_writes_rolled_back": true,
+  "baseline_statement_timeout_ms": 300000,
+  "counterfactual_actual": {
+    "analyze": true,
+    "elapsed_seconds": 300.020539,
+    "exception_category": "QueryCanceled",
+    "sqlstate": "57014",
+    "statement_timeout_ms": 300000,
+    "status": "DATABASE_ERROR"
+  },
+  "counterfactual_statement_timeout_ms": 300000,
+  "counterfactual_tables": [
+    "catalog_inventory",
+    "catalog_inventory_revision"
+  ],
+  "diagnostic_ceiling_ms": 900000,
+  "diagnostic_increase_reason": "The unchanged baseline full INSERT reached its 300-second timeout; isolated complete-plan observation only",
+  "full_insert_triggers_included": true,
+  "natural_actual": {
+    "analyze": true,
+    "elapsed_seconds": 415.631328,
+    "statement_timeout_ms": 900000,
+    "status": "PASS"
+  },
+  "operation": "inventory_lines:parts",
+  "plans_sha256": "d69cb47cf5781f787073fd3650a061636295b3639839b07d3f0cf792ae8bb587",
+  "preserved_failed_state_sha256": "b02727dbe0d6a7bd2dd363fd9f3923a339430a82789e5a03fec8099695ec1f13",
+  "production_mutation": false,
+  "revision_only_actual": {
+    "analyze": true,
+    "elapsed_seconds": 300.011897,
+    "exception_category": "QueryCanceled",
+    "sqlstate": "57014",
+    "statement_timeout_ms": 300000,
+    "status": "DATABASE_ERROR"
+  },
+  "revision_only_counterfactual_tables": [
+    "catalog_inventory_revision"
+  ],
+  "source_mutation": false,
+  "sql_identity": "d4665b50baf251a3f5e626d98a7a67128bba85a5d297df6cb564a9c4d98958de",
+  "status": "PASS"
+}

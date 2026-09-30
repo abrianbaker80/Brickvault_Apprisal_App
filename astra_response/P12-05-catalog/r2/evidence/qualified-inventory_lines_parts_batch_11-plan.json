@@ -1,0 +1,267 @@
+{
+  "explain_analyze": false,
+  "operation": "inventory_lines:parts:batch:11",
+  "plan": [
+    {
+      "Plan": {
+        "Alias": "catalog_inventory_line",
+        "Async Capable": false,
+        "Disabled": false,
+        "Node Type": "ModifyTable",
+        "Operation": "Insert",
+        "Parallel Aware": false,
+        "Plan Rows": 0,
+        "Plan Width": 0,
+        "Plans": [
+          {
+            "Alias": "*SELECT*",
+            "Async Capable": false,
+            "Disabled": false,
+            "Node Type": "Subquery Scan",
+            "Parallel Aware": false,
+            "Parent Relationship": "Outer",
+            "Plan Rows": 1,
+            "Plan Width": 886,
+            "Plans": [
+              {
+                "Async Capable": false,
+                "Disabled": false,
+                "Inner Unique": true,
+                "Join Type": "Inner",
+                "Node Type": "Nested Loop",
+                "Parallel Aware": false,
+                "Parent Relationship": "Subquery",
+                "Plan Rows": 1,
+                "Plan Width": 240,
+                "Plans": [
+                  {
+                    "Async Capable": false,
+                    "Disabled": false,
+                    "Inner Unique": false,
+                    "Join Type": "Inner",
+                    "Node Type": "Nested Loop",
+                    "Parallel Aware": false,
+                    "Parent Relationship": "Outer",
+                    "Plan Rows": 87,
+                    "Plan Width": 81,
+                    "Plans": [
+                      {
+                        "Async Capable": false,
+                        "Disabled": false,
+                        "Inner Unique": false,
+                        "Join Type": "Inner",
+                        "Node Type": "Nested Loop",
+                        "Parallel Aware": false,
+                        "Parent Relationship": "Outer",
+                        "Plan Rows": 87,
+                        "Plan Width": 89,
+                        "Plans": [
+                          {
+                            "Async Capable": false,
+                            "Disabled": false,
+                            "Inner Unique": false,
+                            "Join Type": "Inner",
+                            "Node Type": "Nested Loop",
+                            "Parallel Aware": false,
+                            "Parent Relationship": "Outer",
+                            "Plan Rows": 87,
+                            "Plan Width": 79,
+                            "Plans": [
+                              {
+                                "Async Capable": false,
+                                "Disabled": false,
+                                "Hash Cond": "(i.reserved_provider_id = c.provider_identity_id)",
+                                "Inner Unique": false,
+                                "Join Type": "Inner",
+                                "Node Type": "Hash Join",
+                                "Parallel Aware": false,
+                                "Parent Relationship": "Outer",
+                                "Plan Rows": 41,
+                                "Plan Width": 40,
+                                "Plans": [
+                                  {
+                                    "Alias": "i",
+                                    "Async Capable": false,
+                                    "Disabled": false,
+                                    "Filter": "(run_id = '<literal>'::uuid)",
+                                    "Node Type": "Seq Scan",
+                                    "Parallel Aware": false,
+                                    "Parent Relationship": "Outer",
+                                    "Plan Rows": 47452,
+                                    "Plan Width": 40,
+                                    "Relation Name": "catalog_stage_inventories",
+                                    "Startup Cost": 0.0,
+                                    "Total Cost": 2969.15
+                                  },
+                                  {
+                                    "Async Capable": false,
+                                    "Disabled": false,
+                                    "Node Type": "Hash",
+                                    "Parallel Aware": false,
+                                    "Parent Relationship": "Inner",
+                                    "Plan Rows": 41,
+                                    "Plan Width": 32,
+                                    "Plans": [
+                                      {
+                                        "Async Capable": false,
+                                        "Disabled": false,
+                                        "Inner Unique": true,
+                                        "Join Type": "Inner",
+                                        "Node Type": "Nested Loop",
+                                        "Parallel Aware": false,
+                                        "Parent Relationship": "Outer",
+                                        "Plan Rows": 41,
+                                        "Plan Width": 32,
+                                        "Plans": [
+                                          {
+                                            "Alias": "r",
+                                            "Async Capable": false,
+                                            "Disabled": false,
+                                            "Node Type": "Bitmap Heap Scan",
+                                            "Parallel Aware": false,
+                                            "Parent Relationship": "Outer",
+                                            "Plan Rows": 41,
+                                            "Plan Width": 32,
+                                            "Plans": [
+                                              {
+                                                "Async Capable": false,
+                                                "Disabled": false,
+                                                "Index Cond": "(snapshot_id = '<literal>'::uuid)",
+                                                "Index Name": "ix_catalog_inventory_revision_snapshot_id_source_version_id",
+                                                "Node Type": "Bitmap Index Scan",
+                                                "Parallel Aware": false,
+                                                "Parent Relationship": "Outer",
+                                                "Plan Rows": 41,
+                                                "Plan Width": 0,
+                                                "Startup Cost": 0.0,
+                                                "Total Cost": 4.59
+                                              }
+                                            ],
+                                            "Recheck Cond": "(snapshot_id = '<literal>'::uuid)",
+                                            "Relation Name": "catalog_inventory_revision",
+                                            "Startup Cost": 4.6,
+                                            "Total Cost": 149.65
+                                          },
+                                          {
+                                            "Alias": "c",
+                                            "Async Capable": false,
+                                            "Disabled": false,
+                                            "Index Cond": "(id = r.inventory_id)",
+                                            "Index Name": "pk_catalog_inventory",
+                                            "Node Type": "Index Scan",
+                                            "Parallel Aware": false,
+                                            "Parent Relationship": "Inner",
+                                            "Plan Rows": 1,
+                                            "Plan Width": 32,
+                                            "Relation Name": "catalog_inventory",
+                                            "Scan Direction": "Forward",
+                                            "Startup Cost": 0.29,
+                                            "Total Cost": 7.91
+                                          }
+                                        ],
+                                        "Startup Cost": 4.89,
+                                        "Total Cost": 474.15
+                                      }
+                                    ],
+                                    "Startup Cost": 474.15,
+                                    "Total Cost": 474.15
+                                  }
+                                ],
+                                "Startup Cost": 474.67,
+                                "Total Cost": 3622.17
+                              },
+                              {
+                                "Alias": "l",
+                                "Async Capable": false,
+                                "Disabled": false,
+                                "Filter": "((row_number > 1000000) AND (row_number <= 1100000))",
+                                "Index Cond": "((run_id = '<literal>'::uuid) AND (inventory_id = i.id))",
+                                "Index Name": "ix_catalog_stage_inventory_parts_native",
+                                "Node Type": "Index Scan",
+                                "Parallel Aware": false,
+                                "Parent Relationship": "Inner",
+                                "Plan Rows": 9,
+                                "Plan Width": 71,
+                                "Relation Name": "catalog_stage_inventory_parts",
+                                "Scan Direction": "Forward",
+                                "Startup Cost": 0.43,
+                                "Total Cost": 19.42
+                              }
+                            ],
+                            "Startup Cost": 475.09,
+                            "Total Cost": 4422.16
+                          },
+                          {
+                            "Alias": "p",
+                            "Async Capable": false,
+                            "Disabled": false,
+                            "Index Cond": "((run_id = '<literal>'::uuid) AND ((part_num)::text = (l.part_num)::text))",
+                            "Index Name": "ix_catalog_stage_parts_native",
+                            "Node Type": "Index Scan",
+                            "Parallel Aware": false,
+                            "Parent Relationship": "Inner",
+                            "Plan Rows": 1,
+                            "Plan Width": 43,
+                            "Relation Name": "catalog_stage_parts",
+                            "Scan Direction": "Forward",
+                            "Startup Cost": 0.41,
+                            "Total Cost": 0.88
+                          }
+                        ],
+                        "Startup Cost": 475.51,
+                        "Total Cost": 4499.24
+                      },
+                      {
+                        "Alias": "col",
+                        "Async Capable": false,
+                        "Disabled": false,
+                        "Index Cond": "((run_id = '<literal>'::uuid) AND (id = l.color_id))",
+                        "Index Name": "ix_catalog_stage_colors_native",
+                        "Node Type": "Index Scan",
+                        "Parallel Aware": false,
+                        "Parent Relationship": "Inner",
+                        "Plan Rows": 1,
+                        "Plan Width": 40,
+                        "Relation Name": "catalog_stage_colors",
+                        "Scan Direction": "Forward",
+                        "Startup Cost": 0.27,
+                        "Total Cost": 0.29
+                      }
+                    ],
+                    "Startup Cost": 475.78,
+                    "Total Cost": 4525.71
+                  },
+                  {
+                    "Alias": "pc",
+                    "Async Capable": false,
+                    "Disabled": false,
+                    "Index Cond": "((part_id = p.reserved_id) AND (color_id = col.reserved_id))",
+                    "Index Name": "uq_part_color_identity_part_id_color_id",
+                    "Node Type": "Index Scan",
+                    "Parallel Aware": false,
+                    "Parent Relationship": "Inner",
+                    "Plan Rows": 3,
+                    "Plan Width": 48,
+                    "Relation Name": "part_color_identity",
+                    "Scan Direction": "Forward",
+                    "Startup Cost": 0.42,
+                    "Total Cost": 12.81
+                  }
+                ],
+                "Startup Cost": 476.2,
+                "Total Cost": 4921.33
+              }
+            ],
+            "Startup Cost": 476.2,
+            "Total Cost": 4921.34
+          }
+        ],
+        "Relation Name": "catalog_inventory_line",
+        "Startup Cost": 476.2,
+        "Total Cost": 4921.34
+      },
+      "Settings": {}
+    }
+  ],
+  "sql_identity": "63a4dcef4dd6244217e6cbf03a3d13bc39f1a97ec07982b0098413d618fc95b0"
+}

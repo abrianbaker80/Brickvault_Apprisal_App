@@ -1,0 +1,197 @@
+{
+  "aborted_canonical_heap_or_index_bloat_copied": false,
+  "canonical_rows_copied": false,
+  "copied_tables": [
+    {
+      "binary_stream_sha256": "dae39c0461366244bedff2fa2cf2669b796f78ab35e199781a4dc8414ae04a3a",
+      "elapsed_seconds": 0.00837,
+      "rows": 1,
+      "table": "catalog_provider"
+    },
+    {
+      "binary_stream_sha256": "9049fbb33a0c0869b5da140062b6d55573f6caf873c9a06bd9a9ca8d43d78bb2",
+      "elapsed_seconds": 0.008727,
+      "rows": 1,
+      "table": "catalog_source_version"
+    },
+    {
+      "binary_stream_sha256": "879e1376cc83c6014733258facac5ae8369af84c1361dfde9dc37e55820c993f",
+      "elapsed_seconds": 0.013022,
+      "rows": 12,
+      "table": "catalog_source_file"
+    },
+    {
+      "binary_stream_sha256": "4623c6accfdc63ae0a37d48d08b82bb48e3b1ffb36e6db9b1e857a343ec9c91b",
+      "elapsed_seconds": 0.006457,
+      "rows": 1,
+      "table": "catalog_import_run"
+    },
+    {
+      "binary_stream_sha256": "8119b33de21735242c94f4a000a8b2801ee64896c0ce107f3aecef82f7c9f8c1",
+      "elapsed_seconds": 0.006576,
+      "rows": 1,
+      "table": "catalog_snapshot"
+    },
+    {
+      "binary_stream_sha256": "9ed8bf89fe2fe21aa9a00b2b49c4d9bb452338a646bcb47c4c535fb80b3eb8d2",
+      "elapsed_seconds": 0.011466,
+      "rows": 1,
+      "table": "catalog_active_snapshot"
+    },
+    {
+      "binary_stream_sha256": "856dfc8e983f0ac5fb5483e6e10fa25cd8e22941ca60760cb1016e556eadb6ea",
+      "elapsed_seconds": 0.0363,
+      "rows": 496,
+      "table": "catalog_stage_themes"
+    },
+    {
+      "binary_stream_sha256": "a5802d4fe8ef9e4896e5febadff7a28f038c2531b3277799ced6f286355f955e",
+      "elapsed_seconds": 0.024295,
+      "rows": 275,
+      "table": "catalog_stage_colors"
+    },
+    {
+      "binary_stream_sha256": "723c95a4a24ac689ae95a26070e476c7b9ba32b537683feac562ce9008b98bdb",
+      "elapsed_seconds": 0.012666,
+      "rows": 76,
+      "table": "catalog_stage_part_categories"
+    },
+    {
+      "binary_stream_sha256": "41bdbe427444ca8ed4f2e5a707aa8ee312ed277b1152de46dd37ba33b51eef57",
+      "elapsed_seconds": 3.101164,
+      "rows": 64620,
+      "table": "catalog_stage_parts"
+    },
+    {
+      "binary_stream_sha256": "9091f28f27dff39139cda0c350fdeea5ac40465817b3f3afe379646038d2ffd6",
+      "elapsed_seconds": 2.636504,
+      "rows": 37394,
+      "table": "catalog_stage_part_relationships"
+    },
+    {
+      "binary_stream_sha256": "f81793a9c47fd72a489da5d3177ce995098a2158456e7cf003d6e3431ea28106",
+      "elapsed_seconds": 5.883419,
+      "rows": 114245,
+      "table": "catalog_stage_elements"
+    },
+    {
+      "binary_stream_sha256": "15d505972fc3c23853243a8ed93678002bcfb69021ee00579698bdc022e73a88",
+      "elapsed_seconds": 1.344353,
+      "rows": 28278,
+      "table": "catalog_stage_sets"
+    },
+    {
+      "binary_stream_sha256": "b115febc9a09ebc423fe8d41e823203b332751d1fb95f41c7572e64515896f17",
+      "elapsed_seconds": 0.797823,
+      "rows": 17225,
+      "table": "catalog_stage_minifigs"
+    },
+    {
+      "binary_stream_sha256": "dd8a854d4ce217df795e8b76b8729b5642a25f2e17a75d7c93816cd05d13fbab",
+      "elapsed_seconds": 1.799023,
+      "rows": 47452,
+      "table": "catalog_stage_inventories"
+    },
+    {
+      "binary_stream_sha256": "7f0ff61702c285766dfb07fb2543c99dfd23b889f57c847cb9aa6daecd223a48",
+      "elapsed_seconds": 85.433338,
+      "rows": 1557375,
+      "table": "catalog_stage_inventory_parts"
+    },
+    {
+      "binary_stream_sha256": "d8a9bd14abe5a4a1f4ad24c410091fe3eb38369abb5e8c461303f828083c70c6",
+      "elapsed_seconds": 1.289729,
+      "rows": 25820,
+      "table": "catalog_stage_inventory_minifigs"
+    },
+    {
+      "binary_stream_sha256": "fdbfd8289752c727b95f4aab0b55f21211907cb619ecbd5869da929d73d30139",
+      "elapsed_seconds": 0.203122,
+      "rows": 5210,
+      "table": "catalog_stage_inventory_sets"
+    }
+  ],
+  "dataset_counts": {
+    "colors": 275,
+    "elements": 114245,
+    "inventories": 47452,
+    "inventory_minifigs": 25820,
+    "inventory_parts": 1557375,
+    "inventory_sets": 5210,
+    "minifigs": 17225,
+    "part_categories": 76,
+    "part_relationships": 37394,
+    "parts": 64620,
+    "sets": 28278,
+    "themes": 496
+  },
+  "elapsed_seconds": 142.678379,
+  "failed_audit_and_candidate_exact": true,
+  "failed_state_sha256": "b02727dbe0d6a7bd2dd363fd9f3923a339430a82789e5a03fec8099695ec1f13",
+  "idle_transaction_timeout_ms": 60000,
+  "lock_timeout_ms": 10000,
+  "new_postmaster_started": false,
+  "null_pointer_generation_zero": true,
+  "old_postmaster_reused": true,
+  "production_credentials_used": false,
+  "production_mutation": false,
+  "qualification_target": "fresh marked TEST sibling on the owned socket-only PG18 cluster",
+  "semantic_fingerprint": "8f37571222fb078a2f75927ee1c58a7c3a90994bb24bee269270f784ebd48395",
+  "source_before_after_exact": true,
+  "source_mutation": false,
+  "source_readonly_transaction_per_table": true,
+  "source_transaction_ends_before_destination_constraint_completion": true,
+  "staging_statistics": [
+    {
+      "elapsed_seconds": 0.011575,
+      "operation": "staging_statistics:themes"
+    },
+    {
+      "elapsed_seconds": 0.009561,
+      "operation": "staging_statistics:colors"
+    },
+    {
+      "elapsed_seconds": 0.00586,
+      "operation": "staging_statistics:part_categories"
+    },
+    {
+      "elapsed_seconds": 0.988766,
+      "operation": "staging_statistics:parts"
+    },
+    {
+      "elapsed_seconds": 0.920842,
+      "operation": "staging_statistics:part_relationships"
+    },
+    {
+      "elapsed_seconds": 0.635505,
+      "operation": "staging_statistics:elements"
+    },
+    {
+      "elapsed_seconds": 0.582005,
+      "operation": "staging_statistics:sets"
+    },
+    {
+      "elapsed_seconds": 0.389599,
+      "operation": "staging_statistics:minifigs"
+    },
+    {
+      "elapsed_seconds": 0.368288,
+      "operation": "staging_statistics:inventories"
+    },
+    {
+      "elapsed_seconds": 1.536668,
+      "operation": "staging_statistics:inventory_parts"
+    },
+    {
+      "elapsed_seconds": 0.526284,
+      "operation": "staging_statistics:inventory_minifigs"
+    },
+    {
+      "elapsed_seconds": 0.066974,
+      "operation": "staging_statistics:inventory_sets"
+    }
+  ],
+  "statement_timeout_ms": 300000,
+  "status": "PASS",
+  "total_staging_rows": 1898466
+}

@@ -1,0 +1,23 @@
+{
+  "catalog_code_sha256": {
+    "build_steps": "d7b81d298b5bf1b0a77ee86ca53780165ff411cd7b05e77cbfac3bddffe94fbc",
+    "builder": "d25d67ff8c4762c1a2a591b442c21f57a9db175823d8766dadf0d1433fc82a8c",
+    "candidate_validation": "0626524f91c4cdc890b7e90f9c30d7596353d845dc1663a933f3ec4a59629521",
+    "connection": "1705b1f0de969fd3a1fddaeb34225e6584a4c9fc244c073017a18f07a864d163",
+    "fingerprint": "f440e5f16362b62823a681648fa0ff8ed5993f23e13527e85b186a874b76d0c8",
+    "importer": "7d0c71e7ce314b56c5db5035960e846e27393a84fedf3e5e8afb94a5af5000cb",
+    "recovery": "c6b08a5968a70c83690a7b7c1c519b48c4291632012c389d83f901c4459d6d6f",
+    "staged_validation": "a2a5f54ef879eb897ea00440ccf635eee0e52a4dc6840ded144b4c0b49c65179"
+  },
+  "locked_runtime_requirements_sha256": "26b6b014320a29683278a4248bee4918df94b3dd3b53251b48172d29bfeaee03",
+  "locked_test_requirements_sha256": "059b649efa642f507e590e4a71183a25f8c5feb18472db2fe5ca2cfb6cc87e21",
+  "migration": "0016_hunt_cached_runs",
+  "normal_wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+  "production_packages_changed": false,
+  "production_release_unchanged": true,
+  "production_services_changed": false,
+  "pytest_version": "9.1.1",
+  "status": "PASS",
+  "task_venv_only": true,
+  "uv_version": "0.12.10"
+}

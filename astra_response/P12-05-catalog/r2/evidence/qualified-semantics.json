@@ -1,0 +1,67 @@
+{
+  "activation_performed": false,
+  "canonical_cardinalities": {
+    "color": 275,
+    "minifigure": 17225,
+    "part": 64620,
+    "part_category": 76,
+    "set": 28278,
+    "theme": 496
+  },
+  "csv_canonical_line_tuple_digests_equal": true,
+  "dataset_counts": {
+    "colors": 275,
+    "elements": 114245,
+    "inventories": 47452,
+    "inventory_minifigs": 25820,
+    "inventory_parts": 1557375,
+    "inventory_sets": 5210,
+    "minifigs": 17225,
+    "part_categories": 76,
+    "part_relationships": 37394,
+    "parts": 64620,
+    "sets": 28278,
+    "themes": 496
+  },
+  "evidence_rows": 1898466,
+  "exact_native_identity_and_inventory_equality": true,
+  "inventory_digest_set_sha256": "cde10b1d49881bbea1006885a580bef4887119ae51fd05f9799807fb9eaf7a60",
+  "inventory_line_total": 1588405,
+  "inventory_lines": {
+    "inventory_minifigs": {
+      "digest": "d38406d6a37c3fdaacb79eb9e8b87379193f3feb7df15481c68945654b5170cb",
+      "extra_quantity": 0,
+      "regular_quantity": 27352,
+      "rows": 25820
+    },
+    "inventory_parts": {
+      "digest": "75a7931a9032a6f25733c3b149380e2d79c772bf45d6caf57d9fb46d3589b0c4",
+      "extra_quantity": 130863,
+      "regular_quantity": 5126811,
+      "rows": 1557375
+    },
+    "inventory_sets": {
+      "digest": "8d6832710bd91b2f9387f709a63c101b6a1ebdef0df49de2a13a564146e8bdeb",
+      "extra_quantity": 0,
+      "regular_quantity": 10264,
+      "rows": 5210
+    }
+  },
+  "inventory_revisions": 47452,
+  "known_set": {
+    "direct_figure_lots": 4,
+    "exact_identity_count": 1,
+    "identifier": "75331-1",
+    "inventory_count": 1,
+    "name": "The Razor Crest",
+    "native_relationships_equal": true
+  },
+  "nested_target_types_distinct": true,
+  "normal_spare_quantities_equal": true,
+  "provider_identities": 272667,
+  "semantic_fingerprint": "8f37571222fb078a2f75927ee1c58a7c3a90994bb24bee269270f784ebd48395",
+  "source_rows_published": false,
+  "status": "PASS",
+  "structural_validation": "passed",
+  "total_source_rows": 1898466
+}

@@ -1,0 +1,46 @@
+{
+  "artifacts": {
+    "production-initial-evidence.json": {
+      "exported_value_sha256": "93d6d5bf7c71fa6c2673d6fd05ddc6ca2aa700cad8a624a5c7cee0fa484cd9f3",
+      "published_file_basename": "production-initial-evidence.json",
+      "published_file_sha256": "a250baaeab1f34b56c0b114adabe2a4ad2ab93c43ce14cb14ca5ecc331369c43",
+      "source_file_sha256": "d416ed62da3672a704b4ed9734cde4024933e906753bc861921d6d7b1a976115"
+    },
+    "production-initial-statistics.json": {
+      "exported_value_sha256": "33cddb695e9ba3d7afd5ab11ddd031f8bc0b5c2fe701fffd19456a93b2eca9d3",
+      "published_file_basename": "production-initial-statistics.json",
+      "published_file_sha256": "917160b21eef140e69a8094e7295af0004fa547c183c0e95be07fe25fde6ae66",
+      "source_file_sha256": "125d3dbd9e907326214bafea62d4d2b7cdb7929ffcdf9250221b1f26a56f2cd0"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "production-initial",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

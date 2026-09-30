@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "socket-recovery-tests.json": {
+      "exported_value_sha256": "a164921ff861e69d9a49c60f7ec93763aada3898f37ac6c6b38b09d7a1f2b411",
+      "published_file_basename": "socket-recovery-tests.json",
+      "published_file_sha256": "1e42880a5b8c0ad99943cb4ed7d176b0ec69282e5ad1978dfd764055365eb915",
+      "source_file_sha256": "b4e365f965031f60a81f1b433e9d8a5308c3fbb60871ab62c7e47b4d2d166a75"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "socket-tests",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

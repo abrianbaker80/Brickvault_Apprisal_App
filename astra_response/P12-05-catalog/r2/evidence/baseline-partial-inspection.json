@@ -1,0 +1,40 @@
+{
+  "directories": {
+    "isolated_data_directory_facts": {
+      "directory": true,
+      "empty": true,
+      "exact_fixed_path": true,
+      "exists": true,
+      "known_entries": [],
+      "mode": "0o700",
+      "other_entry_count": 0,
+      "pg_version_exists": false,
+      "postgres_owned": true,
+      "postmaster_pid_exists": false,
+      "symlink": false
+    },
+    "isolated_socket_directory_facts": {
+      "directory": true,
+      "empty": true,
+      "exact_fixed_path": true,
+      "exists": true,
+      "known_entries": [],
+      "mode": "0o700",
+      "other_entry_count": 0,
+      "pg_version_exists": false,
+      "postgres_owned": true,
+      "postmaster_pid_exists": false,
+      "symlink": false
+    }
+  },
+  "label": "baseline",
+  "postgres_binaries": {
+    "initdb": true,
+    "pg_ctl": true,
+    "psql": true
+  },
+  "production_mutation": false,
+  "protected_identity_present_and_valid": true,
+  "runuser_found": true,
+  "status": "PASS"
+}

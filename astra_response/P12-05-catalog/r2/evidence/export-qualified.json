@@ -1,0 +1,274 @@
+{
+  "artifacts": {
+    "full-source-recovery.json": {
+      "exported_value_sha256": "08796011847710b423b34721101f11bcc19b0face5cc2f41c9c6b85dbc5aef34",
+      "published_file_basename": "full-source-recovery.json",
+      "published_file_sha256": "e468e7a9324775423280a327c6512d080357e91358b17d05baaeaa9b4dfc3ee9",
+      "source_file_sha256": "1b2cf4a80d12b26ba949288c98b9268db1412c06f46942559411ee92610f8a1c"
+    },
+    "qualified-events.jsonl": {
+      "exported_value_sha256": "ca77f11bff4af0267bbc91e3f388c01b92fbcf05c51227f2b27daeefd7736af7",
+      "published_file_basename": "qualified-events-trace.json",
+      "published_file_sha256": "196a547fc53c11abfb9ddd68dd2dbd4b343f045fcf2c76ddb82fb32431742edd",
+      "source_file_sha256": "2d288c8b8057a939dfed996e6fac68f044bff40dad6b6f73bb1398a46c77bd10"
+    },
+    "qualified-inventory_lines_inventory_minifigs-plan.json": {
+      "exported_value_sha256": "9e24ea4be02cdb58391639831ce20fa015e8ecb959db820cdc4128d1cf2e1449",
+      "published_file_basename": "qualified-inventory_lines_inventory_minifigs-plan.json",
+      "published_file_sha256": "8586496a40f161c7b8522f3bddada47db306cbc2bf6d6c023da20858e2bb3255",
+      "source_file_sha256": "683f8fa5142576cadab74e4f67ba76388d7b302f25c6afe1f1ea2658fb46ace0"
+    },
+    "qualified-inventory_lines_inventory_minifigs-statistics.json": {
+      "exported_value_sha256": "e199e9ec63fdbdbd0d72df66c0d998716988baafc6c2ddafa7ddb8642b5dd4c4",
+      "published_file_basename": "qualified-inventory_lines_inventory_minifigs-statistics.json",
+      "published_file_sha256": "cfff5e63cbb87470edaa15a11858b6d69e89903041b9f807338a881fdf4d2818",
+      "source_file_sha256": "3f6e80d05c9f616984961856452fbaf0790027c8a7763987f9e2c7a72b7ba1a9"
+    },
+    "qualified-inventory_lines_inventory_sets-plan.json": {
+      "exported_value_sha256": "c3781093b663c030a3021303cc88c6095285d8e65b206a1462b2603dc8ef16bb",
+      "published_file_basename": "qualified-inventory_lines_inventory_sets-plan.json",
+      "published_file_sha256": "676b25fc4426ff54b5bda6783f703cd08be96a538e11242c783e45efab143751",
+      "source_file_sha256": "2dc6b862b25fb1017edfd2222d72b5f2e32290151b19173cbd3d082aadefb7ed"
+    },
+    "qualified-inventory_lines_inventory_sets-statistics.json": {
+      "exported_value_sha256": "fdcacca2d839058fe3bcd408003a32db9aa6f99dee6a30d6871d8888d30d1f8b",
+      "published_file_basename": "qualified-inventory_lines_inventory_sets-statistics.json",
+      "published_file_sha256": "cc8d8ce3525be7d64120ea9d1f5569d7b1d7cd29aa78bcfa1ab1f0c524dcd773",
+      "source_file_sha256": "3772d7689c7d0fdacac871f40f96df44c8c820cf7d72e92eebf0265e0fcc535f"
+    },
+    "qualified-inventory_lines_parts-plan.json": {
+      "exported_value_sha256": "2924394c1bdd718a798bfecc7748689262adc9819b231f0a835885964a0f6e8c",
+      "published_file_basename": "qualified-inventory_lines_parts-plan.json",
+      "published_file_sha256": "aae6b562d0c25889d4b34e7150fdbe9a4502b4940c70c6465198550dcbb94570",
+      "source_file_sha256": "529e669e6693263b12b91dbd072d9d1d1284ba563e75d0f47794405641e17789"
+    },
+    "qualified-inventory_lines_parts-statistics.json": {
+      "exported_value_sha256": "b77f34c854b4cb7782a43119f126069b536b4b34e5127556e140ecf4d74e7981",
+      "published_file_basename": "qualified-inventory_lines_parts-statistics.json",
+      "published_file_sha256": "d41d343f3f2f25d7328aae1570b5981e125038319028036de4eb73c82e4a05b7",
+      "source_file_sha256": "c97750ea3516a46d632f7e3956959477d3403d547ff37b3de05455d3fd0e7791"
+    },
+    "qualified-inventory_lines_parts_batch_10-plan.json": {
+      "exported_value_sha256": "e5cc4f3bf282749da544a60c25deb453f036ada559b7538b46f5bb6cdf0af739",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_10-plan.json",
+      "published_file_sha256": "1852ccc631d01a2ab09f80293dfab1e4eda80469001109be636d4073e81c1778",
+      "source_file_sha256": "65e610968fc60bfa43283d3875e172d14668c9c5f29be9dcd61f56c239e2d3f6"
+    },
+    "qualified-inventory_lines_parts_batch_10-statistics.json": {
+      "exported_value_sha256": "4c9be6de4589fb0d8620b74437905655f09939f5185e6074d1cf3a38f5939441",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_10-statistics.json",
+      "published_file_sha256": "8ce3df70754b2f82c93ba750f9fd0a34813b5b41f195c03751229d62421fa637",
+      "source_file_sha256": "f77a08d732493944a7b1f55b7c86c134027bd4c32775bad48b32bf171e35b903"
+    },
+    "qualified-inventory_lines_parts_batch_11-plan.json": {
+      "exported_value_sha256": "4ff2f43fa41b83d5d272e812c45b3601ceb3c64df6936246c1415d51a4b0e1bc",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_11-plan.json",
+      "published_file_sha256": "033eb70d8ee048bbea8fa3479deba8a71fa665fa3a3b3901ac1efd140be55623",
+      "source_file_sha256": "a09a020db8a5cedfc1d5602005bdfd1d39cce44b98e0454e7c60a312ae34c82a"
+    },
+    "qualified-inventory_lines_parts_batch_11-statistics.json": {
+      "exported_value_sha256": "ba04f8a6e51826abc9bc7c2622fe6d8df1cc2b85eee7f26cabcd0b62a3e9fc5f",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_11-statistics.json",
+      "published_file_sha256": "bad6f6cf515485da8f554208a1db2cc92de755ab82fb093cdbeb0c983aab0251",
+      "source_file_sha256": "240556d93e6dd9b77d99257d3d22fad335e0de25d40f766f4fd07c562e726cf1"
+    },
+    "qualified-inventory_lines_parts_batch_12-plan.json": {
+      "exported_value_sha256": "98daeded87ec610676cbe2df87d871f3d0255a5856fc8054d3f43b70d849b834",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_12-plan.json",
+      "published_file_sha256": "3aece588b57d22f46359c778c5b3faf8e5417f7bca425aab083a2f95b422e049",
+      "source_file_sha256": "ebafc973071cc6463c65c10bde4d0fbc2329fa2dc355b9ec15d57134d3a7d6b8"
+    },
+    "qualified-inventory_lines_parts_batch_12-statistics.json": {
+      "exported_value_sha256": "59e825ff08ec842a5dca63a1ba084a4e0ae75707d06e2b071f6210f2c39e748e",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_12-statistics.json",
+      "published_file_sha256": "1e380b8ae6995041dea80f1e8e03a283b09d2aa09747cfacb31d3b04877104d7",
+      "source_file_sha256": "6c633a61a7520db04d371b5562727660b0b4be13b68e0448e7671514f27f2c0a"
+    },
+    "qualified-inventory_lines_parts_batch_13-plan.json": {
+      "exported_value_sha256": "5fc1cad5b1b9f889c6ca6de5327b35786dea91fbbfdc77802df62186140c0061",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_13-plan.json",
+      "published_file_sha256": "116d7719020067f70bc2d8bdfff8597a02694bc2c9392c130053d0767ce9d028",
+      "source_file_sha256": "c5ab9421c6f67eb43e252fdf0a71d50af94e88a97c88510730cdade36b806b67"
+    },
+    "qualified-inventory_lines_parts_batch_13-statistics.json": {
+      "exported_value_sha256": "c39c0c68186f2246b42a03f30fdb2b44819791a4e04c4d2a0ff0d69bfe426eb9",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_13-statistics.json",
+      "published_file_sha256": "95b0eb2aa29f55f6ed89e204cf19b7408d341cf3c5db7c2cde7ea65d8f963e08",
+      "source_file_sha256": "ca65248774890cffd011fd7f69e41ee15c8966abd80b408f7b09d58e543bf69b"
+    },
+    "qualified-inventory_lines_parts_batch_14-plan.json": {
+      "exported_value_sha256": "3178528faa3e297d49ac224858c56620c5c5a3ec5df602261127117d45589e64",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_14-plan.json",
+      "published_file_sha256": "4e50c97a5173aa31d1e566a44c14677f0ec5038ce2dd64832f6131c84ecc3db8",
+      "source_file_sha256": "0fd5a9a565c669780919bf79c6b87ba0ccba3a1307e16694dce989e72cf9cdc7"
+    },
+    "qualified-inventory_lines_parts_batch_14-statistics.json": {
+      "exported_value_sha256": "d8d2d18f7eec97cdeec5f0459dc2695b43b2b4e1e80a447219a46420a94ba69b",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_14-statistics.json",
+      "published_file_sha256": "99c9a765081207c582f450934468dfdfbb2897fa4b76567a6b60a8dd0edfa259",
+      "source_file_sha256": "f03fbbdcbdcc0cf99fc2b4566db5f454a8741dcb9235f64fad9ddd7212c078ac"
+    },
+    "qualified-inventory_lines_parts_batch_15-plan.json": {
+      "exported_value_sha256": "e810379c973ab6c5347496c7f69bdc883bac41572b0cb6cc37d14c32375ef0bc",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_15-plan.json",
+      "published_file_sha256": "725630946cfc1607f3e2962f8f4c83d121ba70fb4fcace3a474a1f62d0d41b3e",
+      "source_file_sha256": "71a85227b23880102c989e013a28bfbda02a4040d6df09c9033f0da68bc19ca2"
+    },
+    "qualified-inventory_lines_parts_batch_15-statistics.json": {
+      "exported_value_sha256": "d24dee84affe568075090a9f2c36da58acb25e983b81bbe177b368ed37541b7d",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_15-statistics.json",
+      "published_file_sha256": "9e72121f30c4da80010acf86f8aa0b344f0e7edc0b84d48e95b76feac0cde64e",
+      "source_file_sha256": "d158b3726cf652d933e0a31852dbec0bcfa314a6089ae60184d4d1af49cbdc33"
+    },
+    "qualified-inventory_lines_parts_batch_16-plan.json": {
+      "exported_value_sha256": "8f846566f1c47b203046150a39abd22b4b902c4847f4e6c95f84ef5dc56b3763",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_16-plan.json",
+      "published_file_sha256": "41d66a6fffc5c63256daacb97f5f83232f95e11e3726a1a78ec940cc7d98c0cc",
+      "source_file_sha256": "8e78197d8654c66d50125383d4e41406a4fa3c5d6b0196ab625d8d4d1bb86f6a"
+    },
+    "qualified-inventory_lines_parts_batch_16-statistics.json": {
+      "exported_value_sha256": "eb4ef1f7c50dda06bfc2f8754278949900dd952e1e9c82ce97b1a553ffaa967e",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_16-statistics.json",
+      "published_file_sha256": "5aec19fd1b3eaef2bfffb055b8a59aaf0ff0b17a9249c5e4ee18bb83c7734ad8",
+      "source_file_sha256": "bd7223161cd8400daee934278f182339d77d52687850ed02316b83aad2474ab2"
+    },
+    "qualified-inventory_lines_parts_batch_2-plan.json": {
+      "exported_value_sha256": "5d089f2df176ad7cef154751551b74d6e37650caee71c3655087d910d184ba93",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_2-plan.json",
+      "published_file_sha256": "efeae019606a05be546b08b9264dd8be51128be298841a29c8cdb2f746f63293",
+      "source_file_sha256": "91ab89d58baf6aa8e38b266464352da55277a4b638042ebba49a33b9d289b62f"
+    },
+    "qualified-inventory_lines_parts_batch_2-statistics.json": {
+      "exported_value_sha256": "53f2b8a24b43b589d49e7e4f368a746f11b7ca3ffed7dfde5336014f2d45c087",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_2-statistics.json",
+      "published_file_sha256": "4121f5cdc9ba25f07e4d52a3712f874b143e0f9ffdfa2c4ab787cea11d9e25a1",
+      "source_file_sha256": "e33b63bb460f0fffab3b5d685bc2240a07945809b313d8dbe0c64cc19ebc62e1"
+    },
+    "qualified-inventory_lines_parts_batch_3-plan.json": {
+      "exported_value_sha256": "d63e5de937f6f9bbf28ab84fe5bb662f364a3780db167509a3421c170f84f1f2",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_3-plan.json",
+      "published_file_sha256": "fac0ef61c818afedd74b2fe5ce281325543b537aaee9fa40f365d6debdcdf80d",
+      "source_file_sha256": "fd0639f013eb10707ee3d6dd3b6a54d7699a9dcff125320ac0b2bd7888d8d022"
+    },
+    "qualified-inventory_lines_parts_batch_3-statistics.json": {
+      "exported_value_sha256": "c06520caffbde6f3ab9e466d2016f2206690caaaa6c727ccdcc179a955d762fa",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_3-statistics.json",
+      "published_file_sha256": "7ebfd50fcbe3d4aa2d12dea2fd07adef6c19941726eb89f24cfad760f9b33643",
+      "source_file_sha256": "27a9909cfc16c6ce8e6549bb706bd361345d008f47577e44d26eb49ad965d3dd"
+    },
+    "qualified-inventory_lines_parts_batch_4-plan.json": {
+      "exported_value_sha256": "d15e8b79d02a704370094ad2e4370e335f3337a045fd76f3d4a45032ebecffa6",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_4-plan.json",
+      "published_file_sha256": "87eceb996cbbe3c1a48ee04b7402da81beb567ec9fa56f7b42289a60faf5462b",
+      "source_file_sha256": "a5ac8a3beadb86a626787dacf9a9cc744bf6f0e71ea5728594495f27101732f5"
+    },
+    "qualified-inventory_lines_parts_batch_4-statistics.json": {
+      "exported_value_sha256": "cb9e904b43a163bda11ad75e6ed5eb470b1ddc2a1c8d17c4a14b3fbe10b1e599",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_4-statistics.json",
+      "published_file_sha256": "dc6e94fed81854727bdf1137351a2719645d34123b4762de1133e1d958436a13",
+      "source_file_sha256": "4463b7e80acb582ef86c5149d16b1e7aece58d99683f6b74b40a5c8bb7b3e84e"
+    },
+    "qualified-inventory_lines_parts_batch_5-plan.json": {
+      "exported_value_sha256": "7a7d9f594cbd30010c6c4d91b55fb5d325a123bf8ce7158c1466416ff5b8c1ce",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_5-plan.json",
+      "published_file_sha256": "f201b190324503497a44b1b0fe3a5f9282e8f84fcba041bc6afeee87e1431a6c",
+      "source_file_sha256": "1040564b552b95817a620e2a1c7233bda0d1932cadeff17e9b4514bf1a376d38"
+    },
+    "qualified-inventory_lines_parts_batch_5-statistics.json": {
+      "exported_value_sha256": "388137820b52ea14d660482f14ed6e682c7669ad3a68013af2736ab51172da0d",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_5-statistics.json",
+      "published_file_sha256": "90b4ae8de52a39041f3943613757faabf580b505eb3f28cb403f8a686cc261d8",
+      "source_file_sha256": "3af329c967bc5e0434124fdbe8d0c42f49d1789552b37caf2b490f954d0df8da"
+    },
+    "qualified-inventory_lines_parts_batch_6-plan.json": {
+      "exported_value_sha256": "7a72164ffe7911de1dad7aefa292274bb9b3772de81d31a4f8a8d1c76684b941",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_6-plan.json",
+      "published_file_sha256": "3910a6fca7565a303d7adb6a40bdbbcd847e0814a0c520e451bf2321fe95ef8a",
+      "source_file_sha256": "50e631442ab6a3a5cb3af2dee4cf4b51a42f086232ee567f6a93a0f52e1320a7"
+    },
+    "qualified-inventory_lines_parts_batch_6-statistics.json": {
+      "exported_value_sha256": "873ace9ddbe5d8cb2c7245fb9cb88dc434532d4357d01860af81ab84d81b067a",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_6-statistics.json",
+      "published_file_sha256": "4db1cb23d0dc50db5fe10c8e79a7fbfee15e9f5e013929aa0aaa8b32dddbeee6",
+      "source_file_sha256": "a1e7aa03f02839fa6575e35c2a1f5bb53654f60a9ab69cf941c3defd123aa230"
+    },
+    "qualified-inventory_lines_parts_batch_7-plan.json": {
+      "exported_value_sha256": "12e85cdb3d4885fa15fb5eeb354e0c36e1ac40b5f847cb7665b15f0b242383ea",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_7-plan.json",
+      "published_file_sha256": "612d38a6df91bd265b9fa066829f88af6135c2e942706d176214c7e0549e681a",
+      "source_file_sha256": "b2cf35578460ecd32f0467e0de5999ccbd66a02934750fa908ce9b67be275035"
+    },
+    "qualified-inventory_lines_parts_batch_7-statistics.json": {
+      "exported_value_sha256": "d919f7141699c9408dde53ce6342944be57c8621971c318907a55d4b4ab0a026",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_7-statistics.json",
+      "published_file_sha256": "9b7f4cc8bab50f92316394132477c4fd18253bb0f54f672bbe57f4044face213",
+      "source_file_sha256": "43af10da03f6851f060695652966c4b0e4a0bc52b3eb0b51e2be6fde6a536ea0"
+    },
+    "qualified-inventory_lines_parts_batch_8-plan.json": {
+      "exported_value_sha256": "acd58beff92f7fa917473a92ac8ed4603a9b62ea711498bb42c756dd9ec7b31a",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_8-plan.json",
+      "published_file_sha256": "2e5b1bb41f9b7f7aac8865f942a78521cc8bc6918238c1ca6b1348691c6e63c3",
+      "source_file_sha256": "fa9e31dbb8040a21c04cd4e33131f661c4ea276f752b920b8685bb313bed34ed"
+    },
+    "qualified-inventory_lines_parts_batch_8-statistics.json": {
+      "exported_value_sha256": "76bd5787d0f131f93f1c8b3bb1f7c0ea62e2f47b8829654d2d104879ddb03232",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_8-statistics.json",
+      "published_file_sha256": "1c2f81ab6ae459452db6783f51836bb65117f5de3628c24000c362ef58432462",
+      "source_file_sha256": "5d8279cab81e611e73c4a287559425280b5cf5062ff3f059c770dab1d8518706"
+    },
+    "qualified-inventory_lines_parts_batch_9-plan.json": {
+      "exported_value_sha256": "455b5a8e948890a23b2d7cfe7f5a6e44ffb49eca682d91915f59f0c9d676ba64",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_9-plan.json",
+      "published_file_sha256": "2be26992ffa266c7f1b7531ba32ae519f3a2fb94c54299d814f3390ed8aa4ad1",
+      "source_file_sha256": "848d64433a82c2d5b361bbc10ee09cb867ccdf4f05eae88ef6061bb7580dacce"
+    },
+    "qualified-inventory_lines_parts_batch_9-statistics.json": {
+      "exported_value_sha256": "7b6c1ddaab03e5297109286760c528e6756abb9134aede5ea56d4df8e03cbfbd",
+      "published_file_basename": "qualified-inventory_lines_parts_batch_9-statistics.json",
+      "published_file_sha256": "ec060b2d09fa901c2ec044da5e272eaf3a3186ae965446d003b9b237c4fd213b",
+      "source_file_sha256": "bd886da56342024beb4b822133d8da6dfda580f15de9faf9cbe529a2bee0e692"
+    },
+    "qualified-semantics.json": {
+      "exported_value_sha256": "9945cccba601b837fd822ee204198c9d9dcd71bc6567b0ed14f2f4a0deba8cda",
+      "published_file_basename": "qualified-semantics.json",
+      "published_file_sha256": "538b66118cff02e9ee83228d5d414a1128e82766e5276502d71819f09d6c5913",
+      "source_file_sha256": "8e50ad918d239e06923c01c4924f42da64fd652e18cfc381e97f90f48826a0b8"
+    },
+    "qualified-summary.json": {
+      "exported_value_sha256": "da036ebb92a39bd73bb29998c14e6e49c263289fe61cc297767e98afe3747feb",
+      "published_file_basename": "qualified-summary.json",
+      "published_file_sha256": "b6e7e05b8a0b1e01e8aa849cc8ee25d27c4ad26f09654b5fb0a782c8bc0b063b",
+      "source_file_sha256": "708e2ac4aa2e845eb107c829d1b480c6fbd842b9efe0353de953215b1caaf1a6"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "qualified",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

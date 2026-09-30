@@ -1,0 +1,17 @@
+{
+  "CODEX_WORKFLOW.md": "5faa1f6b284468be1af43cedb7cd0a3b6a6db513aaddd1c4a482e1c0c776de01",
+  "docs/ROADMAP.md": "3714ed52693ce57b82ed5461c79427f275e6d03db6345438a94a369302467f22",
+  "docs/plans/099-phase-12-production-acceptance.md": "4588f92e1a79ffead786318172185b0bb5600e078774b7b595c70d324da4a7c2",
+  "docs/plans/100-production-catalog-activation.md": "d13e3feddaac255a8f3a557b541fb495750672b76cdc6d01a23b21b82fea9d48",
+  "scripts/production_catalog.py": "812f505508774bd6d6a040795d8076207ebe79f7ea5c041548e45f75a56fb339",
+  "scripts/test_production_catalog.py": "807aa8b23fc2d6ceeed154a8305f767de03a88f11e35d5f42ba4842b238ec4ce",
+  "docs/plans/101-catalog-importer-performance-repair.md": "93c6728aee8e7594fe3fadbca3e50f3b98e672479f3548192dbcaa7a6dc92768",
+  "services/api/src/brickvault_api/catalog/importer.py": "7d0c71e7ce314b56c5db5035960e846e27393a84fedf3e5e8afb94a5af5000cb",
+  "services/api/src/brickvault_api/catalog/builder.py": "d25d67ff8c4762c1a2a591b442c21f57a9db175823d8766dadf0d1433fc82a8c",
+  "services/api/src/brickvault_api/catalog/recovery.py": "c6b08a5968a70c83690a7b7c1c519b48c4291632012c389d83f901c4459d6d6f",
+  "scripts/release_manifest.py": "028ec45f9b914bcff12d9102c94ffab2e1e29596b5f6ded5b92303b590181032",
+  "scripts/test_release_manifest.py": "f13b1077eae0f99f94f75f2b42606a4364590cd15d5f0ae24610927dabc59e0c",
+  "services/api/tests/unit/test_catalog_recovery.py": "a4e854cc722f816d13d3ab40ec853014323be35da4ae6f5c9438d239c43c0e21",
+  "services/api/tests/integration/test_catalog_recovery.py": "bb5ec1286ad3a713096d6807687e589f027e14b98ddf1a88b3afec9b89f12fe7",
+  "services/api/tests/integration/test_catalog_inventory_batches.py": "0bd8ad437d21db9b897befceac0cc2225f134b2a342046d25625eaf3e11cc309"
+}

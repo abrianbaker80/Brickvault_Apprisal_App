@@ -1,0 +1,138 @@
+{
+  "docker_used": false,
+  "fixture_bundle_sha256": "74cd36f78b5771332502a36cf90fdc11d717781a6b56e9e580f0591bdce5fa4d",
+  "function_scoped_owned_databases": true,
+  "postgres_major": 18,
+  "production_credentials_used": false,
+  "production_mutation": false,
+  "pytest_exit_code": 0,
+  "status": "PASS",
+  "tcp_connections_allowed": false,
+  "test_source_sha256": "bb5ec1286ad3a713096d6807687e589f027e14b98ddf1a88b3afec9b89f12fe7",
+  "test_sources_sha256": {
+    "test_catalog_inventory_batches.py": "0bd8ad437d21db9b897befceac0cc2225f134b2a342046d25625eaf3e11cc309",
+    "test_catalog_recovery.py": "bb5ec1286ad3a713096d6807687e589f027e14b98ddf1a88b3afec9b89f12fe7"
+  },
+  "tests": [
+    {
+      "duration_seconds": 1.823349,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_retirement_preserves_failure_audit_and_exact_fresh_retry"
+    },
+    {
+      "duration_seconds": 0.696256,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[wrong_source]"
+    },
+    {
+      "duration_seconds": 0.715714,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[wrong_counts]"
+    },
+    {
+      "duration_seconds": 0.667763,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[wrong_candidate]"
+    },
+    {
+      "duration_seconds": 0.789171,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[validated]"
+    },
+    {
+      "duration_seconds": 0.791501,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[accepted]"
+    },
+    {
+      "duration_seconds": 0.770283,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[competing_attempt]"
+    },
+    {
+      "duration_seconds": 0.803196,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[extra_provider]"
+    },
+    {
+      "duration_seconds": 0.724977,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[extra_evidence]"
+    },
+    {
+      "duration_seconds": 0.763026,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[extra_identity]"
+    },
+    {
+      "duration_seconds": 0.756631,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[changed_stage]"
+    },
+    {
+      "duration_seconds": 0.71017,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[changed_staging_counts]"
+    },
+    {
+      "duration_seconds": 0.735182,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_changed_failed_state_refuses_without_audit_mutation[wrong_staging_file]"
+    },
+    {
+      "duration_seconds": 0.627547,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_recovery_refuses_concurrent_import_lock"
+    },
+    {
+      "duration_seconds": 0.825722,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_explicit_retry_refuses_without_reconciling_or_new_attempt[running_child]"
+    },
+    {
+      "duration_seconds": 0.823353,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_explicit_retry_refuses_without_reconciling_or_new_attempt[malformed_metadata]"
+    },
+    {
+      "duration_seconds": 1.139354,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_linked_retry_with_changed_importer_version_refuses_before_candidate_build"
+    },
+    {
+      "duration_seconds": 0.733943,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_part_line_batches_cover_source_rows_once"
+    },
+    {
+      "duration_seconds": 0.710745,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_multiline_gzip_records_preserve_sparse_row_locators_and_empty_batches"
+    },
+    {
+      "duration_seconds": 0.593938,
+      "outcome": "passed",
+      "phase": "call",
+      "test": "test_failure_after_first_part_batch_rolls_back_whole_candidate"
+    }
+  ]
+}

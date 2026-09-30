@@ -1,0 +1,12 @@
+{
+  "activation_performed": false,
+  "elapsed_seconds": 51.039,
+  "failed_audit_preserved_exact_except_additive_counts_recovery": true,
+  "full_source_failed_shape": true,
+  "original_dataset_counts_preserved": true,
+  "production_mutation": false,
+  "retired_candidate_fingerprint": "8f37571222fb078a2f75927ee1c58a7c3a90994bb24bee269270f784ebd48395",
+  "state": "recovered_for_fresh_retry",
+  "status": "PASS",
+  "strategy": "retire-and-fresh-retry"
+}

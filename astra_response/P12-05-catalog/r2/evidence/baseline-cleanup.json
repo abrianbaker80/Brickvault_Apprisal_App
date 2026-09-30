@@ -1,0 +1,10 @@
+{
+  "absolute_owned_directory_and_inode_guards_pass": true,
+  "all_remaining_databases_task_owned": true,
+  "isolated_cluster_stopped_removed": true,
+  "owned_databases_removed_with_cluster": 1,
+  "postmaster_pid_executable_data_guards_pass": true,
+  "postmaster_stopped_and_paths_removed": true,
+  "production_cluster_touched": false,
+  "status": "PASS"
+}

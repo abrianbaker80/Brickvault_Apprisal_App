@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "batch-probe-summary.json": {
+      "exported_value_sha256": "db9a196e61985ea402e15ccd35c438c3810423ac23155ad815f90080f0dadd07",
+      "published_file_basename": "batch-probe-summary.json",
+      "published_file_sha256": "7904f66e7b3dbc3ee6b0962360f16f72380baa4937aea9cb4e0bb0038b0afbaa",
+      "source_file_sha256": "0b2b4651511e04b2753bc0e055f36d406f09752cf5b9e6b2be8218a38298abc6"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "batch-probe",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

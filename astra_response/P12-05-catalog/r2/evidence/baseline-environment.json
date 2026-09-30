@@ -1,0 +1,15 @@
+{
+  "lock_timeout_ms": 10000,
+  "migration": "0016_hunt_cached_runs",
+  "no_tcp_listener": true,
+  "postgres_major": 18,
+  "production_credentials_used": false,
+  "production_port_used": false,
+  "production_settings_match": true,
+  "same_data_filesystem": true,
+  "schema_statistics_sha256": "645189d703c0685e4300f779cfe70ed9cf38630345216bbcd89ae8cc72774eba",
+  "settings_sha256": "46c3d3e94f8ae87c2e8f390fcea2f8efd412ae8137b146e01297256dbb74f37a",
+  "socket_only": true,
+  "statement_timeout_ms": 300000,
+  "status": "PASS"
+}

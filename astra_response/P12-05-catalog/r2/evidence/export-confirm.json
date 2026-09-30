@@ -1,0 +1,52 @@
+{
+  "artifacts": {
+    "confirm-clean-initial-statistics.json": {
+      "exported_value_sha256": "36196b80afc78b4a75817785eccbac998a476393a0b3d3115285b8db40bf058a",
+      "published_file_basename": "confirm-clean-initial-statistics.json",
+      "published_file_sha256": "2f976e8bbae88e003f5174c7775ffa728d69c4a8ed19364917914f30856695c8",
+      "source_file_sha256": "a98e849cfbba154ed83f0464425070e300a204ce985584d0170af7ce61d3e554"
+    },
+    "confirm-events.jsonl": {
+      "exported_value_sha256": "cac9dbef19d7bcd5ce5bbb686db6653d6707d5d3ee6d58c42f20e209c8cbd9aa",
+      "published_file_basename": "confirm-events-trace.json",
+      "published_file_sha256": "9a70ad7b66fdb04e6794a2b6f7b3d9286fbecb9296ac000414692b0e25ec6d99",
+      "source_file_sha256": "010188ec28bf58a580c4a10f91485b26d2cc78767e9f3957ed0f21bd319b098d"
+    },
+    "confirm-summary.json": {
+      "exported_value_sha256": "a2892844d1dbec919016d0b4f8b7e34c1c9fc8350469a5452a0812c91ebde87c",
+      "published_file_basename": "confirm-summary.json",
+      "published_file_sha256": "7a6f0c894c3eee1466ec82ff23988a00315dd45b661e9524ad92786a4490f290",
+      "source_file_sha256": "8cc235684b7d137f04ab15c9ecf74f2b62fe2a85ebad00d7f54ff957ad591bf4"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "confirm",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}

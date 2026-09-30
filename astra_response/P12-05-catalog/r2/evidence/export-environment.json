@@ -1,0 +1,66 @@
+{
+  "artifacts": {
+    "baseline-bootstrap-flags.json": {
+      "exported_value_sha256": "72103cbd2db86217d57fedf58f44e37eaab9ded12af000d1073fa16c7961aa74",
+      "published_file_basename": "baseline-bootstrap-flags.json",
+      "published_file_sha256": "dc5057215e861dd78d06a34552cd625904adf4348d16b04744b802e1c9d98786",
+      "source_file_sha256": "857990c443e76c1a85b7e1f6bb5ac7a58ad1a827c3915e85e92d12e2eb7c56b2"
+    },
+    "baseline-encoding-recreation.json": {
+      "exported_value_sha256": "a8f5bb0b4e8d64591ff2beef13122a3b97159e8d322164d16eabe52e657cabcf",
+      "published_file_basename": "baseline-encoding-recreation.json",
+      "published_file_sha256": "0d6d39f59a29594575379e283f4ec66e874ec65f4241ca6e28845a701fb93273",
+      "source_file_sha256": "72c28bb52e55ff57760f2d46a764bdb5365acb28ea5e93115eef10b5b2f30694"
+    },
+    "baseline-environment.json": {
+      "exported_value_sha256": "76dd32b269a558816eed1a0eac257ab92df00027a2f480fc10bbf67e8f07fc65",
+      "published_file_basename": "baseline-environment.json",
+      "published_file_sha256": "ec275147a96dd56cafe7a5a13599cb9a2e78a366a077525378385299948dcf0b",
+      "source_file_sha256": "6effb8a6c62ade04866c8578439074a4d0e8b40b233d21f1cb575d047a31bfd4"
+    },
+    "baseline-initial-statistics.json": {
+      "exported_value_sha256": "645189d703c0685e4300f779cfe70ed9cf38630345216bbcd89ae8cc72774eba",
+      "published_file_basename": "baseline-initial-statistics.json",
+      "published_file_sha256": "0f254832a590148cac1e505f900c3452b364cf8d36276cb15850a08f6e3b7c77",
+      "source_file_sha256": "150d4f53214d64366817f8b43c33b0b1afee9378db734f722ca907832e35ee3f"
+    },
+    "baseline-partial-inspection.json": {
+      "exported_value_sha256": "23c45cabd879f16724c1ce6bd11a4763688bcf25d31dbdbb00e524aaa37e1197",
+      "published_file_basename": "baseline-partial-inspection.json",
+      "published_file_sha256": "852d9f5376a0704cdb34c3e698050d7ae38b63d4641312300cd87c82fe6fe0b1",
+      "source_file_sha256": "b863543f60bdbc5a5860c42caac3d52caa9e4892c4dfce0a3f816f6ade5aa5fa"
+    }
+  },
+  "excluded_inputs": [
+    "production-initial-private.json",
+    "production-directory-private.json",
+    "production-settings.json",
+    "baseline-identity.json",
+    "fixed-identity.json",
+    "confirm-identity.json",
+    "qualification-identity.json",
+    "candidate-install-intent.json",
+    "candidate-code-binding.json",
+    "test-databases directory",
+    "candidate-input directory",
+    "candidate-venv directory",
+    "uv-cache directory",
+    "production configuration and approval descriptors",
+    "retained source manifests and bulk files",
+    "raw database or binary copy streams",
+    "all files absent from the literal mode allowlists"
+  ],
+  "full_explain_trees_preserved": true,
+  "maximum_export_bytes": 16777216,
+  "mode": "environment",
+  "named_build_timings_preserved": true,
+  "network_calls_performed": false,
+  "optional_not_present": [
+    "baseline-empty-reset.json"
+  ],
+  "private_string_validation": "passed",
+  "schema": "p12-05-catalog-repair-safe-export-v1",
+  "source_bytes_exported": false,
+  "sql_executed": false,
+  "status": "PASS"
+}
