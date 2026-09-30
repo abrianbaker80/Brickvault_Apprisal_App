@@ -1,0 +1,23 @@
+P12-05 BLOCKED — production catalog unavailable
+PASS: exact accepted main HEAD/branch, empty index, protected SHA-256 values.
+PASS: guest preflight, 13 light health checks, admin, repository identities, zero failed units.
+PASS: Windows trusted HTTPS/private DNS, absent public A/AAAA, blocked API/DB LAN ports.
+PASS: read-only OPNsense no application forwarding; Proxmox configured startup ordering.
+PASS: exactly one fresh normal dual backup with six readbacks and both repository checks.
+PASS: independent Windows Google Drive-only real restore; no Proxmox fallback.
+PASS: 76 table counts, schema/objects/owner/effective ACL/column/function/default grant equality.
+PASS: isolated ownership marker/revision/one principal/role memberships/runtime least privilege.
+PASS: recovered owner/runtime SCRAM authentication; current config and r6 manifest recovery.
+PASS: isolated cluster/config/plaintext/relay cleanup; production healthy and unchanged.
+BLOCKER: zero catalog sets and active snapshots; installed number/name search catalog_unavailable.
+UNRUN: fresh-profile login/cookies/CSRF/Origin/Host/logout and authenticated browser workflow.
+UNRUN: production PWA install/offline/reconnect; Android build/APK/physical TLS/auth/offline.
+UNRUN: release rollback/forward; VM cold start; final acceptance dual backup.
+No broad historical suites, old campaigns, migration/bootstrap or provider dispatch.
+No application/deployment source change; three documentation/status files only.
+Detailed package validation results will be appended after checks.
+
+PUBLICATION CHECKS
+Exact three-document patch reconstruction and byte/hash equality PASS.
+236 local documentation/artifact links resolved. Private literal/address/key/marker
+scan PASS. Main index remained empty.

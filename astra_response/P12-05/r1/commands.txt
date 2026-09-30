@@ -1,0 +1,28 @@
+SANITIZED OPERATION RECORD — 2026-09-30
+Read authorization, accepted plans and production/browser/Android contracts.
+git rev-parse HEAD; git branch --show-current; git status --short
+git diff --cached --name-only; SHA-256 of three protected dirty files
+Pinned SSH to VM 115: installed production-admin verify; health.checks(False)
+systemctl read-only service/job/failed state; exact manifest/file verification
+Read protected backup receipts; validate schema/identity/age/artifact metadata
+Verify both restic repository identities; inspect latest configuration in memory
+Windows normal DNS/TLS health; public A/AAAA query; TCP 18080/5432 refusal
+Chrome OPNsense read-only destination NAT, one-to-one NAT, WAN and new rules views
+Proxmox: qm config 112; qm config 115; qm status 115; qm agent 115 ping
+Proxmox guest address comparison retained privately
+Exactly one guarded production_backup.backup() with normal dual readback/checks
+Independent Windows DPAPI unlock of protected rclone configuration, values hidden
+Windows restic cat config identity comparison; restic dump <private-snapshot> <private-path>
+Stream three Drive artifacts over pinned SSH; compare bytes/hash to protected receipt
+Disposable tmpfs PG18 initdb with temporary bootstrap role; socket-only pg_ctl start
+Recover configuration into root-only RAM directory; psql globals; guarded isolated CREATE DATABASE
+pg_restore --exit-on-error --no-password to isolated socket and disposable database only
+Read-only source/restored inventories, all table counts, effective grants, role/marker checks
+Recovered owner/runtime SCRAM authentication and runtime privilege checks
+pg_ctl stop isolated cluster; umount exact task tmpfs; remove exact task mount/relay
+Four restore attempts; diagnostic helper corrections only; same selected fresh backup reused
+Installed ProductService.search number/name read-only: catalog_unavailable
+Post-cleanup production-admin, exact manifest, light health and zero failed units
+Documentation diff/link/secret/preservation/patch reconstruction checks
+Only isolated astra-response package staged/committed/pushed; main not committed or pushed
+No owner password/session/token/marker/repository run/snapshot/private network values recorded
