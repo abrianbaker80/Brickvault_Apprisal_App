@@ -1,0 +1,255 @@
+diff --git a/docs/plans/099-phase-12-production-acceptance.md b/docs/plans/099-phase-12-production-acceptance.md
+index 8a61e23..b2ec72d 100644
+--- a/docs/plans/099-phase-12-production-acceptance.md
++++ b/docs/plans/099-phase-12-production-acceptance.md
+@@ -1,5 +1,80 @@
+ # ExecPlan 099 — Phase 12 production acceptance
+ 
++## Production continuation stopped before mutation, 2026-09-30
++
++**BLOCKED — Step 4 detached repair approval cannot bind the failed run/candidate.
++Catalog importer repair remains ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED; P12-05 BLOCKED; Phase 12 IN PROGRESS.**
++
++Minimum live admission and exact failed-state admission passed. The exact retained
++`p12-05-catalog-repair-r1` bundle passed manifest/source/wheel verification without
++a rebuild. During preparation, inspection of the accepted
++[approval validator](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/files/scripts/production_catalog.py#L231-L260) found only ten allowed fields: database,
++purpose, repair/predecessor releases and manifests, source version/raw/provenance
++digests, and migration head. It has no failed-run or candidate identity fields and
++rejects extra fields. The continuation's Step 4 explicitly requires those identities
++to be bound by that detached approval. Exact IDs supplied to a command are a
++different binding mechanism and do not satisfy this required approval contract.
++
++The continuation explicitly prohibits a new repair or improvised production fix.
++No alternate approval, schema extension, wrapper patch or substitute artifact was
++used. This conflict was discovered before the first production mutation; the
++sequence stopped before Step 3's pre-recovery backup. Backups performed by normal
++scheduled operations outside this slice are not counted as authorized slice runs.
++
++| Gate | Result in this continuation |
++| --- | --- |
++| Exact retained artifact | PASS: release `p12-05-catalog-repair-r1`; manifest `02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`; source ID `33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344`; wheel `a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6` |
++| Minimum live admission | PASS: expected VM 115, r6 current, revision 0016, admin/one owner, 13 health checks, retention READY, zero failed units/jobs/imports, trusted private HTTPS and loopback exposure |
++| Storage headroom | PASS: 123,552,899,072 bytes free on database volume; database 3,140,015,807 bytes; release volume 20,942,417,920 bytes free |
++| Exact failed-state admission | PASS: one provider/source/failed run/candidate, 12 files, exact 1,898,466 staging rows; audit/provenance/fingerprint unchanged; no canonical/validation/activation data; NULL active snapshot, generation 0 |
++| Detached approval identity binding | BLOCKED: accepted validator has no failed-run/candidate fields and rejects additions |
++| Pre-recovery backup | UNRUN: zero slice backup invocations |
++| Repair installation / wrapper deployment / approval creation | UNRUN; local bundle verification alone passed |
++| Guarded retirement / switch / one linked retry | UNRUN: zero invocations; the one authorized retry remains unused |
++| Production statement timing / fingerprint continuity / structural validation | UNRUN: no production retry observation; accepted isolated evidence is unchanged |
++| Activation / generation-one active catalog | UNRUN; active snapshot remains NULL, generation 0 |
++| Installed number/name/detail/Watchlist/market behavior qualification | UNRUN; source-known set remains `75331-1`, The Razor Crest; no production application result claimed |
++| Post-activation backup | UNRUN: zero slice backup invocations |
++| Blocked-state preservation check | PASS: r6, original failed audit/candidate/source/files/counts/security/listeners/timeouts unchanged; all 13 health checks and active/enabled operational timers pass |
++
++VM 115 already had eight CPUs and 16,384 MiB RAM at live admission. No allocation,
++startup, PostgreSQL configuration, timeout, migration, grant, market-provider,
++owner-state, client/device or Phase 13 changes were made. `statement_timeout`
++remains 300,000 ms and `lock_timeout` 10,000 ms. Market observations remain zero.
++WAN-forwarding inspection was not repeated after the stop; no fresh WAN gate is
++claimed. Private IDs and protected configuration remain outside review evidence.
++
++Only Plans 099/100/101 are changed on main. Main remains at
++`0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, index empty; all three protected dirty files retain their accepted
++hashes and remain unstaged. The sanitized r4 publication includes the specific
++approval contract proof and labels all downstream gates unrun. A separately
++reviewed resolution of this approval-contract discrepancy is required before
++production mutation. No repair or remaining P12-05 client gate starts here.
++
++Earlier sections below retain dated implementation, authorization and evidence
++history; this stopped-continuation status is current.
++
++## Authorized catalog production continuation, 2026-09-30
++
++Brian explicitly authorizes the accepted exact-artifact deployment, guarded
++retirement of the preserved failed candidate, exactly one predecessor-linked
++fresh retry, separate validated-snapshot activation, one pre-recovery and one
++post-activation dual backup, and bounded installed search/detail/Watchlist
++resolution. The catalog importer repair remains ACCEPTED / CLOSED. Catalog
++activation production qualification is STOPPED / BLOCKED; P12-05 remains BLOCKED and
++Phase 12 IN PROGRESS. This authorization supersedes the earlier production
++continuation boundary below for this exact sequence only.
++
++Main remains at `0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, with an empty index
++and the three protected files byte-identical and unstaged. Reuse accepted r2/r3
++repair qualification. No rebuild, new repair, second retry, timeout/resource/
++schema/grant change, manual production ANALYZE, market activation, client/device
++acceptance, rollback/cold-start rehearsal or Phase 13 work is authorized.
++Any stated stop condition preserves durable evidence and stops the sequence.
++Sanitized stopped-continuation gate results are recorded above for catalog r4;
++private identifiers and configuration stay in protected local production state.
++
+ ## Accepted repair closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
+diff --git a/docs/plans/100-production-catalog-activation.md b/docs/plans/100-production-catalog-activation.md
+index b9ad139..5004d97 100644
+--- a/docs/plans/100-production-catalog-activation.md
++++ b/docs/plans/100-production-catalog-activation.md
+@@ -1,5 +1,80 @@
+ # ExecPlan 100 — Production catalog activation prerequisite
+ 
++## Production continuation stopped before mutation, 2026-09-30
++
++**BLOCKED — Step 4 detached repair approval cannot bind the failed run/candidate.
++Catalog importer repair remains ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED; P12-05 BLOCKED; Phase 12 IN PROGRESS.**
++
++Minimum live admission and exact failed-state admission passed. The exact retained
++`p12-05-catalog-repair-r1` bundle passed manifest/source/wheel verification without
++a rebuild. During preparation, inspection of the accepted
++[approval validator](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/files/scripts/production_catalog.py#L231-L260) found only ten allowed fields: database,
++purpose, repair/predecessor releases and manifests, source version/raw/provenance
++digests, and migration head. It has no failed-run or candidate identity fields and
++rejects extra fields. The continuation's Step 4 explicitly requires those identities
++to be bound by that detached approval. Exact IDs supplied to a command are a
++different binding mechanism and do not satisfy this required approval contract.
++
++The continuation explicitly prohibits a new repair or improvised production fix.
++No alternate approval, schema extension, wrapper patch or substitute artifact was
++used. This conflict was discovered before the first production mutation; the
++sequence stopped before Step 3's pre-recovery backup. Backups performed by normal
++scheduled operations outside this slice are not counted as authorized slice runs.
++
++| Gate | Result in this continuation |
++| --- | --- |
++| Exact retained artifact | PASS: release `p12-05-catalog-repair-r1`; manifest `02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`; source ID `33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344`; wheel `a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6` |
++| Minimum live admission | PASS: expected VM 115, r6 current, revision 0016, admin/one owner, 13 health checks, retention READY, zero failed units/jobs/imports, trusted private HTTPS and loopback exposure |
++| Storage headroom | PASS: 123,552,899,072 bytes free on database volume; database 3,140,015,807 bytes; release volume 20,942,417,920 bytes free |
++| Exact failed-state admission | PASS: one provider/source/failed run/candidate, 12 files, exact 1,898,466 staging rows; audit/provenance/fingerprint unchanged; no canonical/validation/activation data; NULL active snapshot, generation 0 |
++| Detached approval identity binding | BLOCKED: accepted validator has no failed-run/candidate fields and rejects additions |
++| Pre-recovery backup | UNRUN: zero slice backup invocations |
++| Repair installation / wrapper deployment / approval creation | UNRUN; local bundle verification alone passed |
++| Guarded retirement / switch / one linked retry | UNRUN: zero invocations; the one authorized retry remains unused |
++| Production statement timing / fingerprint continuity / structural validation | UNRUN: no production retry observation; accepted isolated evidence is unchanged |
++| Activation / generation-one active catalog | UNRUN; active snapshot remains NULL, generation 0 |
++| Installed number/name/detail/Watchlist/market behavior qualification | UNRUN; source-known set remains `75331-1`, The Razor Crest; no production application result claimed |
++| Post-activation backup | UNRUN: zero slice backup invocations |
++| Blocked-state preservation check | PASS: r6, original failed audit/candidate/source/files/counts/security/listeners/timeouts unchanged; all 13 health checks and active/enabled operational timers pass |
++
++VM 115 already had eight CPUs and 16,384 MiB RAM at live admission. No allocation,
++startup, PostgreSQL configuration, timeout, migration, grant, market-provider,
++owner-state, client/device or Phase 13 changes were made. `statement_timeout`
++remains 300,000 ms and `lock_timeout` 10,000 ms. Market observations remain zero.
++WAN-forwarding inspection was not repeated after the stop; no fresh WAN gate is
++claimed. Private IDs and protected configuration remain outside review evidence.
++
++Only Plans 099/100/101 are changed on main. Main remains at
++`0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, index empty; all three protected dirty files retain their accepted
++hashes and remain unstaged. The sanitized r4 publication includes the specific
++approval contract proof and labels all downstream gates unrun. A separately
++reviewed resolution of this approval-contract discrepancy is required before
++production mutation. No repair or remaining P12-05 client gate starts here.
++
++Earlier sections below retain dated implementation, authorization and evidence
++history; this stopped-continuation status is current.
++
++## Authorized catalog production continuation, 2026-09-30
++
++Brian explicitly authorizes the accepted exact-artifact deployment, guarded
++retirement of the preserved failed candidate, exactly one predecessor-linked
++fresh retry, separate validated-snapshot activation, one pre-recovery and one
++post-activation dual backup, and bounded installed search/detail/Watchlist
++resolution. The catalog importer repair remains ACCEPTED / CLOSED. Catalog
++activation production qualification is STOPPED / BLOCKED; P12-05 remains BLOCKED and
++Phase 12 IN PROGRESS. This authorization supersedes the earlier production
++continuation boundary below for this exact sequence only.
++
++Main remains at `0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, with an empty index
++and the three protected files byte-identical and unstaged. Reuse accepted r2/r3
++repair qualification. No rebuild, new repair, second retry, timeout/resource/
++schema/grant change, manual production ANALYZE, market activation, client/device
++acceptance, rollback/cold-start rehearsal or Phase 13 work is authorized.
++Any stated stop condition preserves durable evidence and stops the sequence.
++Sanitized stopped-continuation gate results are recorded above for catalog r4;
++private identifiers and configuration stay in protected local production state.
++
+ ## Accepted repair closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation
+diff --git a/docs/plans/101-catalog-importer-performance-repair.md b/docs/plans/101-catalog-importer-performance-repair.md
+index e223a76..f6e56b9 100644
+--- a/docs/plans/101-catalog-importer-performance-repair.md
++++ b/docs/plans/101-catalog-importer-performance-repair.md
+@@ -1,5 +1,80 @@
+ # ExecPlan 101 — Catalog importer performance repair
+ 
++## Production continuation stopped before mutation, 2026-09-30
++
++**BLOCKED — Step 4 detached repair approval cannot bind the failed run/candidate.
++Catalog importer repair remains ACCEPTED / CLOSED. Production catalog activation
++prerequisite BLOCKED; P12-05 BLOCKED; Phase 12 IN PROGRESS.**
++
++Minimum live admission and exact failed-state admission passed. The exact retained
++`p12-05-catalog-repair-r1` bundle passed manifest/source/wheel verification without
++a rebuild. During preparation, inspection of the accepted
++[approval validator](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/3d17ff6da2b0ec7748ea5a886a1341fbf583aaea/astra_response/P12-05-catalog/r2/files/scripts/production_catalog.py#L231-L260) found only ten allowed fields: database,
++purpose, repair/predecessor releases and manifests, source version/raw/provenance
++digests, and migration head. It has no failed-run or candidate identity fields and
++rejects extra fields. The continuation's Step 4 explicitly requires those identities
++to be bound by that detached approval. Exact IDs supplied to a command are a
++different binding mechanism and do not satisfy this required approval contract.
++
++The continuation explicitly prohibits a new repair or improvised production fix.
++No alternate approval, schema extension, wrapper patch or substitute artifact was
++used. This conflict was discovered before the first production mutation; the
++sequence stopped before Step 3's pre-recovery backup. Backups performed by normal
++scheduled operations outside this slice are not counted as authorized slice runs.
++
++| Gate | Result in this continuation |
++| --- | --- |
++| Exact retained artifact | PASS: release `p12-05-catalog-repair-r1`; manifest `02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`; source ID `33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344`; wheel `a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6` |
++| Minimum live admission | PASS: expected VM 115, r6 current, revision 0016, admin/one owner, 13 health checks, retention READY, zero failed units/jobs/imports, trusted private HTTPS and loopback exposure |
++| Storage headroom | PASS: 123,552,899,072 bytes free on database volume; database 3,140,015,807 bytes; release volume 20,942,417,920 bytes free |
++| Exact failed-state admission | PASS: one provider/source/failed run/candidate, 12 files, exact 1,898,466 staging rows; audit/provenance/fingerprint unchanged; no canonical/validation/activation data; NULL active snapshot, generation 0 |
++| Detached approval identity binding | BLOCKED: accepted validator has no failed-run/candidate fields and rejects additions |
++| Pre-recovery backup | UNRUN: zero slice backup invocations |
++| Repair installation / wrapper deployment / approval creation | UNRUN; local bundle verification alone passed |
++| Guarded retirement / switch / one linked retry | UNRUN: zero invocations; the one authorized retry remains unused |
++| Production statement timing / fingerprint continuity / structural validation | UNRUN: no production retry observation; accepted isolated evidence is unchanged |
++| Activation / generation-one active catalog | UNRUN; active snapshot remains NULL, generation 0 |
++| Installed number/name/detail/Watchlist/market behavior qualification | UNRUN; source-known set remains `75331-1`, The Razor Crest; no production application result claimed |
++| Post-activation backup | UNRUN: zero slice backup invocations |
++| Blocked-state preservation check | PASS: r6, original failed audit/candidate/source/files/counts/security/listeners/timeouts unchanged; all 13 health checks and active/enabled operational timers pass |
++
++VM 115 already had eight CPUs and 16,384 MiB RAM at live admission. No allocation,
++startup, PostgreSQL configuration, timeout, migration, grant, market-provider,
++owner-state, client/device or Phase 13 changes were made. `statement_timeout`
++remains 300,000 ms and `lock_timeout` 10,000 ms. Market observations remain zero.
++WAN-forwarding inspection was not repeated after the stop; no fresh WAN gate is
++claimed. Private IDs and protected configuration remain outside review evidence.
++
++Only Plans 099/100/101 are changed on main. Main remains at
++`0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, index empty; all three protected dirty files retain their accepted
++hashes and remain unstaged. The sanitized r4 publication includes the specific
++approval contract proof and labels all downstream gates unrun. A separately
++reviewed resolution of this approval-contract discrepancy is required before
++production mutation. No repair or remaining P12-05 client gate starts here.
++
++Earlier sections below retain dated implementation, authorization and evidence
++history; this stopped-continuation status is current.
++
++## Authorized catalog production continuation, 2026-09-30
++
++Brian explicitly authorizes the accepted exact-artifact deployment, guarded
++retirement of the preserved failed candidate, exactly one predecessor-linked
++fresh retry, separate validated-snapshot activation, one pre-recovery and one
++post-activation dual backup, and bounded installed search/detail/Watchlist
++resolution. The catalog importer repair remains ACCEPTED / CLOSED. Catalog
++activation production qualification is STOPPED / BLOCKED; P12-05 remains BLOCKED and
++Phase 12 IN PROGRESS. This authorization supersedes the earlier production
++continuation boundary below for this exact sequence only.
++
++Main remains at `0ea8e0e21156bebb9aa4150c270643a0a5d0d571`, with an empty index
++and the three protected files byte-identical and unstaged. Reuse accepted r2/r3
++repair qualification. No rebuild, new repair, second retry, timeout/resource/
++schema/grant change, manual production ANALYZE, market activation, client/device
++acceptance, rollback/cold-start rehearsal or Phase 13 work is authorized.
++Any stated stop condition preserves durable evidence and stops the sequence.
++Sanitized stopped-continuation gate results are recorded above for catalog r4;
++private identifiers and configuration stay in protected local production state.
++
+ ## Accepted repair closeout, 2026-09-30
+ 
+ **Catalog importer repair ACCEPTED / CLOSED. Production catalog activation

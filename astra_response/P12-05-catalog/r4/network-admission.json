@@ -1,0 +1,18 @@
+{
+  "cpu": 8,
+  "memory_mib": 16384,
+  "name": "brickvault-appraisal",
+  "network": {
+    "private_dns_matches_named_vm115": true,
+    "private_port_18080_unreachable": true,
+    "private_port_5432_unreachable": true,
+    "public_a_absent": true,
+    "public_aaaa_absent": true,
+    "trusted_https_health": true
+  },
+  "platform_changes": false,
+  "resource_changes": false,
+  "status": "PASS",
+  "vm": 115,
+  "vm_running_agent_and_target": "PASS"
+}

@@ -1,0 +1,24 @@
+Sanitized logical command record; private SSH target, source paths and IDs omitted.
+
+LOCAL git branch/HEAD/index/status/protected-byte checks: PASS.
+LOCAL release_manifest.py verify <protected retained exact artifact>
+  --manifest-sha256 02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36
+  --release-id p12-05-catalog-repair-r1 --source-id 33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344: PASS.
+NAMED PROXMOX qm config/status/agent ping/network-get-interfaces for VM 115 only: PASS.
+NETWORK private DNS, trusted HTTPS /api/health, public DNS A/AAAA, direct API/PG port checks: PASS.
+ROOT INSTALLED r6 production-admin verify; installed health checks(False); read-only
+  exact catalog/security/timeout/source hash admission: PASS.
+LOCAL accepted wrapper AST/field-contract inspection, no execute/main call: BLOCKED.
+ROOT INSTALLED r6 read-only final preservation / admin / health / unit checks: PASS.
+
+Admission helper corrections: initial VM guard assumed historical 4 CPUs/8192 MiB;
+  actual existing 8/16384 captured unchanged. Source-evidence reader assumed mode
+  0600; retained record is approved mode 0400; existing protected admin reader used.
+  Final preservation helper key corrected to existing listeners_digest. None
+  changed application code, permissions, configuration or catalog state.
+
+production backup, repair install, recover-failed, release switch,
+retry-import --predecessor <protected exact identity>, activate: NOT EXECUTED.
+No ordinary import; no backup/recovery/activation ACK ambiguity or repeated command.
+Documentation update restricted to Plans 099/100/101. r4 publication uses separate
+  astra-response checkout and literal new r4 files; main index stays empty.

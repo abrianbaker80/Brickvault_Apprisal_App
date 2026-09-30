@@ -1,0 +1,98 @@
+{
+  "activate_invocations": 0,
+  "activation_receipts": 0,
+  "active_generation": 0,
+  "active_snapshot": null,
+  "application_release": "p12-04e-r6",
+  "canonical_catalog_rows": 0,
+  "catalog_mutation": false,
+  "failed_audit_unchanged": true,
+  "failed_candidate_unchanged": true,
+  "gate": "BLOCKED_STATE_PRESERVATION",
+  "health_checks": {
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "CLOCK": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "DATA_SPACE": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "REBOOT_PENDING": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "ROOT_SPACE": true,
+    "SECURITY_UPDATES": true,
+    "SERVICES": true,
+    "UFW": true
+  },
+  "import_attempts": 1,
+  "listener_inventory_unchanged": true,
+  "lock_timeout_ms": 10000,
+  "maintenance_conflicts": 0,
+  "market_observations": 0,
+  "migration": "0016_hunt_cached_runs",
+  "normal_backups_in_this_slice": 0,
+  "owner_count": 1,
+  "production_admin": "PASS",
+  "recover_failed_invocations": 0,
+  "repaired_release_install_or_switch": false,
+  "retention": "READY",
+  "retry_import_invocations": 0,
+  "running_imports": 0,
+  "security_inventory_unchanged": true,
+  "source_and_twelve_files_unchanged": true,
+  "staging_rows": 1898466,
+  "statement_timeout_ms": 300000,
+  "status": "PASS",
+  "units": {
+    "apt-daily-upgrade.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "apt-daily.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-api.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-backup.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-health-deep.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-health.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-python-version.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-retention.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "caddy.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "certbot.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "postgresql@18-main.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "qemu-guest-agent.service": {
+      "ActiveState": "active",
+      "UnitFileState": "static"
+    }
+  },
+  "validation_records": 0,
+  "zero_failed_units": true
+}

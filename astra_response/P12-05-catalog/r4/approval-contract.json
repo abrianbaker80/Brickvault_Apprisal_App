@@ -1,0 +1,26 @@
+{
+  "accepted_approval_fields": [
+    "database",
+    "migration_head",
+    "predecessor_release_id",
+    "predecessor_release_manifest_sha256",
+    "purpose",
+    "release_id",
+    "release_manifest_sha256",
+    "source_manifest_sha256",
+    "source_provenance_sha256",
+    "source_version"
+  ],
+  "catalog_command_executed": false,
+  "extra_fields_rejected": true,
+  "failed_candidate_identity_field_present": false,
+  "failed_run_identity_field_present": false,
+  "function": "approve_repair_release",
+  "function_end_line": 260,
+  "function_start_line": 231,
+  "gate": "STEP_4_DETACHED_REPAIR_APPROVAL_IDENTITY_BINDING",
+  "source_changed": false,
+  "status": "BLOCKED",
+  "substitute_approval_or_wrapper_used": false,
+  "wrapper_sha256": "812f505508774bd6d6a040795d8076207ebe79f7ea5c041548e45f75a56fb339"
+}

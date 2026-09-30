@@ -1,0 +1,45 @@
+{
+  "accepted_executable_files_unchanged": true,
+  "changed_main_documents": [
+    "docs/plans/099-phase-12-production-acceptance.md",
+    "docs/plans/100-production-catalog-activation.md",
+    "docs/plans/101-catalog-importer-performance-repair.md"
+  ],
+  "main_branch": "main",
+  "main_committed_or_pushed": false,
+  "main_head": "0ea8e0e21156bebb9aa4150c270643a0a5d0d571",
+  "main_index_empty": true,
+  "main_local_links_checked": 11,
+  "original_plan_body_preserved": true,
+  "plan_copies": {
+    "Plan-099.md": {
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/099-phase-12-production-acceptance.md",
+      "source_sha256": "7d5b8b631bdd1fe67d69572b4997b06d8d6ec8f50d8fc4ee9925f1c8562b5407",
+      "standalone_sha256": "1aaf03beadc65ac10fc179723697672dea9dd87835d8e1a44ec005261b77064d"
+    },
+    "Plan-100.md": {
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/100-production-catalog-activation.md",
+      "source_sha256": "6bcc7d917ba568809b301016435e4e737467a08cc26cbbe704ad7fb8e96f7418",
+      "standalone_sha256": "f5c5243e57d3c5f3a4cc2bba120d9331c77c943d66d6b30fc99c67664f37e6c4"
+    },
+    "Plan-101.md": {
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/101-catalog-importer-performance-repair.md",
+      "source_sha256": "0bb984873858532d448a6105a19ffc5a95eb3740090d295fce4976defe1b9dec",
+      "standalone_sha256": "7b1c4e2c1e3de988e09d425e0d8016e2b523ce3e884d5c7626b5952785b84c11"
+    }
+  },
+  "private_id_ip_source_path_scan": "PASS",
+  "protected_raw_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "reviewed_approval_source_matches_accepted_r2_bytes": true,
+  "scope": "documentation-only validation",
+  "standalone_local_links_checked": 28,
+  "status": "PASS",
+  "test_build_or_full_import_rerun": false
+}
