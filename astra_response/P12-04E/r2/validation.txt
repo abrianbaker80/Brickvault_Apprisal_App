@@ -1,0 +1,27 @@
+P12-04E / P12-04 closeout validation
+
+Accepted evidence: r1 at 6f06662b394471aaef2a136c59d7ed4f3becd676; reused, not rerun.
+Entry main HEAD: 389a30e0ba4cdf6902d48e06277cc6ef1bc2fc6c; entry index empty.
+Exact 28-file user inventory: PASS.
+All 28 entry files matched accepted r1 exact bytes before closeout edits: PASS.
+Only CODEX_WORKFLOW.md, docs/ROADMAP.md and Plan 098 changed relative to r1.
+Complete staged diff review: all 25 non-document diffs identical to accepted r1;
+three full staged documentation diffs reviewed. PASS.
+git diff --cached --check: PASS.
+Changed Markdown links: PASS.
+Local commit: 5c673e81a4f1caa13a0909a746d6ba0fffca075e
+Subject: Close P12-04 production deployment
+Committed inventory exactly 28 files: PASS.
+Main index empty; no residual task-file changes; only the three protected dirty
+files remain unstaged. Protected SHA-256 matches before and after commit: PASS.
+Main not pushed. r1 preserved; r2 publication isolated to astra-response.
+
+Protected files (not included in commit/package):
+AGENTS.md f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4
+services/api/tests/integration/test_catalog_search.py d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7
+services/api/tests/unit/test_catalog_parser.py 0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041
+
+No VM 115 or Proxmox connection, Gmail/Drive/restic contact, retention, alert,
+health check, reboot, tests, lint, type checks or builds ran during closeout.
+No P12-05 work began. Operational results are accepted historical r1 evidence.
+P12-04E CLOSED; P12-04 CLOSED; Phase 12 IN PROGRESS; P12-05 NEXT / NOT STARTED.
