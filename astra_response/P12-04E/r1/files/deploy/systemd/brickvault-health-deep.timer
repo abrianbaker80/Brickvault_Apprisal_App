@@ -1,0 +1,11 @@
+[Unit]
+Description=BrickVault health-deep schedule
+
+[Timer]
+OnCalendar=*-*-* 08:15:00
+Persistent=true
+RandomizedDelaySec=15min
+Unit=brickvault-health-deep.service
+
+[Install]
+WantedBy=timers.target

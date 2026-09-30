@@ -1,0 +1,11 @@
+[Unit]
+Description=BrickVault python-version schedule
+
+[Timer]
+OnCalendar=Sun *-*-* 10:15:00
+Persistent=true
+RandomizedDelaySec=15min
+Unit=brickvault-python-version.service
+
+[Install]
+WantedBy=timers.target

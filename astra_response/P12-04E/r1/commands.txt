@@ -1,0 +1,53 @@
+Sanitized commands actually used, with private connection parameters omitted.
+This is evidence, not an unattended replay script. Hidden-input credentials and
+mutating activation helpers containing protected state are intentionally omitted.
+
+LOCAL FOCUSED CHECKS
+python scripts/test_operational_alert.py
+python scripts/test_operations_health.py
+python scripts/test_release_manifest.py
+python -m pytest services/api/tests/unit/test_production_backup.py -q
+ruff check [the 10 changed Python files]
+ruff format --check [the 10 changed Python files]
+python -m mypy --config-file services/api/pyproject.toml --platform linux [the 10 changed Python files]
+pnpm build:api
+python scripts/release_manifest.py source-id
+python scripts/release_manifest.py create --release-id p12-04e-r6 --source-id 00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5
+Release verify API checked the exact public manifest/source IDs before transfer.
+
+DISPOSABLE LINUX TESTS ONLY
+python test_complete_run_retention.py (six initial tests, actual local restic forget)
+python -m unittest test_complete_run_retention.ProtectedStateTests test_complete_run_retention.PolicyTests
+Protected synthetic filesystem/dedup/backoff/permissions checks, with SMTP mocked.
+
+LIVE AUTHORIZED OPERATIONS (Python adapters, output redacted)
+operational_alert.py TEST -- one invocation only; remotely ACCEPTED
+complete_run_retention.run("plan", None) -- FIRST live invocation
+complete_run_retention.run("apply", approved_zero_candidate_digest) -- NOOP
+No live forget or prune command was issued.
+Source-verified immutable staging, locked uv installation, installed-wheel import.
+Absolute immutable BVA_WEB_BUILD_DIR preflight as the API account; atomic activation.
+systemd-analyze verify [installed operations/application/Certbot units]
+sh -n /etc/letsencrypt/renewal-hooks/deploy/brickvault-certificate
+systemctl start brickvault-health.service
+systemctl start brickvault-python-version.service
+systemctl start brickvault-health-deep.service
+systemctl show [required units] -p ActiveState -p UnitFileState -p OnFailure
+systemctl list-units --state=failed --no-legend --plain
+ss -H -lnt; pg_isready; findmnt; timedatectl; apt-config dump; ufw status
+Read only protected receipt, pins, ledger, health and alert acceptance metadata.
+
+PROXMOX / ONE GUEST REBOOT
+qm config 112; qm config 107; qm config 115
+qm status 115; qm agent 115 ping; qm guest cmd 115 network-get-interfaces
+qm set 115 --onboot 1 --startup order=2
+Guest: verify recent backup / healthy monitors / jobs idle, drain schedulers,
+record protected once-only intent, then systemctl reboot --no-block exactly once.
+Postboot: changed boot ID, same reserved interface address/MAC, key-only SSH,
+all required units/timers, trusted HTTPS health/app, no failed units, light/deep
+and Python checks. Private identifiers were compared without publication.
+Windows Invoke-WebRequest exact private hostname /api/health: normal trust 200.
+
+PUBLICATION
+Isolated temporary Git index builds the literal 28-file patch; main index untouched.
+Only astra_response/P12-04E/r1 is staged/committed/pushed on astra-response.

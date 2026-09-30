@@ -1,0 +1,50 @@
+P12-04E validation - 2026-09-30
+
+SOURCE / TEST
+6 initial retention tests PASS in 313.085s on Linux: 4 actual disposable-restic
+  scenarios and 2 policy tests. No production credentials/repositories involved.
+1 later large protected-state regression PASS; 2 policy reruns PASS (0.035s).
+6 offline alert sender tests PASS; Linux protected persistent-state checks PASS.
+6 health/Python tests PASS, including live-format ss suffix and gzip/size bounds.
+8 manifest tests PASS (schemas 1/2 retained; schema 3 exact inventory).
+18 existing backup unit tests PASS (final run 1.17s).
+Targeted Ruff PASS; format check 10 files PASS; strict mypy 10 files PASS.
+API package build/independent installed-wheel verification PASS.
+Final installed unit bytes, OnFailure bindings, systemd-analyze verify and shell
+  deploy-hook syntax PASS. No broad historical, browser or Android suites run.
+
+LIVE
+Protected permanent pins installed. FIRST PLAN keep=3/delete=0; apply NOOP.
+No live backup forget/prune, migration, bootstrap, certificate issuance or restore.
+Gmail one TEST SMTP remote acceptance PASS. API/HEALTH/PYTHON alerts also ACCEPTED.
+Light health PASS; daily deep repository/complete-history check PASS.
+Official Python lookup installed=latest=3.13.15 CURRENT; gzip handled with bounds.
+Ubuntu standard apt timers enabled/active; unattended security upgrades enabled;
+  automatic reboot not enabled; post-reboot reboot-required=False.
+ACME email absent by explicit decision; renewal/timer/deploy/expiry alerts wired.
+VM115 onboot=1/startup order=2; proven firewall order=1,up=15. No Proxmox reboot.
+One guest reboot PASS: changed boot, same reserved IP/MAC, key-only SSH,
+  reviewed data mount, loopback DB/API, Caddy/trusted HTTPS, UFW, synchronized
+  clock, guest agent, backup/Certbot/four operations/two apt timers active.
+All required enabled units active; guest agent static/active; failed units=0.
+Post-reboot light/deep/Python checks PASS. Windows normal-trust HTTPS health=200.
+
+RESOLVED ACTIVATION FINDINGS
+Static directory symlink was refused by existing loader; task stopped and Brian
+  explicitly approved absolute immutable path repair and resumption. Resolved.
+ss interface suffix parser false negative reproduced/corrected/tested. Resolved.
+Official source HTTP gzip decode failure reproduced/corrected/tested. Resolved.
+64 KiB configuration bound was too small for full retention evidence; bounded
+  16 MiB retention-only reader and real protected-file regression. Resolved.
+Final immutable release p12-04e-r6; prior releases preserved. No guard relaxed.
+
+PRESERVATION / SCOPE
+Main HEAD 389a30e0ba4cdf6902d48e06277cc6ef1bc2fc6c; index empty, no main commit/push.
+Three protected files match accepted SHA-256 values; excluded from publication.
+No P12-05 acceptance performed. Independent ChatGPT review is pending.
+
+PUBLICATION CHECKS
+Exact 28-file patch reconstruction PASS. Reconstructed source ID matches deployed
+release, with 3 unchanged files restored to their hash-verified Windows newline
+bytes. Private-literal/private-address/key scan PASS. 233 local documentation
+and artifact links resolved. Main index remained empty.

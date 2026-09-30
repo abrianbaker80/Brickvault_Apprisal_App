@@ -1,0 +1,191 @@
+{
+  "files": [
+    {
+      "path": "api/brickvault_api-0.0.0-py3-none-any.whl",
+      "sha256": "54874a178ef3a3aae02bd190db1fcdb40d92c96a0512be916ab318eaf2bf6fe4",
+      "size": 356454
+    },
+    {
+      "path": "api/brickvault_api-0.0.0.tar.gz",
+      "sha256": "bf9174dd5d0c6c022bcc509d6ce3be8d323274f3cf5c8583bfd350b71467ac03",
+      "size": 290742
+    },
+    {
+      "path": "api/requirements.txt",
+      "sha256": "26b6b014320a29683278a4248bee4918df94b3dd3b53251b48172d29bfeaee03",
+      "size": 13091
+    },
+    {
+      "path": "deploy/caddy/Caddyfile",
+      "sha256": "567b2700709c248cc9b239a922aaab7e7056f62b0ad4491a7f18c50904bdd485",
+      "size": 556
+    },
+    {
+      "path": "deploy/certbot/renewal-hooks/deploy/brickvault-certificate",
+      "sha256": "7a87bb323025a0aaab9575e42519bfc885217da5bd7dbf817c85353395db05f7",
+      "size": 261
+    },
+    {
+      "path": "deploy/complete_run_retention.py",
+      "sha256": "be9b44a6eef119a4917a4c6dbf2da2b66aeaacefa9641a04928e60d20ec2b5b2",
+      "size": 17628
+    },
+    {
+      "path": "deploy/deploy_certificate.py",
+      "sha256": "b7852a76991f4de41585bfda2723b2ab4e1f394eae88c72c0cf40b4e1f38cc58",
+      "size": 8997
+    },
+    {
+      "path": "deploy/operational_alert.py",
+      "sha256": "2ec53bba5544f9df91a5a8c9bf18460bd739ce684cc75f44a02d4b8c70ab7b04",
+      "size": 8480
+    },
+    {
+      "path": "deploy/production_health.py",
+      "sha256": "c6065c9712cdae7d2ded6c58201378a3f51da3a270e825dd831105950ae6a4e7",
+      "size": 10371
+    },
+    {
+      "path": "deploy/python_maintenance.py",
+      "sha256": "0fadc2d8c5a5c1debe91fd9c9227018183c6f42871453eeaac8be6a505547b6d",
+      "size": 3907
+    },
+    {
+      "path": "deploy/systemd/brickvault-alert@.service",
+      "sha256": "be40016b7be1dba4f941a70d37d215a9c204312b199d386b4a7240e5699be8c0",
+      "size": 584
+    },
+    {
+      "path": "deploy/systemd/brickvault-api.service",
+      "sha256": "fbaf9411e20b49d3ff0db215ee399668e7e72970d2ecff74a5270d45fd9e84c2",
+      "size": 803
+    },
+    {
+      "path": "deploy/systemd/brickvault-api.service.d/operations.conf",
+      "sha256": "a22bb777da58b50c57162008f20bad46ab568c9220f8f1d22cfb9da10a291199",
+      "size": 89
+    },
+    {
+      "path": "deploy/systemd/brickvault-backup.service",
+      "sha256": "69f868c85113ea3ea340c4fcd204374863148d3060c5d2a6dec4e9ff5bbb33e4",
+      "size": 986
+    },
+    {
+      "path": "deploy/systemd/brickvault-backup.service.d/operations.conf",
+      "sha256": "ade2cfa9faa9865ecdd2158cad727549887c5b156d2a37387b4d3a12ad0bdabc",
+      "size": 109
+    },
+    {
+      "path": "deploy/systemd/brickvault-backup.timer",
+      "sha256": "13a12c2e9f6231f7cf6ba2437bf356f93ca35a63c7e4ae9a2cab232eeb1b7565",
+      "size": 223
+    },
+    {
+      "path": "deploy/systemd/brickvault-health-deep.service",
+      "sha256": "a1353632f54177e5d1e299a7ecc583e5e5e530c1722f0089415a1fff287301c7",
+      "size": 731
+    },
+    {
+      "path": "deploy/systemd/brickvault-health-deep.timer",
+      "sha256": "fa3e7df28a06f6c71a059a6ab2ac23e578042c6281f97c46e3ff14e8153cdb80",
+      "size": 197
+    },
+    {
+      "path": "deploy/systemd/brickvault-health.service",
+      "sha256": "07c4bcdb914719b39bbb70899cdb8ea10e0fcbb97ced9b963f30cc499c43d192",
+      "size": 701
+    },
+    {
+      "path": "deploy/systemd/brickvault-health.timer",
+      "sha256": "f871033cedfdddbb9e3d4a7e45c234a805e66bee5a910a07fe3cce6a8d2ecf46",
+      "size": 181
+    },
+    {
+      "path": "deploy/systemd/brickvault-python-version.service",
+      "sha256": "c60e4aa12445bdc107bd88cd68af4e932975e0455b87427a37f8779c29e2354f",
+      "size": 631
+    },
+    {
+      "path": "deploy/systemd/brickvault-python-version.timer",
+      "sha256": "beda65c21307d0fed153e81fffc8b8e26b7dc811eac7b91473073e05c82c6f40",
+      "size": 207
+    },
+    {
+      "path": "deploy/systemd/brickvault-retention.service",
+      "sha256": "80f5a6710cdb919f68ae160eca809360db814a86f481898d46cf4ce3eebe438e",
+      "size": 814
+    },
+    {
+      "path": "deploy/systemd/brickvault-retention.timer",
+      "sha256": "96c2304d62126eb829667bcb07aaf60027e6c1eeadf8af5ce8e3cc4be914e2a4",
+      "size": 197
+    },
+    {
+      "path": "deploy/systemd/caddy.service.d/brickvault.conf",
+      "sha256": "7d138774fd553c54bc4b17ba6f6680ba568fc7296f2ba9c39110ec8bde98c458",
+      "size": 734
+    },
+    {
+      "path": "deploy/systemd/caddy.service.d/operations.conf",
+      "sha256": "acd3d5a74ffaf8d3912df58306722d11d10209f9120351a239411d885eb76dad",
+      "size": 45
+    },
+    {
+      "path": "deploy/systemd/certbot.service.d/operations.conf",
+      "sha256": "acd3d5a74ffaf8d3912df58306722d11d10209f9120351a239411d885eb76dad",
+      "size": 45
+    },
+    {
+      "path": "deploy/tmpfiles.d/brickvault-operations.conf",
+      "sha256": "6f8feec1bc307afcf382f6f244f1049d3b493c6ffb02eb6797792b4ebcdb0b64",
+      "size": 57
+    },
+    {
+      "path": "web/assets/index-B3HcPfbe.css",
+      "sha256": "79da5515a54d718ea804b09bcf10b4ee73bc0799a7dd07008f3226dc6138ec70",
+      "size": 37418
+    },
+    {
+      "path": "web/assets/index-c5nVxxSk.js",
+      "sha256": "08b144bed6f936f3436d312769564351723708f664d8e236c77e38e5fc2a3cbe",
+      "size": 380521
+    },
+    {
+      "path": "web/assets/web-BGz34vD4.js",
+      "sha256": "e011e6ab248a5e8f035f4c5c09157d1bc8b272b82639d51368d35c8a8738834e",
+      "size": 844
+    },
+    {
+      "path": "web/icon-192.png",
+      "sha256": "70c2b912417313f74596384f91bcb336f0fd303604df994017353ab1b85732ea",
+      "size": 2037
+    },
+    {
+      "path": "web/icon-512.png",
+      "sha256": "19a28e2b1de1f41c7b549d4c13d2f1227a908057b142032a802d882dff23ea73",
+      "size": 7234
+    },
+    {
+      "path": "web/index.html",
+      "sha256": "a4c4c03752d95d5a3394de5ce9c9c226eea02a74f20c05092161599519457cb2",
+      "size": 578
+    },
+    {
+      "path": "web/manifest.webmanifest",
+      "sha256": "0b8302d5769d1ef6e55731ba92b3eb0f9a7bc6ec1438b835bda1c42d66bb435d",
+      "size": 496
+    },
+    {
+      "path": "web/sw.js",
+      "sha256": "ced49f090dbd63dd3c3e71bcfbe9f75161e35f20ecefda07033184361a5e58f6",
+      "size": 4308
+    }
+  ],
+  "release_id": "p12-04e-r6",
+  "schema": 3,
+  "source": {
+    "commit": "389a30e0ba4cdf6902d48e06277cc6ef1bc2fc6c",
+    "reviewed_id": "00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5"
+  },
+  "uv_version": "0.12.10"
+}

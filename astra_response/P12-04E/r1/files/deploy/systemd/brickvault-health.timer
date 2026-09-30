@@ -1,0 +1,11 @@
+[Unit]
+Description=BrickVault health schedule
+
+[Timer]
+OnBootSec=10min
+OnUnitActiveSec=10min
+RandomizedDelaySec=30s
+Unit=brickvault-health.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,23 @@
+[Unit]
+Description=BrickVault external failure notification
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+Group=root
+UMask=0077
+ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/operational_alert.py %i
+TimeoutStartSec=90s
+StateDirectory=brickvault-operations
+StateDirectoryMode=0700
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+ReadWritePaths=/var/lib/brickvault-operations

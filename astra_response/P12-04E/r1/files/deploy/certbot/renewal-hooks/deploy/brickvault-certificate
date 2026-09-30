@@ -1,0 +1,7 @@
+#!/bin/sh
+set -eu
+if /opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/deploy_certificate.py; then
+    exit 0
+fi
+/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/operational_alert.py CERTIFICATE || true
+exit 1

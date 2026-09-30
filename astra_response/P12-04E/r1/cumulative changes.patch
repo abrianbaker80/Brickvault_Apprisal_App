@@ -1,0 +1,2520 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 31c9a62eea12731199b1cfa1569202df7756bbfa..e84a1a83b6b95585e140d930470d0159648d4bd2 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,20 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## P12-04E operational hardening, 2026-09-30
++
++**P12-04E IMPLEMENTED / READY FOR REVIEW. P12-04 IN PROGRESS.
++P12-05 NOT STARTED.** [ExecPlan 098](docs/plans/098-production-operational-hardening.md) records
++complete-run retention and permanent pins, disposable destructive tests, live
++PLAN keep=3/delete=0 and NOOP, Gmail SMTP test acceptance, light/deep health,
++official Python 3.13.15 CURRENT, standard Ubuntu security maintenance and the
++retained no-contact ACME decision. Immutable p12-04e-r6 is active. VM 115 is
++onboot=1/startup order=2 after the proven firewall order; one controlled guest
++reboot recovered all required services/timers, reserved address and trusted HTTPS
++with no failed units. Main remains uncommitted/unpushed with an empty index and
++protected dirty files preserved. Independent review remains pending. Owner/auth,
++browser/PWA, physical Android, real restore, rollback and disaster-recovery
++acceptance remain P12-05 gates. Earlier checkpoint sections are historical.
++
+ ## P12-04D accepted closeout, 2026-09-29
+ 
+ [ExecPlan 097](docs/plans/097-private-https-application-activation.md) records the
+diff --git a/deploy/certbot/renewal-hooks/deploy/brickvault-certificate b/deploy/certbot/renewal-hooks/deploy/brickvault-certificate
+index 2858a8398f231d2ed4dbd7c2fd72399b91bf4e4a..922878860584b452e4154d716c47651368352906 100644
+--- a/deploy/certbot/renewal-hooks/deploy/brickvault-certificate
++++ b/deploy/certbot/renewal-hooks/deploy/brickvault-certificate
+@@ -1,3 +1,7 @@
+ #!/bin/sh
+ set -eu
+-exec /opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/deploy_certificate.py
++if /opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/deploy_certificate.py; then
++    exit 0
++fi
++/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/operational_alert.py CERTIFICATE || true
++exit 1
+diff --git a/deploy/systemd/brickvault-alert@.service b/deploy/systemd/brickvault-alert@.service
+new file mode 100644
+index 0000000000000000000000000000000000000000..9d9fbebc15ec12cce728668f296bef66373cc574
+--- /dev/null
++++ b/deploy/systemd/brickvault-alert@.service
+@@ -0,0 +1,23 @@
++[Unit]
++Description=BrickVault external failure notification
++Wants=network-online.target
++After=network-online.target
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++UMask=0077
++ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/operational_alert.py %i
++TimeoutStartSec=90s
++StateDirectory=brickvault-operations
++StateDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault-operations
+diff --git a/deploy/systemd/brickvault-api.service.d/operations.conf b/deploy/systemd/brickvault-api.service.d/operations.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..b47a5a7b10f1539b4c64e9dc2a2e487d1d312aed
+--- /dev/null
++++ b/deploy/systemd/brickvault-api.service.d/operations.conf
+@@ -0,0 +1,4 @@
++[Unit]
++OnFailure=brickvault-alert@%n.service
++StartLimitIntervalSec=300
++StartLimitBurst=5
+diff --git a/deploy/systemd/brickvault-backup.service.d/operations.conf b/deploy/systemd/brickvault-backup.service.d/operations.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..fc9a1e1e41587e6bf59f4ed6786341dc30a86ac7
+--- /dev/null
++++ b/deploy/systemd/brickvault-backup.service.d/operations.conf
+@@ -0,0 +1,5 @@
++[Unit]
++OnFailure=brickvault-alert@%n.service
++
++[Service]
++ReadWritePaths=/run/brickvault-backup-retention.lock
+diff --git a/deploy/systemd/brickvault-health-deep.service b/deploy/systemd/brickvault-health-deep.service
+new file mode 100644
+index 0000000000000000000000000000000000000000..596ee2a4c79f4f5ddb745dc7935b814a1de9b4b7
+--- /dev/null
++++ b/deploy/systemd/brickvault-health-deep.service
+@@ -0,0 +1,25 @@
++[Unit]
++Description=BrickVault daily repository health
++Wants=network-online.target
++After=network-online.target postgresql@18-main.service
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault
++OnFailure=brickvault-alert@%n.service
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++UMask=0077
++ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/production_health.py --deep
++TimeoutStartSec=5min
++StateDirectory=brickvault-operations
++StateDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault-operations /var/cache/brickvault-backup
+diff --git a/deploy/systemd/brickvault-health-deep.timer b/deploy/systemd/brickvault-health-deep.timer
+new file mode 100644
+index 0000000000000000000000000000000000000000..1033b138d51065a44d58ffc15835e95715fe1488
+--- /dev/null
++++ b/deploy/systemd/brickvault-health-deep.timer
+@@ -0,0 +1,11 @@
++[Unit]
++Description=BrickVault health-deep schedule
++
++[Timer]
++OnCalendar=*-*-* 08:15:00
++Persistent=true
++RandomizedDelaySec=15min
++Unit=brickvault-health-deep.service
++
++[Install]
++WantedBy=timers.target
+diff --git a/deploy/systemd/brickvault-health.service b/deploy/systemd/brickvault-health.service
+new file mode 100644
+index 0000000000000000000000000000000000000000..5d969353a1baa25f59df4bf05a34e4c569700db3
+--- /dev/null
++++ b/deploy/systemd/brickvault-health.service
+@@ -0,0 +1,25 @@
++[Unit]
++Description=BrickVault lightweight production health
++Wants=network-online.target
++After=network-online.target postgresql@18-main.service
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault
++OnFailure=brickvault-alert@%n.service
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++UMask=0077
++ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/production_health.py
++TimeoutStartSec=180s
++StateDirectory=brickvault-operations
++StateDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault-operations
+diff --git a/deploy/systemd/brickvault-health.timer b/deploy/systemd/brickvault-health.timer
+new file mode 100644
+index 0000000000000000000000000000000000000000..62c026cf8e3812e854dff1390fa065f60564de86
+--- /dev/null
++++ b/deploy/systemd/brickvault-health.timer
+@@ -0,0 +1,11 @@
++[Unit]
++Description=BrickVault health schedule
++
++[Timer]
++OnBootSec=10min
++OnUnitActiveSec=10min
++RandomizedDelaySec=30s
++Unit=brickvault-health.service
++
++[Install]
++WantedBy=timers.target
+diff --git a/deploy/systemd/brickvault-python-version.service b/deploy/systemd/brickvault-python-version.service
+new file mode 100644
+index 0000000000000000000000000000000000000000..e56cbed8a72035214a594ca991905ffb0193ebc8
+--- /dev/null
++++ b/deploy/systemd/brickvault-python-version.service
+@@ -0,0 +1,24 @@
++[Unit]
++Description=BrickVault official CPython 3.13 maintenance check
++Wants=network-online.target
++After=network-online.target
++OnFailure=brickvault-alert@%n.service
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++UMask=0077
++ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/python_maintenance.py
++TimeoutStartSec=100s
++StateDirectory=brickvault-operations
++StateDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault-operations
+diff --git a/deploy/systemd/brickvault-python-version.timer b/deploy/systemd/brickvault-python-version.timer
+new file mode 100644
+index 0000000000000000000000000000000000000000..f91c4aa248e870f100478dc722f99e0338779f1a
+--- /dev/null
++++ b/deploy/systemd/brickvault-python-version.timer
+@@ -0,0 +1,11 @@
++[Unit]
++Description=BrickVault python-version schedule
++
++[Timer]
++OnCalendar=Sun *-*-* 10:15:00
++Persistent=true
++RandomizedDelaySec=15min
++Unit=brickvault-python-version.service
++
++[Install]
++WantedBy=timers.target
+diff --git a/deploy/systemd/brickvault-retention.service b/deploy/systemd/brickvault-retention.service
+new file mode 100644
+index 0000000000000000000000000000000000000000..b161ec5f85995fe76a9c4b558018e1628fef40ff
+--- /dev/null
++++ b/deploy/systemd/brickvault-retention.service
+@@ -0,0 +1,25 @@
++[Unit]
++Description=BrickVault complete-run weekly retention
++Wants=network-online.target
++After=network-online.target postgresql@18-main.service
++RequiresMountsFor=/var/lib/postgresql /opt/brickvault
++OnFailure=brickvault-alert@%n.service
++
++[Service]
++Type=oneshot
++User=root
++Group=root
++UMask=0077
++ExecStart=/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/complete_run_retention.py scheduled
++TimeoutStartSec=4h
++StateDirectory=brickvault-operations
++StateDirectoryMode=0700
++NoNewPrivileges=true
++PrivateTmp=true
++ProtectSystem=strict
++ProtectHome=true
++ProtectKernelTunables=true
++ProtectKernelModules=true
++ProtectControlGroups=true
++RestrictSUIDSGID=true
++ReadWritePaths=/var/lib/brickvault-operations /etc/brickvault/backup/retention /var/cache/brickvault-backup /run/brickvault-backup-retention.lock
+diff --git a/deploy/systemd/brickvault-retention.timer b/deploy/systemd/brickvault-retention.timer
+new file mode 100644
+index 0000000000000000000000000000000000000000..c97211ccbb8a627af7cf8d59cd4f5f4574df2b61
+--- /dev/null
++++ b/deploy/systemd/brickvault-retention.timer
+@@ -0,0 +1,11 @@
++[Unit]
++Description=BrickVault retention schedule
++
++[Timer]
++OnCalendar=Sun *-*-* 09:15:00
++Persistent=true
++RandomizedDelaySec=15min
++Unit=brickvault-retention.service
++
++[Install]
++WantedBy=timers.target
+diff --git a/deploy/systemd/caddy.service.d/operations.conf b/deploy/systemd/caddy.service.d/operations.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..c5d3982f4c72e1a7f811fa470482be4919aacc00
+--- /dev/null
++++ b/deploy/systemd/caddy.service.d/operations.conf
+@@ -0,0 +1,2 @@
++[Unit]
++OnFailure=brickvault-alert@%n.service
+diff --git a/deploy/systemd/certbot.service.d/operations.conf b/deploy/systemd/certbot.service.d/operations.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..c5d3982f4c72e1a7f811fa470482be4919aacc00
+--- /dev/null
++++ b/deploy/systemd/certbot.service.d/operations.conf
+@@ -0,0 +1,2 @@
++[Unit]
++OnFailure=brickvault-alert@%n.service
+diff --git a/deploy/tmpfiles.d/brickvault-operations.conf b/deploy/tmpfiles.d/brickvault-operations.conf
+new file mode 100644
+index 0000000000000000000000000000000000000000..05d87b5b91d93ce38339e139f1900400fbd4a0cf
+--- /dev/null
++++ b/deploy/tmpfiles.d/brickvault-operations.conf
+@@ -0,0 +1 @@
++f /run/brickvault-backup-retention.lock 0600 root root -
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 16eebf499a5dda1222fcd5b2692c25f00cbc432f..c927c943591d527aa35bc58c484fb31ac2a3f3c2 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,5 +1,20 @@
+ # Valuation-First Roadmap
+ 
++## P12-04E operational hardening, 2026-09-30
++
++**P12-04E IMPLEMENTED / READY FOR REVIEW. P12-04 IN PROGRESS.
++P12-05 NOT STARTED.** [ExecPlan 098](plans/098-production-operational-hardening.md) records
++complete-run retention and permanent pins, disposable destructive tests, live
++PLAN keep=3/delete=0 and NOOP, Gmail SMTP test acceptance, light/deep health,
++official Python 3.13.15 CURRENT, standard Ubuntu security maintenance and the
++retained no-contact ACME decision. Immutable p12-04e-r6 is active. VM 115 is
++onboot=1/startup order=2 after the proven firewall order; one controlled guest
++reboot recovered all required services/timers, reserved address and trusted HTTPS
++with no failed units. Main remains uncommitted/unpushed with an empty index and
++protected dirty files preserved. Independent review remains pending. Owner/auth,
++browser/PWA, physical Android, real restore, rollback and disaster-recovery
++acceptance remain P12-05 gates. Earlier checkpoint sections are historical.
++
+ ## P12-04D accepted closeout, 2026-09-29
+ 
+ [ExecPlan 097](plans/097-private-https-application-activation.md) records the stable
+diff --git a/docs/plans/098-production-operational-hardening.md b/docs/plans/098-production-operational-hardening.md
+new file mode 100644
+index 0000000000000000000000000000000000000000..ab3cff6eaefb2edbffb43e10028bb73b00595282
+--- /dev/null
++++ b/docs/plans/098-production-operational-hardening.md
+@@ -0,0 +1,293 @@
++# ExecPlan 098 - P12-04E production operational hardening
++
++## Goal and user-visible outcome
++
++P12-04E is IMPLEMENTED / READY FOR REVIEW. Production now has complete-run
++retention, private Gmail operational alerts, health and maintenance checks,
++deliberate VM autostart, and one successful controlled guest reboot.
++P12-04 remains IN PROGRESS; P12-05 remains NOT STARTED.
++
++## Why this work is being done now
++
++[Plan 097](097-private-https-application-activation.md) is accepted/closed.
++Its remaining operational gates are the explicit scope of Brian's P12-04E
++instructions. This checkpoint does not perform production acceptance.
++
++## In scope
++
++Guarded complete-run retention; permanent pins; disposable destructive proof;
++first live plan/NOOP; Gmail SMTP and failure integration; light/deep health;
++official Python 3.13 patch detection; standard Ubuntu maintenance monitoring;
++ACME notification decision; VM 115 autostart and one guest reboot; immutable
++release identity; focused validation and sanitized isolated review publication.
++
++## Explicit non-goals
++
++No main commit/push, mutation of accepted p12-04d-r1, live backup deletion/prune,
++migration/bootstrap, certificate issuance, automatic Python replacement,
++automatic guest reboot, Proxmox reboot, owner login, browser/PWA/physical Android
++acceptance, real production restore, rollback or disaster-recovery acceptance.
++
++## Current repository state
++
++Main HEAD remains `389a30e0ba4cdf6902d48e06277cc6ef1bc2fc6c`; index empty.
++AGENTS.md and the two protected catalog tests remain byte-for-byte unchanged
++from their accepted dirty baseline, unstaged and excluded from the package.
++Implementation is uncommitted on main. Publication alone uses astra-response.
++
++Final immutable release: `p12-04e-r6`.
++
++- Reviewed source ID: `00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5`.
++- Manifest SHA-256: `9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d`.
++- CPython 3.13.15 under /opt/python/3.13.15; uv 0.12.10.
++- Manifest schema 3 binds operations tools, service/timer/drop-in files and the
++  certificate hook; verification still accepts schemas 1 and 2.
++- BVA_WEB_BUILD_DIR is the absolute immutable release web directory. It must
++  never be /opt/brickvault/current/web because the static loader rejects symlinks.
++
++## Decisions and assumptions
++
++No approved alert configuration existed initially. Work stopped at ALERT
++DESTINATION REQUIRED. Brian selected private email, explicitly selected Gmail,
++and entered a dedicated app password locally through hidden input. Gmail
++accepted the single synthetic TEST. The private recipient is never published.
++
++No permission was given to use the address for ACME registration. Keep the
++existing absent ACME contact. Renewal service failures, inactive renewal timer,
++deploy-hook failure and served-certificate expiry are independently covered by
++the operational alert path. No ACME account/certificate change was made.
++
++## Data model and API/interface changes
++
++No application API or database migration. The equivalent retention interface is:
++
++`/opt/brickvault/current/api/venv/bin/python /opt/brickvault/current/deploy/complete_run_retention.py plan`
++
++Use `apply --digest <reviewed-plan-digest>` only under applicable deletion
++authority. `scheduled` is reserved for the approved weekly unit. `prune --digest
++<reviewed-current-digest>` is a separate explicitly supervised operation, never
++an automatic consequence of forget. No live prune occurred here.
++
++### Complete-run algorithm and recovery
++
++One policy item comprises a structurally valid protected schema-2 production
++receipt and all three artifacts (database.dump, globals.sql, configuration.tar)
++in both independently identified repositories. The planner rejects missing,
++extra, malformed, overlapping or ambiguous snapshot identities and changed
++receipt/pin metadata. Snapshot paths and tags must match the complete run.
++
++Sort by verified UTC time and then run ID. Keep the newest run in each of the
++latest 30 distinct UTC days, 8 ISO weeks and 12 calendar months; take their union
++and add permanent pins. The two accepted production recovery points and both
++synthetic canaries are permanently pinned. Sparse history retains available
++buckets; overlapping policies do not produce artifact-level decisions.
++
++The plan digest binds policy, UTC date, exact keep/delete sets, repository
++identities, all receipt digests, complete snapshot metadata, pins and ledger.
++Apply gathers again and requires the exact digest. Before deleting anything it
++reads back every selected artifact from both destinations and rechecks the plan.
++Only the three explicit snapshot IDs for a selected complete run are forgotten
++at each destination. Exact surviving snapshot inventories and restic check follow
++each destination. Backup, retention and deep planning share a protected flock.
++
++Before any destructive call, persist a DEGRADED ledger and exact transaction
++intent. After each successful destination, persist progress. Only complete
++success returns READY. First-destination failure, partial cross-repository failure,
++interruption or failed post-check leaves durable DEGRADED state and stops all
++further deletion. No destructive retry is automatic. Normal configuration reads
++remain capped at 64 KiB; retention evidence/ledger reads have a bounded 16 MiB
++limit so full snapshot evidence remains readable as history grows.
++
++Pins: /etc/brickvault/backup/retention-pins.json, root:root 0600.
++Ledger/transactions: /etc/brickvault/backup/retention/, root:root 0700, files 0600.
++Receipts remain available after logical deletion and their digests stay in the
++ledger. Protected records use exclusive temporary creation, fsync and atomic
++replacement. Raw IDs remain only in protected local evidence.
++
++Operator repair after DEGRADED: stop the retention timer; preserve ledger,
++transaction and both repository inventories; establish which operations really
++completed, verify pinned history and repository integrity, and review a concrete
++recovery/reconciliation plan with Brian. Never clear DEGRADED or replay deletion
++blindly. Prune requires READY, unchanged current plan, zero pending candidates,
++and prior completed deletion/readback/check evidence; it also persists failure
++state before mutation. There is no prune timer.
++
++Six initial retention tests passed (313.085 seconds), including actual forget
++against disposable LOCAL Linux restic repositories, complete-run/pin preservation,
++changed plan, incomplete/ambiguous history, first-destination and partial
++cross-repository failures, and degraded refusal. A later focused Linux root-file
++regression proved large protected-state roundtrip, size bounds and permission
++refusal; the two policy tests also passed again. No production deletion occurred.
++
++First live invocation: PLAN keep=3, delete=0, digest
++`65c14383b67e90edf7e59b8a6b4ff43ec3b7c3b3c156a36e904ab8bb4be5ff7b`.
++Digest-bound apply returned NOOP. Ledger remains READY with no deleted runs.
++Weekly retention was enabled only after all required disposable and live gates.
++Future scheduled runs may apply the reviewed complete-run policy under the
++explicit P12-04E authorization; that is distinct from this checkpoint's NOOP.
++
++### External alerts and health
++
++Gmail SMTP uses smtp.gmail.com:465, certificate-verified implicit TLS and a
++20-second socket timeout. Root-only configuration is under
++/etc/brickvault/operations/. No credential is passed in argv or logged. Messages
++contain fixed generic categories only. Protected persistent state distinguishes
++PENDING, ACCEPTED and FAILED; accepted categories deduplicate for six hours and
++failed/uncertain attempts back off ten minutes. TEST cannot be sent twice.
++Gmail SMTP acceptance proves transport acceptance, not that Brian read the mail.
++
++OnFailure covers backup, retention, repeated API failure, Caddy, Certbot,
++light/deep health and Python checks. The certificate deploy wrapper alerts on
++hook failure while preserving its nonzero result. Service sandboxes receive no
++application EnvironmentFile. Real activation API/health/Python failures also
++exercised failure notifications; the final stack is healthy.
++
++Light health checks credential-free exact-host trusted HTTPS, exact certificate
++SAN and >21-day validity, services/timers, loopback API/DB and approved listeners,
++pg readiness/data mount UUID, recent complete receipt (<36 hours), retention READY,
++release/manifest/runtime/hook bytes, UFW, clock, guest agent, free space (>=10%,
++root >=2 GiB and data >=5 GiB), reboot-required age (<48 hours), and apt policy.
++The Linux ss interface suffix is normalized before checking the explicit allowed
++endpoints; unexpected loopback and non-loopback ports still fail.
++Daily deep health additionally reads both repository identities and validates
++complete snapshot/receipt/pin history. Frequent checks do not run restic check.
++All probes are owner-credential-free. Healthy health runs are quiet; failures
++emit sanitized categories, exit nonzero and invoke external alerts. A stopped
++VM cannot send its own alerts; independent whole-host availability monitoring
++is not claimed by this guest-local implementation.
++
++### Schedules and runtime maintenance
++
++The verified guest timezone is Etc/UTC. Enabled/active schedules:
++
++| Timer | Cadence |
++| --- | --- |
++| brickvault-health | 10 minutes after boot and each invocation, up to 30 seconds jitter |
++| brickvault-health-deep | Daily 08:15 UTC, up to 15 minutes jitter |
++| brickvault-retention | Sunday 09:15 UTC, up to 15 minutes jitter |
++| brickvault-python-version | Sunday 10:15 UTC, up to 15 minutes jitter |
++
++Accepted backup and Certbot schedules remain enabled/active. Deep work follows
++the established backup window. Calendar operations timers persist missed runs.
++
++Python detection uses only https://www.python.org/downloads/source/ with normal
++TLS, same-official-host redirects, bounded compressed and expanded HTTP response
++sizes, identity/gzip decoding and final 3.13.x release links. Three bounded lookup
++attempts precede failure. Newer patches or repeated lookup failure alert; nothing
++is downloaded/installed automatically. Live installed=latest=3.13.15, CURRENT.
++The official index and https://www.python.org/downloads/release/python-31315/
++are the source authority; no third-party version service is consulted.
++
++Future separately reviewed Python update procedure:
++
++1. Fetch the official Python.org signed source release.
++2. Verify its published SHA-256.
++3. Verify the release-manager signature with the independently established key.
++4. Install into a new versioned /opt/python/<version>, leaving /usr/bin/python3 alone.
++5. Create a new immutable release venv from that interpreter and locked dependencies.
++6. Run targeted application, installed-wheel, static-build and operational checks.
++7. Atomically activate the reviewed release with the absolute immutable web path.
++8. Retain the prior interpreter/release for a separately authorized rollback.
++9. Remove old versions only after later review.
++
++Ubuntu's existing unattended-upgrades is installed; apt-daily and
++apt-daily-upgrade are enabled/active. Periodic package-list refresh and unattended
++security upgrades are enabled. Automatic reboot is disabled by policy/default;
++no third-party update manager was added. Reboot-required older than 48 hours
++fails health and alerts. No reboot-required flag remained after the controlled
++reboot. A package request alone does not authorize a reboot.
++
++### VM autostart and controlled reboot
++
++Proxmox discovery confirmed firewall VM 112 (opensense) onboot=1 with
++startup order=1,up=15 and the existing application VM 107 at order=2.
++After unattended readiness passed, only VM 115 was changed to onboot=1,
++startup order=2. Configuration readback passed. Proxmox was never rebooted.
++
++Before the single reboot: recent production backup, alerts, light/deep health,
++maintenance state, retention READY and no failed units passed. Backup,
++retention, certificate and apt jobs were idle; schedulers were drained without
++interrupting jobs. A protected once-only intent and boot ID were recorded.
++
++After reboot: boot ID changed, VM returned, the same reserved IP and interface
++MAC were observed through guest-agent readback, and key-only pinned SSH worked.
++Data mount, PostgreSQL, API, Caddy, trusted HTTPS health/app 200, UFW, clock,
++all eight backup/cert/operations/apt timers, guest agent and listener checks passed.
++Light/deep health and official Python check passed again; failed units=0.
++This is one guest reboot test, not a Proxmox host boot or disaster-recovery test.
++
++## Implementation sequence
++
++1. Verify main/protected state and accepted live target; resolve alert destination.
++2. Implement bounded operations tools and focused tests, using local hidden secrets.
++3. Exercise destructive retention only on disposable repositories.
++4. Package/install a new immutable release; pin live history; first PLAN and NOOP.
++5. Prove Gmail acceptance and operational units, health and maintenance checks.
++6. Resolve startup dependencies; gate and perform one guest reboot; verify recovery.
++7. Publish sanitized r1 evidence without committing main or beginning P12-05.
++
++## Validation and acceptance criteria
++
++Actual focused evidence: 6 initial disposable/policy retention tests; 1 later
++protected-state regression plus 2 policy reruns; 6 alert tests; 6 health/Python
++tests; 8 manifest tests; 18 existing backup unit tests. Linux persistent alert
++state/dedup/backoff/permission checks passed separately. API package build and
++installed-wheel check passed. Targeted Ruff/format/strict mypy and systemd-analyze
++verify passed. Regression checks covered IPv4 interface suffixes, unexpected
++listeners, official gzip HTTP, decompression size bounds and large retention state.
++Live PLAN/NOOP, SMTP acceptance, installed light/deep/Python units, onboot readback
++and post-reboot verification passed. No broad historical suites were run.
++
++## Security, privacy, and data-integrity considerations
++
++Published evidence excludes real email, passwords, webhook/tokens, IP/MAC,
++run/snapshot/pin IDs, owner data and recovery media identifiers. Configuration
++stays root-only, and the production backup now includes the actual protected
++Caddy environment path plus operational configuration in its encrypted archive.
++No new production backup was forced; the accepted schedule remains responsible
++for the next capture. Shared backup/retention locking serializes mutation.
++
++## Failure modes, rollback, and recovery
++
++Stop on failed live alert, ambiguous/pinned/partial history, unexpected current
++live candidates, official-source uncertainty, unsafe startup dependencies,
++failed guest recovery or lost private API/TLS/DNS. Never silently retry destructive
++retention or prune. Prior immutable releases and interpreter remain available.
++
++Activation initially supplied a symlinked web directory and the existing loader
++correctly refused it. Work stopped under Brian's explicit API-failure condition.
++Brian approved the exact absolute-path repair and resumption; API/private HTTPS
++recovered without relaxing the loader. Subsequent same-scope corrections fixed
++ss suffix parsing and gzip decoding. Final review corrected the retention state
++size bound. Each executable revision used a new immutable release; r6 is final.
++The temporary activation outage is resolved, not an outstanding gate.
++
++## Progress log
++
++- [x] 2026-09-30: Main/index/protected hashes and minimum live target verified.
++- [x] 2026-09-30: Destination stop resolved; hidden Gmail configuration and one
++  remotely accepted TEST completed.
++- [x] 2026-09-30: Disposable retention deletion/failure proof; protected live pins;
++  first PLAN keep=3/delete=0 and NOOP; no live forget/prune.
++- [x] 2026-09-30: Immutable release r6; approved static-path recovery; operational
++  failure integration, light/deep/Python and Ubuntu checks passed.
++- [x] 2026-09-30: Proven startup order; VM 115 onboot=1/order=2; one reboot and all
++  required post-reboot checks passed.
++- [x] 2026-09-30: Focused source/package/static/unit verification completed.
++- [x] 2026-09-30: Sanitized P12-04E r1 evidence prepared for isolated publication.
++
++## Open questions or physical-device/manual checks
++
++Independent ChatGPT review of P12-04E remains required. All P12-05 gates remain
++open: owner login/session/cookie issuance and auth/CSRF/Host/Origin acceptance;
++full private browser acceptance; PWA install/offline/reconnect; physical Android
++production TLS; real off-host production restore; release rollback rehearsal;
++end-to-end disaster-recovery acceptance. None was started or claimed here.
++
++## Outcome and follow-up
++
++READY FOR P12-04E REVIEW. P12-04E IMPLEMENTED / READY FOR REVIEW;
++P12-04 IN PROGRESS; P12-05 NOT STARTED. Main remains uncommitted/unpushed,
++index empty and protected dirty files preserved. Review publication is limited
++to astra_response/P12-04E/r1/ on astra-response. Only subsequent accepted review
++can close this checkpoint; completion does not authorize P12-05.
+diff --git a/scripts/complete_run_retention.py b/scripts/complete_run_retention.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..7f43bed7351feb52bb169d04112d99901907ba19
+--- /dev/null
++++ b/scripts/complete_run_retention.py
+@@ -0,0 +1,448 @@
++"""Complete-run retention. All identifiers stay in protected local state."""
++
++import argparse
++import hashlib
++import json
++import os
++import re
++import stat
++import sys
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from typing import Any
++
++import operational_alert as protected
++
++ARTIFACTS = {"database.dump", "globals.sql", "configuration.tar"}
++DESTINATIONS = {"proxmox", "drive"}
++HEX32 = re.compile(r"[a-f0-9]{32}\Z")
++HEX64 = re.compile(r"[a-f0-9]{64}\Z")
++PINS = Path("/etc/brickvault/backup/retention-pins.json")
++STATE = Path("/etc/brickvault/backup/retention")
++LOCK = Path("/run/brickvault-backup-retention.lock")
++MAX_STATE_BYTES = 16 * 1024 * 1024
++
++
++class RetentionError(RuntimeError):
++    """Retention must stop without disclosing private history."""
++
++
++def read_state(path: Path) -> dict[str, Any]:
++    # Full snapshot evidence and the durable deleted-run ledger exceed config size.
++    return protected.protected_json(path, max_bytes=MAX_STATE_BYTES)
++
++
++def digest(value: Any) -> str:
++    return hashlib.sha256(
++        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
++    ).hexdigest()
++
++
++def stamp(value: Any, now: datetime) -> datetime:
++    if not isinstance(value, str):
++        raise RetentionError("Invalid receipt time.")
++    result = datetime.fromisoformat(value)
++    if result.utcoffset() != timedelta(0) or result > now:
++        raise RetentionError("Invalid receipt time.")
++    return result
++
++
++def validate_receipt(
++    run: str,
++    record: dict[str, Any],
++    repositories: dict[str, Any],
++    marker: str,
++    now: datetime,
++) -> None:
++    if (
++        HEX32.fullmatch(run) is None
++        or set(record)
++        != {
++            "schema",
++            "purpose",
++            "database",
++            "ownership_marker",
++            "run_id",
++            "revisions_at_backup",
++            "verified_at_utc",
++            "repositories",
++            "artifacts",
++        }
++        or type(record["schema"]) is not int
++        or record["schema"] != 2
++        or record["purpose"] != "production"
++        or record["database"] != "brickvault_appraisal_prod"
++        or record["ownership_marker"] != marker
++        or record["run_id"] != run
++        or record["repositories"] != repositories
++        or record["revisions_at_backup"] not in [[], ["0016_hunt_cached_runs"]]
++        or not isinstance(record["artifacts"], dict)
++        or set(record["artifacts"]) != ARTIFACTS
++    ):
++        raise RetentionError("Invalid production receipt.")
++    stamp(record["verified_at_utc"], now)
++    seen = set()
++    for row in record["artifacts"].values():
++        if (
++            not isinstance(row, dict)
++            or set(row) != {"bytes", "sha256", "snapshots"}
++            or type(row["bytes"]) is not int
++            or row["bytes"] <= 0
++            or not isinstance(row["sha256"], str)
++            or HEX64.fullmatch(row["sha256"]) is None
++            or not isinstance(row["snapshots"], dict)
++            or set(row["snapshots"]) != DESTINATIONS
++        ):
++            raise RetentionError("Invalid artifact receipt.")
++        for identity in row["snapshots"].values():
++            if (
++                not isinstance(identity, str)
++                or HEX64.fullmatch(identity) is None
++                or identity in seen
++            ):
++                raise RetentionError("Ambiguous snapshot identity.")
++            seen.add(identity)
++
++
++def select_keep(receipts: dict[str, dict[str, Any]], now: datetime) -> set[str]:
++    ordered = sorted(
++        receipts,
++        key=lambda r: (stamp(receipts[r]["verified_at_utc"], now), r),
++        reverse=True,
++    )
++    keep: set[str] = set()
++    for period, count in (("day", 30), ("week", 8), ("month", 12)):
++        buckets: set[str] = set()
++        for run in ordered:
++            date = stamp(receipts[run]["verified_at_utc"], now)
++            key = (
++                date.strftime("%Y-%m-%d")
++                if period == "day"
++                else date.strftime("%G-%V")
++                if period == "week"
++                else date.strftime("%Y-%m")
++            )
++            if key not in buckets:
++                if len(buckets) == count:
++                    break
++                buckets.add(key)
++                keep.add(run)
++    return keep
++
++
++def make_plan(
++    receipts: dict[str, dict[str, Any]],
++    repositories: dict[str, Any],
++    marker: str,
++    snapshots: dict[str, list[dict[str, Any]]],
++    pins: dict[str, Any],
++    ledger: dict[str, Any],
++    now: datetime,
++) -> dict[str, Any]:
++    if (
++        set(pins) != {"schema", "repositories", "runs", "canaries"}
++        or pins["schema"] != 1
++        or pins["repositories"] != repositories
++        or not isinstance(pins["runs"], dict)
++        or len(pins["runs"]) < 2
++        or not isinstance(pins["canaries"], dict)
++        or set(pins["canaries"]) != DESTINATIONS
++        or set(ledger) != {"schema", "status", "deleted", "last_transaction"}
++        or ledger["schema"] != 1
++        or ledger["status"] != "READY"
++        or not isinstance(ledger["deleted"], dict)
++        or set(snapshots) != DESTINATIONS
++    ):
++        raise RetentionError("Pins or retention state are invalid/degraded.")
++    if not set(pins["runs"]).issubset(receipts) or not set(ledger["deleted"]).issubset(
++        receipts
++    ):
++        raise RetentionError("Protected receipt history is missing.")
++    if set(pins["runs"]) & set(ledger["deleted"]):
++        raise RetentionError("Pinned history was selected for deletion.")
++    live: dict[str, dict[str, Any]] = {}
++    expected: dict[str, dict[str, tuple[str, str]]] = {d: {} for d in DESTINATIONS}
++    all_ids: set[str] = set()
++    for run, receipt in receipts.items():
++        validate_receipt(run, receipt, repositories, marker, now)
++        receipt_digest = digest(receipt)
++        if run in pins["runs"] and pins["runs"][run] != receipt_digest:
++            raise RetentionError("Pinned receipt changed.")
++        if run in ledger["deleted"]:
++            if ledger["deleted"][run] != receipt_digest:
++                raise RetentionError("Deleted receipt changed.")
++        else:
++            live[run] = receipt
++        for artifact, row in receipt["artifacts"].items():
++            for destination, identity in row["snapshots"].items():
++                if identity in all_ids:
++                    raise RetentionError("Snapshot shared across runs.")
++                all_ids.add(identity)
++                if run in live:
++                    expected[destination][identity] = (run, artifact)
++    normalized: dict[str, list[dict[str, Any]]] = {}
++    for destination in sorted(DESTINATIONS):
++        canaries = pins["canaries"][destination]
++        if not isinstance(canaries, dict) or not canaries:
++            raise RetentionError("Canary pins missing.")
++        rows: dict[str, dict[str, Any]] = {}
++        for row in snapshots[destination]:
++            identity = row.get("id")
++            if (
++                not isinstance(identity, str)
++                or HEX64.fullmatch(identity) is None
++                or identity in rows
++            ):
++                raise RetentionError("Ambiguous repository snapshot list.")
++            rows[identity] = row
++        if set(rows) != set(expected[destination]) | set(canaries):
++            raise RetentionError("Partial or unrecognized backup history.")
++        if set(canaries) & all_ids:
++            raise RetentionError("Canary overlaps production artifacts.")
++        for identity, row_digest in canaries.items():
++            if digest(rows[identity]) != row_digest:
++                raise RetentionError("Pinned canary identity changed.")
++        for identity, (run, artifact) in expected[destination].items():
++            row = rows[identity]
++            if row.get("paths") not in [
++                [f"/{run}/{artifact}"],
++                [f"{run}/{artifact}"],
++            ] or row.get("tags") != [run]:
++                raise RetentionError(
++                    "Snapshot path/tag does not match its complete run."
++                )
++        normalized[destination] = [rows[key] for key in sorted(rows)]
++    keep = select_keep(live, now) | set(pins["runs"])
++    plan = {
++        "schema": 1,
++        "policy": [30, 8, 12],
++        "date_utc": now.date().isoformat(),
++        "keep": sorted(keep),
++        "delete": sorted(set(live) - keep),
++        "repositories": repositories,
++        "receipts": {r: digest(v) for r, v in sorted(receipts.items())},
++        "snapshots": normalized,
++        "pins_digest": digest(pins),
++        "ledger_digest": digest(ledger),
++    }
++    plan["digest"] = digest(plan)
++    return plan
++
++
++def apply_plan(
++    expected_digest: str,
++    gather: Any,
++    forget: Any,
++    readback: Any,
++    check: Any,
++    save: Any,
++    notify: Any,
++) -> str:
++    """Adapters permit real disposable restic tests without production credentials."""
++    plan, receipts, ledger = gather()
++    if plan["digest"] != expected_digest:
++        raise RetentionError("Retention plan changed; no deletion performed.")
++    if not plan["delete"]:
++        save(ledger, {"status": "NOOP", "plan": plan})
++        return "NOOP"
++    # Verify the exact six bytes streams before the first irreversible action.
++    for run in plan["delete"]:
++        readback(run, receipts[run])
++    refreshed, _, _ = gather()
++    if refreshed != plan:
++        raise RetentionError("History changed during readback; no deletion performed.")
++    transaction: dict[str, Any] = {"status": "DEGRADED", "plan": plan, "completed": []}
++    ledger = dict(ledger, status="DEGRADED", last_transaction=plan["digest"])
++    save(
++        ledger, transaction
++    )  # Durable fail-closed intent before either repository mutates.
++    remaining = {d: {row["id"] for row in plan["snapshots"][d]} for d in DESTINATIONS}
++    try:
++        for run in plan["delete"]:
++            for destination in sorted(DESTINATIONS):
++                identities = sorted(
++                    receipts[run]["artifacts"][a]["snapshots"][destination]
++                    for a in ARTIFACTS
++                )
++                forget(destination, identities)
++                remaining[destination].difference_update(identities)
++                check(destination, remaining[destination])
++                transaction["completed"].append(
++                    {"run": run, "destination": destination, "snapshots": identities}
++                )
++                save(ledger, transaction)
++            ledger["deleted"][run] = digest(receipts[run])
++        transaction["status"] = "COMPLETE"
++        save(dict(ledger, status="READY"), transaction)
++        return "COMPLETE"
++    except BaseException:  # noqa: BLE001 - fail closed even on process interruption.
++        # Even a killed process leaves DEGRADED on disk; only operator review can clear it.
++        try:
++            notify()
++        except Exception:  # noqa: BLE001, S110 - preserve failure and protected transaction.
++            pass
++        raise RetentionError("Retention DEGRADED; operator repair required.") from None
++
++
++def run(command: str, requested_digest: str | None) -> str:
++    import fcntl
++
++    from brickvault_api import production_admin as admin
++    from brickvault_api import production_backup as backup
++
++    if os.geteuid() != 0:
++        raise RetentionError("Root is required.")
++    os.umask(0o077)
++    descriptor = os.open(LOCK, os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
++    try:
++        info = os.fstat(descriptor)
++        if (
++            not stat.S_ISREG(info.st_mode)
++            or info.st_uid != 0
++            or info.st_nlink != 1
++            or stat.S_IMODE(info.st_mode) != 0o600
++        ):
++            raise RetentionError("Unsafe backup/retention lock.")
++        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
++        config = backup._preflight()
++        protected.directory(STATE)
++        destinations = {d.name: d for d in backup.DESTINATIONS}
++
++        def gather() -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
++            backup._verify_destination_identity()
++            identities, _ = backup._validated_identity(
++                admin._parse_json(
++                    admin._protected_file(backup.BACKUP_DIR / "repositories.json")
++                )
++            )
++            repositories = {
++                d.name: {"uri": d.repository, "id": identities[d.name]}
++                for d in backup.DESTINATIONS
++            }
++            receipts = {}
++            for path in sorted(backup.RECEIPT_DIR.iterdir()):
++                if path.suffix != ".json" or HEX32.fullmatch(path.stem) is None:
++                    raise RetentionError("Unexpected receipt directory entry.")
++                receipts[path.stem] = protected.protected_json(path)
++            pins = protected.protected_json(PINS)
++            ledger = read_state(STATE / "ledger.json")
++            snapshots = {
++                d.name: json.loads(
++                    backup._restic(d, "snapshots", "--json", capture=True)
++                )
++                for d in backup.DESTINATIONS
++            }
++            return (
++                make_plan(
++                    receipts,
++                    repositories,
++                    config.marker,
++                    snapshots,
++                    pins,
++                    ledger,
++                    datetime.now(UTC),
++                ),
++                receipts,
++                ledger,
++            )
++
++        def save(ledger: dict[str, Any], transaction: dict[str, Any]) -> None:
++            # Write DEGRADED first; a later failed transaction write must still prohibit deletion.
++            if ledger["status"] == "DEGRADED":
++                protected.write_state(STATE / "ledger.json", ledger)
++            protected.write_state(
++                STATE / (transaction["plan"]["digest"] + ".json"), transaction
++            )
++            if ledger["status"] == "READY":
++                protected.write_state(STATE / "ledger.json", ledger)
++
++        def readback(run_id: str, receipt: dict[str, Any]) -> None:
++            for artifact, row in receipt["artifacts"].items():
++                for d in backup.DESTINATIONS:
++                    backup._readback(
++                        d,
++                        row["snapshots"][d.name],
++                        artifact,
++                        row["bytes"],
++                        row["sha256"],
++                        run_id,
++                    )
++
++        def forget(destination: str, identities: list[str]) -> None:
++            backup._restic(destinations[destination], "forget", *identities)
++
++        def check(destination: str, expected: set[str]) -> None:
++            d = destinations[destination]
++            rows = json.loads(backup._restic(d, "snapshots", "--json", capture=True))
++            if {row["id"] for row in rows} != expected:
++                raise RetentionError("Post-deletion repository state differs.")
++            backup._restic(d, "check")
++
++        plan, _, _ = gather()
++        if command == "plan":
++            # Counts and a digest disclose no raw run or snapshot identifiers.
++            return f"RETENTION_PLAN keep={len(plan['keep'])} delete={len(plan['delete'])} digest={plan['digest']}"
++        if command == "scheduled":
++            requested_digest = plan["digest"]
++        if requested_digest is None or HEX64.fullmatch(requested_digest) is None:
++            raise RetentionError("An exact current plan digest is required.")
++        if command == "prune":
++            current, _, ledger = gather()
++            if (
++                current["digest"] != requested_digest
++                or current["delete"]
++                or not ledger["last_transaction"]
++            ):
++                raise RetentionError(
++                    "Prune requires an unchanged safe plan after completed retention."
++                )
++            previous = read_state(STATE / (ledger["last_transaction"] + ".json"))
++            if previous["status"] != "COMPLETE":
++                raise RetentionError(
++                    "Prune requires completed deletion/readback/checks."
++                )
++            transaction = {"status": "PRUNE_PENDING", "plan": current}
++            save(dict(ledger, status="DEGRADED"), transaction)
++            try:
++                for destination in sorted(DESTINATIONS):
++                    backup._restic(destinations[destination], "prune")
++                    check(
++                        destination,
++                        {row["id"] for row in current["snapshots"][destination]},
++                    )
++                transaction["status"] = "PRUNE_COMPLETE"
++                save(ledger, transaction)
++                return "RETENTION_PRUNE_COMPLETE"
++            except Exception:  # noqa: BLE001 - never retry destructive maintenance.
++                protected.send("RETENTION")
++                raise RetentionError(
++                    "Prune DEGRADED; operator review required."
++                ) from None
++        return "RETENTION_" + apply_plan(
++            requested_digest,
++            gather,
++            forget,
++            readback,
++            check,
++            save,
++            lambda: protected.send("RETENTION"),
++        )
++    finally:
++        os.close(descriptor)
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("command", choices=["plan", "apply", "scheduled", "prune"])
++    parser.add_argument("--digest")
++    args = parser.parse_args()
++    try:
++        print(run(args.command, args.digest))
++        return 0
++    except Exception:  # noqa: BLE001 - live identifiers/credentials remain private.
++        print("RETENTION_REFUSED; inspect protected state", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/operational_alert.py b/scripts/operational_alert.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..375510e825891b501b2565dde6fabba60f76161b
+--- /dev/null
++++ b/scripts/operational_alert.py
+@@ -0,0 +1,250 @@
++"""Root-only, category-limited Gmail alerts; credentials and server replies stay private."""
++
++import argparse
++import json
++import os
++import re
++import smtplib
++import ssl
++import stat
++import sys
++import time
++from email.message import EmailMessage
++from pathlib import Path
++from typing import Any
++
++CONFIG = Path("/etc/brickvault/operations/gmail.json")
++STATE = Path("/var/lib/brickvault-operations/alerts")
++CATEGORIES = frozenset(
++    {
++        "TEST",
++        "BACKUP",
++        "RETENTION",
++        "API",
++        "CADDY",
++        "CERTIFICATE",
++        "HEALTH",
++        "PYTHON",
++        "REBOOT",
++    }
++)
++UNITS = {
++    "brickvault-backup.service": "BACKUP",
++    "brickvault-retention.service": "RETENTION",
++    "brickvault-api.service": "API",
++    "caddy.service": "CADDY",
++    "certbot.service": "CERTIFICATE",
++    "brickvault-health.service": "HEALTH",
++    "brickvault-health-deep.service": "HEALTH",
++    "brickvault-python-version.service": "PYTHON",
++}
++
++
++class AlertError(RuntimeError):
++    """Sanitized operational failure."""
++
++
++def unique_object(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
++    value: dict[str, Any] = {}
++    for key, item in pairs:
++        if key in value:
++            raise AlertError("Ambiguous operations record.")
++        value[key] = item
++    return value
++
++
++def directory(path: Path, *, create: bool = False) -> None:
++    if create:
++        path.mkdir(mode=0o700, parents=False, exist_ok=True)
++    for item in (path, *path.parents):
++        info = item.lstat()
++        if not stat.S_ISDIR(info.st_mode) or info.st_uid != 0 or info.st_mode & 0o022:
++            raise AlertError("Unsafe operations directory.")
++    if stat.S_IMODE(path.stat().st_mode) != 0o700 or path.stat().st_gid != 0:
++        raise AlertError("Unsafe operations directory permissions.")
++
++
++def protected_json(path: Path, *, max_bytes: int = 65536) -> dict[str, Any]:
++    directory(path.parent)
++    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
++    try:
++        info = os.fstat(descriptor)
++        if (
++            not stat.S_ISREG(info.st_mode)
++            or info.st_uid != 0
++            or info.st_gid != 0
++            or stat.S_IMODE(info.st_mode) != 0o600
++            or info.st_nlink != 1
++            or info.st_size > max_bytes
++        ):
++            raise AlertError("Unsafe operations file.")
++        with os.fdopen(descriptor, "rb", closefd=False) as stream:
++            value = json.load(stream, object_pairs_hook=unique_object)
++    finally:
++        os.close(descriptor)
++    if not isinstance(value, dict):
++        raise AlertError("Invalid operations record.")
++    return value
++
++
++def write_state(path: Path, value: dict[str, Any]) -> None:
++    directory(path.parent)
++    temporary = path.with_suffix(".pending")
++    descriptor = os.open(
++        temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600
++    )
++    with os.fdopen(descriptor, "w", encoding="ascii") as stream:
++        json.dump(value, stream, sort_keys=True)
++        stream.write("\n")
++        stream.flush()
++        os.fsync(stream.fileno())
++    temporary.replace(path)
++    descriptor = os.open(path.parent, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
++    try:
++        os.fsync(descriptor)
++    finally:
++        os.close(descriptor)
++
++
++def validate_config(value: dict[str, Any]) -> None:
++    if (
++        set(value)
++        != {
++            "schema",
++            "purpose",
++            "transport",
++            "host",
++            "port",
++            "username",
++            "sender",
++            "recipient",
++            "password",
++        }
++        or type(value["schema"]) is not int
++        or value["schema"] != 1
++        or value["purpose"] != "brickvault-operational-alerts"
++        or value["transport"] != "smtp-ssl"
++        or value["host"] != "smtp.gmail.com"
++        or type(value["port"]) is not int
++        or value["port"] != 465
++        or not isinstance(value["username"], str)
++        or re.fullmatch(r"[a-z0-9][a-z0-9._+\-]{0,63}@gmail\.com", value["username"])
++        is None
++        or value["sender"] != value["username"]
++        or value["recipient"] != value["username"]
++        or not isinstance(value["password"], str)
++        or re.fullmatch(r"[a-z]{16}", value["password"]) is None
++    ):
++        raise AlertError("Invalid Gmail alert configuration.")
++
++
++def deliver(config: dict[str, Any], category: str) -> None:
++    validate_config(config)
++    if category not in CATEGORIES:
++        raise AlertError("Unknown alert category.")
++    message = EmailMessage()
++    message["From"] = config["sender"]
++    message["To"] = config["recipient"]
++    message["Subject"] = f"BrickVault operations: {category}"
++    message.set_content(
++        "BrickVault operational notification.\n"
++        + (
++            "This is the authorized synthetic alert test.\n"
++            if category == "TEST"
++            else f"Attention is required for category {category}. Inspect the protected local operations status.\n"
++        )
++        + "No application records, account identifiers, infrastructure addresses or credentials are included.\n"
++    )
++    client = smtplib.SMTP_SSL(
++        "smtp.gmail.com",
++        465,
++        local_hostname="brickvault-operations",
++        timeout=20,
++        context=ssl.create_default_context(),
++    )
++    try:
++        client.login(config["username"], config["password"])
++        refused = client.send_message(message)
++        if refused:
++            raise AlertError("Alert recipient was refused.")
++        # send_message returning without refusal proves the final SMTP DATA acceptance.
++        # A failure during QUIT must not turn that accepted send into an automatic retry.
++    finally:
++        client.close()
++
++
++def due(record: dict[str, Any], now: float) -> bool:
++    if not record:
++        return True
++    if (
++        set(record) != {"attempt", "status"}
++        or type(record["attempt"]) not in (int, float)
++        or record["status"] not in {"PENDING", "ACCEPTED", "FAILED"}
++        or not 0 <= record["attempt"] <= now
++    ):
++        raise AlertError("Invalid alert state or clock rollback.")
++    return now - float(record["attempt"]) >= (
++        21600 if record["status"] == "ACCEPTED" else 600
++    )
++
++
++def send(category: str) -> str:
++    import fcntl
++
++    if os.geteuid() != 0 or category not in CATEGORIES:
++        raise AlertError("Root and an approved category are required.")
++    os.umask(0o077)
++    directory(STATE.parent, create=True)
++    directory(STATE, create=True)
++    descriptor = os.open(STATE / "lock", os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
++    try:
++        info = os.fstat(descriptor)
++        if (
++            info.st_uid != 0
++            or info.st_nlink != 1
++            or stat.S_IMODE(info.st_mode) != 0o600
++        ):
++            raise AlertError("Unsafe alert lock.")
++        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
++        path = STATE / f"{category}.json"
++        record = protected_json(path) if path.exists() or path.is_symlink() else {}
++        now = time.time()
++        if category == "TEST" and record:
++            raise AlertError("Test alert already attempted; operator review required.")
++        if not due(record, now):
++            return (
++                "SUPPRESSED"
++                if record["status"] == "ACCEPTED"
++                else "FAILED_RATE_LIMITED"
++            )
++        config = protected_json(CONFIG)
++        validate_config(config)
++        write_state(path, {"attempt": now, "status": "PENDING"})
++        try:
++            deliver(config, category)
++        except Exception:  # noqa: BLE001 - SMTP/configuration details must never escape.
++            write_state(path, {"attempt": now, "status": "FAILED"})
++            raise AlertError(
++                "Alert delivery failed; private details withheld."
++            ) from None
++        write_state(path, {"attempt": now, "status": "ACCEPTED"})
++        return "ACCEPTED"
++    finally:
++        os.close(descriptor)
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("category", choices=sorted(CATEGORIES | UNITS.keys()))
++    args = parser.parse_args()
++    try:
++        result = send(UNITS.get(args.category, args.category))
++        print("ALERT_" + result)
++        return 0 if result in {"ACCEPTED", "SUPPRESSED"} else 1
++    except Exception:  # noqa: BLE001 - SMTP/configuration details must never escape.
++        print("ALERT_FAILED: private details withheld", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/production_health.py b/scripts/production_health.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..3a24a0727f29a2c6343cc775fb9a40596b6c73b7
+--- /dev/null
++++ b/scripts/production_health.py
+@@ -0,0 +1,305 @@
++"""Credential-free application probes and protected operational health checks."""
++
++import argparse
++import hashlib
++import json
++import os
++import shutil
++import socket
++import ssl
++import subprocess
++import sys
++import time
++import urllib.request
++from datetime import UTC, datetime
++from pathlib import Path
++from typing import Any
++
++import complete_run_retention as retention
++import operational_alert as protected
++
++HOST = "appraisal.abrianbaker.com"
++CONFIG = Path("/etc/brickvault/operations/health.json")
++STATE = Path("/var/lib/brickvault-operations")
++
++
++def command(*args: str) -> str:
++    result = subprocess.run(args, capture_output=True, timeout=30, check=False)
++    if result.returncode:
++        raise ValueError("Health command failed.")
++    return result.stdout.decode("utf-8").strip()
++
++
++def listeners_valid(output: str) -> bool:
++    found: dict[int, set[str]] = {}
++    for line in output.splitlines():
++        fields = line.split()
++        if len(fields) < 4:
++            return False
++        endpoint = fields[3]
++        address, port_text = endpoint.rsplit(":", 1)
++        port = int(port_text)
++        # ss can include an interface suffix even on IPv4 loopback DNS stubs.
++        address = address.strip("[]").split("%", 1)[0]
++        found.setdefault(port, set()).add(address)
++        if port not in {22, 443} and (address, port) not in {
++            ("127.0.0.1", 18080),
++            ("127.0.0.1", 5432),
++            ("127.0.0.53", 53),
++            ("127.0.0.54", 53),
++        }:
++            return False
++    return (
++        found.get(18080) == {"127.0.0.1"}
++        and found.get(5432) == {"127.0.0.1"}
++        and 443 in found
++        and 80 not in found
++    )
++
++
++def recent_backup(records: list[dict[str, Any]], now: datetime) -> bool:
++    if not records:
++        return False
++    times = [retention.stamp(r["verified_at_utc"], now) for r in records]
++    return (now - max(times)).total_seconds() < 36 * 3600
++
++
++def disk_ok(total: int, free: int, minimum: int) -> bool:
++    return total > 0 and free >= minimum and free / total >= 0.10
++
++
++def certificate_ok(certificate: dict[str, Any], now: float) -> bool:
++    return (
++        certificate.get("subjectAltName") == (("DNS", HOST),)
++        and ssl.cert_time_to_seconds(certificate["notAfter"]) - now > 21 * 86400
++    )
++
++
++def checks(deep: bool) -> dict[str, bool]:
++    config = protected.protected_json(CONFIG)
++    result: dict[str, bool] = {}
++
++    def probe(name: str, operation: Any) -> None:
++        try:
++            result[name] = bool(operation())
++        except Exception:  # noqa: BLE001 - do not log command output or private configuration.
++            result[name] = False
++
++    def services() -> bool:
++        units = [
++            "brickvault-api.service",
++            "caddy.service",
++            "postgresql@18-main.service",
++            "brickvault-backup.timer",
++            "certbot.timer",
++            "qemu-guest-agent.service",
++            "brickvault-health.timer",
++            "brickvault-health-deep.timer",
++            "brickvault-python-version.timer",
++            "brickvault-retention.timer",
++            "apt-daily.timer",
++            "apt-daily-upgrade.timer",
++        ]
++        return all(
++            command("/usr/bin/systemctl", "is-active", name) == "active"
++            for name in units
++        )
++
++    def https() -> bool:
++        with urllib.request.urlopen(
++            f"https://{HOST}/api/health", timeout=15
++        ) as response:
++            if response.status != 200 or response.url != f"https://{HOST}/api/health":
++                return False
++            json.loads(response.read(65536))
++        with (
++            socket.create_connection((HOST, 443), timeout=15) as raw,
++            ssl.create_default_context().wrap_socket(
++                raw, server_hostname=HOST
++            ) as connection,
++        ):
++            return certificate_ok(dict(connection.getpeercert() or {}), time.time())
++
++    def mount() -> bool:
++        rows = json.loads(
++            command(
++                "/usr/bin/findmnt",
++                "--json",
++                "--target",
++                "/var/lib/postgresql",
++                "--output",
++                "TARGET,FSTYPE,UUID",
++            )
++        )["filesystems"]
++        return (
++            len(rows) == 1
++            and rows[0]
++            == {
++                "target": "/var/lib/postgresql",
++                "fstype": "ext4",
++                "uuid": config["data_uuid"],
++            }
++            and command(
++                "/usr/lib/postgresql/18/bin/psql",
++                "-X",
++                "-A",
++                "-t",
++                "--no-password",
++                "-h",
++                "/var/run/postgresql",
++                "-U",
++                "postgres",
++                "-d",
++                "postgres",
++                "-c",
++                "SHOW data_directory",
++            )
++            == "/var/lib/postgresql/18/main"
++        )
++
++    def backups() -> bool:
++        # Only protected receipt metadata is read in the frequent path; no remote restic work.
++        from brickvault_api import production_admin as admin
++        from brickvault_api import production_backup as backup
++
++        identities, _ = backup._validated_identity(
++            admin._parse_json(
++                admin._protected_file(backup.BACKUP_DIR / "repositories.json")
++            )
++        )
++        repositories = {
++            d.name: {"uri": d.repository, "id": identities[d.name]}
++            for d in backup.DESTINATIONS
++        }
++        marker = admin._load_config(admin.CONFIG_PATH).marker
++        records = []
++        for path in backup.RECEIPT_DIR.iterdir():
++            record = protected.protected_json(path)
++            retention.validate_receipt(
++                path.stem, record, repositories, marker, datetime.now(UTC)
++            )
++            records.append(record)
++        return (
++            recent_backup(records, datetime.now(UTC))
++            and retention.read_state(retention.STATE / "ledger.json")["status"]
++            == "READY"
++        )
++
++    def release() -> bool:
++        current = Path("/opt/brickvault/current")
++        directory = current.resolve(strict=True)
++        if (
++            directory.parent != Path("/opt/brickvault/releases")
++            or directory.name != config["release_id"]
++        ):
++            return False
++        raw = (directory / "manifest.json").read_bytes()
++        if hashlib.sha256(raw).hexdigest() != config["manifest_sha256"]:
++            return False
++        manifest = json.loads(raw)
++        for row in manifest["files"]:
++            path = directory / row["path"]
++            if (
++                path.is_symlink()
++                or not path.resolve().is_relative_to(directory)
++                or hashlib.sha256(path.read_bytes()).hexdigest() != row["sha256"]
++            ):
++                return False
++        hook = Path("/etc/letsencrypt/renewal-hooks/deploy/brickvault-certificate")
++        if hook.is_symlink() or hook.stat().st_uid != 0 or hook.stat().st_mode & 0o022:
++            return False
++        if (
++            hook.read_bytes()
++            != (
++                directory / "deploy/certbot/renewal-hooks/deploy/brickvault-certificate"
++            ).read_bytes()
++        ):
++            return False
++        return list(sys.version_info[:3]) == config["python_version"] and Path(
++            sys.executable
++        ).resolve().is_relative_to(Path("/opt/python"))
++
++    def security_updates() -> bool:
++        values = command("/usr/bin/apt-config", "dump")
++        return (
++            'APT::Periodic::Update-Package-Lists "1";' in values
++            and 'APT::Periodic::Unattended-Upgrade "1";' in values
++            and 'Unattended-Upgrade::Automatic-Reboot "true";' not in values
++            and 'Unattended-Upgrade::Automatic-Reboot "1";' not in values
++            and "${distro_id}:${distro_codename}-security" in values
++        )
++
++    probe("SERVICES", services)
++    probe("HTTPS_CERTIFICATE", https)
++    probe("LISTENERS", lambda: listeners_valid(command("/usr/bin/ss", "-H", "-lnt")))
++    probe(
++        "DATABASE_READY",
++        lambda: (
++            "accepting connections"
++            in command(
++                "/usr/lib/postgresql/18/bin/pg_isready", "-h", "127.0.0.1", "-p", "5432"
++            )
++        ),
++    )
++    probe("DATA_MOUNT", mount)
++    probe("BACKUP_FRESH_RETENTION_READY", backups)
++    probe("RELEASE_RUNTIME_HOOK", release)
++    probe(
++        "UFW", lambda: command("/usr/sbin/ufw", "status").startswith("Status: active")
++    )
++    probe(
++        "CLOCK",
++        lambda: (
++            command("/usr/bin/timedatectl", "show", "-p", "NTPSynchronized", "--value")
++            == "yes"
++        ),
++    )
++    for name, path, minimum in [
++        ("ROOT_SPACE", "/", 2 * 1024**3),
++        ("DATA_SPACE", "/var/lib/postgresql", 5 * 1024**3),
++    ]:
++        usage = shutil.disk_usage(path)
++        result[name] = disk_ok(usage.total, usage.free, minimum)
++    reboot = Path("/var/run/reboot-required")
++    probe(
++        "REBOOT_PENDING",
++        lambda: not reboot.exists() or time.time() - reboot.stat().st_mtime < 48 * 3600,
++    )
++    probe("SECURITY_UPDATES", security_updates)
++    if deep:
++
++        def repositories() -> bool:
++            from brickvault_api import production_backup as backup
++
++            backup._verify_destination_identity()
++            return retention.run("plan", None).startswith("RETENTION_PLAN ")
++
++        probe("REPOSITORY_IDENTITIES", repositories)
++    return result
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--deep", action="store_true")
++    args = parser.parse_args()
++    try:
++        if os.geteuid() != 0:
++            raise ValueError("Root required.")
++        protected.directory(STATE, create=True)
++        result = checks(args.deep)
++        protected.write_state(
++            STATE / ("health-deep.json" if args.deep else "health.json"),
++            {"checked_at": time.time(), "checks": result},
++        )
++        failed = [name for name, passed in result.items() if not passed]
++        if failed:
++            print("HEALTH_FAILED " + ",".join(failed), file=sys.stderr)
++            return 1
++        return 0
++    except Exception:  # noqa: BLE001 - private configuration and command errors stay local.
++        print("HEALTH_FAILED INTERNAL", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/python_maintenance.py b/scripts/python_maintenance.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e2a724b1f5cd7f282ca36803256f72295faa6d31
+--- /dev/null
++++ b/scripts/python_maintenance.py
+@@ -0,0 +1,113 @@
++"""Detect official 3.13 patch releases; never download or install an interpreter."""
++
++import gzip
++import io
++import re
++import sys
++import time
++import urllib.request
++from html.parser import HTMLParser
++from pathlib import Path
++from urllib.parse import urlparse
++
++import operational_alert as protected
++
++SOURCE = "https://www.python.org/downloads/source/"
++STATE = Path("/var/lib/brickvault-operations/python-version.json")
++MAX_RESPONSE = 2 * 1024 * 1024
++
++
++class ReleaseLinks(HTMLParser):
++    def __init__(self) -> None:
++        super().__init__()
++        self.patches: set[int] = set()
++
++    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
++        if tag != "a":
++            return
++        href = dict(attrs).get("href") or ""
++        match = re.fullmatch(r"/downloads/release/python-313([0-9]+)/", href)
++        if match:
++            self.patches.add(int(match[1]))
++
++
++def latest_from_html(html: str) -> tuple[int, int, int]:
++    parser = ReleaseLinks()
++    parser.feed(html)
++    if "Stable Releases" not in html or not parser.patches:
++        raise ValueError("Official source release index is unrecognized.")
++    return 3, 13, max(parser.patches)
++
++
++def lookup() -> tuple[int, int, int]:
++    request = urllib.request.Request(
++        SOURCE,
++        headers={
++            "User-Agent": "BrickVault-operations-version-check/1",
++            "Accept-Encoding": "gzip, identity",
++        },
++    )
++    with urllib.request.urlopen(request, timeout=20) as response:
++        location = urlparse(response.url)
++        if location.scheme != "https" or location.hostname != "www.python.org":
++            raise ValueError("Official source redirect refused.")
++        raw = response.read(MAX_RESPONSE + 1)
++        encoding = response.headers.get("Content-Encoding", "identity").lower().strip()
++    if len(raw) > MAX_RESPONSE:
++        raise ValueError("Official source response too large.")
++    if encoding == "gzip":
++        with gzip.GzipFile(fileobj=io.BytesIO(raw)) as compressed:
++            raw = compressed.read(MAX_RESPONSE + 1)
++    elif encoding != "identity":
++        raise ValueError("Official source response encoding is unsupported.")
++    if len(raw) > MAX_RESPONSE:
++        raise ValueError("Official source expanded response too large.")
++    return latest_from_html(raw.decode("utf-8"))
++
++
++def main() -> int:
++    installed = tuple(sys.version_info[:3])
++    try:
++        protected.directory(STATE.parent, create=True)
++        if installed[:2] != (3, 13):
++            raise ValueError("Unexpected installed runtime family.")
++        latest = None
++        for attempt in range(3):
++            try:
++                latest = lookup()
++                break
++            except (OSError, ValueError, EOFError):
++                if attempt < 2:
++                    time.sleep(2)
++        if latest is None or latest < installed:
++            protected.write_state(
++                STATE,
++                {
++                    "checked_at": time.time(),
++                    "status": "LOOKUP_FAILED",
++                    "installed": installed,
++                },
++            )
++            print("PYTHON_LOOKUP_FAILED_AFTER_THREE_ATTEMPTS", file=sys.stderr)
++            return 1
++        status = "UPDATE_AVAILABLE" if latest > installed else "CURRENT"
++        protected.write_state(
++            STATE,
++            {
++                "checked_at": time.time(),
++                "status": status,
++                "installed": installed,
++                "latest": latest,
++            },
++        )
++        print(
++            f"PYTHON_{status} installed={'.'.join(map(str, installed))} latest={'.'.join(map(str, latest))}"
++        )
++        return int(latest > installed)
++    except Exception:  # noqa: BLE001 - only sanitized maintenance categories may be logged.
++        print("PYTHON_MAINTENANCE_FAILED", file=sys.stderr)
++        return 1
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index 3825d93cf06c993ca101740a2b0eef6d32f98cc1..1dbcbe5fcbf71a28d60ba5d861299b96a11e878e 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -33,18 +33,39 @@ SAFE_ID = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]{1,63}\Z")
+ HEX_40 = re.compile(r"[a-f0-9]{40}\Z")
+ HEX_64 = re.compile(r"[a-f0-9]{64}\Z")
+ MAX_WEB_BYTES = 32 * 1024 * 1024
+-DEPLOYMENT_FILES = {
++SCHEMA_TWO_DEPLOYMENT_FILES = {
+     "deploy/caddy/Caddyfile": "deploy/caddy/Caddyfile",
+     "deploy/systemd/caddy.service.d/brickvault.conf": "deploy/systemd/caddy.service.d/brickvault.conf",
+     "deploy/certbot/renewal-hooks/deploy/brickvault-certificate": "deploy/certbot/renewal-hooks/deploy/brickvault-certificate",
+     "scripts/deploy_certificate.py": "deploy/deploy_certificate.py",
+ }
++DEPLOYMENT_FILES = {
++    **SCHEMA_TWO_DEPLOYMENT_FILES,
++    "deploy/systemd/brickvault-alert@.service": "deploy/systemd/brickvault-alert@.service",
++    "deploy/systemd/brickvault-health.service": "deploy/systemd/brickvault-health.service",
++    "deploy/systemd/brickvault-health.timer": "deploy/systemd/brickvault-health.timer",
++    "deploy/systemd/brickvault-health-deep.service": "deploy/systemd/brickvault-health-deep.service",
++    "deploy/systemd/brickvault-health-deep.timer": "deploy/systemd/brickvault-health-deep.timer",
++    "deploy/systemd/brickvault-python-version.service": "deploy/systemd/brickvault-python-version.service",
++    "deploy/systemd/brickvault-python-version.timer": "deploy/systemd/brickvault-python-version.timer",
++    "deploy/systemd/brickvault-retention.service": "deploy/systemd/brickvault-retention.service",
++    "deploy/systemd/brickvault-retention.timer": "deploy/systemd/brickvault-retention.timer",
++    "deploy/systemd/brickvault-api.service": "deploy/systemd/brickvault-api.service",
++    "deploy/systemd/brickvault-backup.service": "deploy/systemd/brickvault-backup.service",
++    "deploy/systemd/brickvault-backup.timer": "deploy/systemd/brickvault-backup.timer",
++    "deploy/systemd/brickvault-api.service.d/operations.conf": "deploy/systemd/brickvault-api.service.d/operations.conf",
++    "deploy/systemd/brickvault-backup.service.d/operations.conf": "deploy/systemd/brickvault-backup.service.d/operations.conf",
++    "deploy/systemd/caddy.service.d/operations.conf": "deploy/systemd/caddy.service.d/operations.conf",
++    "deploy/systemd/certbot.service.d/operations.conf": "deploy/systemd/certbot.service.d/operations.conf",
++    "scripts/operational_alert.py": "deploy/operational_alert.py",
++    "scripts/complete_run_retention.py": "deploy/complete_run_retention.py",
++    "scripts/production_health.py": "deploy/production_health.py",
++    "scripts/python_maintenance.py": "deploy/python_maintenance.py",
++    "deploy/tmpfiles.d/brickvault-operations.conf": "deploy/tmpfiles.d/brickvault-operations.conf",
++}
+ RELEASE_SOURCE_PATHS = (
+     *DEPLOYMENT_FILES,
+     "apps/web/package.json",
+-    "deploy/systemd/brickvault-api.service",
+-    "deploy/systemd/brickvault-backup.service",
+-    "deploy/systemd/brickvault-backup.timer",
+     "package.json",
+     "pnpm-lock.yaml",
+     "scripts/database.py",
+@@ -53,6 +74,9 @@ RELEASE_SOURCE_PATHS = (
+     "scripts/release_manifest.py",
+     "scripts/test_release_manifest.py",
+     "scripts/test_deploy_certificate.py",
++    "scripts/test_operational_alert.py",
++    "scripts/test_complete_run_retention.py",
++    "scripts/test_operations_health.py",
+     "services/api/pyproject.toml",
+     "services/api/src/brickvault_api/persistence/runtime_grants.py",
+     "services/api/src/brickvault_api/production_admin.py",
+@@ -71,6 +95,7 @@ DOCUMENTATION_PATHS = {
+     "docs/plans/095-dual-recovery-foundation.md",
+     "docs/plans/096-production-database-activation.md",
+     "docs/plans/097-private-https-application-activation.md",
++    "docs/plans/098-production-operational-hardening.md",
+ }
+ PROTECTED_PATHS = {
+     "AGENTS.md",
+@@ -391,7 +416,7 @@ def create(root: Path, release_id: str, source_id: str) -> tuple[Path, str]:
+         key=lambda item: str(item["path"]),
+     )
+     manifest = {
+-        "schema": 2,
++        "schema": 3,
+         "release_id": release_id,
+         "source": {"commit": commit, "reviewed_id": source_id},
+         "uv_version": UV_VERSION,
+@@ -429,7 +454,7 @@ def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str)
+     if (
+         not isinstance(manifest, dict)
+         or set(manifest) != {"schema", "release_id", "source", "uv_version", "files"}
+-        or manifest["schema"] not in (1, 2)
++        or manifest["schema"] not in (1, 2, 3)
+         or manifest["release_id"] != release_id
+         or manifest["uv_version"] != UV_VERSION
+         or not isinstance(source, dict)
+@@ -468,6 +493,8 @@ def verify(bundle: Path, expected_digest: str, release_id: str, source_id: str)
+             raise ReleaseError("Release file differs from its reviewed manifest.")
+     required = {f"api/{WHEEL}", f"api/{SDIST}", "api/requirements.txt"}
+     if manifest["schema"] == 2:
++        required.update(SCHEMA_TWO_DEPLOYMENT_FILES.values())
++    elif manifest["schema"] == 3:
+         required.update(DEPLOYMENT_FILES.values())
+     web = bundle / "web"
+     web_paths = {"web/" + path.relative_to(web).as_posix() for path in _web_files(web)}
+diff --git a/scripts/test_complete_run_retention.py b/scripts/test_complete_run_retention.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..53abcfdc687ad8bead9a76efaa852d123ae28f8b
+--- /dev/null
++++ b/scripts/test_complete_run_retention.py
+@@ -0,0 +1,345 @@
++"""Synthetic policy tests plus real forget in disposable LOCAL restic repositories."""
++
++import copy
++import hashlib
++import json
++import os
++import shutil
++import subprocess
++import tempfile
++import unittest
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from typing import Any
++from unittest.mock import patch
++
++import complete_run_retention as retention
++import operational_alert as protected
++
++NOW = datetime(2026, 9, 30, tzinfo=UTC)
++
++
++def receipt(
++    number: int, when: datetime, repositories: dict[str, Any]
++) -> dict[str, Any]:
++    run = f"{number:032x}"
++    return {
++        "schema": 2,
++        "purpose": "production",
++        "database": "brickvault_appraisal_prod",
++        "ownership_marker": "test-marker",
++        "run_id": run,
++        "revisions_at_backup": [],
++        "verified_at_utc": when.isoformat(),
++        "repositories": repositories,
++        "artifacts": {
++            a: {
++                "bytes": 4,
++                "sha256": hashlib.sha256(b"test").hexdigest(),
++                "snapshots": {
++                    d: hashlib.sha256(f"{run}/{a}/{d}".encode()).hexdigest()
++                    for d in retention.DESTINATIONS
++                },
++            }
++            for a in retention.ARTIFACTS
++        },
++    }
++
++
++class PolicyTests(unittest.TestCase):
++    def test_daily_weekly_monthly_union_and_ties(self) -> None:
++        receipts = {
++            f"{i:032x}": receipt(i, NOW - timedelta(days=i), {}) for i in range(1, 451)
++        }
++        kept = retention.select_keep(receipts, NOW)
++        dates = [datetime.fromisoformat(receipts[r]["verified_at_utc"]) for r in kept]
++        self.assertTrue(all(f"{i:032x}" in kept for i in range(1, 31)))
++        self.assertGreaterEqual(len({d.strftime("%G-%V") for d in dates}), 8)
++        self.assertEqual(len({d.strftime("%Y-%m") for d in dates}), 12)
++        self.assertLess(len(kept), 30 + 8 + 12)
++        newer = receipt(999, NOW - timedelta(days=1), {})
++        receipts[newer["run_id"]] = newer
++        self.assertIn(newer["run_id"], retention.select_keep(receipts, NOW))
++        self.assertNotIn(f"{1:032x}", retention.select_keep(receipts, NOW))
++
++    def test_partial_receipt_and_ambiguous_snapshot_refusal(self) -> None:
++        value = receipt(1, NOW, {})
++        value["artifacts"].pop("globals.sql")
++        with self.assertRaises(retention.RetentionError):
++            retention.validate_receipt(value["run_id"], value, {}, "test-marker", NOW)
++        value = receipt(1, NOW, {})
++        value["artifacts"]["globals.sql"]["snapshots"] = value["artifacts"][
++            "database.dump"
++        ]["snapshots"]
++        with self.assertRaises(retention.RetentionError):
++            retention.validate_receipt(value["run_id"], value, {}, "test-marker", NOW)
++
++
++@unittest.skipUnless(
++    os.name == "posix" and hasattr(os, "geteuid") and os.geteuid() == 0,
++    "Protected-state Linux root filesystem required",
++)
++class ProtectedStateTests(unittest.TestCase):
++    def test_large_retention_record_roundtrip_and_bounded_read(self) -> None:
++        with tempfile.TemporaryDirectory(dir="/root") as directory:
++            path = Path(directory) / "transaction.json"
++            value = {"snapshot_evidence": "x" * 100_000}
++            protected.write_state(path, value)
++            with self.assertRaises(protected.AlertError):
++                protected.protected_json(path)
++            self.assertEqual(retention.read_state(path), value)
++            with (
++                patch.object(retention, "MAX_STATE_BYTES", 100_000),
++                self.assertRaises(protected.AlertError),
++            ):
++                retention.read_state(path)
++            path.chmod(0o644)
++            with self.assertRaises(protected.AlertError):
++                retention.read_state(path)
++
++
++@unittest.skipUnless(
++    os.name == "posix" and shutil.which("restic"), "Disposable Linux restic required"
++)
++class DisposableResticTests(unittest.TestCase):
++    def setUp(self) -> None:
++        self.tmp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.tmp.cleanup)
++        self.root = Path(self.tmp.name)
++        password = self.root / "password"
++        password.write_text("synthetic-disposable-password")
++        password.chmod(0o600)
++        self.environment = {
++            "PATH": "/usr/local/bin:/usr/bin:/bin",
++            "HOME": str(self.root),
++            "RESTIC_PASSWORD_FILE": str(password),
++            "RESTIC_CACHE_DIR": str(self.root / "cache"),
++        }
++        self.repositories: dict[str, Any] = {}
++        for d in sorted(retention.DESTINATIONS):
++            self.command(d, "init")
++            self.repositories[d] = {
++                "uri": str(self.root / d),
++                "id": json.loads(self.command(d, "cat", "config"))["id"],
++            }
++        self.receipts = {}
++        for n in range(1, 5):
++            record = receipt(n, NOW - timedelta(hours=6 - n), self.repositories)
++            run = record["run_id"]
++            self.receipts[run] = record
++            for artifact in sorted(retention.ARTIFACTS):
++                for d in sorted(retention.DESTINATIONS):
++                    self.command(
++                        d,
++                        "backup",
++                        "--stdin",
++                        "--stdin-filename",
++                        f"{run}/{artifact}",
++                        "--tag",
++                        run,
++                        input_data=b"test",
++                    )
++                    record["artifacts"][artifact]["snapshots"][d] = json.loads(
++                        self.command(d, "snapshots", "--json", "--tag", run)
++                    )[-1]["id"]
++                    # Query by exact path because snapshot listing order is not an identity.
++                    rows = json.loads(
++                        self.command(d, "snapshots", "--json", "--tag", run)
++                    )
++                    record["artifacts"][artifact]["snapshots"][d] = next(
++                        x["id"] for x in rows if x["paths"] == [f"/{run}/{artifact}"]
++                    )
++        canaries = {}
++        for d in sorted(retention.DESTINATIONS):
++            self.command(
++                d,
++                "backup",
++                "--stdin",
++                "--stdin-filename",
++                "canary",
++                "--tag",
++                "canary",
++                input_data=b"canary",
++            )
++            row = json.loads(self.command(d, "snapshots", "--json", "--tag", "canary"))[
++                0
++            ]
++            canaries[d] = {row["id"]: retention.digest(row)}
++        self.pins: dict[str, Any] = {
++            "schema": 1,
++            "repositories": self.repositories,
++            "runs": {
++                r: retention.digest(self.receipts[r])
++                for r in [f"{1:032x}", f"{2:032x}"]
++            },
++            "canaries": canaries,
++        }
++        self.ledger = {
++            "schema": 1,
++            "status": "READY",
++            "deleted": {},
++            "last_transaction": None,
++        }
++        self.calls: list[tuple[str, list[str]]] = []
++        self.alerts = 0
++
++    def command(self, d: str, *args: str, input_data: bytes | None = None) -> bytes:
++        path = self.root / d
++        assert path.parent == self.root and d in retention.DESTINATIONS
++        r = subprocess.run(
++            ["restic", "-r", str(path), *args],
++            input=input_data,
++            capture_output=True,
++            env=self.environment,
++            timeout=30,
++            check=False,
++        )
++        if r.returncode:
++            raise RuntimeError("Disposable restic command failed")
++        return r.stdout
++
++    def gather(self) -> tuple[dict[str, Any], dict[str, Any], dict[str, Any]]:
++        snapshots = {
++            d: json.loads(self.command(d, "snapshots", "--json"))
++            for d in retention.DESTINATIONS
++        }
++        return (
++            retention.make_plan(
++                self.receipts,
++                self.repositories,
++                "test-marker",
++                snapshots,
++                self.pins,
++                self.ledger,
++                NOW,
++            ),
++            self.receipts,
++            copy.deepcopy(self.ledger),
++        )
++
++    def forget(self, d: str, ids: list[str]) -> None:
++        self.calls.append((d, ids))
++        self.command(d, "forget", *ids)
++
++    def readback(self, run: str, record: dict[str, Any]) -> None:
++        for a, row in record["artifacts"].items():
++            for d in retention.DESTINATIONS:
++                self.assertEqual(
++                    self.command(d, "dump", row["snapshots"][d], f"/{run}/{a}"), b"test"
++                )
++
++    def check(self, d: str, expected: set[str]) -> None:
++        rows = json.loads(self.command(d, "snapshots", "--json"))
++        self.assertEqual({r["id"] for r in rows}, expected)
++        self.command(d, "check")
++
++    def save(self, ledger: dict[str, Any], transaction: dict[str, Any]) -> None:
++        self.ledger = copy.deepcopy(ledger)
++        (self.root / "ledger.json").write_text(json.dumps(ledger))
++        (self.root / "transaction.json").write_text(json.dumps(transaction))
++
++    def notify(self) -> None:
++        self.alerts += 1
++
++    def test_real_complete_run_forget_pins_readback_and_noop(self) -> None:
++        plan, _, _ = self.gather()
++        self.assertEqual(plan["delete"], [f"{3:032x}"])
++        result = retention.apply_plan(
++            plan["digest"],
++            self.gather,
++            self.forget,
++            self.readback,
++            self.check,
++            self.save,
++            self.notify,
++        )
++        self.assertEqual(result, "COMPLETE")
++        self.assertEqual(len(self.calls), 2)
++        self.assertTrue(all(len(ids) == 3 for _, ids in self.calls))
++        plan, _, _ = self.gather()
++        self.assertEqual(plan["delete"], [])
++        self.assertEqual(
++            retention.apply_plan(
++                plan["digest"],
++                self.gather,
++                self.forget,
++                self.readback,
++                self.check,
++                self.save,
++                self.notify,
++            ),
++            "NOOP",
++        )
++        self.assertEqual(len(self.calls), 2)
++
++    def test_changed_history_and_partial_snapshot_refused(self) -> None:
++        plan, _, _ = self.gather()
++        self.pins["runs"][f"{3:032x}"] = retention.digest(self.receipts[f"{3:032x}"])
++        with self.assertRaises(retention.RetentionError):
++            retention.apply_plan(
++                plan["digest"],
++                self.gather,
++                self.forget,
++                self.readback,
++                self.check,
++                self.save,
++                self.notify,
++            )
++        self.assertEqual(self.calls, [])
++        identity = self.receipts[f"{4:032x}"]["artifacts"]["database.dump"][
++            "snapshots"
++        ]["drive"]
++        self.command("drive", "forget", identity)
++        with self.assertRaises(retention.RetentionError):
++            self.gather()
++
++    def test_partial_cross_repository_failure_durable_degraded(self) -> None:
++        plan, _, _ = self.gather()
++
++        def fail_second(d: str, ids: list[str]) -> None:
++            if self.calls:
++                raise RuntimeError("disposable second-destination failure")
++            self.forget(d, ids)
++
++        with self.assertRaises(retention.RetentionError):
++            retention.apply_plan(
++                plan["digest"],
++                self.gather,
++                fail_second,
++                self.readback,
++                self.check,
++                self.save,
++                self.notify,
++            )
++        self.assertEqual(len(self.calls), 1)
++        self.assertEqual(self.alerts, 1)
++        self.assertEqual(
++            json.loads((self.root / "ledger.json").read_text())["status"], "DEGRADED"
++        )
++        with self.assertRaises(retention.RetentionError):
++            self.gather()
++
++    def test_first_destination_failure_stops_without_deletion(self) -> None:
++        plan, _, _ = self.gather()
++
++        def fail(d: str, ids: list[str]) -> None:
++            raise RuntimeError("disposable first-destination failure")
++
++        with self.assertRaises(retention.RetentionError):
++            retention.apply_plan(
++                plan["digest"],
++                self.gather,
++                fail,
++                self.readback,
++                self.check,
++                self.save,
++                self.notify,
++            )
++        self.assertEqual(self.calls, [])
++        self.assertEqual(self.alerts, 1)
++        with self.assertRaises(retention.RetentionError):
++            self.gather()
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_operational_alert.py b/scripts/test_operational_alert.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..e6a6d267949f31589313b13841faf23e91f28612
+--- /dev/null
++++ b/scripts/test_operational_alert.py
+@@ -0,0 +1,88 @@
++"""Offline alert transport tests; no real configuration or network is used."""
++
++import smtplib
++import ssl
++import sys
++import unittest
++from unittest.mock import MagicMock, patch
++
++import operational_alert as alert
++
++
++class AlertTests(unittest.TestCase):
++    def test_duplicate_configuration_fields_refused(self) -> None:
++        with self.assertRaises(alert.AlertError):
++            alert.unique_object([("status", "READY"), ("status", "DEGRADED")])
++
++    def setUp(self) -> None:
++        self.config = {
++            "schema": 1,
++            "purpose": "brickvault-operational-alerts",
++            "transport": "smtp-ssl",
++            "host": "smtp.gmail.com",
++            "port": 465,
++            "username": "fixture@gmail.com",
++            "sender": "fixture@gmail.com",
++            "recipient": "fixture@gmail.com",
++            "password": "a" * 16,
++        }
++
++    def test_tls_bounded_timeout_and_generic_body(self) -> None:
++        with patch.object(smtplib, "SMTP_SSL") as smtp:
++            smtp.return_value.send_message.return_value = {}
++            alert.deliver(self.config, "TEST")
++            self.assertEqual(smtp.call_args.kwargs["timeout"], 20)
++            context = smtp.call_args.kwargs["context"]
++            self.assertEqual(context.verify_mode, ssl.CERT_REQUIRED)
++            self.assertTrue(context.check_hostname)
++            message = smtp.return_value.send_message.call_args.args[0]
++            self.assertNotIn(self.config["password"], message.as_string())
++            self.assertNotIn(self.config["recipient"], message.get_content())
++            smtp.return_value.close.assert_called_once()
++
++    def test_unknown_category_and_header_injection_refused_before_network(self) -> None:
++        with patch.object(smtplib, "SMTP_SSL") as smtp:
++            with self.assertRaises(alert.AlertError):
++                alert.deliver(self.config, "private-log-content")
++            self.config["recipient"] = "fixture@gmail.com\nBcc: other@example.invalid"
++            with self.assertRaises(alert.AlertError):
++                alert.deliver(self.config, "TEST")
++            smtp.assert_not_called()
++
++    def test_authentication_and_recipient_failure(self) -> None:
++        with patch.object(smtplib, "SMTP_SSL") as smtp:
++            smtp.return_value.login.side_effect = smtplib.SMTPAuthenticationError(
++                535, b"private"
++            )
++            with self.assertRaises(smtplib.SMTPAuthenticationError):
++                alert.deliver(self.config, "TEST")
++            smtp.return_value.send_message.assert_not_called()
++            smtp.return_value.close.assert_called_once()
++        with patch.object(smtplib, "SMTP_SSL") as smtp:
++            smtp.return_value.send_message.return_value = {
++                "fixture@gmail.com": (550, b"no")
++            }
++            with self.assertRaises(alert.AlertError):
++                alert.deliver(self.config, "TEST")
++
++    def test_persistent_dedup_failure_backoff_and_clock_rollback(self) -> None:
++        self.assertTrue(alert.due({}, 1000))
++        self.assertFalse(alert.due({"attempt": 900, "status": "ACCEPTED"}, 1000))
++        self.assertFalse(alert.due({"attempt": 900, "status": "PENDING"}, 1000))
++        self.assertTrue(alert.due({"attempt": 300, "status": "FAILED"}, 1000))
++        with self.assertRaises(alert.AlertError):
++            alert.due({"attempt": 1100, "status": "ACCEPTED"}, 1000)
++
++    def test_cli_redacts_exceptions(self) -> None:
++        output = MagicMock()
++        with (
++            patch.object(sys, "argv", ["alert", "TEST"]),
++            patch.object(alert, "send", side_effect=RuntimeError("private-sentinel")),
++            patch.object(sys, "stderr", output),
++        ):
++            self.assertEqual(alert.main(), 1)
++        self.assertNotIn("private-sentinel", str(output.mock_calls))
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_operations_health.py b/scripts/test_operations_health.py
+new file mode 100644
+index 0000000000000000000000000000000000000000..7d24818510c8d268a34e577289e6065b24251a06
+--- /dev/null
++++ b/scripts/test_operations_health.py
+@@ -0,0 +1,126 @@
++"""Deterministic health and official-version parser regressions."""
++
++import gzip
++import io
++import time
++import unittest
++import urllib.request
++from datetime import UTC, datetime, timedelta
++from unittest.mock import patch
++
++import operational_alert as protected
++import production_health as health
++import python_maintenance as maintenance
++
++
++class HealthTests(unittest.TestCase):
++    def test_loopback_and_unexpected_listeners(self) -> None:
++        good = "LISTEN 0 100 127.0.0.1:18080 0.0.0.0:*\nLISTEN 0 100 127.0.0.1:5432 0.0.0.0:*\nLISTEN 0 100 *:443 *:*"
++        self.assertTrue(health.listeners_valid(good))
++        self.assertTrue(
++            health.listeners_valid(good + "\nLISTEN 0 100 127.0.0.53%lo:53 0.0.0.0:*")
++        )
++        self.assertFalse(
++            health.listeners_valid(good.replace("127.0.0.1:5432", "0.0.0.0:5432"))
++        )
++        self.assertFalse(health.listeners_valid(good + "\nLISTEN 0 100 *:80 *:*"))
++        self.assertFalse(health.listeners_valid(good + "\nLISTEN 0 100 *:2019 *:*"))
++        self.assertFalse(
++            health.listeners_valid(good + "\nLISTEN 0 100 127.0.0.1:2019 0.0.0.0:*")
++        )
++        self.assertFalse(
++            health.listeners_valid(good + "\nLISTEN 0 100 192.0.2.1%eth0:53 0.0.0.0:*")
++        )
++
++    def test_stale_backup_and_space_thresholds(self) -> None:
++        now = datetime(2026, 9, 30, tzinfo=UTC)
++        self.assertTrue(
++            health.recent_backup(
++                [{"verified_at_utc": (now - timedelta(hours=24)).isoformat()}], now
++            )
++        )
++        self.assertFalse(
++            health.recent_backup(
++                [{"verified_at_utc": (now - timedelta(hours=37)).isoformat()}], now
++            )
++        )
++        self.assertFalse(health.recent_backup([], now))
++        self.assertFalse(health.disk_ok(1000, 99, 1))
++        self.assertFalse(health.disk_ok(1000, 200, 201))
++        self.assertTrue(health.disk_ok(1000, 200, 100))
++
++    def test_certificate_exact_san_and_expiry(self) -> None:
++        certificate = {
++            "subjectAltName": (("DNS", health.HOST),),
++            "notAfter": "Oct 30 00:00:00 2026 GMT",
++        }
++        now = datetime(2026, 9, 30, tzinfo=UTC).timestamp()
++        self.assertTrue(health.certificate_ok(certificate, now))
++        self.assertFalse(health.certificate_ok(certificate, now + 20 * 86400))
++        certificate["subjectAltName"] = (("DNS", "wrong.invalid"),)
++        self.assertFalse(health.certificate_ok(certificate, now))
++
++
++class PythonTests(unittest.TestCase):
++    def test_official_http_identity_gzip_and_response_bounds(self) -> None:
++        html = b'Stable Releases <a href="/downloads/release/python-31315/">release</a>'
++
++        class Response(io.BytesIO):
++            url = maintenance.SOURCE
++
++            def __init__(self, raw: bytes, encoding: str) -> None:
++                super().__init__(raw)
++                self.headers = {"Content-Encoding": encoding}
++
++        for encoding, raw in [("identity", html), ("gzip", gzip.compress(html))]:
++            with patch.object(
++                urllib.request,
++                "urlopen",
++                return_value=Response(raw, encoding),
++            ):
++                self.assertEqual(maintenance.lookup(), (3, 13, 15))
++        for encoding, raw in [
++            ("br", html),
++            ("identity", b"x" * (maintenance.MAX_RESPONSE + 1)),
++            ("gzip", gzip.compress(b"x" * (maintenance.MAX_RESPONSE + 1))),
++            ("gzip", b"invalid gzip"),
++        ]:
++            with (
++                patch.object(
++                    urllib.request,
++                    "urlopen",
++                    return_value=Response(raw, encoding),
++                ),
++                self.assertRaises((OSError, ValueError)),
++            ):
++                maintenance.lookup()
++
++    def test_only_official_final_313_links_and_numeric_order(self) -> None:
++        html = 'Stable Releases <a href="/downloads/release/python-3139/">old</a><a href="/downloads/release/python-31315/">new</a><a href="/downloads/release/python-31499/">other</a><a href="/downloads/release/python-31316rc1/">pre</a><a href="https://third-party.invalid/downloads/release/python-31399/">untrusted</a>'
++        self.assertEqual(maintenance.latest_from_html(html), (3, 13, 15))
++        with self.assertRaises(ValueError):
++            maintenance.latest_from_html("unexpected page")
++
++    def test_repeated_lookup_failure_and_newer_version(self) -> None:
++        with (
++            patch.object(protected, "directory"),
++            patch.object(protected, "write_state") as saved,
++            patch.object(
++                maintenance, "lookup", side_effect=OSError("private")
++            ) as lookup,
++            patch.object(time, "sleep"),
++        ):
++            self.assertEqual(maintenance.main(), 1)
++            self.assertEqual(lookup.call_count, 3)
++            self.assertEqual(saved.call_args.args[1]["status"], "LOOKUP_FAILED")
++        with (
++            patch.object(protected, "directory"),
++            patch.object(protected, "write_state") as saved,
++            patch.object(maintenance, "lookup", return_value=(3, 13, 999)),
++        ):
++            self.assertEqual(maintenance.main(), 1)
++            self.assertEqual(saved.call_args.args[1]["status"], "UPDATE_AVAILABLE")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/scripts/test_release_manifest.py b/scripts/test_release_manifest.py
+index 6aacd7b74ffe2e2c09356986ab3492aec12be412..00f8028abaea0fe1cb52eb2e1aaadb5db491c285 100644
+--- a/scripts/test_release_manifest.py
++++ b/scripts/test_release_manifest.py
+@@ -115,6 +115,27 @@ class ReleaseManifestTests(unittest.TestCase):
+             self.source_id,
+         )
+ 
++    def test_accepted_schema_two_bundle_remains_verifiable(self) -> None:
++        bundle, _ = self._create()
++        manifest_path = bundle / "manifest.json"
++        manifest = json.loads(manifest_path.read_text())
++        manifest["schema"] = 2
++        removed = set(release_manifest.DEPLOYMENT_FILES.values()) - set(
++            release_manifest.SCHEMA_TWO_DEPLOYMENT_FILES.values()
++        )
++        manifest["files"] = [
++            item for item in manifest["files"] if item["path"] not in removed
++        ]
++        for name in removed:
++            (bundle / name).unlink()
++        manifest_path.write_text(json.dumps(manifest))
++        release_manifest.verify(
++            bundle,
++            release_manifest._sha256(manifest_path),
++            self.release_id,
++            self.source_id,
++        )
++
+     def test_manifest_requires_external_digest_and_exact_identity(self) -> None:
+         bundle, digest = self._create()
+         with self.assertRaises(release_manifest.ReleaseError):
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index 9d8e3de4224b236a0fdef64c2699aeeb223fd76b..f4fb2339c3bd0a5862fb04b44cedecfed60de28c 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -235,7 +235,14 @@ def _configuration_files() -> tuple[str, ...]:
+         Path("/etc/brickvault/production-admin.json"),
+         Path("/opt/brickvault/current/manifest.json"),
+     ]
+-    optional = [Path("/etc/brickvault/api.env"), Path("/etc/brickvault/caddy.env")]
++    optional = [
++        Path("/etc/brickvault/api.env"),
++        Path("/etc/caddy/brickvault.env"),
++        Path("/etc/brickvault/operations/gmail.json"),
++        Path("/etc/brickvault/operations/health.json"),
++        Path("/etc/brickvault/backup/retention-pins.json"),
++        Path("/etc/brickvault/backup/retention/ledger.json"),
++    ]
+     if any(not path.is_file() for path in required):
+         raise BackupError("Required production recovery configuration is absent.")
+     for path in (*required, *optional):
+@@ -484,6 +491,31 @@ def _current_revisions(config: admin.AdminConfig) -> tuple[str, ...]:
+ 
+ 
+ def backup() -> str:
++    """Serialize backup creation with complete-run retention across all CLI callers."""
++    admin._require_root()
++    import fcntl
++
++    descriptor = os.open(
++        "/run/brickvault-backup-retention.lock",
++        os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW,
++        0o600,
++    )
++    try:
++        info = os.fstat(descriptor)
++        if (
++            not stat.S_ISREG(info.st_mode)
++            or info.st_uid != 0
++            or info.st_nlink != 1
++            or stat.S_IMODE(info.st_mode) != 0o600
++        ):
++            raise BackupError("Unsafe backup/retention lock.")
++        fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
++        return _backup_locked()
++    finally:
++        os.close(descriptor)
++
++
++def _backup_locked() -> str:
+     config = _preflight()
+     revisions = _current_revisions(config)
+     files = _configuration_files()
