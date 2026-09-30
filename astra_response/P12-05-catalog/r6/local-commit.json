@@ -1,0 +1,39 @@
+{
+  "branch": "main",
+  "committed_file_sha256": {
+    "docs/plans/099-phase-12-production-acceptance.md": "650075deb56f44d6706d7db69930d137ca656d83bc8fd0838219ca2e594a7817",
+    "docs/plans/100-production-catalog-activation.md": "1647c954d6a4f0621f9beb6a85241f0ea30efecc8c9406f891d3829cc4931bc1",
+    "docs/plans/101-catalog-importer-performance-repair.md": "2431dfe6126d4d91a488a7da2f1410b0963e79d99709b2d34b346c0d8566335d"
+  },
+  "committed_inventory": [
+    "docs/plans/099-phase-12-production-acceptance.md",
+    "docs/plans/100-production-catalog-activation.md",
+    "docs/plans/101-catalog-importer-performance-repair.md"
+  ],
+  "complete_staged_diff_review": "PASS",
+  "index": "empty",
+  "live_test_build_lint_mypy_rerun": false,
+  "local_commit": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "main_pushed": false,
+  "one_local_commit": true,
+  "parent": "0ea8e0e21156bebb9aa4150c270643a0a5d0d571",
+  "protected_byte_identical": true,
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "staged_text_equals_worktree_after_configured_crlf_normalization": true,
+  "status": "PASS",
+  "subject": "Close P12-05 production catalog activation",
+  "worktree_file_sha256": {
+    "docs/plans/099-phase-12-production-acceptance.md": "a68a818abae3a91f05f2d99f71debcefb8e3d3b7f682a4046f490f93f3544bdb",
+    "docs/plans/100-production-catalog-activation.md": "9fc78330c40745fe8cc5773b3aae95c6c4e7cfea1d431712329859622eaed644",
+    "docs/plans/101-catalog-importer-performance-repair.md": "ade7c3a6987ad36f3258500dfb0b1ff624146bb5e6e6bbd6d108e3a1084f4f03"
+  },
+  "worktree_residual_unstaged": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ]
+}

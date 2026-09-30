@@ -1,0 +1,96 @@
+{
+  "P12-05": "IN PROGRESS / RESUMABLE",
+  "Phase_12": "IN PROGRESS",
+  "accepted_r4_r5_worktree_history_byte_preserved": true,
+  "accepted_r5_commit": "09035359864d021518341c37f32a6ce453ceb3ca",
+  "backup_db_search_detail_rerun": false,
+  "browser_pwa_android_work": false,
+  "catalog_importer_repair": "ACCEPTED / CLOSED",
+  "commit_pinned_public_markdown_targets_verified_in_local_git_objects": 26,
+  "committed_inventory": [
+    "docs/plans/099-phase-12-production-acceptance.md",
+    "docs/plans/100-production-catalog-activation.md",
+    "docs/plans/101-catalog-importer-performance-repair.md"
+  ],
+  "complete_staged_diff_review": "PASS",
+  "complete_staged_diff_sha256": "2225a2c79f8fa4bdb8e8f65d0f9358b918232267cfb6214fe01080a52598c69b",
+  "final_main_branch": "main",
+  "final_main_head": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "final_main_index": "empty",
+  "final_main_worktree_residual_unstaged": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "git_configured_crlf_normalization_verified": true,
+  "initial_index": "empty",
+  "initial_main_head": "0ea8e0e21156bebb9aa4150c270643a0a5d0d571",
+  "local_main_commit": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "main_local_markdown_links_checked": 11,
+  "main_push": false,
+  "plan_copies": {
+    "Plan-099.md": {
+      "accepted_r5_hyperlink_mapping_reused": true,
+      "committed_sha256": "650075deb56f44d6706d7db69930d137ca656d83bc8fd0838219ca2e594a7817",
+      "local_commit": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/099-phase-12-production-acceptance.md",
+      "standalone_sha256": "26fbbcf7206cd3450652f4bf41b48b015b96e1d7b125f5422ad68cbaedaba9b5"
+    },
+    "Plan-100.md": {
+      "accepted_r5_hyperlink_mapping_reused": true,
+      "committed_sha256": "1647c954d6a4f0621f9beb6a85241f0ea30efecc8c9406f891d3829cc4931bc1",
+      "local_commit": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/100-production-catalog-activation.md",
+      "standalone_sha256": "e346367d368003d8a6f4fe08e20c8f187693d3c1005918c3a8cbfc083d9d9788"
+    },
+    "Plan-101.md": {
+      "accepted_r5_hyperlink_mapping_reused": true,
+      "committed_sha256": "2431dfe6126d4d91a488a7da2f1410b0963e79d99709b2d34b346c0d8566335d",
+      "local_commit": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+      "only_markdown_links_rewritten": true,
+      "source": "docs/plans/101-catalog-importer-performance-repair.md",
+      "standalone_sha256": "c4c6dd42c8445d24651a4259253d74a1b6c890e2cfa5e8d22ac02d60a0957b67"
+    }
+  },
+  "preserved_r1_r5_tree_ids": {
+    "r1": "229ea623a1135ba6560a7e2870061664047acf46",
+    "r2": "5c6dce93dd70e5413dbbdcac420b5bee1ce9d8c4",
+    "r3": "313bac6e865f732818f635be01bc1ef7a4fc91b9",
+    "r4": "6b46811c36dff879f1860db3f68cad0e1b91061b",
+    "r5": "a7c5b086d2dd42fb2dd0be5c8156bb770a780558"
+  },
+  "production_catalog_activation_prerequisite": "ACCEPTED / CLOSED",
+  "production_contact": false,
+  "protected_files_unstaged_and_unchanged": true,
+  "protected_raw_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "publication_scope": "astra_response/P12-05-catalog/r6/",
+  "remaining_gates_started": false,
+  "remaining_p12_05_gates": [
+    "real owner login/session/cookies",
+    "CSRF/Host/Origin/logout/session invalidation",
+    "full Windows browser workflow",
+    "temporary Watchlist create/update/persistence/cleanup",
+    "Deal Economics manual-sale-assumption workflow",
+    "PWA install/offline/reconnect/update",
+    "physical Android production-TLS/auth/offline/reconnect",
+    "immutable release rollback and forward return",
+    "VM cold-start recovery",
+    "final owner logout/private-state cleanup",
+    "final production dual backup",
+    "final security/operations review",
+    "Phase 12 independent acceptance"
+  ],
+  "rollback_cold_start_work": false,
+  "scope": "Only authorized documentation/Git closeout checks; accepted r5 evidence reused.",
+  "staged_diff_check": "PASS",
+  "standalone_local_markdown_links_checked": 26,
+  "status": "PASS",
+  "subject": "Close P12-05 production catalog activation",
+  "tests_builds_lint_mypy_rerun": false
+}

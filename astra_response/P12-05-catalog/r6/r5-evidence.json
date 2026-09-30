@@ -1,0 +1,108 @@
+{
+  "accepted_commit": "09035359864d021518341c37f32a6ce453ceb3ca",
+  "accepted_folder": "astra_response/P12-05-catalog/r5/",
+  "accepted_tree": "a7c5b086d2dd42fb2dd0be5c8156bb770a780558",
+  "artifacts": {
+    "REVIEW.md": {
+      "bytes": 3017,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/REVIEW.md",
+      "sha256": "dec3f9e2891b7c744b7ac32f60d440fca27858ea54b4f0021365e8073e84ccfd"
+    },
+    "activation.json": {
+      "bytes": 2605,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/activation.json",
+      "sha256": "b42a9b7d1989d0d1667221258522ef90c24a0a60dc39790c6573ec17f351252a"
+    },
+    "activation.md": {
+      "bytes": 715,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/activation.md",
+      "sha256": "8a5b46dd61b0266c9c09436ffdeb42806c79ba4f0e88f6a5ec894d0ed5997f40"
+    },
+    "approval-contract-correction.md": {
+      "bytes": 2033,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/approval-contract-correction.md",
+      "sha256": "1daee9a5e372cc1798befcc68e043c46057f57dbc75788c49992cba5a5c808a2"
+    },
+    "failed-state-retirement.md": {
+      "bytes": 985,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/failed-state-retirement.md",
+      "sha256": "56867c564b320858e298096ae5e1609e1628829f922e8a1772a6be72128c29a7"
+    },
+    "final-production-state.md": {
+      "bytes": 2749,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/final-production-state.md",
+      "sha256": "449352b8c1c5b5ff6fc37134c69ceb8198cbfd6020ee91053754bb4a2b612805"
+    },
+    "final-state.json": {
+      "bytes": 4011,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/final-state.json",
+      "sha256": "387410f3ef321f65117fe1d85155a46cb77d293e639d85badb458c6cc5c22da0"
+    },
+    "firewall-final.json": {
+      "bytes": 658,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/firewall-final.json",
+      "sha256": "3f5a47659a8e9fc60f97a7fb1d81ac8606f9f8c56bd366702024a62b3d65a9de"
+    },
+    "network-final.json": {
+      "bytes": 450,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/network-final.json",
+      "sha256": "11d530e2fb620f7c32b59c30a00c7dccf5768de5a19975487adc4e73bc9f7b9e"
+    },
+    "post-activation-backup.md": {
+      "bytes": 1757,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/post-activation-backup.md",
+      "sha256": "0d6feb9b1ca2a30bd805caeabf8cb9208267d02ecaa0f78312632a8fdd23015e"
+    },
+    "post-backup.json": {
+      "bytes": 2977,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/post-backup.json",
+      "sha256": "413a173060f47cf46d25ec78fcee31980a94c7e26c0cbbecc409df39fb64411e"
+    },
+    "pre-backup.json": {
+      "bytes": 2854,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/pre-backup.json",
+      "sha256": "ca5439b223c47dbc9aac95227a04ca076744ad5176ffac954821021c2f6edae3"
+    },
+    "pre-recovery-backup.md": {
+      "bytes": 1416,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/pre-recovery-backup.md",
+      "sha256": "f7d29ac2f4affa3e9e16ec1ebd754b61f6fc0d60af97b081e63b3d28403263ef"
+    },
+    "production-retry.md": {
+      "bytes": 2117,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/production-retry.md",
+      "sha256": "b5ebdb9e372ffceb928367f4d3b013fe1a86367ffbe4300b88fd75605e715221"
+    },
+    "release-installation.md": {
+      "bytes": 2161,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/release-installation.md",
+      "sha256": "a5db8be35bd17f85f6282679871af7e0c4f68d98f719211d828e628bd270de1f"
+    },
+    "retirement.json": {
+      "bytes": 1260,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/retirement.json",
+      "sha256": "f2ddf28ac4b6107fcb82f5e19c3f0695b76ba216a26f346bd1caa151ae1fedc7"
+    },
+    "retry.json": {
+      "bytes": 3534,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/retry.json",
+      "sha256": "7fae4a78be536d4322c26bae4ddd8f6c962e229b56d95da0644701c92044bad0"
+    },
+    "runtime-qualification.json": {
+      "bytes": 5184,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/runtime-qualification.json",
+      "sha256": "ca1e632252d02d9bef3860a6178c70839944595170d95c0af2a45def3e2c3eb8"
+    },
+    "search-detail-watchlist.md": {
+      "bytes": 2403,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/search-detail-watchlist.md",
+      "sha256": "9659b2fef72c50fc620fd5325620effa49a1904b5d18e30e1805f339c8eafacc"
+    },
+    "statement-timings.json": {
+      "bytes": 119030,
+      "commit_pinned_url": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/09035359864d021518341c37f32a6ce453ceb3ca/astra_response/P12-05-catalog/r5/statement-timings.json",
+      "sha256": "49d58d58a8d9437e24101750fdb3146902c4751a8fff560efe242a353d27a446"
+    }
+  },
+  "reuse": "Substantive accepted evidence referenced unchanged; no live rerun or fresh confirmation."
+}
