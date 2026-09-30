@@ -1,0 +1,9 @@
+CODEX_WORKFLOW.md
+deploy/systemd/brickvault-backup.service
+docs/ROADMAP.md
+docs/plans/096-production-database-activation.md
+scripts/release_manifest.py
+services/api/src/brickvault_api/production_admin.py
+services/api/src/brickvault_api/production_backup.py
+services/api/tests/unit/test_production_admin.py
+services/api/tests/unit/test_production_backup.py

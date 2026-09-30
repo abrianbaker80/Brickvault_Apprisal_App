@@ -1,0 +1,14 @@
+Closeout validation only; accepted r2 substantive evidence reused.
+PASS: expected initial main HEAD and empty index.
+PASS: all nine task files initially matched accepted r2 copies byte-for-byte.
+PASS: complete nine-file staged diff reviewed; exact staged inventory.
+PASS: git diff --cached --check.
+PASS: local Markdown links in workflow, roadmap and Plan 096.
+PASS: one local main commit, exactly nine files; main not pushed.
+PASS: final main index empty; worktree contains only three pre-existing protected modifications.
+No VM/Proxmox/Drive contact; no test, Ruff/mypy, build, backup/restore, migration/admin reruns; no API/DNS/TLS/Caddy or P12-04D work.
+Protected file SHA-256 values (unchanged, unstaged):
+F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4  AGENTS.md
+D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7  services/api/tests/integration/test_catalog_search.py
+0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041  services/api/tests/unit/test_catalog_parser.py
+PASS: r3 inventory, exact file copies and cumulative patch; publication Markdown links and staged whitespace; r1/r2 preserved.
