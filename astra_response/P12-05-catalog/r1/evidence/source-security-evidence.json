@@ -1,0 +1,12 @@
+{
+  "image_bytes_acquired": false,
+  "market_provider_activated": false,
+  "provider_credential_added": false,
+  "public_routes_or_listeners_changed": false,
+  "rebrickable_credential_pattern_matches": 0,
+  "release_manifest_unchanged": true,
+  "source_archives_in_static_files": 0,
+  "source_outside_static_root": true,
+  "status": "PASS",
+  "web_files_checked": 8
+}

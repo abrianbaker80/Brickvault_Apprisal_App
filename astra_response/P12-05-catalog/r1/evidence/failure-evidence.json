@@ -1,0 +1,32 @@
+{
+  "activation_attempted": false,
+  "dataset_counts": {
+    "colors": 275,
+    "elements": 114245,
+    "inventories": 47452,
+    "inventory_minifigs": 25820,
+    "inventory_parts": 1557375,
+    "inventory_sets": 5210,
+    "minifigs": 17225,
+    "part_categories": 76,
+    "part_relationships": 37394,
+    "parts": 64620,
+    "sets": 28278,
+    "themes": 496
+  },
+  "elapsed_seconds": 1004,
+  "failure_category": "database_failure",
+  "import_retry": false,
+  "import_stage": "failed",
+  "import_status": "failed",
+  "lock_timeout": "10s",
+  "matching_postgresql_timeout_events": [
+    {
+      "operation_table": null,
+      "reason": "canceling statement due to statement timeout"
+    }
+  ],
+  "statement_timeout": "5min",
+  "status": "BLOCKED",
+  "timeout_changed": false
+}

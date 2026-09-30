@@ -1,0 +1,18 @@
+{
+  "dataset_counts": {
+    "colors": 275,
+    "elements": 114245,
+    "inventories": 47452,
+    "inventory_minifigs": 25820,
+    "inventory_parts": 1557375,
+    "inventory_sets": 5210,
+    "minifigs": 17225,
+    "part_categories": 76,
+    "part_relationships": 37394,
+    "parts": 64620,
+    "sets": 28278,
+    "themes": 496
+  },
+  "manifest_digest": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15",
+  "state": "preflight_passed"
+}

@@ -1,0 +1,324 @@
+{
+  "acquired_end": "2026-09-09T21:48:39.552697+00:00",
+  "acquired_start": "2026-09-09T21:48:35.294084+00:00",
+  "classification": "official-nonsynthetic",
+  "counts": {
+    "colors": 275,
+    "elements": 114245,
+    "inventories": 47452,
+    "inventory_minifigs": 25820,
+    "inventory_parts": 1557375,
+    "inventory_sets": 5210,
+    "minifigs": 17225,
+    "part_categories": 76,
+    "part_relationships": 37394,
+    "parts": 64620,
+    "sets": 28278,
+    "themes": 496
+  },
+  "importer_version": "offline-catalog-2d.2",
+  "known_direct_figure_lots": 4,
+  "known_inventory_versions": 1,
+  "known_name": "The Razor Crest",
+  "known_set": "75331-1",
+  "manifest_sha256": "c4518012ab3c41da9538e08362bdb2294df9192b977496b6f18853b39da3c9ad",
+  "original_receipt_matches": true,
+  "parser_errors": 0,
+  "permitted_use_reference": "https://rebrickable.com/downloads/",
+  "profile_version": "rebrickable-bulk-v3-2d.1",
+  "provenance_sha256": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15",
+  "provider": "rebrickable",
+  "quarantined_rows": 0,
+  "receipt_sha256": "b2131cf8b57bedc1d12f72a9eddc531272a40ca5c6225699c08950943b436510",
+  "rights_basis": "Brian supplied first-party Downloads and Terms text, viewed 2026-09-09; same retained source; docs/PHASE_2D_PROVIDER_GATE.md and D-030",
+  "rights_evidence_sha256": "b0fd9663b79acd0adb4e3a47f39436b7ab2123fe4b3033a33512f9af40264ec3",
+  "rights_limitations": [
+    "Rebrickable attribution required",
+    "No full-source redistribution in review",
+    "No AI training",
+    "No provider image bytes acquired"
+  ],
+  "scope": "full-catalog",
+  "source_files": [
+    {
+      "compressed_bytes": 4508,
+      "compressed_sha256": "f2131e7752116cf7da3e072b0f63987b9fe38d4b3e75a6e5a9b72598f21242b9",
+      "dataset": "themes",
+      "decompressed_bytes": 10342,
+      "decompressed_sha256": "828f0d8b3152c462c8436927c77a543beedea744635b2a0daf1869ceb7758a32",
+      "downloaded_at": "2026-09-09T21:48:35.464377Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "id",
+        "name",
+        "parent_id"
+      ],
+      "http_metadata": {
+        "Content-Length": "4508",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c0-119c\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:00 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/themes.csv.gz"
+    },
+    {
+      "compressed_bytes": 4893,
+      "compressed_sha256": "ee2b2b75e7ef4ecb865b989d4a25a23817fede871916d671a705660e8163b79a",
+      "dataset": "colors",
+      "decompressed_bytes": 13780,
+      "decompressed_sha256": "6be1e6a60c6151b3f63b0a90d8df742faba107aa81d458923b7c20d40e5a3912",
+      "downloaded_at": "2026-09-09T21:48:35.558982Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "id",
+        "name",
+        "rgb",
+        "is_trans",
+        "num_parts",
+        "num_sets",
+        "y1",
+        "y2"
+      ],
+      "http_metadata": {
+        "Content-Length": "4893",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c0-131d\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:00 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/colors.csv.gz"
+    },
+    {
+      "compressed_bytes": 856,
+      "compressed_sha256": "5d856ffe91237b8a2acdb553466adf56c7381cd947d0ece84f478c4ddbb713f6",
+      "dataset": "part_categories",
+      "decompressed_bytes": 1660,
+      "decompressed_sha256": "d5413d4b0e296c9e87c53cd82041fd1393c97106677e6644113585c9a3d80ba4",
+      "downloaded_at": "2026-09-09T21:48:35.641109Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "id",
+        "name"
+      ],
+      "http_metadata": {
+        "Content-Length": "856",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c0-358\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:00 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/part_categories.csv.gz"
+    },
+    {
+      "compressed_bytes": 1066075,
+      "compressed_sha256": "b463ba4547868c7b01a11e9a57625e3cab46d6a22e0d4e35d2534b639b21b299",
+      "dataset": "parts",
+      "decompressed_bytes": 5789587,
+      "decompressed_sha256": "34f0d5c3f6ce390c1029bcde700a028a4eb2292e76f1155c1a32a430ca51a4bb",
+      "downloaded_at": "2026-09-09T21:48:35.861968Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "part_num",
+        "name",
+        "part_cat_id",
+        "part_material"
+      ],
+      "http_metadata": {
+        "Content-Length": "1066075",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c1-10445b\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:01 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/parts.csv.gz"
+    },
+    {
+      "compressed_bytes": 195867,
+      "compressed_sha256": "1ca08eef25fff8bfbcd1f999aaedd6a7cb503fbe7137735f8da4d5812aa82325",
+      "dataset": "part_relationships",
+      "decompressed_bytes": 804925,
+      "decompressed_sha256": "65cfaf7e46b27b741c97040e79405151406a464094ecdcc3b87cced821db65f0",
+      "downloaded_at": "2026-09-09T21:48:36.014472Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "rel_type",
+        "child_part_num",
+        "parent_part_num"
+      ],
+      "http_metadata": {
+        "Content-Length": "195867",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106e5-2fd1b\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:37 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/part_relationships.csv.gz"
+    },
+    {
+      "compressed_bytes": 1129724,
+      "compressed_sha256": "f6949187fe4f1ff77826982a8c72437e7ae46312eaac932c3448552da7251a8c",
+      "dataset": "elements",
+      "decompressed_bytes": 2888428,
+      "decompressed_sha256": "45f2a2aecfbd3f7f36e1c8bf5f1bafc4e16c9fe1fed8dd69aba5c28d6ffea6f7",
+      "downloaded_at": "2026-09-09T21:48:36.274253Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "element_id",
+        "part_num",
+        "color_id",
+        "design_id"
+      ],
+      "http_metadata": {
+        "Content-Length": "1129724",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c2-113cfc\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:02 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/elements.csv.gz"
+    },
+    {
+      "compressed_bytes": 517142,
+      "compressed_sha256": "c1c39190fa989fd4387fdacfa41eee0a48300144ae79f9052da87f31fe366ae7",
+      "dataset": "sets",
+      "decompressed_bytes": 2745895,
+      "decompressed_sha256": "bba17afe167296d3aeea3da6c120c21b21416253e0d9eca84cc13dffb8d23ad2",
+      "downloaded_at": "2026-09-09T21:48:36.437292Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "set_num",
+        "name",
+        "year",
+        "theme_id",
+        "num_parts",
+        "img_url"
+      ],
+      "http_metadata": {
+        "Content-Length": "517142",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c4-7e416\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:04 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/sets.csv.gz"
+    },
+    {
+      "compressed_bytes": 302404,
+      "compressed_sha256": "af415ecb7ec608fe57712bd713eb464045a7512c59d42d5a0a279892cd9b482a",
+      "dataset": "minifigs",
+      "decompressed_bytes": 1883938,
+      "decompressed_sha256": "720daf07a9e4aa0bf52afd7181cdc0d906cf0e54fad94dd5a351058af4fe450a",
+      "downloaded_at": "2026-09-09T21:48:36.575696Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "fig_num",
+        "name",
+        "num_parts",
+        "img_url"
+      ],
+      "http_metadata": {
+        "Content-Length": "302404",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c5-49d44\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:05 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/minifigs.csv.gz"
+    },
+    {
+      "compressed_bytes": 264775,
+      "compressed_sha256": "0b723063c6af43c9e6fd42c8e632dfc1c8f6014dbc807701e45fbac010c9e971",
+      "dataset": "inventories",
+      "decompressed_bytes": 892482,
+      "decompressed_sha256": "a13647d02de405870bea838da69f637c20ea5123c466df62500bb8b696ec1e1d",
+      "downloaded_at": "2026-09-09T21:48:36.737813Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "id",
+        "version",
+        "set_num"
+      ],
+      "http_metadata": {
+        "Content-Length": "264775",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106c3-40a47\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:03 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/inventories.csv.gz"
+    },
+    {
+      "compressed_bytes": 14104580,
+      "compressed_sha256": "4745181a34247bc4acba7286052a430f2acc9b90f7f003c508cfb3d01269dc35",
+      "dataset": "inventory_parts",
+      "decompressed_bytes": 133253339,
+      "decompressed_sha256": "caa5eb725b29e6b9f8a9f21e38588c259442f10e01067bff4ea1414e7aa12eac",
+      "downloaded_at": "2026-09-09T21:48:39.334110Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "inventory_id",
+        "part_num",
+        "color_id",
+        "quantity",
+        "is_spare",
+        "img_url"
+      ],
+      "http_metadata": {
+        "Content-Length": "14104580",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106e1-d73804\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:33 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/inventory_parts.csv.gz"
+    },
+    {
+      "compressed_bytes": 97942,
+      "compressed_sha256": "e21ebf27f9e13328992332ec31f95d4aebc0b628f63b8b8a7c33d7989da1f325",
+      "dataset": "inventory_minifigs",
+      "decompressed_bytes": 517495,
+      "decompressed_sha256": "3e266a9cb62bf91607bf6127d95de43283fb5237ea6ae81c3e96b73834e14c50",
+      "downloaded_at": "2026-09-09T21:48:39.454551Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "inventory_id",
+        "fig_num",
+        "quantity"
+      ],
+      "http_metadata": {
+        "Content-Length": "97942",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106e5-17e96\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:37 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/inventory_minifigs.csv.gz"
+    },
+    {
+      "compressed_bytes": 18978,
+      "compressed_sha256": "0a1f4509ff8959d35e726f15ac70d80a2083963ee792009a14bdedae53acedd5",
+      "dataset": "inventory_sets",
+      "decompressed_bytes": 89341,
+      "decompressed_sha256": "ef7b3c98aef5eb7aed64f881ee1c5bce027a8bb873e02326f92531cce12f1fb4",
+      "downloaded_at": "2026-09-09T21:48:39.552697Z",
+      "encoding": "utf-8",
+      "format": "gzip",
+      "headers": [
+        "inventory_id",
+        "set_num",
+        "quantity"
+      ],
+      "http_metadata": {
+        "Content-Length": "18978",
+        "Content-Type": "application/octet-stream",
+        "ETag": "\"6aa106e4-4a22\"",
+        "Last-Modified": "Wed, 09 Sep 2026 07:12:36 GMT"
+      },
+      "source_url": "https://cdn.rebrickable.com/media/downloads/inventory_sets.csv.gz"
+    }
+  ],
+  "source_version": "official-aa9a32c8fa634132b0c737680027853c",
+  "strategy": "retained-accepted-official-source",
+  "synthetic": false
+}

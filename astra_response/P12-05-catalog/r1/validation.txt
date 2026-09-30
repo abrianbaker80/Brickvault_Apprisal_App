@@ -1,0 +1,34 @@
+P12-05 CATALOG PREREQUISITE BLOCKED — confirmed statement timeout
+PASS: current retained official metadata/rights evidence, original receipt and all twelve file hashes.
+PASS: parser compatibility and EOF counts; 1,898,466 source rows; exact suffix/actual name/relationships.
+PASS: new wrapper 44 focused tests; Ruff check/format; strict mypy Linux platform target
+on Windows for two changed files. Actual invocations are recorded in commands.txt.
+PASS: guarded production preflight; exact r6/admin/revision/one owner/empty catalog/idle jobs.
+PASS: source placement root-parent correction preserved digests before mutation.
+PASS: exactly one normal pre-import dual backup, six readbacks, both checks, protected receipt.
+CONFIRMED FAILURE: sole import failed/database_failure after about1,004s; PostgreSQL five-minute
+statement timeout event correlated to this run. No structural validation report/acceptance/activation.
+PASS: stopped-state audit/candidate/staging preservation and canonical build rollback.
+PASS: all13 light checks/admin/retentionREADY/zero failed/idle; protected baselines identical.
+PASS: installed runtime number and actual-name diagnostic returns catalog_unavailable honestly.
+UNRUN: successful production exact/name search, Set Detail, Watchlist resolution and price-state display.
+UNRUN: post-activation backup/nonempty backup metadata sanity; no second restore required.
+UNRUN: remaining P12-05 browser/PWA/Android/rollback/cold-start/full owner gates.
+No broad catalog suite rerun, timeout increase, retry, manual SQL, schema/runtime grant/release change,
+provider dispatch, market activation, image bytes, Phase13, retention apply/prune or main commit/push.
+Source/test evidence does not establish production importer performance or successful catalog activation.
+Publication checks are appended after exact-byte/patch/link/redaction/review validation.
+
+PUBLICATION CHECKS
+Exact six-file patch reconstruction and byte/hash equality PASS.
+Wrapper bytes match executed preflight SHA-256.
+246 local artifact/document links resolved; complete new documents inspected.
+Private source literal/address/key/marker/account/recovery archive scans PASS.
+Fixed system administration paths occur only in reviewable wrapper/test source.
+No real provider archives, private retained source paths or plaintext backup included.
+Main HEAD/index/protected dirty preservation verified at publication.
+
+Independent review PASS for an accurate blocked closeout: no additional blocking
+findings in wrapper, six exact source/document copies or sanitized package.
+No successful catalog acceptance, activation or production performance qualification.
+Reviewer performed no edits/live calls/tests/staging/commits. See independent-review.md.

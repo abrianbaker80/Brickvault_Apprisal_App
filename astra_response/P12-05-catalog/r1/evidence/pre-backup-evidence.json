@@ -1,0 +1,76 @@
+{
+  "active_manifest_digest": null,
+  "active_semantic_fingerprint": null,
+  "artifacts": {
+    "configuration.tar": {
+      "bytes": 20480,
+      "sha256": "3ec57ccb0f4749832c82c540fe334c90e187c53b466abe9028f2d039c46616f3"
+    },
+    "database.dump": {
+      "bytes": 579623,
+      "sha256": "dbed36bf72435275c1b6d4fc65108fb6862b04738f7ab1f00df44d63f950073c"
+    },
+    "globals.sql": {
+      "bytes": 1454,
+      "sha256": "cc19980f358e82ae2d9b57beaa8a4e5002d65f43c09f717a9ab4624925e12cdd"
+    }
+  },
+  "catalog_counts": {
+    "catalog_activation": 0,
+    "catalog_active_snapshot": 0,
+    "catalog_color": 0,
+    "catalog_color_fact": 0,
+    "catalog_default_inventory": 0,
+    "catalog_evidence": 0,
+    "catalog_evidence_link": 0,
+    "catalog_import_run": 0,
+    "catalog_inventory": 0,
+    "catalog_inventory_line": 0,
+    "catalog_inventory_revision": 0,
+    "catalog_minifigure": 0,
+    "catalog_minifigure_fact": 0,
+    "catalog_part": 0,
+    "catalog_part_category": 0,
+    "catalog_part_category_fact": 0,
+    "catalog_part_fact": 0,
+    "catalog_provider": 0,
+    "catalog_provider_identity": 0,
+    "catalog_set": 0,
+    "catalog_set_alias": 0,
+    "catalog_set_fact": 0,
+    "catalog_snapshot": 0,
+    "catalog_snapshot_validation": 0,
+    "catalog_source_file": 0,
+    "catalog_source_version": 0,
+    "catalog_stage_colors": 0,
+    "catalog_stage_elements": 0,
+    "catalog_stage_inventories": 0,
+    "catalog_stage_inventory_minifigs": 0,
+    "catalog_stage_inventory_parts": 0,
+    "catalog_stage_inventory_sets": 0,
+    "catalog_stage_minifigs": 0,
+    "catalog_stage_part_categories": 0,
+    "catalog_stage_part_relationships": 0,
+    "catalog_stage_parts": 0,
+    "catalog_stage_sets": 0,
+    "catalog_stage_themes": 0,
+    "catalog_theme": 0,
+    "catalog_theme_fact": 0
+  },
+  "destinations": {
+    "drive": "PASS",
+    "proxmox": "PASS"
+  },
+  "encrypted_readbacks": 6,
+  "normal_dual_backup_count": 1,
+  "phase": "pre",
+  "protected_receipt": "PASS",
+  "protected_receipt_sha256": "0f02c76c5c45acc5940fb45cafa29fb347cf6944d04cd11262732d5622376d59",
+  "repository_checks": 2,
+  "retention_apply_or_prune": false,
+  "revision": [
+    "0016_hunt_cached_runs"
+  ],
+  "source_unchanged_during_backup": true,
+  "status": "PASS"
+}

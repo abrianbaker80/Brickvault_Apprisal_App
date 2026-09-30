@@ -1,0 +1,43 @@
+SANITIZED OPERATION RECORD — 2026-09-30
+Read authorization, current guidance, plans, source/parser/import/activation/search contracts.
+Verify main HEAD/branch/empty index and protected dirty SHA-256 values.
+Locate original retained source manifest, acquisition receipt and original supplied rights input.
+Current parser EOF checks of twelve gzip files; compressed/decompressed SHA-256 and row equality.
+Inspect actual source known-set identity, inventory versions and direct figure lots.
+Implement smallest fixed production-admin wrapper delegating import_source and activate.
+Focused wrapper pytest, Ruff, format and strict Windows mypy targeting Linux; no broad suite.
+Pinned root SSH using installed r6 Python and existing protected production-admin configuration.
+Protected source transfer: unchanged manifest/twelve files and approval descriptor, digest bound.
+Initial wrapper preflight refusal before catalog mutation: application-owned source parent.
+Dedicated root-owned source placement correction; all transferred digests unchanged.
+Production-admin verify; exact installed manifest; health.checks(False); failed/jobs/unit state.
+Read-only ownership/grants/config/marker/principal/security/operations baseline captures.
+Windows private DNS/trusted HTTPS health/public A and AAAA/direct API and DB ports.
+Source archive/client credential/static-root checks; no source/images exposed.
+One backup helper refused before attempt marker/backup; fresh read-only preconditions passed.
+Exactly ONE normal dual production pre-import backup with all three artifacts/six readbacks.
+Both repository checks and protected receipt PASS; no retention apply/prune/recovery proof.
+Run production_catalog import once through the existing guarded importer.
+Read-only staged counts, terminal audit and safe progress labels; no SQL/text/data published.
+Import failed/database_failure during build; correlated PostgreSQL statement timeout confirmed.
+Preserve failed candidate/audit/full staging; no timeout change, retry, cleanup or activation.
+Read-only stopped-state admin/all13 health/security+operations equality/catalog and search checks.
+Collect protected sanitized evidence only; secrets/private raw inventories retained privately.
+Post-activation backup, nonempty backup sanity, successful detail/Watchlist UNRUN.
+Minimum status/Plan100/additive Plan099 handoff; exact six-file cumulative patch/copies/hash checks.
+Review publication uses literal package allowlist only on isolated astra-response worktree.
+Main unstaged/uncommitted; protected dirty files unchanged; remaining P12-05 gates UNRUN.
+
+ACTUAL FOCUSED VALIDATION COMMANDS (Windows PowerShell)
+$env:PYTHONPATH = 'services/api/src;scripts'
+services/api/.venv/Scripts/python.exe -m pytest scripts/test_production_catalog.py -q
+  44 passed (final source path correction justified the focused rerun).
+services/api/.venv/Scripts/python.exe -m ruff check scripts/production_catalog.py scripts/test_production_catalog.py
+  All checks passed.
+services/api/.venv/Scripts/python.exe -m ruff format --check scripts/production_catalog.py scripts/test_production_catalog.py
+  2 files already formatted.
+$env:MYPYPATH = 'services/api/src;scripts'
+services/api/.venv/Scripts/python.exe -m mypy --strict --platform linux --follow-imports=silent --cache-dir <ignored-task-cache> scripts/production_catalog.py scripts/test_production_catalog.py
+  Success: no issues found in 2 source files. This is a Linux platform static target on Windows.
+git diff --check -- scripts/production_catalog.py scripts/test_production_catalog.py
+  PASS.

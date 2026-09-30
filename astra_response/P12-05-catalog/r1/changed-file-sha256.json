@@ -1,0 +1,8 @@
+{
+  "CODEX_WORKFLOW.md": "903e1e5cef4a10ae56e9c2b08e0cc9857fbbf8899a2b9e6d18be61a73507219d",
+  "docs/ROADMAP.md": "eb6ecff3a2cae6396e506b0ffbf7a2acd1c775d4fed68be9408c941a9e8856e7",
+  "docs/plans/099-phase-12-production-acceptance.md": "581c589345a90425a0b192465d00d01bf74b864f2a0e5297d75804d1ce9e2fad",
+  "docs/plans/100-production-catalog-activation.md": "583b255610b3fffce7e2e4eaf98c452a8bd6609ff22ffb48e5a0c48010a2d9d3",
+  "scripts/production_catalog.py": "011f4db4fd3f3a431231d3b8012ce6d4cd19216eb9c4e6bf702c2535ab18c8f5",
+  "scripts/test_production_catalog.py": "ae2d66d49ff74abae06ce9f166ab0d392066541bb1f3fee3b895bd07ce4dce53"
+}
