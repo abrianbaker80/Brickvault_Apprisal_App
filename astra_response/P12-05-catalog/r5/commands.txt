@@ -1,0 +1,54 @@
+SANITIZED AUTHORIZED OPERATIONS — PRIVATE PARAMETERS WITHHELD
+
+Read-only: pinned main/protected/source/retained-manifest/wheel admission;
+named VM115 qm config/status/agent/target; native admin, health, source/failure
+ownership/fingerprint/row counts, role timeouts and storage admission.
+
+Root-only create protected exact ten-field detached approval; invoke native
+approve_repair_release/load_source/admin admission without catalog mutation.
+
+PRE: normal production_backup.backup() exactly once; native six readbacks,
+two repository checks and protected schema-2 receipt; exact failed-state recheck.
+
+Install exact retained bundle beside r6. Existing uv venv with Python 3.13.15;
+uv pip install --require-hashes --no-deps --only-binary :all: --requirement <locked-requirements>;
+uv pip install --no-deps --no-build <exact-accepted-wheel>;
+uv pip check; exact manifest/wheel/170 package-file/platform-marker verification.
+No installation repeat, rebuild or unpinned dependency.
+
+<repair-release-python> production_catalog.py recover-failed
+  --run <protected-exact-original-run-UUID> --candidate <protected-exact-original-candidate-UUID>
+ONE INVOCATION; r6 remains current; native durable recovered_for_fresh_retry check.
+
+Accepted atomic current pointer switch + protected absolute BVA_WEB_BUILD_DIR
+update and health release/manifest identity; systemctl restart brickvault-api;
+native admin/HTTPS/13 health checks. Startup restore-r6 path was not needed.
+
+<repair-release-python> production_catalog.py retry-import
+  --predecessor <protected-exact-original-failed-run-UUID>
+ONE INVOCATION; no ordinary import; unchanged 300000/10000 ms; accepted progress
+callback telemetry observed without changing code or bindings; native validation.
+
+<repair-release-python> production_catalog.py activate
+  --snapshot <protected-exact-validated-snapshot-UUID> --receipt <protected-fresh-receipt-UUID>
+ONE INVOCATION; native expected generation zero; durable accepted/generation-one readback.
+
+Installed runtime role, repeatable-read READ ONLY: ProductService.search(number),
+search(actual-name) twice, appraisal(number), PinnedCatalog inventory/figures;
+WatchlistService._resolve only; before/after exact row counts/security. No owner login.
+
+POST: normal production_backup.backup() exactly once; native six readbacks,
+two repository checks and protected schema-2 receipt. Full exact source state stable.
+
+Final read-only native admin/health/timers/retention/listeners/source/timeouts/
+installed-file/static-credential checks; named VM115/private DNS/trusted HTTPS/
+public A/AAAA absence/off-host 18080/5432 checks; existing OPNsense authenticated
+Chrome NAT and WAN rule pages read-only. No firewall save/apply or secret retrieval.
+
+Operational timers were transiently paused for serialized recovery/switch/retry/
+backup/activation windows and restored active/enabled after each. Native operations
+locks/conflict guards applied; services remained running except the authorized API
+restart. No timer disable/configuration change.
+
+Documentation only: Plans 099/100/101. Isolated astra-response r5 literal allowlist
+publication after complete diff/link/redaction/byte review; no main stage/commit/push.

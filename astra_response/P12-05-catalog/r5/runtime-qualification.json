@@ -1,0 +1,181 @@
+{
+  "active_pointer_generation": 1,
+  "actual_catalog_name": "The Razor Crest",
+  "all_database_row_counts_and_security_unchanged": true,
+  "all_strategy_amounts": null,
+  "browser_pwa_android_acceptance": "NOT_STARTED",
+  "current_release": "p12-05-catalog-repair-r1",
+  "detail_pinned_generation": null,
+  "direct_figure_lots": 4,
+  "figure_membership": "complete",
+  "figures": [
+    {
+      "component_state": "unavailable",
+      "identifier": "fig-010525",
+      "recorded_quantity": 1
+    },
+    {
+      "component_state": "unavailable",
+      "identifier": "fig-013153",
+      "recorded_quantity": 1
+    },
+    {
+      "component_state": "unavailable",
+      "identifier": "fig-013154",
+      "recorded_quantity": 1
+    },
+    {
+      "component_state": "unavailable",
+      "identifier": "fig-013155",
+      "recorded_quantity": 1
+    }
+  ],
+  "gate": "INSTALLED_RUNTIME_QUALIFICATION",
+  "inventory_count": 1,
+  "inventory_selection": "application_selected_not_provider_certified",
+  "inventory_version": "1",
+  "market_observations": 0,
+  "market_reasons": [
+    "market_data_unavailable"
+  ],
+  "name_search": "PASS",
+  "name_search_deterministic": true,
+  "name_search_result_count": 5,
+  "number_search": "PASS",
+  "number_search_result_count": 1,
+  "owner_session_created": false,
+  "physical_reasons": [
+    "choice_coverage_unknown",
+    "component_inventory_incomplete",
+    "inventory_components_incomplete",
+    "minifigure_membership_unknown",
+    "physical_partition_unresolved",
+    "subset_membership_unknown",
+    "unresolved_physical_target"
+  ],
+  "physical_states": [
+    {
+      "admitted": true,
+      "reasons": [],
+      "state": "COMPLETE_FOR_REPRESENTATION",
+      "strategy": "COMPLETE_SET"
+    },
+    {
+      "admitted": false,
+      "reasons": [
+        "choice_coverage_unknown",
+        "inventory_components_incomplete",
+        "minifigure_membership_unknown",
+        "physical_partition_unresolved",
+        "subset_membership_unknown",
+        "unresolved_physical_target"
+      ],
+      "state": "UNKNOWN",
+      "strategy": "PART_OUT_WITH_INTACT_FIGURES"
+    },
+    {
+      "admitted": false,
+      "reasons": [
+        "choice_coverage_unknown",
+        "component_inventory_incomplete",
+        "inventory_components_incomplete",
+        "minifigure_membership_unknown",
+        "physical_partition_unresolved",
+        "subset_membership_unknown",
+        "unresolved_physical_target"
+      ],
+      "state": "UNKNOWN",
+      "strategy": "FULL_COMPONENT_PART_OUT"
+    },
+    {
+      "admitted": false,
+      "reasons": [
+        "choice_coverage_unknown",
+        "inventory_components_incomplete",
+        "minifigure_membership_unknown",
+        "physical_partition_unresolved",
+        "subset_membership_unknown",
+        "unresolved_physical_target"
+      ],
+      "state": "UNKNOWN",
+      "strategy": "FIGURES_PLUS_REMAINING_BUILD"
+    }
+  ],
+  "provider": "rebrickable",
+  "provider_dispatch": false,
+  "qualification_surface": "installed ProductService, PinnedCatalog and read-only WatchlistService resolver",
+  "recorded_rows": [
+    {
+      "extra_quantity": 0,
+      "kind": "minifigure",
+      "regular_quantity": 4,
+      "row_count": 4
+    },
+    {
+      "extra_quantity": 121,
+      "kind": "part_color",
+      "regular_quantity": 6173,
+      "row_count": 802
+    }
+  ],
+  "runtime_read_only_transactions": true,
+  "seller_physical_completeness_verified": false,
+  "semantic_fingerprint": "8f37571222fb078a2f75927ee1c58a7c3a90994bb24bee269270f784ebd48395",
+  "set_detail": "PASS",
+  "set_number": "75331-1",
+  "source_completeness": {
+    "component_availability": "unknown",
+    "matching_resolution": "unknown",
+    "minifigure_membership": "complete",
+    "nested_availability": "unknown",
+    "physical_partition": "unknown",
+    "source_coverage": "unknown",
+    "structural": "valid"
+  },
+  "source_contract": null,
+  "source_provenance_sha256": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15",
+  "source_version": "official-aa9a32c8fa634132b0c737680027853c",
+  "status": "PASS",
+  "synthetic": false,
+  "watchlist_rows_created": 0,
+  "watchlist_target_resolution": "PASS",
+  "whole_set_views": [
+    {
+      "amount": null,
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "missing_or_incompatible_or_ambiguous_mapping"
+      ],
+      "state": "UNKNOWN",
+      "unresolved_mapping_reference_count": 2
+    },
+    {
+      "amount": null,
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "missing_or_incompatible_or_ambiguous_mapping"
+      ],
+      "state": "UNKNOWN",
+      "unresolved_mapping_reference_count": 2
+    },
+    {
+      "amount": null,
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "missing_or_incompatible_or_ambiguous_mapping"
+      ],
+      "state": "UNKNOWN",
+      "unresolved_mapping_reference_count": 2
+    },
+    {
+      "amount": null,
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "missing_or_incompatible_or_ambiguous_mapping"
+      ],
+      "state": "UNKNOWN",
+      "unresolved_mapping_reference_count": 2
+    }
+  ],
+  "zero_price_substitution": false
+}

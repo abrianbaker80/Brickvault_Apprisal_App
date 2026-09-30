@@ -1,0 +1,15 @@
+{
+  "all_evidence_receipts_checked": true,
+  "complete_main_doc_diff_bytes": 47478,
+  "complete_main_doc_diff_sha256": "e73998d245384c82cecd97a7ae711f26771832c39d8e571456fd2d37695b6cf9",
+  "documentation_validation": "PASS",
+  "exact_once_and_phase_transitions_checked": true,
+  "historical_body_and_prior_review_preserved": true,
+  "main_index_empty": true,
+  "scope": "prepublication documentation and production-evidence review only",
+  "source_and_native_gate_truth_consistent": true,
+  "source_tests_builds_or_production_commands_rerun_for_review": false,
+  "statement_timing_rows_checked": 274,
+  "status": "PASS",
+  "three_plan_changes_additive_and_identical": true
+}

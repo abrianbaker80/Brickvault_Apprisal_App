@@ -1,0 +1,20 @@
+{
+  "accepted_field_count": 10,
+  "approval_sha256": "47fbe031080b49abe0738acdd91de3a3d357ebe89bc5086b9f3c90f7fc42fec6",
+  "catalog_mutation": false,
+  "gate": "EXACT_STATIC_APPROVAL",
+  "live_ids_added_to_static_approval": false,
+  "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+  "native_approve_repair_release": "PASS",
+  "production_admin": "PASS",
+  "qualification_interpreter_reused_for_static_admission_only": true,
+  "release_id": "p12-05-catalog-repair-r1",
+  "release_rebuilt": false,
+  "repair_install_or_switch": false,
+  "root_owned_protected": true,
+  "source_approval": "PASS",
+  "status": "PASS",
+  "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+  "wrapper_sha256": "812f505508774bd6d6a040795d8076207ebe79f7ea5c041548e45f75a56fb339",
+  "wrapper_source_changed": false
+}

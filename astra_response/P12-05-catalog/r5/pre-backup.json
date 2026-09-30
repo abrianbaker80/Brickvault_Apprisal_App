@@ -1,0 +1,92 @@
+{
+  "active_generation": 0,
+  "artifacts": {
+    "configuration.tar": {
+      "bytes": 20480,
+      "sha256": "3ec57ccb0f4749832c82c540fe334c90e187c53b466abe9028f2d039c46616f3"
+    },
+    "database.dump": {
+      "bytes": 273449903,
+      "sha256": "bc2f36923061a4694411fbc120aeb1f9418444996f139ab918e6298c4087b878"
+    },
+    "globals.sql": {
+      "bytes": 1454,
+      "sha256": "e5d7e764b5f6aedc6a14de28ab7ea748b3e48364239448f3f2cd35e651bfdb07"
+    }
+  },
+  "catalog_counts": {
+    "catalog_activation": 0,
+    "catalog_active_snapshot": 1,
+    "catalog_color": 0,
+    "catalog_color_fact": 0,
+    "catalog_default_inventory": 0,
+    "catalog_evidence": 0,
+    "catalog_evidence_link": 0,
+    "catalog_import_run": 1,
+    "catalog_inventory": 0,
+    "catalog_inventory_line": 0,
+    "catalog_inventory_revision": 0,
+    "catalog_minifigure": 0,
+    "catalog_minifigure_fact": 0,
+    "catalog_part": 0,
+    "catalog_part_category": 0,
+    "catalog_part_category_fact": 0,
+    "catalog_part_fact": 0,
+    "catalog_provider": 1,
+    "catalog_provider_identity": 0,
+    "catalog_set": 0,
+    "catalog_set_alias": 0,
+    "catalog_set_fact": 0,
+    "catalog_snapshot": 1,
+    "catalog_snapshot_validation": 0,
+    "catalog_source_file": 12,
+    "catalog_source_version": 1,
+    "catalog_stage_colors": 275,
+    "catalog_stage_elements": 114245,
+    "catalog_stage_inventories": 47452,
+    "catalog_stage_inventory_minifigs": 25820,
+    "catalog_stage_inventory_parts": 1557375,
+    "catalog_stage_inventory_sets": 5210,
+    "catalog_stage_minifigs": 17225,
+    "catalog_stage_part_categories": 76,
+    "catalog_stage_part_relationships": 37394,
+    "catalog_stage_parts": 64620,
+    "catalog_stage_sets": 28278,
+    "catalog_stage_themes": 496,
+    "catalog_theme": 0,
+    "catalog_theme_fact": 0,
+    "color_provider_mapping": 0,
+    "element_mapping": 0,
+    "inventory_expansion_binding": 0,
+    "inventory_matching_candidate": 0,
+    "inventory_matching_group": 0,
+    "minifigure_provider_mapping": 0,
+    "part_category_provider_mapping": 0,
+    "part_color_identity": 0,
+    "part_color_observation": 0,
+    "part_provider_mapping": 0,
+    "part_relationship": 0,
+    "set_provider_mapping": 0,
+    "theme_provider_mapping": 0
+  },
+  "current_release": "p12-04e-r6",
+  "destinations": {
+    "drive": "PASS",
+    "proxmox": "PASS"
+  },
+  "elapsed_seconds": 222.446,
+  "encrypted_readbacks": 6,
+  "hashes_and_sizes": "PASS",
+  "normal_dual_backup_invocations": 1,
+  "persistent_plaintext_dump": false,
+  "phase": "pre",
+  "proof_finalization_retention_apply_or_prune": false,
+  "protected_receipt_sha256": "40a0018c30ef9e7deb59a6793b587e1d9bf80d3747a506f4bc8a58c840cf6b78",
+  "protected_schema_2_receipt": "PASS",
+  "repository_checks": 2,
+  "revision": [
+    "0016_hunt_cached_runs"
+  ],
+  "source_unchanged_during_backup": true,
+  "status": "PASS"
+}

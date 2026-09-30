@@ -1,0 +1,121 @@
+{
+  "absolute_release_web_path": "PASS",
+  "activation_invocations": 1,
+  "activation_receipts": 1,
+  "active_generation": 1,
+  "api_caddy_postgresql_https": "PASS",
+  "approval_sha256": "47fbe031080b49abe0738acdd91de3a3d357ebe89bc5086b9f3c90f7fc42fec6",
+  "browser_pwa_android_acceptance": "NOT_STARTED",
+  "caddy_configuration_unchanged": true,
+  "credential_values_absent_from_static_files": "PASS",
+  "current_release": "p12-05-catalog-repair-r1",
+  "exact_accepted_active_snapshot": "PASS",
+  "failed_predecessor_audit_preserved": true,
+  "gate": "FINAL_PRODUCTION_STATE",
+  "health_checks": {
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "CLOCK": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "DATA_SPACE": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "REBOOT_PENDING": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "ROOT_SPACE": true,
+    "SECURITY_UPDATES": true,
+    "SERVICES": true,
+    "UFW": true
+  },
+  "import_attempts": 2,
+  "installed_wheel_files": 170,
+  "listener_inventory_unchanged": true,
+  "lock_timeout_ms": 10000,
+  "maintenance_jobs_idle": true,
+  "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+  "manual_analyze_or_settings_changes": false,
+  "market_observations": 0,
+  "market_provider_activation": false,
+  "migration": "0016_hunt_cached_runs",
+  "native_static_approval": "PASS",
+  "network_and_firewall_scope": "separate final read-only evidence",
+  "no_pending_migration": true,
+  "owner_count": 1,
+  "phase_13": "NOT_STARTED",
+  "post_backup_source_state_still_exact": true,
+  "postgresql_and_api_loopback_only": true,
+  "production_admin": "PASS",
+  "production_recovery_invocations": 1,
+  "production_retry_invocations": 1,
+  "provider_credentials_configured": false,
+  "release_rebuild": false,
+  "retained_and_installed_release_files": "PASS",
+  "retention": "READY",
+  "rollback_or_cold_start_rehearsal": false,
+  "security_inventory_unchanged": true,
+  "semantic_fingerprint": "8f37571222fb078a2f75927ee1c58a7c3a90994bb24bee269270f784ebd48395",
+  "sets": 28278,
+  "slice_post_backup_invocations": 1,
+  "slice_pre_backup_invocations": 1,
+  "source_archives_root_protected_outside_static_roots": "PASS",
+  "source_id": "33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344",
+  "source_provenance_sha256": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15",
+  "source_schema_wrapper_changes": false,
+  "statement_timeout_ms": 300000,
+  "static_files_scanned": 8,
+  "status": "PASS",
+  "timeouts_unchanged": true,
+  "units": {
+    "apt-daily-upgrade.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "apt-daily.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-api.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-backup.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-health-deep.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-health.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-python-version.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "brickvault-retention.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "caddy.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "certbot.timer": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "postgresql@18-main.service": {
+      "ActiveState": "active",
+      "UnitFileState": "enabled"
+    },
+    "qemu-guest-agent.service": {
+      "ActiveState": "active",
+      "UnitFileState": "static"
+    }
+  },
+  "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+  "wrapper_sha256": "812f505508774bd6d6a040795d8076207ebe79f7ea5c041548e45f75a56fb339",
+  "zero_failed_units": true
+}

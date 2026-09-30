@@ -1,0 +1,30 @@
+{
+  "catalog_mutation": false,
+  "current_release": "p12-04e-r6",
+  "gate": "EXACT_REPAIR_INSTALLATION",
+  "guarded_repair_bridge_admission": "PASS",
+  "installation_repeated": false,
+  "installed_locked_dependencies": "PASS",
+  "installed_wheel_files": 170,
+  "locked_dependencies": 26,
+  "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+  "migration": "0016_hunt_cached_runs",
+  "module_sha256": {
+    "builder": "d25d67ff8c4762c1a2a591b442c21f57a9db175823d8766dadf0d1433fc82a8c",
+    "importer": "7d0c71e7ce314b56c5db5035960e846e27393a84fedf3e5e8afb94a5af5000cb",
+    "recovery": "c6b08a5968a70c83690a7b7c1c519b48c4291632012c389d83f901c4459d6d6f"
+  },
+  "no_pending_migration": true,
+  "python": "3.13.15",
+  "release": "p12-05-catalog-repair-r1",
+  "release_rebuilt": false,
+  "skipped_by_platform_markers": [
+    "tzdata"
+  ],
+  "source_id": "33d1cd5d78e2069b6c61a864cd3ba4c6fa66cc094142f57db14cc9530aa1f344",
+  "status": "PASS",
+  "verification_helper_platform_marker_correction": true,
+  "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+  "wrapper_present_root_protected": true,
+  "wrapper_sha256": "812f505508774bd6d6a040795d8076207ebe79f7ea5c041548e45f75a56fb339"
+}

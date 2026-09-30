@@ -1,0 +1,27 @@
+PRODUCTION CONTINUATION — ACTUAL CHECKS
+PASS fresh short admission and unchanged original failure/source/protected identities
+PASS exact retained manifest/source/wheel and native static ten-field approval
+PASS ONE pre-backup: two destinations, three artifacts, SIX readbacks, two repository checks
+PASS exact install, Linux platform markers/26 lock dependencies, 170 wheel files, 0016 graph
+PASS ONE native retirement with exact typed UUIDs; original failed audit preserved
+PASS atomic repair/web-path switch, API restart/admin/HTTPS/13 health checks
+PASS ONE linked retry: 12 datasets/1,898,466 rows; same fingerprint; report passed
+PASS 274 named operations; maximum 172.357442 s; no statement/lock timeout
+PASS ONE activation, one accepted active snapshot/receipt, generation 1, two attempts
+PASS installed number/name/detail/one inventory/four minifigure lots/read-only Watchlist
+PASS null/unknown money, unavailable mapping diagnostics, zero market observations
+PASS accepted whole-set identity semantics and UNKNOWN exploded completeness
+PASS ONE post-backup: two destinations, three artifacts, SIX readbacks, two repository checks
+PASS final admin/one owner/0016/13 health checks/retention READY/timers/zero failed units
+PASS unchanged listeners and 300000/10000 ms timeouts; exact module/approval bytes
+PASS static credential containment and protected source outside static roots
+PASS named VM115 resources unchanged; private HTTPS/DNS; public A/AAAA absent
+PASS fresh read-only no-WAN-forwarding/NAT check after user browser sign-in
+
+Source tests, build, migration campaign, provider call, device qualification,
+browser/PWA/Android acceptance, rollback/cold-start rehearsal, retention apply/prune,
+proof finalization, Phase 13: NOT RUN. Accepted importer/source qualification retained.
+Focused operational helper corrections are documented; no app/source/wrapper patch.
+
+Document links/historical preservation/complete diff and staged-byte review:
+captured separately in documentation-validation.json and publication receipt.

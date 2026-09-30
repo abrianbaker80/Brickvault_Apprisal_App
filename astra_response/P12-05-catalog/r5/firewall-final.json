@@ -1,0 +1,17 @@
+{
+  "additional_rule_collection": "same WAN ICMP and existing LAN rules visible",
+  "brickvault_wan_forwarding": false,
+  "brickvault_wan_tcp_or_udp_allow": false,
+  "browser_sign_in_completed_by_user": true,
+  "browser_warnings_bypassed_by_agent": false,
+  "configuration_saved_applied_or_modified": false,
+  "destination_nat_entries": 0,
+  "gate": "READ_ONLY_WAN_FORWARDING",
+  "ipv6_translation_entries": 0,
+  "observed_at_utc": "2026-09-30T18:46:35.121Z",
+  "one_to_one_nat_entries": 0,
+  "private_network_identifiers_published": false,
+  "status": "PASS",
+  "wan_explicit_rule_protocol": "IPv4 ICMP to firewall WAN address",
+  "wan_explicit_rules": 1
+}

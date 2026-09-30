@@ -1,0 +1,92 @@
+{
+  "active_generation": 1,
+  "artifacts": {
+    "configuration.tar": {
+      "bytes": 20480,
+      "sha256": "04c3d86bc697e4ca38ed53d24214fe5829b487c3c09afef30fed626edfbde1f7"
+    },
+    "database.dump": {
+      "bytes": 768620272,
+      "sha256": "b2a24e4645ce67732af42778222bc10c5dd72c220ab1e1673def717ac59d8238"
+    },
+    "globals.sql": {
+      "bytes": 1454,
+      "sha256": "544c973b8c5d79159ca193bfdd87731873984648273b232bed03950e206bad19"
+    }
+  },
+  "catalog_counts": {
+    "catalog_activation": 1,
+    "catalog_active_snapshot": 1,
+    "catalog_color": 275,
+    "catalog_color_fact": 275,
+    "catalog_default_inventory": 45503,
+    "catalog_evidence": 1898466,
+    "catalog_evidence_link": 0,
+    "catalog_import_run": 2,
+    "catalog_inventory": 47452,
+    "catalog_inventory_line": 1588405,
+    "catalog_inventory_revision": 47452,
+    "catalog_minifigure": 17225,
+    "catalog_minifigure_fact": 17225,
+    "catalog_part": 64620,
+    "catalog_part_category": 76,
+    "catalog_part_category_fact": 76,
+    "catalog_part_fact": 64620,
+    "catalog_provider": 1,
+    "catalog_provider_identity": 272667,
+    "catalog_set": 28278,
+    "catalog_set_alias": 53877,
+    "catalog_set_fact": 28278,
+    "catalog_snapshot": 1,
+    "catalog_snapshot_validation": 1,
+    "catalog_source_file": 12,
+    "catalog_source_version": 1,
+    "catalog_stage_colors": 275,
+    "catalog_stage_elements": 114245,
+    "catalog_stage_inventories": 47452,
+    "catalog_stage_inventory_minifigs": 25820,
+    "catalog_stage_inventory_parts": 1557375,
+    "catalog_stage_inventory_sets": 5210,
+    "catalog_stage_minifigs": 17225,
+    "catalog_stage_part_categories": 76,
+    "catalog_stage_part_relationships": 37394,
+    "catalog_stage_parts": 64620,
+    "catalog_stage_sets": 28278,
+    "catalog_stage_themes": 496,
+    "catalog_theme": 496,
+    "catalog_theme_fact": 496,
+    "color_provider_mapping": 275,
+    "element_mapping": 114245,
+    "inventory_expansion_binding": 31030,
+    "inventory_matching_candidate": 0,
+    "inventory_matching_group": 0,
+    "minifigure_provider_mapping": 17225,
+    "part_category_provider_mapping": 76,
+    "part_color_identity": 109475,
+    "part_color_observation": 1671620,
+    "part_provider_mapping": 64620,
+    "part_relationship": 37394,
+    "set_provider_mapping": 28278,
+    "theme_provider_mapping": 496
+  },
+  "current_release": "p12-05-catalog-repair-r1",
+  "destinations": {
+    "drive": "PASS",
+    "proxmox": "PASS"
+  },
+  "elapsed_seconds": 754.849,
+  "encrypted_readbacks": 6,
+  "hashes_and_sizes": "PASS",
+  "normal_dual_backup_invocations": 1,
+  "persistent_plaintext_dump": false,
+  "phase": "post",
+  "proof_finalization_retention_apply_or_prune": false,
+  "protected_receipt_sha256": "2548a2a4a64974406d8f25ed5c0329dcca815d9d267819aa44463d73f87ee358",
+  "protected_schema_2_receipt": "PASS",
+  "repository_checks": 2,
+  "revision": [
+    "0016_hunt_cached_runs"
+  ],
+  "source_unchanged_during_backup": true,
+  "status": "PASS"
+}
