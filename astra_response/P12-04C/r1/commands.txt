@@ -1,0 +1,23 @@
+Sanitized commands and checks (arguments containing secrets, marker, private addresses and repository IDs omitted):
+
+Local source:
+  focused pytest: 46 production backup/admin tests and 5 release-manifest tests passed
+  targeted Ruff, format and mypy passed
+  pnpm build passed independent wheel import, migration graph and frontend checks
+  release manifest verification passed
+
+VM release and database:
+  hash-locked transfer and installed-wheel verification passed
+  systemd-analyze verify backup unit definitions passed
+  brickvault-production-admin preflight passed
+  brickvault-production-admin provision-db passed
+  guarded database/role checks passed; no migration or principal
+
+First backup:
+  systemctl start brickvault-backup.service -> exit 1
+  service Result=exit-code, ExecMainStatus=1
+  read-only snapshot counts: one prior synthetic canary per destination; zero new snapshots
+  read-only transient service probes: preflight/revision/config PASS; runuser FAIL under NoNewPrivileges=true
+  read-only transient service probe: runuser, pg_dump, pg_dumpall and tar PASS under NoNewPrivileges=false
+
+No second backup service start or downstream production activation command ran.

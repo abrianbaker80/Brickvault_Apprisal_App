@@ -1,0 +1,7 @@
+# First real backup — failed checkpoint
+
+The one authorized `systemctl start brickvault-backup.service` returned exit status 1. The service state became failed (`Result=exit-code`, `ExecMainStatus=1`). No protected detailed receipt or recovery proof was created. Read-only snapshot counts remained at the single P12-04B synthetic canary in each repository; no real production snapshot exists.
+
+Read-only transient service probes using the same working directory and sandbox settings passed backup preflight, descriptor loading, empty Alembic revision reading and required configuration-file checks. The first source command then failed: `runuser -u postgres` returned 1 with `cannot set user id: Operation not permitted`. Changing only `RestrictSUIDSGID` did not resolve it. With `NoNewPrivileges=false` and `RestrictSUIDSGID=true`, a matching read-only probe successfully streamed the database dump, global roles and configuration tar into memory/discard; no plaintext dump file or backup snapshot was made. This isolates the installed service's `NoNewPrivileges=true` as the cause of the failed first backup.
+
+The local corrected service file explicitly sets `NoNewPrivileges=false` so the root runner can switch to PostgreSQL's service account. Its remaining sandbox protections stay in place. This correction has not been installed on VM 115 or exercised in a real backup. Because the user required a stop on a failed pre-migration backup, no retry, proof finalization, migration, grants, owner bootstrap, post-bootstrap backup or timer activation followed.

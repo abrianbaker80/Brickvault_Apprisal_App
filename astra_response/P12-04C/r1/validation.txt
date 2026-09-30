@@ -1,0 +1,13 @@
+P12-04C r1 status: BLOCKED at first real pre-migration backup.
+
+Offline custody: PASS on replacement removable media; first exposed-phrase bundle disqualified and card retired.
+Source: 46 focused backup/admin tests + 5 release-manifest tests passed; targeted Ruff, format and mypy passed.
+Release: p12-04c-r3 hash-pinned local/VM verification and installed entrypoints passed.
+Database: exact protected descriptor and production database/roles provisioned; unmigrated, no principal.
+First backup: FAIL before new snapshot or receipt. Read-only sandbox diagnosis identified NoNewPrivileges=true blocking runuser.
+Local service correction: read-only source probes PASS; not installed on VM and no real backup retry.
+Proof/migration/grants/bootstrap/admin verify/post-bootstrap backup/timer: NOT RUN.
+API: disabled/inactive; no API listener. P12-04 remains IN PROGRESS; P12-05 NOT STARTED.
+
+The nine-file changed inventory is listed in REVIEW.md's linked files tree and cumulative patch.
+The three protected dirty files are excluded from the review patch. Main was not committed or pushed.
