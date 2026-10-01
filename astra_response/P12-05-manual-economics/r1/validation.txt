@@ -1,0 +1,22 @@
+P12-05 manual economics r1: BLOCKED diagnostic review, 2026-09-30
+Base main HEAD: e64f2d812bf90255005c88e8d1f68b4c8ab0d7af
+
+PASS: accepted branch/HEAD, empty main index, three protected accepted SHA-256s.
+PASS: prior CODEX_WORKFLOW and ROADMAP bytes unchanged; prior Plan 099 body preserved.
+PASS: economics + exact snapshot unit selection: 112 passed in 0.91s.
+Command: python -m pytest -c services/api/pyproject.toml services/api/tests/unit/test_economics.py services/api/tests/unit/test_economics_snapshot.py -q
+Environment: existing uv-managed project interpreter, repository pythonEnvironment; no dotenv/provider credentials loaded.
+PASS: four synthetic MANUAL/SELECTED_MARKET x SUPPORTED/zero-observation UNKNOWN cases; exact capture/encode/decode/replay/version preservation.
+PASS: owned TEST PostgreSQL integration selection: 2 passed, 3 warnings in 17.84s; smoke=False.
+Selection: test_forecasts_expired_status_cleanup_and_saved_protection; test_forecasts_bounded_cleanup_and_payload_limit.
+PASS: TEST ledger passed/pytest_exit=0; all run-recorded disposable databases removed; no leftovers.
+Warnings: anyio assertion-rewrite import warning, Starlette httpx/TestClient deprecation, anyio BlockingPortal alias deprecation. No dependency change warranted for this stopped slice.
+
+Trace completed: models, basis revision, capture, persisted execution versions, canonical/digest integrity, input-only recomputation, saved/index/revision verification, expiry/basis guards, UI assumption/unsupported/lifecycle handling, governing Phase 7A2/7B and subsequent 7C/8/9 boundaries.
+Production/dev saved-version inventory: NOT QUERIED; no absence/count claim. Local synthetic captures only V1. Prior r2 context reused.
+Requested MANUAL+UNKNOWN arithmetic acceptance: NOT SATISFIED; explicit governing-contract stop.
+No source/test/generated-contract/build/migration/dependency changes.
+Ruff/format/mypy/browser/full-suite/build/catalog/PWA/Android/production tests: NOT RUN for this documentation-only stopped result.
+New independent-agent review: NOT RUN; no agent delegation requested. This package is for user review.
+Invocation correction: local unit-launch helper's relative import corrected before tests ran; no repository source changed.
+Publication checks: see publication-validation.json for complete doc/diff/links/inventory/sanitization/byte-preservation checks, including application of cumulative patch to a temporary accepted-main index.

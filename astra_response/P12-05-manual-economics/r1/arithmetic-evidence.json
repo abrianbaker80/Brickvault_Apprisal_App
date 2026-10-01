@@ -1,0 +1,75 @@
+{
+  "evidence": "offline synthetic unchanged V1",
+  "cases": {
+    "MANUAL_SUPPORTED": {
+      "execution_version": "whole-set-economics-v1",
+      "exact_roundtrip_and_replay": true,
+      "status": "SUPPORTED",
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "all_admitted_occurrences_have_eligible_market_evidence"
+      ],
+      "market_value": "180.05",
+      "expected_sale": "200.00",
+      "gross_proceeds": "210.00",
+      "selling_costs": "25.00",
+      "estimated_net": "185.00",
+      "total_acquisition": "105.00",
+      "estimated_profit": "80.00",
+      "roi_percent": "76.2",
+      "roi_state": "DEFINED"
+    },
+    "MANUAL_UNKNOWN": {
+      "execution_version": "whole-set-economics-v1",
+      "exact_roundtrip_and_replay": true,
+      "status": "UNKNOWN",
+      "reasons": [
+        "synthetic_qualification"
+      ],
+      "market_value": null,
+      "expected_sale": null,
+      "gross_proceeds": null,
+      "selling_costs": "25.00",
+      "estimated_net": null,
+      "total_acquisition": "105.00",
+      "estimated_profit": null,
+      "roi_percent": null,
+      "roi_state": "UNAVAILABLE"
+    },
+    "SELECTED_MARKET_SUPPORTED": {
+      "execution_version": "whole-set-economics-v1",
+      "exact_roundtrip_and_replay": true,
+      "status": "SUPPORTED",
+      "reasons": [
+        "accepted_strategy_physical_assessment",
+        "all_admitted_occurrences_have_eligible_market_evidence"
+      ],
+      "market_value": "180.05",
+      "expected_sale": "180.05",
+      "gross_proceeds": "190.05",
+      "selling_costs": "25.00",
+      "estimated_net": "165.05",
+      "total_acquisition": "105.00",
+      "estimated_profit": "60.05",
+      "roi_percent": "57.2",
+      "roi_state": "DEFINED"
+    },
+    "SELECTED_MARKET_UNKNOWN": {
+      "execution_version": "whole-set-economics-v1",
+      "exact_roundtrip_and_replay": true,
+      "status": "UNKNOWN",
+      "reasons": [
+        "synthetic_qualification"
+      ],
+      "market_value": null,
+      "expected_sale": null,
+      "gross_proceeds": null,
+      "selling_costs": "25.00",
+      "estimated_net": null,
+      "total_acquisition": "105.00",
+      "estimated_profit": null,
+      "roi_percent": null,
+      "roi_state": "UNAVAILABLE"
+    }
+  }
+}

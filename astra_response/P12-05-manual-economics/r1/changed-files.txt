@@ -1,0 +1,19 @@
+Current slice:
+M docs/plans/099-phase-12-production-acceptance.md (only additive contract-stop note)
+A docs/plans/102-manual-deal-economics-admission-repair.md (bounded stopped ExecPlan)
+
+Preexisting blocker edits preserved:
+CODEX_WORKFLOW.md (byte-for-byte unchanged by current slice)
+docs/ROADMAP.md (byte-for-byte unchanged by current slice)
+docs/plans/099-phase-12-production-acceptance.md (entire prior body retained)
+
+Protected dirty files preserved byte-for-byte/unstaged; omitted from review patch:
+AGENTS.md
+services/api/tests/integration/test_catalog_search.py
+services/api/tests/unit/test_catalog_parser.py
+
+Executable source/tests changed by this slice: NONE.
+changed-documents.zip contains exact current bytes of the two current-slice documents.
+repair-plan.md is an exact copy of Plan 102.
+Cumulative patch includes three preexisting status documents plus Plan 102, from accepted main HEAD. It excludes protected changes.
+Unchanged-by-this-slice complete workflow/roadmap files are not recopied: historical private paths/identifiers must not be published. Their permitted status deltas are in the cumulative patch and prior r2 review.

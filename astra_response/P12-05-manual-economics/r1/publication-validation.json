@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "package_files": 17,
+  "resolved_package_links": 14,
+  "resolved_exact_source_document_links": 6,
+  "sanitization_including_zip": "PASS",
+  "exact_changed_document_bytes": "PASS",
+  "main": {
+    "head": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+    "branch": "main",
+    "index": "empty",
+    "protected_hashes": "PASS",
+    "prior_blocker_documents": "preserved"
+  },
+  "cumulative_patch_applies_to_accepted_main": "PASS",
+  "virtual_index_matches_current_docs": "PASS",
+  "changed_executable_source": "NONE",
+  "protected_modifications_exported": false,
+  "prior_review_packages_changed": false,
+  "production_interaction": "NONE",
+  "patch_whitespace": "Added source lines checked; standard blank context prefixes preserved as patch syntax"
+}

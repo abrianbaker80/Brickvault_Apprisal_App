@@ -1,0 +1,17 @@
+astra_response/P12-05-manual-economics/r1/REVIEW.md
+astra_response/P12-05-manual-economics/r1/arithmetic-evidence.json
+astra_response/P12-05-manual-economics/r1/arithmetic-evidence.md
+astra_response/P12-05-manual-economics/r1/changed-documents.zip
+astra_response/P12-05-manual-economics/r1/changed-files.txt
+astra_response/P12-05-manual-economics/r1/contract-analysis.md
+astra_response/P12-05-manual-economics/r1/cumulative.patch
+astra_response/P12-05-manual-economics/r1/document-hashes.json
+astra_response/P12-05-manual-economics/r1/file-inventory.txt
+astra_response/P12-05-manual-economics/r1/forecast-cleanup.md
+astra_response/P12-05-manual-economics/r1/manual-admission.md
+astra_response/P12-05-manual-economics/r1/market-basis-regression.md
+astra_response/P12-05-manual-economics/r1/p12-05-r2-context.md
+astra_response/P12-05-manual-economics/r1/publication-validation.json
+astra_response/P12-05-manual-economics/r1/repair-plan.md
+astra_response/P12-05-manual-economics/r1/validation.txt
+astra_response/P12-05-manual-economics/r1/version-replay-compatibility.md
