@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "head": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "main_index": "empty",
+  "protected_hashes": "PASS",
+  "additive_only": true,
+  "prior_document_bodies_preserved": true,
+  "resolved_links": 319,
+  "application_source_changes": 0,
+  "tests_rerun": false,
+  "diagnostic_evidence": "reused accepted r1"
+}

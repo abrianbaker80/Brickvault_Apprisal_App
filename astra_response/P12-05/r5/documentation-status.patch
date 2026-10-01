@@ -1,0 +1,150 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,4 +1,17 @@
+ # Codex Workflow for BrickVault Appraisal App
++
++## Final populated Drive recovery — 2026-10-01
++
++P12-05 is IMPLEMENTED / READY FOR FINAL ACCEPTANCE. Phase 12 is READY FOR FINAL
++ACCEPTANCE; Phase 13 NOT STARTED. Brian accepted r4 except for the populated final
++backup restore. The existing final receipt's three artifacts were recovered via
++independent Windows Drive credentials only into an off-host socket-only PostgreSQL
++18 tmpfs cluster. All table counts, ownership/grants, SCRAM, catalog audit and
++cleanup state matched a bounded read-only production snapshot; recovery cleanup
++and short read-only production health passed. No new backup or Gates 1-12 repeat.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records r5 evidence.
++Main remains uncommitted/unpushed, index empty and protected files unchanged.
++
+ 
+ ## Final P12-05 acceptance ready for review — 2026-10-01
+ 
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,4 +1,16 @@
+ # Valuation-First Roadmap
++
++## Final populated Drive recovery — 2026-10-01
++
++P12-05 IMPLEMENTED / READY FOR FINAL ACCEPTANCE; Phase 12 READY FOR FINAL
++ACCEPTANCE; Phase 13 NOT STARTED. The remaining real populated final-backup
++recovery proof passed via independent Windows Google Drive-only recovery into
++off-host isolated PostgreSQL 18. Production comparison, ownership/least privilege,
++catalog audit and cleanup matched; disposable recovery resources were removed
++and production stayed healthy. R4 gates remain accepted and were not repeated.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records r5. Final acceptance
++and main closeout remain pending; this status starts no subsequent phase.
++
+ 
+ ## Final P12-05 acceptance ready for review — 2026-10-01
+ 
+diff --git a/docs/DECISIONS.md b/docs/DECISIONS.md
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1,4 +1,18 @@
+ # Project Decisions
++
++## Final populated Drive recovery — 2026-10-01
++
++Brian accepted P12-05 r4 except for restoring its populated final backup. The
++authorized continuation reused that exact existing protected receipt and
++independent Windows Drive context, with no backup rerun, Proxmox fallback or
++production mutation. Actual empty-rehearsal size and on-VM placement constraints
++required bounded operator adaptations for the existing Windows WSL off-host
++PostgreSQL 18 cluster, socket-only and tmpfs noswap. Accepted restore and effective
++ownership/grant/SCRAM checks were retained. Populated recovery, full table-count
++comparison, catalog/retry audit and complete cleanup passed. P12-05 and Phase 12
++are READY FOR FINAL ACCEPTANCE, not yet closed; Phase 13 remains NOT STARTED.
++[Plan 099](plans/099-phase-12-production-acceptance.md) is authoritative.
++
+ 
+ ## Accepted P12-05 rollback target disposition — 2026-10-01
+ 
+diff --git a/docs/plans/099-phase-12-production-acceptance.md b/docs/plans/099-phase-12-production-acceptance.md
+--- a/docs/plans/099-phase-12-production-acceptance.md
++++ b/docs/plans/099-phase-12-production-acceptance.md
+@@ -1,4 +1,83 @@
+ # ExecPlan 099 — Phase 12 production acceptance
++
++## Final populated Drive recovery — 2026-10-01
++
++**READY FOR PHASE 12 FINAL ACCEPTANCE. P12-05 IMPLEMENTED / READY FOR FINAL
++ACCEPTANCE; Phase 12 READY FOR FINAL ACCEPTANCE; Phase 13 NOT STARTED.** Brian
++accepted r4 except for the remaining populated-backup recovery proof. This bounded
++continuation restores the already-created final P12-05 backup, with no new backup
++or repeat of Gates 1-12. Older statuses below remain dated history.
++
++### Scope, method and actual result
++
++Independent Windows recovery credentials unlocked the exact Drive repository.
++All three artifacts came from the privately retained final protected receipt;
++their sizes and SHA-256 values matched before restore. VM115 Drive credentials
++were not used, and no Proxmox repository fallback occurred. Windows streamed
++directly into disposable tmpfs without a persistent plaintext Windows dump.
++
++The accepted Windows procedure and restore/ownership/ACL/SCRAM verification were
++reused. Actual incompatibilities required bounded operator adaptations: the old
++rehearsal ran its disposable cluster on VM115 and capped the empty-database dump
++at 8 MiB; this request requires an off-host target and its final dump is
++768,622,342 bytes. The cluster ran in existing Windows WSL Ubuntu, PostgreSQL 18,
++with a separate data directory/socket, empty listen_addresses, a 10 GiB tmpfs
++and noswap. PostgreSQL 18 tools were installed locally without creating a default
++cluster or starting a default service. The exact source database locale was
++recreated. The accepted provisioned-identity guard was reused unchanged. No
++application source, production configuration, service or release was modified.
++
++Globals, protected configuration and the database restored successfully, with
++zero failing/skipped objects. Immediately before comparison, production was
++captured in one bounded REPEATABLE READ / READ ONLY transaction. All
++76 application/catalog table row counts and normalized ownership,
++effective ACLs, schema/column/function/default grants, database contract,
++owner/runtime role attributes/memberships and protected identity matched.
++Both recovered owner/runtime passwords authenticated using SCRAM on the isolated
++socket; runtime least privilege passed. Private IDs, verifiers and marker remain
++unpublished. Revision is 0016_hunt_cached_runs; exactly one owner principal.
++
++The restored state has 28,278 catalog sets, one accepted active nonsynthetic
++Rebrickable snapshot, generation 1 and exactly one activation receipt. Failed
++predecessor audit and its successful predecessor-linked retry are preserved.
++Zero market observations, empty Watchlist, accepted default Settings, zero valid
++owner sessions and zero saved forecast/deal matched production. Known set
++75331-1 / The Razor Crest has one inventory and four directly recorded minifigure
++lots. No market provider or application acceptance campaign ran.
++
++### Cleanup, verification and outcome
++
++The disposable PostgreSQL was stopped; its cluster/data/socket, all recovered
++plaintext/configuration and temporary relay were removed, and tmpfs unmounted
++and removed. No recovery process or listener remained. The only subsequent
++production confirmation was read-only: current repaired release unchanged,
++generation 1 / 28,278 sets, all 13 normal health checks and zero failed units.
++
++An initial environment admission assertion misparsed findmnt's trailing newline;
++it stopped before any artifact restore and cleaned up fully. A bounded mount-only
++check proved the cause; correcting the operator parser preserved the noswap
++requirement. The extracted guard's dataclass decorator was also retained before
++restore. The first populated database restore succeeded, but current production
++had one Watchlist item and the required comparison admission stopped. All
++disposable resources were removed and the blocker was recorded. Brian then
++cleared Watchlist and signed out locally before this resumed comparison.
++The second database restore passed, but the operator verification queried its
++cluster guard before SET TRANSACTION isolation level; PostgreSQL rejected that
++invocation before any data comparison. Cleanup passed again. Setting isolation
++before the first query corrected the operator ordering. The third restore passed
++all 76 table counts and security/ownership/grants; full audit-row hashes differed
++because production timestamps used Etc/UTC while initdb inherited America/Chicago
++locally. A disposable initdb-only probe confirmed that default, without starting
++PostgreSQL. The recovery cluster timezone was set to match production Etc/UTC;
++no data or comparison fields were excluded. The fourth restore of the same final
++backup passed the full exact comparison and SCRAM qualification.
++No backup retry, production repair or weakened contract.
++
++Sanitized r5 evidence is published under astra_response/P12-05/r5/, preserving
++r1-r4. Main remains e64f2d812bf90255005c88e8d1f68b4c8ab0d7af, uncommitted/unpushed
++with empty index and protected dirty files unchanged. Final acceptance and any
++subsequent main closeout remain separate; no Phase 13 work is authorized.
++
+ 
+ ## Final populated Drive recovery blocked — 2026-10-01
+ 

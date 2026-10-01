@@ -1,0 +1,11 @@
+{
+  "cluster_removed": true,
+  "gate": "recovery_cleanup",
+  "no_recovery_listener": true,
+  "no_recovery_process": true,
+  "production_cluster_untouched": true,
+  "recovered_plaintext_removed": true,
+  "status": "PASS",
+  "temporary_configuration_removed": true,
+  "tmpfs_unmounted_removed": true
+}

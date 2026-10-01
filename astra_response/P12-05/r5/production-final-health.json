@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "current_release": "p12-05-catalog-repair-r1",
+  "generation": 1,
+  "sets": 28278,
+  "normal_health_checks": {
+    "SERVICES": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "UFW": true,
+    "CLOCK": true,
+    "ROOT_SPACE": true,
+    "DATA_SPACE": true,
+    "REBOOT_PENDING": true,
+    "SECURITY_UPDATES": true
+  },
+  "zero_failed_units": true,
+  "production_mutations": 0,
+  "new_backup_invocations": 0,
+  "gate": "production_final_health"
+}
