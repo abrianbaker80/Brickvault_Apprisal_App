@@ -1,0 +1,80 @@
+{
+  "status": "PASS",
+  "scope": "documentation/Git closeout only",
+  "documentation": {
+    "status": "PASS",
+    "accepted_review": "57dec1e5f7b0538c75f2a17a824c15aba3083dc2",
+    "historical_document_bodies_byte_preserved": true,
+    "resolved_main_markdown_links": 327,
+    "protected_hashes": {
+      "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+      "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+      "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+    },
+    "protected_unstaged": true,
+    "plans_100_101_byte_preserved": true,
+    "application_source_changes": 0,
+    "production_contact": false,
+    "tests_builds_rerun": false,
+    "operational_qualification_rerun": false,
+    "phase_13_started": false
+  },
+  "staged_checkpoint": {
+    "status": "PASS",
+    "parent": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+    "literal_staged_inventory": [
+      "CODEX_WORKFLOW.md",
+      "docs/DECISIONS.md",
+      "docs/ROADMAP.md",
+      "docs/plans/099-phase-12-production-acceptance.md",
+      "docs/plans/102-manual-deal-economics-admission-repair.md"
+    ],
+    "complete_staged_diff_review": "PASS",
+    "staged_diff_sha256": "955358ed8c994e3fbe6bf05cf1025a2b80ea0b188b7da50acc87855f0849bf5e",
+    "cached_diff_check": "PASS",
+    "commit_hooks": "none",
+    "protected_hashes": "PASS",
+    "protected_unstaged": true,
+    "markdown_links": 327,
+    "tests_builds_rerun": false
+  },
+  "local_commit": {
+    "status": "PASS",
+    "local_commit": "653fae52ef5cb852985e2c36039b20523776f3b9",
+    "subject": "Close Phase 12 production acceptance",
+    "parent": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+    "branch": "main",
+    "index": "empty",
+    "main_pushed": false,
+    "committed_inventory": [
+      "CODEX_WORKFLOW.md",
+      "docs/DECISIONS.md",
+      "docs/ROADMAP.md",
+      "docs/plans/099-phase-12-production-acceptance.md",
+      "docs/plans/102-manual-deal-economics-admission-repair.md"
+    ],
+    "worktree_status": [
+      " M AGENTS.md",
+      " M services/api/tests/integration/test_catalog_search.py",
+      " M services/api/tests/unit/test_catalog_parser.py"
+    ],
+    "protected_byte_preserved_and_unstaged": true,
+    "plans_100_101_recommitted": false,
+    "executable_catalog_repair_recommitted": false
+  },
+  "publication_parent": "57dec1e5f7b0538c75f2a17a824c15aba3083dc2",
+  "accepted_r1_r5_evidence_reused": true,
+  "production_test_build_backup_restore_device_vm_health_reruns": 0,
+  "phase_13_started": false,
+  "publication_validation": {
+    "status": "PASS",
+    "literal_files": 14,
+    "resolved_package_links": 39,
+    "json_parse": "PASS",
+    "privacy_scan": "PASS",
+    "r1_r5_preserved": true,
+    "final_plan_copies_from_local_commit": true,
+    "complete_commit_patch_changes_match_reviewed_staged_diff": true,
+    "zero_context_patch_export": true
+  }
+}

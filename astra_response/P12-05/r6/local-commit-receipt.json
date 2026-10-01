@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "local_commit": "653fae52ef5cb852985e2c36039b20523776f3b9",
+  "subject": "Close Phase 12 production acceptance",
+  "parent": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "branch": "main",
+  "index": "empty",
+  "main_pushed": false,
+  "committed_inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/DECISIONS.md",
+    "docs/ROADMAP.md",
+    "docs/plans/099-phase-12-production-acceptance.md",
+    "docs/plans/102-manual-deal-economics-admission-repair.md"
+  ],
+  "worktree_status": [
+    " M AGENTS.md",
+    " M services/api/tests/integration/test_catalog_search.py",
+    " M services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "protected_byte_preserved_and_unstaged": true,
+  "plans_100_101_recommitted": false,
+  "executable_catalog_repair_recommitted": false
+}

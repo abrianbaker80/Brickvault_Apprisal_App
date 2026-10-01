@@ -1,0 +1,1045 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 582bf44..ada1b67 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -2,0 +3,108 @@
++## Phase 12 final closeout — 2026-10-01
++
++**P12-05: ACCEPTED / CLOSED. Phase 12: ACCEPTED / CLOSED.
++Phase 13: NEXT / NOT STARTED.** Brian independently accepts the final
++[r5 review](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/57dec1e5f7b0538c75f2a17a824c15aba3083dc2/astra_response/P12-05/r5/REVIEW.md) at 57dec1e5f7b0538c75f2a17a824c15aba3083dc2.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) is CLOSED.
++[Plan 102](docs/plans/102-manual-deal-economics-admission-repair.md) is
++CONTRACT REVIEW COMPLETE / CLOSED — NO REPAIR REQUIRED.
++
++This authorized closeout records accepted r1-r5 evidence and commits exactly
++the five named status/plan documents locally with subject
++`Close Phase 12 production acceptance`; main is not pushed. Sanitized closeout
++receipts are published separately in `astra_response/P12-05/r6/` on
++`astra-response`. Protected dirty files remain byte-for-byte unchanged and
++unstaged; Plans 100/101 and executable catalog repair are excluded.
++Only documentation/Git validation occurs. Accepted production, recovery and
++device evidence is reused without live contact or test/build reruns.
++All dated blocker/resume entries below are preserved historical evidence;
++this closure supersedes their current-status language. Phase 13 has not begun.
++
++
++## Final populated Drive recovery — 2026-10-01
++
++P12-05 is IMPLEMENTED / READY FOR FINAL ACCEPTANCE. Phase 12 is READY FOR FINAL
++ACCEPTANCE; Phase 13 NOT STARTED. Brian accepted r4 except for the populated final
++backup restore. The existing final receipt's three artifacts were recovered via
++independent Windows Drive credentials only into an off-host socket-only PostgreSQL
++18 tmpfs cluster. All table counts, ownership/grants, SCRAM, catalog audit and
++cleanup state matched a bounded read-only production snapshot; recovery cleanup
++and short read-only production health passed. No new backup or Gates 1-12 repeat.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records r5 evidence.
++Main remains uncommitted/unpushed, index empty and protected files unchanged.
++
++
++## Final P12-05 acceptance ready for review — 2026-10-01
++
++**READY FOR P12-05 / PHASE 12 FINAL REVIEW. Phase 12 IN PROGRESS pending independent
++acceptance.** Gates 1-7 reused; corrected Gate 8 immutable r6 rollback and exact
++catalog-repair forward return passed, including authenticated exact probe persistence.
++VM115-only real graceful cold stop/start passed after actual VM112-before-115
++startup-order verification. The probe is removed, Settings restored, no saved
++forecast exists, zero valid sessions, and THIS continuation's just-revoked replay
++returned 401/no-store. Exactly one final normal dual backup passed all three
++artifacts/six encrypted readbacks/both repositories. Final security/operations,
++immutable/installed byte checks, deep health, retention and network exposure PASS.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records the evidence and limits. Plan 102 remains CLOSED —
++NO REPAIR REQUIRED. Prior r3/r2/r1 remain dated history; final sanitized review is
++`astra_response/P12-05/r4/`. Main stays uncommitted/unpushed at e64f2d8, index empty,
++protected dirty bytes unchanged. No source/schema change, provider activation,
++broad tests, Phase 13 or final human acceptance is implied.
++
++
++## P12-05 current stop at Gate 8 — 2026-10-01
++
++**BLOCKED — required immutable rollback operational compatibility. Gates 1-7 PASS;
++P12-05 and Phase 12 remain IN PROGRESS.** Production PWA and physical Android
++acceptance passed with the documented evidence limits. The required `p12-04d-r1`
++rollback lacks scripts used by installed health, retention, Python-maintenance
++and alert services, and its renewal hook conflicts with the health equality
++contract. No pointer change or rollback was attempted; the repaired release
++remains installed. The temporary Watchlist is removed, Settings restored, Android
++signed out, PWA at sign-in, and no valid owner session or saved forecast exists.
++New-token replay remains unexercised; accepted earlier Windows replay 401 is reused.
++VM recovery, final backup (zero invocations) and final operations acceptance remain
++pending. [Plan 099](docs/plans/099-phase-12-production-acceptance.md) records the blocker, evidence and next reviewed
++compatibility disposition. Gate 5 and Plan 102's no-repair closure remain accepted.
++Prior r2/r1 evidence stays preserved; sanitized blocked review goes to
++`astra_response/P12-05/r3/`. Main stays uncommitted/unpushed with empty index and
++unchanged protected dirty bytes. Earlier status below is dated history.
++
++
++## P12-05 Gate 5 correction and continuation — 2026-10-01
++
++**Gate 5 PASS; manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++Brian accepted the manual-economics r1 diagnosis and corrected the acceptance
++criterion: MANUAL selects sale price after qualified valuation admission. The
++observed production UNKNOWN/null full economics conforms to frozen V1; no bug,
++V2, replay change, application repair or new deployment is warranted.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records accepted Gates 1-5 and ordered PWA, physical Android, immutable
++recovery, cleanup, one final dual backup and operations/review continuation.
++Plan 102 is CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Prior r2/r1 pause
++evidence and all earlier dated prose remain preserved and superseded as status.
++Ordinary unsaved previews follow normal expiry/cleanup; no unsafe deletion or
++forced row-count-zero criterion applies. No market activation or Phase 13.
++Main remains uncommitted/unpushed, index empty and protected dirty bytes intact.
++
++## P12-05 remaining acceptance stop, 2026-09-30
++
++**Catalog importer repair and production catalog activation prerequisite ACCEPTED /
++CLOSED. P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS.**
++From accepted main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`, the real fresh-profile
++owner session/security checks, Windows shell/search/detail/Settings, and unique
++temporary Watchlist create/update/persistence passed. The manual-sale forecast
++preview received the explicit price but returned null sale/net/profit/ROI because
++the existing v1 backend requires supported market evidence before selecting MANUAL.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records the exact stop.
++No application repair, provider activation, schema/configuration change or deployment
++was performed. A repair requires separate authorization and replay/version review.
++
++Settings defaults were restored, the temporary Watchlist item removed, and the
++browser signed out; old-session replay returned 401. One unsaved preview remains
++under normal expiry/cleanup rules, so complete temporary-data cleanup is not claimed.
++PWA, physical Android, rollback/forward, VM stop/start, final backup and final
++operations qualification remain unrun. The blocked review is published separately
++under `astra_response/P12-05/r2/`; main remains uncommitted/unpushed, index empty,
++and protected dirty files unchanged. Earlier sections retain dated history.
++
+diff --git a/docs/DECISIONS.md b/docs/DECISIONS.md
+index b3a6d18..cfbe4f7 100644
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -2,0 +3,60 @@
++## Accepted Phase 12 final closure — 2026-10-01
++
++Brian independently accepts [P12-05 r5](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/57dec1e5f7b0538c75f2a17a824c15aba3083dc2/astra_response/P12-05/r5/REVIEW.md) at
++57dec1e5f7b0538c75f2a17a824c15aba3083dc2. **P12-05: ACCEPTED / CLOSED.
++Phase 12: ACCEPTED / CLOSED. Phase 13: NEXT / NOT STARTED.**
++[Plan 099](plans/099-phase-12-production-acceptance.md) is CLOSED.
++[Plan 102](plans/102-manual-deal-economics-admission-repair.md) is
++CONTRACT REVIEW COMPLETE / CLOSED — NO REPAIR REQUIRED. Qualified valuation
++admission, frozen V1 replay and the accepted Gate 5 criterion remain intact.
++
++The final populated Drive-only recovery and accepted r1-r4 gates close Phase 12;
++the accepted evidence limits remain in force. This decision authorizes only the
++literal five-file local documentation commit and separate r6 review publication.
++Main is not pushed; protected dirty bytes stay unchanged and unstaged. Plans
++100/101 and executable catalog repair are excluded. No live qualification or
++test/build work is repeated. Historical decisions and dated blocker/resume
++evidence below remain intact; their pending-status language is superseded here.
++
++
++## Final populated Drive recovery — 2026-10-01
++
++Brian accepted P12-05 r4 except for restoring its populated final backup. The
++authorized continuation reused that exact existing protected receipt and
++independent Windows Drive context, with no backup rerun, Proxmox fallback or
++production mutation. Actual empty-rehearsal size and on-VM placement constraints
++required bounded operator adaptations for the existing Windows WSL off-host
++PostgreSQL 18 cluster, socket-only and tmpfs noswap. Accepted restore and effective
++ownership/grant/SCRAM checks were retained. Populated recovery, full table-count
++comparison, catalog/retry audit and complete cleanup passed. P12-05 and Phase 12
++are READY FOR FINAL ACCEPTANCE, not yet closed; Phase 13 remains NOT STARTED.
++[Plan 099](plans/099-phase-12-production-acceptance.md) is authoritative.
++
++
++## Accepted P12-05 rollback target disposition — 2026-10-01
++
++For Plan 099 Gate 8, Brian explicitly replaces the older infrastructure checkpoint
++`p12-04d-r1` with immediate accepted operational predecessor `p12-04e-r6`.
++P12-04D predates current health/retention/Python/alert/hook dependencies and remains
++immutable. R6 binds that accepted operational contract and shares revision 0016
++with the catalog-repair release. Both exact immutable releases remain unchanged;
++this corrects the acceptance target, without a source patch or weakened check.
++Actual r6 rollback and exact repaired forward return passed authenticated private
++persistence, followed by cleanup/replay, real VM115 cold recovery and one final
++dual backup. [Plan 099](plans/099-phase-12-production-acceptance.md) records evidence.
++Earlier blocker evidence remains preserved. Independent Phase 12 acceptance and
++main closeout remain pending; no Phase 13 is authorized by this readiness.
++
++
++## P12-05 Gate 5 acceptance criterion corrected — 2026-10-01
++
++Brian accepts the [Plan 102](plans/102-manual-deal-economics-admission-repair.md)
++contract diagnosis: MANUAL is price selection after qualified valuation admission,
++not an admission bypass. Keep whole-set-economics-v1 frozen, including exact
++historical recomputation/expectation comparison. Production MANUAL + UNKNOWN/null
++full economics conforms; no application bug, repair, V2, migration or new deployment
++is required. [Plan 099](plans/099-phase-12-production-acceptance.md) Gate 5 is PASS
++and resumes at Gate 6. Prior blocked reviews remain dated evidence. Ordinary unsaved
++preview expiry is not a saved deal and does not require forced deletion for cleanup.
++This corrects production acceptance only; no valuation/financial contract changes.
++
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index b2a5a0b..cdbe29b 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -2,0 +3,104 @@
++## Phase 12 final closeout — 2026-10-01
++
++**P12-05: ACCEPTED / CLOSED. Phase 12: ACCEPTED / CLOSED.
++Phase 13: NEXT / NOT STARTED.** Brian independently accepts
++[final r5 evidence](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/57dec1e5f7b0538c75f2a17a824c15aba3083dc2/astra_response/P12-05/r5/REVIEW.md) at 57dec1e5f7b0538c75f2a17a824c15aba3083dc2.
++[Plan 099](plans/099-phase-12-production-acceptance.md) is CLOSED;
++[Plan 102](plans/102-manual-deal-economics-admission-repair.md) is
++CONTRACT REVIEW COMPLETE / CLOSED — NO REPAIR REQUIRED.
++
++The accepted production baseline is `p12-05-catalog-repair-r1`, migration
++`0016_hunt_cached_runs`, catalog generation 1 / 28,278 sets. R5 qualifies
++the populated FINAL backup through independent Windows Google Drive-only
++recovery, exact restored-state comparison and complete disposable cleanup.
++Those accepted results are reused here; this closeout performs only
++documentation/Git validation. Prior dated blocker/resume evidence is retained
++below. Closure does not authorize or start Phase 13.
++
++
++## Final populated Drive recovery — 2026-10-01
++
++P12-05 IMPLEMENTED / READY FOR FINAL ACCEPTANCE; Phase 12 READY FOR FINAL
++ACCEPTANCE; Phase 13 NOT STARTED. The remaining real populated final-backup
++recovery proof passed via independent Windows Google Drive-only recovery into
++off-host isolated PostgreSQL 18. Production comparison, ownership/least privilege,
++catalog audit and cleanup matched; disposable recovery resources were removed
++and production stayed healthy. R4 gates remain accepted and were not repeated.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records r5. Final acceptance
++and main closeout remain pending; this status starts no subsequent phase.
++
++
++## Final P12-05 acceptance ready for review — 2026-10-01
++
++**READY FOR P12-05 / PHASE 12 FINAL REVIEW. Phase 12 IN PROGRESS pending independent
++acceptance.** Gates 1-7 reused; corrected Gate 8 immutable r6 rollback and exact
++catalog-repair forward return passed, including authenticated exact probe persistence.
++VM115-only real graceful cold stop/start passed after actual VM112-before-115
++startup-order verification. The probe is removed, Settings restored, no saved
++forecast exists, zero valid sessions, and THIS continuation's just-revoked replay
++returned 401/no-store. Exactly one final normal dual backup passed all three
++artifacts/six encrypted readbacks/both repositories. Final security/operations,
++immutable/installed byte checks, deep health, retention and network exposure PASS.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records the evidence and limits. Plan 102 remains CLOSED —
++NO REPAIR REQUIRED. Prior r3/r2/r1 remain dated history; final sanitized review is
++`astra_response/P12-05/r4/`. Main stays uncommitted/unpushed at e64f2d8, index empty,
++protected dirty bytes unchanged. No source/schema change, provider activation,
++broad tests, Phase 13 or final human acceptance is implied.
++
++
++## P12-05 current stop at Gate 8 — 2026-10-01
++
++**BLOCKED — required immutable rollback operational compatibility. Gates 1-7 PASS;
++P12-05 and Phase 12 remain IN PROGRESS.** Production PWA and physical Android
++acceptance passed with the documented evidence limits. The required `p12-04d-r1`
++rollback lacks scripts used by installed health, retention, Python-maintenance
++and alert services, and its renewal hook conflicts with the health equality
++contract. No pointer change or rollback was attempted; the repaired release
++remains installed. The temporary Watchlist is removed, Settings restored, Android
++signed out, PWA at sign-in, and no valid owner session or saved forecast exists.
++New-token replay remains unexercised; accepted earlier Windows replay 401 is reused.
++VM recovery, final backup (zero invocations) and final operations acceptance remain
++pending. [Plan 099](plans/099-phase-12-production-acceptance.md) records the blocker, evidence and next reviewed
++compatibility disposition. Gate 5 and Plan 102's no-repair closure remain accepted.
++Prior r2/r1 evidence stays preserved; sanitized blocked review goes to
++`astra_response/P12-05/r3/`. Main stays uncommitted/unpushed with empty index and
++unchanged protected dirty bytes. Earlier status below is dated history.
++
++
++## P12-05 Gate 5 correction and continuation — 2026-10-01
++
++**Gate 5 PASS; manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++Brian accepted the manual-economics r1 diagnosis and corrected the acceptance
++criterion: MANUAL selects sale price after qualified valuation admission. The
++observed production UNKNOWN/null full economics conforms to frozen V1; no bug,
++V2, replay change, application repair or new deployment is warranted.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records accepted Gates 1-5 and ordered PWA, physical Android, immutable
++recovery, cleanup, one final dual backup and operations/review continuation.
++Plan 102 is CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Prior r2/r1 pause
++evidence and all earlier dated prose remain preserved and superseded as status.
++Ordinary unsaved previews follow normal expiry/cleanup; no unsafe deletion or
++forced row-count-zero criterion applies. No market activation or Phase 13.
++Main remains uncommitted/unpushed, index empty and protected dirty bytes intact.
++
++## P12-05 remaining acceptance stop, 2026-09-30
++
++**Catalog importer repair and production catalog activation prerequisite ACCEPTED /
++CLOSED. P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS.**
++From accepted main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`, the real fresh-profile
++owner session/security checks, Windows shell/search/detail/Settings, and unique
++temporary Watchlist create/update/persistence passed. The manual-sale forecast
++preview received the explicit price but returned null sale/net/profit/ROI because
++the existing v1 backend requires supported market evidence before selecting MANUAL.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records the exact stop.
++No application repair, provider activation, schema/configuration change or deployment
++was performed. A repair requires separate authorization and replay/version review.
++
++Settings defaults were restored, the temporary Watchlist item removed, and the
++browser signed out; old-session replay returned 401. One unsaved preview remains
++under normal expiry/cleanup rules, so complete temporary-data cleanup is not claimed.
++PWA, physical Android, rollback/forward, VM stop/start, final backup and final
++operations qualification remain unrun. The blocked review is published separately
++under `astra_response/P12-05/r2/`; main remains uncommitted/unpushed, index empty,
++and protected dirty files unchanged. Earlier sections retain dated history.
++
+diff --git a/docs/plans/099-phase-12-production-acceptance.md b/docs/plans/099-phase-12-production-acceptance.md
+index ea1db0c..b374332 100644
+--- a/docs/plans/099-phase-12-production-acceptance.md
++++ b/docs/plans/099-phase-12-production-acceptance.md
+@@ -2,0 +3,545 @@
++## Independently accepted final closeout — 2026-10-01
++
++**Plan 099: CLOSED. P12-05: ACCEPTED / CLOSED.
++Phase 12: ACCEPTED / CLOSED. Phase 13: NEXT / NOT STARTED.** Brian independently
++accepts [r5](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/57dec1e5f7b0538c75f2a17a824c15aba3083dc2/astra_response/P12-05/r5/REVIEW.md) at 57dec1e5f7b0538c75f2a17a824c15aba3083dc2, including
++the populated FINAL backup recovery. All dated blocker/resume and operational
++evidence below remains preserved; this closure supersedes earlier pending states.
++
++### Accepted baseline and recovery evidence
++
++The accepted production baseline is `p12-05-catalog-repair-r1`, migration
++`0016_hunt_cached_runs`, one accepted active nonsynthetic Rebrickable snapshot,
++catalog generation 1 / 28,278 sets and one activation receipt. Failed predecessor
++audit and its successful predecessor-linked retry remain preserved. Cleanup
++evidence records zero market observations, empty Watchlist, default Settings,
++zero valid owner sessions and zero saved acceptance forecast/deal. Ordinary
++unsaved preview state follows normal expiry and is not a saved acceptance record.
++
++Accepted r5 restored the existing FINAL receipt's globals, protected configuration
++and populated database through independent Windows Google Drive credentials
++only into an off-host isolated socket-only PostgreSQL 18 environment. All three
++artifact sizes/SHA-256 values matched before restore; all 76 application/catalog
++table counts, ownership/effective grants, owner/runtime SCRAM authentication,
++catalog audit and cleanup state matched. Known set 75331-1 / The Razor Crest has
++one inventory and four directly recorded minifigure lots. Disposable resources
++and plaintext were removed; no recovery process/listener remained. The accepted
++short read-only health confirmation passed all 13 normal checks and zero failed
++units. No new backup or Proxmox repository fallback was needed for r5.
++
++### Documentation/Git closeout boundary
++
++Accepted r1-r5 evidence is reused; Gates 1-12, production contact, tests/builds,
++backup/restore, browser/PWA/Android, rollback/forward, VM operations and health
++qualification are not repeated. [Plan 102](102-manual-deal-economics-admission-repair.md)
++is CONTRACT REVIEW COMPLETE / CLOSED — NO REPAIR REQUIRED; frozen V1 remains.
++Plans 100/101 and executable catalog repair are not altered or recommitted.
++
++Brian authorizes exactly CODEX_WORKFLOW.md, docs/ROADMAP.md, docs/DECISIONS.md,
++this Plan 099 and Plan 102 for one local `Close Phase 12 production acceptance`
++commit from e64f2d812bf90255005c88e8d1f68b4c8ab0d7af. Main is not pushed.
++Validation covers the exact staged inventory, complete staged diff, cached
++whitespace, Markdown links, protected hashes and final HEAD/index/worktree.
++AGENTS.md and the two protected catalog tests retain their exact dirty bytes
++and stay unstaged. The separate `astra_response/P12-05/r6/` package on
++`astra-response` records the final plans, accepted baseline/recovery evidence,
++local commit receipt and closeout validation while preserving r1-r5.
++
++- [x] Independent P12-05 / Phase 12 final acceptance recorded.
++- [x] Populated FINAL Google Drive-only recovery accepted from r5.
++- [x] Plan 099 closed; Plan 102 contract review closed without repair.
++- [x] Historical evidence and future-phase authorization boundary retained.
++
++
++## Final populated Drive recovery — 2026-10-01
++
++**READY FOR PHASE 12 FINAL ACCEPTANCE. P12-05 IMPLEMENTED / READY FOR FINAL
++ACCEPTANCE; Phase 12 READY FOR FINAL ACCEPTANCE; Phase 13 NOT STARTED.** Brian
++accepted r4 except for the remaining populated-backup recovery proof. This bounded
++continuation restores the already-created final P12-05 backup, with no new backup
++or repeat of Gates 1-12. Older statuses below remain dated history.
++
++### Scope, method and actual result
++
++Independent Windows recovery credentials unlocked the exact Drive repository.
++All three artifacts came from the privately retained final protected receipt;
++their sizes and SHA-256 values matched before restore. VM115 Drive credentials
++were not used, and no Proxmox repository fallback occurred. Windows streamed
++directly into disposable tmpfs without a persistent plaintext Windows dump.
++
++The accepted Windows procedure and restore/ownership/ACL/SCRAM verification were
++reused. Actual incompatibilities required bounded operator adaptations: the old
++rehearsal ran its disposable cluster on VM115 and capped the empty-database dump
++at 8 MiB; this request requires an off-host target and its final dump is
++768,622,342 bytes. The cluster ran in existing Windows WSL Ubuntu, PostgreSQL 18,
++with a separate data directory/socket, empty listen_addresses, a 10 GiB tmpfs
++and noswap. PostgreSQL 18 tools were installed locally without creating a default
++cluster or starting a default service. The exact source database locale was
++recreated. The accepted provisioned-identity guard was reused unchanged. No
++application source, production configuration, service or release was modified.
++
++Globals, protected configuration and the database restored successfully, with
++zero failing/skipped objects. Immediately before comparison, production was
++captured in one bounded REPEATABLE READ / READ ONLY transaction. All
++76 application/catalog table row counts and normalized ownership,
++effective ACLs, schema/column/function/default grants, database contract,
++owner/runtime role attributes/memberships and protected identity matched.
++Both recovered owner/runtime passwords authenticated using SCRAM on the isolated
++socket; runtime least privilege passed. Private IDs, verifiers and marker remain
++unpublished. Revision is 0016_hunt_cached_runs; exactly one owner principal.
++
++The restored state has 28,278 catalog sets, one accepted active nonsynthetic
++Rebrickable snapshot, generation 1 and exactly one activation receipt. Failed
++predecessor audit and its successful predecessor-linked retry are preserved.
++Zero market observations, empty Watchlist, accepted default Settings, zero valid
++owner sessions and zero saved forecast/deal matched production. Known set
++75331-1 / The Razor Crest has one inventory and four directly recorded minifigure
++lots. No market provider or application acceptance campaign ran.
++
++### Cleanup, verification and outcome
++
++The disposable PostgreSQL was stopped; its cluster/data/socket, all recovered
++plaintext/configuration and temporary relay were removed, and tmpfs unmounted
++and removed. No recovery process or listener remained. The only subsequent
++production confirmation was read-only: current repaired release unchanged,
++generation 1 / 28,278 sets, all 13 normal health checks and zero failed units.
++
++An initial environment admission assertion misparsed findmnt's trailing newline;
++it stopped before any artifact restore and cleaned up fully. A bounded mount-only
++check proved the cause; correcting the operator parser preserved the noswap
++requirement. The extracted guard's dataclass decorator was also retained before
++restore. The first populated database restore succeeded, but current production
++had one Watchlist item and the required comparison admission stopped. All
++disposable resources were removed and the blocker was recorded. Brian then
++cleared Watchlist and signed out locally before this resumed comparison.
++The second database restore passed, but the operator verification queried its
++cluster guard before SET TRANSACTION isolation level; PostgreSQL rejected that
++invocation before any data comparison. Cleanup passed again. Setting isolation
++before the first query corrected the operator ordering. The third restore passed
++all 76 table counts and security/ownership/grants; full audit-row hashes differed
++because production timestamps used Etc/UTC while initdb inherited America/Chicago
++locally. A disposable initdb-only probe confirmed that default, without starting
++PostgreSQL. The recovery cluster timezone was set to match production Etc/UTC;
++no data or comparison fields were excluded. The fourth restore of the same final
++backup passed the full exact comparison and SCRAM qualification.
++No backup retry, production repair or weakened contract.
++
++Sanitized r5 evidence is published under astra_response/P12-05/r5/, preserving
++r1-r4. Main remains e64f2d812bf90255005c88e8d1f68b4c8ab0d7af, uncommitted/unpushed
++with empty index and protected dirty files unchanged. Final acceptance and any
++subsequent main closeout remain separate; no Phase 13 work is authorized.
++
++
++## Final populated Drive recovery blocked — 2026-10-01
++
++**BLOCKED — current production comparison: Watchlist is not empty (1 item;
++required 0). P12-05 / Phase 12 final recovery qualification remains incomplete.
++Phase 13 NOT STARTED.** Brian accepted r4 except for the populated final-backup
++restore. This continuation did not repeat Gates 1-12 or create another backup.
++Older readiness statements below remain dated history, superseded for this gap.
++
++The exact final protected receipt and Drive repository identity matched using
++the existing independent Windows recovery credentials; VM115 Drive credentials
++were not used. All three final artifacts streamed directly into task-owned
++off-host Windows WSL tmpfs and matched exact sizes/SHA-256 before restore.
++Globals, protected configuration, exact database ownership/marker/grants and the
++768,622,342-byte database.dump restored successfully into socket-only PostgreSQL
++18, with zero failing/skipped objects or restore diagnostics. One actual populated
++database restore ran. No production configuration/service/data/release mutation,
++Proxmox repository fallback, provider action, backup or retention/prune occurred.
++
++Actual incompatibilities required bounded operator adaptations of the accepted
++procedure: the earlier disposable consumer was on VM115 and assumed an empty
++dump below 8 MiB/256 MiB tmpfs. This request requires off-host recovery and a
++populated dump. Existing Windows WSL Ubuntu hosted the isolated PostgreSQL 18
++cluster in 10 GiB tmpfs with noswap, separate data/socket and no TCP listener.
++Missing PostgreSQL tools were installed locally with no default cluster/service
++startup. Exact production locale and the unchanged accepted ownership guard
++were used. An initial environment admission assertion misparsed findmnt's
++trailing newline, stopped before any artifact restore, and cleaned up fully.
++A mount-only check proved the cause; the operator parser was corrected while
++retaining noswap. The extracted guard's dataclass decorator was retained before
++restore. No application-source fix or weakened production contract.
++
++Immediately before restored-state comparison, one bounded production
++REPEATABLE READ / READ ONLY snapshot completed table/security inventory but
++stopped at the required empty-Watchlist assertion. Read-only diagnosis confirmed
++one owner principal, zero valid owner sessions, one Watchlist item, zero saved
++forecasts and zero market observations; Settings equal accepted defaults and
++75331-1 / The Razor Crest remains present. This slice created no Watchlist item.
++No private IDs were published. The accepted active/retry-audit and ownership
++preconditions passed before the cleanup-state assertion. The full restored-state
++count/grant comparison and owner/runtime SCRAM qualification were not completed;
++successful pg_restore alone is not claimed as full recovery qualification.
++
++The disposable cluster stopped, all recovered plaintext/configuration/data/socket
++and temporary consumer were removed, and tmpfs unmounted/removed. No recovery
++process or listener remained. The authorized short production read-only health
++confirmation passed: p12-05-catalog-repair-r1 unchanged, generation 1 / 28,278 sets,
++all 13 normal checks and zero failed units. The live Watchlist item was preserved;
++no automatic production repair, backup rerun or second populated restore followed.
++
++Sanitized local evidence records the blocker. No success-only r5 package was
++published; r1-r4 and isolated astra-response stay unchanged. Main remains
++e64f2d812bf90255005c88e8d1f68b4c8ab0d7af, uncommitted/unpushed with empty index and
++protected dirty bytes unchanged. Resolving the live-state discrepancy requires
++separate user direction; this continuation does not authorize production cleanup.
++
++
++## Final P12-05 acceptance ready for review — 2026-10-01
++
++**READY FOR P12-05 / PHASE 12 FINAL REVIEW. Phase 12 remains IN PROGRESS pending
++independent acceptance; main remains uncommitted/unpushed.** All older resume/blocker
++statements below are preserved as dated history, superseded by this current status.
++Catalog importer repair/catalog activation and Plan 102 no-repair closure remain accepted.
++
++### Gate 8 corrected target and actual recovery proof — PASS
++
++Brian accepted r3 and explicitly selected immediate operational predecessor
++`p12-04e-r6`; `p12-04d-r1` remains immutable and unused. Both r6 and the forward
++`p12-05-catalog-repair-r1` 36-file manifests verified exactly. R6 source ID is
++`00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5`; manifest SHA-256 is
++`9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d`.
++Every discovered installed current-pointer service/drop-in dependency exists in
++r6; required operational script bytes and root-owned renewal hook match both
++releases. Both runtimes accept revision 0016, with 49 identical migration files.
++Read-only r6 runtime-role search and Set Detail read the real generation-1 catalog,
++28,278 sets and exact 75331-1 / The Razor Crest without mutation/provider dispatch.
++
++Brian entered the owner password in a local hidden prompt; an isolated normal
++trusted-HTTPS app API session stayed in process memory. Exactly one new uniquely
++marked Watchlist probe was created, with its revision privately recorded and no
++Settings mutation. Actual atomic current-pointer/absolute-web-path/health-identity
++rollback to r6, API restart, admin/trusted HTTPS and all 14 deep health checks
++passed. Authenticated search/detail and exact probe revision/data persisted.
++Actual forward return to the exact repaired release passed all 13 normal health
++checks, authoritative authenticated reads and the same single unchanged probe.
++The established eight-timer maintenance/operations-lock mechanism was used during
++each switch; all timers were restored. Original API environment and health config
++bytes were restored exactly, with no immutable release/source/schema modification.
++
++### Gates 9-12 — PASS
++
++- Actual startup config verified: running firewall VM112 onboot=1/order=1/up=15;
++  application VM115 onboot=1/order=2. Graceful shutdown ONLY VM115, actual Proxmox
++  stopped state, start and changed guest boot ID prove a real cold stop/start.
++  Guest agent/expected network, SSH, data mount, PostgreSQL, API, Caddy/TLS,
++  UFW/listeners, required timers, zero failed units and unchanged catalog passed.
++  No host reboot, firewall VM action, force-stop or configuration/resource change.
++- Only the rollback probe was removed through the app API. Pre-Gate-8 Watchlist
++  restored empty, Settings equal accepted defaults, no saved forecast/deal and
++  zero valid owner sessions. Logout returned 204/no-store; actual replay of THIS
++  continuation's just-revoked session returned 401/no-store. Session material was
++  cleared and the qualification process exited. Prior browser/Android signed-out
++  cleanup is reused. Ordinary unsaved preview cleanup remains normal; no manual
++  deletion, clock manipulation or forecast-guard bypass.
++- Exactly ONE final normal dual backup ran after cleanup and cold recovery.
++  Proxmox and Drive, database.dump/globals.sql/configuration.tar, six encrypted
++  readbacks, exact hashes/sizes, both repository checks and protected receipt PASS.
++  No retention apply/prune or repeat backup invocation.
++- Final admin/security/schema/catalog identity, installed wheel/release byte
++  verification, all 14 deep health checks, retention READY, enabled/active required
++  units/timers, idle jobs, zero failed units and unchanged least privilege PASS.
++  Static credential containment, no provider credentials, protected source outside
++  public roots and exact Caddy/environment/configuration bytes PASS. Final private
++  DNS matches VM115; public A/AAAA absent; trusted HTTPS healthy; direct API/PG ports
++  unreachable from Windows; unauthenticated private read 401/no-store. Accepted
++  read-only no-WAN-forwarding router evidence is reused; no router/DNS/firewall
++  change occurred in this continuation.
++
++### Final evidence boundary and publication
++
++Gates 1-7 remain accepted and were not unnecessarily repeated. Gate 5's corrected
++valuation-admission contract remains frozen; no economics repair/V2/replay change.
++Prior PWA cold-process evidence is user-confirmed and its worker-version transition
++was unexercised because release web/worker bytes are identical; these limitations
++remain explicit. Physical Android debug acceptance APK evidence remains distinct
++from release-store signing. No market activation, broad test campaign or Phase 13.
++
++Final release is `p12-05-catalog-repair-r1`, manifest SHA-256
++`02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`, revision
++`0016_hunt_cached_runs`, sole owner, one accepted active catalog generation 1,
++28,278 sets, zero market observations. Main stays at
++`e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`, with empty index and unchanged protected
++dirty files. Only additive status documentation changed. Sanitized final review
++is published under `astra_response/P12-05/r4/` on isolated `astra-response`,
++preserving r3/r2/r1 and the accepted diagnostic. Independent Phase 12 acceptance
++and any subsequent main closeout remain separate; this readiness starts no new phase.
++
++
++## Gate 8 target correction accepted — 2026-10-01
++
++**P12-05 IN PROGRESS — resume Gate 8 with p12-04e-r6. Phase 12 IN PROGRESS.**
++Brian accepts the r3 blocker and replaces only the rollback acceptance target.
++Use the immediate accepted operational predecessor `p12-04e-r6`, source ID
++`00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5`, manifest SHA-256
++`9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d`.
++The exact forward release stays `p12-05-catalog-repair-r1`. Both remain immutable.
++Do not use `p12-04d-r1`: it predates P12-04E operational hardening and cannot meet
++current installed service/hook requirements. Prior r3 and all older target/status
++statements below remain dated evidence, superseded by this explicit disposition.
++
++Static r6 compatibility PASS: both 36-file manifests exact, 49 migration artifact
++files identical, both venv/static builds usable, every discovered installed
++current-pointer service/drop-in dependency present, operational script bytes and
++root-owned renewal hook match both releases. Normal current 13 health checks PASS.
++Read-only r6/runtime-role catalog compatibility PASS: PostgreSQL enforced read-only,
++active generation 1 and 28,278 sets visible, exact 75331-1 / The Razor Crest search
++and Set Detail succeeded; security/catalog/Watchlist/Settings/session metadata
++unchanged. Appraisal's pinned response generation is null under the unchanged
++read contract; generation 1 was separately verified from the authoritative pointer.
++No import/recovery/provider/session/user mutation occurred in this compatibility proof.
++
++One new, uniquely marked rollback-only Watchlist probe is authorized through the
++normal authenticated app API; local hidden password entry, credentials/session only
++in process memory. No Settings change is needed. Prove exact private identity,
++revision/data across rollback and forward, then remove only that probe, logout and
++replay THIS continuation's just-revoked session for 401/no-store. Continue directly
++to VM 115 cold stop/start after actual VM112 order=1/up=15 and VM115 order=2/onboot
++verification, final cleanup, exactly one final normal dual backup and final review.
++No Gates 1-7 repeat, release/source/schema modification, health weakening, provider
++activation or Phase 13. Stop and restore forward if rollback fails. Successful
++final review destination: `astra_response/P12-05/r4/`; main remains uncommitted,
++unpushed, index empty and protected dirty bytes unchanged.
++
++
++## Current acceptance stop at Gate 8 — 2026-10-01
++
++**BLOCKED — Gate 8: required immutable rollback operational compatibility.
++Gates 1-7 PASS; P12-05 and Phase 12 remain IN PROGRESS.**
++This disposition supersedes earlier resume/stop status below while preserving
++all dated evidence. Gate 5 remains PASS after the accepted contract correction;
++Plan 102 remains CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED.
++
++### New client evidence
++
++Gate 6 passed on the installed production Chrome PWA: standalone/secure context,
++controlled public worker, authenticated reads, alive-document offline read-only,
++fresh offline document without private data, reconnect and public-cache inspection.
++The seven cache URLs contain only shell/icons/manifest/assets, with no API URLs.
++Ten observed API requests were reads; no write or queued retry was observed.
++Brian performed the browser/PWA shutdown and offline Start-menu relaunch and
++confirmed “Connection unavailable,” with no private records. This cold-process
++result is user-confirmed; the agent did not observe the browser process ID.
++Normal worker update found no waiting/installing worker. The exact old/forward
++web artifacts, including worker bytes, are identical; an actual worker-version
++transition was not exercised and no synthetic production update was introduced.
++
++Gate 7 passed on the USB-connected physical Android phone, using the approved
++production build path and a signed debug acceptance APK. Package
++`com.abrianbaker.brickvault.appraisal`, version 1.0/code 1, APK SHA-256
++`045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2`.
++Production API/WebView origins use system-only TLS trust; no test CA, localhost,
++ADB reverse, cleartext or native HTTP/cookie bypass. Local owner login, Set Detail,
++Settings write/restore, one Watchlist item/target, same-process offline read-only,
++confirmed force-stop/cold offline private-data absence, and authoritative reconnect
++passed. The target persisted once, without a duplicate. Phone network settings
++were restored exactly. No emulator evidence substitutes for these physical checks.
++
++### Gate 8 root cause and unchanged live state
++
++Read-only preflight verified all immutable manifest bytes: `p12-04d-r1` (15 files,
++manifest SHA-256 `25cbb51ec895640f2ed27ab36afac8ebcd11590aa52f96015b15e460502b6f36`)
++and `p12-05-catalog-repair-r1` (36 files, manifest SHA-256
++`02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`).
++The required old release lacks scripts referenced by installed current-pointer
++health/deep-health, retention, Python-maintenance and alert service commands.
++Its certificate renewal hook also differs from the installed forward hook;
++the health release contract requires byte equality against the current release.
++Therefore switching the required pointer would violate operational compatibility.
++Acceptance stops before any release pointer or configuration change. Resolving
++this requires a reviewed compatibility disposition; no replacement target,
++immutable-release edit, disabled check or source repair is authorized here.
++
++The repaired release stays current. API environment and health configuration
++bytes, database security/principal/schema and catalog identities/counts were
++verified unchanged after failure cleanup. Revision remains `0016_hunt_cached_runs`,
++one accepted generation-1 snapshot with 28,278 sets and zero market observations.
++Preflight passed all 13 light health checks, retention READY, required units/timers
++active/enabled and zero failed units. Existing fresh dual backup verification
++passed six encrypted readbacks, both repository checks and recovery proof; this
++was an existing-backup verification, not the final Gate 11 backup.
++
++### Failure cleanup and remaining gates
++
++Temporary Android Watchlist removed through the app; authoritative count is zero.
++Settings defaults equal the accepted pre-run defaults and default profile is null.
++No saved forecast/deal exists. Android shows “Signed out”; reloaded PWA shows
++sign-in. Read-only session metadata confirms zero valid owner sessions (one revoked,
++one expired). Accepted earlier Windows old-token replay 401 is reused; a new replay
++of this continuation's tokens was not exercised. These are distinct evidence claims.
++Ordinary unsaved preview state remains governed by normal application cleanup;
++no manual deletion, clock manipulation or guard bypass occurred.
++
++Rollback/forward were NOT ATTEMPTED; operational timers were never paused.
++Gate 9 VM stop/start NOT RUN; later Gate 10 completion/replay qualification remains
++pending despite performed failure cleanup. Gate 11 final backup invocations: zero.
++Gates 12/13 final security/Phase 12 acceptance remain pending. No application source,
++schema, provider activation, backend deployment, main commit/push or Phase 13 work.
++Sanitized blocked review: `astra_response/P12-05/r3/` on `astra-response`, preserving
++prior r2 and manual-economics r1. Main index/protected dirty bytes remain unchanged.
++
++
++## Gate 5 contract correction accepted; resume at Gate 6 — 2026-10-01
++
++**Gate 5 PASS. Manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++
++Brian accepts the [manual-economics diagnostic r1](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/d6f8a96efb2372db663e19fcbbbbf3fdd4116a7b/astra_response/P12-05-manual-economics/r1/REVIEW.md)
++and corrects the acceptance criterion, not the application contract. Accepted
++Plan 071 and frozen whole-set-economics-v1 require a qualified/SUPPORTED valuation
++basis before full dependent economics, including MANUAL. MANUAL selects sale price
++after admission; it does not bypass valuation admission. No application bug is
++established. [Plan 102](102-manual-deal-economics-admission-repair.md) is CONTRACT
++REVIEW COMPLETE — NO REPAIR REQUIRED. V1 and exact historical replay remain frozen;
++no V2, dispatch change, source/test change, migration or new deployment is warranted.
++All older paused/blocked status statements below are preserved as dated history
++and superseded by this current disposition; prior r2 and diagnostic r1 stay intact.
++
++The existing production MANUAL 200 + UNKNOWN result conforms: valuation/status
++and reasons remain UNKNOWN/honest; sale/gross/net/profit/ROI are null; selling costs
++25.00 and acquisition 105.00 may remain calculable. No source/provider/zero-price
++substitution or provider dispatch is needed. Accepted synthetic SUPPORTED evidence
++proves unchanged V1 produces sale 200.00, gross 210.00, costs 25.00, net 185.00,
++acquisition 105.00, profit 80.00 and ROI 76.2%. It is not supported production
++market evidence. Reuse the accepted diagnostic tests; do not repeat them live.
++
++### Current accepted and remaining gates
++
++1. Owner login/session/cookies — PASS; reuse accepted run.
++2. CSRF/Origin/Host/security — PASS; reuse accepted run.
++3. Windows catalog/core workflow — PASS; reuse accepted run.
++4. Temporary Watchlist persistence — PASS; removed afterward.
++5. Deal Economics — PASS: unsupported valuation correctly prevents full dependent
++   economics even with explicit MANUAL sale. Accepted behavior, not a workaround.
++6. Production PWA install/standalone/offline/reconnect/update — next gate.
++7. Physical Android production TLS/auth/offline/reconnect — follows Gate 6.
++8. Exact immutable p12-04d-r1 rollback and p12-05-catalog-repair-r1 forward return.
++9. VM 115 cold-start recovery after actual startup-order verification.
++10. Final cleanup/logout as applicable to this continuation.
++11. Exactly one final normal dual backup after preceding gates and cleanup.
++12. Final security/operations review.
++13. P12-05 / Phase 12 final review package.
++
++No Gates 1-5 repeat, market-provider activation, broad tests or Phase 13. No new
++application deployment. Existing immutable recovery operations remain separately
++bounded by Gates 8/9; no host reboot or firewall VM mutation. Request local password,
++PWA or device interaction only when unavoidable. Main stays uncommitted/unpushed,
++index empty, protected dirty bytes unchanged.
++
++### Corrected cleanup acceptance
++
++Reuse performed Windows cleanup: Settings/default profile restored, temporary
++Watchlist removed, browser logged out and old-session replay rejected with 401.
++The ordinary UNSAVED/PENDING capture is ephemeral preview state, not a saved deal.
++Do not manually delete it, manipulate clocks, bypass forecast_guard or force row
++count zero. Normal save-eligible expiry/owner-scoped cleanup governs it; if later
++normal activity removes an expired preview, report the actual fact only.
++Final cleanup requires temporary Watchlist absent, Settings restored, all owner
++sessions used by acceptance logged out, no saved acceptance forecast/deal created,
++old-session replay rejected and private state cleared. An ordinary unexpired
++unsaved preview does not prevent cleanup acceptance. No artificial activity may
++be created solely to force its cleanup.
++
++## Manual economics contract review stopped, 2026-09-30
++
++**Manual economics repair BLOCKED: the accepted governing contract requires a
++qualified market basis even for MANUAL sale.** [Plan 102](102-manual-deal-economics-admission-repair.md)
++records the compatibility review: changing V1 would alter historical recomputation.
++No executable repair, new version, migration or production interaction occurred.
++Focused existing V1 and isolated cleanup tests passed; the requested MANUAL +
++UNKNOWN outcome remains unavailable. P12-05 stays BLOCKED at Gate 5 and Phase 12
++stays IN PROGRESS; catalog/importer closures and the prior r2 evidence remain intact.
++Blocked review destination: astra_response/P12-05-manual-economics/r1/ on astra-response.
++
++## Remaining production acceptance resumed, 2026-09-30
++
++**P12-05 BLOCKED — Gate 5 manual Deal Economics admission; Phase 12 IN PROGRESS. Catalog importer repair
++and production catalog activation prerequisite remain ACCEPTED / CLOSED.**
++
++Brian separately authorizes the remaining Plan 099 acceptance gates from local
++main `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af` and the
++[accepted catalog r6 closeout](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/2542eb2462614f1e8505df5e215243105ed19ef9/astra_response/P12-05-catalog/r6/REVIEW.md).
++Reuse accepted P12-01 through P12-04 and catalog evidence. This resumption
++supersedes earlier remaining-gate prohibitions and historical production identities
++below only for the newly authorized ordered acceptance sequence.
++
++Expected current release is `p12-05-catalog-repair-r1`, revision
++`0016_hunt_cached_runs`, sole accepted catalog generation 1 with 28,278 sets.
++Do not reopen catalog/importer work, change source/schema/PostgreSQL settings or
++VM resources, activate market providers, push/commit main, or begin Phase 13.
++A material application/source/deployment defect stops acceptance with its exact
++blocker; no silent patch or workaround is authorized.
++
++### Current gate and local interaction
++
++Brian completed fresh, unsynced Chrome profile/extension setup and local owner
++login at `https://appraisal.abrianbaker.com`, then replied ready. Live session
++reload returned 200 with `Cache-Control: no-store`; both session and CSRF cookies
++are Secure, HttpOnly, SameSite=Strict, host-only and Path=/. No credential values
++were printed or saved. The earlier automatic profile-launch rejection was
++resolved through Brian's local Chrome setup; no alternate launch was attempted.
++
++Gate 2 live controls passed: unauthenticated Settings 401, missing/wrong CSRF 403,
++wrong Origin 403, wrong Host with real production SNI 421, and forged proxy headers
++with wrong Origin 403. Correct browser Origin/CSRF Settings save returned 200 and
++preserved all default values. Direct API port was inaccessible from Windows.
++Authenticated Settings/profile reads also returned 200 and no-store. Original
++Settings defaults were captured before a reversible UI change to manual-sale
++mode. Browser shell, exact/name search, Set Detail, Deal form, Settings
++read/change/navigation/reload and Watchlist read passed. Gate 4 created only an
++initially absent set, then proved target/note update and reload/navigation
++persistence with exactly one temporary item.
++
++Gate 5 STOPPED on a material acceptance-contract blocker. The live forecast-preview
++request carried `sale_basis=MANUAL` and `manual_sale_price=200`, but HTTP 200
++returned UNKNOWN with null expected sale/gross/net/profit/ROI. Costs were recognized:
++selling costs 25.00 and total acquisition 105.00. Stated assumptions would imply
++sale 200.00, gross 210.00, net 185.00, profit 80.00 and ROI 76.2%; market evidence
++must remain honestly unavailable. In `economics_v1.calculate_v1`, an unsupported
++or absent market price returns before the MANUAL sale selection. The current
++version deliberately retains that evidence-admission contract; changing it
++requires a separately authorized repair and review, including saved-replay/version
++compatibility. No patch, workaround, provider activation or deployment was performed.
++
++Only necessary acceptance cleanup followed the stop: original Settings defaults
++and default profile were restored through the UI (revision advanced normally),
++the exact temporary Watchlist item was removed through its authenticated API,
++and the browser signed out. Old session replay returned 401/no-store, auth cookies
++were absent and private UI content cleared. No Android session was created.
++The calculation created one UNSAVED/PENDING forecast capture. Its existing guard
++prevents deletion before expiry; normal owner-scoped cleanup runs on a later
++preview. It was not saved, forcibly deleted, or replaced with another calculation.
++Thus no temporary Watchlist remains, but complete temporary-data cleanup is not
++claimed. Remaining qualification gates and final backup were not run.
++
++### Remaining gates, in authorized order
++
++1. Real owner login/session/cookie qualification — PASS.
++2. CSRF/Origin/Host positive and negative checks — PASS.
++3. Windows shell/search/detail/Deal form/Settings/Watchlist read — PASS; manual calculation is Gate 5.
++4. Unique temporary Watchlist create/update/persistence — PASS; item subsequently removed.
++5. Deal Economics with manual sale assumption and honest unavailable market — BLOCKED.
++6. Production PWA install/offline/reconnect/update — NOT RUN after Gate 5 stop.
++7. Physical Android production TLS/auth/offline/reconnect — NOT RUN after Gate 5 stop.
++8. Exact immutable `p12-04d-r1` rollback and forward return — NOT RUN after Gate 5 stop.
++9. Graceful VM 115 cold stop/start after startup-order verification — NOT RUN after Gate 5 stop.
++10. Windows Settings/Watchlist/logout/replay cleanup — PASS; full gate NOT COMPLETE (unsaved preview retained; Android unrun).
++11. Exactly one final normal dual backup — NOT RUN; invocation count zero.
++12. Final security/operations review — NOT RUN; accepted historical evidence is reused only.
++13. Independent-review blocked package — published at `astra_response/P12-05/r2/`.
++
++Forward return must restore exactly `p12-05-catalog-repair-r1` and its exact
++absolute immutable web path. A failed rollback first returns to that repaired
++release and verifies recovery, then stops. Cold-start authority covers only
++VM 115; no Proxmox reboot or firewall VM mutation. Final backup runs only after
++forward return, cold recovery and cleanup; no retention apply/prune.
++
++Publish the actual sanitized outcome under `astra_response/P12-05/r2/`, preserving
++the existing r1 catalog blocker and referencing accepted catalog r6 minimally.
++The r2 package reports the actual Gate 5 blocker, passed checks, cleanup residual
++and all unrun gates. Main remains uncommitted at the accepted HEAD with an empty
++index; protected dirty hashes are unchanged. Only documentation/status and ignored
++task evidence record the acceptance attempt.
++Earlier sections below retain accepted and dated historical evidence.
++
+diff --git a/docs/plans/102-manual-deal-economics-admission-repair.md b/docs/plans/102-manual-deal-economics-admission-repair.md
+new file mode 100644
+index 0000000..c890995
+--- /dev/null
++++ b/docs/plans/102-manual-deal-economics-admission-repair.md
+@@ -0,0 +1,202 @@
++# ExecPlan 102 — Manual Deal Economics admission and compatibility review
++
++## Phase 12 final closeout — 2026-10-01
++
++**Plan 102: CONTRACT REVIEW COMPLETE / CLOSED — NO REPAIR REQUIRED.
++P12-05: ACCEPTED / CLOSED. Phase 12: ACCEPTED / CLOSED.
++Phase 13: NEXT / NOT STARTED.** Brian independently accepts
++[P12-05 r5](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/57dec1e5f7b0538c75f2a17a824c15aba3083dc2/astra_response/P12-05/r5/REVIEW.md) at 57dec1e5f7b0538c75f2a17a824c15aba3083dc2.
++[Plan 099](099-phase-12-production-acceptance.md) is CLOSED.
++
++The accepted qualified-basis MANUAL admission correction remains the final
++resolution. Frozen economics V1, replay and stored history are preserved;
++no application repair or new execution version is required. Accepted diagnostic
++tests and production acceptance evidence are reused without reruns. This slice
++performs only the authorized documentation/Git closeout. The earlier diagnostic,
++blocker and Gate 6 resume text below is preserved dated history and does not
++reopen either plan or authorize Phase 13.
++
++
++## Accepted final disposition — 2026-10-01
++
++**CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Manual Deal Economics diagnostic
++CLOSED. Gate 5 PASS; P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++
++Brian accepts diagnostic publication d6f8a96efb2372db663e19fcbbbbf3fdd4116a7b and
++corrects the previous P12-05 acceptance criterion. The governing qualified-basis
++contract is confirmed and retained: MANUAL chooses the explicit sale price only
++after valuation admission. The observed production MANUAL + UNKNOWN null full
++economics conforms. No application bug is established; no repair or new version
++is required or authorized. economics_v1, replay/dispatch, API/models, tests and
++production deployment remain unchanged.
++
++Accepted 112 unit tests, four synthetic replay cases and two isolated PostgreSQL
++cleanup tests are reused, not rerun. The SUPPORTED MANUAL fixture correctly returns
++200.00 sale, 210.00 gross, 25.00 costs, 185.00 net, 105.00 acquisition, 80.00 profit
++and 76.2% ROI; it is synthetic evidence, not a supported production market claim.
++Historical snapshots persist execution version and recompute through frozen V1,
++comparing exact/presentation expectations; changing admission would break valid
++MANUAL+UNKNOWN replay. Preserve V1, no V2/migration/history rewrite.
++
++Prior paused review conclusions below explain the stop under its then-current
++prompt and remain diagnostic history. Their suggestion of a future contract
++change is not the accepted resolution. The error was the acceptance criterion.
++[Plan 099](099-phase-12-production-acceptance.md) records the corrected gate and
++authorizes continuation at Gate 6 without repeating accepted Gates 1-5. Ordinary
++unsaved preview state follows normal expiry/cleanup; no manual deletion or forced
++row-count-zero requirement applies. No saved acceptance forecast/deal was created.
++
++- [x] Governing contract confirmed and retained.
++- [x] Frozen V1/history preserved; no source repair required.
++- [x] Production Gate 5 behavior accepted as conforming.
++- [x] Plan 102 closed; prior review evidence retained.
++- [x] P12-05 may resume at Gate 6; subsequent gates remain separately qualified.
++
++## Preserved diagnostic record — 2026-09-30
++
++The sections below retain the exact earlier diagnostic record. Its BLOCKED status
++is historical and superseded by the accepted final disposition above.
++
++## Goal and user-visible outcome
++
++**BLOCKED — governing contract forbids MANUAL economics independent of market
++admission.** P12-05 remains BLOCKED at Gate 5; Phase 12 remains IN PROGRESS.
++The requested outcome is calculable user-entered sale assumptions while market
++valuation remains UNKNOWN. No executable repair or new version is implemented.
++
++## Why this work is being done now
++
++The accepted P12-05 r2 production evidence recorded a MANUAL 200 forecast returning
++UNKNOWN and null sale/gross/net/profit/ROI. Shipping and costs were recognized.
++Brian authorized bounded diagnosis, compatibility review, source repair if its
++contract conditions permit it, focused isolated validation and review publication.
++The explicit stop condition applies when the governing contract does not support
++MANUAL independent of market admission. Production interaction is prohibited.
++
++## In scope
++
++Trace calculation models, API/capture/persistence, replay, historical/index/revision
++reads, fingerprints, UI, later phase contracts and normal expiry cleanup. Preserve
++the existing blocker documentation; record the stop and publish its evidence.
++
++## Explicit non-goals
++
++No application/test changes, contract reinterpretation, new calculator, schema or
++migration, provider activation, production login/preview/cleanup/deployment/restart/
++backup, PWA/Android/rollback/VM acceptance, main commit/push or Phase 13.
++
++## Current repository state
++
++Main HEAD is `e64f2d812bf90255005c88e8d1f68b4c8ab0d7af`; the index is empty.
++The existing CODEX_WORKFLOW, ROADMAP and Plan 099 blocker edits are preserved.
++The three protected dirty files match their accepted SHA-256 values and remain
++unstaged. Accepted production release context is `p12-05-catalog-repair-r1`, reused
++from r2; production has not been accessed or freshly verified in this slice.
++Catalog importer repair and catalog activation remain ACCEPTED / CLOSED.
++
++## Decisions and assumptions
++
++- Plan 071's accepted checkpoint explicitly forbids full dependent economics for
++  PARTIAL/BLOCKED/UNKNOWN even with a manual sale assumption. VALUATION_RULES repeats
++  this rule for exact replay; it is an accepted contract, not an accidental guard.
++- Plans 073/075/076/077/079/081 and the Phase 8/9 extensions preserve that contract:
++  fee assumptions, saving/revisions/indexes/defaults/frozen context/document memory
++  do not authorize independent MANUAL admission.
++- Path A fails both governing-contract and replay compatibility conditions. A
++  guard change alters a valid historical MANUAL+UNKNOWN result from null economics.
++- Future changed financial admission would require a separate execution version
++  and recorded-version dispatch preserving V1. Path B is not implemented because
++  the governing-contract stop condition applies before that work is authorized.
++- This is not a finding that a larger schema redesign is unavoidable. Existing
++  nullable amounts and MANUAL provenance can carry values, but accepted status/UI
++  semantics explicitly couple full arithmetic availability to qualified evidence.
++
++## Data model and API/interface changes
++
++None. `whole-set-economics-v1` is the frozen execution contract, distinct from
++`deal-economics-v1` / `purchase-limits-v1` result variants, `whole-set-snapshot-v1`
++storage schema and `whole-set-usd-rounding-v1` rounding. Canonical snapshot bytes
++persist calculation version, exact inputs, historical qualifications, expectations
++and digest. Saved reads recompute with V1 and compare expectations; outputs are not
++merely frozen display values. Unknown execution versions fail without fallback.
++The digest includes every resolved field except itself, including execution
++versions/request/basis/expected outputs. `basis_revision` is a separate identity
++hash of valuation/evidence/policy inputs, not reconstructable history.
++
++## Implementation sequence
++
++1. Verify accepted HEAD/index/protected hashes and preserve prior documentation.
++2. Trace governing contracts and authoritative runtime/replay/UI paths.
++3. Stop executable repair on the explicit governing-contract conflict.
++4. Confirm unchanged V1 and cleanup with bounded offline/owned TEST evidence.
++5. Add only this plan and a minimal Plan 099 status note; publish a blocked review
++   on `astra-response`, `astra_response/P12-05-manual-economics/r1/`.
++
++## Validation and acceptance criteria
++
++Current diagnostic evidence: 112 economics/snapshot unit tests PASS; two isolated
++PostgreSQL expiry/bounded-cleanup integration tests PASS with cleanup ledger passed
++and no leftovers. Four synthetic capture/encode/decode/replay cases PASS and retain
++V1 versions/bytes. No source repair acceptance is claimed.
++
++With MANUAL 200, purchase 100, charged shipping 10, fees 15, paid shipping 8,
++other selling costs 2 and acquisition costs 5, unchanged V1 on a SUPPORTED fixture
++returns sale 200.00, gross 210.00, selling costs 25.00, net 185.00, acquisition
++105.00, profit 80.00 and ROI 76.2%. Its market amount remains the separate synthetic
++180.05. With zero-observation UNKNOWN, MANUAL and SELECTED_MARKET retain UNKNOWN
++and null sale/gross/net/profit/ROI; selling costs 25.00 and acquisition 105.00 remain.
++The requested MANUAL+UNKNOWN behavior therefore remains undelivered.
++
++The tests cover unsupported status/manual admission, exact supported MARKET and
++MANUAL results, validation of invalid/missing money, zero acquisition, basis
++identity, immutable/canonical payloads, unsupported versions, integrity/replay
++mismatch and clock/Decimal independence. Existing expiry/change guards and UI
++abort/generation checks are unchanged; no browser suite is rerun. Ruff/format/mypy,
++builds and broad suites are not run because executable files are unchanged.
++
++## Security, privacy, and data-integrity considerations
++
++No production/development saved records were queried; absence of live history is
++not assumed. Local test payloads use synthetic identities and prices. No provider
++dispatch, credentials, owner/session access or private saved content is needed.
++Public artifacts exclude private paths, identifiers and raw integration logs.
++
++## Failure modes, rollback, and recovery
++
++Changing V1 in place would invalidate expectation comparisons for admitted historic
++captures, making reads fail closed rather than silently display new numbers. Leave
++V1 and stored records intact. No operational rollback is necessary for this
++documentation-only result. Failed publication must preserve main and prior reviews.
++
++## Progress log
++
++- [x] 2026-09-30: Accepted repository/protected-file guards passed.
++- [x] 2026-09-30: Contract conflict and exact replay dependency identified.
++- [x] 2026-09-30: 112 unit tests, four offline cases and two owned TEST cleanup
++  tests passed; no leftover disposable databases.
++- [x] 2026-09-30: Blocked plan/status and bounded review package prepared.
++- [ ] Implement independent MANUAL admission: stopped on governing contract.
++- [ ] Production continuation: not authorized by this repair slice.
++
++## Open questions or physical-device/manual checks
++
++A separate explicit decision must supersede the accepted qualified-basis admission
++policy and define honest calculation availability versus market/physical
++qualifications. Any subsequent implementation must preserve old V1 replay and
++select/dispatch a new recorded execution version. No larger redesign or migration
++requirement is established here. Device/production gates remain unrun.
++
++## Outcome and follow-up
++
++Exact admission change: none. Migration required for this stopped slice: no.
++Current production's previously reported ordinary UNSAVED preview is untouched.
++The existing guard prevents premature/saved deletion; owner-scoped cleanup removes
++only expired unsaved captures, at most 100 per call, on a later normal preview.
++The isolated expiry test proves the pending state, normal deadline, refusal to save
++after expiry, cleanup on preview and protection of saved history. This is TEST
++evidence, not a claim that production cleanup has occurred.
++
++Current slice changes only this plan and the minimal Plan 099 note. Existing
++workflow/roadmap/blocker prose and protected modifications are preserved. Review
++publication is authorized on the isolated artifact branch; main remains uncommitted
++and unpushed. P12-05 Gate 5 and Phase 12 status remain unchanged.

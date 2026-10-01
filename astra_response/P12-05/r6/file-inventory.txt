@@ -1,0 +1,14 @@
+astra_response/P12-05/r6/Plan-099.md
+astra_response/P12-05/r6/Plan-102.md
+astra_response/P12-05/r6/REVIEW.md
+astra_response/P12-05/r6/closeout-validation.json
+astra_response/P12-05/r6/closeout-validation.md
+astra_response/P12-05/r6/commands-validation.md
+astra_response/P12-05/r6/committed-file-inventory.txt
+astra_response/P12-05/r6/documentation-closeout.patch
+astra_response/P12-05/r6/file-inventory.txt
+astra_response/P12-05/r6/final-phase-12-acceptance-summary.md
+astra_response/P12-05/r6/local-commit-receipt.json
+astra_response/P12-05/r6/populated-drive-recovery-acceptance.md
+astra_response/P12-05/r6/production-baseline.md
+astra_response/P12-05/r6/publication-validation.md
