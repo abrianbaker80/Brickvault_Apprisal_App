@@ -1,0 +1,29 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "current_pointer_services_missing_scripts_in_rollback": [
+        "brickvault-health.service",
+        "brickvault-health-deep.service",
+        "brickvault-retention.service",
+        "brickvault-python-version.service",
+        "brickvault-alert@RELEASE.service"
+      ],
+      "current_release": "p12-05-catalog-repair-r1",
+      "forward_manifest_files_verified": 36,
+      "forward_pointer_changes": 0,
+      "gate": "GATE_8_ROLLBACK_OPERATIONAL_COMPATIBILITY",
+      "health_contract_requires_current_release_hook_byte_equality": true,
+      "installed_current_hook_matches_forward": true,
+      "installed_hook_matches_rollback": false,
+      "new_backup_invocations": 0,
+      "required_rollback_release": "p12-04d-r1",
+      "rollback_manifest_files_verified": 15,
+      "rollback_pointer_changes": 0,
+      "schema_changes": false,
+      "source_repairs": false,
+      "status": "BLOCKED",
+      "timers_paused": false
+    }
+  ]
+}

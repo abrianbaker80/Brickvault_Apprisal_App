@@ -1,0 +1,31 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "api_environment_and_health_config_unchanged": true,
+      "current_release": "p12-05-catalog-repair-r1",
+      "database_security_catalog_unchanged": true,
+      "default_profile_is_null": true,
+      "gate": "FAILURE_CLEANUP",
+      "new_backup_invocations": 0,
+      "new_old_token_replay": "NOT_EXERCISED; accepted earlier Windows replay 401 reused",
+      "rollback_attempted": false,
+      "saved_forecasts_count": 0,
+      "session_revoked_count": 1,
+      "session_total_count": 2,
+      "settings_defaults": {
+        "purchase_limits": false,
+        "sale_basis": null,
+        "targets": {
+          "minimum_profit": null,
+          "profit_enabled": false,
+          "roi_enabled": false,
+          "roi_percent": null
+        }
+      },
+      "status": "PASS",
+      "temporary_watchlist_count": 0,
+      "valid_owner_sessions": 0
+    }
+  ]
+}

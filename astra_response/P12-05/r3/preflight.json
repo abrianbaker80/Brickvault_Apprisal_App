@@ -1,0 +1,37 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "both_repository_checks": "PASS",
+      "catalog_generation": 1,
+      "current_release": "p12-05-catalog-repair-r1",
+      "dual_backup_age_hours": 8.06,
+      "existing_backup_six_readbacks": "PASS",
+      "gate": "ROLLBACK_PREFLIGHT",
+      "generated_recovery_proof": "PASS",
+      "health_checks": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "immutable_files": {
+        "p12-04d-r1": 15,
+        "p12-05-catalog-repair-r1": 36
+      },
+      "new_backup_invocations": 0,
+      "sets": 28278,
+      "status": "PASS",
+      "temporary_watchlist_target": "123.45"
+    }
+  ]
+}

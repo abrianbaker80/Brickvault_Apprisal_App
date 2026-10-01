@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "package": "com.abrianbaker.brickvault.appraisal",
+  "versionCode": 1,
+  "versionName": "1.0",
+  "sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+  "origin": "https://appraisal.abrianbaker.com",
+  "webview_origin": "https://android.appraisal.abrianbaker.com",
+  "system_trust_only": true,
+  "cleartext": false,
+  "native_http_cookie_bypass": false,
+  "qualification_certificate_files": 0,
+  "matching_public_asset_count": 8,
+  "forbidden_private_files": 0,
+  "signature_verified": true,
+  "physical_acceptance": "NOT_RUN"
+}

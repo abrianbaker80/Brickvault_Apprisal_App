@@ -1,0 +1,103 @@
+{
+  "gate5": "PASS_CONTRACT_CORRECTION",
+  "plan102": "CLOSED_NO_REPAIR_REQUIRED",
+  "gate6": {
+    "state": "PASS",
+    "signedIn": true,
+    "standaloneObserved": true,
+    "manifestErrors": [],
+    "installabilityErrors": [],
+    "workerControlled": true,
+    "aliveDocumentReadOnly": "PASS",
+    "freshOfflineDocumentPrivateAbsence": "PASS",
+    "reconnect": "PASS",
+    "apiWritesObserved": 0,
+    "publicCacheUrls": 7,
+    "updateCheck": "PASS_NO_WAITING_UPDATE",
+    "versionTransition": "NOT_EXERCISED",
+    "cold_offline_relaunch": {
+      "evidence": "user-performed local restart and result confirmation",
+      "result": "Connection unavailable; no private records",
+      "browser_process_id_not_observed": true
+    }
+  },
+  "gate7": {
+    "state": "PASS",
+    "apk_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+    "local_owner_login": true,
+    "settings_read_write_restore": "PASS",
+    "set_detail": "PASS",
+    "temporary_watchlist": {
+      "set": "75331-1",
+      "target": "123.45",
+      "created_once": true,
+      "preserved_for_rollback": false,
+      "removed_through_app": true
+    },
+    "alive_offline": "PASS_SAME_PROCESS_NATIVE_RESUME",
+    "cold_offline": "PASS_PROCESS_STOP_VERIFIED_NO_PRIVATE_RECORDS",
+    "reconnect": "PASS_AUTHORITATIVE_TARGET_RETAINED_NO_DUPLICATE_VISIBLE",
+    "network_settings_restored": true
+  },
+  "gate8": {
+    "current_pointer_services_missing_scripts_in_rollback": [
+      "brickvault-health.service",
+      "brickvault-health-deep.service",
+      "brickvault-retention.service",
+      "brickvault-python-version.service",
+      "brickvault-alert@RELEASE.service"
+    ],
+    "current_release": "p12-05-catalog-repair-r1",
+    "forward_manifest_files_verified": 36,
+    "forward_pointer_changes": 0,
+    "gate": "GATE_8_ROLLBACK_OPERATIONAL_COMPATIBILITY",
+    "health_contract_requires_current_release_hook_byte_equality": true,
+    "installed_current_hook_matches_forward": true,
+    "installed_hook_matches_rollback": false,
+    "new_backup_invocations": 0,
+    "required_rollback_release": "p12-04d-r1",
+    "rollback_manifest_files_verified": 15,
+    "rollback_pointer_changes": 0,
+    "schema_changes": false,
+    "source_repairs": false,
+    "status": "BLOCKED",
+    "timers_paused": false
+  },
+  "gate9": "NOT_RUN",
+  "finalBackupInvocations": 0,
+  "sourceChanges": false,
+  "failure_cleanup": {
+    "api_environment_and_health_config_unchanged": true,
+    "current_release": "p12-05-catalog-repair-r1",
+    "database_security_catalog_unchanged": true,
+    "default_profile_is_null": true,
+    "gate": "FAILURE_CLEANUP",
+    "new_backup_invocations": 0,
+    "new_old_token_replay": "NOT_EXERCISED; accepted earlier Windows replay 401 reused",
+    "rollback_attempted": false,
+    "saved_forecasts_count": 0,
+    "session_revoked_count": 1,
+    "session_total_count": 2,
+    "settings_defaults": {
+      "purchase_limits": false,
+      "sale_basis": null,
+      "targets": {
+        "minimum_profit": null,
+        "profit_enabled": false,
+        "roi_enabled": false,
+        "roi_percent": null
+      }
+    },
+    "status": "PASS",
+    "temporary_watchlist_count": 0,
+    "valid_owner_sessions": 0,
+    "settings_equal_accepted_baseline": true,
+    "android_signed_out_ui": true,
+    "pwa_reloaded_sign_in_ui": true
+  },
+  "gate10": "PENDING_FINAL_QUALIFICATION; failure cleanup performed; new token replay not exercised",
+  "gate11": "NOT_RUN_AFTER_GATE_8_BLOCKER",
+  "gate12": "NOT_RUN_AFTER_GATE_8_BLOCKER",
+  "gate13": "NOT_RUN_AFTER_GATE_8_BLOCKER",
+  "status": "BLOCKED — Gate 8 immutable rollback operational compatibility"
+}

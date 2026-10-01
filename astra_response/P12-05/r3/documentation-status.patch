@@ -1,0 +1,300 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,4 +1,39 @@
+ # Codex Workflow for BrickVault Appraisal App
++
++## P12-05 current stop at Gate 8 — 2026-10-01
++
++**BLOCKED — required immutable rollback operational compatibility. Gates 1-7 PASS;
++P12-05 and Phase 12 remain IN PROGRESS.** Production PWA and physical Android
++acceptance passed with the documented evidence limits. The required `p12-04d-r1`
++rollback lacks scripts used by installed health, retention, Python-maintenance
++and alert services, and its renewal hook conflicts with the health equality
++contract. No pointer change or rollback was attempted; the repaired release
++remains installed. The temporary Watchlist is removed, Settings restored, Android
++signed out, PWA at sign-in, and no valid owner session or saved forecast exists.
++New-token replay remains unexercised; accepted earlier Windows replay 401 is reused.
++VM recovery, final backup (zero invocations) and final operations acceptance remain
++pending. [Plan 099](docs/plans/099-phase-12-production-acceptance.md) records the blocker, evidence and next reviewed
++compatibility disposition. Gate 5 and Plan 102's no-repair closure remain accepted.
++Prior r2/r1 evidence stays preserved; sanitized blocked review goes to
++`astra_response/P12-05/r3/`. Main stays uncommitted/unpushed with empty index and
++unchanged protected dirty bytes. Earlier status below is dated history.
++
++
++## P12-05 Gate 5 correction and continuation — 2026-10-01
++
++**Gate 5 PASS; manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++Brian accepted the manual-economics r1 diagnosis and corrected the acceptance
++criterion: MANUAL selects sale price after qualified valuation admission. The
++observed production UNKNOWN/null full economics conforms to frozen V1; no bug,
++V2, replay change, application repair or new deployment is warranted.
++[Plan 099](docs/plans/099-phase-12-production-acceptance.md) records accepted Gates 1-5 and ordered PWA, physical Android, immutable
++recovery, cleanup, one final dual backup and operations/review continuation.
++Plan 102 is CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Prior r2/r1 pause
++evidence and all earlier dated prose remain preserved and superseded as status.
++Ordinary unsaved previews follow normal expiry/cleanup; no unsafe deletion or
++forced row-count-zero criterion applies. No market activation or Phase 13.
++Main remains uncommitted/unpushed, index empty and protected dirty bytes intact.
+ 
+ ## P12-05 remaining acceptance stop, 2026-09-30
+ 
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,4 +1,39 @@
+ # Valuation-First Roadmap
++
++## P12-05 current stop at Gate 8 — 2026-10-01
++
++**BLOCKED — required immutable rollback operational compatibility. Gates 1-7 PASS;
++P12-05 and Phase 12 remain IN PROGRESS.** Production PWA and physical Android
++acceptance passed with the documented evidence limits. The required `p12-04d-r1`
++rollback lacks scripts used by installed health, retention, Python-maintenance
++and alert services, and its renewal hook conflicts with the health equality
++contract. No pointer change or rollback was attempted; the repaired release
++remains installed. The temporary Watchlist is removed, Settings restored, Android
++signed out, PWA at sign-in, and no valid owner session or saved forecast exists.
++New-token replay remains unexercised; accepted earlier Windows replay 401 is reused.
++VM recovery, final backup (zero invocations) and final operations acceptance remain
++pending. [Plan 099](plans/099-phase-12-production-acceptance.md) records the blocker, evidence and next reviewed
++compatibility disposition. Gate 5 and Plan 102's no-repair closure remain accepted.
++Prior r2/r1 evidence stays preserved; sanitized blocked review goes to
++`astra_response/P12-05/r3/`. Main stays uncommitted/unpushed with empty index and
++unchanged protected dirty bytes. Earlier status below is dated history.
++
++
++## P12-05 Gate 5 correction and continuation — 2026-10-01
++
++**Gate 5 PASS; manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++Brian accepted the manual-economics r1 diagnosis and corrected the acceptance
++criterion: MANUAL selects sale price after qualified valuation admission. The
++observed production UNKNOWN/null full economics conforms to frozen V1; no bug,
++V2, replay change, application repair or new deployment is warranted.
++[Plan 099](plans/099-phase-12-production-acceptance.md) records accepted Gates 1-5 and ordered PWA, physical Android, immutable
++recovery, cleanup, one final dual backup and operations/review continuation.
++Plan 102 is CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Prior r2/r1 pause
++evidence and all earlier dated prose remain preserved and superseded as status.
++Ordinary unsaved previews follow normal expiry/cleanup; no unsafe deletion or
++forced row-count-zero criterion applies. No market activation or Phase 13.
++Main remains uncommitted/unpushed, index empty and protected dirty bytes intact.
+ 
+ ## P12-05 remaining acceptance stop, 2026-09-30
+ 
+diff --git a/docs/plans/099-phase-12-production-acceptance.md b/docs/plans/099-phase-12-production-acceptance.md
+--- a/docs/plans/099-phase-12-production-acceptance.md
++++ b/docs/plans/099-phase-12-production-acceptance.md
+@@ -1,4 +1,142 @@
+ # ExecPlan 099 — Phase 12 production acceptance
++
++## Current acceptance stop at Gate 8 — 2026-10-01
++
++**BLOCKED — Gate 8: required immutable rollback operational compatibility.
++Gates 1-7 PASS; P12-05 and Phase 12 remain IN PROGRESS.**
++This disposition supersedes earlier resume/stop status below while preserving
++all dated evidence. Gate 5 remains PASS after the accepted contract correction;
++Plan 102 remains CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED.
++
++### New client evidence
++
++Gate 6 passed on the installed production Chrome PWA: standalone/secure context,
++controlled public worker, authenticated reads, alive-document offline read-only,
++fresh offline document without private data, reconnect and public-cache inspection.
++The seven cache URLs contain only shell/icons/manifest/assets, with no API URLs.
++Ten observed API requests were reads; no write or queued retry was observed.
++Brian performed the browser/PWA shutdown and offline Start-menu relaunch and
++confirmed “Connection unavailable,” with no private records. This cold-process
++result is user-confirmed; the agent did not observe the browser process ID.
++Normal worker update found no waiting/installing worker. The exact old/forward
++web artifacts, including worker bytes, are identical; an actual worker-version
++transition was not exercised and no synthetic production update was introduced.
++
++Gate 7 passed on the USB-connected physical Android phone, using the approved
++production build path and a signed debug acceptance APK. Package
++`com.abrianbaker.brickvault.appraisal`, version 1.0/code 1, APK SHA-256
++`045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2`.
++Production API/WebView origins use system-only TLS trust; no test CA, localhost,
++ADB reverse, cleartext or native HTTP/cookie bypass. Local owner login, Set Detail,
++Settings write/restore, one Watchlist item/target, same-process offline read-only,
++confirmed force-stop/cold offline private-data absence, and authoritative reconnect
++passed. The target persisted once, without a duplicate. Phone network settings
++were restored exactly. No emulator evidence substitutes for these physical checks.
++
++### Gate 8 root cause and unchanged live state
++
++Read-only preflight verified all immutable manifest bytes: `p12-04d-r1` (15 files,
++manifest SHA-256 `25cbb51ec895640f2ed27ab36afac8ebcd11590aa52f96015b15e460502b6f36`)
++and `p12-05-catalog-repair-r1` (36 files, manifest SHA-256
++`02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36`).
++The required old release lacks scripts referenced by installed current-pointer
++health/deep-health, retention, Python-maintenance and alert service commands.
++Its certificate renewal hook also differs from the installed forward hook;
++the health release contract requires byte equality against the current release.
++Therefore switching the required pointer would violate operational compatibility.
++Acceptance stops before any release pointer or configuration change. Resolving
++this requires a reviewed compatibility disposition; no replacement target,
++immutable-release edit, disabled check or source repair is authorized here.
++
++The repaired release stays current. API environment and health configuration
++bytes, database security/principal/schema and catalog identities/counts were
++verified unchanged after failure cleanup. Revision remains `0016_hunt_cached_runs`,
++one accepted generation-1 snapshot with 28,278 sets and zero market observations.
++Preflight passed all 13 light health checks, retention READY, required units/timers
++active/enabled and zero failed units. Existing fresh dual backup verification
++passed six encrypted readbacks, both repository checks and recovery proof; this
++was an existing-backup verification, not the final Gate 11 backup.
++
++### Failure cleanup and remaining gates
++
++Temporary Android Watchlist removed through the app; authoritative count is zero.
++Settings defaults equal the accepted pre-run defaults and default profile is null.
++No saved forecast/deal exists. Android shows “Signed out”; reloaded PWA shows
++sign-in. Read-only session metadata confirms zero valid owner sessions (one revoked,
++one expired). Accepted earlier Windows old-token replay 401 is reused; a new replay
++of this continuation's tokens was not exercised. These are distinct evidence claims.
++Ordinary unsaved preview state remains governed by normal application cleanup;
++no manual deletion, clock manipulation or guard bypass occurred.
++
++Rollback/forward were NOT ATTEMPTED; operational timers were never paused.
++Gate 9 VM stop/start NOT RUN; later Gate 10 completion/replay qualification remains
++pending despite performed failure cleanup. Gate 11 final backup invocations: zero.
++Gates 12/13 final security/Phase 12 acceptance remain pending. No application source,
++schema, provider activation, backend deployment, main commit/push or Phase 13 work.
++Sanitized blocked review: `astra_response/P12-05/r3/` on `astra-response`, preserving
++prior r2 and manual-economics r1. Main index/protected dirty bytes remain unchanged.
++
++
++## Gate 5 contract correction accepted; resume at Gate 6 — 2026-10-01
++
++**Gate 5 PASS. Manual economics diagnostic CLOSED — NO REPAIR REQUIRED.
++P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++
++Brian accepts the [manual-economics diagnostic r1](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/d6f8a96efb2372db663e19fcbbbbf3fdd4116a7b/astra_response/P12-05-manual-economics/r1/REVIEW.md)
++and corrects the acceptance criterion, not the application contract. Accepted
++Plan 071 and frozen whole-set-economics-v1 require a qualified/SUPPORTED valuation
++basis before full dependent economics, including MANUAL. MANUAL selects sale price
++after admission; it does not bypass valuation admission. No application bug is
++established. [Plan 102](102-manual-deal-economics-admission-repair.md) is CONTRACT
++REVIEW COMPLETE — NO REPAIR REQUIRED. V1 and exact historical replay remain frozen;
++no V2, dispatch change, source/test change, migration or new deployment is warranted.
++All older paused/blocked status statements below are preserved as dated history
++and superseded by this current disposition; prior r2 and diagnostic r1 stay intact.
++
++The existing production MANUAL 200 + UNKNOWN result conforms: valuation/status
++and reasons remain UNKNOWN/honest; sale/gross/net/profit/ROI are null; selling costs
++25.00 and acquisition 105.00 may remain calculable. No source/provider/zero-price
++substitution or provider dispatch is needed. Accepted synthetic SUPPORTED evidence
++proves unchanged V1 produces sale 200.00, gross 210.00, costs 25.00, net 185.00,
++acquisition 105.00, profit 80.00 and ROI 76.2%. It is not supported production
++market evidence. Reuse the accepted diagnostic tests; do not repeat them live.
++
++### Current accepted and remaining gates
++
++1. Owner login/session/cookies — PASS; reuse accepted run.
++2. CSRF/Origin/Host/security — PASS; reuse accepted run.
++3. Windows catalog/core workflow — PASS; reuse accepted run.
++4. Temporary Watchlist persistence — PASS; removed afterward.
++5. Deal Economics — PASS: unsupported valuation correctly prevents full dependent
++   economics even with explicit MANUAL sale. Accepted behavior, not a workaround.
++6. Production PWA install/standalone/offline/reconnect/update — next gate.
++7. Physical Android production TLS/auth/offline/reconnect — follows Gate 6.
++8. Exact immutable p12-04d-r1 rollback and p12-05-catalog-repair-r1 forward return.
++9. VM 115 cold-start recovery after actual startup-order verification.
++10. Final cleanup/logout as applicable to this continuation.
++11. Exactly one final normal dual backup after preceding gates and cleanup.
++12. Final security/operations review.
++13. P12-05 / Phase 12 final review package.
++
++No Gates 1-5 repeat, market-provider activation, broad tests or Phase 13. No new
++application deployment. Existing immutable recovery operations remain separately
++bounded by Gates 8/9; no host reboot or firewall VM mutation. Request local password,
++PWA or device interaction only when unavoidable. Main stays uncommitted/unpushed,
++index empty, protected dirty bytes unchanged.
++
++### Corrected cleanup acceptance
++
++Reuse performed Windows cleanup: Settings/default profile restored, temporary
++Watchlist removed, browser logged out and old-session replay rejected with 401.
++The ordinary UNSAVED/PENDING capture is ephemeral preview state, not a saved deal.
++Do not manually delete it, manipulate clocks, bypass forecast_guard or force row
++count zero. Normal save-eligible expiry/owner-scoped cleanup governs it; if later
++normal activity removes an expired preview, report the actual fact only.
++Final cleanup requires temporary Watchlist absent, Settings restored, all owner
++sessions used by acceptance logged out, no saved acceptance forecast/deal created,
++old-session replay rejected and private state cleared. An ordinary unexpired
++unsaved preview does not prevent cleanup acceptance. No artificial activity may
++be created solely to force its cleanup.
+ 
+ ## Manual economics contract review stopped, 2026-09-30
+ 
+diff --git a/docs/plans/102-manual-deal-economics-admission-repair.md b/docs/plans/102-manual-deal-economics-admission-repair.md
+--- a/docs/plans/102-manual-deal-economics-admission-repair.md
++++ b/docs/plans/102-manual-deal-economics-admission-repair.md
+@@ -1,4 +1,44 @@
+ # ExecPlan 102 — Manual Deal Economics admission and compatibility review
++
++## Accepted final disposition — 2026-10-01
++
++**CONTRACT REVIEW COMPLETE — NO REPAIR REQUIRED. Manual Deal Economics diagnostic
++CLOSED. Gate 5 PASS; P12-05 IN PROGRESS / RESUMABLE FROM GATE 6; Phase 12 IN PROGRESS.**
++
++Brian accepts diagnostic publication d6f8a96efb2372db663e19fcbbbbf3fdd4116a7b and
++corrects the previous P12-05 acceptance criterion. The governing qualified-basis
++contract is confirmed and retained: MANUAL chooses the explicit sale price only
++after valuation admission. The observed production MANUAL + UNKNOWN null full
++economics conforms. No application bug is established; no repair or new version
++is required or authorized. economics_v1, replay/dispatch, API/models, tests and
++production deployment remain unchanged.
++
++Accepted 112 unit tests, four synthetic replay cases and two isolated PostgreSQL
++cleanup tests are reused, not rerun. The SUPPORTED MANUAL fixture correctly returns
++200.00 sale, 210.00 gross, 25.00 costs, 185.00 net, 105.00 acquisition, 80.00 profit
++and 76.2% ROI; it is synthetic evidence, not a supported production market claim.
++Historical snapshots persist execution version and recompute through frozen V1,
++comparing exact/presentation expectations; changing admission would break valid
++MANUAL+UNKNOWN replay. Preserve V1, no V2/migration/history rewrite.
++
++Prior paused review conclusions below explain the stop under its then-current
++prompt and remain diagnostic history. Their suggestion of a future contract
++change is not the accepted resolution. The error was the acceptance criterion.
++[Plan 099](099-phase-12-production-acceptance.md) records the corrected gate and
++authorizes continuation at Gate 6 without repeating accepted Gates 1-5. Ordinary
++unsaved preview state follows normal expiry/cleanup; no manual deletion or forced
++row-count-zero requirement applies. No saved acceptance forecast/deal was created.
++
++- [x] Governing contract confirmed and retained.
++- [x] Frozen V1/history preserved; no source repair required.
++- [x] Production Gate 5 behavior accepted as conforming.
++- [x] Plan 102 closed; prior review evidence retained.
++- [x] P12-05 may resume at Gate 6; subsequent gates remain separately qualified.
++
++## Preserved diagnostic record — 2026-09-30
++
++The sections below retain the exact earlier diagnostic record. Its BLOCKED status
++is historical and superseded by the accepted final disposition above.
+ 
+ ## Goal and user-visible outcome
+ 
+diff --git a/docs/DECISIONS.md b/docs/DECISIONS.md
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1,4 +1,16 @@
+ # Project Decisions
++
++## P12-05 Gate 5 acceptance criterion corrected — 2026-10-01
++
++Brian accepts the [Plan 102](plans/102-manual-deal-economics-admission-repair.md)
++contract diagnosis: MANUAL is price selection after qualified valuation admission,
++not an admission bypass. Keep whole-set-economics-v1 frozen, including exact
++historical recomputation/expectation comparison. Production MANUAL + UNKNOWN/null
++full economics conforms; no application bug, repair, V2, migration or new deployment
++is required. [Plan 099](plans/099-phase-12-production-acceptance.md) Gate 5 is PASS
++and resumes at Gate 6. Prior blocked reviews remain dated evidence. Ordinary unsaved
++preview expiry is not a saved deal and does not require forced deletion for cleanup.
++This corrects production acceptance only; no valuation/financial contract changes.
+ 
+ ## Phase 9 final physical qualification accepted and phase closed — 2026-09-26
+ 
