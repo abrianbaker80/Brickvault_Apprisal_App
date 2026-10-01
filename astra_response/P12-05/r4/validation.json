@@ -1,0 +1,470 @@
+{
+  "static": {
+    "all_required_operational_script_bytes_match": true,
+    "both_venvs_static_builds": "PASS",
+    "current_health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "current_pointer_dependencies": [
+      "api",
+      "api/venv/bin/brickvault-production-backup",
+      "api/venv/bin/python",
+      "deploy/complete_run_retention.py",
+      "deploy/operational_alert.py",
+      "deploy/production_health.py",
+      "deploy/python_maintenance.py"
+    ],
+    "current_release": "p12-05-catalog-repair-r1",
+    "expected_revision": "0016_hunt_cached_runs",
+    "gate": "R6_STATIC_COMPATIBILITY",
+    "immutable_files": {
+      "p12-04e-r6": 36,
+      "p12-05-catalog-repair-r1": 36
+    },
+    "installed_root_hook_matches_both": true,
+    "migration_artifact_files_identical": 49,
+    "new_backup_invocations": 0,
+    "pointer_changes": 0,
+    "r6_manifest_sha256": "9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d",
+    "r6_source_id": "00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5",
+    "referencing_unit_file_count": 7,
+    "status": "PASS"
+  },
+  "read": {
+    "appraisal_response_catalog_generation": null,
+    "catalog_generation": 1,
+    "gate": "R6_CURRENT_DATABASE_READ_COMPATIBILITY",
+    "generation_verified_from_authoritative_active_pointer": true,
+    "postgres_transaction_read_only": true,
+    "provider_dispatch": false,
+    "r6_product_search": "75331-1 The Razor Crest",
+    "r6_set_detail": "PASS",
+    "runtime_role": true,
+    "session_user_catalog_mutations": 0,
+    "sets": 28278,
+    "status": "PASS",
+    "unchanged_database_security_catalog_watchlist_settings_sessions": true
+  },
+  "capture": {
+    "current_release": "p12-05-catalog-repair-r1",
+    "exactly_one_unique_probe": true,
+    "existing_fully_readback_dual_recovery_proof": "PASS_REUSED",
+    "gate": "ROLLBACK_PROBE_ADMISSION",
+    "new_backup_invocations": 0,
+    "probe_revision_recorded_privately": true,
+    "recovery_age_hours": 9.02,
+    "settings_unchanged": true,
+    "status": "PASS"
+  },
+  "rollback": {
+    "api_https_admin": "PASS",
+    "atomic_pointer_and_absolute_web_path": true,
+    "catalog_import_recovery_activation": false,
+    "database_security_catalog_settings_probe_unchanged": true,
+    "deep_health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "REPOSITORY_IDENTITIES": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "forward_original_config_bytes_restored": false,
+    "gate": "IMMUTABLE_R6_ROLLBACK",
+    "generation": 1,
+    "health_checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "manifest_sha256": "9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d",
+    "new_backup_invocations": 0,
+    "other_api_environment_bytes_unchanged": true,
+    "provider_dispatch": false,
+    "release": "p12-04e-r6",
+    "schema": "0016_hunt_cached_runs",
+    "sets": 28278,
+    "status": "PASS",
+    "timers_restored": true,
+    "zero_unexpected_failed_units": true
+  },
+  "forward": {
+    "api_https_admin": "PASS",
+    "atomic_pointer_and_absolute_web_path": true,
+    "catalog_import_recovery_activation": false,
+    "database_security_catalog_settings_probe_unchanged": true,
+    "deep_health": null,
+    "forward_original_config_bytes_restored": true,
+    "gate": "EXACT_REPAIR_FORWARD_RETURN",
+    "generation": 1,
+    "health_checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+    "new_backup_invocations": 0,
+    "other_api_environment_bytes_unchanged": true,
+    "provider_dispatch": false,
+    "release": "p12-05-catalog-repair-r1",
+    "schema": "0016_hunt_cached_runs",
+    "sets": 28278,
+    "status": "PASS",
+    "timers_restored": true,
+    "zero_unexpected_failed_units": true
+  },
+  "before-cold": {
+    "catalog_generation": 1,
+    "current_release": "p12-05-catalog-repair-r1",
+    "gate": "CLEANUP_AND_VM_COLD_START_ADMISSION",
+    "manual_preview_deletion_clock_change_guard_bypass": false,
+    "new_backup_invocations": 0,
+    "normal_health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "original_api_env_health_bytes": "RESTORED",
+    "saved_acceptance_forecasts": 0,
+    "security_catalog_settings_pre_gate8_state": "UNCHANGED",
+    "sets": 28278,
+    "settings_equal_accepted_defaults": true,
+    "status": "PASS",
+    "valid_owner_sessions": 0,
+    "watchlist_count": 0
+  },
+  "after-cold": {
+    "actual_new_guest_boot": true,
+    "catalog_generation": 1,
+    "current_release": "p12-05-catalog-repair-r1",
+    "data_mount_postgresql_api_caddy_tls_ufw": "PASS",
+    "gate": "VM115_POST_COLD_RECOVERY",
+    "guest_agent_required_unit": "PASS",
+    "health_checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "immutable_release_files_verified": 36,
+    "listeners_security_catalog_unchanged": true,
+    "manual_preview_deletion_clock_change_guard_bypass": false,
+    "new_backup_invocations": 0,
+    "original_api_env_health_bytes": "RESTORED",
+    "required_timers_active_enabled": true,
+    "saved_acceptance_forecasts": 0,
+    "security_catalog_settings_pre_gate8_state": "UNCHANGED",
+    "sets": 28278,
+    "settings_equal_accepted_defaults": true,
+    "status": "PASS",
+    "valid_owner_sessions": 0,
+    "watchlist_count": 0,
+    "zero_unexpected_failed_units": true
+  },
+  "backup": {
+    "artifacts": {
+      "configuration.tar": {
+        "bytes": 20480,
+        "sha256": "345bf0c016c777f76073dacdafa6f9746bbe578e37f23319f6c6c1a6304f88d9"
+      },
+      "database.dump": {
+        "bytes": 768622342,
+        "sha256": "64a3357acec037c86af98214f3a63a29686278aa2f68d2fde92478b08502e0cc"
+      },
+      "globals.sql": {
+        "bytes": 1454,
+        "sha256": "214d2260cef07c00095f0365dfee465062771d912647007e0eade51eb4dd5587"
+      }
+    },
+    "catalog_generation": 1,
+    "database_security_catalog_sessions_settings_watchlist_unchanged": true,
+    "destinations": {
+      "drive": "PASS",
+      "proxmox": "PASS"
+    },
+    "encrypted_artifact_readbacks": 6,
+    "gate": "ONE_FINAL_NORMAL_DUAL_BACKUP",
+    "hash_size_verification": "PASS",
+    "normal_dual_backup_invocations": 1,
+    "protected_receipt": "PASS",
+    "repository_checks": 2,
+    "retention_apply_or_prune": false,
+    "revision": "0016_hunt_cached_runs",
+    "sets": 28278,
+    "status": "PASS"
+  },
+  "final": {
+    "caddy_bytes_unchanged": true,
+    "catalog_generation": 1,
+    "current_release": "p12-05-catalog-repair-r1",
+    "gate": "FINAL_SECURITY_OPERATIONS",
+    "health_checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "REPOSITORY_IDENTITIES": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "immutable_forward_files_verified": 36,
+    "installed_wheel_files_verified": 170,
+    "maintenance_jobs_idle": true,
+    "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+    "manual_preview_deletion_clock_change_guard_bypass": false,
+    "normal_final_dual_backup_invocations": 1,
+    "original_api_env_health_bytes": "RESTORED",
+    "phase13_started": false,
+    "production_admin": "PASS",
+    "protected_catalog_source_outside_static": "PASS",
+    "provider_credentials_configured": false,
+    "public_static_files": 8,
+    "required_units": {
+      "apt-daily-upgrade.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "apt-daily.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-api.service": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-backup.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-health-deep.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-health.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-python-version.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "brickvault-retention.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "caddy.service": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "certbot.timer": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "postgresql@18-main.service": {
+        "ActiveState": "active",
+        "UnitFileState": "enabled"
+      },
+      "qemu-guest-agent.service": {
+        "ActiveState": "active",
+        "UnitFileState": "static"
+      }
+    },
+    "retention": "READY",
+    "runtime_least_privilege_unchanged": true,
+    "saved_acceptance_forecasts": 0,
+    "security_catalog_settings_pre_gate8_state": "UNCHANGED",
+    "sets": 28278,
+    "settings_equal_accepted_defaults": true,
+    "source_schema_release_modifications": false,
+    "static_credential_containment": "PASS",
+    "status": "PASS",
+    "valid_owner_sessions": 0,
+    "watchlist_count": 0,
+    "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+    "zero_failed_units": true
+  },
+  "vm-preflight": {
+    "status": "PASS",
+    "gate": "ACTUAL_VM_STARTUP_ORDER",
+    "firewall_vm112": {
+      "onboot": 1,
+      "order": 1,
+      "up": 15,
+      "running": true
+    },
+    "application_vm115": {
+      "onboot": 1,
+      "order": 2,
+      "running": true
+    },
+    "agent_expected_network": "PASS",
+    "configuration_mutations": 0
+  },
+  "vm-stopped": {
+    "status": "PASS",
+    "vm": 115,
+    "graceful_shutdown": true,
+    "proxmox_stopped_observed": true,
+    "hard_stop_used": false,
+    "firewall_host_actions": 0
+  },
+  "vm-cold": {
+    "status": "PASS",
+    "gate": "VM115_REAL_COLD_STOP_START",
+    "vm": 115,
+    "proxmox_stopped_observed": true,
+    "running_guest_agent_expected_network_ssh_listener": "PASS",
+    "actual_startup_order_verified": true,
+    "vm_configs_network_identity_unchanged": true,
+    "hard_stop_host_reboot_firewall_mutation": false
+  },
+  "network-final": {
+    "status": "PASS",
+    "gate": "FINAL_NAMED_NETWORK_EXPOSURE",
+    "checks": {
+      "private_dns_matches_named_vm115": true,
+      "trusted_https_health": true,
+      "public_a_absent": true,
+      "public_aaaa_absent": true,
+      "private_port_18080_unreachable": true,
+      "private_port_5432_unreachable": true,
+      "unauthenticated_private_read_401_no_store": true
+    },
+    "wan_forwarding": "accepted read-only OPNsense evidence reused; no router change in continuation",
+    "dns_firewall_platform_mutations": 0,
+    "private_identifiers_exported": false
+  },
+  "session": {
+    "status": "CLEANUP_REPLAY_PASS",
+    "credentials_persisted": false,
+    "new_probe_creates": 1,
+    "settings_mutations": 0,
+    "final_backup_invocations": 0,
+    "current_forward_probe": {
+      "session_authenticated": true,
+      "search": "75331-1 The Razor Crest",
+      "set_detail": "PASS",
+      "watchlist_count": 1,
+      "probe_exact_private_identity_revision_data": "PASS",
+      "no_duplicate": true
+    },
+    "rollback-read": {
+      "session_authenticated": true,
+      "search": "75331-1 The Razor Crest",
+      "set_detail": "PASS",
+      "watchlist_count": 1,
+      "probe_exact_private_identity_revision_data": "PASS",
+      "no_duplicate": true
+    },
+    "forward-read": {
+      "session_authenticated": true,
+      "search": "75331-1 The Razor Crest",
+      "set_detail": "PASS",
+      "watchlist_count": 1,
+      "probe_exact_private_identity_revision_data": "PASS",
+      "no_duplicate": true
+    },
+    "watchlist_restored_empty": true,
+    "logout_204_no_store": true,
+    "this_continuation_just_revoked_session_replay": {
+      "status": 401,
+      "no_store": true,
+      "actual_old_session_sent": true
+    },
+    "private_process_session_state_cleared": true,
+    "evidence_stage": "Rollback/forward session cleanup; before VM cold recovery and final backup"
+  },
+  "status": "READY FOR P12-05 / PHASE 12 FINAL REVIEW",
+  "main_head": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+  "prior_gates_1_7": "ACCEPTED_PASS_REUSED; no broad qualification repeat",
+  "independent_phase12_acceptance": "PENDING_REVIEW; no main commit or Phase 13",
+  "r6-installed-runtime": {
+    "artifact_package_bytes_match": true,
+    "gate": "R6_INSTALLED_RUNTIME_IDENTITY",
+    "installed_wheel_files_verified": 169,
+    "new_backup_invocations": 0,
+    "pointer_changes": 0,
+    "r6_interpreter_prefix_and_module_path": "PASS",
+    "read_only_filesystem_check": true,
+    "status": "PASS"
+  },
+  "documentation_validation": {
+    "status": "PASS",
+    "head": "e64f2d812bf90255005c88e8d1f68b4c8ab0d7af",
+    "main_index": "empty",
+    "protected_hashes": "PASS",
+    "additive_only": true,
+    "prior_document_bodies_preserved": true,
+    "resolved_links": 316,
+    "application_source_changes": 0,
+    "tests_rerun": false,
+    "diagnostic_evidence": "reused accepted r1"
+  },
+  "normal_final_dual_backup_invocations": 1
+}

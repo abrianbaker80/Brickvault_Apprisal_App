@@ -1,0 +1,102 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "caddy_bytes_unchanged": true,
+      "catalog_generation": 1,
+      "current_release": "p12-05-catalog-repair-r1",
+      "gate": "FINAL_SECURITY_OPERATIONS",
+      "health_checks": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "REPOSITORY_IDENTITIES": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "immutable_forward_files_verified": 36,
+      "installed_wheel_files_verified": 170,
+      "maintenance_jobs_idle": true,
+      "manifest_sha256": "02c0cc06a49efe1718ffa2392c5cb88fe22e093328de22bdf4a53c3041333b36",
+      "manual_preview_deletion_clock_change_guard_bypass": false,
+      "normal_final_dual_backup_invocations": 1,
+      "original_api_env_health_bytes": "RESTORED",
+      "phase13_started": false,
+      "production_admin": "PASS",
+      "protected_catalog_source_outside_static": "PASS",
+      "provider_credentials_configured": false,
+      "public_static_files": 8,
+      "required_units": {
+        "apt-daily-upgrade.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "apt-daily.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-api.service": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-backup.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-health-deep.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-health.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-python-version.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "brickvault-retention.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "caddy.service": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "certbot.timer": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "postgresql@18-main.service": {
+          "ActiveState": "active",
+          "UnitFileState": "enabled"
+        },
+        "qemu-guest-agent.service": {
+          "ActiveState": "active",
+          "UnitFileState": "static"
+        }
+      },
+      "retention": "READY",
+      "runtime_least_privilege_unchanged": true,
+      "saved_acceptance_forecasts": 0,
+      "security_catalog_settings_pre_gate8_state": "UNCHANGED",
+      "sets": 28278,
+      "settings_equal_accepted_defaults": true,
+      "source_schema_release_modifications": false,
+      "static_credential_containment": "PASS",
+      "status": "PASS",
+      "valid_owner_sessions": 0,
+      "watchlist_count": 0,
+      "wheel_sha256": "a7e61ce8bacb5e8e308b40ad852c46f654d6355fa5e51d423ddc43a8f3274ed6",
+      "zero_failed_units": true
+    }
+  ]
+}

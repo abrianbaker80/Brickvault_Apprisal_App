@@ -1,0 +1,40 @@
+{
+  "status": "CLEANUP_REPLAY_PASS",
+  "credentials_persisted": false,
+  "new_probe_creates": 1,
+  "settings_mutations": 0,
+  "final_backup_invocations": 0,
+  "current_forward_probe": {
+    "session_authenticated": true,
+    "search": "75331-1 The Razor Crest",
+    "set_detail": "PASS",
+    "watchlist_count": 1,
+    "probe_exact_private_identity_revision_data": "PASS",
+    "no_duplicate": true
+  },
+  "rollback-read": {
+    "session_authenticated": true,
+    "search": "75331-1 The Razor Crest",
+    "set_detail": "PASS",
+    "watchlist_count": 1,
+    "probe_exact_private_identity_revision_data": "PASS",
+    "no_duplicate": true
+  },
+  "forward-read": {
+    "session_authenticated": true,
+    "search": "75331-1 The Razor Crest",
+    "set_detail": "PASS",
+    "watchlist_count": 1,
+    "probe_exact_private_identity_revision_data": "PASS",
+    "no_duplicate": true
+  },
+  "watchlist_restored_empty": true,
+  "logout_204_no_store": true,
+  "this_continuation_just_revoked_session_replay": {
+    "status": 401,
+    "no_store": true,
+    "actual_old_session_sent": true
+  },
+  "private_process_session_state_cleared": true,
+  "evidence_stage": "Rollback/forward session cleanup; before VM cold recovery and final backup"
+}

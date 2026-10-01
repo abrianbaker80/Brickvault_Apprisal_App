@@ -1,0 +1,20 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "appraisal_response_catalog_generation": null,
+      "catalog_generation": 1,
+      "gate": "R6_CURRENT_DATABASE_READ_COMPATIBILITY",
+      "generation_verified_from_authoritative_active_pointer": true,
+      "postgres_transaction_read_only": true,
+      "provider_dispatch": false,
+      "r6_product_search": "75331-1 The Razor Crest",
+      "r6_set_detail": "PASS",
+      "runtime_role": true,
+      "session_user_catalog_mutations": 0,
+      "sets": 28278,
+      "status": "PASS",
+      "unchanged_database_security_catalog_watchlist_settings_sessions": true
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "artifact_package_bytes_match": true,
+      "gate": "R6_INSTALLED_RUNTIME_IDENTITY",
+      "installed_wheel_files_verified": 169,
+      "new_backup_invocations": 0,
+      "pointer_changes": 0,
+      "r6_interpreter_prefix_and_module_path": "PASS",
+      "read_only_filesystem_check": true,
+      "status": "PASS"
+    }
+  ]
+}

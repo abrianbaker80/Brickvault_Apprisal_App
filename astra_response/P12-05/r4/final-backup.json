@@ -1,0 +1,37 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "artifacts": {
+        "configuration.tar": {
+          "bytes": 20480,
+          "sha256": "345bf0c016c777f76073dacdafa6f9746bbe578e37f23319f6c6c1a6304f88d9"
+        },
+        "database.dump": {
+          "bytes": 768622342,
+          "sha256": "64a3357acec037c86af98214f3a63a29686278aa2f68d2fde92478b08502e0cc"
+        },
+        "globals.sql": {
+          "bytes": 1454,
+          "sha256": "214d2260cef07c00095f0365dfee465062771d912647007e0eade51eb4dd5587"
+        }
+      },
+      "catalog_generation": 1,
+      "database_security_catalog_sessions_settings_watchlist_unchanged": true,
+      "destinations": {
+        "drive": "PASS",
+        "proxmox": "PASS"
+      },
+      "encrypted_artifact_readbacks": 6,
+      "gate": "ONE_FINAL_NORMAL_DUAL_BACKUP",
+      "hash_size_verification": "PASS",
+      "normal_dual_backup_invocations": 1,
+      "protected_receipt": "PASS",
+      "repository_checks": 2,
+      "retention_apply_or_prune": false,
+      "revision": "0016_hunt_cached_runs",
+      "sets": 28278,
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "gate": "FINAL_NAMED_NETWORK_EXPOSURE",
+  "checks": {
+    "private_dns_matches_named_vm115": true,
+    "trusted_https_health": true,
+    "public_a_absent": true,
+    "public_aaaa_absent": true,
+    "private_port_18080_unreachable": true,
+    "private_port_5432_unreachable": true,
+    "unauthenticated_private_read_401_no_store": true
+  },
+  "wan_forwarding": "accepted read-only OPNsense evidence reused; no router change in continuation",
+  "dns_firewall_platform_mutations": 0,
+  "private_identifiers_exported": false
+}

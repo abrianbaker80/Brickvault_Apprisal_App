@@ -1,0 +1,42 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "actual_new_guest_boot": true,
+      "catalog_generation": 1,
+      "current_release": "p12-05-catalog-repair-r1",
+      "data_mount_postgresql_api_caddy_tls_ufw": "PASS",
+      "gate": "VM115_POST_COLD_RECOVERY",
+      "guest_agent_required_unit": "PASS",
+      "health_checks": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "immutable_release_files_verified": 36,
+      "listeners_security_catalog_unchanged": true,
+      "manual_preview_deletion_clock_change_guard_bypass": false,
+      "new_backup_invocations": 0,
+      "original_api_env_health_bytes": "RESTORED",
+      "required_timers_active_enabled": true,
+      "saved_acceptance_forecasts": 0,
+      "security_catalog_settings_pre_gate8_state": "UNCHANGED",
+      "sets": 28278,
+      "settings_equal_accepted_defaults": true,
+      "status": "PASS",
+      "valid_owner_sessions": 0,
+      "watchlist_count": 0,
+      "zero_unexpected_failed_units": true
+    }
+  ]
+}

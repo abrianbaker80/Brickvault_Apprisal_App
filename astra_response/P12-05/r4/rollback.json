@@ -1,0 +1,55 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "api_https_admin": "PASS",
+      "atomic_pointer_and_absolute_web_path": true,
+      "catalog_import_recovery_activation": false,
+      "database_security_catalog_settings_probe_unchanged": true,
+      "deep_health": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "REPOSITORY_IDENTITIES": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "forward_original_config_bytes_restored": false,
+      "gate": "IMMUTABLE_R6_ROLLBACK",
+      "generation": 1,
+      "health_checks": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "manifest_sha256": "9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d",
+      "new_backup_invocations": 0,
+      "other_api_environment_bytes_unchanged": true,
+      "provider_dispatch": false,
+      "release": "p12-04e-r6",
+      "schema": "0016_hunt_cached_runs",
+      "sets": 28278,
+      "status": "PASS",
+      "timers_restored": true,
+      "zero_unexpected_failed_units": true
+    }
+  ]
+}

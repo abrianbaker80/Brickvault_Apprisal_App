@@ -1,0 +1,48 @@
+{
+  "exit_code": 0,
+  "records": [
+    {
+      "all_required_operational_script_bytes_match": true,
+      "both_venvs_static_builds": "PASS",
+      "current_health": {
+        "BACKUP_FRESH_RETENTION_READY": true,
+        "CLOCK": true,
+        "DATABASE_READY": true,
+        "DATA_MOUNT": true,
+        "DATA_SPACE": true,
+        "HTTPS_CERTIFICATE": true,
+        "LISTENERS": true,
+        "REBOOT_PENDING": true,
+        "RELEASE_RUNTIME_HOOK": true,
+        "ROOT_SPACE": true,
+        "SECURITY_UPDATES": true,
+        "SERVICES": true,
+        "UFW": true
+      },
+      "current_pointer_dependencies": [
+        "api",
+        "api/venv/bin/brickvault-production-backup",
+        "api/venv/bin/python",
+        "deploy/complete_run_retention.py",
+        "deploy/operational_alert.py",
+        "deploy/production_health.py",
+        "deploy/python_maintenance.py"
+      ],
+      "current_release": "p12-05-catalog-repair-r1",
+      "expected_revision": "0016_hunt_cached_runs",
+      "gate": "R6_STATIC_COMPATIBILITY",
+      "immutable_files": {
+        "p12-04e-r6": 36,
+        "p12-05-catalog-repair-r1": 36
+      },
+      "installed_root_hook_matches_both": true,
+      "migration_artifact_files_identical": 49,
+      "new_backup_invocations": 0,
+      "pointer_changes": 0,
+      "r6_manifest_sha256": "9667d1f64f9a418647c0dc30a6d3a2525685d603ab3d930e8a3b854df0ba781d",
+      "r6_source_id": "00c719ac356f881c9929909a22f683831235f222939d28c8892747c8898558f5",
+      "referencing_unit_file_count": 7,
+      "status": "PASS"
+    }
+  ]
+}
