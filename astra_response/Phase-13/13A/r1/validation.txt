@@ -1,0 +1,34 @@
+PHASE 13A FOCUSED VALIDATION — PASS
+14 meaningful integration cases: 14 passed in 13.86s.
+One affected subset after source-review corrections: 8 passed, 6 deselected in 10.62s.
+No repeated full suite and no concurrency permutation campaign.
+
+Cases: listing decimal/missing/zero/read/pagination; JPEG original/thumbnail/content;
+PNG/WebP transparency/no enlargement/EXIF; duplicate and lost-result replay;
+UUID bytes/position conflicts (including corrupt replacement); receipt-position
+conflict; cross-listing original/blob reuse and stricter privacy; grouped invalid,
+file/pixel/dimension/animation/bomb/format rejection; chunked ceiling/multipart/
+Origin/CSRF/private access/post-decode revoked session; real overlapping ordering
+and reopened service; real deferred DB commit failure/no false success/retry;
+immutable filesystem corruption/report-only missing/orphan/staging/root safety;
+PostgreSQL receipt immutability/JSON-null rejection/deferred minimum order;
+accepted 0016 upgrade preservation and disposable downgrade/re-upgrade smoke.
+
+Fresh disposable PostgreSQL 18 -> 0017_listing_images: PASS via owned harness.
+0016 -> 0017 and empty-table 0017 -> 0016 -> 0017: PASS.
+Both owned run ledgers: status passed; pytest_exit 0; leftovers []; TEST instance
+running_before=false and running_after=false; volumes preserved. No production.
+
+Ruff changed Python files only: PASS, 14 files.
+Ruff format --check changed Python files only: PASS, 14 files.
+mypy affected source modules only: PASS, 13 files.
+contracts:generate and contracts:check: PASS; no database/provider credentials.
+Existing OpenAPI paths and retained components: all byte-equivalent as JSON values.
+Three existing harness dependency/deprecation warnings retained; no unrelated
+test-stack upgrade (anyio assert rewrite, TestClient/httpx, BlockingPortal alias).
+
+git diff whitespace, explicit 24-file inventory, Markdown links, protected hashes,
+empty main index and sanitized isolated review publication checks: PASS.
+Main baseline 653fae52ef5cb852985e2c36039b20523776f3b9 remains uncommitted/unpushed.
+No broad API/repository suites, browser tests, frontend/production builds, provider,
+recognition, Android, home-server access, deployment, retention/delete or Phase 14.

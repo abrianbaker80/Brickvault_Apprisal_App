@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "baseline": "653fae52ef5cb852985e2c36039b20523776f3b9",
+  "publication_parent": "fe54bff54e20f7d42db6ff9d0e6d806b4e9dba31",
+  "changed_files": 24,
+  "review_files": 39,
+  "source_tests_generated_new_docs_exact": true,
+  "workflow_copy_sanitization": "one unchanged historical private ZIP path only",
+  "complete_patch_applies_in_reverse_to_current_source": true,
+  "markdown_links": {
+    "main": 242,
+    "package": 14
+  },
+  "protected_hashes": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "main_index": "empty",
+  "main_commit_push": false,
+  "tests": {
+    "initial_passed": 14,
+    "affected_passed": 8,
+    "unique_cases": 14,
+    "broad_suites": false
+  },
+  "ruff": "PASS",
+  "format": "PASS",
+  "mypy_source_files": 13,
+  "contracts": "PASS",
+  "disposable_cleanup": "PASS, zero leftovers, prior TEST stopped state restored",
+  "production_access": false,
+  "provider_calls": false,
+  "phase_14_started": false
+}

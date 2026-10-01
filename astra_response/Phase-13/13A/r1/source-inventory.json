@@ -1,0 +1,194 @@
+[
+  {
+    "file": "CODEX_WORKFLOW.md",
+    "source_sha256": "7560c3023a1f89ac75454c344d13fdc44d29270b14f61f9759d7277dc9e5eadf",
+    "review_sha256": "a97331e30e1f9050e35e378afeb0f1ea68daec6bc9d00a99a008f3b5d2d2f4cc",
+    "exact_source_bytes": false,
+    "sanitization": "one unchanged historical private ZIP path redacted; current changed lines exact",
+    "published_git_blob_sha256": "a97331e30e1f9050e35e378afeb0f1ea68daec6bc9d00a99a008f3b5d2d2f4cc"
+  },
+  {
+    "file": "docs/IMAGE_PRIVACY_POLICY.md",
+    "source_sha256": "1883724ca4d83c50a8004f397306c71a5a4158bd7748df4b92bdc8e294510a57",
+    "review_sha256": "1883724ca4d83c50a8004f397306c71a5a4158bd7748df4b92bdc8e294510a57",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "1883724ca4d83c50a8004f397306c71a5a4158bd7748df4b92bdc8e294510a57"
+  },
+  {
+    "file": "docs/ROADMAP.md",
+    "source_sha256": "226ee53304f3090b0cc08e18fb3da19e1b94c2ae82dd4e6e738c843b7f93f139",
+    "review_sha256": "226ee53304f3090b0cc08e18fb3da19e1b94c2ae82dd4e6e738c843b7f93f139",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "226ee53304f3090b0cc08e18fb3da19e1b94c2ae82dd4e6e738c843b7f93f139"
+  },
+  {
+    "file": "docs/plans/103-phase-13-image-ingestion.md",
+    "source_sha256": "16af7d924a483a1bddeb5cf48047ea8081cb1c740e6c8715ee9849ff4c9ac4c7",
+    "review_sha256": "16af7d924a483a1bddeb5cf48047ea8081cb1c740e6c8715ee9849ff4c9ac4c7",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "16af7d924a483a1bddeb5cf48047ea8081cb1c740e6c8715ee9849ff4c9ac4c7"
+  },
+  {
+    "file": "packages/contracts/openapi.json",
+    "source_sha256": "86ccc124afb116f752ec487f747bfcef8b08b4d3a4231883153eb2a14f54f346",
+    "review_sha256": "86ccc124afb116f752ec487f747bfcef8b08b4d3a4231883153eb2a14f54f346",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "86ccc124afb116f752ec487f747bfcef8b08b4d3a4231883153eb2a14f54f346"
+  },
+  {
+    "file": "packages/contracts/src/schema.d.ts",
+    "source_sha256": "e46e1fccd339fece16564d60f1e55f49757adeaaf5b59224b5593ac54662438b",
+    "review_sha256": "e46e1fccd339fece16564d60f1e55f49757adeaaf5b59224b5593ac54662438b",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "e46e1fccd339fece16564d60f1e55f49757adeaaf5b59224b5593ac54662438b"
+  },
+  {
+    "file": "services/api/pyproject.toml",
+    "source_sha256": "5004a0ba338c251399ad117d0c6c7b39724bc8825e5fde3b7e5de33dd633b034",
+    "review_sha256": "5004a0ba338c251399ad117d0c6c7b39724bc8825e5fde3b7e5de33dd633b034",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "5004a0ba338c251399ad117d0c6c7b39724bc8825e5fde3b7e5de33dd633b034"
+  },
+  {
+    "file": "services/api/src/brickvault_api/api/auth.py",
+    "source_sha256": "c63cb1dab7d9d9557661aec8c68ee65135a11ea3a403c5da0761b5df5f7168c8",
+    "review_sha256": "c63cb1dab7d9d9557661aec8c68ee65135a11ea3a403c5da0761b5df5f7168c8",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "6ca72918f7b3afd895378917af7063151e1e1ab076b876d802a7c04a40b1f2ec"
+  },
+  {
+    "file": "services/api/src/brickvault_api/api/listings.py",
+    "source_sha256": "78077ffbec5d69eb97dd4180c3217f8b0126fffa34466cded98e2b17dd48fd36",
+    "review_sha256": "78077ffbec5d69eb97dd4180c3217f8b0126fffa34466cded98e2b17dd48fd36",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "78077ffbec5d69eb97dd4180c3217f8b0126fffa34466cded98e2b17dd48fd36"
+  },
+  {
+    "file": "services/api/src/brickvault_api/images/__init__.py",
+    "source_sha256": "17fbdb6bf74ac8f4fe52e97edce43652f081bc7f2fda50bba4695e01bb0f7f50",
+    "review_sha256": "17fbdb6bf74ac8f4fe52e97edce43652f081bc7f2fda50bba4695e01bb0f7f50",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "17fbdb6bf74ac8f4fe52e97edce43652f081bc7f2fda50bba4695e01bb0f7f50"
+  },
+  {
+    "file": "services/api/src/brickvault_api/images/consistency.py",
+    "source_sha256": "96207ca2cef7054765cfc527d37d30495ec852a78fa71d98f7b50c852c39ca25",
+    "review_sha256": "96207ca2cef7054765cfc527d37d30495ec852a78fa71d98f7b50c852c39ca25",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "96207ca2cef7054765cfc527d37d30495ec852a78fa71d98f7b50c852c39ca25"
+  },
+  {
+    "file": "services/api/src/brickvault_api/images/processing.py",
+    "source_sha256": "26424f66ddd6b87589374ed2750962325770e4d935557b79c8159849bfc3710f",
+    "review_sha256": "26424f66ddd6b87589374ed2750962325770e4d935557b79c8159849bfc3710f",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "26424f66ddd6b87589374ed2750962325770e4d935557b79c8159849bfc3710f"
+  },
+  {
+    "file": "services/api/src/brickvault_api/images/storage.py",
+    "source_sha256": "a81734334b7f780c96a41b7167f659310a799c2e9725a35db5152593e0b69a77",
+    "review_sha256": "a81734334b7f780c96a41b7167f659310a799c2e9725a35db5152593e0b69a77",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "a81734334b7f780c96a41b7167f659310a799c2e9725a35db5152593e0b69a77"
+  },
+  {
+    "file": "services/api/src/brickvault_api/listings/__init__.py",
+    "source_sha256": "eb51a7e60bd512a1f6f250347fc9bde933421a1df8b6bc50ce4349ab16cdd7e5",
+    "review_sha256": "eb51a7e60bd512a1f6f250347fc9bde933421a1df8b6bc50ce4349ab16cdd7e5",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "eb51a7e60bd512a1f6f250347fc9bde933421a1df8b6bc50ce4349ab16cdd7e5"
+  },
+  {
+    "file": "services/api/src/brickvault_api/listings/models.py",
+    "source_sha256": "6e99054812e306b716d7d38127c0b9ffde4d98e1fe1a42d000296f8ea7df19be",
+    "review_sha256": "6e99054812e306b716d7d38127c0b9ffde4d98e1fe1a42d000296f8ea7df19be",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "6e99054812e306b716d7d38127c0b9ffde4d98e1fe1a42d000296f8ea7df19be"
+  },
+  {
+    "file": "services/api/src/brickvault_api/listings/service.py",
+    "source_sha256": "3601ea59c4055bf918aa07eec76e471950611a2eac9932aa765d71110ed04714",
+    "review_sha256": "3601ea59c4055bf918aa07eec76e471950611a2eac9932aa765d71110ed04714",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "3601ea59c4055bf918aa07eec76e471950611a2eac9932aa765d71110ed04714"
+  },
+  {
+    "file": "services/api/src/brickvault_api/main.py",
+    "source_sha256": "58eec9da4899471d8139cb692dfbf5124eb08280e574618233eda58c0b44858d",
+    "review_sha256": "58eec9da4899471d8139cb692dfbf5124eb08280e574618233eda58c0b44858d",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "9b75bfd752e0c61688e7a137ab16717b9dd425f71b52463b5223d223d28bbb1d"
+  },
+  {
+    "file": "services/api/src/brickvault_api/migrations/sql/0017_listing_images_down.sql",
+    "source_sha256": "7bdb8d30b32181c001402f2a8a8d6a0c6043eb782fa1d2ebe21e1da05d3dcec2",
+    "review_sha256": "7bdb8d30b32181c001402f2a8a8d6a0c6043eb782fa1d2ebe21e1da05d3dcec2",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "7bdb8d30b32181c001402f2a8a8d6a0c6043eb782fa1d2ebe21e1da05d3dcec2"
+  },
+  {
+    "file": "services/api/src/brickvault_api/migrations/sql/0017_listing_images_up.sql",
+    "source_sha256": "f1566251cc48dd1225202dd949510d4eba21104abf62045d722e8aca3614f7b3",
+    "review_sha256": "f1566251cc48dd1225202dd949510d4eba21104abf62045d722e8aca3614f7b3",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "f1566251cc48dd1225202dd949510d4eba21104abf62045d722e8aca3614f7b3"
+  },
+  {
+    "file": "services/api/src/brickvault_api/migrations/versions/0017_listing_images.py",
+    "source_sha256": "cea5999678816da4bd91193359c281cd71b5e4964b977fd67ecdf22a8de1ecb7",
+    "review_sha256": "cea5999678816da4bd91193359c281cd71b5e4964b977fd67ecdf22a8de1ecb7",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "cea5999678816da4bd91193359c281cd71b5e4964b977fd67ecdf22a8de1ecb7"
+  },
+  {
+    "file": "services/api/src/brickvault_api/persistence/runtime_grants.py",
+    "source_sha256": "a9c65cb998da6037e5e790c9e6b43c2cf483ae57c498e36947b8bdb122731412",
+    "review_sha256": "a9c65cb998da6037e5e790c9e6b43c2cf483ae57c498e36947b8bdb122731412",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "1ad842632df6167b2f4a790f2450997c754e798d357a752a740bf5fb189fa82b"
+  },
+  {
+    "file": "services/api/src/brickvault_api/settings.py",
+    "source_sha256": "108d7a15294db193c4b1ba2bf8b14847e5599cf31d0640be54966facd376ce5e",
+    "review_sha256": "108d7a15294db193c4b1ba2bf8b14847e5599cf31d0640be54966facd376ce5e",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "108d7a15294db193c4b1ba2bf8b14847e5599cf31d0640be54966facd376ce5e"
+  },
+  {
+    "file": "services/api/tests/integration/test_listing_images.py",
+    "source_sha256": "a175a60919a64a2f63b8bf6ab97560d03514e7f6a24e741be9fed8043b51ba3c",
+    "review_sha256": "a175a60919a64a2f63b8bf6ab97560d03514e7f6a24e741be9fed8043b51ba3c",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "a175a60919a64a2f63b8bf6ab97560d03514e7f6a24e741be9fed8043b51ba3c"
+  },
+  {
+    "file": "services/api/uv.lock",
+    "source_sha256": "78415cc1b4258731dca3e210657f2cbcd36d38e73d9dc71391d912e2a9d531f5",
+    "review_sha256": "78415cc1b4258731dca3e210657f2cbcd36d38e73d9dc71391d912e2a9d531f5",
+    "exact_source_bytes": true,
+    "sanitization": null,
+    "published_git_blob_sha256": "78415cc1b4258731dca3e210657f2cbcd36d38e73d9dc71391d912e2a9d531f5"
+  }
+]
