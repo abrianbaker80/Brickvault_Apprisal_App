@@ -15,3 +15,7 @@ The [cumulative patch](cumulative-13C.patch) targets the local 13B baseline and 
 Eight focused seam cases, affected static checks, one wording case and one final normal build passed. Linux filesystem, guarded migration/grants, one real browser intake, combined encrypted service capture and off-host restore supply live evidence. No broad earlier campaign, provider/model call, Android build/native capture, recognition, dataset/export, deletion, live retention prune, VM stop/reboot, automatic rollback/drop or newer-data restore occurred. The old Android APK is not claimed updated.
 
 Private images, credentials, production identifiers and source-machine paths are excluded. Accepted evidence is linked from focused validation. Phase 14 has not started.
+
+## October 1 Central: backup schedule addendum
+
+The separately authorized [operational schedule change](backup-schedule.md) moves the existing daily image-inclusive timer to 04:00 America/Chicago without randomized delay. The original twenty-file Phase 13C candidate and all protected files remain byte-identical; the [current inventory](changed-files.txt) adds only the matching timer drop-in and schedule note. These operational files are outside the already-built immutable release. Original application, backup and recovery evidence above is retained; none of those gates was repeated.

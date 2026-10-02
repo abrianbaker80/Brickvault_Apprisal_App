@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "recorded_at_utc": "2026-10-02T03:38:48+00:00",
+  "effective_timer": {
+    "TimersCalendar": "{ OnCalendar=*-*-* 04:00:00 America/Chicago ; next_elapse=Fri 2026-10-02 09:00:00 UTC }",
+    "NextElapseUSecRealtime": "Fri 2026-10-02 09:00:00 UTC",
+    "LastTriggerUSec": "Fri 2026-10-02 03:29:04 UTC",
+    "AccuracyUSec": "1min",
+    "RandomizedDelayUSec": "0",
+    "Persistent": "yes",
+    "ActiveState": "active",
+    "SubState": "waiting",
+    "DropInPaths": "/etc/systemd/system/brickvault-backup.timer.d/schedule.conf",
+    "UnitFileState": "enabled"
+  },
+  "server_timezone": "Etc/UTC",
+  "calendar_parsing": "Normalized form: *-*-* 04:00:00 America/Chicago\n    Next elapse: Fri 2026-10-02 09:00:00 UTC\n       From now: 5h 21min left\n   Iteration #2: Sat 2026-10-03 09:00:00 UTC\n       From now: 1 day 5h left\n   Iteration #3: Sun 2026-10-04 09:00:00 UTC\n       From now: 2 days left",
+  "next_central": "2026-10-02T04:00:00-05:00",
+  "next_utc": "2026-10-02T09:00:00+00:00",
+  "preexisting_scheduled_backup_started_utc": "2026-10-02T03:29:04+00:00",
+  "latest_successful_receipt_utc": "2026-10-02T03:35:28.510114+00:00",
+  "backup_before_change": "inactive",
+  "backup_after_change": "inactive",
+  "api_before_change": "active",
+  "api_after_change": "active",
+  "backup_invocation_and_start_unchanged": true,
+  "api_invocation_and_pid_unchanged": true,
+  "scheduler_state_reset": false,
+  "scheduler_stamp_unchanged": true,
+  "receipt_history_unchanged": true,
+  "base_timer_unchanged": true,
+  "immutable_release_unchanged": true,
+  "new_repository_files": [
+    "deploy/systemd/brickvault-backup.timer.d/schedule.conf",
+    "docs/BACKUP_SCHEDULE.md"
+  ],
+  "original_phase13c_and_protected_bytes_unchanged": true,
+  "main_head": "1c7501092e7fad92a5471fa5571c6d009a1b0c3f",
+  "main_index": "empty",
+  "main_pushed": false,
+  "additional_tests_builds_backups_restores_health_campaigns": false
+}

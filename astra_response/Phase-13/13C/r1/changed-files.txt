@@ -18,3 +18,5 @@ services/api/src/brickvault_api/image_backup.py
 services/api/src/brickvault_api/production_admin.py
 services/api/src/brickvault_api/production_backup.py
 services/api/tests/unit/test_image_backup_seams.py
+deploy/systemd/brickvault-backup.timer.d/schedule.conf
+docs/BACKUP_SCHEDULE.md

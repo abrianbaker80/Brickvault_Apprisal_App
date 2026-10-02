@@ -12,5 +12,21 @@
   "source_id_still_matches_deployed_release": true,
   "source_copy_correspondence": "PASS with three explicitly documented unchanged-literal redactions",
   "complete_review": "Candidate source independently reviewed; public reports and copied-source correspondence reviewed",
-  "pre_and_post_backup_private_value_scan": "PASS"
+  "pre_and_post_backup_private_value_scan": "PASS",
+  "original_validation_scope": "Original 20-file Phase 13C candidate at initial publication; retained without rerunning",
+  "operational_schedule_addendum": {
+    "status": "PASS",
+    "source_files": 2,
+    "current_combined_inventory": 22,
+    "current_package_files": 41,
+    "files": [
+      "deploy/systemd/brickvault-backup.timer.d/schedule.conf",
+      "docs/BACKUP_SCHEDULE.md"
+    ],
+    "validation": "backup-schedule-validation.json",
+    "independent_review": "PASS",
+    "main_index": "empty",
+    "all_original_candidate_and_protected_hashes": "unchanged",
+    "application_build_identity": "Original immutable release unchanged; no rebuild or recalculation"
+  }
 }

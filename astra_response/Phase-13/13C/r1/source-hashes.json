@@ -18,5 +18,7 @@
   "services/api/src/brickvault_api/image_backup.py": "e427f211cebba076950fe983c49ebf638527e834fed8b42fedbc36fdeb07cb0f",
   "services/api/src/brickvault_api/production_admin.py": "fb493222a3aad19b363c20ec869c840a25e2617fb54fb665e35cb38ab46ce594",
   "services/api/src/brickvault_api/production_backup.py": "d5c38c74903b219c573ba57e25d9fc964ba222f8396aed657f1c92b3e5ff97a0",
-  "services/api/tests/unit/test_image_backup_seams.py": "a08233ce462aca58cc1025e28a35e5e7b86f41d0d5eb92f296d7c1495cea4022"
+  "services/api/tests/unit/test_image_backup_seams.py": "a08233ce462aca58cc1025e28a35e5e7b86f41d0d5eb92f296d7c1495cea4022",
+  "deploy/systemd/brickvault-backup.timer.d/schedule.conf": "320059d7e5ecf47d74da702e25caea6ced3a1fbd94b8a5765f706a9a34eb0040",
+  "docs/BACKUP_SCHEDULE.md": "1336a3774ab235f26baa8c299d04558cad4e4eb0a64de1b73318741f4e71c0de"
 }
