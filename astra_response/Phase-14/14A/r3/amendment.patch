@@ -1,0 +1,1109 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,20 +1,23 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
+-## Phase 14A local pilot — 2026-10-02 live result
+-
+-**Phase 14 IN PROGRESS; READY FOR PHASE 14A REVIEW (partial sample).**
+-Brian approved USD 10.00 lifetime, ten inference attempts and exact `gpt-6-luna`.
+-Six requests/eleven approved images were sent; five groups completed. G06 exhausted
+-2,048 output tokens on reasoning and returned incomplete; G07 was not attempted.
+-No retry/fallback occurred. Estimated cost USD 0.0036058; actual billing is unknown.
+-Raw top-1/top-3 agreement is 3/17; catalog coverage is separately three exact sets
+-resolved and fourteen BrickLink figure labels unresolved. No mapping/import was done.
+-The frozen sample/labels, private ledger/recovery copy and protected files remain
+-preserved; development stayed stopped, main is unpushed and its index is empty.
+-Only affected fixtures/lint/types ran. See [Plan 104](docs/plans/104-recognition-quality-pilot.md),
+-[pilot results](docs/PHASE_14A_PILOT.md) and [provider decision](docs/PHASE_14A_PROVIDER_DECISION.md).
+-Manual continuation requires an explicit output/reasoning and retry decision.
+-Phase 13 remains CLOSED. Earlier checkpoints below are historical.
++## Phase 14A two-call continuation — 2026-10-02
++
++**READY FOR PHASE 14A CONTINUATION REVIEW; qualification unestablished.** Brian
++accepted r2 as partial and authorized only G07 once then one fresh G06 retry, keeping
++exact `gpt-6-luna`/Medium, photos/texts, prompt/schema and catalog/scoring rules.
++Only those calls use 16,384 output tokens and 180 seconds. Both completed; eight
++lifetime attempts, all seven groups now processed. Original failed G06 remains counted.
++Cumulative raw agreement is 3/17: sets 3/3, figures 0/14; custom-build outcome correct.
++Catalog integration separately resolves three expected sets, fourteen figures remain
++unmapped. Estimated lifetime cost USD 0.0058142; actual billing unknown. Reservations
++USD 1.877792 retained under USD 10.00. Two remaining attempts are not authorized.
++Original r2 results/hashes stay unchanged. Only three affected fixtures/static checks
++ran; no research, database/catalog campaign, builds or production change occurred.
++Development is stopped, recovery/protected files retained, main unpushed/index empty.
++See [pilot views](docs/PHASE_14A_PILOT.md), [Plan 104](docs/plans/104-recognition-quality-pilot.md),
++and [provider decision](docs/PHASE_14A_PROVIDER_DECISION.md). Stop for quality review;
++no tuning/model comparison or Phase 15/16 starts automatically. Earlier checkpoints
++are historical; Phase 13 remains CLOSED.
+ 
+ ## Phase 13 final closeout — 2026-10-01
+ 
+diff --git a/docs/DECISIONS.md b/docs/DECISIONS.md
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1598,3 +1598,25 @@
+ and retry approval. Development, catalog/import state, protected files and the main
+ index were preserved. Only sanitized review publication is authorized; main stays
+ uncommitted/unpushed. This outcome does not close wider Phase 14 or start Phase 15/16.
++
++
++## Phase 14A r2 acceptance and two-call amendment — 2026-10-02
++
++Brian accepted published r2 at 108f7f6d65a38ebead7701d3c0f7f2d62ed3b5ab as honest
++partial pilot evidence, without closing 14A or establishing recognition quality.
++The explicit amendment authorizes G07 once then one fresh G06 retry, with unchanged
++Luna/Medium, prompt/schema, inputs and scoring. Only output allowance/deadline become
++16,384 tokens/180 seconds. Original history/failed G06 and reservations are retained;
++new files/protocol are versioned and retry 8 links to predecessor 6. No other call
++or future tuning/model comparison is authorized. The existing USD 10.00 cap remains.
++
++Both requests completed. Cumulative sample coverage is seven groups, eight lifetime
++requests, raw 3/17: three sets matched, fourteen figures did not. G07 correctly returned
++custom_build. This is weak figure-recognition evidence despite completed processing.
++Catalog figure coverage remains a distinct limitation. Lifetime token-derived estimate
++USD 0.0058142; actual billing unavailable; USD 1.877792 retained reservations. The two
++unused lifetime attempts are not authorized. Original r2 evaluation/result hashes
++match. Three affected fixture checks and source static checks passed; no broad work.
++Publish only sanitized r3 review, preserving r1/r2; main stays uncommitted/unpushed,
++index empty, protected files unchanged. [Existing report](PHASE_14A_PILOT.md) contains
++separate original, amended and cumulative views. Stop for recognition-quality review.
+diff --git a/docs/PROVIDER_GATES.md b/docs/PROVIDER_GATES.md
+--- a/docs/PROVIDER_GATES.md
++++ b/docs/PROVIDER_GATES.md
+@@ -1,20 +1,23 @@
+ # Provider and Device Evidence Gates
+ 
+-## Phase 14A local pilot — 2026-10-02 live result
+-
+-**Phase 14 IN PROGRESS; READY FOR PHASE 14A REVIEW (partial sample).**
+-Brian approved USD 10.00 lifetime, ten inference attempts and exact `gpt-6-luna`.
+-Six requests/eleven approved images were sent; five groups completed. G06 exhausted
+-2,048 output tokens on reasoning and returned incomplete; G07 was not attempted.
+-No retry/fallback occurred. Estimated cost USD 0.0036058; actual billing is unknown.
+-Raw top-1/top-3 agreement is 3/17; catalog coverage is separately three exact sets
+-resolved and fourteen BrickLink figure labels unresolved. No mapping/import was done.
+-The frozen sample/labels, private ledger/recovery copy and protected files remain
+-preserved; development stayed stopped, main is unpushed and its index is empty.
+-Only affected fixtures/lint/types ran. See [Plan 104](plans/104-recognition-quality-pilot.md),
+-[pilot results](PHASE_14A_PILOT.md) and [provider decision](PHASE_14A_PROVIDER_DECISION.md).
+-Manual continuation requires an explicit output/reasoning and retry decision.
+-Phase 13 remains CLOSED. Earlier checkpoints below are historical.
++## Phase 14A two-call continuation — 2026-10-02
++
++**READY FOR PHASE 14A CONTINUATION REVIEW; qualification unestablished.** Brian
++accepted r2 as partial and authorized only G07 once then one fresh G06 retry, keeping
++exact `gpt-6-luna`/Medium, photos/texts, prompt/schema and catalog/scoring rules.
++Only those calls use 16,384 output tokens and 180 seconds. Both completed; eight
++lifetime attempts, all seven groups now processed. Original failed G06 remains counted.
++Cumulative raw agreement is 3/17: sets 3/3, figures 0/14; custom-build outcome correct.
++Catalog integration separately resolves three expected sets, fourteen figures remain
++unmapped. Estimated lifetime cost USD 0.0058142; actual billing unknown. Reservations
++USD 1.877792 retained under USD 10.00. Two remaining attempts are not authorized.
++Original r2 results/hashes stay unchanged. Only three affected fixtures/static checks
++ran; no research, database/catalog campaign, builds or production change occurred.
++Development is stopped, recovery/protected files retained, main unpushed/index empty.
++See [pilot views](PHASE_14A_PILOT.md), [Plan 104](plans/104-recognition-quality-pilot.md),
++and [provider decision](PHASE_14A_PROVIDER_DECISION.md). Stop for quality review;
++no tuning/model comparison or Phase 15/16 starts automatically. Earlier checkpoints
++are historical; Phase 13 remains CLOSED.
+ 
+ ## Current private historical-use decision — 2026-09-17
+ 
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,20 +1,23 @@
+ # Valuation-First Roadmap
+ 
+-## Phase 14A local pilot — 2026-10-02 live result
+-
+-**Phase 14 IN PROGRESS; READY FOR PHASE 14A REVIEW (partial sample).**
+-Brian approved USD 10.00 lifetime, ten inference attempts and exact `gpt-6-luna`.
+-Six requests/eleven approved images were sent; five groups completed. G06 exhausted
+-2,048 output tokens on reasoning and returned incomplete; G07 was not attempted.
+-No retry/fallback occurred. Estimated cost USD 0.0036058; actual billing is unknown.
+-Raw top-1/top-3 agreement is 3/17; catalog coverage is separately three exact sets
+-resolved and fourteen BrickLink figure labels unresolved. No mapping/import was done.
+-The frozen sample/labels, private ledger/recovery copy and protected files remain
+-preserved; development stayed stopped, main is unpushed and its index is empty.
+-Only affected fixtures/lint/types ran. See [Plan 104](plans/104-recognition-quality-pilot.md),
+-[pilot results](PHASE_14A_PILOT.md) and [provider decision](PHASE_14A_PROVIDER_DECISION.md).
+-Manual continuation requires an explicit output/reasoning and retry decision.
+-Phase 13 remains CLOSED. Earlier checkpoints below are historical.
++## Phase 14A two-call continuation — 2026-10-02
++
++**READY FOR PHASE 14A CONTINUATION REVIEW; qualification unestablished.** Brian
++accepted r2 as partial and authorized only G07 once then one fresh G06 retry, keeping
++exact `gpt-6-luna`/Medium, photos/texts, prompt/schema and catalog/scoring rules.
++Only those calls use 16,384 output tokens and 180 seconds. Both completed; eight
++lifetime attempts, all seven groups now processed. Original failed G06 remains counted.
++Cumulative raw agreement is 3/17: sets 3/3, figures 0/14; custom-build outcome correct.
++Catalog integration separately resolves three expected sets, fourteen figures remain
++unmapped. Estimated lifetime cost USD 0.0058142; actual billing unknown. Reservations
++USD 1.877792 retained under USD 10.00. Two remaining attempts are not authorized.
++Original r2 results/hashes stay unchanged. Only three affected fixtures/static checks
++ran; no research, database/catalog campaign, builds or production change occurred.
++Development is stopped, recovery/protected files retained, main unpushed/index empty.
++See [pilot views](PHASE_14A_PILOT.md), [Plan 104](plans/104-recognition-quality-pilot.md),
++and [provider decision](PHASE_14A_PROVIDER_DECISION.md). Stop for quality review;
++no tuning/model comparison or Phase 15/16 starts automatically. Earlier checkpoints
++are historical; Phase 13 remains CLOSED.
+ 
+ ## Phase 13 final closeout — 2026-10-01
+ 
+diff --git a/docs/PHASE_14A_PILOT.md b/docs/PHASE_14A_PILOT.md
+--- a/docs/PHASE_14A_PILOT.md
++++ b/docs/PHASE_14A_PILOT.md
+@@ -1,9 +1,110 @@
+ # Phase 14A local recognition pilot
+ 
+-**Phase 14 IN PROGRESS — bounded live execution stopped; partial review ready.**
++**Phase 14 IN PROGRESS — two-call continuation finished; recognition qualification unestablished.**
+ Phase 13 remains CLOSED. This optional CLI does not alter the running application.
+ See [Plan 104](plans/104-recognition-quality-pilot.md) and the
+ [provider/privacy/cost decision](PHASE_14A_PROVIDER_DECISION.md).
++
++## Two-call continuation result — 2026-10-02
++
++**READY FOR PHASE 14A CONTINUATION REVIEW.** Brian accepted r2 as honest partial
++pilot evidence, not completed recognition qualification. The authorized two-call
++continuation is finished and stopped. Phase 14A remains open for review.
++
++### Versioned limit amendment
++
++`recognition-14a-limits-v1` changes only `max_output_tokens: 2048 → 16384` and the
++transport deadline `60 → 180` seconds for lifetime attempts **7 (G07)** and **8 (G06)**.
++Model `gpt-6-luna`, Medium reasoning, Standard processing, `store:false`, prompt,
++strict recognition schema, high image detail, preprocessing, exact approved inputs,
++catalog rules and scoring are unchanged. G07 went first. G06 attempt 8 links to
++failed predecessor 6; no previous reasoning, output or expected labels was sent.
++The original approval and G01–G05 files remain under their original parameters.
++
++Original protocol SHA-256: `4f8f47a56907a3c7a82012f87f2c83c8ab36bc43fb56c4c441de509247adc7bc`. Amended protocol SHA-256: `1809a6dfd05299ffd4f9dd39b505311366cc22eff5d257f4d2f0e5b0ea4ebcaf`.
++The private amendment binds the accepted r2 commit, original approval/ledger/attempt
++prefix, frozen inputs and new protocol. The original six attempt records are preserved
++exactly by JSON field/value, and all fifteen preserved r2 file hashes match.
++No ledger reset, result overwrite or reservation release occurred.
++
++### Three distinct result views
++
++**Original protocol (r2):** six requests, five completed groups, original G06 incomplete,
++G07 unattempted; raw top-1/top-3 **3/17**, cost estimate **USD 0.0036058**. This recorded
++view is unchanged. Three sets matched; five confirmed figure IDs were omitted in
++G02/G03, and G05 proposed a different figure ID. Eight G06 identities had no completed
++answer. Original G04 was an unscored mixed-set abstention.
++
++**Amended protocol:** exactly two additional completed requests:
++
++| Lifetime attempt | Group | Result | Raw identity agreement | Input | Output | Reasoning within output | Estimated USD | Seconds |
++| --- | --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
++| 7 | G07 | `custom_build`, no official identity proposed | Correct confirmed MOC outcome | 2486 | 398 | 322 | 0.0004476 | 6.160784 |
++| 8 | G06 sole retry | 11 objects: 9 unknown, 2 figure proposals | 0 of 8 confirmed figure IDs at top-1/top-3 | 1248 | 3272 | 2477 | 0.0017608 | 28.857528 |
++
++The two G06 proposals do not match any confirmed label. G06 labels are not exhaustive:
++partial/combined figures remain unscored, so unmatched suggestions are not all promoted
++to verified wrong-object judgments. Nine unknown objects are distinct from its earlier
++processing failure. No reasoning text or private listing/figure labels is published.
++Increasing output space supplied a usable answer; exact figure recognition did not improve.
++
++**Cumulative sample coverage (mixed limits, explicitly labeled):** all **7 groups/13
++approved images** now have completed structured results. Eight lifetime requests sent
++**14 image inputs**, including the repeated approved G06 photo. Original G06 remains
++failed and counted. Only its sole authorized retry supplies group coverage; no identity
++is counted twice and no best-of-retries selection is made.
++
++- Raw top-1/top-3 **3/17 (17.65%)** with the original independently confirmed denominator.
++- Sets **3/3 exact**; minifigures **0/14 exact**. Listing text was included throughout.
++- Confirmed outcomes **6/6**; G07 correctly returns a custom build. This outcome count
++  does not establish exact identity accuracy. G04 identities stay unscored.
++- Cumulative abstentions: 11 objects. Confidence remains uncalibrated. G06's non-exhaustive
++  labels cannot support an exhaustive false-suggestion rate.
++- Canonical integration remains separate: **3 expected set labels resolve; 14 figure
++  labels remain unresolved**. All three correct set predictions resolve. This is a frozen
++  three-reference projection, not full-catalog retrieval. No mappings/confirmations/
++  valuation evidence were written. Missing mappings do not explain raw figure misses.
++
++### Lifetime cost and workload
++
++The conservative new reservation is
++`(922000 × 0.125 × 2 + 16384 × 0.50 × 1.5) / 1000000 = USD 0.242788/request`.
++Both requests were admitted within the unchanged USD 10.00 lifetime cap, without
++cache savings or releasing any original reservation. See the [provider decision](PHASE_14A_PROVIDER_DECISION.md).
++
++| Accounting scope | Requests | Input | Total output | Reasoning included | Estimated USD | Retained reservations USD |
++| --- | ---: | ---: | ---: | ---: | ---: | ---: |
++| Original r2 | 6 | 9118 | 5388 | 4403 | 0.0036058 | 1.392216 |
++| Amended calls | 2 | 3734 | 3670 | 2799 | 0.0022084 | 0.485576 |
++| Lifetime | 8 | 12852 | 9058 | 7202 | 0.0058142 | 1.877792 |
++
++All calls reported usage, with cached/write tokens zero. **Actual invoice/billing
++amount remains unavailable**. Estimates apply the dated Standard rates; reasoning
++is already included in output. New requests averaged USD 0.0011042/request. Lifetime
++average is USD 0.000726775/request; effective cost per distinct attempted group is
++USD 0.0008306, including the failed first G06 call. Per transmitted image input is
++USD 0.0004153, an allocation rather than an image-only billing rate. Unreserved
++allowance is **USD 8.122208**. Two lifetime attempts remain, **neither authorized**.
++No model metadata/counting call, automatic retry/fallback or result reuse was added.
++
++### Focused validation and preserved state
++
++Exactly three affected fixture tests passed in **2.93 seconds** (ten unrelated tests
++deselected): amended reservation/output accounting, guarded two-call continuation,
++and original-protocol readability. Their fixtures also exercise one uncertain first
++call stopping before G06, no repeated continuation, and retained known unusable output.
++Ruff lint/format and strict mypy passed for the four edited Python/test files.
++No broad suites, builds, provider investigation or prior qualification were repeated.
++
++The exact sample, privacy/account/key receipts, original approval/results/evaluation
++and original request parameters are preserved. Development remains stopped and the
++protected recovery remains retained; no database work occurred. Protected files
++match, main is uncommitted/unpushed and its index is empty. r1/r2 remain intact;
++r3 publishes the amendment, new evidence, lifetime accounting and cumulative patch.
++
++The continuation is complete, but recognition qualification is **not** established.
++Review the weak minifigure results before any separately authorized model/retrieval
++comparison. No further call, tuning cycle, mapping campaign or later phase has begun.
+ 
+ ## Current execution result — 2026-10-02 amended approval
+ 
+@@ -134,7 +235,9 @@
+ | `seal` | Require completed Brian approval; create immutable initialization marker and durable ledger; refuse repeats |
+ | `key` | Accept a key through hidden terminal input and write it only to protected storage; refuse overwrite |
+ | `run` | Validate approval and limits; reserve before dispatch; reuse verified completed results; stop on failure or exhausted budget |
+-| `report` | Print counts, latency, tokens and estimated/reserved USD; exclude photos, clues, IDs, filenames and listing text |
++| `report` | Preserve the original-protocol counts, latency, tokens and estimated/reserved USD |
++| `continue-approved` | With a recorded v1 amendment, send only G07 then one G06 retry; refuse any repeat/resume or other group |
++| `continuation-report` | Separate original results, amended request accounting and cumulative sample coverage; omit private labels/content |
+ 
+ `subset` never starts a database. The owned development database must already be
+ available through the established local workflow. It cannot target production or
+diff --git a/docs/PHASE_14A_PROVIDER_DECISION.md b/docs/PHASE_14A_PROVIDER_DECISION.md
+--- a/docs/PHASE_14A_PROVIDER_DECISION.md
++++ b/docs/PHASE_14A_PROVIDER_DECISION.md
+@@ -1,4 +1,26 @@
+ # Phase 14A provider, privacy and cost decision
++
++## Two-call limit amendment — 2026-10-02
++
++Brian accepted r2 as partial evidence and authorized only G07 once, then one fresh
++G06 retry. Those calls use `gpt-6-luna`, Medium, Standard and `store:false` with the
++same prompt/schema/photos/texts/cache boundary; only output allowance (16,384) and
++deadline (180 seconds) change. The original six attempts keep their prior parameters.
++The private versioned amendment links retry 8 to failed predecessor 6; no old answer
++or reasoning is sent. No model/counting preflight or additional research was needed.
++
++Worst-case reservation per new request:
++`(922000 × 0.125 × 2 + 16384 × 0.50 × 1.5) / 1000000 = USD 0.242788`.
++The existing USD 10.00 lifetime cap/ten-attempt ceiling stay intact. Old reservations
++are retained, giving USD 1.877792 after both calls. The two remaining attempts are
++not authorized. There is no third G06 attempt or automatic continuation/resume.
++
++Both calls returned complete structured results. New estimated cost USD 0.0022084;
++lifetime estimate USD 0.0058142. Actual billing is unavailable. All token partitions
++were reported; no cache saving occurred or was assumed for admission. Standard
++handling/data-sharing-disabled and the prior retention acceptance remain unchanged.
++The earlier sections below record the original protocol and former admission pauses.
++See [distinct result views](PHASE_14A_PILOT.md#two-call-continuation-result--2026-10-02).
+ 
+ ## Current approved admission — 2026-10-02
+ 
+diff --git a/docs/plans/104-recognition-quality-pilot.md b/docs/plans/104-recognition-quality-pilot.md
+--- a/docs/plans/104-recognition-quality-pilot.md
++++ b/docs/plans/104-recognition-quality-pilot.md
+@@ -1,4 +1,19 @@
+ # Plan 104 — Phase 14A recognition pilot
++
++## Current continuation checkpoint — 2026-10-02
++
++r2 is accepted as partial evidence. The versioned v1 amendment authorized exactly
++G07 then one G06 retry with 16,384 output tokens and a 180-second deadline. Both
++completed. All other request variables and the original files/attempts/results
++remain preserved. Original scoring stays 3/17; cumulative coverage also 3/17, with
++sets 3/3, figures 0/14 and the MOC outcome correct. Processing completion does not
++establish recognition qualification. Lifetime eight requests, estimated USD 0.0058142,
++retained USD 1.877792 under USD 10.00; two unused attempts remain unauthorized.
++
++Three affected tests passed in 2.93 seconds, plus narrow Ruff/type checks. r3 review
++includes the amendment and distinct result/accounting views; r1/r2 remain intact.
++No database work, prompt tuning, additional model, broad testing or deployment.
++Stop for quality review. Earlier outcome and blocker entries below are historical.
+ 
+ ## Goal and user-visible outcome
+ 
+@@ -100,7 +115,7 @@
+ - [x] 2026-10-02: sanitized r1 package assembled for astra-response; publication
+   commit and pinned review link are reported in the conversation receipt.
+ 
+-## Open questions or manual checks
++## Prior r2 open question (answered by the v1 amendment)
+ 
+ Review the partial results. Manual G06 continuation requires explicit approval for
+ a revised output/reasoning allowance and retry, keeping the failed attempt counted.
+@@ -108,7 +123,7 @@
+ by this completed one-run execution. Crosswalk acquisition/mapping writes and wider
+ Phase 14 comparisons require separate scope decisions.
+ 
+-## Outcome and follow-up
++## Original r2 outcome (preserved)
+ 
+ Six live requests/eleven image inputs; five completed groups, one incomplete G06,
+ one unattempted G07. Raw top-1/top-3 agreement 3/17; three expected sets resolve,
+diff --git a/services/api/src/brickvault_api/recognition/__main__.py b/services/api/src/brickvault_api/recognition/__main__.py
+--- a/services/api/src/brickvault_api/recognition/__main__.py
++++ b/services/api/src/brickvault_api/recognition/__main__.py
+@@ -30,6 +30,8 @@
+ )
+ from brickvault_api.recognition.pilot import (
+     check_model_access,
++    continuation_report,
++    continue_approved,
+     evaluate,
+     execute,
+     export_subset,
+@@ -62,6 +64,8 @@
+             "key",
+             "run",
+             "report",
++            "continue-approved",
++            "continuation-report",
+         ),
+     )
+     try:
+@@ -157,7 +161,13 @@
+                     execute(PRIVATE)
+                 elif command == "report":
+                     print(json.dumps(evaluate(PRIVATE), indent=2))
+-        if command != "report":
++                elif command == "continue-approved":
++                    if not (PRIVATE / "sealed").is_file():
++                        raise PilotError("sealed_approval_required")
++                    continue_approved(PRIVATE)
++                elif command == "continuation-report":
++                    print(json.dumps(continuation_report(PRIVATE), indent=2))
++        if command not in ("report", "continuation-report"):
+             print(json.dumps({"command": command, "status": "complete"}))
+         return 0
+     except PilotError as error:
+diff --git a/services/api/src/brickvault_api/recognition/contracts.py b/services/api/src/brickvault_api/recognition/contracts.py
+--- a/services/api/src/brickvault_api/recognition/contracts.py
++++ b/services/api/src/brickvault_api/recognition/contracts.py
+@@ -17,8 +17,10 @@
+ OUTPUT_RATE = Decimal("0.50")
+ MAX_ATTEMPTS = 10
+ MAX_OUTPUT = 2048
++AMENDED_OUTPUT = 16384
+ TEXT_BYTES = 16000
+ TIMEOUT = 60
++AMENDED_TIMEOUT = 180
+ Digest = Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
+ Short = Annotated[str, Field(min_length=1, max_length=240)]
+ Identifier = Annotated[str, Field(min_length=1, max_length=80)]
+@@ -170,6 +172,33 @@
+     reported_billing_usd: None = None
+     response_received: bool = False
+     failure_code: str | None = None
++    amendment_sha256: Digest | None = None
++    protocol_sha256: Digest | None = None
++    max_output_tokens: Literal[16384] | None = None
++    request_deadline_seconds: Literal[180] | None = None
++    result_filename: (
++        Literal["G07-amendment-v1-result.json", "G06-amendment-v1-result.json"] | None
++    ) = None
++    predecessor_input_sha256: Digest | None = None
++
++
++class Amendment(StrictModel):
++    version: Literal["recognition-14a-limits-v1"]
++    approved: bool
++    approved_by: Literal["Brian"]
++    accepted_review_commit: Literal["108f7f6d65a38ebead7701d3c0f7f2d62ed3b5ab"]
++    parent_approval_sha256: Digest
++    parent_ledger_sha256: Digest
++    original_attempts_sha256: Digest
++    prepared_sha256: Digest
++    subset_sha256: Digest
++    prior_protocol_sha256: Digest
++    protocol_sha256: Digest
++    order: Literal["G07_then_G06"]
++    additional_attempts: Literal[2]
++    g06_predecessor_input_sha256: Digest
++    dollar_cap: Literal["10.00"]
++    expires_on: str
+ 
+ 
+ class Ledger(StrictModel):
+diff --git a/services/api/src/brickvault_api/recognition/pilot.py b/services/api/src/brickvault_api/recognition/pilot.py
+--- a/services/api/src/brickvault_api/recognition/pilot.py
++++ b/services/api/src/brickvault_api/recognition/pilot.py
+@@ -7,6 +7,7 @@
+ import threading
+ import time
+ from dataclasses import asdict
++from datetime import date
+ from decimal import Decimal
+ from pathlib import Path
+ from typing import Any
+@@ -18,6 +19,8 @@
+ from brickvault_api.catalog.query_types import Identity, QueryState
+ from brickvault_api.catalog.repository import open_catalog
+ from brickvault_api.recognition.contracts import (
++    AMENDED_OUTPUT,
++    AMENDED_TIMEOUT,
+     CACHED_RATE,
+     INPUT_RATE,
+     MAX_OUTPUT,
+@@ -29,6 +32,7 @@
+     TEXT_BYTES,
+     TIMEOUT,
+     WRITE_RATE,
++    Amendment,
+     Approval,
+     Attempt,
+     CatalogRequest,
+@@ -64,13 +68,13 @@
+ messages or other private text. Return only the requested JSON structure."""
+ 
+ 
+-def parameters() -> dict[str, Any]:
++def parameters(*, amended: bool = False) -> dict[str, Any]:
+     return {
+         "model": MODEL,
+         "store": False,
+         "service_tier": "default",
+         "reasoning": {"effort": "medium"},
+-        "max_output_tokens": MAX_OUTPUT,
++        "max_output_tokens": AMENDED_OUTPUT if amended else MAX_OUTPUT,
+         "prompt_cache_options": {"mode": "explicit", "ttl": "30m"},
+     }
+ 
+@@ -87,18 +91,18 @@
+     }
+ 
+ 
+-def protocol_digest() -> str:
++def protocol_digest(*, amended: bool = False) -> str:
+     return digest(
+         json.dumps(
+             {
+-                "parameters": parameters(),
++                "parameters": parameters(amended=amended),
+                 "endpoint": "/v1/responses",
+                 "prompt": PROMPT,
+                 "schema": Recognition.model_json_schema(),
+                 "prompt_version": PROMPT_VERSION,
+                 "schema_version": SCHEMA_VERSION,
+                 "text_bytes": TEXT_BYTES,
+-                "timeout": TIMEOUT,
++                "timeout": AMENDED_TIMEOUT if amended else TIMEOUT,
+                 "pricing": pricing(),
+                 "image_recipe": "recognition-rgb-1024-jpeg85-v1",
+                 "detail": "high",
+@@ -118,12 +122,13 @@
+     if len(body) > 3 * 1024 * 1024:
+         raise PilotError("request_size_limit")
+     request = json.loads(body)
+-    if any(request.get(k) != v for k, v in parameters().items()):
++    amended = request.get("max_output_tokens") == AMENDED_OUTPUT
++    if any(request.get(k) != v for k, v in parameters(amended=amended).items()):
+         raise PilotError("reservation_parameters_changed")
+     return 922000
+ 
+ 
+-def maximum_cost(input_bound: int) -> Decimal:
++def maximum_cost(input_bound: int, *, amended: bool = False) -> Decimal:
+     if type(input_bound) is not int or not 0 < input_bound <= 922000:
+         raise PilotError("input_token_bound_invalid")
+     incoming = WRITE_RATE  # Worst rate, even with zero hits; writes are not additive.
+@@ -132,7 +137,8 @@
+         incoming *= 2
+         outgoing *= Decimal("1.5")
+     # Output includes reasoning, bounded by max_output_tokens; never add it twice.
+-    return (Decimal(input_bound) * incoming + Decimal(MAX_OUTPUT) * outgoing) / 1000000
++    output_limit = AMENDED_OUTPUT if amended else MAX_OUTPUT
++    return (Decimal(input_bound) * incoming + Decimal(output_limit) * outgoing) / 1000000
+ 
+ 
+ def export_subset(database: CatalogDatabase, request: CatalogRequest) -> ReferenceSubset:
+@@ -170,7 +176,7 @@
+     }
+ 
+ 
+-def request_body(group: PreparedGroup, images: list[bytes]) -> bytes:
++def request_body(group: PreparedGroup, images: list[bytes], *, amended: bool = False) -> bytes:
+     if not 1 <= len(images) <= 2 or len(images) != len(group.images):
+         raise PilotError("image_count_limit")
+     schema = Recognition.model_json_schema()
+@@ -207,7 +213,7 @@
+         )
+     body = json.dumps(
+         {
+-            **parameters(),
++            **parameters(amended=amended),
+             "text": {
+                 "format": {
+                     "type": "json_schema",
+@@ -239,16 +245,17 @@
+ 
+ 
+ def _https_request(
+-    body: bytes, key: str, project: str, *, model_check: bool = False
++    body: bytes, key: str, project: str, *, model_check: bool = False, timeout: float | None = None
+ ) -> dict[str, Any]:
+     """Single attempt; fixed host, no proxy, redirect, retries, SDK or fallback."""
++    timeout = TIMEOUT if timeout is None else timeout
+     connection = http.client.HTTPSConnection(
+-        "api.openai.com", timeout=TIMEOUT, context=ssl.create_default_context()
++        "api.openai.com", timeout=timeout, context=ssl.create_default_context()
+     )
+     started = time.monotonic()
+ 
+     def remaining() -> None:
+-        seconds = TIMEOUT - (time.monotonic() - started)
++        seconds = timeout - (time.monotonic() - started)
+         if seconds <= 0:
+             raise PilotError("provider_timeout")
+         if connection.sock is not None:
+@@ -319,17 +326,20 @@
+ 
+ 
+ def call_openai(
+-    body: bytes, key: str, project: str, *, model_check: bool = False
++    body: bytes, key: str, project: str, *, model_check: bool = False, timeout: float | None = None
+ ) -> dict[str, Any]:
+     # Include DNS/TLS/header stalls in the wall-clock deadline. One daemon worker
+     # is transport only, never parallel inference. An uncertain timeout stops the
+     # whole pilot and retains its reservation even if the server finishes later.
++    timeout = TIMEOUT if timeout is None else timeout
+     result: list[dict[str, Any]] = []
+     errors: list[PilotError] = []
+ 
+     def send() -> None:
+         try:
+-            result.append(_https_request(body, key, project, model_check=model_check))
++            result.append(
++                _https_request(body, key, project, model_check=model_check, timeout=timeout)
++            )
+         except PilotError as error:
+             errors.append(error)
+         except Exception:
+@@ -337,7 +347,7 @@
+ 
+     worker = threading.Thread(target=send, daemon=True)
+     worker.start()
+-    worker.join(TIMEOUT)
++    worker.join(timeout)
+     if worker.is_alive():
+         raise PilotError("provider_request_failed_or_uncertain")
+     if errors:
+@@ -402,7 +412,7 @@
+         reasoning is not None and reasoning > outgoing
+     ):
+         raise PilotError("provider_usage_inconsistent")
+-    if incoming > attempt.input_token_bound or outgoing > MAX_OUTPUT:
++    if incoming > attempt.input_token_bound or outgoing > (attempt.max_output_tokens or MAX_OUTPUT):
+         raise PilotError("provider_accounting_exceeded_reservation")
+     input_scale = Decimal(2 if incoming > 272000 else 1)
+     output_scale = Decimal("1.5") if incoming > 272000 else Decimal(1)
+@@ -456,18 +466,37 @@
+ def load_result(
+     root: Path, group: PreparedGroup, attempt: Attempt, approval: Approval
+ ) -> Recognition:
+-    expected_key = input_digest(group, protocol_digest(), approval.subset_sha256)
+     try:
+-        raw = read_bytes(root / f"{group.group}-result.json")
++        amended = attempt.amendment_sha256 is not None
++        if amended:
++            amendment = read_model(root / "amendment-v1.json", Amendment)
++            if (
++                attempt.amendment_sha256 != digest(read_bytes(root / "amendment-v1.json"))
++                or amendment.protocol_sha256 != protocol_digest(amended=True)
++                or amendment.parent_approval_sha256 != digest(read_bytes(root / "approval.json"))
++                or attempt.protocol_sha256 != amendment.protocol_sha256
++                or attempt.result_filename != f"{group.group}-amendment-v1-result.json"
++                or attempt.max_output_tokens != AMENDED_OUTPUT
++                or attempt.request_deadline_seconds != AMENDED_TIMEOUT
++            ):
++                raise PilotError("saved_result_integrity_failure")
++        expected_protocol = protocol_digest(amended=amended)
++        expected_key = input_digest(group, expected_protocol, approval.subset_sha256)
++        raw = read_bytes(root / (attempt.result_filename or f"{group.group}-result.json"))
+         report = json.loads(raw)
++        if amended and (
++            report.get("amendment_sha256") != attempt.amendment_sha256
++            or report.get("predecessor_input_sha256") != attempt.predecessor_input_sha256
++        ):
++            raise PilotError("saved_result_integrity_failure")
+         if (
+             attempt.state != "complete"
+             or attempt.input_sha256 != expected_key
+             or attempt.result_sha256 != digest(raw)
+             or report["input_sha256"] != expected_key
+-            or report["protocol_sha256"] != protocol_digest()
++            or report["protocol_sha256"] != expected_protocol
+             or report["model"] != MODEL
+-            or report["parameters"] != parameters()
++            or report["parameters"] != parameters(amended=amended)
+         ):
+             raise PilotError("saved_result_integrity_failure")
+         return Recognition.model_validate(report["recognition"])
+@@ -564,9 +593,254 @@
+             write_model(root / "ledger.json", ledger, replace=True)
+ 
+ 
+-def evaluate(root: Path) -> dict[str, Any]:
++def original_attempts_digest(root: Path) -> str:
++    records = json.loads(read_bytes(root / "ledger.json"))["attempts"][:6]
++    return digest(json.dumps(records, sort_keys=True, separators=(",", ":")).encode())
++
++
++def create_amendment(root: Path) -> None:
++    """Record Brian's explicit r2 acceptance and two-call authorization once."""
++    approval = approved(root)
++    ledger = read_model(root / "ledger.json", Ledger)
++    if (
++        len(ledger.attempts) != 6
++        or not ledger.stopped
++        or [a.group for a in ledger.attempts] != [f"G0{i}" for i in range(1, 7)]
++        or any(a.state != "complete" or a.amendment_sha256 for a in ledger.attempts[:5])
++        or ledger.attempts[5].state != "failed"
++        or ledger.attempts[5].failure_code != "provider_incomplete_output"
++        or not ledger.attempts[5].response_received
++        or approval.dollar_cap != Decimal("10.00")
++    ):
++        raise PilotError("amendment_requires_accepted_six_attempt_history")
++    write_model(
++        root / "amendment-v1.json",
++        Amendment(
++            version="recognition-14a-limits-v1",
++            approved=True,
++            approved_by="Brian",
++            accepted_review_commit="108f7f6d65a38ebead7701d3c0f7f2d62ed3b5ab",
++            parent_approval_sha256=digest(read_bytes(root / "approval.json")),
++            parent_ledger_sha256=digest(read_bytes(root / "ledger.json")),
++            original_attempts_sha256=original_attempts_digest(root),
++            prepared_sha256=approval.prepared_sha256,
++            subset_sha256=approval.subset_sha256,
++            prior_protocol_sha256=approval.protocol_sha256,
++            protocol_sha256=protocol_digest(amended=True),
++            order="G07_then_G06",
++            additional_attempts=2,
++            g06_predecessor_input_sha256=ledger.attempts[5].input_sha256,
++            dollar_cap="10.00",
++            expires_on=approval.expires_on,
++        ),
++    )
++    validate_amendment(root)
++
++
++def validate_amendment(root: Path) -> tuple[Approval, Amendment, Ledger]:
++    approval = approved(root)
++    amendment = read_model(root / "amendment-v1.json", Amendment)
++    ledger = read_model(root / "ledger.json", Ledger)
++    if (
++        not amendment.approved
++        or date.today() > date.fromisoformat(amendment.expires_on)
++        or amendment.parent_approval_sha256 != digest(read_bytes(root / "approval.json"))
++        or ledger.approval_sha256 != amendment.parent_approval_sha256
++        or amendment.prepared_sha256 != approval.prepared_sha256
++        or amendment.subset_sha256 != approval.subset_sha256
++        or amendment.prior_protocol_sha256 != protocol_digest()
++        or amendment.protocol_sha256 != protocol_digest(amended=True)
++        or amendment.original_attempts_sha256 != original_attempts_digest(root)
++        or not 6 <= len(ledger.attempts) <= 8
++        or not ledger.stopped
++        or amendment.g06_predecessor_input_sha256 != ledger.attempts[5].input_sha256
++        or approval.dollar_cap != Decimal("10.00")
++    ):
++        raise PilotError("amendment_or_original_history_changed")
++    if len(ledger.attempts) == 6 and amendment.parent_ledger_sha256 != digest(
++        read_bytes(root / "ledger.json")
++    ):
++        raise PilotError("amendment_parent_ledger_changed")
++    amended_hash = digest(read_bytes(root / "amendment-v1.json"))
++    for number, attempt in enumerate(ledger.attempts[6:]):
++        group = ("G07", "G06")[number]
++        if (
++            attempt.group != group
++            or attempt.amendment_sha256 != amended_hash
++            or attempt.protocol_sha256 != amendment.protocol_sha256
++            or attempt.max_output_tokens != AMENDED_OUTPUT
++            or attempt.request_deadline_seconds != AMENDED_TIMEOUT
++            or attempt.result_filename != f"{group}-amendment-v1-result.json"
++            or attempt.predecessor_input_sha256
++            != (amendment.g06_predecessor_input_sha256 if group == "G06" else None)
++        ):
++            raise PilotError("continuation_attempt_history_changed")
++    prepared = read_model(root / "prepared.json", Prepared)
++    for prepared_group in prepared.groups:
++        for stored_attempt in ledger.attempts:
++            if stored_attempt.group == prepared_group.group and stored_attempt.state == "complete":
++                load_result(root, prepared_group, stored_attempt, approval)
++    return approval, amendment, ledger
++
++
++def continue_approved(root: Path) -> None:
++    """Exactly G07 then the sole G06 retry; no resume, retry loop or extra call."""
++    approval, amendment, initial = validate_amendment(root)
++    if len(initial.attempts) != 6:
++        raise PilotError("continuation_already_dispatched_or_interrupted")
++    for group_name in ("G07", "G06"):
++        if (root / f"{group_name}-amendment-v1-result.json").exists():
++            raise PilotError("continuation_result_already_exists")
++    prepared = read_model(root / "prepared.json", Prepared)
++    subset = read_model(root / "subset.json", ReferenceSubset)
++    if subset.snapshot.synthetic:
++        raise PilotError("synthetic_catalog_not_live_evidence")
++    output_failures = {
++        "provider_incomplete_output",
++        "provider_malformed_response",
++        "provider_refusal",
++        "provider_unexpected_output",
++    }
++    for number, group_name in enumerate(("G07", "G06")):
++        approval, amendment, ledger = validate_amendment(root)
++        if len(ledger.attempts) != 6 + number:
++            raise PilotError("continuation_order_or_attempt_count")
++        group = next(g for g in prepared.groups if g.group == group_name)
++        images = [
++            read_bytes(root / f"{i.transmitted_sha256}.jpg", 1024 * 1024) for i in group.images
++        ]
++        body = request_body(group, images, amended=True)
++        bound = input_token_bound(body)
++        key = local_key(root)
++        if json.loads(read_bytes(root / "model-access.json")) != {
++            "model": MODEL,
++            "project_id": approval.project_id,
++            "key_sha256": digest(key.encode()),
++            "approval_sha256": digest(read_bytes(root / "approval.json")),
++        }:
++            raise PilotError("project_model_access_check_required")
++        reservation = maximum_cost(bound, amended=True)
++        if len(ledger.attempts) >= min(8, approval.max_attempts):
++            raise PilotError("continuation_attempt_cap")
++        if (
++            sum((a.reserved_usd for a in ledger.attempts), Decimal(0)) + reservation
++            > approval.dollar_cap
++        ):
++            raise PilotError("dollar_cap")
++        filename = f"{group_name}-amendment-v1-result.json"
++        # The Literal filename is fixed by this two-call path, never provider output.
++        attempt = Attempt.model_validate_json(
++            json.dumps(
++                {
++                    "group": group_name,
++                    "input_sha256": input_digest(
++                        group, amendment.protocol_sha256, approval.subset_sha256
++                    ),
++                    "state": "reserved",
++                    "reserved_usd": str(reservation),
++                    "input_token_bound": bound,
++                    "amendment_sha256": digest(read_bytes(root / "amendment-v1.json")),
++                    "protocol_sha256": amendment.protocol_sha256,
++                    "max_output_tokens": AMENDED_OUTPUT,
++                    "request_deadline_seconds": AMENDED_TIMEOUT,
++                    "result_filename": filename,
++                    "predecessor_input_sha256": amendment.g06_predecessor_input_sha256
++                    if group_name == "G06"
++                    else None,
++                }
++            )
++        )
++        ledger.attempts.append(attempt)
++        # exclude_unset preserves every original attempt's JSON fields/values.
++        write_bytes(
++            root / "ledger.json",
++            ledger.model_dump_json(indent=2, exclude_unset=True).encode(),
++            replace=True,
++        )
++        started = time.monotonic()
++        stop = False
++        try:
++            payload = call_openai(body, key, approval.project_id, timeout=AMENDED_TIMEOUT)
++            attempt.response_received = True
++            record_usage(payload, attempt)
++            if attempt.estimated_usd is None:
++                raise PilotError("provider_usage_unavailable")
++            result = parse_response(payload)
++            report = {
++                "provider": "openai",
++                "model": MODEL,
++                "prompt_version": PROMPT_VERSION,
++                "schema_version": SCHEMA_VERSION,
++                "image_recipe": prepared.recipe,
++                "parameters": parameters(amended=True),
++                "protocol_sha256": amendment.protocol_sha256,
++                "pricing": pricing(),
++                "amendment_sha256": attempt.amendment_sha256,
++                "predecessor_input_sha256": attempt.predecessor_input_sha256,
++                "input_sha256": attempt.input_sha256,
++                "images": [i.model_dump() for i in group.images],
++                "catalog_snapshot": asdict(subset.snapshot),
++                "recognition": result.model_dump(),
++                "objects": resolved_objects(result, subset),
++            }
++            raw = json.dumps(report, default=str).encode()
++            write_bytes(root / filename, raw)
++            attempt.result_sha256 = digest(raw)
++            attempt.state = "complete"
++        except BaseException as error:
++            attempt.state = "failed"
++            attempt.failure_code = (
++                str(error) if isinstance(error, PilotError) else "local_or_interrupted_failure"
++            )
++            if attempt.failure_code.startswith("provider_request_failed_http_"):
++                attempt.response_received = True
++            stop = attempt.failure_code not in output_failures
++        finally:
++            attempt.latency_seconds = round(time.monotonic() - started, 6)
++            write_bytes(
++                root / "ledger.json",
++                ledger.model_dump_json(indent=2, exclude_unset=True).encode(),
++                replace=True,
++            )
++        if stop:
++            raise PilotError("continuation_stopped_attempt_retained")
++
++
++def continuation_report(root: Path) -> dict[str, Any]:
++    _, _, ledger = validate_amendment(root)
++    return {
++        "original_protocol_result": evaluate(root),
++        "amended_requests": [
++            a.model_dump(
++                mode="json",
++                exclude={
++                    "input_sha256",
++                    "amendment_sha256",
++                    "protocol_sha256",
++                    "result_sha256",
++                    "predecessor_input_sha256",
++                    "result_filename",
++                },
++            )
++            | {
++                "lifetime_attempt_number": i + 7,
++                "linked_failed_predecessor": 6 if a.group == "G06" else None,
++            }
++            for i, a in enumerate(ledger.attempts[6:])
++        ],
++        "cumulative_sample_coverage": evaluate(root, cumulative=True),
++        "further_calls_authorized": 0,
++    }
++
++
++def evaluate(root: Path, *, cumulative: bool = False) -> dict[str, Any]:
+     prepared = read_model(root / "prepared.json", Prepared)
+     ledger = read_model(root / "ledger.json", Ledger)
++    if cumulative:
++        validate_amendment(root)
++    else:
++        # Original-protocol reporting remains identical even after the two calls.
++        ledger.attempts = [a for a in ledger.attempts if a.amendment_sha256 is None]
+     subset = read_model(root / "subset.json", ReferenceSubset)
+     approval = read_model(root / "approval.json", Approval)
+     if (
+@@ -612,7 +886,9 @@
+             else 0
+         )
+         stats["labeled_outcomes"] += int(labeled and group.expected_outcome is not None)
+-        attempt = next((a for a in ledger.attempts if a.group == group.group), None)
++        # The sole explicitly authorized retry supplies coverage, never best-of.
++        attempts = reversed(ledger.attempts) if cumulative else iter(ledger.attempts)
++        attempt = next((a for a in attempts if a.group == group.group), None)
+         if attempt is None:
+             stats["not_attempted_groups"] += 1
+             continue
+@@ -693,4 +969,13 @@
+         }
+         for a in ledger.attempts
+     ]
++    if cumulative:
++        unique_groups = len({a.group for a in ledger.attempts})
++        stats["result_view"] = "cumulative_sample_coverage_with_one_authorized_retry"
++        stats["total_sent_image_inputs"] = sum(
++            len(g.images) for a in ledger.attempts for g in prepared.groups if g.group == a.group
++        )
++        stats["effective_estimated_cost_per_attempted_group_usd"] = (
++            str(sum(estimates, Decimal(0)) / unique_groups) if accounted else None
++        )
+     return stats
+diff --git a/services/api/tests/unit/test_recognition_pilot.py b/services/api/tests/unit/test_recognition_pilot.py
+--- a/services/api/tests/unit/test_recognition_pilot.py
++++ b/services/api/tests/unit/test_recognition_pilot.py
+@@ -618,3 +618,174 @@
+     truncated["status"] = "incomplete"
+     with pytest.raises(PilotError, match="incomplete"):
+         pilot.parse_response(truncated)
++
++
++def stopped_original_fixture(root: Path, monkeypatch: pytest.MonkeyPatch) -> dict[str, Any]:
++    approval = setup_pilot(root)
++    prepared = read_model(root / "prepared.json", Prepared)
++    clean = sanitized_image(image_bytes("orange"))
++    hashed = digest(clean)
++    write_bytes(root / f"{hashed}.jpg", clean)
++    prepared.groups.append(
++        PreparedGroup(
++            group="G07",
++            images=[PreparedImage(original_sha256=hashed, transmitted_sha256=hashed)],
++            listing_text="untrusted evidence only",
++            independently_confirmed=True,
++            labels_exhaustive=True,
++            expected=[],
++            expected_outcome="custom_build",
++        )
++    )
++    write_model(root / "prepared.json", prepared, replace=True)
++    approval.prepared_sha256 = digest((root / "prepared.json").read_bytes())
++    write_model(root / "approval.json", approval, replace=True)
++    approval_hash = digest((root / "approval.json").read_bytes())
++    write_model(
++        root / "ledger.json", Ledger(approval_sha256=approval_hash, attempts=[]), replace=True
++    )
++    access = json.loads((root / "model-access.json").read_bytes())
++    access["approval_sha256"] = approval_hash
++    write_bytes(root / "model-access.json", json.dumps(access).encode(), replace=True)
++    calls = 0
++
++    def original(body: bytes, key: str, project: str) -> dict[str, Any]:
++        nonlocal calls
++        calls += 1
++        answer = response(recognition("candidates", [candidate()]))
++        if calls == 6:
++            answer["status"] = "incomplete"
++            answer["usage"]["output_tokens"] = 2048
++            answer["usage"]["output_tokens_details"]["reasoning_tokens"] = 2048
++        return answer
++
++    monkeypatch.setattr(pilot, "call_openai", original)
++    with pytest.raises(PilotError, match="pilot_stopped_attempt_retained"):
++        pilot.execute(root)
++    assert calls == 6
++    return pilot.evaluate(root)
++
++
++def test_amended_reservation_and_output_accounting(tmp_path: Path) -> None:
++    setup_pilot(tmp_path)
++    group = read_model(tmp_path / "prepared.json", Prepared).groups[0]
++    images = [(tmp_path / f"{group.images[0].transmitted_sha256}.jpg").read_bytes()]
++    old = json.loads(pilot.request_body(group, images))
++    new = json.loads(pilot.request_body(group, images, amended=True))
++    assert new.pop("max_output_tokens") == 16384
++    assert old.pop("max_output_tokens") == 2048 and old == new
++    assert pilot.protocol_digest() != pilot.protocol_digest(amended=True)
++    assert pilot.maximum_cost(922000, amended=True) == Decimal("0.242788")
++    attempt = Attempt(
++        group="G07",
++        input_sha256="a" * 64,
++        state="reserved",
++        reserved_usd=Decimal("0.242788"),
++        input_token_bound=922000,
++        max_output_tokens=16384,
++    )
++    data = response(recognition())
++    data["usage"]["output_tokens"] = 16384
++    data["usage"]["output_tokens_details"]["reasoning_tokens"] = 16384
++    pilot.record_usage(data, attempt)
++    assert attempt.estimated_usd == Decimal("0.0082765")
++    data["usage"]["output_tokens"] = 16385
++    with pytest.raises(PilotError, match="exceeded_reservation"):
++        pilot.record_usage(data, attempt)
++
++
++def test_guarded_two_call_continuation_preserves_history(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    stopped_original_fixture(tmp_path, monkeypatch)
++    previous = json.loads((tmp_path / "ledger.json").read_bytes())
++    originals = {p.name: p.read_bytes() for p in tmp_path.glob("G0*-result.json")}
++    pilot.create_amendment(tmp_path)
++    calls: list[dict[str, Any]] = []
++
++    def amended(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        assert timeout == 180
++        calls.append(json.loads(body))
++        return response(
++            recognition("custom_build")
++            if len(calls) == 1
++            else recognition("candidates", [candidate()])
++        )
++
++    monkeypatch.setattr(pilot, "call_openai", amended)
++    pilot.continue_approved(tmp_path)
++    current = json.loads((tmp_path / "ledger.json").read_bytes())
++    assert current["attempts"][:6] == previous["attempts"] and current["stopped"] is True
++    assert [a["group"] for a in current["attempts"][6:]] == ["G07", "G06"]
++    assert (
++        current["attempts"][7]["predecessor_input_sha256"]
++        == previous["attempts"][5]["input_sha256"]
++    )
++    assert all((tmp_path / name).read_bytes() == data for name, data in originals.items())
++    assert len(calls) == 2 and all(c["max_output_tokens"] == 16384 for c in calls)
++    assert sum(
++        a.reserved_usd for a in read_model(tmp_path / "ledger.json", Ledger).attempts
++    ) == Decimal("1.877792")
++    report = pilot.continuation_report(tmp_path)
++    assert report["cumulative_sample_coverage"]["full_sample_completed"] is True
++    assert report["cumulative_sample_coverage"]["top1"] == 6
++    assert report["further_calls_authorized"] == 0
++    with pytest.raises(PilotError, match="already_dispatched"):
++        pilot.continue_approved(tmp_path)
++    assert len(calls) == 2
++    # An uncertain first request retains its seventh attempt and blocks G06.
++    other = tmp_path / "uncertain"
++    other.mkdir()
++    stopped_original_fixture(other, monkeypatch)
++    pilot.create_amendment(other)
++    sent = 0
++
++    def uncertain(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        nonlocal sent
++        sent += 1
++        raise PilotError("provider_request_failed_or_uncertain")
++
++    monkeypatch.setattr(pilot, "call_openai", uncertain)
++    with pytest.raises(PilotError, match="continuation_stopped"):
++        pilot.continue_approved(other)
++    assert sent == 1 and len(read_model(other / "ledger.json", Ledger).attempts) == 7
++
++
++def test_original_protocol_readability_after_amendment(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    original_stats = stopped_original_fixture(tmp_path, monkeypatch)
++    pilot.create_amendment(tmp_path)
++    calls = 0
++
++    def amended(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        nonlocal calls
++        calls += 1
++        data = response(recognition("candidates", [candidate()]))
++        if calls == 1:
++            data["status"] = "incomplete"
++        return data
++
++    monkeypatch.setattr(pilot, "call_openai", amended)
++    pilot.continue_approved(tmp_path)
++    assert calls == 2  # Known incomplete G07 is retained, never retried.
++    assert pilot.evaluate(tmp_path) == original_stats
++    report = pilot.continuation_report(tmp_path)
++    assert report["original_protocol_result"] == original_stats
++    assert report["amended_requests"][0]["state"] == "failed"
++    assert (
++        report["cumulative_sample_coverage"]["labeled_identities"]
++        == original_stats["labeled_identities"]
++    )
++    prepared = read_model(tmp_path / "prepared.json", Prepared)
++    approval = read_model(tmp_path / "approval.json", Approval)
++    ledger = read_model(tmp_path / "ledger.json", Ledger)
++    assert (
++        pilot.load_result(tmp_path, prepared.groups[0], ledger.attempts[0], approval)
++        .objects[0]
++        .outcome
++        == "candidates"
++    )
++    (tmp_path / "G01-result.json").write_bytes(b"{}")
++    with pytest.raises(PilotError, match="saved_result_integrity"):
++        pilot.load_result(tmp_path, prepared.groups[0], ledger.attempts[0], approval)

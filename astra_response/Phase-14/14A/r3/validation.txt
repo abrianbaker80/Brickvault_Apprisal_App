@@ -1,0 +1,50 @@
+Phase 14A two-call continuation validation — 2026-10-02
+
+NEW AFFECTED CHECKS (existing fixtures; network prohibited)
+- Exactly 3 selected tests passed in 2.93 seconds; 10 unrelated tests deselected:
+  test_amended_reservation_and_output_accounting
+  test_guarded_two_call_continuation_preserves_history
+  test_original_protocol_readability_after_amendment
+- Assert only output cap changes in serialized input, 180-second transport deadline,
+  revised worst-case USD 0.242788 reservation, reasoning included within output,
+  rejection above 16384 tokens, and exact G07/G06 order/two-call ceiling.
+- Original six JSON attempt records/stop/results remain preserved, G06 retry links
+  predecessor, repeated continuation is refused, and one uncertain first call stops
+  before G06 while retaining the seventh attempt. Known incomplete output is retained.
+- Original-protocol report remains identical and results validate under original
+  parameters; altered old result bytes fail integrity validation.
+- Ruff lint/format and strict mypy pass for four edited Python/test files.
+
+LIVE EVIDENCE
+- Exactly two new Standard Responses requests: attempt 7 G07 completed custom_build;
+  attempt 8 G06 completed with 11 objects (9 unknown, 2 unmatched figure-ID proposals).
+- No G01-G05 resubmission, context from old answers/reasoning, automatic retry/fallback,
+  extra sample, metadata probe or token-counting request.
+- New usage: 3734 input, 3670 output including 2799 reasoning, zero cached/write tokens.
+  Estimated USD 0.0022084. G07 latency 6.160784s; G06 latency 28.857528s.
+- Lifetime eight attempts: 12852 input, 9058 output including 7202 reasoning;
+  estimate USD 0.0058142, actual billing unavailable. Reservations USD 1.877792.
+- Cumulative sample coverage 7/7 groups, 13 unique approved images, 14 sent image
+  inputs including G06 retry. Original failed G06 remains counted. Whole-sample
+  raw denominator 17, top-1/top-3 3/17; sets 3/3, minifigures 0/14; MOC outcome correct.
+
+DOCUMENT/PUBLICATION AND PRESERVATION
+- 382 local Markdown targets resolve in the literal seven-document inventory.
+- Original r2 report result section is byte-equivalent after newline normalization.
+- All fifteen pre-existing private r2 file hashes match, including prepared inputs,
+  original approval, key/account/model-access receipts, original result/evaluation files.
+- Protected hashes match; owned development service remains stopped; recovery archive
+  retained at accepted size. No database connection/query/campaign or new recovery work.
+- Cumulative patch checks against d839e51b65f9156e5829740c08d52b59be4c4ec4;
+  amendment patch checks against accepted r2 source. Main index untouched.
+- Exact staged package privacy/links/whitespace checks exclude diff context markers;
+  patch additions are separately checked with git apply --whitespace=error.
+- Only sanitized r3 files are published; r1/r2 and main remain preserved.
+
+REUSED EVIDENCE
+Earlier r2 source/static/live/account/catalog/migration/privacy evidence is reused,
+not rerun: see ../r2/validation.txt and ../r2/REVIEW.md. Canonical expected coverage
+remains three exact sets and fourteen unresolved figures; no crosswalk was invented.
+No broad tests/builds, provider/support loop, catalog/mapping writes, production,
+training or later phase. Completed processing is not recognition qualification.
+Two lifetime attempts remain but are not authorized. Stop for quality review.
