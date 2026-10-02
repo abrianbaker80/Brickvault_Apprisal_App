@@ -1,0 +1,53 @@
+{
+  "commit": "d839e51b65f9156e5829740c08d52b59be4c4ec4",
+  "subject": "Close Phase 13 marketplace intake and images",
+  "parent": "1c7501092e7fad92a5471fa5571c6d009a1b0c3f",
+  "branch": "main",
+  "committed_files": [
+    "CODEX_WORKFLOW.md",
+    "apps/web/pwa/worker.js",
+    "apps/web/src/AppShell.tsx",
+    "apps/web/src/Listings.test.tsx",
+    "apps/web/src/ListingsPage.tsx",
+    "deploy/systemd/brickvault-api.service",
+    "deploy/systemd/brickvault-backup.service",
+    "deploy/systemd/brickvault-backup.timer.d/schedule.conf",
+    "docs/BACKUP_SCHEDULE.md",
+    "docs/IMAGE_BACKUP_RECOVERY.md",
+    "docs/IMAGE_PRIVACY_POLICY.md",
+    "docs/ROADMAP.md",
+    "docs/plans/103-phase-13-image-ingestion.md",
+    "scripts/complete_run_retention.py",
+    "scripts/package_api.py",
+    "scripts/production_health.py",
+    "scripts/release_manifest.py",
+    "services/api/src/brickvault_api/backup_format.py",
+    "services/api/src/brickvault_api/image_backup.py",
+    "services/api/src/brickvault_api/production_admin.py",
+    "services/api/src/brickvault_api/production_backup.py",
+    "services/api/tests/unit/test_image_backup_seams.py"
+  ],
+  "files": 22,
+  "main_pushed": false,
+  "index": "empty",
+  "remaining_worktree": [
+    " M AGENTS.md",
+    " M services/api/tests/integration/test_catalog_search.py",
+    " M services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "protected_unchanged_unstaged": true,
+  "complete_diff_review": "PASS",
+  "cached_whitespace": "PASS",
+  "changed_document_links": 10,
+  "accepted_evidence_reused": true,
+  "operations_tests_builds_reran": false,
+  "patch_sha256": "8e7ae9292255d6ed489bfa86e48c1c8f528425226479cd0196df58bb338cedd2",
+  "patch_sha256_basis": "Complete reviewed full-context staged diff",
+  "published_patch_sha256": "728db37f79d00e52fff5a0b12c615640245cd6cf3bf8329f36dfc38657053ae8",
+  "published_patch_format": "git diff parent commit --binary --full-index --unified=0"
+}
