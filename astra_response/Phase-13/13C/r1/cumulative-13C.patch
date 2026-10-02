@@ -1,0 +1,1420 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 26d1d19..5e14f81 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -2,0 +3,27 @@
++## Phase 13C production delivery — 2026-10-01
++
++**Phase 13A and 13B ACCEPTED / CLOSED. Phase 13C IMPLEMENTED / READY FOR FINAL REVIEW.
++Phase 13 IN PROGRESS pending final review; Phase 14 NOT STARTED.**
++Accepted 13B local checkpoint is `1c7501092e7fad92a5471fa5571c6d009a1b0c3f`,
++`Implement Phase 13B marketplace intake UI`. Brian approved the
++[image privacy and retention policy](docs/IMAGE_PRIVACY_POLICY.md) and bounded production delivery
++under [Plan 103](docs/plans/103-phase-13-image-ingestion.md). Marketplace Listings are private sourcing records;
++Add Marketplace Listing never publishes to an external marketplace.
++
++The immutable `phase13c-marketplace-intake-r1` release is active with
++`0017_listing_images`, enumerated runtime grants and private Linux blob storage.
++The normal backup path supports legacy three-artifact sets and complete four-artifact
++image sets, with a settled API pause and one exported database snapshot. One
++pre-migration dual backup and its supported guarded proof preceded activation.
++The one retained synthetic intake passed with three images/receipts, and its same
++four-artifact dual backup passed independent Windows Drive-only restore: all 82
++counts, six blobs, image/catalog/user context, ownership/grants and SCRAM matched.
++Disposable recovery was cleaned; all 14 final checks passed, normal timers active,
++zero failed units. The combined backup service interval was 376 seconds with a
++controlled API pause through capture/readback. The accepted Android APK was not
++rebuilt or claimed updated; providers, recognition/native capture and datasets did
++not start. The r1 review package is ready for independent final review. Main is unpushed; 13C
++changes stay uncommitted with empty index and protected bytes unchanged.
++
++Earlier dated sections remain historical and are superseded by this checkpoint.
++
+diff --git a/apps/web/pwa/worker.js b/apps/web/pwa/worker.js
+index 2a8bca8..f59c1d1 100644
+--- a/apps/web/pwa/worker.js
++++ b/apps/web/pwa/worker.js
+@@ -7 +7 @@ function navigation(path) {
+-    ['/', '/deals', '/watchlist', '/settings', '/hunt'].includes(path) ||
++    ['/', '/deals', '/watchlist', '/settings', '/hunt', '/listings'].includes(path) ||
+@@ -9 +9 @@ function navigation(path) {
+-    new RegExp(`^/(deals|hunt)/${UUID}$`).test(path)
++    new RegExp(`^/(deals|hunt|listings)/${UUID}$`).test(path)
+diff --git a/apps/web/src/AppShell.tsx b/apps/web/src/AppShell.tsx
+index 74a53bc..461c44e 100644
+--- a/apps/web/src/AppShell.tsx
++++ b/apps/web/src/AppShell.tsx
+@@ -79 +79 @@ export function AppShell({
+-                Listings
++                Marketplace Listings
+diff --git a/apps/web/src/Listings.test.tsx b/apps/web/src/Listings.test.tsx
+index 08f35e5..675fcc3 100644
+--- a/apps/web/src/Listings.test.tsx
++++ b/apps/web/src/Listings.test.tsx
+@@ -58,2 +58,6 @@ it('creates through generated metadata and renders list/detail without treating
+-  expect(screen.getByRole('link', { name: 'Listings' })).toHaveAttribute('aria-current', 'page');
+-  fireEvent.click(screen.getByRole('button', { name: 'Create listing' }));
++  expect(screen.getByRole('link', { name: 'Marketplace Listings' })).toHaveAttribute(
++    'aria-current',
++    'page',
++  );
++  expect(screen.getByText(/Nothing publishes to Facebook, eBay, Poshmark/)).toBeVisible();
++  fireEvent.click(screen.getByRole('button', { name: 'Add Marketplace Listing' }));
+diff --git a/apps/web/src/ListingsPage.tsx b/apps/web/src/ListingsPage.tsx
+index ed383b6..6e22ebb 100644
+--- a/apps/web/src/ListingsPage.tsx
++++ b/apps/web/src/ListingsPage.tsx
+@@ -106 +106 @@ export function ListingsPage() {
+-    document.title = 'Listings | BrickVault';
++    document.title = 'Marketplace Listings | BrickVault';
+@@ -121 +121 @@ export function ListingsPage() {
+-        Listings
++        Marketplace Listings
+@@ -123 +123,4 @@ export function ListingsPage() {
+-      <p>Keep marketplace details and photos in your private BrickVault workspace.</p>
++      <p>
++        Private records of marketplace ads you are evaluating. Nothing publishes to Facebook, eBay,
++        Poshmark or any other marketplace.
++      </p>
+@@ -125 +128 @@ export function ListingsPage() {
+-        {creating ? 'Cancel creation' : 'Create listing'}
++        {creating ? 'Cancel creation' : 'Add Marketplace Listing'}
+@@ -137 +140,3 @@ export function ListingsPage() {
+-          {!page.items.length && <p>No listings yet. Create one to add photos.</p>}
++          {!page.items.length && (
++            <p>No marketplace listings yet. Add one to keep its details and photos.</p>
++          )}
+@@ -191 +196 @@ function CreateListing() {
+-      <h2>Create a private listing</h2>
++      <h2>Add Marketplace Listing</h2>
+@@ -316 +321 @@ export function ListingDetailPage({ id }: { id: string }) {
+-        All listings
++        Marketplace Listings
+diff --git a/deploy/systemd/brickvault-api.service b/deploy/systemd/brickvault-api.service
+index 2c8dae6..e0f422d 100644
+--- a/deploy/systemd/brickvault-api.service
++++ b/deploy/systemd/brickvault-api.service
+@@ -27 +27 @@ RestrictSUIDSGID=true
+-ReadWritePaths=/var/lib/brickvault
++ReadWritePaths=/var/lib/brickvault /var/lib/postgresql/brickvault-images
+diff --git a/deploy/systemd/brickvault-backup.service b/deploy/systemd/brickvault-backup.service
+index cbdda5a..877b057 100644
+--- a/deploy/systemd/brickvault-backup.service
++++ b/deploy/systemd/brickvault-backup.service
+@@ -13,0 +14,5 @@ ExecStart=/opt/brickvault/current/api/venv/bin/brickvault-production-backup back
++ExecStopPost=/opt/brickvault/current/api/venv/bin/python -m brickvault_api.image_backup resume
++RuntimeDirectory=brickvault-image-capture
++RuntimeDirectoryMode=0700
++RuntimeDirectoryPreserve=yes
++TimeoutStopSec=5min
+diff --git a/docs/IMAGE_PRIVACY_POLICY.md b/docs/IMAGE_PRIVACY_POLICY.md
+index ebd77e8..988be98 100644
+--- a/docs/IMAGE_PRIVACY_POLICY.md
++++ b/docs/IMAGE_PRIVACY_POLICY.md
+@@ -1 +1 @@
+-# Proposed image privacy and retention policy
++# Approved image privacy and retention policy
+@@ -3 +3 @@
+-**PROPOSED FOR BRIAN'S REVIEW — NOT PRODUCTION SHIPPING APPROVAL.**
++**APPROVED BY BRIAN — Phase 13C, 2026-10-01.**
+@@ -5,7 +5,6 @@
+-Purpose: optional Brian-owned private marketplace sourcing/listing review.
+-Access: Brian's existing private owner session only. Original seller/listing
+-photos are private; raw screenshots and unknown sources are restricted. Explicit
+-seller_photo/listing_photo classification records the uploader's intended class,
+-not automated content recognition. All derivatives inherit the stricter original
+-class; sharing a canonical original can escalate privacy but never downgrade it.
+-Classification does not confer export, provider or training rights.
++Marketplace Listings are private records of marketplace ads Brian evaluates.
++Adding a record never publishes to Facebook, eBay, Poshmark or another marketplace.
++Only Brian's authenticated owner session may access metadata, originals and thumbnails.
++Raw screenshots and unknown sources are restricted; other listing images are private.
++Derivatives inherit the applicable stricter classification. Shared canonical originals
++can escalate privacy, never downgrade it. Classification grants no external rights.
+@@ -13,4 +12,3 @@ Classification does not confer export, provider or training rights.
+-Original bytes stay immutable while retained. Phase 13 implements no deletion,
+-automatic retention, AI/provider submission, training or export. Source URLs are
+-metadata only and never fetched. Private filenames remain metadata/owner response
+-only; logs exclude names, private text, image bytes and credentials.
++Phase 13 submits no images to AI or providers and performs no training or dataset
++export. Source URLs are saved references and are never automatically fetched.
++Logs exclude image bytes, private filenames/text, credentials and authorization headers.
+@@ -18,4 +16,6 @@ only; logs exclude names, private text, image bytes and credentials.
+-Storage and future backups must remain private, outside all public/static roots.
+-API bytes require authentication and no-store responses. Phase 13A uses only
+-synthetic local fixtures and is not deployed. A definitive report-only orphan
+-inspection requires uploads stopped and does not delete/repair any objects.
++Originals and thumbnails have no scheduled deletion date. They remain retained until
++an intentionally authorized future deletion feature is used. Originals are immutable
++while retained. There is no automatic live-image or orphan deletion and no persisted
++listing/image Delete control in this release. A future shared-blob deletion feature
++must preserve every surviving reference. Report-only orphan inspection never deletes
++or repairs objects and requires settled uploads for a definitive result.
+@@ -23,6 +23,13 @@ inspection requires uploads stopped and does not delete/repair any objects.
+-Before shipping, Brian must approve retention durations for originals,
+-screenshots, derivatives, backups and exports; intentional deletion/removal and
+-shared-blob reference handling; and consistent database-plus-blob backup/recovery.
+-Immutability protects against accidental overwrite and does not override an
+-eventual deliberately approved deletion policy. Manual deletion workflows are
+-deferred beyond 13A. [Plan 103](plans/103-phase-13-image-ingestion.md).
++Private storage is outside PostgreSQL PGDATA, static roots and immutable releases.
++API image responses require owner authentication and use no-store; private API/image
++bytes are never durably cached by the service worker. Client object URLs are temporary
++and revoked when private views leave the document.
++
++Image-containing backups remain encrypted and private. Historical backups follow
++the existing approved retention and permanent-pin rules. Old backups are not rewritten;
++permanent pins are not removed. Pinned recovery copies are not promised to expire.
++The [combined recovery runbook](IMAGE_BACKUP_RECOVERY.md) binds database references
++and actual bytes in a consistent recovery set.
++
++Recognition remains Phase 14, native capture Phase 15, and dataset/export work Phase 16.
++None is authorized here. [Plan 103](plans/103-phase-13-image-ingestion.md).
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index a133b9a..2655778 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -2,0 +3,27 @@
++## Phase 13C production delivery — 2026-10-01
++
++**Phase 13A and 13B ACCEPTED / CLOSED. Phase 13C IMPLEMENTED / READY FOR FINAL REVIEW.
++Phase 13 IN PROGRESS pending final review; Phase 14 NOT STARTED.**
++Accepted 13B local checkpoint is `1c7501092e7fad92a5471fa5571c6d009a1b0c3f`,
++`Implement Phase 13B marketplace intake UI`. Brian approved the
++[image privacy and retention policy](IMAGE_PRIVACY_POLICY.md) and bounded production delivery
++under [Plan 103](plans/103-phase-13-image-ingestion.md). Marketplace Listings are private sourcing records;
++Add Marketplace Listing never publishes to an external marketplace.
++
++The immutable `phase13c-marketplace-intake-r1` release is active with
++`0017_listing_images`, enumerated runtime grants and private Linux blob storage.
++The normal backup path supports legacy three-artifact sets and complete four-artifact
++image sets, with a settled API pause and one exported database snapshot. One
++pre-migration dual backup and its supported guarded proof preceded activation.
++The one retained synthetic intake passed with three images/receipts, and its same
++four-artifact dual backup passed independent Windows Drive-only restore: all 82
++counts, six blobs, image/catalog/user context, ownership/grants and SCRAM matched.
++Disposable recovery was cleaned; all 14 final checks passed, normal timers active,
++zero failed units. The combined backup service interval was 376 seconds with a
++controlled API pause through capture/readback. The accepted Android APK was not
++rebuilt or claimed updated; providers, recognition/native capture and datasets did
++not start. The r1 review package is ready for independent final review. Main is unpushed; 13C
++changes stay uncommitted with empty index and protected bytes unchanged.
++
++Earlier dated sections remain historical and are superseded by this checkpoint.
++
+diff --git a/docs/plans/103-phase-13-image-ingestion.md b/docs/plans/103-phase-13-image-ingestion.md
+index 7fd0cbc..922d1bd 100644
+--- a/docs/plans/103-phase-13-image-ingestion.md
++++ b/docs/plans/103-phase-13-image-ingestion.md
+@@ -3 +3,76 @@
+-## Current checkpoint — Phase 13B, 2026-10-01
++## Current checkpoint — Phase 13C, 2026-10-01
++
++**Phase 13A and 13B ACCEPTED / CLOSED. Phase 13C IMPLEMENTED / READY FOR FINAL REVIEW.
++Phase 13 IN PROGRESS; Phase 14 NOT STARTED.** Brian explicitly approves
++[the privacy policy](../IMAGE_PRIVACY_POLICY.md), terminology correction,
++0017 production migration/deployment, private Linux storage and combined recovery.
++Accepted 13B local commit: `1c7501092e7fad92a5471fa5571c6d009a1b0c3f`,
++`Implement Phase 13B marketplace intake UI`; exact eleven-file closeout reused
++accepted checks without test/browser/build reruns. Main remains unpushed.
++
++The authorized sequence is focused backup-format/capture seam validation, one
++wording check and immutable release build, fresh production admission, one verified
++pre-migration dual backup and supported proof, guarded 0017 migration/grants,
++release/storage activation, one retained synthetic intake, one combined dual backup,
++then independent Windows Drive-only off-host restore of that same recovery set.
++Historical receipts/pins remain unchanged. No live retention deletion, Android build,
++provider work or later phase is included. On ambiguous live failure stop mutations,
++inspect durable evidence and preserve user data; never automatically downgrade/drop
++new tables or restore over newer activity. Details: [recovery runbook](../IMAGE_BACKUP_RECOVERY.md).
++
++- [x] Accepted 13B closeout, empty index and protected hashes.
++- [x] Fresh admission: expected release/0016, generation 1, 28,278 sets,
++  normal health, no failed units or maintenance conflicts; data disk has ample space.
++- [x] Eight focused seams, affected static checks, one wording case and one final normal immutable release.
++- [x] Guarded 0017 migration/grants, release/private storage and one retained three-image synthetic intake.
++- [x] One normal combined dual capture; same-set independent Drive-only off-host restore and cleanup.
++- [x] Fourteen final normal health checks, active services/timers, zero failed units and sanitized r1 review package.
++
++### Phase 13C completed evidence
++
++Production is `phase13c-marketplace-intake-r1`, `0017_listing_images`; catalog
++remains generation 1, one accepted nonsynthetic snapshot and 28,278 sets.
++One harmless synthetic intake retains three originals, thumbnails and durable
++receipts in positions 0–2, next_display_order 3. Peak uploads were two. Authenticated
++original bytes matched, refresh/reopen passed, private responses were no-store,
++no private service-worker entries appeared, sign-out revoked nine object URLs,
++and one logged-out image request returned 401. Manual/unknown-source images and
++thumbnails retain the stricter restricted classification. No Delete was invented.
++
++The single post-intake normal backup service completed in 376 seconds. It paused
++the API/health timers through capture/readback, exported one read-only database
++snapshot, and streamed four artifacts to both encrypted destinations. All eight
++readbacks, bytes/hashes and repository checks passed. Historical receipts/pins
++were byte-identical. The API/timers resumed and the pause journal was removed.
++
++That same populated Drive set restored into an independent Windows off-host
++PostgreSQL 18 cluster and filesystem in a 9 GiB noswap tmpfs, with separate data/
++socket and no TCP listener. All 82 table counts, six referenced blobs, image-table
++and catalog/user-context digests, ownership/normalized grants, lineage/receipt/order
++and owner/runtime SCRAM authentication matched the captured backup inventory.
++Existing user data was preserved without imposing empty Watchlist/Settings rules.
++No Proxmox fallback or VM retrieval credentials were used; no persistent plaintext
++dump was saved on Windows. Temporary cluster/plaintext/configuration/runtime/helper
++copies were removed; production records/images/backups remain retained.
++
++The old independent WSL SQLAlchemy 1.4 runtime could not import the new verifier
++before any cluster or retrieval. A disposable runtime matching production Python
++3.13.15 and exact hash-locked libraries resolved this observed incompatibility.
++The SQLAlchemy verifier uses its normal tuple-row DBAPI connection and explicit
++UTC transaction. No application dependency/release changed or new backup ran.
++Two bounded orchestration corrections finalized the already completed pre-migration
++backup's prefixed CLI receipt and restored paused timers before activation health.
++No migration/deployment was repeated or application data repaired.
++
++The short final check passed all 14 normal health/storage/backup checks with active
++API/Caddy/PostgreSQL and backup/retention/health timers; zero failed units. The source
++review found no blocking defect. [Review package](https://github.com/abrianbaker80/Brickvault_Apprisal_App/tree/astra-response/astra_response/Phase-13/13C/r1)
++contains the exact twenty-file candidate, patch and sanitized evidence.
++Main HEAD stays at the accepted 13B local commit; 13C is uncommitted, index empty,
++protected bytes unchanged and main unpushed. This is ready for independent final
++review; Phase 13 remains IN PROGRESS and Phase 14 NOT STARTED.
++
++Earlier sections are dated history; their unapproved-policy and next-step statements
++are superseded by this authorization.
++
++## Historical accepted checkpoint — Phase 13B, 2026-10-01
+diff --git a/scripts/complete_run_retention.py b/scripts/complete_run_retention.py
+index 7f43bed..fe124e0 100644
+--- a/scripts/complete_run_retention.py
++++ b/scripts/complete_run_retention.py
+@@ -57,48 +57,6 @@ def validate_receipt(
+-    if (
+-        HEX32.fullmatch(run) is None
+-        or set(record)
+-        != {
+-            "schema",
+-            "purpose",
+-            "database",
+-            "ownership_marker",
+-            "run_id",
+-            "revisions_at_backup",
+-            "verified_at_utc",
+-            "repositories",
+-            "artifacts",
+-        }
+-        or type(record["schema"]) is not int
+-        or record["schema"] != 2
+-        or record["purpose"] != "production"
+-        or record["database"] != "brickvault_appraisal_prod"
+-        or record["ownership_marker"] != marker
+-        or record["run_id"] != run
+-        or record["repositories"] != repositories
+-        or record["revisions_at_backup"] not in [[], ["0016_hunt_cached_runs"]]
+-        or not isinstance(record["artifacts"], dict)
+-        or set(record["artifacts"]) != ARTIFACTS
+-    ):
+-        raise RetentionError("Invalid production receipt.")
+-    stamp(record["verified_at_utc"], now)
+-    seen = set()
+-    for row in record["artifacts"].values():
+-        if (
+-            not isinstance(row, dict)
+-            or set(row) != {"bytes", "sha256", "snapshots"}
+-            or type(row["bytes"]) is not int
+-            or row["bytes"] <= 0
+-            or not isinstance(row["sha256"], str)
+-            or HEX64.fullmatch(row["sha256"]) is None
+-            or not isinstance(row["snapshots"], dict)
+-            or set(row["snapshots"]) != DESTINATIONS
+-        ):
+-            raise RetentionError("Invalid artifact receipt.")
+-        for identity in row["snapshots"].values():
+-            if (
+-                not isinstance(identity, str)
+-                or HEX64.fullmatch(identity) is None
+-                or identity in seen
+-            ):
+-                raise RetentionError("Ambiguous snapshot identity.")
+-            seen.add(identity)
++    from brickvault_api.backup_format import validate_receipt as validate
++
++    try:
++        validate(run, record, repositories, marker, now)
++    except (ValueError, TypeError, KeyError) as exc:
++        raise RetentionError("Invalid production receipt.") from exc
+@@ -265 +223 @@ def apply_plan(
+-                    for a in ARTIFACTS
++                    for a in receipts[run]["artifacts"]
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index e586b94..bbe3585 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -69,0 +70,7 @@ def package() -> None:
++        "brickvault_api/backup_format.py",
++        "brickvault_api/image_backup.py",
++        "brickvault_api/images/storage.py",
++        "brickvault_api/api/listings.py",
++        "brickvault_api/migrations/versions/0017_listing_images.py",
++        "brickvault_api/migrations/sql/0017_listing_images_up.sql",
++        "brickvault_api/migrations/sql/0017_listing_images_down.sql",
+@@ -253,2 +260,2 @@ assert corpus_demand(load_corpus())['mapping_attempts'] is None
+-assert expected_revisions() == ('0016_hunt_cached_runs',)
+-assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
++assert expected_revisions() == ('0017_listing_images',)
++assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0017_listing_images','0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
+@@ -260 +267 @@ assert BenchmarkManifest.model_validate_json('{"benchmark_version":"catalog-2c-v
+-for revision in ('0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
++for revision in ('0017_listing_images', '0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
+diff --git a/scripts/production_health.py b/scripts/production_health.py
+index 3a24a07..7b305da 100644
+--- a/scripts/production_health.py
++++ b/scripts/production_health.py
+@@ -187,0 +188,22 @@ def checks(deep: bool) -> dict[str, bool]:
++    def image_storage() -> bool:
++        from brickvault_api import production_admin as admin
++        from brickvault_api.image_backup import configured_root
++        from sqlalchemy import text
++
++        cfg = admin._load_config(admin.CONFIG_PATH)
++        with admin._owner_connection(cfg) as owner:
++            owner.execute(text("SET TRANSACTION READ ONLY"))
++            revisions = admin._revisions(owner)
++        if revisions != ("0017_listing_images",):
++            return False
++        root = configured_root()
++        import pwd
++
++        info = root.stat()
++        return (
++            info.st_uid == pwd.getpwnam("brickvault").pw_uid
++            and root.stat().st_dev == Path("/var/lib/postgresql").stat().st_dev
++        )
++
++    probe("PRIVATE_IMAGE_STORAGE", image_storage)
++
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index a66e051..8d484f4 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -94,0 +95,7 @@ RELEASE_SOURCE_PATHS = (
++    "services/api/src/brickvault_api/backup_format.py",
++    "services/api/src/brickvault_api/image_backup.py",
++    "services/api/tests/unit/test_image_backup_seams.py",
++    "apps/web/src/AppShell.tsx",
++    "apps/web/src/ListingsPage.tsx",
++    "apps/web/src/Listings.test.tsx",
++    "apps/web/pwa/worker.js",
+@@ -96,0 +104,3 @@ DOCUMENTATION_PATHS = {
++    "docs/IMAGE_PRIVACY_POLICY.md",
++    "docs/IMAGE_BACKUP_RECOVERY.md",
++    "docs/plans/103-phase-13-image-ingestion.md",
+diff --git a/services/api/src/brickvault_api/production_admin.py b/services/api/src/brickvault_api/production_admin.py
+index 170c39c..3ea241d 100644
+--- a/services/api/src/brickvault_api/production_admin.py
++++ b/services/api/src/brickvault_api/production_admin.py
+@@ -363 +363 @@ def _require_provisioned(
+-def _owner_connection(config: AdminConfig) -> Iterator[Connection]:
++def _owner_connection(config: AdminConfig, *, repeatable: bool = False) -> Iterator[Connection]:
+@@ -364,0 +365,4 @@ def _owner_connection(config: AdminConfig) -> Iterator[Connection]:
++    if repeatable:
++        engine = engine.execution_options(
++            isolation_level="REPEATABLE READ", postgresql_readonly=True
++        )
+@@ -532 +536 @@ def _recovery_proof(path: Path, config: AdminConfig, revisions: tuple[str, ...]
+-        or value["schema"] != 2
++        or value["schema"] not in (2, 3)
+@@ -581 +585,2 @@ def _recovery_proof(path: Path, config: AdminConfig, revisions: tuple[str, ...]
+-        artifact: receipt["artifacts"][artifact]["snapshots"] for artifact in backup.ARTIFACTS
++        artifact: receipt["artifacts"][artifact]["snapshots"]
++        for artifact in backup.required_artifacts(receipt["schema"], receipt["revisions_at_backup"])
+@@ -584 +589,2 @@ def _recovery_proof(path: Path, config: AdminConfig, revisions: tuple[str, ...]
+-        hashlib.sha256(raw).hexdigest() != value["backup_receipt_sha256"]
++        receipt["schema"] != value["schema"]
++        or hashlib.sha256(raw).hexdigest() != value["backup_receipt_sha256"]
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index f4fb233..cdcb183 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -16,0 +17 @@ import sys
++import tempfile
+@@ -19,0 +21 @@ from collections.abc import Mapping, Sequence
++from contextlib import nullcontext
+@@ -24,0 +27,3 @@ from typing import Any, NoReturn, cast
++from sqlalchemy import text
++
++from brickvault_api import image_backup
+@@ -26 +31,7 @@ from brickvault_api import production_admin as admin
+-from brickvault_api.persistence.database import expected_revisions
++from brickvault_api.backup_format import (
++    IMAGE_ARTIFACTS,
++    IMAGE_REVISION,
++    LEGACY_ARTIFACTS,
++    required_artifacts,
++    validate_receipt,
++)
+@@ -41 +52,3 @@ SSH_COMMAND = "ssh -F /etc/brickvault/backup/proxmox-ssh-config bva-proxmox-repo
+-ARTIFACTS = ("database.dump", "globals.sql", "configuration.tar")
++ARTIFACTS = (
++    LEGACY_ARTIFACTS  # Supported legacy public constant; new readers use required_artifacts.
++)
+@@ -431 +444 @@ def _readback(
+-        or artifact not in ARTIFACTS
++        or artifact not in IMAGE_ARTIFACTS
+@@ -520,0 +534,40 @@ def _backup_locked() -> str:
++    schema = 3 if revisions == (IMAGE_REVISION,) else 2
++    names = required_artifacts(schema, list(revisions))
++    pause = image_backup.maintenance_pause() if schema == 3 else nullcontext()
++    with pause:
++        if schema == 2:
++            return _capture(config, revisions, schema, names)
++        root = image_backup.configured_root()
++        with admin._owner_connection(config, repeatable=True) as owner:
++            owner.execute(text("SET LOCAL statement_timeout='180s'"))
++            owner.execute(text("SET LOCAL idle_in_transaction_session_timeout=0"))
++            owner.execute(text("SET LOCAL timezone='Etc/UTC'"))
++            snapshot = owner.scalar(text("SELECT pg_export_snapshot()"))
++            value = {
++                "schema": 1,
++                "revisions": list(revisions),
++                "database": image_backup.database_inventory(owner),
++            }
++            store = image_backup.FilesystemBlobStore(root)
++            for row in image_backup.validate_inventory(value):
++                blob = store.stat(row["sha256"])
++                if blob.byte_count != row["byte_count"]:
++                    raise BackupError("Captured database blob bytes differ.")
++            with tempfile.TemporaryDirectory(
++                prefix="inventory-", dir=image_backup.STATE
++            ) as directory:
++                inventory = Path(directory) / "inventory.json"
++                inventory.write_bytes(image_backup.canonical(value))
++                inventory.chmod(0o600)
++                return _capture(config, revisions, schema, names, snapshot, inventory, root)
++
++
++def _capture(
++    config: admin.AdminConfig,
++    revisions: tuple[str, ...],
++    schema: int,
++    names: tuple[str, ...],
++    snapshot: str | None = None,
++    inventory: Path | None = None,
++    root: Path | None = None,
++) -> str:
+@@ -524 +577 @@ def _backup_locked() -> str:
+-    for artifact in ARTIFACTS:
++    for artifact in names:
+@@ -532,3 +585,15 @@ def _backup_locked() -> str:
+-        size, sha = stream_to_two(
+-            _producer(artifact, files), commands, [d.environment() for d in DESTINATIONS]
+-        )
++        if artifact == "image-blobs.tar":
++            assert inventory is not None and root is not None
++            producer = [
++                sys.executable,
++                "-m",
++                "brickvault_api.image_backup",
++                "archive",
++                str(inventory),
++                str(root),
++            ]
++        else:
++            producer = _producer(artifact, files)
++            if artifact == "database.dump" and snapshot is not None:
++                producer.append("--snapshot=" + snapshot)
++        size, sha = stream_to_two(producer, commands, [d.environment() for d in DESTINATIONS])
+@@ -550 +615 @@ def _backup_locked() -> str:
+-        "schema": 2,
++        "schema": schema,
+@@ -585,28 +649,0 @@ def verified_receipt(run_id: str) -> tuple[dict[str, Any], bytes]:
+-    if (
+-        set(receipt)
+-        != {
+-            "schema",
+-            "purpose",
+-            "database",
+-            "ownership_marker",
+-            "run_id",
+-            "revisions_at_backup",
+-            "verified_at_utc",
+-            "repositories",
+-            "artifacts",
+-        }
+-        or type(receipt["schema"]) is not int
+-        or receipt["schema"] != 2
+-        or receipt.get("purpose") != "production"
+-        or receipt.get("database") != DATABASE
+-        or receipt.get("ownership_marker") != config.marker
+-        or receipt.get("run_id") != run_id
+-        or type(receipt["revisions_at_backup"]) is not list
+-        or any(type(value) is not str for value in receipt["revisions_at_backup"])
+-        or tuple(receipt["revisions_at_backup"]) not in ((), expected_revisions())
+-        or type(receipt["verified_at_utc"]) is not str
+-        or receipt.get("repositories") != repositories
+-        or type(receipt["artifacts"]) is not dict
+-        or set(receipt.get("artifacts", {})) != set(ARTIFACTS)
+-    ):
+-        raise BackupError("Backup receipt identity differs.")
+@@ -614,5 +651,3 @@ def verified_receipt(run_id: str) -> tuple[dict[str, Any], bytes]:
+-        stamp = datetime.fromisoformat(receipt["verified_at_utc"])
+-    except ValueError as exc:
+-        raise BackupError("Backup receipt time is invalid.") from exc
+-    if stamp.tzinfo is None or stamp.utcoffset() != timedelta(0) or stamp > datetime.now(UTC):
+-        raise BackupError("Backup receipt time is invalid.")
++        names = validate_receipt(run_id, receipt, repositories, config.marker)
++    except (ValueError, TypeError, KeyError) as exc:
++        raise BackupError("Backup receipt identity differs.") from exc
+@@ -620 +655 @@ def verified_receipt(run_id: str) -> tuple[dict[str, Any], bytes]:
+-    for artifact in ARTIFACTS:
++    for artifact in names:
+@@ -648 +683 @@ def verified_receipt(run_id: str) -> tuple[dict[str, Any], bytes]:
+-    if len(set(snapshot_ids)) != len(ARTIFACTS) * len(DESTINATIONS):
++    if len(set(snapshot_ids)) != len(names) * len(DESTINATIONS):
+@@ -669 +704 @@ def _proof_from_receipt(
+-        for name in ARTIFACTS
++        for name in required_artifacts(receipt["schema"], receipt["revisions_at_backup"])
+@@ -672 +707 @@ def _proof_from_receipt(
+-        "schema": 2,
++        "schema": receipt["schema"],
+diff --git a/docs/IMAGE_BACKUP_RECOVERY.md b/docs/IMAGE_BACKUP_RECOVERY.md
+new file mode 100644
+--- /dev/null
++++ b/docs/IMAGE_BACKUP_RECOVERY.md
+@@ -0,0 +1,94 @@
++# Marketplace image production capture and recovery
++
++Phase 13C extends the existing two encrypted repositories and protected receipts.
++No new repository, automatic image deletion or retention policy is introduced.
++
++## Supported sets and guarded transition
++
++Receipt/proof schema 2 requires exactly database.dump, globals.sql and
++configuration.tar, with empty foundation revision or 0016_hunt_cached_runs.
++Schema 3 requires those three artifacts **and image-blobs.tar**, with exactly
++0017_listing_images. Unknown versions, extra fields, absent image archives,
++incomplete destinations and ambiguous snapshot identities are refused. Shared
++backup_format admission is used by backup verification, admin proofs and retention;
++health uses the same retention validator. Each complete run has two independently
++verified copies of every required artifact. Old receipts/proofs/pins stay unchanged.
++
++A fresh schema-2 backup of production 0016 can authorize the reviewed upgrade to
++0017 and subsequent enumerated runtime grants. The real backup finalize-proof
++command creates the protected proof; migrate and grant-runtime consume its exact
++path. This never implies the old application is compatible with the new schema.
++
++## Normal consistent capture
++
++The normal `brickvault-production-backup backup` command owns the existing
++backup/retention lock. For 0017 it journals prior API/health-timer states in a
++root-only runtime directory, pauses health timers and stops the API, verifies
++MainPID=0, then keeps one read-only REPEATABLE READ transaction open. In-flight
++requests finish or roll back before capture. An exported snapshot is passed to
++pg_dump. The image inventory uses that same snapshot. All referenced keys/hashes/
++sizes are verified before the first artifact is sent. Originals and thumbnails
++are streamed into image-blobs.tar alongside inventory.json; dump and archives
++are never staged as persistent plaintext production files.
++
++The API remains stopped through dual stream/readback and repository checks.
++This intentionally causes bounded downtime during image-inclusive backups.
++Normal failure and SIGTERM restore prior service state. Scheduled service
++ExecStopPost also recovers journaled state after process termination; a live
++capture PID or malformed journal prevents unsafe resumption. Failed resumption
++retains its protected journal for operator review. Scheduled and manual backups
++use the same code and consistency mechanism. No one-off capture bypass exists.
++
++The inventory contains captured table counts, image-table digests, normalized
++ownership/grants and every referenced blob key/hash/size. Orphan objects are not
++deleted or represented as successful application uploads. Every database blob
++must appear in the archive. Complete-run retention handles four artifacts for
++schema 3 and three for schema 2, retaining permanent pins and DEGRADED semantics.
++Phase 13C performs no live forget/prune.
++
++## Private storage and release admission
++
++The configured BVA_IMAGE_BLOB_ROOT is a 0700 directory owned by the application
++account on the existing data filesystem, beside PostgreSQL PGDATA. It is outside
++PGDATA, immutable releases and public/static roots. Root backups can read it.
++The API unit adds only that narrow writable path; all other hardening remains.
++Release activation uses the absolute BVA_WEB_BUILD_DIR and retained immutable
++bundle/manifest/locked dependencies. Prepare the new bundle beside the old one.
++Before changing schema, retain one verified dual recovery point and exact prior
++configuration/service/release identities privately.
++
++On activation failure after 0017, keep maintenance in effect and inspect durable
++migration/grant/configuration state. Prefer corrected same-schema forward
++activation after review. Do not blindly start the 0016 application, downgrade/drop
++image tables, or restore over newer user activity. A destructive historical recovery
++requires an explicit operator decision and reconciliation of later data.
++
++## Independent Drive-only recovery
++
++Select every artifact from one protected receipt. Use the already established
++independent Windows recovery credentials, confirm the exact Drive repository,
++and stream artifacts directly into an isolated off-host target. Never retrieve
++with VM Drive credentials or fall back to the Proxmox repository. No persistent
++plaintext database dump is written on Windows. Size recovery storage from actual
++captured database/artifact size and available memory/filesystem headroom.
++
++Verify all artifact bytes and SHA-256 before restoration. Restore globals,
++safely extract the allowlisted protected configuration, create the exact database
++identity/locale/owner, then pg_restore with exit-on-error into disposable PostgreSQL
++18 with separate data/socket and no TCP listener. Never target live PGDATA.
++Extract image-blobs.tar with `image_backup.extract_archive(archive, destination)`;
++the destination must be new, absolute and outside production storage. Only exact
++inventory members are admitted; links, traversal, duplicates, extra/missing files,
++wrong sizes and hashes fail. No generic tar extract or overwrite mode is used.
++
++Compare restored counts, six image tables, lineage/links/receipts/order and normalized
++ownership/grants with the embedded captured snapshot inventory, never later live
++activity. Verify every referenced original and thumbnail, next_display_order and
++owner/runtime SCRAM authentication. Preserve the existing locale/timezone and ACL
++default normalization used by the accepted recovery procedure.
++
++Stop/remove only the disposable cluster, sockets, recovered plaintext/configuration,
++mounts and task helpers. Retain production intake/images and encrypted backups.
++A final short production health/storage/timer check takes no additional backup.
++
++[Approved privacy policy](IMAGE_PRIVACY_POLICY.md). [Plan 103](plans/103-phase-13-image-ingestion.md).
+diff --git a/services/api/src/brickvault_api/backup_format.py b/services/api/src/brickvault_api/backup_format.py
+new file mode 100644
+--- /dev/null
++++ b/services/api/src/brickvault_api/backup_format.py
+@@ -0,0 +1,78 @@
++"""Strict shared admission for legacy and image-inclusive recovery sets."""
++
++import re
++from datetime import UTC, datetime, timedelta
++from typing import Any
++
++LEGACY_ARTIFACTS = ("database.dump", "globals.sql", "configuration.tar")
++IMAGE_ARTIFACTS = (*LEGACY_ARTIFACTS, "image-blobs.tar")
++LEGACY_REVISION = "0016_hunt_cached_runs"
++IMAGE_REVISION = "0017_listing_images"
++HEX32 = re.compile(r"[a-f0-9]{32}\Z")
++HEX64 = re.compile(r"[a-f0-9]{64}\Z")
++FIELDS = {
++    "schema",
++    "purpose",
++    "database",
++    "ownership_marker",
++    "run_id",
++    "revisions_at_backup",
++    "verified_at_utc",
++    "repositories",
++    "artifacts",
++}
++
++
++def required_artifacts(schema: Any, revisions: Any) -> tuple[str, ...]:
++    if type(schema) is not int or type(revisions) is not list:
++        raise ValueError("Invalid recovery format.")
++    if schema == 2 and revisions in ([], [LEGACY_REVISION]):
++        return LEGACY_ARTIFACTS
++    if schema == 3 and revisions == [IMAGE_REVISION]:
++        return IMAGE_ARTIFACTS
++    raise ValueError("Unsupported recovery format or revision.")
++
++
++def validate_receipt(
++    run: str,
++    record: dict[str, Any],
++    repositories: dict[str, Any],
++    marker: str,
++    now: datetime | None = None,
++) -> tuple[str, ...]:
++    artifacts = required_artifacts(record.get("schema"), record.get("revisions_at_backup"))
++    if (
++        HEX32.fullmatch(run) is None
++        or set(record) != FIELDS
++        or record["purpose"] != "production"
++        or record["database"] != "brickvault_appraisal_prod"
++        or record["ownership_marker"] != marker
++        or record["run_id"] != run
++        or record["repositories"] != repositories
++        or set(repositories) != {"proxmox", "drive"}
++        or type(record["artifacts"]) is not dict
++        or set(record["artifacts"]) != set(artifacts)
++        or type(record["verified_at_utc"]) is not str
++    ):
++        raise ValueError("Invalid production receipt.")
++    stamp = datetime.fromisoformat(record["verified_at_utc"])
++    if stamp.utcoffset() != timedelta(0) or stamp > (now or datetime.now(UTC)):
++        raise ValueError("Invalid receipt time.")
++    seen: set[str] = set()
++    for row in record["artifacts"].values():
++        if (
++            type(row) is not dict
++            or set(row) != {"bytes", "sha256", "snapshots"}
++            or type(row["bytes"]) is not int
++            or row["bytes"] <= 0
++            or type(row["sha256"]) is not str
++            or HEX64.fullmatch(row["sha256"]) is None
++            or type(row["snapshots"]) is not dict
++            or set(row["snapshots"]) != set(repositories)
++        ):
++            raise ValueError("Invalid artifact receipt.")
++        for identity in row["snapshots"].values():
++            if type(identity) is not str or HEX64.fullmatch(identity) is None or identity in seen:
++                raise ValueError("Ambiguous snapshot identity.")
++            seen.add(identity)
++    return artifacts
+diff --git a/services/api/src/brickvault_api/image_backup.py b/services/api/src/brickvault_api/image_backup.py
+new file mode 100644
+--- /dev/null
++++ b/services/api/src/brickvault_api/image_backup.py
+@@ -0,0 +1,351 @@
++"""Paused, snapshot-bound image capture and strictly checked disposable extraction."""
++
++import hashlib
++import io
++import json
++import os
++import signal
++import stat
++import subprocess
++import sys
++import tarfile
++from collections.abc import Iterator
++from contextlib import contextmanager
++from pathlib import Path
++from typing import Any
++
++from sqlalchemy import Connection, text
++
++from brickvault_api.images.storage import FilesystemBlobStore, key_for
++
++STATE = Path("/run/brickvault-image-capture")
++JOURNAL = STATE / "pause.json"
++UNITS = ("brickvault-health.timer", "brickvault-health-deep.timer", "brickvault-api.service")
++IMAGE_TABLES = (
++    "listing",
++    "blob",
++    "image_asset",
++    "image_relation",
++    "listing_image",
++    "upload_receipt",
++)
++
++
++def canonical(value: Any) -> bytes:
++    return json.dumps(value, sort_keys=True, separators=(",", ":"), default=str).encode()
++
++
++def security_inventory(connection: Connection) -> dict[str, Any]:
++    queries = {
++        "roles": "SELECT rolname,rolsuper,rolinherit,rolcreaterole,rolcreatedb,rolcanlogin,rolreplication,rolbypassrls,rolconnlimit,rolvaliduntil FROM pg_roles WHERE rolname IN ('brickvault_appraisal_prod_owner','brickvault_appraisal_prod_runtime') ORDER BY rolname",
++        "memberships": "SELECT roleid::regrole::text AS role,member::regrole::text AS member,admin_option FROM pg_auth_members WHERE roleid IN (SELECT oid FROM pg_roles WHERE rolname IN ('brickvault_appraisal_prod_owner','brickvault_appraisal_prod_runtime')) OR member IN (SELECT oid FROM pg_roles WHERE rolname IN ('brickvault_appraisal_prod_owner','brickvault_appraisal_prod_runtime')) ORDER BY 1,2",
++        "database": "SELECT datname,pg_get_userbyid(datdba) AS owner,coalesce(datacl,acldefault('d',datdba))::text AS acl FROM pg_database WHERE datname=current_database()",
++        "schemas": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,coalesce(nspacl,acldefault('n',nspowner))::text AS acl FROM pg_namespace WHERE nspname='public' ORDER BY 1",
++        "columns": "SELECT c.relname,a.attname,a.attacl::text AS acl FROM pg_attribute a JOIN pg_class c ON c.oid=a.attrelid JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND a.attacl IS NOT NULL ORDER BY 1,2",
++        "functions": "SELECT p.proname,pg_get_function_identity_arguments(p.oid) AS args,pg_get_userbyid(p.proowner) AS owner,coalesce(p.proacl,acldefault('f',p.proowner))::text AS acl FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' ORDER BY 1,2",
++        "defaults": "SELECT pg_get_userbyid(defaclrole) AS role,defaclobjtype,defaclacl::text AS acl FROM pg_default_acl ORDER BY 1,2,3",
++    }
++    result = {}
++    for name, query in queries.items():
++        rows = [dict(r) for r in connection.execute(text(query)).mappings()]
++        for row in rows:
++            if "acl" in row:
++                row["acl"] = sorted(row["acl"].strip("{}").split(","))
++        result[name] = rows
++    return result
++
++
++def database_inventory(connection: Connection) -> dict[str, Any]:
++    tables = (
++        connection.execute(
++            text("SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename")
++        )
++        .scalars()
++        .all()
++    )
++    counts = {
++        name: connection.scalar(
++            text('SELECT count(*) FROM public."' + name.replace('"', '""') + '"')
++        )
++        for name in tables
++    }
++    rows = {
++        name: [
++            dict(r)
++            for r in connection.execute(text(f"SELECT * FROM public.{name} ORDER BY id")).mappings()
++        ]
++        for name in IMAGE_TABLES
++    }
++    objects = [
++        dict(r)
++        for r in connection.execute(
++            text(
++                "SELECT c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,"
++                "coalesce(c.relacl,acldefault(CASE WHEN c.relkind='S' THEN 'S'::\"char\" ELSE 'r'::\"char\" END,c.relowner))::text AS acl "
++                "FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace "
++                "WHERE n.nspname='public' ORDER BY c.relname,c.relkind"
++            )
++        ).mappings()
++    ]
++    for row in objects:
++        row["acl"] = sorted(row["acl"].strip("{}").split(","))
++    return {
++        "counts": counts,
++        "security": security_inventory(connection),
++        "context": {
++            name: hashlib.sha256(
++                canonical(
++                    [
++                        dict(r)
++                        for r in connection.execute(
++                            text(f"SELECT * FROM public.{name} t ORDER BY row_to_json(t)::text")
++                        ).mappings()
++                    ]
++                )
++            ).hexdigest()
++            for name in (
++                "catalog_active_snapshot",
++                "catalog_activation",
++                "catalog_import_run",
++                "auth_principal",
++                "application_settings",
++                "watchlist_item",
++            )
++        },
++        "image_tables": {
++            name: hashlib.sha256(canonical(values)).hexdigest() for name, values in rows.items()
++        },
++        "objects": objects,
++        "blobs": [{k: r[k] for k in ("sha256", "storage_key", "byte_count")} for r in rows["blob"]],
++    }
++
++
++def configured_root() -> Path:
++    from brickvault_api import production_admin as admin
++
++    raw = admin._protected_file(Path("/etc/brickvault/api.env")).decode()
++    values = [
++        line.split("=", 1)[1]
++        for line in raw.splitlines()
++        if line.startswith("BVA_IMAGE_BLOB_ROOT=")
++    ]
++    if len(values) != 1 or not values[0].startswith("/"):
++        raise ValueError("Private image root is absent.")
++    root = Path(values[0])
++    if root != root.resolve(strict=True) or not root.is_dir():
++        raise ValueError("Private image root is unsafe.")
++    for forbidden in (Path("/var/lib/postgresql/18/main"), Path("/opt/brickvault")):
++        if root.is_relative_to(forbidden):
++            raise ValueError("Private image root overlaps protected storage.")
++    info = root.stat()
++    if stat.S_IMODE(info.st_mode) != 0o700:
++        raise ValueError("Private image root permissions differ.")
++    return root
++
++
++def systemctl(*arguments: str) -> str:
++    r = subprocess.run(
++        ["/usr/bin/systemctl", *arguments], capture_output=True, timeout=180, check=False
++    )
++    if r.returncode:
++        raise RuntimeError("Image capture service control failed.")
++    return r.stdout.decode().strip()
++
++
++def resume() -> None:
++    if not JOURNAL.exists():
++        return
++    from brickvault_api import production_admin as admin
++
++    value = dict(admin._parse_json(admin._protected_file(JOURNAL)))
++    if (
++        set(value) != {"pid", "active"}
++        or type(value["pid"]) is not int
++        or type(value["active"]) is not list
++    ):
++        raise ValueError("Invalid image pause journal.")
++    if len(value["active"]) != len(set(value["active"])) or any(
++        u not in UNITS for u in value["active"]
++    ):
++        raise ValueError("Invalid image pause units.")
++    if value["pid"] != os.getpid() and Path(f"/proc/{value['pid']}").exists():
++        raise ValueError("Image capture is still running.")
++    for unit in reversed(value["active"]):
++        systemctl("start", unit)
++    JOURNAL.unlink()
++
++
++@contextmanager
++def maintenance_pause() -> Iterator[None]:
++    from brickvault_api import production_admin as admin
++
++    admin._require_root()
++    STATE.mkdir(mode=0o700, exist_ok=True)
++    info = STATE.lstat()
++    if (
++        not stat.S_ISDIR(info.st_mode)
++        or info.st_uid != 0
++        or stat.S_IMODE(info.st_mode) != 0o700
++        or JOURNAL.exists()
++    ):
++        raise ValueError("Image capture state needs operator review.")
++    for unit in ("brickvault-health.service", "brickvault-health-deep.service"):
++        if systemctl("show", unit, "--property=ActiveState", "--value") not in (
++            "inactive",
++            "failed",
++        ):
++            raise ValueError("Health operation conflicts with image capture.")
++    active = []
++    for unit in UNITS:
++        state = systemctl("show", unit, "--property=ActiveState", "--value")
++        if state not in ("active", "inactive"):
++            raise ValueError("Service transition conflicts with image capture.")
++        if state == "active":
++            active.append(unit)
++    fd = os.open(JOURNAL, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
++    with os.fdopen(fd, "wb") as output:
++        output.write(canonical({"pid": os.getpid(), "active": active}))
++        output.flush()
++        os.fsync(output.fileno())
++    previous = signal.getsignal(signal.SIGTERM)
++
++    def interrupted(_signal: int, _frame: Any) -> None:
++        raise InterruptedError("Image capture interrupted.")
++
++    signal.signal(signal.SIGTERM, interrupted)
++    try:
++        for unit in active:
++            systemctl("stop", unit)
++        if systemctl("show", "brickvault-api.service", "--property=MainPID", "--value") != "0":
++            raise ValueError("Image uploads have not settled.")
++        yield
++    finally:
++        signal.signal(signal.SIGTERM, previous)
++        resume()
++
++
++def validate_inventory(value: Any) -> list[dict[str, Any]]:
++    if (
++        type(value) is not dict
++        or set(value) != {"schema", "revisions", "database"}
++        or value["schema"] != 1
++        or value["revisions"] != ["0017_listing_images"]
++    ):
++        raise ValueError("Invalid image inventory format.")
++    database = value["database"]
++    if (
++        type(database) is not dict
++        or set(database) != {"counts", "image_tables", "objects", "blobs", "security", "context"}
++        or type(database["blobs"]) is not list
++    ):
++        raise ValueError("Invalid image inventory.")
++    rows = database["blobs"]
++    seen = set()
++    for row in rows:
++        if (
++            type(row) is not dict
++            or set(row) != {"sha256", "storage_key", "byte_count"}
++            or type(row["byte_count"]) is not int
++            or row["byte_count"] <= 0
++        ):
++            raise ValueError("Invalid inventory blob.")
++        if (
++            type(row["sha256"]) is not str
++            or row["storage_key"] != key_for(row["sha256"])
++            or row["sha256"] in seen
++        ):
++            raise ValueError("Invalid inventory key.")
++        seen.add(row["sha256"])
++    return rows
++
++
++def write_archive(inventory: Path, root: Path) -> None:
++    raw = inventory.read_bytes()
++    rows = validate_inventory(json.loads(raw))
++    store = FilesystemBlobStore(root)
++    with tarfile.open(fileobj=sys.stdout.buffer, mode="w|") as archive:
++        member = tarfile.TarInfo("inventory.json")
++        member.size = len(raw)
++        member.mode = 0o600
++        archive.addfile(member, io.BytesIO(raw))
++        for row in rows:
++            verified = store.stat(row["sha256"])
++            if verified.byte_count != row["byte_count"]:
++                raise ValueError("Inventory bytes differ.")
++            member = tarfile.TarInfo(row["storage_key"])
++            member.size = verified.byte_count
++            member.mode = 0o600
++            with store.read(row["sha256"]) as source:
++                archive.addfile(member, source)
++
++
++def extract_archive(archive_path: Path, destination: Path) -> dict[str, Any]:
++    # Destination must be newly task-owned; no production default or overwrite mode.
++    if (
++        not destination.is_absolute()
++        or destination.exists()
++        or destination != destination.parent.resolve() / destination.name
++    ):
++        raise ValueError("Recovery destination must be new and absolute.")
++    if any(
++        destination.is_relative_to(p)
++        for p in (Path("/var/lib/postgresql"), Path("/opt/brickvault"))
++    ):
++        raise ValueError("Recovery destination overlaps production.")
++    destination.mkdir(mode=0o700)
++    with tarfile.open(archive_path, mode="r|") as archive:
++        member = archive.next()
++        if (
++            member is None
++            or member.name != "inventory.json"
++            or not member.isfile()
++            or member.size > 16 * 1024**2
++        ):
++            raise ValueError("Recovery inventory is absent.")
++        source = archive.extractfile(member)
++        assert source is not None
++        value = json.loads(source.read())
++        rows = {r["storage_key"]: r for r in validate_inventory(value)}
++        seen: set[str] = set()
++        while (member := archive.next()) is not None:
++            if (
++                not member.isfile()
++                or member.name not in rows
++                or member.name in seen
++                or member.size != rows[member.name]["byte_count"]
++            ):
++                raise ValueError("Unexpected recovery archive member.")
++            path = destination / member.name
++            path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
++            source = archive.extractfile(member)
++            assert source is not None
++            digest = hashlib.sha256()
++            with path.open("xb") as output:
++                os.chmod(path, 0o600)
++                while chunk := source.read(1024 * 1024):
++                    digest.update(chunk)
++                    output.write(chunk)
++            if digest.hexdigest() != rows[member.name]["sha256"]:
++                raise ValueError("Recovery blob digest differs.")
++            seen.add(member.name)
++        if seen != set(rows):
++            raise ValueError("Recovery archive is incomplete.")
++    return value
++
++
++def main() -> int:
++    try:
++        if sys.argv[1:] == ["resume"]:
++            resume()
++        elif len(sys.argv) == 4 and sys.argv[1] == "archive":
++            write_archive(Path(sys.argv[2]), Path(sys.argv[3]))
++        else:
++            raise ValueError("Invalid image backup command.")
++    except Exception:  # noqa: BLE001 - private metadata is never logged.
++        print("IMAGE_BACKUP_FAILED", file=sys.stderr)
++        return 1
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/services/api/tests/unit/test_image_backup_seams.py b/services/api/tests/unit/test_image_backup_seams.py
+new file mode 100644
+--- /dev/null
++++ b/services/api/tests/unit/test_image_backup_seams.py
+@@ -0,0 +1,298 @@
++"""Bounded new recovery-format, real filesystem and service failure seams."""
++
++import copy
++import hashlib
++import io
++import json
++import os
++import sys
++import tarfile
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from types import SimpleNamespace
++from typing import Any
++
++import pytest
++
++from brickvault_api import backup_format as fmt
++from brickvault_api import image_backup as images
++from brickvault_api import production_admin as admin
++from brickvault_api import production_backup as backup
++from brickvault_api.images.storage import FilesystemBlobStore, ImageError
++
++NOW = datetime.now(UTC)
++REPOS = {
++    d: {"uri": "synthetic:" + d, "id": hashlib.sha256(d.encode()).hexdigest()}
++    for d in ("proxmox", "drive")
++}
++MARKER = "brickvault-appraisal:" + "1" * 32 + ":" + "2" * 32
++
++
++def receipt(schema: int = 3) -> dict[str, Any]:
++    revisions = [fmt.IMAGE_REVISION if schema == 3 else fmt.LEGACY_REVISION]
++    names = fmt.required_artifacts(schema, revisions)
++    return {
++        "schema": schema,
++        "purpose": "production",
++        "database": admin.DATABASE,
++        "ownership_marker": MARKER,
++        "run_id": "a" * 32,
++        "revisions_at_backup": revisions,
++        "verified_at_utc": (NOW - timedelta(seconds=5)).isoformat(),
++        "repositories": REPOS,
++        "artifacts": {
++            n: {
++                "bytes": 10,
++                "sha256": "b" * 64,
++                "snapshots": {d: hashlib.sha256((n + d).encode()).hexdigest() for d in REPOS},
++            }
++            for n in names
++        },
++    }
++
++
++def proof_check(monkeypatch: pytest.MonkeyPatch, schema: int) -> None:
++    r = receipt(schema)
++    raw = json.dumps(r).encode()
++    proof = backup._proof_from_receipt(r["run_id"], r, raw, tuple(r["revisions_at_backup"]), NOW)
++    monkeypatch.setattr(admin, "_protected_file", lambda _p: json.dumps(proof).encode())
++    monkeypatch.setattr(backup, "verified_receipt", lambda _r: (r, raw))
++    cfg = admin.AdminConfig("unused-owner", "unused-runtime", MARKER)
++    admin._recovery_proof(backup._proof_path(r["run_id"]), cfg, tuple(r["revisions_at_backup"]))
++    admin._recovery_proof(backup._proof_path(r["run_id"]), cfg, None)
++    with pytest.raises(admin.AdminError):
++        admin._recovery_proof(backup._proof_path(r["run_id"]), cfg, ("unexpected",))
++
++
++def test_legacy_proof_remains_exact_during_approved_transition(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    r = receipt(2)
++    assert fmt.validate_receipt(r["run_id"], r, REPOS, MARKER, NOW) == fmt.LEGACY_ARTIFACTS
++    proof_check(monkeypatch, 2)
++    r["revisions_at_backup"] = [fmt.IMAGE_REVISION]
++    with pytest.raises(ValueError):
++        fmt.validate_receipt(r["run_id"], r, REPOS, MARKER, NOW)
++
++
++def test_combined_proof_requires_all_four_artifacts(monkeypatch: pytest.MonkeyPatch) -> None:
++    r = receipt()
++    assert fmt.validate_receipt(r["run_id"], r, REPOS, MARKER, NOW) == fmt.IMAGE_ARTIFACTS
++    proof_check(monkeypatch, 3)
++    r["artifacts"].pop("image-blobs.tar")
++    with pytest.raises(ValueError):
++        fmt.validate_receipt(r["run_id"], r, REPOS, MARKER, NOW)
++
++
++def test_malformed_unknown_or_incomplete_copies_fail_closed() -> None:
++    bad = []
++    r = receipt()
++    r["schema"] = 4
++    bad.append(r)
++    r = receipt()
++    r["artifacts"]["image-blobs.tar"]["snapshots"].pop("drive")
++    bad.append(r)
++    r = receipt()
++    r["artifacts"]["image-blobs.tar"]["sha256"] = "broken"
++    bad.append(r)
++    r = receipt()
++    r["artifacts"]["image-blobs.tar"]["snapshots"] = r["artifacts"]["database.dump"]["snapshots"]
++    bad.append(r)
++    r = receipt()
++    r["optional_images"] = True
++    bad.append(r)
++    for r in bad:
++        with pytest.raises(ValueError):
++            fmt.validate_receipt(r["run_id"], r, REPOS, MARKER, NOW)
++
++
++def fixture_archive(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> tuple[Path, Path, dict[str, Any]]:
++    root = tmp_path / "source"
++    store = FilesystemBlobStore(root)
++    blobs = [store.publish(b"original fixture"), store.publish(b"thumbnail fixture")]
++    value = {
++        "schema": 1,
++        "revisions": [fmt.IMAGE_REVISION],
++        "database": {
++            "counts": {"blob": 2},
++            "security": {},
++            "context": {},
++            "objects": [],
++            "image_tables": {},
++            "blobs": [
++                {"sha256": b.sha256, "storage_key": b.key, "byte_count": b.byte_count}
++                for b in blobs
++            ],
++        },
++    }
++    inventory = tmp_path / "inventory.json"
++    inventory.write_bytes(images.canonical(value))
++    out = io.BytesIO()
++    monkeypatch.setattr(images.sys, "stdout", SimpleNamespace(buffer=out))
++    images.write_archive(inventory, root)
++    archive = tmp_path / "images.tar"
++    archive.write_bytes(out.getvalue())
++    return archive, root, value
++
++
++def test_real_blob_archive_roundtrip_and_missing_corrupt_refusal(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    archive, root, value = fixture_archive(tmp_path, monkeypatch)
++    destination = tmp_path / "recovered"
++    assert images.extract_archive(archive, destination) == value
++    for row in value["database"]["blobs"]:
++        assert (destination / row["storage_key"]).read_bytes() == (
++            root / row["storage_key"]
++        ).read_bytes()
++    blob = root / value["database"]["blobs"][0]["storage_key"]
++    blob.write_bytes(b"corrupt")
++    with pytest.raises(ImageError):
++        images.write_archive(tmp_path / "inventory.json", root)
++    blob.unlink()
++    with pytest.raises(ImageError):
++        images.write_archive(tmp_path / "inventory.json", root)
++
++
++def test_archive_rejects_path_escape_links_missing_and_duplicate_members(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    archive, _root, value = fixture_archive(tmp_path, monkeypatch)
++    with tarfile.open(archive) as source:
++        members = [(m, source.extractfile(m).read()) for m in source.getmembers()]
++    for n, mode in enumerate(("escape", "link", "missing", "duplicate", "corrupt")):
++        altered = tmp_path / f"bad-{n}.tar"
++        with tarfile.open(altered, "w") as target:
++            for member, data in members:
++                if mode == "missing" and member.name != "inventory.json":
++                    continue
++                member = copy.copy(member)
++                if member.name != "inventory.json" and mode == "escape":
++                    member.name = "../escaped"
++                if member.name != "inventory.json" and mode == "link":
++                    member.type = tarfile.SYMTYPE
++                    member.linkname = "../escaped"
++                if member.name != "inventory.json" and mode == "corrupt":
++                    data = b"x" * len(data)
++                target.addfile(member, io.BytesIO(data) if member.isfile() else None)
++            if mode == "duplicate":
++                target.addfile(members[0][0], io.BytesIO(members[0][1]))
++        with pytest.raises(ValueError):
++            images.extract_archive(altered, tmp_path / f"target-{n}")
++    assert not (tmp_path / "escaped").exists()
++    assert len(value["database"]["blobs"]) == 2
++
++
++def test_mixed_receipts_retention_keeps_complete_artifact_set_and_pins(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    scripts = Path(__file__).resolve().parents[5] / "scripts"
++    monkeypatch.syspath_prepend(str(scripts))
++    import complete_run_retention as retention
++
++    legacy = receipt(2)
++    new = receipt(3)
++    retention.validate_receipt(legacy["run_id"], legacy, REPOS, MARKER, NOW)
++    retention.validate_receipt(new["run_id"], new, REPOS, MARKER, NOW)
++    # Planner binds every actual artifact and protects two historical permanent pins.
++    new["run_id"] = "c" * 32
++    extra = copy.deepcopy(legacy)
++    extra["run_id"] = "d" * 32
++    for n, r in enumerate((legacy, extra, new)):
++        r["verified_at_utc"] = (NOW - timedelta(days=400 + n)).isoformat()
++        for a, row in r["artifacts"].items():
++            row["snapshots"] = {
++                d: hashlib.sha256((r["run_id"] + a + d).encode()).hexdigest() for d in REPOS
++            }
++    receipts = {r["run_id"]: r for r in (legacy, extra, new)}
++    snapshots = {
++        d: [
++            {"id": row["snapshots"][d], "paths": [f"/{run}/{a}"], "tags": [run]}
++            for run, r in receipts.items()
++            for a, row in r["artifacts"].items()
++        ]
++        for d in REPOS
++    }
++    canaries = {}
++    for d in REPOS:
++        row = {
++            "id": hashlib.sha256((d + "canary").encode()).hexdigest(),
++            "paths": ["/canary"],
++            "tags": ["canary"],
++        }
++        snapshots[d].append(row)
++        canaries[d] = {row["id"]: retention.digest(row)}
++    pins = {
++        "schema": 1,
++        "repositories": REPOS,
++        "runs": {r["run_id"]: retention.digest(r) for r in (legacy, extra)},
++        "canaries": canaries,
++    }
++    ledger = {"schema": 1, "status": "READY", "deleted": {}, "last_transaction": None}
++    before = images.canonical(pins)
++    plan = retention.make_plan(receipts, REPOS, MARKER, snapshots, pins, ledger, NOW)
++    assert set(pins["runs"]) <= set(plan["keep"])
++    assert images.canonical(pins) == before
++    snapshots["drive"] = [
++        r
++        for r in snapshots["drive"]
++        if r["id"] != new["artifacts"]["image-blobs.tar"]["snapshots"]["drive"]
++    ]
++    with pytest.raises(retention.RetentionError):
++        retention.make_plan(receipts, REPOS, MARKER, snapshots, pins, ledger, NOW)
++
++
++def test_pause_restores_prior_state_after_capture_or_stop_failure(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    monkeypatch.setattr(os, "O_NOFOLLOW", getattr(os, "O_NOFOLLOW", 0), raising=False)
++    monkeypatch.setattr(admin, "_require_root", lambda: None)
++    monkeypatch.setattr(images, "STATE", tmp_path / "pause")
++    monkeypatch.setattr(images, "JOURNAL", tmp_path / "pause/pause.json")
++    monkeypatch.setattr(admin, "_protected_file", lambda p: p.read_bytes())
++    # Windows lacks POSIX owner/mode checks; preserve all remaining real journal/finally behavior.
++    real_lstat = Path.lstat
++
++    def info(p: Path) -> Any:
++        r = real_lstat(p)
++        if p == images.STATE:
++            return SimpleNamespace(st_mode=0o40700, st_uid=0)
++        return r
++
++    monkeypatch.setattr(Path, "lstat", info)
++    for stop_fails in (False, True):
++        calls = []
++
++        def control(
++            *args: str, calls: list[tuple[str, ...]] = calls, stop_fails: bool = stop_fails
++        ) -> str:
++            calls.append(args)
++            if args[0] == "show":
++                if "--property=MainPID" in args:
++                    return "0"
++                return "active" if args[1] in images.UNITS else "inactive"
++            if stop_fails and args[:2] == ("stop", "brickvault-api.service"):
++                raise RuntimeError("synthetic stop failure")
++            return ""
++
++        monkeypatch.setattr(images, "systemctl", control)
++        with pytest.raises(RuntimeError):
++            with images.maintenance_pause():
++                raise RuntimeError("synthetic capture failure")
++        assert [a[1] for a in calls if a[0] == "start"] == list(reversed(images.UNITS))
++        assert not images.JOURNAL.exists()
++
++
++def test_new_artifact_stream_requires_both_destinations(tmp_path: Path) -> None:
++    source = [sys.executable, "-c", "import sys;sys.stdout.buffer.write(b'image artifact')"]
++    sink = [
++        sys.executable,
++        "-c",
++        "import sys;from pathlib import Path;Path(sys.argv[1]).write_bytes(sys.stdin.buffer.read())",
++        str(tmp_path / "copy"),
++    ]
++    failed = [sys.executable, "-c", "import sys;sys.stdin.buffer.read();sys.exit(2)"]
++    with pytest.raises(backup.BackupError):
++        backup.stream_to_two(source, [sink, failed], [dict(), dict()], deadline_seconds=20)

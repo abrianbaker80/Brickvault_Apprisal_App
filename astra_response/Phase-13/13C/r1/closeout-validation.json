@@ -1,0 +1,16 @@
+{
+  "source_files": 20,
+  "package_files": 37,
+  "source_markdown_links": 254,
+  "review_markdown_links": 25,
+  "patch_reverse_check": "PASS",
+  "whitespace": "PASS",
+  "private_scan": "PASS",
+  "protected": "unchanged and unstaged",
+  "index": "empty",
+  "main_pushed": false,
+  "source_id_still_matches_deployed_release": true,
+  "source_copy_correspondence": "PASS with three explicitly documented unchanged-literal redactions",
+  "complete_review": "Candidate source independently reviewed; public reports and copied-source correspondence reviewed",
+  "pre_and_post_backup_private_value_scan": "PASS"
+}

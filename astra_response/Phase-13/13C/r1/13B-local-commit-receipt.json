@@ -1,0 +1,22 @@
+{
+  "commit": "1c7501092e7fad92a5471fa5571c6d009a1b0c3f",
+  "subject": "Implement Phase 13B marketplace intake UI",
+  "parent": "d14002e244434123dc68b57aefda004a00aa8e89",
+  "files": [
+    "CODEX_WORKFLOW.md",
+    "apps/web/src/App.tsx",
+    "apps/web/src/AppShell.tsx",
+    "apps/web/src/Listings.test.tsx",
+    "apps/web/src/ListingsPage.tsx",
+    "apps/web/src/listings-api.ts",
+    "apps/web/src/styles.css",
+    "apps/web/src/upload-queue.ts",
+    "docs/ROADMAP.md",
+    "docs/plans/103-phase-13-image-ingestion.md",
+    "services/api/src/brickvault_api/api/static.py"
+  ],
+  "index": "empty",
+  "main_pushed": false,
+  "protected": "unchanged and unstaged",
+  "validation": "Accepted source hashes and complete diff; exact staged inventory and whitespace; no tests/browser/build rerun"
+}

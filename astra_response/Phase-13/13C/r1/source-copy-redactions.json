@@ -1,0 +1,6 @@
+{
+  "CODEX_WORKFLOW.md": "One unchanged historical private source path",
+  "services/api/src/brickvault_api/production_backup.py": "Two unchanged repository URI literals",
+  "cumulative_patch": "All changed lines exact; no private literals in zero-context patch",
+  "raw_source_hashes": "source-hashes.json"
+}

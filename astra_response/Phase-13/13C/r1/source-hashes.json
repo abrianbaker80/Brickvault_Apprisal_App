@@ -1,0 +1,22 @@
+{
+  "CODEX_WORKFLOW.md": "5a3e4aa898fd05aaf6eb65e2c6e46af1526e90a7b75dd42483d3b6c79c577c23",
+  "apps/web/pwa/worker.js": "edf3f571d76f7849f5fd30ddd4e3a9ab140308188d247db64b1aa037ecad5d7b",
+  "apps/web/src/AppShell.tsx": "6ca8896d61656f570c0ff857679ac35681407481bd2588cd6e97bbe02bba4335",
+  "apps/web/src/Listings.test.tsx": "9d2c5d1a0f0d1e26ce1474f88f6d4aae5b787c8a18061759a40384e5835fd01d",
+  "apps/web/src/ListingsPage.tsx": "e6d2e8d6142c1274dc0c09936b03ced2053d6a19b87742b8fbe76d1de5be3fd9",
+  "deploy/systemd/brickvault-api.service": "e4d57950fe25493f0aa0a4fc1c46494648b1bf619be8653c5d91ca40c355af73",
+  "deploy/systemd/brickvault-backup.service": "7de1461c28bbd243a36828474c55f53536ce635062a58039d38c04d0f73a7b7d",
+  "docs/IMAGE_BACKUP_RECOVERY.md": "80230de57c7877a80f1f6d26681e9e65c74e547049e787e3766c3d989a4410df",
+  "docs/IMAGE_PRIVACY_POLICY.md": "b552afd1d25d75ba3e4930a39b693126b9d175a278db83767245b46cf8aede61",
+  "docs/ROADMAP.md": "212136b943c38a790c44f83fa6bef460b14ff76f9c4485615c9bc6ad742d0481",
+  "docs/plans/103-phase-13-image-ingestion.md": "534148d6ba639c183ae8346fbec608b4d5de394d213763a08ff32f05f461b0fd",
+  "scripts/complete_run_retention.py": "82760148dd0df407c944002e5748edd1a6f1471eaa5dd098cf8bb67240753947",
+  "scripts/package_api.py": "a1a3c0efbef2b710c9cdec42b8b362e6adea4554471fc9ae717b134eee64ab5b",
+  "scripts/production_health.py": "49e8a558edd88b58f65cb1a527dd845a03d83296d64404e1e9418ecc7efccb97",
+  "scripts/release_manifest.py": "13b1f7f5fff85793fb7b620fa03d6692942db78b8ea4f45721ea12d380ac3682",
+  "services/api/src/brickvault_api/backup_format.py": "ac1427d1bd7f59cb1211351e9c291891dd36d7303c7df3d15787bdf358022367",
+  "services/api/src/brickvault_api/image_backup.py": "e427f211cebba076950fe983c49ebf638527e834fed8b42fedbc36fdeb07cb0f",
+  "services/api/src/brickvault_api/production_admin.py": "fb493222a3aad19b363c20ec869c840a25e2617fb54fb665e35cb38ab46ce594",
+  "services/api/src/brickvault_api/production_backup.py": "d5c38c74903b219c573ba57e25d9fc964ba222f8396aed657f1c92b3e5ff97a0",
+  "services/api/tests/unit/test_image_backup_seams.py": "a08233ce462aca58cc1025e28a35e5e7b86f41d0d5eb92f296d7c1495cea4022"
+}

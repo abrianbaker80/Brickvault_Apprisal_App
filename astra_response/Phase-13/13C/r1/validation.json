@@ -1,0 +1,248 @@
+{
+  "status": "PASS",
+  "browser": {
+    "status": "PASS",
+    "listingRecordsCreated": 1,
+    "images": 3,
+    "positions": [
+      0,
+      1,
+      2
+    ],
+    "nextDisplayOrder": 3,
+    "attempts": 3,
+    "peakUploads": 2,
+    "thumbnailDimensions": [
+      512,
+      384
+    ],
+    "originalDimensions": [
+      640,
+      480
+    ],
+    "servedOriginalExactHash": true,
+    "refreshReopen": true,
+    "privateResponsesNoStore": true,
+    "privateResponses": 18,
+    "privateServiceWorkerResponses": 0,
+    "privateCacheEntries": 0,
+    "currentPublicShell": "brickvault-public-shell-baac5696d26059163a360d7cd5b0cb99f983a3e1b096c195f3b957a3c35fe045",
+    "logoutObjects": {
+      "created": 9,
+      "live": 0,
+      "privateImages": 0,
+      "revoked": 9
+    },
+    "loggedOutImage": {
+      "noStore": "no-store",
+      "status": 401
+    }
+  },
+  "stored_intake": {
+    "status": "PASS",
+    "gate": "persisted-intake-originals-and-receipts",
+    "images": 3,
+    "receipts": 3,
+    "relations": 3,
+    "original_hashes_sizes_exact": true,
+    "originals_thumbnails_present": true,
+    "positions": [
+      0,
+      1,
+      2
+    ],
+    "next_display_order": 3,
+    "privacy": "restricted for manual/unknown source, inherited by thumbnails",
+    "catalog_sets": 28278,
+    "production_data_retained": true,
+    "probe_corrected_to_actual_accepted_privacy_rule": true
+  },
+  "combined_backup": {
+    "schema": 3,
+    "normal_invocations": 1,
+    "destinations": 2,
+    "artifact_count": 4,
+    "readbacks": 8,
+    "artifact_bytes": {
+      "configuration.tar": 20480,
+      "database.dump": 768651105,
+      "globals.sql": 1454,
+      "image-blobs.tar": 143360
+    },
+    "historical_receipts_unchanged": true,
+    "api_restored": true,
+    "pause_journal_removed": true
+  },
+  "independent_recovery": {
+    "status": "PASS",
+    "records": [
+      {
+        "status": "PASS",
+        "gate": "independent_drive_context",
+        "repository_identity_exact": true,
+        "same_combined_receipt": true,
+        "vm_drive_credentials_used": false,
+        "proxmox_fallback": false,
+        "windows_persistent_plaintext_dump": false
+      },
+      {
+        "gate": "isolated_init",
+        "placement": "Windows WSL off-host",
+        "postgres_major": 18,
+        "status": "PASS",
+        "tcp_listener": false,
+        "tmpfs_gib": 9,
+        "tmpfs_noswap": true
+      },
+      {
+        "artifact": "globals.sql",
+        "bytes": 1454,
+        "gate": "artifact_receive",
+        "hash_verified_before_restore": true,
+        "status": "PASS"
+      },
+      {
+        "artifact": "configuration.tar",
+        "bytes": 20480,
+        "gate": "artifact_receive",
+        "hash_verified_before_restore": true,
+        "status": "PASS"
+      },
+      {
+        "artifact": "database.dump",
+        "bytes": 768651105,
+        "gate": "artifact_receive",
+        "hash_verified_before_restore": true,
+        "status": "PASS"
+      },
+      {
+        "artifact": "image-blobs.tar",
+        "bytes": 143360,
+        "gate": "artifact_receive",
+        "hash_verified_before_restore": true,
+        "status": "PASS"
+      },
+      {
+        "failing_objects": 0,
+        "gate": "globals_restore",
+        "status": "PASS"
+      },
+      {
+        "current_release_manifest": true,
+        "exact_database_identity": true,
+        "files": 8,
+        "gate": "protected_configuration",
+        "status": "PASS"
+      },
+      {
+        "gate": "exact_database_creation",
+        "owner_marker_grants": "PASS",
+        "status": "PASS"
+      },
+      {
+        "failing_objects": 0,
+        "gate": "database_restore",
+        "skipped_objects": 0,
+        "status": "PASS"
+      },
+      {
+        "accepted_active_snapshots": 1,
+        "comparison": {
+          "blobs": true,
+          "context": true,
+          "counts": true,
+          "image_tables": true,
+          "objects": true,
+          "security": true
+        },
+        "comparison_is_captured_backup_state": true,
+        "every_referenced_blob_valid": true,
+        "gate": "restored_combined_comparison",
+        "generation": 1,
+        "image_counts": {
+          "blob": 6,
+          "image_asset": 6,
+          "image_relation": 3,
+          "listing": 1,
+          "listing_image": 3,
+          "upload_receipt": 3
+        },
+        "lineage_links_receipts_order_exact": true,
+        "next_display_order": 3,
+        "owner_runtime_scram_authentication": true,
+        "revision": "0017_listing_images",
+        "runtime_least_privilege": true,
+        "sets": 28278,
+        "status": "PASS",
+        "tables": 82,
+        "verified_blob_count": 6
+      },
+      {
+        "cluster_removed": true,
+        "gate": "recovery_cleanup",
+        "no_recovery_listener": true,
+        "no_recovery_process": true,
+        "production_cluster_untouched": true,
+        "recovered_plaintext_removed": true,
+        "status": "PASS",
+        "temporary_configuration_removed": true,
+        "tmpfs_unmounted_removed": true
+      }
+    ],
+    "failure": null,
+    "source": "independent Windows Google Drive only",
+    "proxmox_fallback": false,
+    "windows_persistent_plaintext_dump": false
+  },
+  "final_production": {
+    "status": "PASS",
+    "release": "phase13c-marketplace-intake-r1",
+    "migration": "0017_listing_images",
+    "generation": 1,
+    "catalog_sets": 28278,
+    "retained_acceptance_images": 3,
+    "retained_upload_receipts": 3,
+    "checks": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true
+    },
+    "units": {
+      "brickvault-api.service": "active",
+      "caddy.service": "active",
+      "postgresql@18-main.service": "active",
+      "brickvault-backup.timer": "active",
+      "brickvault-retention.timer": "active",
+      "brickvault-health.timer": "active",
+      "brickvault-health-deep.timer": "active"
+    },
+    "failed_units": 0,
+    "combined_backup_seconds": 376,
+    "historical_receipts_pins_unchanged": true,
+    "temporary_production_config_helpers_removed": true,
+    "capture_runtime_directory_removed": true,
+    "backup_retention_services_inactive": true,
+    "no_additional_backup": true
+  },
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "source_baseline": "1c7501092e7fad92a5471fa5571c6d009a1b0c3f",
+  "index": "empty",
+  "main_pushed": false,
+  "phase13": "IN PROGRESS pending final review",
+  "phase14": "NOT STARTED"
+}
