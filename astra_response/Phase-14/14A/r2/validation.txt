@@ -1,0 +1,60 @@
+Phase 14A affected validation — 2026-10-02
+
+NEW CHECKS
+- Six affected fixture tests passed in 3.42 seconds (four unrelated tests deselected).
+  Selection: cost_bound, raw_recognition, budget_caps, unknown_mixed,
+  provider_failure, large_mixed.
+- Final HTTP diagnostic/redaction test passed in 0.69 seconds (nine deselected).
+- Synthetic identifier replaces any real sample label in the unmapped-ID fixture;
+  that single test recheck passed in 0.81 seconds (nine deselected).
+- Ruff check/format and strict mypy passed for six Python files. No new dependencies.
+- 379 local Markdown targets in the seven literal task documents resolve.
+- Review-file whitespace passes. Unified-diff blank context markers are excluded
+  from that check; patch additions pass git apply --whitespace=error validation.
+- Cumulative 13-file patch applies against implementation base
+  d839e51b65f9156e5829740c08d52b59be4c4ec4, checked using an isolated temporary
+  review index. Main's index was untouched.
+- All 13 explicitly selected original and prepared image hashes match. Frozen
+  sample/review approval hashes match. Six pre-existing protected private files
+  (including credential/account receipts) match the prior preservation receipt.
+  The prior ledger/seal entries were null: they were initialized once, never reset.
+- Three unrelated protected file hashes match; current main HEAD unchanged,
+  main index empty, development ownership guard confirms stopped.
+- Recovery archive exists at its accepted size. No repeated archive hash/readback.
+
+LIVE EVIDENCE (separate from fixtures)
+- Exact gpt-6-luna metadata GET passed in the approved project; no photos submitted
+  by that check. Two metadata GETs over the lifetime, one this continuation.
+- Six Standard Responses requests, eleven photo inputs, six returned responses
+  with token accounting. Five groups completed; G06 returned incomplete after its
+  full 2048 output tokens were reported as reasoning. G07 unattempted.
+- 9118 input, 5388 total output, 4403 included reasoning; zero cached/write tokens.
+  Token-derived estimate USD 0.0036058. Actual invoice charges unavailable.
+- All six reservations retained: USD 1.392216. Four lifetime attempts remain.
+- Raw top-1 and top-3 are 3/17; canonical expected coverage is separately 3 resolved,
+  14 unresolved. Failed/unattempted cases retain the original denominators.
+- Zero counting calls, automatic retries, fallback calls or result reuses.
+
+REUSED ACCEPTED EVIDENCE
+- Existing development migrations 0013-0017/runtime grants passed. Protected
+  recovery retained; 69 existing table counts, 39 content digests and 56 runtime
+  SELECT checks passed previously. No database campaign repeated.
+- Three exact set labels resolve in the accepted nonsynthetic catalog. Fourteen
+  BrickLink figure mappings are unavailable. Authoritative crosswalk not established.
+- Account data sharing disabled; approved Standard data handling and store=false.
+
+LIMITATIONS
+Partial tiny selected sample with listing text; not general accuracy, visual-only
+performance, quantity/condition/completeness qualification or calibrated confidence.
+Canonical lookup is a frozen three-reference projection, not full-catalog retrieval.
+The incomplete group has no scored structured predictions. The approved MOC negative
+case was not attempted. No per-image token formula, counting-endpoint pricing or
+invoice amount is claimed. No broad suites/builds, production operations, mapping
+writes, catalog imports, new migrations, training or Phase 15/16 work.
+
+PROTECTED SHA-256 (unchanged, excluded from publication inventory)
+AGENTS.md: F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4
+services/api/tests/integration/test_catalog_search.py:
+D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7
+services/api/tests/unit/test_catalog_parser.py:
+0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041
