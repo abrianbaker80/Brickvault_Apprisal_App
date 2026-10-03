@@ -1,0 +1,28 @@
+Focused fixture validation, 2026-10-03; no live calls in tests.
+pytest services/api/tests/unit/test_recognition_pilot.py -k test_sol_ -q
+3 passed, 13 deselected in 4.45s.
+- Sol-specific worst-case reservation, actual usage partitions, long-context pricing,
+  full output/reasoning bound and retained lifetime-cap refusal before dispatch.
+- Exactly one G06 dispatch; repeat refused; uncertain failure consumes nine and
+  refuses repeat/ten; model is the only request-body difference.
+- Prior eight attempt records/result bytes/old report views remain unchanged;
+  Sol score is separate and old-record tampering is refused.
+Initial focused run: two passed, one failed because the older history guard correctly
+raised its earlier fixed error code. The assertion was broadened to accept both
+valid history guards. Narrow mypy found two Literal annotation issues, corrected
+without changing values. Only the same three affected checks were rerun.
+Ruff format/check and strict mypy passed for contracts.py, pilot.py, __main__.py,
+and tests/unit/test_recognition_pilot.py (four edited Python files).
+Live: one model metadata GET, then one authorized Responses inference, attempt 9.
+No inference probe or counting request; completed strict output, model/tier checked.
+Preservation: 33 private file hashes, three protected files, eight old JSON attempt
+records and unchanged r2/r3 report views. No prior qualification repeated.
+No broad suites, builds, database startup/query/import/migration, production access,
+provider research loop, extra calls, retry/fallback, mapping, confirmation or valuation.
+Earlier r3 validation and recovery/database/catalog evidence are reused as accepted.
+Publication validation is recorded separately after package assembly.
+Publication: privacy scan passed for all 20 files; 391 local Markdown links resolve
+(package links in review tree, copied application links against application root).
+Both patches apply with cached scratch-index check and --whitespace=error.
+All previous private/protected hashes and eight attempt records preserved; main
+HEAD unchanged and index empty. Scratch index removed from isolated review tree.

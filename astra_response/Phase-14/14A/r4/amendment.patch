@@ -1,0 +1,1170 @@
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,4 +1,17 @@
+ # Codex Workflow for BrickVault Appraisal App
++
++## One Sol comparison checkpoint — 2026-10-03
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.** Brian authorized only G06,
++`gpt-6.1-sol`, lifetime attempt 9, compared with completed Luna attempt 8 under
++the same approved request/sample/scoring. Sol completed; both score 0/8 top-1/top-3.
++Luna's whole-sample 3/17 remains unchanged. Catalog figure mappings remain unresolved.
++Nine lifetime calls, token-estimated USD 0.0489202, retained USD 7.373552,
++unreserved USD 2.626448 under the unchanged USD 10 cap. Attempt 10 is unauthorized.
++Three affected fixtures and targeted lint/type checks passed; all old evidence and
++protected files remain intact. Development stays stopped, main unpushed/index empty.
++Stop for review; no further calls, tuning, mapping writes, deployment or later phase.
++Earlier dated checkpoints below preserve their prior scope and results.
+ 
+ ## Phase 14A two-call continuation — 2026-10-02
+ 
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1620,3 +1620,18 @@
+ Publish only sanitized r3 review, preserving r1/r2; main stays uncommitted/unpushed,
+ index empty, protected files unchanged. [Existing report](PHASE_14A_PILOT.md) contains
+ separate original, amended and cumulative views. Stop for recognition-quality review.
++
++
++## Phase 14A one Sol comparison authorization — 2026-10-03
++
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.** Brian authorized only G06,
++`gpt-6.1-sol`, lifetime attempt 9, compared with completed Luna attempt 8 under
++the same approved request/sample/scoring. Sol completed; both score 0/8 top-1/top-3.
++Luna's whole-sample 3/17 remains unchanged. Catalog figure mappings remain unresolved.
++Nine lifetime calls, token-estimated USD 0.0489202, retained USD 7.373552,
++unreserved USD 2.626448 under the unchanged USD 10 cap. Attempt 10 is unauthorized.
++Three affected fixtures and targeted lint/type checks passed; all old evidence and
++protected files remain intact. Development stays stopped, main unpushed/index empty.
++Stop for review; no further calls, tuning, mapping writes, deployment or later phase.
++Earlier dated checkpoints below preserve their prior scope and results.
+--- a/docs/PROVIDER_GATES.md
++++ b/docs/PROVIDER_GATES.md
+@@ -1,4 +1,17 @@
+ # Provider and Device Evidence Gates
++
++## One Sol comparison checkpoint — 2026-10-03
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.** Brian authorized only G06,
++`gpt-6.1-sol`, lifetime attempt 9, compared with completed Luna attempt 8 under
++the same approved request/sample/scoring. Sol completed; both score 0/8 top-1/top-3.
++Luna's whole-sample 3/17 remains unchanged. Catalog figure mappings remain unresolved.
++Nine lifetime calls, token-estimated USD 0.0489202, retained USD 7.373552,
++unreserved USD 2.626448 under the unchanged USD 10 cap. Attempt 10 is unauthorized.
++Three affected fixtures and targeted lint/type checks passed; all old evidence and
++protected files remain intact. Development stays stopped, main unpushed/index empty.
++Stop for review; no further calls, tuning, mapping writes, deployment or later phase.
++Earlier dated checkpoints below preserve their prior scope and results.
+ 
+ ## Phase 14A two-call continuation — 2026-10-02
+ 
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1,4 +1,17 @@
+ # Valuation-First Roadmap
++
++## One Sol comparison checkpoint — 2026-10-03
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.** Brian authorized only G06,
++`gpt-6.1-sol`, lifetime attempt 9, compared with completed Luna attempt 8 under
++the same approved request/sample/scoring. Sol completed; both score 0/8 top-1/top-3.
++Luna's whole-sample 3/17 remains unchanged. Catalog figure mappings remain unresolved.
++Nine lifetime calls, token-estimated USD 0.0489202, retained USD 7.373552,
++unreserved USD 2.626448 under the unchanged USD 10 cap. Attempt 10 is unauthorized.
++Three affected fixtures and targeted lint/type checks passed; all old evidence and
++protected files remain intact. Development stays stopped, main unpushed/index empty.
++Stop for review; no further calls, tuning, mapping writes, deployment or later phase.
++Earlier dated checkpoints below preserve their prior scope and results.
+ 
+ ## Phase 14A two-call continuation — 2026-10-02
+ 
+--- a/docs/PHASE_14A_PILOT.md
++++ b/docs/PHASE_14A_PILOT.md
+@@ -1,4 +1,101 @@
+ # Phase 14A local recognition pilot
++
++## One Sol model-comparison result — 2026-10-03
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.**
++
++
++**One additional live inference request was sent, lifetime attempt 9; it completed.**
++Both models are compared against the same eight independently confirmed identities,
++with exact kind + namespace + identifier matching and unchanged rank scoring.
++
++| G06 measurement | Luna attempt 8 | Sol attempt 9 |
++| --- | ---: | ---: |
++| Completed | Yes | Yes |
++| Exact top-1 / top-3 | 0/8 / 0/8 | 0/8 / 0/8 |
++| Confirmed identities omitted from all three ranks | 8 | 8 |
++| Objects / abstentions | 11 / 9 | 11 / 3 |
++| Distinct unmatched proposals | 2 | 8 |
++| Reported input tokens | 1248 | 1248 |
++| Reported output tokens | 3272 | 4061 |
++| Reasoning tokens, included in output | 2477 | 2070 |
++| Cached input / cache writes | 0 / 0 | 0 / 0 |
++| Latency, seconds | 28.857528 | 90.569283 |
++| Token-estimated USD | 0.0017608 | 0.043106 |
++| Retained reservation USD | 0.242788 | 5.495760 |
++
++Both models omit all eight confirmed identities at top-3. Exact omitted-ID and
++unmatched-ID lists remain in the protected private score review, outside this
++publication. G06 labels are **not exhaustive**; unmatched proposals are not
++automatically proven wrong-object identifications. Confidence remains uncalibrated.
++Sol produced more proposals without improving exact agreement on this group.
++
++## Canonical resolution is separate
++
++Neither model resolves any G06 proposal through the retained accepted catalog
++projection; all eight confirmed G06 figure labels remain canonically unresolved.
++Across the original pilot, three set labels resolve and fourteen BrickLink figure
++labels remain unmapped. Missing mappings do not cause the raw recognition misses.
++No mapping, automatic confirmation, valuation promotion or catalog write occurred.
++
++Luna's original whole-sample **3/17 top-1 and top-3** is unchanged, as is its r3
++cumulative **3/17** (sets 3/3, figures 0/14). Sol has only this independent G06
++measurement. Its answer is never combined with Luna's other answers as either
++model's full-sample accuracy. This is preliminary evidence, not production qualification.
++
++## Lifetime accounting
++
++| Scope | Requests | Input | Output | Reasoning included | Estimated USD | Retained reservations USD |
++| --- | ---: | ---: | ---: | ---: | ---: | ---: |
++| Prior Luna history | 8 | 12852 | 9058 | 7202 | 0.0058142 | 1.877792 |
++| Sol G06 comparison | 1 | 1248 | 4061 | 2070 | 0.043106 | 5.495760 |
++| Lifetime | 9 | 14100 | 13119 | 9272 | 0.0489202 | 7.373552 |
++
++All nine requests report usage and token partitions. Actual invoice charges are
++unavailable; costs are dated token-based estimates. Sol calculation is
++`(1248 × 2 + 4061 × 10) / 1000000 = USD 0.043106`; cache/write counts are zero.
++Sol's one-request average/effective cost per G06 group is USD 0.043106. The mixed-model
++lifetime average is approximately USD 0.005435578/request; allocation
++per seven distinct groups is USD 0.006988600, including repeats. These
++allocations are workload evidence, not per-image tariffs or full-model comparisons.
++There are 13 unique approved images and 15 sent image inputs across all nine calls.
++Unreserved allowance is **USD 2.626448**; reservations remain retained rather than
++being described as actual spending. Attempt 10 and all further calls are unauthorized.
++
++## Preserved state and limits
++
++The eight old attempt JSON records are unchanged by field/value; 33 frozen private
++files (including all 13 derivatives) and three protected files match their pre-r4
++hashes. Original r2/r3 result/evaluation/publication files remain unchanged and
++readable. Only G06 was resubmitted, once, with a separate linked result. Development
++remains stopped and the protected recovery copy retained. Main remains at `d839e51b65f9156e5829740c08d52b59be4c4ec4`,
++unpushed with empty index. No broader suite, build, database/catalog access, mapping,
++production deployment, prompt tuning or later-phase work occurred. Stop for review.
++
++### Comparison amendment and cost admission
++
++
++Official [Sol specification](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
++and [Standard pricing](https://developers.openai.com/api/docs/pricing), checked
++2026-10-03: per million tokens, USD 2 input, 0.10 cached input, 2.50 cache write,
++10 output. Above 272,000 input tokens, input/cache rates double and output is USD 15.
++The published context window is 1,050,000; maximum output is 128,000. Admission
++conservatively reserves the entire context ceiling as input, including images,
++instructions/framing/schema, **plus** the approved 16,384 output allowance. This
++over-reserves shared context and assumes no cache discount or image multiplier.
++
++`(1050000 × 5.00 + 16384 × 15.00) / 1000000 = USD 5.495760`.
++Previous reservations USD 1.877792 remain encumbered. Total USD 7.373552 stays
++within the unchanged USD 10 lifetime cap. Standard global `api.openai.com` processing
++has no regional/fast surcharge. Cache writes use the highest applicable input rate;
++reasoning is already within output. [Cache rules](https://developers.openai.com/api/docs/guides/prompt-caching)
++support explicit breakpoints and 30m TTL for this generation. Existing standard
++retention acceptance and disabled project sharing remain in force; `store:false`
++does not promise zero retention.
++
++Reservation is durable before dispatch; any failed/interrupted/uncertain request
++consumes attempt 9. Repeat dispatch is refused. No retry, fallback, reset, credits,
++auto-recharge, database/catalog work or broader evaluation is authorized.
+ 
+ **Phase 14 IN PROGRESS — two-call continuation finished; recognition qualification unestablished.**
+ Phase 13 remains CLOSED. This optional CLI does not alter the running application.
+--- a/docs/PHASE_14A_PROVIDER_DECISION.md
++++ b/docs/PHASE_14A_PROVIDER_DECISION.md
+@@ -1,4 +1,44 @@
+ # Phase 14A provider, privacy and cost decision
++
++Brian authorized only lifetime attempt **9**, G06 with requested model ID
++`gpt-6.1-sol`, paired with Luna's completed attempt **8**. Accepted r3 publication:
++`c89583e40eb1c62620c1162bd1ac0c23bbf51c56`. Application baseline: `d839e51b65f9156e5829740c08d52b59be4c4ec4`.
++The private `recognition-14a-sol-v1` amendment binds that history, original approval,
++first eight attempt records, frozen prepared inputs, prior result and exact request.
++Attempt 10 remains unauthorized. The original Luna approval/protocol is preserved.
++
++The model ID is the sole request-body change. Exact approved transmitted G06 image
++bytes and sanitized text, developer instructions, strict schema, preprocessing,
++`detail:high`, Medium reasoning, `max_output_tokens:16384`, 180-second deadline,
++`service_tier:default`, `store:false`, and explicit developer-only cache boundary
++with 30m TTL remain unchanged. No tools, browsing, old answers/reasoning, expected
++labels, filenames or catalog references were sent. No inference access probe or
++token-counting request occurred. One project-bound model metadata GET passed before
++dispatch; the completed structured result confirms this configuration for this call.
++
++## Sol-specific admission
++
++Official [Sol specification](https://developers.openai.com/api/docs/models/gpt-6.1-sol)
++and [Standard pricing](https://developers.openai.com/api/docs/pricing), checked
++2026-10-03: per million tokens, USD 2 input, 0.10 cached input, 2.50 cache write,
++10 output. Above 272,000 input tokens, input/cache rates double and output is USD 15.
++The published context window is 1,050,000; maximum output is 128,000. Admission
++conservatively reserves the entire context ceiling as input, including images,
++instructions/framing/schema, **plus** the approved 16,384 output allowance. This
++over-reserves shared context and assumes no cache discount or image multiplier.
++
++`(1050000 × 5.00 + 16384 × 15.00) / 1000000 = USD 5.495760`.
++Previous reservations USD 1.877792 remain encumbered. Total USD 7.373552 stays
++within the unchanged USD 10 lifetime cap. Standard global `api.openai.com` processing
++has no regional/fast surcharge. Cache writes use the highest applicable input rate;
++reasoning is already within output. [Cache rules](https://developers.openai.com/api/docs/guides/prompt-caching)
++support explicit breakpoints and 30m TTL for this generation. Existing standard
++retention acceptance and disabled project sharing remain in force; `store:false`
++does not promise zero retention.
++
++Reservation is durable before dispatch; any failed/interrupted/uncertain request
++consumes attempt 9. Repeat dispatch is refused. No retry, fallback, reset, credits,
++auto-recharge, database/catalog work or broader evaluation is authorized.
+ 
+ ## Two-call limit amendment — 2026-10-02
+ 
+--- a/docs/plans/104-recognition-quality-pilot.md
++++ b/docs/plans/104-recognition-quality-pilot.md
+@@ -1,4 +1,17 @@
+ # Plan 104 — Phase 14A recognition pilot
++
++## One Sol comparison checkpoint — 2026-10-03
++
++**READY FOR PHASE 14A MODEL-COMPARISON REVIEW.** Brian authorized only G06,
++`gpt-6.1-sol`, lifetime attempt 9, compared with completed Luna attempt 8 under
++the same approved request/sample/scoring. Sol completed; both score 0/8 top-1/top-3.
++Luna's whole-sample 3/17 remains unchanged. Catalog figure mappings remain unresolved.
++Nine lifetime calls, token-estimated USD 0.0489202, retained USD 7.373552,
++unreserved USD 2.626448 under the unchanged USD 10 cap. Attempt 10 is unauthorized.
++Three affected fixtures and targeted lint/type checks passed; all old evidence and
++protected files remain intact. Development stays stopped, main unpushed/index empty.
++Stop for review; no further calls, tuning, mapping writes, deployment or later phase.
++Earlier dated checkpoints below preserve their prior scope and results.
+ 
+ ## Current continuation checkpoint — 2026-10-02
+ 
+--- a/services/api/src/brickvault_api/recognition/__main__.py
++++ b/services/api/src/brickvault_api/recognition/__main__.py
+@@ -29,11 +29,14 @@
+     write_model,
+ )
+ from brickvault_api.recognition.pilot import (
++    check_comparison_model,
+     check_model_access,
++    comparison_report,
+     continuation_report,
+     continue_approved,
+     evaluate,
+     execute,
++    execute_comparison,
+     export_subset,
+     protocol_digest,
+ )
+@@ -66,6 +69,9 @@
+             "report",
+             "continue-approved",
+             "continuation-report",
++            "check-sol-model",
++            "compare-sol-approved",
++            "comparison-report",
+         ),
+     )
+     try:
+@@ -167,7 +173,15 @@
+                     continue_approved(PRIVATE)
+                 elif command == "continuation-report":
+                     print(json.dumps(continuation_report(PRIVATE), indent=2))
+-        if command not in ("report", "continuation-report"):
++                elif command == "check-sol-model":
++                    check_comparison_model(PRIVATE)
++                elif command == "compare-sol-approved":
++                    if not (PRIVATE / "sealed").is_file():
++                        raise PilotError("sealed_approval_required")
++                    execute_comparison(PRIVATE)
++                elif command == "comparison-report":
++                    print(json.dumps(comparison_report(PRIVATE), indent=2))
++        if command not in ("report", "continuation-report", "comparison-report"):
+             print(json.dumps({"command": command, "status": "complete"}))
+         return 0
+     except PilotError as error:
+--- a/services/api/src/brickvault_api/recognition/contracts.py
++++ b/services/api/src/brickvault_api/recognition/contracts.py
+@@ -8,6 +8,13 @@
+ from brickvault_api.catalog.query_types import Identity, SnapshotRef
+ 
+ MODEL: Literal["gpt-6-luna"] = "gpt-6-luna"
++SOL_MODEL: Literal["gpt-6.1-sol"] = "gpt-6.1-sol"
++SOL_PRICING_DATE = "2026-10-03"
++SOL_INPUT_RATE = Decimal("2.00")
++SOL_CACHED_RATE = Decimal("0.10")
++SOL_WRITE_RATE = Decimal("2.50")
++SOL_OUTPUT_RATE = Decimal("10.00")
++SOL_CONTEXT_BOUND = 1050000
+ PROMPT_VERSION = "recognition-14a-v1"
+ SCHEMA_VERSION = "recognition-14a-v2"
+ PRICING_DATE = "2026-10-02"
+@@ -17,10 +24,10 @@
+ OUTPUT_RATE = Decimal("0.50")
+ MAX_ATTEMPTS = 10
+ MAX_OUTPUT = 2048
+-AMENDED_OUTPUT = 16384
++AMENDED_OUTPUT: Literal[16384] = 16384
+ TEXT_BYTES = 16000
+ TIMEOUT = 60
+-AMENDED_TIMEOUT = 180
++AMENDED_TIMEOUT: Literal[180] = 180
+ Digest = Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
+ Short = Annotated[str, Field(min_length=1, max_length=240)]
+ Identifier = Annotated[str, Field(min_length=1, max_length=80)]
+@@ -155,10 +162,10 @@
+     group: str
+     input_sha256: Digest
+     state: Literal["reserved", "complete", "failed"]
+-    reserved_usd: Annotated[Decimal, Field(gt=0, le=Decimal("0.25"))]
+-    input_token_bound: Annotated[int, Field(gt=0, le=922000)]
+-    model: Literal["gpt-6-luna"] = MODEL
+-    prices_verified_on: Literal["2026-10-02"] = "2026-10-02"
++    reserved_usd: Annotated[Decimal, Field(gt=0, le=Decimal("10.00"))]
++    input_token_bound: Annotated[int, Field(gt=0, le=1050000)]
++    model: Literal["gpt-6-luna", "gpt-6.1-sol"] = MODEL
++    prices_verified_on: Literal["2026-10-02", "2026-10-03"] = "2026-10-02"
+     result_sha256: Digest | None = None
+     reuse_count: Annotated[int, Field(ge=0)] = 0
+     latency_seconds: float | None = None
+@@ -177,9 +184,36 @@
+     max_output_tokens: Literal[16384] | None = None
+     request_deadline_seconds: Literal[180] | None = None
+     result_filename: (
+-        Literal["G07-amendment-v1-result.json", "G06-amendment-v1-result.json"] | None
++        Literal[
++            "G07-amendment-v1-result.json", "G06-amendment-v1-result.json", "G06-sol-v1-result.json"
++        ]
++        | None
+     ) = None
+     predecessor_input_sha256: Digest | None = None
++
++    @model_validator(mode="after")
++    def model_limits(self) -> Self:
++        if self.model == MODEL:
++            if self.reserved_usd > Decimal("0.25") or self.input_token_bound > 922000:
++                raise ValueError("original_model_limits")
++            if (
++                self.prices_verified_on != PRICING_DATE
++                or self.result_filename == "G06-sol-v1-result.json"
++            ):
++                raise ValueError("original_model_metadata")
++        elif (
++            self.group != "G06"
++            or self.prices_verified_on != SOL_PRICING_DATE
++            or self.input_token_bound != SOL_CONTEXT_BOUND
++            or self.max_output_tokens != AMENDED_OUTPUT
++            or self.request_deadline_seconds != AMENDED_TIMEOUT
++            or self.result_filename != "G06-sol-v1-result.json"
++            or self.amendment_sha256 is None
++            or self.protocol_sha256 is None
++            or self.predecessor_input_sha256 is None
++        ):
++            raise ValueError("comparison_model_limits")
++        return self
+ 
+ 
+ class Amendment(StrictModel):
+@@ -205,3 +239,26 @@
+     approval_sha256: Digest
+     attempts: Annotated[list[Attempt], Field(max_length=10)]
+     stopped: bool = False
++
++
++class ModelComparisonAmendment(StrictModel):
++    version: Literal["recognition-14a-sol-v1"]
++    approved: bool
++    approved_by: Literal["Brian"]
++    accepted_review_commit: Literal["c89583e40eb1c62620c1162bd1ac0c23bbf51c56"]
++    parent_approval_sha256: Digest
++    parent_ledger_sha256: Digest
++    prior_attempts_sha256: Digest
++    prepared_sha256: Digest
++    subset_sha256: Digest
++    prior_protocol_sha256: Digest
++    protocol_sha256: Digest
++    g06_request_sha256: Digest
++    g06_predecessor_input_sha256: Digest
++    g06_predecessor_result_sha256: Digest
++    model: Literal["gpt-6.1-sol"]
++    group: Literal["G06"]
++    lifetime_attempt_number: Literal[9]
++    additional_attempts: Literal[1]
++    dollar_cap: Literal["10.00"]
++    expires_on: str
+--- a/services/api/src/brickvault_api/recognition/pilot.py
++++ b/services/api/src/brickvault_api/recognition/pilot.py
+@@ -29,6 +29,13 @@
+     PRICING_DATE,
+     PROMPT_VERSION,
+     SCHEMA_VERSION,
++    SOL_CACHED_RATE,
++    SOL_CONTEXT_BOUND,
++    SOL_INPUT_RATE,
++    SOL_MODEL,
++    SOL_OUTPUT_RATE,
++    SOL_PRICING_DATE,
++    SOL_WRITE_RATE,
+     TEXT_BYTES,
+     TIMEOUT,
+     WRITE_RATE,
+@@ -37,6 +44,7 @@
+     Attempt,
+     CatalogRequest,
+     Ledger,
++    ModelComparisonAmendment,
+     PilotError,
+     Prepared,
+     PreparedGroup,
+@@ -68,9 +76,9 @@
+ messages or other private text. Return only the requested JSON structure."""
+ 
+ 
+-def parameters(*, amended: bool = False) -> dict[str, Any]:
++def parameters(*, amended: bool = False, sol: bool = False) -> dict[str, Any]:
+     return {
+-        "model": MODEL,
++        "model": SOL_MODEL if sol else MODEL,
+         "store": False,
+         "service_tier": "default",
+         "reasoning": {"effort": "medium"},
+@@ -79,23 +87,23 @@
+     }
+ 
+ 
+-def pricing() -> dict[str, str]:
++def pricing(*, sol: bool = False) -> dict[str, str]:
+     return {
+-        "verified_on": PRICING_DATE,
+-        "input_per_million_usd": str(INPUT_RATE),
+-        "cached_per_million_usd": str(CACHED_RATE),
+-        "cache_write_per_million_usd": str(WRITE_RATE),
+-        "output_per_million_usd": str(OUTPUT_RATE),
++        "verified_on": SOL_PRICING_DATE if sol else PRICING_DATE,
++        "input_per_million_usd": str(SOL_INPUT_RATE if sol else INPUT_RATE),
++        "cached_per_million_usd": str(SOL_CACHED_RATE if sol else CACHED_RATE),
++        "cache_write_per_million_usd": str(SOL_WRITE_RATE if sol else WRITE_RATE),
++        "output_per_million_usd": str(SOL_OUTPUT_RATE if sol else OUTPUT_RATE),
+         "long_context": ">272000 input: input/cache x2, output x1.5",
+         "processing": "Standard, global api.openai.com",
+     }
+ 
+ 
+-def protocol_digest(*, amended: bool = False) -> str:
++def protocol_digest(*, amended: bool = False, sol: bool = False) -> str:
+     return digest(
+         json.dumps(
+             {
+-                "parameters": parameters(amended=amended),
++                "parameters": parameters(amended=amended, sol=sol),
+                 "endpoint": "/v1/responses",
+                 "prompt": PROMPT,
+                 "schema": Recognition.model_json_schema(),
+@@ -103,12 +111,14 @@
+                 "schema_version": SCHEMA_VERSION,
+                 "text_bytes": TEXT_BYTES,
+                 "timeout": AMENDED_TIMEOUT if amended else TIMEOUT,
+-                "pricing": pricing(),
++                "pricing": pricing(sol=sol),
+                 "image_recipe": "recognition-rgb-1024-jpeg85-v1",
+                 "detail": "high",
+                 "cache_boundary": "developer_instructions_only",
+                 "max_images": 2,
+-                "image_token_basis": "published_full_model_input_ceiling_922000",
++                "image_token_basis": "published_full_context_ceiling_1050000"
++                if sol
++                else "published_full_model_input_ceiling_922000",
+             },
+             sort_keys=True,
+         ).encode()
+@@ -123,16 +133,23 @@
+         raise PilotError("request_size_limit")
+     request = json.loads(body)
+     amended = request.get("max_output_tokens") == AMENDED_OUTPUT
+-    if any(request.get(k) != v for k, v in parameters(amended=amended).items()):
++    sol = request.get("model") == SOL_MODEL
++    if sol and not amended:
++        raise PilotError("comparison_parameters_required")
++    if any(request.get(k) != v for k, v in parameters(amended=amended, sol=sol).items()):
+         raise PilotError("reservation_parameters_changed")
+-    return 922000
+-
+-
+-def maximum_cost(input_bound: int, *, amended: bool = False) -> Decimal:
+-    if type(input_bound) is not int or not 0 < input_bound <= 922000:
++    return SOL_CONTEXT_BOUND if sol else 922000
++
++
++def maximum_cost(input_bound: int, *, amended: bool = False, sol: bool = False) -> Decimal:
++    if sol and not amended:
++        raise PilotError("comparison_parameters_required")
++    if type(input_bound) is not int or not 0 < input_bound <= (
++        SOL_CONTEXT_BOUND if sol else 922000
++    ):
+         raise PilotError("input_token_bound_invalid")
+-    incoming = WRITE_RATE  # Worst rate, even with zero hits; writes are not additive.
+-    outgoing = OUTPUT_RATE
++    incoming = SOL_WRITE_RATE if sol else WRITE_RATE  # Worst rate, without cache hits.
++    outgoing = SOL_OUTPUT_RATE if sol else OUTPUT_RATE
+     if input_bound > 272000:
+         incoming *= 2
+         outgoing *= Decimal("1.5")
+@@ -176,7 +193,11 @@
+     }
+ 
+ 
+-def request_body(group: PreparedGroup, images: list[bytes], *, amended: bool = False) -> bytes:
++def request_body(
++    group: PreparedGroup, images: list[bytes], *, amended: bool = False, sol: bool = False
++) -> bytes:
++    if sol and (not amended or group.group != "G06"):
++        raise PilotError("comparison_parameters_required")
+     if not 1 <= len(images) <= 2 or len(images) != len(group.images):
+         raise PilotError("image_count_limit")
+     schema = Recognition.model_json_schema()
+@@ -213,7 +234,7 @@
+         )
+     body = json.dumps(
+         {
+-            **parameters(amended=amended),
++            **parameters(amended=amended, sol=sol),
+             "text": {
+                 "format": {
+                     "type": "json_schema",
+@@ -245,7 +266,13 @@
+ 
+ 
+ def _https_request(
+-    body: bytes, key: str, project: str, *, model_check: bool = False, timeout: float | None = None
++    body: bytes,
++    key: str,
++    project: str,
++    *,
++    model_check: bool = False,
++    timeout: float | None = None,
++    metadata_model: str = MODEL,
+ ) -> dict[str, Any]:
+     """Single attempt; fixed host, no proxy, redirect, retries, SDK or fallback."""
+     timeout = TIMEOUT if timeout is None else timeout
+@@ -266,7 +293,7 @@
+         remaining()
+         connection.request(
+             "GET" if model_check else "POST",
+-            "/v1/models/" + MODEL if model_check else "/v1/responses",
++            "/v1/models/" + metadata_model if model_check else "/v1/responses",
+             body=None if model_check else body,
+             headers={
+                 "Authorization": "Bearer " + key,
+@@ -326,7 +353,13 @@
+ 
+ 
+ def call_openai(
+-    body: bytes, key: str, project: str, *, model_check: bool = False, timeout: float | None = None
++    body: bytes,
++    key: str,
++    project: str,
++    *,
++    model_check: bool = False,
++    timeout: float | None = None,
++    metadata_model: str = MODEL,
+ ) -> dict[str, Any]:
+     # Include DNS/TLS/header stalls in the wall-clock deadline. One daemon worker
+     # is transport only, never parallel inference. An uncertain timeout stops the
+@@ -338,7 +371,14 @@
+     def send() -> None:
+         try:
+             result.append(
+-                _https_request(body, key, project, model_check=model_check, timeout=timeout)
++                _https_request(
++                    body,
++                    key,
++                    project,
++                    model_check=model_check,
++                    timeout=timeout,
++                    metadata_model=metadata_model,
++                )
+             )
+         except PilotError as error:
+             errors.append(error)
+@@ -357,9 +397,9 @@
+     return result[0]
+ 
+ 
+-def parse_response(payload: dict[str, Any]) -> Recognition:
++def parse_response(payload: dict[str, Any], *, expected_model: str = MODEL) -> Recognition:
+     try:
+-        if payload.get("model") != MODEL:
++        if payload.get("model") != expected_model:
+             raise PilotError("unexpected_provider_model")
+         if payload.get("status") != "completed" or payload.get("error"):
+             raise PilotError("provider_incomplete_output")
+@@ -416,20 +456,25 @@
+         raise PilotError("provider_accounting_exceeded_reservation")
+     input_scale = Decimal(2 if incoming > 272000 else 1)
+     output_scale = Decimal("1.5") if incoming > 272000 else Decimal(1)
++    sol = attempt.model == SOL_MODEL
++    input_rate = SOL_INPUT_RATE if sol else INPUT_RATE
++    cached_rate = SOL_CACHED_RATE if sol else CACHED_RATE
++    write_rate = SOL_WRITE_RATE if sol else WRITE_RATE
++    output_rate = SOL_OUTPUT_RATE if sol else OUTPUT_RATE
+     if cached is None or written is None:
+         # Missing detail is unknown. Estimate at the highest applicable input rate,
+         # with no claimed cache saving. The full reservation remains encumbered.
+-        cost = Decimal(incoming) * WRITE_RATE
++        cost = Decimal(incoming) * write_rate
+         attempt.cost_basis = "upper_bound_missing_details"
+     else:
+         cost = (
+-            Decimal(incoming - cached - written) * INPUT_RATE
+-            + Decimal(cached) * CACHED_RATE
+-            + Decimal(written) * WRITE_RATE
++            Decimal(incoming - cached - written) * input_rate
++            + Decimal(cached) * cached_rate
++            + Decimal(written) * write_rate
+         )
+         attempt.cost_basis = "token_details"
+     attempt.estimated_usd = (
+-        cost * input_scale + Decimal(outgoing) * OUTPUT_RATE * output_scale
++        cost * input_scale + Decimal(outgoing) * output_rate * output_scale
+     ) / 1000000
+     if attempt.estimated_usd > attempt.reserved_usd:
+         raise PilotError("provider_accounting_exceeded_reservation")
+@@ -651,7 +696,9 @@
+         or amendment.prior_protocol_sha256 != protocol_digest()
+         or amendment.protocol_sha256 != protocol_digest(amended=True)
+         or amendment.original_attempts_sha256 != original_attempts_digest(root)
+-        or not 6 <= len(ledger.attempts) <= 8
++        or not 6 <= len(ledger.attempts) <= 9
++        or any(a.model != MODEL for a in ledger.attempts[:8])
++        or (len(ledger.attempts) == 9 and ledger.attempts[8].model != SOL_MODEL)
+         or not ledger.stopped
+         or amendment.g06_predecessor_input_sha256 != ledger.attempts[5].input_sha256
+         or approval.dollar_cap != Decimal("10.00")
+@@ -662,7 +709,7 @@
+     ):
+         raise PilotError("amendment_parent_ledger_changed")
+     amended_hash = digest(read_bytes(root / "amendment-v1.json"))
+-    for number, attempt in enumerate(ledger.attempts[6:]):
++    for number, attempt in enumerate(ledger.attempts[6:8]):
+         group = ("G07", "G06")[number]
+         if (
+             attempt.group != group
+@@ -677,7 +724,7 @@
+             raise PilotError("continuation_attempt_history_changed")
+     prepared = read_model(root / "prepared.json", Prepared)
+     for prepared_group in prepared.groups:
+-        for stored_attempt in ledger.attempts:
++        for stored_attempt in ledger.attempts[:8]:
+             if stored_attempt.group == prepared_group.group and stored_attempt.state == "complete":
+                 load_result(root, prepared_group, stored_attempt, approval)
+     return approval, amendment, ledger
+@@ -806,6 +853,315 @@
+             raise PilotError("continuation_stopped_attempt_retained")
+ 
+ 
++def comparison_group(root: Path) -> PreparedGroup:
++    return next(g for g in read_model(root / "prepared.json", Prepared).groups if g.group == "G06")
++
++
++def comparison_body(root: Path) -> bytes:
++    group = comparison_group(root)
++    images = [read_bytes(root / f"{i.transmitted_sha256}.jpg", 1024 * 1024) for i in group.images]
++    return request_body(group, images, amended=True, sol=True)
++
++
++def prior_comparison_attempts_digest(root: Path) -> str:
++    attempts = json.loads(read_bytes(root / "ledger.json"))["attempts"][:8]
++    return digest(json.dumps(attempts, sort_keys=True).encode())
++
++
++def create_comparison_amendment(root: Path) -> None:
++    approval, prior, ledger = validate_amendment(root)
++    if len(ledger.attempts) != 8 or ledger.attempts[7].state != "complete":
++        raise PilotError("comparison_requires_completed_eight_attempt_history")
++    predecessor = ledger.attempts[7]
++    if predecessor.result_sha256 is None or approval.max_attempts != 10:
++        raise PilotError("comparison_requires_completed_eight_attempt_history")
++    write_model(
++        root / "comparison-sol-v1.json",
++        ModelComparisonAmendment(
++            version="recognition-14a-sol-v1",
++            approved=True,
++            approved_by="Brian",
++            accepted_review_commit="c89583e40eb1c62620c1162bd1ac0c23bbf51c56",
++            parent_approval_sha256=digest(read_bytes(root / "approval.json")),
++            parent_ledger_sha256=digest(read_bytes(root / "ledger.json")),
++            prior_attempts_sha256=prior_comparison_attempts_digest(root),
++            prepared_sha256=approval.prepared_sha256,
++            subset_sha256=approval.subset_sha256,
++            prior_protocol_sha256=prior.protocol_sha256,
++            protocol_sha256=protocol_digest(amended=True, sol=True),
++            g06_request_sha256=digest(comparison_body(root)),
++            g06_predecessor_input_sha256=predecessor.input_sha256,
++            g06_predecessor_result_sha256=predecessor.result_sha256,
++            model=SOL_MODEL,
++            group="G06",
++            lifetime_attempt_number=9,
++            additional_attempts=1,
++            dollar_cap="10.00",
++            expires_on=approval.expires_on,
++        ),
++    )
++    validate_comparison(root)
++
++
++def validate_comparison(root: Path) -> tuple[Approval, ModelComparisonAmendment, Ledger]:
++    approval, prior, ledger = validate_amendment(root)
++    amendment = read_model(root / "comparison-sol-v1.json", ModelComparisonAmendment)
++    if (
++        not amendment.approved
++        or date.today() > date.fromisoformat(amendment.expires_on)
++        or amendment.parent_approval_sha256 != ledger.approval_sha256
++        or amendment.prepared_sha256 != approval.prepared_sha256
++        or amendment.subset_sha256 != approval.subset_sha256
++        or amendment.prior_protocol_sha256 != prior.protocol_sha256
++        or amendment.protocol_sha256 != protocol_digest(amended=True, sol=True)
++        or amendment.prior_attempts_sha256 != prior_comparison_attempts_digest(root)
++        or len(ledger.attempts) not in (8, 9)
++        or ledger.attempts[7].state != "complete"
++        or amendment.g06_predecessor_input_sha256 != ledger.attempts[7].input_sha256
++        or amendment.g06_predecessor_result_sha256 != ledger.attempts[7].result_sha256
++        or approval.max_attempts != 10
++    ):
++        raise PilotError("comparison_or_prior_history_changed")
++    if len(ledger.attempts) == 8 and amendment.parent_ledger_sha256 != digest(
++        read_bytes(root / "ledger.json")
++    ):
++        raise PilotError("comparison_parent_ledger_changed")
++    body = comparison_body(root)
++    if amendment.g06_request_sha256 != digest(body):
++        raise PilotError("comparison_input_changed")
++    # Reconstruct the same G06 request: model is the only request-body difference.
++    group = comparison_group(root)
++    images = [read_bytes(root / f"{i.transmitted_sha256}.jpg", 1024 * 1024) for i in group.images]
++    changed = json.loads(body)
++    changed["model"] = MODEL
++    if changed != json.loads(request_body(group, images, amended=True)):
++        raise PilotError("comparison_configuration_changed")
++    if len(ledger.attempts) == 9:
++        attempt = ledger.attempts[8]
++        if (
++            attempt.amendment_sha256 != digest(read_bytes(root / "comparison-sol-v1.json"))
++            or attempt.protocol_sha256 != amendment.protocol_sha256
++            or attempt.predecessor_input_sha256 != amendment.g06_predecessor_input_sha256
++            or attempt.input_sha256
++            != input_digest(group, amendment.protocol_sha256, approval.subset_sha256)
++            or attempt.reserved_usd != maximum_cost(SOL_CONTEXT_BOUND, amended=True, sol=True)
++        ):
++            raise PilotError("comparison_attempt_changed")
++    return approval, amendment, ledger
++
++
++def check_comparison_model(root: Path) -> None:
++    approval, _, ledger = validate_comparison(root)
++    if len(ledger.attempts) != 8 or (root / "sol-model-access.json").exists():
++        raise PilotError("comparison_model_check_already_recorded_or_dispatched")
++    key = local_key(root)
++    payload = call_openai(b"", key, approval.project_id, model_check=True, metadata_model=SOL_MODEL)
++    if payload.get("id") != SOL_MODEL or payload.get("object") != "model":
++        raise PilotError("requested_comparison_model_unavailable")
++    write_bytes(
++        root / "sol-model-access.json",
++        json.dumps(
++            {
++                "model": SOL_MODEL,
++                "project_id": approval.project_id,
++                "key_sha256": digest(key.encode()),
++                "amendment_sha256": digest(read_bytes(root / "comparison-sol-v1.json")),
++            }
++        ).encode(),
++    )
++
++
++def execute_comparison(root: Path) -> None:
++    """The single approved attempt 9. Durable reservation forbids any repeat."""
++    approval, amendment, ledger = validate_comparison(root)
++    if len(ledger.attempts) != 8 or (root / "G06-sol-v1-result.json").exists():
++        raise PilotError("comparison_already_dispatched_or_interrupted")
++    key = local_key(root)
++    if json.loads(read_bytes(root / "sol-model-access.json")) != {
++        "model": SOL_MODEL,
++        "project_id": approval.project_id,
++        "key_sha256": digest(key.encode()),
++        "amendment_sha256": digest(read_bytes(root / "comparison-sol-v1.json")),
++    }:
++        raise PilotError("comparison_project_model_access_required")
++    body = comparison_body(root)
++    bound = input_token_bound(body)
++    reservation = maximum_cost(bound, amended=True, sol=True)
++    if (
++        sum((a.reserved_usd for a in ledger.attempts), Decimal(0)) + reservation
++        > approval.dollar_cap
++    ):
++        raise PilotError("dollar_cap")
++    group = comparison_group(root)
++    subset = read_model(root / "subset.json", ReferenceSubset)
++    if subset.snapshot.synthetic:
++        raise PilotError("synthetic_catalog_not_live_evidence")
++    attempt = Attempt(
++        group="G06",
++        input_sha256=input_digest(group, amendment.protocol_sha256, approval.subset_sha256),
++        state="reserved",
++        reserved_usd=reservation,
++        input_token_bound=bound,
++        model=SOL_MODEL,
++        prices_verified_on="2026-10-03",
++        amendment_sha256=digest(read_bytes(root / "comparison-sol-v1.json")),
++        protocol_sha256=amendment.protocol_sha256,
++        max_output_tokens=AMENDED_OUTPUT,
++        request_deadline_seconds=AMENDED_TIMEOUT,
++        result_filename="G06-sol-v1-result.json",
++        predecessor_input_sha256=amendment.g06_predecessor_input_sha256,
++    )
++    ledger.attempts.append(attempt)
++    write_bytes(
++        root / "ledger.json",
++        ledger.model_dump_json(indent=2, exclude_unset=True).encode(),
++        replace=True,
++    )
++    started = time.monotonic()
++    try:
++        payload = call_openai(body, key, approval.project_id, timeout=AMENDED_TIMEOUT)
++        attempt.response_received = True
++        record_usage(payload, attempt)
++        if attempt.estimated_usd is None:
++            raise PilotError("provider_usage_unavailable")
++        result = parse_response(payload, expected_model=SOL_MODEL)
++        report = {
++            "provider": "openai",
++            "model": SOL_MODEL,
++            "prompt_version": PROMPT_VERSION,
++            "schema_version": SCHEMA_VERSION,
++            "image_recipe": "recognition-rgb-1024-jpeg85-v1",
++            "parameters": parameters(amended=True, sol=True),
++            "pricing": pricing(sol=True),
++            "protocol_sha256": amendment.protocol_sha256,
++            "amendment_sha256": attempt.amendment_sha256,
++            "predecessor_input_sha256": attempt.predecessor_input_sha256,
++            "predecessor_result_sha256": amendment.g06_predecessor_result_sha256,
++            "paired_predecessor_attempt": 8,
++            "lifetime_attempt_number": 9,
++            "input_sha256": attempt.input_sha256,
++            "images": [i.model_dump() for i in group.images],
++            "catalog_snapshot": asdict(subset.snapshot),
++            "recognition": result.model_dump(),
++            "objects": resolved_objects(result, subset),
++        }
++        raw = json.dumps(report, default=str).encode()
++        write_bytes(root / "G06-sol-v1-result.json", raw)
++        attempt.result_sha256 = digest(raw)
++        attempt.state = "complete"
++    except BaseException as error:
++        attempt.state = "failed"
++        attempt.failure_code = (
++            str(error) if isinstance(error, PilotError) else "local_or_interrupted_failure"
++        )
++        if attempt.failure_code.startswith("provider_request_failed_http_"):
++            attempt.response_received = True
++    finally:
++        attempt.latency_seconds = round(time.monotonic() - started, 6)
++        write_bytes(
++            root / "ledger.json",
++            ledger.model_dump_json(indent=2, exclude_unset=True).encode(),
++            replace=True,
++        )
++    if attempt.state != "complete":
++        raise PilotError("comparison_stopped_attempt_retained")
++
++
++def load_comparison_result(
++    root: Path, amendment: ModelComparisonAmendment, attempt: Attempt
++) -> Recognition:
++    raw = read_bytes(root / "G06-sol-v1-result.json")
++    report = json.loads(raw)
++    if (
++        attempt.state != "complete"
++        or attempt.result_sha256 != digest(raw)
++        or report.get("model") != SOL_MODEL
++        or report.get("parameters") != parameters(amended=True, sol=True)
++        or report.get("protocol_sha256") != amendment.protocol_sha256
++        or report.get("amendment_sha256") != attempt.amendment_sha256
++        or report.get("input_sha256") != attempt.input_sha256
++        or report.get("predecessor_input_sha256") != amendment.g06_predecessor_input_sha256
++        or report.get("predecessor_result_sha256") != amendment.g06_predecessor_result_sha256
++    ):
++        raise PilotError("saved_comparison_result_integrity_failure")
++    return Recognition.model_validate(report["recognition"])
++
++
++def comparison_report(root: Path) -> dict[str, Any]:
++    approval, amendment, ledger = validate_comparison(root)
++    if len(ledger.attempts) != 9:
++        raise PilotError("comparison_not_dispatched")
++    group = comparison_group(root)
++    subset = read_model(root / "subset.json", ReferenceSubset)
++    expected = {(p.kind, p.namespace, p.identifier) for p in group.expected}
++    paired = []
++    for number, attempt in ((8, ledger.attempts[7]), (9, ledger.attempts[8])):
++        result = None
++        if attempt.state == "complete":
++            result = (
++                load_result(root, group, attempt, approval)
++                if number == 8
++                else load_comparison_result(root, amendment, attempt)
++            )
++        candidates = [c for o in result.objects for c in o.candidates] if result else []
++        proposed = {(c.kind, c.namespace, c.identifier) for c in candidates}
++        first = {(c.kind, c.namespace, c.identifier) for c in candidates if c.rank == 1}
++        paired.append(
++            {
++                "attempt": number,
++                "model": attempt.model,
++                "state": attempt.state,
++                "failure_code": attempt.failure_code,
++                "confirmed_denominator": len(expected),
++                "top1": len(expected & first),
++                "top3": len(expected & proposed),
++                "omitted_confirmed_identities_top3": len(expected - proposed),
++                "abstention_objects": sum(not o.candidates for o in result.objects)
++                if result
++                else None,
++                "objects": len(result.objects) if result else None,
++                "candidate_proposals": len(candidates),
++                "distinct_proposed_identities": len(proposed),
++                "unmatched_distinct_proposals": len(proposed - expected),
++                "labels_exhaustive": group.labels_exhaustive,
++                "canonical_expected_resolved": sum(
++                    resolve(p, subset.identities)["state"] == "resolved" for p in group.expected
++                ),
++                "canonical_proposals_resolved": sum(
++                    resolve(c, subset.identities)["state"] == "resolved" for c in candidates
++                ),
++                "input_tokens": attempt.input_tokens,
++                "output_tokens": attempt.output_tokens,
++                "reasoning_tokens_in_output": attempt.reasoning_tokens,
++                "cached_input_tokens": attempt.cached_input_tokens,
++                "cache_write_tokens": attempt.cache_write_tokens,
++                "latency_seconds": attempt.latency_seconds,
++                "estimated_usd": str(attempt.estimated_usd)
++                if attempt.estimated_usd is not None
++                else None,
++                "cost_basis": attempt.cost_basis,
++                "reserved_usd": str(attempt.reserved_usd),
++                "reported_billing_usd": None,
++            }
++        )
++    reservation = sum((a.reserved_usd for a in ledger.attempts), Decimal(0))
++    estimates = [a.estimated_usd for a in ledger.attempts if a.estimated_usd is not None]
++    return {
++        "paired_G06": paired,
++        "lifetime_attempts": len(ledger.attempts),
++        "lifetime_estimated_usd_available_sum": str(sum(estimates, Decimal(0))),
++        "attempts_without_cost_accounting": len(ledger.attempts) - len(estimates),
++        "retained_reservations_usd": str(reservation),
++        "unreserved_allowance_usd": str(approval.dollar_cap - reservation),
++        "remaining_authorized_attempts": 0,
++        "attempt_10_authorized": False,
++        "luna_original_score": evaluate(root)["top1"],
++        "luna_cumulative_score": evaluate(root, cumulative=True)["top1"],
++        "combined_model_whole_sample_score": None,
++        "qualification": "preliminary_single_group_comparison_only",
++    }
++
++
+ def continuation_report(root: Path) -> dict[str, Any]:
+     _, _, ledger = validate_amendment(root)
+     return {
+@@ -826,7 +1182,7 @@
+                 "lifetime_attempt_number": i + 7,
+                 "linked_failed_predecessor": 6 if a.group == "G06" else None,
+             }
+-            for i, a in enumerate(ledger.attempts[6:])
++            for i, a in enumerate(ledger.attempts[6:8])
+         ],
+         "cumulative_sample_coverage": evaluate(root, cumulative=True),
+         "further_calls_authorized": 0,
+@@ -838,6 +1194,8 @@
+     ledger = read_model(root / "ledger.json", Ledger)
+     if cumulative:
+         validate_amendment(root)
++        # Sol's paired comparison must never replace a Luna sample answer.
++        ledger.attempts = ledger.attempts[:8]
+     else:
+         # Original-protocol reporting remains identical even after the two calls.
+         ledger.attempts = [a for a in ledger.attempts if a.amendment_sha256 is None]
+--- a/services/api/tests/unit/test_recognition_pilot.py
++++ b/services/api/tests/unit/test_recognition_pilot.py
+@@ -22,6 +22,7 @@
+ from brickvault_api.recognition import pilot
+ from brickvault_api.recognition.contracts import (
+     MODEL,
++    SOL_MODEL,
+     Approval,
+     Attempt,
+     CatalogRequest,
+@@ -789,3 +790,154 @@
+     (tmp_path / "G01-result.json").write_bytes(b"{}")
+     with pytest.raises(PilotError, match="saved_result_integrity"):
+         pilot.load_result(tmp_path, prepared.groups[0], ledger.attempts[0], approval)
++
++
++def completed_luna_fixture(root: Path, monkeypatch: pytest.MonkeyPatch) -> None:
++    stopped_original_fixture(root, monkeypatch)
++    pilot.create_amendment(root)
++    calls = 0
++
++    def amended(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        nonlocal calls
++        calls += 1
++        return response(
++            recognition("custom_build") if calls == 1 else recognition("candidates", [candidate()])
++        )
++
++    monkeypatch.setattr(pilot, "call_openai", amended)
++    pilot.continue_approved(root)
++    pilot.create_comparison_amendment(root)
++
++    def metadata(
++        body: bytes, key: str, project: str, *, model_check: bool, metadata_model: str
++    ) -> dict[str, Any]:
++        assert body == b"" and model_check and metadata_model == SOL_MODEL
++        return {"id": SOL_MODEL, "object": "model"}
++
++    monkeypatch.setattr(pilot, "call_openai", metadata)
++    pilot.check_comparison_model(root)
++
++
++def test_sol_reservation_accounting_and_lifetime_cap(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    completed_luna_fixture(tmp_path, monkeypatch)
++    body = pilot.comparison_body(tmp_path)
++    assert pilot.input_token_bound(body) == 1050000
++    reservation = pilot.maximum_cost(1050000, amended=True, sol=True)
++    assert reservation == Decimal("5.495760")
++    ledger = read_model(tmp_path / "ledger.json", Ledger)
++    assert sum(a.reserved_usd for a in ledger.attempts) + reservation == Decimal("7.373552")
++    attempt = Attempt(
++        group="G06",
++        input_sha256="a" * 64,
++        state="reserved",
++        reserved_usd=reservation,
++        input_token_bound=1050000,
++        model=SOL_MODEL,
++        prices_verified_on="2026-10-03",
++        amendment_sha256="b" * 64,
++        protocol_sha256="c" * 64,
++        max_output_tokens=16384,
++        request_deadline_seconds=180,
++        result_filename="G06-sol-v1-result.json",
++        predecessor_input_sha256="d" * 64,
++    )
++    data = response(recognition())
++    pilot.record_usage(data, attempt)
++    assert attempt.estimated_usd == Decimal("0.002670")
++    data["usage"].update(
++        input_tokens=1050000,
++        output_tokens=16384,
++        input_tokens_details={"cached_tokens": 0, "cache_write_tokens": 1050000},
++        output_tokens_details={"reasoning_tokens": 16384},
++    )
++    pilot.record_usage(data, attempt)
++    assert attempt.estimated_usd == reservation
++    data["usage"]["output_tokens"] = 16385
++    with pytest.raises(PilotError, match="exceeded_reservation"):
++        pilot.record_usage(data, attempt)
++    before = (tmp_path / "ledger.json").read_bytes()
++    monkeypatch.setattr(pilot, "maximum_cost", lambda *args, **kwargs: Decimal("9.00"))
++    with pytest.raises(PilotError, match="dollar_cap"):
++        pilot.execute_comparison(tmp_path)
++    assert (tmp_path / "ledger.json").read_bytes() == before
++
++
++def test_sol_one_call_authorization_and_no_repeat(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    completed_luna_fixture(tmp_path, monkeypatch)
++    calls = []
++
++    def sol(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        assert timeout == 180
++        calls.append(json.loads(body))
++        result = response(recognition())
++        result["model"] = SOL_MODEL
++        return result
++
++    monkeypatch.setattr(pilot, "call_openai", sol)
++    pilot.execute_comparison(tmp_path)
++    with pytest.raises(PilotError, match="already_dispatched"):
++        pilot.execute_comparison(tmp_path)
++    assert len(calls) == 1 and len(read_model(tmp_path / "ledger.json", Ledger).attempts) == 9
++    assert calls[0].pop("model") == SOL_MODEL
++    group = pilot.comparison_group(tmp_path)
++    images = [(tmp_path / f"{i.transmitted_sha256}.jpg").read_bytes() for i in group.images]
++    prior = json.loads(pilot.request_body(group, images, amended=True))
++    assert prior.pop("model") == MODEL and calls[0] == prior
++    # Failure or uncertain transport also consumes nine and refuses ten.
++    other = tmp_path / "uncertain"
++    other.mkdir()
++    completed_luna_fixture(other, monkeypatch)
++    failed_calls = 0
++
++    def uncertain(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        nonlocal failed_calls
++        failed_calls += 1
++        raise PilotError("provider_request_failed_or_uncertain")
++
++    monkeypatch.setattr(pilot, "call_openai", uncertain)
++    with pytest.raises(PilotError, match="comparison_stopped_attempt_retained"):
++        pilot.execute_comparison(other)
++    with pytest.raises(PilotError, match="already_dispatched"):
++        pilot.execute_comparison(other)
++    failed = read_model(other / "ledger.json", Ledger)
++    assert failed_calls == 1 and len(failed.attempts) == 9
++    assert failed.attempts[8].state == "failed" and failed.attempts[8].reserved_usd == Decimal(
++        "5.495760"
++    )
++
++
++def test_sol_preserves_prior_luna_readability_and_scores(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    completed_luna_fixture(tmp_path, monkeypatch)
++    before = json.loads((tmp_path / "ledger.json").read_bytes())
++    original = pilot.evaluate(tmp_path)
++    luna = pilot.continuation_report(tmp_path)
++    originals = {p.name: p.read_bytes() for p in tmp_path.glob("G0*-result.json")}
++
++    def sol(body: bytes, key: str, project: str, *, timeout: int) -> dict[str, Any]:
++        data = response(recognition())
++        data["model"] = SOL_MODEL
++        return data
++
++    monkeypatch.setattr(pilot, "call_openai", sol)
++    pilot.execute_comparison(tmp_path)
++    after = json.loads((tmp_path / "ledger.json").read_bytes())
++    assert after["attempts"][:8] == before["attempts"] and after["stopped"] is True
++    assert all((tmp_path / name).read_bytes() == data for name, data in originals.items())
++    assert pilot.evaluate(tmp_path) == original and pilot.continuation_report(tmp_path) == luna
++    report = pilot.comparison_report(tmp_path)
++    assert report["paired_G06"][0]["top1"] == 1 and report["paired_G06"][1]["top1"] == 0
++    assert report["combined_model_whole_sample_score"] is None
++    assert report["attempt_10_authorized"] is False
++    # A modified old record invalidates the comparison's bound history.
++    after["attempts"][0]["reuse_count"] = 1
++    (tmp_path / "ledger.json").write_bytes(json.dumps(after).encode())
++    with pytest.raises(
++        PilotError, match="(comparison_or_prior|amendment_or_original)_history_changed"
++    ):
++        pilot.validate_comparison(tmp_path)
