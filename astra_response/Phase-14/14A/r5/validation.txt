@@ -1,0 +1,23 @@
+Focused fixture checks only:
+python -m pytest services/api/tests/unit/test_recognition_pilot.py -q -k test_reference
+3 passed, 16 deselected in 4.17s
+
+- Five separately identified images; >3 MiB base64 fixture admitted within the new
+  bounded limit; four images and oversized payload refused; all response alternatives.
+- USD 0.25/lifetime USD 10 limits; uncertain dispatch consumes attempt 10; repeat refused.
+- Prior nine records/results and original/cumulative Luna/paired Sol results remain
+  readable and unchanged after the separate protocol.
+
+Targeted Ruff format/check and strict mypy (--follow-imports=silent), five changed
+Python files: passed. One fixture mock was corrected to avoid modifying historical
+Sol pricing; two Literal annotations were corrected before the passing run.
+No broad suites, builds, DB startup/work, catalog changes or new dependencies.
+
+Live request: exactly one. Completed, no retries/fallback/counting/probes.
+Post-dispatch scoped preservation: nine prior records, 15 literal prior evidence/
+result files and three protected files unchanged. Original Luna 3/17; accepted
+G06 both models 0/8 top1/top3 unchanged. Private model-facing images inspected locally.
+
+Publication checks: exact r5 inventory, private-data exclusion scan, patch admission
+against r4 source, staged path check, and prior r1-r4 tree preservation. Main index
+remains empty; main HEAD stays d839e51b65f9156e5829740c08d52b59be4c4ec4.
