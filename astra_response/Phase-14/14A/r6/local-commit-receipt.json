@@ -1,0 +1,93 @@
+{
+  "local_commit": "7149f83dd7a16092bc2dfa12cd1ab1935073f537",
+  "title": "Close Phase 14A recognition feasibility pilot",
+  "parent": "d839e51b65f9156e5829740c08d52b59be4c4ec4",
+  "branch": "main",
+  "main_pushed": false,
+  "committed_file_count": 14,
+  "inventory": [
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "git_blob": "d5ccf5fdae0a364b467bad8b10f6b807d99ae559"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "git_blob": "527fde686ee43cf2a39dd77666eed6d595252fcf"
+    },
+    {
+      "path": "docs/PROVIDER_GATES.md",
+      "git_blob": "8140f04ec29250fcbd4ca82e769b73e4790874f6"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "git_blob": "29f60c7c66809b709607c6301ca9d93cb407b9f0"
+    },
+    {
+      "path": "docs/PHASE_14A_PILOT.md",
+      "git_blob": "0a8b2d9858952347cb012d98381f74b4d08d1250"
+    },
+    {
+      "path": "docs/PHASE_14A_PROVIDER_DECISION.md",
+      "git_blob": "96eaf8461142b306bd335774f653647f754dcbb4"
+    },
+    {
+      "path": "docs/plans/104-recognition-quality-pilot.md",
+      "git_blob": "9efc22d1a7918f20f81be2eb80103244a97e312d"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/__init__.py",
+      "git_blob": "83f6fcc733a55c34512c31723f6a33e0e9fbe526"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/__main__.py",
+      "git_blob": "1db8d143c5d37e2927b58803b02b27e33eef649b"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/contracts.py",
+      "git_blob": "36985ef04de4a2c945070ecd41cba47eb02f3ce0"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/local.py",
+      "git_blob": "f6b9ba77b0bbf56690eaf32cbe2b633c3dbde28e"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/pilot.py",
+      "git_blob": "daaca0edffe5d95d86cac0e5105356e683320037"
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/reference.py",
+      "git_blob": "c562b825de26814fe82eb70aae639fe73b38c82c"
+    },
+    {
+      "path": "services/api/tests/unit/test_recognition_pilot.py",
+      "git_blob": "b517f720b55ba279963ae1ea06658c3d7d132f6f"
+    }
+  ],
+  "index_after_commit": "empty",
+  "residual_worktree": "Only the three protected files remain modified and unstaged.",
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "protected_before_after_equal": true,
+  "cumulative_patch_sha256": "9f072e36b0971f4cf05be02d346e530279a7f40327fcd8f2620c2cfa021ad0d2",
+  "committed_plan_104_sha256": "c17a35a7cece99bfa90614b04943ce4db3bbf286088267cad507ce45cef1b836",
+  "closeout_date": "2026-10-04",
+  "evidence_pins": {
+    "r2": "108f7f6d65a38ebead7701d3c0f7f2d62ed3b5ab",
+    "r3": "c89583e40eb1c62620c1162bd1ac0c23bbf51c56",
+    "r4": "0a22aa90d3abb4c070e1d9fbd3fab375f78ae914",
+    "r5": "457f3d5c60ec891dd96b069fb9c1cb878e0cf51a"
+  },
+  "prior_review_trees": {
+    "r1": "68deb4ee914a4e8f0141e3d534341dee3a625f7b",
+    "r2": "d45e2fc59ea5c66508183bf077252a8810fa5c6a",
+    "r3": "b310578f58cbdf7665bfbe16eaa75066b8caddb1",
+    "r4": "517f1fc7673127b0f88be9d631ba0fe09b244940",
+    "r5": "04882d2743f22c1e1353c51c1262a327420ff5bd"
+  },
+  "live_test_build_work_rerun": false,
+  "private_evidence_included": false,
+  "ledger_or_reservations_changed": false
+}
