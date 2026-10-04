@@ -1,0 +1,1323 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index d5ccf5f..222196d 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,14 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 14B local retrieval foundation — 2026-10-04
++
++**READY FOR PHASE 14B FOUNDATION REVIEW.** Description-assisted CLI retrieval,
++private offline comparison and separate operator notes work locally. Six focused
++cases/static checks and one catalog/browser/note smoke passed. Three retained
++front-reference photos; canonical/hidden-view coverage remains limited. Zero new
++provider calls; Phase 14A accounting stays closed. Main uncommitted/unpushed,
++index empty and protected files preserved. See [Plan 105](docs/plans/105-reference-candidate-retrieval.md).
++
+ ## Phase 14A feasibility closeout — 2026-10-04
+ 
+ **Phase 14A: COMPLETED / ACCEPTED AS FEASIBILITY EVIDENCE.** Brian accepted r5.
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 29f60c7..9f5ee81 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1294,6 +1294,10 @@ Exact minifigure recognition is **NOT QUALIFIED FOR PRODUCTION**; no production
+ recognition capability or further calls are approved. Further work requires
+ separate authorization. See [Plan 104](plans/104-recognition-quality-pilot.md).
+ 
++Phase 14B's local description-assisted retrieval/comparison foundation is ready for
++review; see [Plan 105](plans/105-reference-candidate-retrieval.md). Image-only retrieval
++and fresh AI verification remain deferred.
++
+ - **Inputs:** Proven core/image ingestion, rights-cleared catalog references, separately confirmed listing examples, and approved provider/spending scope.
+ - **Scope:** Candidate set/minifigure identities using shared catalog/mappings, server-side OpenAI/Gemini adapters, text clues, retrieval/verification comparison, analysis provenance, and separate corrections.
+ - **Exclusions:** A parallel catalog/mapping/valuation engine, model-invented finance, custom training, full catalog/vector infrastructure without evidence, Android capture, and deployment.
+diff --git a/docs/plans/105-reference-candidate-retrieval.md b/docs/plans/105-reference-candidate-retrieval.md
+new file mode 100644
+index 0000000..68812a0
+--- /dev/null
++++ b/docs/plans/105-reference-candidate-retrieval.md
+@@ -0,0 +1,141 @@
++# Plan 105 — Phase 14B local candidate retrieval foundation
++
++## Goal and user-visible outcome
++
++Explicitly selected photos plus a short visible description produce a deterministic
++candidate shortlist, a private offline HTML comparison and optional separate operator
++notes. This is description-assisted retrieval. Image-only retrieval and fresh AI
++verification are deferred.
++
++## Why now
++
++Phase 14A is closed as accepted feasibility evidence. Exact minifigure recognition
++remains unqualified for production. A reviewable local matching baseline is useful
++before any new model work. Wider Phase 14 remains IN PROGRESS.
++
++## In scope
++
++- Existing catalog set search and a small snapshot-scoped minifigure name helper.
++- Three corrected, approved reference photographs and retained provenance/licenses,
++  indexed privately under .local/recognition-14b.
++- scripts/reference_candidates.py: compare, interactive review and reopen.
++- Self-contained reports with embedded raster bytes, source credits, ranking reasons,
++  missing views and explicit canonical-resolution state.
++
++## Explicit non-goals
++
++No provider/model/counting/embedding calls, downloads, new dependencies, image-only
++matching, new catalog/crosswalk, mapping writes, migrations, production UI/deployment
++or Phase 15/16. Ten consumed 14A attempts, ledger and reservations stay unchanged.
++
++## Current repository state
++
++Main baseline: 7149f83dd7a16092bc2dfa12cd1ab1935073f537. Accepted 14A r6:
++2c71ad336424c8d4e7af6e8ed15279371afab578. Implementation remains uncommitted,
++main unpushed and index empty. The three protected files remain unchanged/unstaged.
++
++## Decisions and assumptions
++
++- Registry entries are reference evidence, not independent canonical catalog records.
++  Documentary photo-to-ID association does not verify concealed components.
++- Query fields are positively selected. Expected labels, candidate IDs, revealing
++  filenames and reviewer conclusions are excluded; selected text containing catalog
++  IDs or paths is refused. Operator descriptions must independently describe visible
++  evidence. Prior visual/text clues require explicit object/field/clue selection.
++- Up to twelve unique text terms query set and figure names independently, with at
++  most 100 results per term/type. Any saturated term result is marked truncated.
++- Exact token overlap: name weight 3, visible/source-feature weight 2, exact name
++  phrase bonus 6. Stable ties use exact kind/namespace/identifier. Scores are not
++  calibrated confidence, visual compatibility or identity proof.
++- Native accepted catalog identities are separate from external reference identifiers.
++  Canonical projection reuses exact namespace/identifier resolution; there is no new
++  provider crosswalk. The fourteen known missing mappings remain unresolved.
++- Reference photos selected around a known example demonstrate software behavior,
++  not independent retrieval accuracy or the broader 25–100-set evaluation.
++
++## Data model and interface changes
++
++FigureMatch plus PinnedCatalog.search_minifigures reuse existing name predicates and
++accepted snapshot guards. New local retrieval/comparison models keep candidate,
++canonical identity, source/reference evidence and operator assertion separate.
++No HTTP contract or database schema changes.
++
++Registry records retain names/features with source basis, exact whole-figure keys,
++image hashes/paths, view coverage, source URLs and permission/attribution evidence.
++Comparison JSON/HTML and append-only notes are protected local files. No original
++prediction, confirmed label, reference record or scoring result is overwritten.
++
++## Implementation sequence
++
++1. Verify baseline/protected state and derive the small reference-only index.
++2. Add read-only figure text querying, deterministic ranking and private rendering.
++3. Add explicit provisional/compatible/none/insufficient/operator-known review notes.
++4. Run six focused synthetic cases, targeted static checks and one local smoke.
++5. Publish sanitized review evidence on astra-response; leave main uncommitted.
++
++## Validation and acceptance
++
++Six cases cover ranking/ties/no-match, missing images/exact namespace separation,
++query leakage prevention, append-only ambiguous notes/operator assertions, escaped
++offline rendering/input integrity and bounded snapshot-scoped figure queries.
++One smoke uses retained references and an independently supplied visible description:
++query, actual owned development catalog, shortlist, browser comparison, save/reopen
++private note. This demonstrates the workflow without an accuracy benchmark.
++
++## Security, privacy and integrity
++
++Only explicit image paths are read. Reports embed bytes and escape private text;
++CSP disables scripts, connections, external resources, forms and base URLs.
++Attribution stays with images. No remote images load on opening a report.
++Existing protected-file helpers enforce private ACLs and exclusive local writes.
++No private images, query text, operator notes, credentials or asset paths are published.
++
++Development access uses the established ownership/loopback/service guards, runtime
++role, accepted nonsynthetic snapshot, 0017 schema and read-only transaction. Only an
++existing service may start; its original stopped/running state is restored in finally.
++No provisioning, grants, import, backup, migration or database mutation occurs.
++
++## Failure modes, rollback and recovery
++
++Missing permitted photos remain explicit coverage gaps. No-match and saturated
++catalog term results are distinct. Changed image/permission bytes, invalid query or
++note association fail closed. A partial private report can be inspected locally;
++original evidence remains intact. Removing this uncommitted slice requires Brian's
++separate instruction; no cleanup of unrelated work is automatic.
++
++## Progress log
++
++- [x] 2026-10-04: Scope and baseline verified; initial retrieval/comparison implementation.
++- [x] Six synthetic cases passed (1.53 seconds); changed-file Ruff and strict mypy
++  passed for seven Python files.
++- [x] One real local catalog smoke produced eight candidates from a bounded pool of
++  1,012. Two shortlisted entries had approved photographs; six had no reference
++  image. Term-result caps were reached, so coverage is explicitly truncated.
++- [x] Installed Edge loaded four embedded images and the separate saved/reopened
++  insufficient-evidence note with zero external requests. Development returned to
++  its original stopped state.
++- [x] Windows report-directory creation was corrected to use the established private
++  ACL helper after the initial note guard refused that new directory. The same report
++  was retained; no second catalog query or source-evidence rewrite was needed.
++- [x] Sanitized r1 review package prepared for astra-response; publication receipt
++  is returned with the review link. Main remains uncommitted.
++
++## Open questions and manual checks
++
++Additional view coverage, image-driven retrieval and any fresh AI-verification scope
++need separate decisions. No further reference sourcing is included here.
++
++## Outcome and follow-up
++
++READY FOR PHASE 14B FOUNDATION REVIEW after the affected checks and local smoke.
++Three source-associated, CC BY 2.0 front photographs are available; all lack exposed
++heads/rear views and verified canonical mappings. The selected clue came from one
++explicitly selected retained visual-clue field; prior IDs, labels and answers were
++excluded. This and the preselected references demonstrate behavior, not independent
++retrieval accuracy. The saved note is a software smoke example, not Brian's identity
++confirmation.
++
++No production recognition capability or full Phase 14 completion is claimed.
++Phase 14A scores, ten consumed attempts and retained reservations remain closed and
++unchanged. New provider calls/spend: zero. Image-driven retrieval, more independently
++selected evaluation coverage and any fresh AI-verification scope remain separate work.
+diff --git a/scripts/reference_candidates.py b/scripts/reference_candidates.py
+new file mode 100644
+index 0000000..eacbfdd
+--- /dev/null
++++ b/scripts/reference_candidates.py
+@@ -0,0 +1,229 @@
++"""Repository-local Phase 14B CLI; only guarded development catalog reads."""
++
++import argparse
++import json
++import re
++from collections.abc import Iterator
++from contextlib import contextmanager
++from pathlib import Path
++
++import psycopg
++from brickvault_api.catalog.connection import CatalogDatabase, read_transaction
++from brickvault_api.catalog.query_types import CatalogError
++from brickvault_api.catalog.repository import PinnedCatalog, open_catalog
++from brickvault_api.persistence.database import expected_revisions
++from brickvault_api.recognition.comparison import create_comparison, render_note
++from brickvault_api.recognition.local import (
++    digest,
++    private_directory,
++    read_bytes,
++    write_bytes,
++)
++from brickvault_api.recognition.retrieval import (
++    Comparison,
++    Key,
++    Query,
++    Registry,
++    RetrievalError,
++    ReviewNote,
++    query_from,
++    retained_clues,
++    retrieve,
++    save_note,
++)
++from database import LOCAL, ROOT, DatabaseError, database_marker, instance, runner_lock
++
++PRIVATE = ROOT / ".local" / "recognition-14b"
++
++
++@contextmanager
++def development_catalog() -> Iterator[PinnedCatalog]:
++    """Require existing ownership/service/head; restore its exact initial running state."""
++    if not (LOCAL / "development.json").is_file():
++        raise RetrievalError("existing_development_receipt_required")
++    if expected_revisions() != ("0017_listing_images",):
++        raise RetrievalError("approved_0017_schema_required")
++    with runner_lock():
++        dev = instance("development")
++        before = dev.verify()
++        if before is None:
++            raise RetrievalError("existing_development_service_required")
++        running = bool(before["State"]["Running"])
++        try:
++            if not running:
++                dev.up()  # Existing supported no-recreate/no-pull lifecycle; no provisioning.
++            database = CatalogDatabase(
++                dev.target("brickvault_dev", "runtime"),
++                "development",
++                database_marker(dev, "development"),
++                role="runtime",
++            )
++            with read_transaction(database, repeatable=True) as connection:
++                pointers = connection.execute(
++                    """SELECT a.snapshot_id FROM catalog_active_snapshot a
++                    JOIN catalog_snapshot s ON s.id=a.snapshot_id
++                    JOIN catalog_source_version v ON v.id=s.source_version_id
++                    JOIN catalog_provider p ON p.id=v.provider_id
++                    WHERE p.code='rebrickable' AND NOT v.synthetic AND s.state='accepted'
++                    ORDER BY a.snapshot_id LIMIT 2"""
++                ).fetchall()
++                if len(pointers) != 1:
++                    raise RetrievalError("one_accepted_catalog_required")
++                with open_catalog(
++                    database,
++                    snapshot_id=pointers[0]["snapshot_id"],
++                    connection=connection,
++                ) as catalog:
++                    yield catalog
++        finally:
++            if not running:
++                dev.stop()
++
++
++def selected_query(args: argparse.Namespace) -> Query:
++    if args.query_file:
++        return query_from(json.loads(read_bytes(Path(args.query_file))))
++    if args.clues_file:
++        return retained_clues(
++            json.loads(read_bytes(Path(args.clues_file))),
++            args.object_index,
++            field=args.clue_field,
++            indices=args.clue_index,
++            candidate_index=args.candidate_index,
++        )
++    return query_from({"description": input("Visible description (no catalog IDs): ")})
++
++
++def existing_comparison(root: Path, run: str) -> Comparison:
++    if re.fullmatch(r"[a-f0-9]{32}", run) is None:
++        raise RetrievalError("invalid_comparison_run")
++    return Comparison.model_validate_json(
++        read_bytes(root / run / "comparison.json", 4 * 1024 * 1024)
++    )
++
++
++def review_interactive(root: Path, run: str) -> Path:
++    comparison = existing_comparison(root, run)
++    decision = input(
++        "Decision: provisional / compatible / none / insufficient_evidence / known_identity: "
++    )
++    selected = []
++    identity = None
++    needed_view = ""
++    if decision in ("provisional", "compatible"):
++        ranks = [
++            int(v) for v in input("Candidate ranks, separated by commas: ").split(",")
++        ]
++        if any(not 1 <= rank <= len(comparison.retrieval.matches) for rank in ranks):
++            raise RetrievalError("candidate_rank_unavailable")
++        selected = [
++            comparison.retrieval.matches[rank - 1].candidate.key for rank in ranks
++        ]
++    if decision == "insufficient_evidence":
++        needed_view = input("Needed view: ")
++    if decision == "known_identity":
++        identity = Key.model_validate(
++            {
++                "kind": input("Kind: set / minifigure: "),
++                "namespace": input("Namespace: "),
++                "identifier": input(
++                    "Independently known identifier (operator-supplied): "
++                ),
++            }
++        )
++    note = ReviewNote.model_validate(
++        {
++            "run": run,
++            "comparison_sha256": digest(
++                read_bytes(root / run / "comparison.json", 4 * 1024 * 1024)
++            ),
++            "decision": decision,
++            "candidates": [k.model_dump() for k in selected],
++            "needed_view": needed_view,
++            "operator_identity": identity.model_dump() if identity else None,
++            "comment": input("Optional private review note: "),
++        }
++    )
++    target = save_note(root, comparison, note)
++    write_bytes(target.with_suffix(".html"), render_note(note))
++    return target.with_suffix(".html")
++
++
++def main() -> int:
++    parser = argparse.ArgumentParser(
++        description="Local description-assisted retrieval; no AI calls."
++    )
++    parser.add_argument("--private-root", type=Path, default=PRIVATE)
++    commands = parser.add_subparsers(dest="command", required=True)
++    compare = commands.add_parser("compare")
++    compare.add_argument("--image", type=Path, action="append", required=True)
++    sources = compare.add_mutually_exclusive_group()
++    sources.add_argument("--query-file")
++    sources.add_argument("--clues-file")
++    compare.add_argument("--object-index", type=int, default=0)
++    compare.add_argument("--candidate-index", type=int, default=0)
++    compare.add_argument(
++        "--clue-field", choices=["visual_clues", "text_clues"], default="visual_clues"
++    )
++    compare.add_argument("--clue-index", type=int, action="append")
++    compare.add_argument(
++        "--reference-only",
++        action="store_true",
++        help="Explicitly omit catalog access; report restricted coverage.",
++    )
++    compare.add_argument("--limit", type=int, default=8)
++    review = commands.add_parser("review")
++    review.add_argument("--run", required=True)
++    reopen = commands.add_parser("reopen")
++    reopen.add_argument("--run", required=True)
++    args = parser.parse_args()
++    try:
++        if args.private_root.resolve() != PRIVATE.resolve():
++            raise RetrievalError("repository_private_14b_directory_required")
++        private_directory(PRIVATE)
++        if args.command == "compare":
++            registry = Registry.model_validate_json(
++                read_bytes(PRIVATE / "reference-index.json")
++            )
++            query = selected_query(args)
++            if args.reference_only:
++                result = retrieve(query, registry, None, limit=args.limit)
++            else:
++                with development_catalog() as catalog:
++                    result = retrieve(query, registry, catalog, limit=args.limit)
++            comparison, report = create_comparison(PRIVATE, result, args.image)
++            print(f"Local comparison ready. Run: {comparison.run}; report: {report}")
++        elif args.command == "review":
++            print(f"Separate operator note: {review_interactive(PRIVATE, args.run)}")
++        else:
++            comparison = existing_comparison(PRIVATE, args.run)
++            notes = sorted(
++                (PRIVATE / comparison.run).glob("note-*.json"),
++                key=lambda p: p.stat().st_mtime_ns,
++            )
++            if not notes:
++                raise RetrievalError("operator_note_unavailable")
++            note = ReviewNote.model_validate_json(read_bytes(notes[-1]))
++            if note.comparison_sha256 != digest(
++                read_bytes(
++                    PRIVATE / comparison.run / "comparison.json", 4 * 1024 * 1024
++                )
++            ):
++                raise RetrievalError("note_comparison_mismatch")
++            print(
++                f"Saved note: {notes[-1].with_suffix('.html')}; decision: {note.decision}"
++            )
++    except (RetrievalError, CatalogError, DatabaseError) as error:
++        print(f"Local candidate workflow stopped: {error}")
++        return 1
++    except (OSError, ValueError, psycopg.Error):
++        # Never emit a traceback, private query, URL, credential or user text.
++        print(
++            "Local candidate workflow failed. Preserve evidence; inspect the local inputs and owned development prerequisites."
++        )
++        return 1
++    return 0
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/services/api/src/brickvault_api/catalog/query_types.py b/services/api/src/brickvault_api/catalog/query_types.py
+index e436f11..c10570e 100644
+--- a/services/api/src/brickvault_api/catalog/query_types.py
++++ b/services/api/src/brickvault_api/catalog/query_types.py
+@@ -217,6 +217,15 @@ class SetMatch:
+     rank: int | None = None
+ 
+ 
++@dataclass(frozen=True)
++class FigureMatch:
++    identity: Identity
++    name: str
++    source_type: str | None
++    classification: str | None
++    provenance: Provenance
++
++
+ @dataclass(frozen=True)
+ class DefaultInventory:
+     owner: Owner
+diff --git a/services/api/src/brickvault_api/catalog/repository.py b/services/api/src/brickvault_api/catalog/repository.py
+index 3eede6e..355c276 100644
+--- a/services/api/src/brickvault_api/catalog/repository.py
++++ b/services/api/src/brickvault_api/catalog/repository.py
+@@ -22,6 +22,7 @@ from brickvault_api.catalog.query_types import (
+     Completeness,
+     DefaultInventory,
+     ExtrasMode,
++    FigureMatch,
+     FigureMembership,
+     FigureMode,
+     Identity,
+@@ -41,7 +42,7 @@ from brickvault_api.catalog.query_types import (
+     SourceContract,
+     SourceLine,
+ )
+-from brickvault_api.catalog.search import MATCH_COLUMNS, SEARCH_SQL, search_input
++from brickvault_api.catalog.search import FIGURE_SEARCH_SQL, MATCH_COLUMNS, SEARCH_SQL, search_input
+ from brickvault_api.catalog.types import (
+     FigureTarget,
+     Owner,
+@@ -261,6 +262,26 @@ class PinnedCatalog:
+             tuple(set_match(row) for row in rows),
+         )
+ 
++    def search_minifigures(
++        self, value: str, *, limit: int = 20
++    ) -> QueryResult[tuple[FigureMatch, ...]]:
++        query = search_input(value, limit)
++        rows = self._rows(FIGURE_SEARCH_SQL, {"query": query, "limit": limit}, bound=limit)
++        return QueryResult(
++            self.snapshot,
++            QueryState.OK if rows else QueryState.EMPTY,
++            tuple(
++                FigureMatch(
++                    Identity(row["id"], "minifigure", row["namespace"], row["identifier"]),
++                    row["display_name"],
++                    row["source_type"],
++                    row["classification"],
++                    provenance(row),
++                )
++                for row in rows
++            ),
++        )
++
+     def resolve_identity(self, kind: str, identifier: str) -> QueryResult[tuple[Identity, ...]]:
+         if (
+             kind not in MAPPING_TABLES
+diff --git a/services/api/src/brickvault_api/catalog/search.py b/services/api/src/brickvault_api/catalog/search.py
+index 3298a55..39e7786 100644
+--- a/services/api/src/brickvault_api/catalog/search.py
++++ b/services/api/src/brickvault_api/catalog/search.py
+@@ -25,6 +25,13 @@ SEARCH_SQL = f"""SELECT {MATCH_COLUMNS},
+     ORDER BY rank, f.display_name COLLATE "C", c.identifier COLLATE "C", c.id
+     LIMIT %(limit)s"""
+ 
++FIGURE_SEARCH_SQL = f"""SELECT c.id,c.namespace,c.identifier,f.display_name,
++    f.source_type,f.classification,f.snapshot_id,f.source_version_id,f.evidence_id
++    FROM catalog_minifigure_fact f JOIN catalog_minifigure c ON c.id=f.minifigure_id
++    WHERE f.snapshot_id=%(snapshot)s AND ({EXACT} OR {PREFIX} OR {TEXT_MATCH})
++    ORDER BY f.display_name COLLATE "C",c.namespace COLLATE "C",c.identifier COLLATE "C",c.id
++    LIMIT %(limit)s"""
++
+ 
+ def search_input(value: str, limit: int) -> str:
+     if (
+diff --git a/services/api/src/brickvault_api/recognition/comparison.py b/services/api/src/brickvault_api/recognition/comparison.py
+new file mode 100644
+index 0000000..f4fd8b3
+--- /dev/null
++++ b/services/api/src/brickvault_api/recognition/comparison.py
+@@ -0,0 +1,154 @@
++"""Private self-contained HTML and append-only human review; no remote image requests."""
++
++import base64
++import html
++import io
++import json
++from pathlib import Path
++from uuid import uuid4
++
++from PIL import Image
++
++from brickvault_api.recognition.local import digest, private_directory, read_bytes, write_bytes
++from brickvault_api.recognition.retrieval import (
++    Comparison,
++    Retrieval,
++    RetrievalError,
++    ReviewNote,
++    SelectedImage,
++)
++
++STYLE = """
++body{font:16px system-ui;margin:24px auto;max-width:1200px;padding:0 16px;color:#172130}
++.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
++article{border:1px solid #a9b6c5;border-radius:8px;padding:16px;overflow-wrap:anywhere}
++img{width:100%;height:auto;max-height:650px;object-fit:contain}
++.limit{background:#fff2cc;padding:12px}small{display:block;margin:8px 0}h2{margin-top:32px}
++"""
++
++
++def escaped(value: object) -> str:
++    return html.escape(str(value), quote=True)
++
++
++def page(title: str, content: str) -> bytes:
++    return (
++        '<!doctype html><html lang="en"><meta charset="utf-8">'
++        '<meta name="viewport" content="width=device-width,initial-scale=1">'
++        '<meta http-equiv="Content-Security-Policy" content="default-src &apos;none&apos;; '
++        "img-src data:; style-src &apos;unsafe-inline&apos;; script-src &apos;none&apos;; "
++        'connect-src &apos;none&apos;; base-uri &apos;none&apos;; form-action &apos;none&apos;">'
++        f"<title>{escaped(title)}</title><style>{STYLE}</style><body>"
++        f"<h1>{escaped(title)}</h1>{content}</body></html>"
++    ).encode()
++
++
++def inline_image(path: Path, expected: str, caption: str) -> str:
++    raw = read_bytes(path, 25 * 1024 * 1024)
++    if digest(raw) != expected:
++        raise RetrievalError("selected_image_changed")
++    with Image.open(io.BytesIO(raw)) as image:
++        if image.format not in ("JPEG", "PNG", "WEBP") or image.width * image.height > 20_000_000:
++            raise RetrievalError("unsupported_comparison_image")
++        image.verify()
++        mime = {"JPEG": "jpeg", "PNG": "png", "WEBP": "webp"}[image.format]
++    return (
++        f'<img alt="{escaped(caption)}" src="data:image/{mime};base64,'
++        f'{base64.b64encode(raw).decode()}">'
++    )
++
++
++def render(comparison: Comparison) -> bytes:
++    result = comparison.retrieval
++    parts = [
++        f"<p>{escaped(result.claim)}</p>",
++        '<p class="limit">Candidate, not confirmed. No image-only recognition or AI verification '
++        "was performed. Retrieval, visual compatibility, unique identity, operator assertion "
++        "and canonical mapping are separate. Photo darkness is not proof of different printing; "
++        "concealed components need another view.</p>",
++        f"<p>Query: {escaped(result.query.text)}</p>",
++        f"<p>Catalog: {escaped(result.catalog_status)}. Pool: {result.pool_count}; "
++        f"approved references: {result.reference_count}. "
++        f"Catalog term-result limits reached: {result.catalog_truncated}.</p>",
++        "<h2>Explicitly selected evaluation images</h2><div class=grid>",
++    ]
++    for i, image in enumerate(comparison.images, 1):
++        parts.append(
++            f"<article>{inline_image(Path(image.path), image.sha256, f'Selected view {i}')}</article>"
++        )
++    parts.append("</div><h2>Ranked candidates</h2>")
++    if result.state == "no_match":
++        parts.append("<p>No matching candidate in the queried coverage.</p>")
++    parts.append("<div class=grid>")
++    for rank, match in enumerate(result.matches, 1):
++        c = match.candidate
++        parts.extend(
++            [
++                f"<article><h3>{rank}. {escaped(c.name)}</h3>",
++                f"<p>{escaped(c.key.token)} — candidate, not confirmed</p>",
++                f"<p>Retrieval score {match.score}; {escaped(match.ranking_basis)}.</p>",
++                f"<p>Matched terms: {escaped(json.dumps(match.matched_terms))}</p>",
++                f"<p>Source-supported features: {escaped(c.features or 'No feature description available')}</p>",
++                f"<p>Canonical resolution: {escaped(c.resolution)}; "
++                f"{escaped(json.dumps(c.canonical) if c.canonical else 'No verified canonical identity')}</p>",
++                f"<small>Catalog/name provenance: {escaped(json.dumps(c.provenance))}</small>",
++            ]
++        )
++        if c.reference:
++            ref = c.reference
++            parts.extend(
++                [
++                    inline_image(Path(ref.image_path), ref.image_sha256, "Approved reference"),
++                    f"<p>Photo association: {escaped(ref.identity_status)}. "
++                    f"{escaped(ref.association_basis)}</p>",
++                    f"<p>Available views: {escaped(', '.join(ref.views))}. Missing/unverified: "
++                    f"{escaped(', '.join(ref.missing_views))}.</p>",
++                    f"<small>Identity sources: {escaped(' ; '.join(ref.source_urls))}</small>",
++                    f"<small>Attribution: {escaped(json.dumps(ref.attribution))}</small>",
++                    f"<small>Permission evidence: {escaped(ref.permission)} "
++                    f"Retained evidence hash: {escaped(ref.license_evidence['sha256'])}</small>",
++                ]
++            )
++        else:
++            parts.append(
++                "<p>Reference image unavailable. Visual compatibility and hidden components "
++                "cannot be assessed from this catalog record alone.</p>"
++            )
++        parts.append(
++            "<p>Visual compatibility: not assessed; unique identity: not established.</p></article>"
++        )
++    parts.append(
++        "</div><h2>Private operator review</h2><p>Use the local review CLI to record one "
++        "provisional candidate, several compatible candidates, none, insufficient evidence "
++        "with a needed view, or an independently known operator-supplied identity. Notes "
++        "are separate append-only files; no catalog or valuation follows.</p>"
++    )
++    return page("BrickVault — description-assisted candidate comparison", "".join(parts))
++
++
++def create_comparison(root: Path, result: Retrieval, images: list[Path]) -> tuple[Comparison, Path]:
++    if not 1 <= len(images) <= 2:
++        raise RetrievalError("select_one_or_two_images")
++    selected = [
++        SelectedImage(path=str(p.resolve()), sha256=digest(read_bytes(p, 25 * 1024 * 1024)))
++        for p in images
++    ]
++    comparison = Comparison(run=uuid4().hex, retrieval=result, images=selected)
++    rendered = render(comparison)  # Validate all bytes before publishing a report directory.
++    target = root / comparison.run
++    private_directory(target, create=True)
++    write_bytes(target / "comparison.json", comparison.model_dump_json(indent=2).encode())
++    write_bytes(target / "comparison.html", rendered)
++    return comparison, target / "comparison.html"
++
++
++def render_note(note: ReviewNote) -> bytes:
++    content = (
++        f"<p>{escaped(note.assertion)}</p><p>Decision: {escaped(note.decision)}</p>"
++        f"<p>Compatible/provisional candidates: {escaped(', '.join(k.token for k in note.candidates))}</p>"
++        f"<p>Needed view: {escaped(note.needed_view)}</p><p>Note: {escaped(note.comment)}</p>"
++        f"<p>Independently known identity — operator-supplied assertion: "
++        f"{escaped(note.operator_identity.token if note.operator_identity else 'None')}</p>"
++        "<p>Visual uniqueness and canonical mapping are not established by this note.</p>"
++    )
++    return page("BrickVault — private operator review note", content)
+diff --git a/services/api/src/brickvault_api/recognition/retrieval.py b/services/api/src/brickvault_api/recognition/retrieval.py
+new file mode 100644
+index 0000000..4330dc7
+--- /dev/null
++++ b/services/api/src/brickvault_api/recognition/retrieval.py
+@@ -0,0 +1,382 @@
++"""Description-assisted local retrieval; no model, prediction or mapping writes."""
++
++import json
++import re
++import unicodedata
++from collections.abc import Mapping
++from pathlib import Path
++from typing import Any, Literal
++from uuid import uuid4
++
++from pydantic import BaseModel, ConfigDict, Field, model_validator
++
++from brickvault_api.catalog.query_types import FigureMatch, SetMatch
++from brickvault_api.catalog.repository import PinnedCatalog
++from brickvault_api.recognition.local import digest, read_bytes, write_bytes
++
++WORD = re.compile(r"[^\W_]+", re.UNICODE)
++IDENTIFIER = re.compile(
++    r"\b(?:sw\d+|fig[-_]\d+|\d{4,}(?:-\d+)?)\b|[\\/]|\.(?:png|jpe?g|webp)\b",
++    re.IGNORECASE,
++)
++STOP = frozenset("a an the with and or of on in is are has have figure minifigure lego".split())
++
++
++class RetrievalError(ValueError):
++    """Fixed error categories only; private data never belongs in diagnostics."""
++
++
++class Record(BaseModel):
++    model_config = ConfigDict(extra="forbid", frozen=True, hide_input_in_errors=True)
++
++
++class Key(Record):
++    kind: Literal["set", "minifigure"]
++    namespace: str = Field(min_length=1, max_length=64)
++    identifier: str = Field(min_length=1, max_length=256)
++
++    @property
++    def token(self) -> str:
++        return f"{self.kind}:{self.namespace}:{self.identifier}"
++
++
++class Reference(Record):
++    key: Key
++    name: str
++    features: str
++    name_basis: str
++    association_basis: str
++    identity_status: Literal["provenance_supported"]
++    source_urls: list[str]
++    image_path: str
++    image_sha256: str
++    views: list[str]
++    missing_views: list[str]
++    attribution: dict[str, str]
++    permission: str
++    license_evidence: dict[str, str]
++
++
++class Registry(Record):
++    version: Literal["14b-reference-index-v1"] = "14b-reference-index-v1"
++    source_sha256: str
++    references: list[Reference]
++
++    @model_validator(mode="after")
++    def unique(self) -> "Registry":
++        if len({r.key.token for r in self.references}) != len(self.references):
++            raise RetrievalError("duplicate_reference_identity")
++        return self
++
++
++class Candidate(Record):
++    key: Key
++    name: str
++    features: str = ""
++    provenance: dict[str, str]
++    canonical: dict[str, str] | None = None
++    resolution: Literal["verified", "unresolved", "ambiguous", "not_checked"]
++    reference: Reference | None = None
++
++
++class Query(Record):
++    text: str
++    terms: list[str]
++    excluded_fields: list[str]
++
++
++class Match(Record):
++    candidate: Candidate
++    score: int
++    matched_terms: dict[str, list[str]]
++    ranking_basis: str = "name=3, source features=2; exact name phrase=6; identity keys excluded"
++
++
++class Retrieval(Record):
++    version: Literal["14b-description-v1"] = "14b-description-v1"
++    query: Query
++    matches: list[Match]
++    pool_count: int
++    reference_count: int
++    catalog_status: str
++    catalog_truncated: bool
++    state: Literal["shortlist", "no_match"]
++    claim: str = "Description-assisted retrieval; scores are not confidence or identity proof."
++
++
++class SelectedImage(Record):
++    path: str
++    sha256: str
++
++
++class Comparison(Record):
++    version: Literal["14b-comparison-v1"] = "14b-comparison-v1"
++    run: str = Field(pattern=r"^[a-f0-9]{32}$")
++    retrieval: Retrieval
++    images: list[SelectedImage]
++
++
++class ReviewNote(Record):
++    version: Literal["14b-operator-note-v1"] = "14b-operator-note-v1"
++    run: str = Field(pattern=r"^[a-f0-9]{32}$")
++    comparison_sha256: str
++    decision: Literal[
++        "provisional", "compatible", "none", "insufficient_evidence", "known_identity"
++    ]
++    candidates: list[Key] = Field(default_factory=list)
++    needed_view: str = Field(default="", max_length=1000)
++    comment: str = Field(default="", max_length=2000)
++    operator_identity: Key | None = None
++    assertion: str = "Operator review only; no production confirmation, mapping or valuation."
++
++    @model_validator(mode="after")
++    def disposition(self) -> "ReviewNote":
++        n = len(self.candidates)
++        if (
++            (self.decision == "provisional" and n != 1)
++            or (self.decision == "compatible" and n < 2)
++            or (self.decision in ("none", "insufficient_evidence", "known_identity") and n != 0)
++            or (self.decision == "insufficient_evidence" and not self.needed_view.strip())
++            or ((self.decision == "known_identity") != (self.operator_identity is not None))
++            or len({k.token for k in self.candidates}) != n
++        ):
++            raise RetrievalError("invalid_review_disposition")
++        return self
++
++
++def terms(value: str) -> list[str]:
++    return sorted(set(WORD.findall(unicodedata.normalize("NFKC", value).casefold())) - STOP)
++
++
++def query_from(payload: Mapping[str, Any]) -> Query:
++    """Positive field selection: never ingest IDs, labels, filenames or prior answers."""
++    if not isinstance(payload, Mapping):
++        raise RetrievalError("invalid_visible_description")
++    description = payload.get("description", "")
++    clues = payload.get("visual_clues", [])
++    if not isinstance(description, str) or not isinstance(clues, list):
++        raise RetrievalError("invalid_visible_description")
++    if not all(isinstance(c, str) for c in clues):
++        raise RetrievalError("invalid_visible_description")
++    text = " ".join([description, *clues]).strip()
++    if (
++        not text
++        or len(text) > 256
++        or IDENTIFIER.search(text)
++        or any(unicodedata.category(c).startswith("C") for c in text)
++    ):
++        raise RetrievalError("description_requires_visible_text_without_identifiers_or_filenames")
++    tokens = terms(text)
++    if not 1 <= len(tokens) <= 12:
++        raise RetrievalError("description_term_limit")
++    return Query(
++        text=text,
++        terms=tokens,
++        excluded_fields=sorted(set(payload) - {"description", "visual_clues"}),
++    )
++
++
++def retained_clues(
++    payload: Mapping[str, Any],
++    index: int,
++    *,
++    field: str = "visual_clues",
++    indices: list[int] | None = None,
++    candidate_index: int = 0,
++) -> Query:
++    """One selected prior candidate clue field; all other answer fields are excluded."""
++    try:
++        objects = payload["recognition"]["objects"]
++        if index < 0 or index >= len(objects):
++            raise RetrievalError("clue_object_unavailable")
++        if field not in ("visual_clues", "text_clues"):
++            raise RetrievalError("invalid_clue_field")
++        candidates = objects[index]["candidates"]
++        if candidate_index < 0 or candidate_index >= len(candidates):
++            raise RetrievalError("clue_object_unavailable")
++        clues = candidates[candidate_index]["supporting_" + field]
++        if indices is not None:
++            if any(i < 0 or i >= len(clues) for i in indices):
++                raise RetrievalError("clue_object_unavailable")
++            clues = [clues[i] for i in indices]
++        query = query_from({"visual_clues": clues})
++    except (KeyError, TypeError, IndexError):
++        raise RetrievalError("clue_object_unavailable") from None
++    return query.model_copy(
++        update={"excluded_fields": [f"all prior fields except selected {field}"]}
++    )
++
++
++def prepare_registry(
++    source: Path, names: Mapping[str, tuple[str, str]], destination: Path
++) -> Registry:
++    """Derive a reference-only index from accepted corrected evidence and supported names."""
++    raw = read_bytes(source)
++    evidence = json.loads(raw)
++    refs = []
++    for row in evidence["candidates"]:
++        code = row["code"]
++        name, basis = names[code]
++        image = Path(row["source_image_path"])
++        if digest(read_bytes(image, 25 * 1024 * 1024)) != row["source_image_sha256"]:
++            raise RetrievalError("reference_image_changed")
++        license_record = row["license_evidence"]
++        license_path = Path(license_record.get("html_path", license_record.get("screenshot", "")))
++        license_hash = license_record.get("html_sha256", license_record.get("screenshot_sha256"))
++        if digest(read_bytes(license_path, 2 * 1024 * 1024)) != license_hash:
++            raise RetrievalError("license_evidence_changed")
++        if row["license"] != "CC BY 2.0" or row["identity_status"] != "provenance_supported":
++            raise RetrievalError("reference_permission_or_identity_unavailable")
++        credit = dict(row["required_attribution"])
++        credit["changes"] = (
++            "Original retained photo bytes embedded unchanged; CSS scales display only."
++        )
++        refs.append(
++            Reference(
++                key=Key.model_validate(row["whole_minifigure_identity"]),
++                name=name,
++                features=row["visible_features"],
++                name_basis=basis,
++                association_basis=row["association_basis"],
++                identity_status=row["identity_status"],
++                source_urls=[row["catalog_identity_source_url"], *row["provenance_urls"]],
++                image_path=str(image),
++                image_sha256=row["source_image_sha256"],
++                views=["front, helmet on"],
++                missing_views=row["unavailable_views"],
++                attribution=credit,
++                permission=row["permission_status"],
++                license_evidence={"path": str(license_path), "sha256": str(license_hash)},
++            )
++        )
++    registry = Registry(source_sha256=digest(raw), references=refs)
++    write_bytes(destination, registry.model_dump_json(indent=2).encode())
++    return registry
++
++
++def catalog_candidates(catalog: PinnedCatalog, query: Query) -> tuple[list[Candidate], bool]:
++    """Bounded union of existing set text search and the added figure text helper."""
++    by_key: dict[str, Candidate] = {}
++    truncated = False
++    for term in query.terms:
++        sets = catalog.search_sets(term, limit=100).data
++        figures = catalog.search_minifigures(term, limit=100).data
++        truncated |= len(sets) == 100 or len(figures) == 100
++        rows: list[SetMatch | FigureMatch] = [*sets, *figures]
++        for row in rows:
++            key = Key(
++                kind="set" if row.identity.kind == "set" else "minifigure",
++                namespace=row.identity.namespace,
++                identifier=row.identity.identifier,
++            )
++            facts = (
++                " ".join(x for x in (row.source_type, row.classification) if x)
++                if isinstance(row, FigureMatch)
++                else ""
++            )
++            provenance = {
++                "snapshot_id": str(row.provenance.snapshot_id),
++                "source_version_id": str(row.provenance.source_version_id),
++                "evidence_id": str(row.provenance.evidence_id),
++            }
++            by_key[key.token] = Candidate(
++                key=key,
++                name=row.name,
++                features=facts,
++                provenance=provenance,
++                canonical={"id": str(row.identity.id), **key.model_dump()},
++                resolution="verified",
++            )
++    return list(by_key.values()), truncated
++
++
++def reference_candidate(reference: Reference, catalog: PinnedCatalog | None) -> Candidate:
++    """Existing exact namespace/identifier resolution; no new provider crosswalk."""
++    canonical = None
++    resolution: Literal["verified", "unresolved", "ambiguous", "not_checked"] = (
++        "unresolved" if catalog else "not_checked"
++    )
++    if catalog:
++        identities = [
++            x
++            for x in catalog.resolve_identity(reference.key.kind, reference.key.identifier).data
++            if x.namespace == reference.key.namespace
++        ]
++        # Native external mappings are intentionally not guessed from catalog names.
++        if len(identities) == 1:
++            canonical = {"id": str(identities[0].id), **reference.key.model_dump()}
++            resolution = "verified"
++        elif identities:
++            resolution = "ambiguous"
++    return Candidate(
++        key=reference.key,
++        name=reference.name,
++        features=reference.features,
++        provenance={
++            "name_basis": reference.name_basis,
++            "identity_basis": reference.association_basis,
++        },
++        canonical=canonical,
++        resolution=resolution,
++        reference=reference,
++    )
++
++
++def retrieve(
++    query: Query, registry: Registry, catalog: PinnedCatalog | None, *, limit: int = 8
++) -> Retrieval:
++    if not 1 <= limit <= 12:
++        raise RetrievalError("shortlist_limit")
++    pool, truncated = catalog_candidates(catalog, query) if catalog else ([], False)
++    candidates = {c.key.token: c for c in pool}
++    for ref in registry.references:
++        candidate = reference_candidate(ref, catalog)
++        existing = candidates.get(candidate.key.token)
++        if existing:
++            candidate = candidate.model_copy(
++                update={
++                    "canonical": existing.canonical,
++                    "resolution": existing.resolution,
++                    "provenance": {**existing.provenance, **candidate.provenance},
++                }
++            )
++        candidates[candidate.key.token] = candidate
++    matches = []
++    for candidate in candidates.values():
++        hits = {
++            "name": sorted(set(query.terms) & set(terms(candidate.name))),
++            "source_features": sorted(set(query.terms) & set(terms(candidate.features))),
++        }
++        score = 3 * len(hits["name"]) + 2 * len(hits["source_features"])
++        if WORD.findall(query.text.casefold()) == WORD.findall(candidate.name.casefold()):
++            score += 6
++        if score:
++            matches.append(Match(candidate=candidate, score=score, matched_terms=hits))
++    matches.sort(key=lambda m: (-m.score, m.candidate.key.token))
++    return Retrieval(
++        query=query,
++        matches=matches[:limit],
++        pool_count=len(candidates),
++        reference_count=len(registry.references),
++        catalog_status=f"accepted snapshot {catalog.snapshot.id}"
++        if catalog
++        else "not queried: reference-only",
++        catalog_truncated=truncated,
++        state="shortlist" if matches else "no_match",
++    )
++
++
++def save_note(root: Path, comparison: Comparison, note: ReviewNote) -> Path:
++    path = root / comparison.run / "comparison.json"
++    if (
++        note.run != comparison.run
++        or note.comparison_sha256 != digest(read_bytes(path, 4 * 1024 * 1024))
++        or any(
++            k.token not in {m.candidate.key.token for m in comparison.retrieval.matches}
++            for k in note.candidates
++        )
++    ):
++        raise RetrievalError("note_comparison_mismatch")
++    target = path.parent / f"note-{uuid4().hex}.json"
++    write_bytes(target, note.model_dump_json(indent=2).encode())
++    return target
+diff --git a/services/api/tests/unit/test_reference_retrieval.py b/services/api/tests/unit/test_reference_retrieval.py
+new file mode 100644
+index 0000000..92ce9f2
+--- /dev/null
++++ b/services/api/tests/unit/test_reference_retrieval.py
+@@ -0,0 +1,267 @@
++"""Six synthetic Phase 14B correctness cases; no network or database startup."""
++
++from pathlib import Path
++from typing import Any, cast
++from uuid import UUID
++
++import pytest
++from PIL import Image
++from pydantic import ValidationError
++
++from brickvault_api.catalog.connection import CatalogConnection
++from brickvault_api.catalog.query_types import (
++    FigureMatch,
++    Identity,
++    Provenance,
++    QueryResult,
++    QueryState,
++    SnapshotRef,
++)
++from brickvault_api.catalog.repository import PinnedCatalog
++from brickvault_api.recognition.comparison import create_comparison, render_note
++from brickvault_api.recognition.local import digest, read_bytes
++from brickvault_api.recognition.retrieval import (
++    Key,
++    Reference,
++    Registry,
++    RetrievalError,
++    ReviewNote,
++    catalog_candidates,
++    query_from,
++    retained_clues,
++    retrieve,
++    save_note,
++)
++
++UID = UUID(int=1)
++SNAPSHOT = SnapshotRef(UID, UID, UID, "synthetic", True)
++PROVENANCE = Provenance(UID, UID, UID)
++
++
++def reference(tmp_path: Path, identifier: str = "external-fixture") -> Reference:
++    path = tmp_path / "reference.png"
++    if not path.exists():
++        Image.new("RGB", (40, 60), "green").save(path)
++    return Reference(
++        key=Key(kind="minifigure", namespace="external-fixture", identifier=identifier),
++        name="Green helmet figure",
++        features="green helmet gray hands",
++        name_basis="synthetic source",
++        association_basis="synthetic identity provenance; head unverified",
++        identity_status="provenance_supported",
++        source_urls=["https://example.invalid/catalog"],
++        image_path=str(path),
++        image_sha256=digest(path.read_bytes()),
++        views=["front, helmet on"],
++        missing_views=["head with helmet removed"],
++        attribution={"creator": "Synthetic fixture", "license": "fixture"},
++        permission="synthetic fixture only",
++        license_evidence={"path": "synthetic", "sha256": "0" * 64},
++    )
++
++
++class FakeCatalog:
++    snapshot = SNAPSHOT
++
++    def __init__(self) -> None:
++        self.queries: list[str] = []
++
++    def search_sets(self, value: str, *, limit: int) -> QueryResult[tuple[Any, ...]]:
++        self.queries.append(value)
++        return QueryResult(SNAPSHOT, QueryState.EMPTY, ())
++
++    def search_minifigures(self, value: str, *, limit: int) -> QueryResult[tuple[FigureMatch, ...]]:
++        self.queries.append(value)
++        rows = (
++            (
++                FigureMatch(
++                    Identity(UID, "minifigure", "native-fixture", "native-fixture"),
++                    "Green helmet figure",
++                    None,
++                    None,
++                    PROVENANCE,
++                ),
++            )
++            if value in ("green", "helmet")
++            else ()
++        )
++        return QueryResult(SNAPSHOT, QueryState.OK if rows else QueryState.EMPTY, rows)
++
++    def resolve_identity(self, kind: str, identifier: str) -> QueryResult[tuple[Identity, ...]]:
++        # A same identifier in another namespace must never become a crosswalk.
++        return QueryResult(
++            SNAPSHOT, QueryState.OK, (Identity(UID, kind, "native-fixture", identifier),)
++        )
++
++
++def test_deterministic_rank_ties_and_no_match(tmp_path: Path) -> None:
++    refs = [reference(tmp_path, "z-fixture"), reference(tmp_path, "a-fixture")]
++    query = query_from({"description": "green helmet"})
++    first = retrieve(query, Registry(source_sha256="fixture", references=refs), None)
++    second = retrieve(query, Registry(source_sha256="fixture", references=refs[::-1]), None)
++    assert first.matches == second.matches
++    assert [m.candidate.key.identifier for m in first.matches] == ["a-fixture", "z-fixture"]
++    assert first.matches[0].matched_terms["name"] == ["green", "helmet"]
++    assert first.matches[0].score == 10
++    assert (
++        retrieve(
++            query_from({"description": "purple spaceship"}),
++            Registry(source_sha256="fixture", references=refs),
++            None,
++        ).state
++        == "no_match"
++    )
++
++
++def test_catalog_candidate_without_image_and_namespace_gap(tmp_path: Path) -> None:
++    catalog = cast(PinnedCatalog, FakeCatalog())
++    registry = Registry(source_sha256="fixture", references=[reference(tmp_path)])
++    result = retrieve(query_from({"description": "green helmet"}), registry, catalog)
++    assert result.pool_count == 2
++    external = next(m.candidate for m in result.matches if m.candidate.reference)
++    native = next(m.candidate for m in result.matches if not m.candidate.reference)
++    assert external.resolution == "unresolved" and external.canonical is None
++    assert native.resolution == "verified" and native.reference is None
++    assert native.key.namespace != external.key.namespace
++
++
++def test_labels_answers_filenames_and_ids_never_reach_query() -> None:
++    payload = {
++        "description": "green helmet",
++        "expected": ["sw1234"],
++        "previous_answer": {"identifier": "sw5678"},
++        "filename": "answer-sw1234.jpg",
++        "correct_answer": "B",
++        "reviewer_conclusion": "B is correct",
++    }
++    query = query_from(payload)
++    catalog = FakeCatalog()
++    catalog_candidates(cast(PinnedCatalog, catalog), query)
++    assert catalog.queries == ["green", "green", "helmet", "helmet"]
++    assert query.excluded_fields == sorted(set(payload) - {"description"})
++    for text in ("green helmet sw1234", "answer-sw1234.jpg", "green fig-012345"):
++        with pytest.raises(RetrievalError):
++            query_from({"description": text})
++    prior = {
++        "recognition": {
++            "objects": [
++                {
++                    "candidates": [
++                        {
++                            "identifier": "sw1234",
++                            "supporting_visual_clues": ["green helmet"],
++                            "supporting_text_clues": ["green armor"],
++                        }
++                    ]
++                }
++            ]
++        },
++        "expected": ["sw5678"],
++    }
++    assert retained_clues(prior, 0).terms == ["green", "helmet"]
++    with pytest.raises(RetrievalError):
++        retained_clues(prior, -1)
++
++
++def test_ambiguity_notes_are_separate_append_only_operator_assertions(tmp_path: Path) -> None:
++    registry = Registry(
++        source_sha256="fixture",
++        references=[reference(tmp_path, "a-fixture"), reference(tmp_path, "b-fixture")],
++    )
++    result = retrieve(query_from({"description": "green helmet"}), registry, None)
++    comparison, report = create_comparison(tmp_path, result, [tmp_path / "reference.png"])
++    original = read_bytes(report)
++    source_hash = digest(read_bytes(report.parent / "comparison.json"))
++    note = ReviewNote(
++        run=comparison.run,
++        comparison_sha256=source_hash,
++        decision="compatible",
++        candidates=[m.candidate.key for m in result.matches],
++    )
++    path = save_note(tmp_path, comparison, note)
++    second = save_note(tmp_path, comparison, note)
++    assert path != second and ReviewNote.model_validate_json(path.read_bytes()) == note
++    assert report.read_bytes() == original
++    assert "unique identity: not established" in original.decode()
++    with pytest.raises(ValidationError):
++        ReviewNote(
++            run=comparison.run, comparison_sha256=source_hash, decision="insufficient_evidence"
++        )
++    with pytest.raises(RetrievalError):
++        save_note(
++            tmp_path,
++            comparison,
++            note.model_copy(
++                update={"candidates": [Key(kind="set", namespace="other", identifier="missing")]}
++            ),
++        )
++    known = ReviewNote(
++        run=comparison.run,
++        comparison_sha256=source_hash,
++        decision="known_identity",
++        operator_identity=Key(
++            kind="minifigure", namespace="operator-fixture", identifier="known-fixture"
++        ),
++    )
++    assert "operator-supplied assertion" in render_note(known).decode()
++
++
++def test_private_html_escapes_text_and_preserves_selected_bytes(tmp_path: Path) -> None:
++    ref = reference(tmp_path)
++    before = Path(ref.image_path).read_bytes()
++    result = retrieve(
++        query_from({"description": "<green helmet>"}),
++        Registry(source_sha256="fixture", references=[ref]),
++        None,
++    )
++    # Slashes are forbidden in retrieval text, so exercise escaping through an untrusted source name.
++    candidate = result.matches[0].candidate.model_copy(
++        update={"name": "<img src=https://example.invalid onerror=alert(1)>"}
++    )
++    result = result.model_copy(
++        update={"matches": [result.matches[0].model_copy(update={"candidate": candidate})]}
++    )
++    comparison, report = create_comparison(tmp_path, result, [Path(ref.image_path)])
++    text = report.read_text()
++    assert "&lt;img src=https:" in text and "<img src=https:" not in text
++    assert "script-src &apos;none&apos;" in text and "connect-src &apos;none&apos;" in text
++    assert 'src="data:image/png;base64,' in text and "https://example.invalid" in text
++    assert before == Path(ref.image_path).read_bytes()
++    Path(ref.image_path).write_bytes(b"changed")
++    from brickvault_api.recognition.comparison import render
++
++    with pytest.raises(RetrievalError):
++        render(comparison)
++
++
++def test_minifigure_query_is_bounded_and_snapshot_scoped() -> None:
++    calls: list[tuple[str, dict[str, Any]]] = []
++
++    class Rows:
++        def fetchmany(self, count: int) -> list[dict[str, Any]]:
++            assert count == 4
++            return [
++                {
++                    "id": UID,
++                    "namespace": "fixture",
++                    "identifier": "whole-figure",
++                    "display_name": "Helmet figure",
++                    "source_type": None,
++                    "classification": None,
++                    "snapshot_id": UID,
++                    "source_version_id": UID,
++                    "evidence_id": UID,
++                }
++            ]
++
++    class Connection:
++        def execute(self, sql: str, params: dict[str, Any]) -> Rows:
++            calls.append((sql, params))
++            return Rows()
++
++    catalog = PinnedCatalog(cast(CatalogConnection, Connection()), SNAPSHOT)
++    result = catalog.search_minifigures("helmet", limit=3)
++    assert result.data[0].identity.kind == "minifigure"
++    assert calls[0][1] == {"query": "helmet", "limit": 3, "snapshot": UID}
++    assert "f.snapshot_id=%(snapshot)s" in calls[0][0] and "LIMIT %(limit)s" in calls[0][0]
++    assert catalog.query_count == 1

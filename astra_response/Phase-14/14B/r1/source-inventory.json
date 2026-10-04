@@ -1,0 +1,68 @@
+{
+  "baseline": "7149f83dd7a16092bc2dfa12cd1ab1935073f537",
+  "file_count": 10,
+  "files": [
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "local_sha256": "a7e498d42e6a5fe2433d08b1f44fdff77c2b874b3d469e333b8fde35a36c3b1a",
+      "published_normalized_sha256": "f57d2632a10ac0f2d13ef05d20992fc17c2077bf2eb800310b5646a395a7b327",
+      "publication_only_legacy_path_redaction": true
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "local_sha256": "1efb7a2f0e5a6f99e175de1e6e50491cc5de4cac26a413834230e7dfd8a0d046",
+      "published_normalized_sha256": "1efb7a2f0e5a6f99e175de1e6e50491cc5de4cac26a413834230e7dfd8a0d046",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "docs/plans/105-reference-candidate-retrieval.md",
+      "local_sha256": "caae47f821bc38c99dce70d73ad781c2f0eae837f7f802d93d5a1ad5ac7c7dda",
+      "published_normalized_sha256": "caae47f821bc38c99dce70d73ad781c2f0eae837f7f802d93d5a1ad5ac7c7dda",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "scripts/reference_candidates.py",
+      "local_sha256": "4d5ef030f64058f8b565ae8d9b242d860f6c548fd270a927a8fb3a2f3814ea95",
+      "published_normalized_sha256": "4d5ef030f64058f8b565ae8d9b242d860f6c548fd270a927a8fb3a2f3814ea95",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/catalog/query_types.py",
+      "local_sha256": "8adf32b245f650e744d6ef360b6409849e06282e8129d3d7754d975980907760",
+      "published_normalized_sha256": "3921ea1ea8a61e96e9cbbf6d2c3d338778193ca420c2282867baae71b5d8fbde",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/catalog/repository.py",
+      "local_sha256": "9caf76185e8efa2dc2e243edfa32ce2c3bfb9db306585453537a024c6828db4b",
+      "published_normalized_sha256": "4ece78d48a3b10b8215477473bc824fa7cb020003e46d33c393c573773722e65",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/catalog/search.py",
+      "local_sha256": "0da7c4aed3f380f5d42d358b6562e9cd019895100662e3665c58a71a126fcdcf",
+      "published_normalized_sha256": "0da7c4aed3f380f5d42d358b6562e9cd019895100662e3665c58a71a126fcdcf",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/comparison.py",
+      "local_sha256": "10ab4f63e6de179ce6a3979b0a0ff084f7bd250b923aef4bcb2d5988ecf09822",
+      "published_normalized_sha256": "10ab4f63e6de179ce6a3979b0a0ff084f7bd250b923aef4bcb2d5988ecf09822",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/recognition/retrieval.py",
+      "local_sha256": "473b37b21dc6540beb95dbe1170880266206b5834579e537bb9cfd02f358caf5",
+      "published_normalized_sha256": "473b37b21dc6540beb95dbe1170880266206b5834579e537bb9cfd02f358caf5",
+      "publication_only_legacy_path_redaction": false
+    },
+    {
+      "path": "services/api/tests/unit/test_reference_retrieval.py",
+      "local_sha256": "58f474b8ea2fac876092be2cf70f2af5c51952c91c0bccefaf00b9a36c5c99a0",
+      "published_normalized_sha256": "58f474b8ea2fac876092be2cf70f2af5c51952c91c0bccefaf00b9a36c5c99a0",
+      "publication_only_legacy_path_redaction": false
+    }
+  ],
+  "cumulative_patch_sha256": "0110c3c49aae3b4e4f3a19d84a09402816b63ac94b0785517942c237072ebc7a",
+  "main_index_used_for_patch": false
+}

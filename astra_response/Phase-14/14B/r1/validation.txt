@@ -1,0 +1,38 @@
+Focused fixtures
+......                                                                   [100%]
+6 passed in 1.53s
+exit=0
+
+Targeted lint
+All checks passed!
+exit=0
+
+Strict types
+Success: no issues found in 7 source files
+exit=0
+
+
+Actual local smoke: PASS
+One catalog compare run; runtime role, owned loopback development target,
+0017 schema and accepted nonsynthetic snapshot guards passed. Read-only transaction.
+Eight candidates; two references, six unavailable images; bounded pool 1,012,
+coverage truncated. Separate insufficient-evidence software note saved/reopened.
+Development initially stopped and finally stopped. No provisioning/migration/import.
+
+Browser: installed Microsoft Edge, headless; report and saved-note HTML PASS.
+Four embedded images loaded; eight candidate cards; six missing-reference cards.
+External requests: zero. No third-party scripts, analytics or hosting.
+
+Initial new Windows report directory failed the private ACL guard during note use.
+Directory creation was corrected to use the existing private-folder helper. The same
+report was repaired/reused; no second catalog smoke or original-evidence rewrite.
+Focused cases ran after the fix. No broad suites/builds/old-pilot/provider checks.
+
+Protected-file hashes and all 28 selected retained reference/accounting evidence
+hashes match the initial capture. Selected evaluation bytes remain unchanged.
+Main HEAD 7149f83dd7a16092bc2dfa12cd1ab1935073f537; implementation uncommitted,
+index empty, main unpushed. Application diff whitespace check PASS; cumulative patch
+reverse-application check PASS, without staging or applying it to the checkout.
+One historical private asset path is redacted only in the published workflow copy;
+local source is retained. No private photos, labels, query text, notes or credentials
+are published. No new provider calls or ledger/reservation changes.
