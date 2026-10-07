@@ -1,0 +1,24 @@
+{
+  "commit": "e9c7d1f14ccfdf8784a9d4402a2fc0641184dab9",
+  "parent": "9dfe8868b9271eeed84831ce60f71a8df2b6d7dd",
+  "title": "Close Phase 14 recognition quality spike",
+  "inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/PHASE_14_CLOSEOUT.md",
+    "docs/ROADMAP.md",
+    "docs/plans/104-recognition-quality-pilot.md",
+    "docs/plans/105-reference-candidate-retrieval.md",
+    "docs/plans/106-retrieval-quality-gate.md",
+    "docs/plans/107-kind-partitioned-retrieval.md"
+  ],
+  "exact_staged_inventory": "PASS",
+  "complete_staged_diff_review": "PASS",
+  "git_diff_cached_check": "PASS",
+  "changed_markdown_links": 15,
+  "accepted_evidence_links_verified": 4,
+  "history_and_phase16": "preserved",
+  "protected_hashes": "unchanged",
+  "qualification_rerun": false,
+  "main_pushed": false,
+  "index_after_commit": "empty"
+}

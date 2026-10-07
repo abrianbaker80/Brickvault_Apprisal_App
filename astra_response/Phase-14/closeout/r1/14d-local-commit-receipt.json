@@ -1,0 +1,24 @@
+{
+  "commit": "9dfe8868b9271eeed84831ce60f71a8df2b6d7dd",
+  "parent": "7d664487ab436547dfa8293f4359ea4e38e59523",
+  "title": "Close Phase 14D kind-partitioned retrieval diagnostic",
+  "inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/107-kind-partitioned-retrieval.md",
+    "scripts/evaluate_retrieval.py",
+    "scripts/reference_candidates.py",
+    "services/api/src/brickvault_api/recognition/comparison.py",
+    "services/api/src/brickvault_api/recognition/evaluation.py",
+    "services/api/src/brickvault_api/recognition/retrieval.py",
+    "services/api/tests/unit/test_kind_partitioned_retrieval.py"
+  ],
+  "exact_staged_inventory": "PASS",
+  "complete_staged_diff_review": "PASS",
+  "git_diff_cached_check": "PASS",
+  "changed_markdown_links": 3,
+  "protected_hashes": "unchanged",
+  "qualification_rerun": false,
+  "main_pushed": false,
+  "index_after_commit": "empty"
+}

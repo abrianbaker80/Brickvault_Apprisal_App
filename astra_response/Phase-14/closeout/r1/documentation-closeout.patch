@@ -1,0 +1,240 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index d20b511..9c13d4d 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,16 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 14 accepted quality-spike closeout — 2026-10-06
++
++**Phase 14: COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. Phase 14A–14D CLOSED.
++PRODUCTION RECOGNITION: NOT QUALIFIED.** Brian accepted 14D r1; its exact nine-file
++local checkpoint is 9dfe8868b9271eeed84831ce60f71a8df2b6d7dd. Description-ranking
++optimization is stopped; image-driven retrieval is **DEFERRED / UNRESOLVED**.
++**Phase 15: NEXT / NOT STARTED / NOT AUTHORIZED.** Phase 16 remains later/unchanged.
++Main stays unpushed; protected/private evidence retained. Documentation/Git checks
++only, without rerunning qualification. See [final Phase 14 disposition](docs/PHASE_14_CLOSEOUT.md).
++Earlier dated checkpoints below retain their original scope and evidence.
++
+ ## Phase 14D structural retrieval diagnostic — 2026-10-06
+ 
+ **Phase 14A/14B CLOSED; Phase 14C CLOSED / NOT USEFUL BASELINE; Phase 14D READY
+diff --git a/docs/PHASE_14_CLOSEOUT.md b/docs/PHASE_14_CLOSEOUT.md
+new file mode 100644
+index 0000000..551056d
+--- /dev/null
++++ b/docs/PHASE_14_CLOSEOUT.md
+@@ -0,0 +1,103 @@
++# Phase 14 — recognition quality spike closeout
++
++## Accepted disposition — 2026-10-06
++
++**Phase 14: COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE.**
++**PRODUCTION RECOGNITION: NOT QUALIFIED.** Phases 14A–14D and Plans 104–107 are
++accepted and closed. The spike produced decision evidence; production recognition
++success was not a condition for completing it. No evidence is rescored or reinterpreted.
++
++## Accepted findings and evidence
++
++### 14A — direct multimodal and reference comparison
++
++Luna matched **3/3 selected set labels and 0/14 exact minifigure labels** on the tiny
++approved sample. Listing text was included: these are neither visual-only results nor
++general accuracy estimates. The original direct scores and denominators remain intact.
++G06 Luna and Sol each scored **0/8 exact**; that single comparison demonstrated no
++benefit from Sol. Closed-set G05 reference comparison selected the confirmed candidate
++but did not visually establish unique A/B whole-figure identity. Their concealed-head
++distinction remains unresolved; darkness is not proof of a different variant. No
++additional view was requested. Closed-set verification is not full-catalog retrieval.
++
++**Ten lifetime provider attempts consumed.** Estimated provider spend:
++**USD 0.0497493**; actual billed dollars unavailable. **USD 7.616340 retained
++reservations are accounting holds, not spending or a new allowance.** No further
++Phase 14A calls are authorized. All fourteen BrickLink minifigure mappings remain
++unresolved; no new catalog, alias, mapping or automatic confirmation follows.
++
++Accepted evidence: [14A r6](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/2c71ad336424c8d4e7af6e8ed15279371afab578/astra_response/Phase-14/14A/r6/REVIEW.md),
++with detailed findings in the existing [pilot report](PHASE_14A_PILOT.md).
++
++### 14B — local foundation
++
++Description-assisted candidate retrieval/comparison and separate private operator
++review work technically. Candidate proposals, visual compatibility, operator assertions
++and canonical resolution remain distinct. The working foundation establishes no
++retrieval-quality or production-recognition claim.
++
++Accepted evidence: [14B r1](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/d9d77b0c7b4491cc3edf4374ba71e0cc15c16752/astra_response/Phase-14/14B/r1/REVIEW.md).
++
++### 14C — frozen quality gate
++
++Four scoreable cases; thirteen exact figure identities unscoreable because the
++required corpus/mapping was unavailable. **Top-1: 0/4; top-3: 0/4; top-8: 1/4.**
++All three known sets were absent from top-eight; all searches were truncated.
++Disposition: **NOT USEFUL**. The one scoreable figure came from curated references,
++not independently measured reference coverage. Unavailable identities were excluded
++from ranking metrics, preserving their distinction from retrieval misses.
++
++Accepted evidence: [14C r1](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/21cb0224372fa4161bfac4206a115a3f376b5215/astra_response/Phase-14/14C/r1/REVIEW.md).
++
++### 14D — structural diagnostic
++
++Sets and minifigures received independent top-eight buckets, removing set starvation.
++None of the three known sets recovered. **Top-1/top-3/top-8 remained 0/4, 0/4, 1/4.**
++Disposition: **STILL NOT USEFUL**. This was a before/after diagnostic designed after
++14C results, not an independent benchmark. Further deterministic description-ranking
++optimization is **STOPPED**; current evidence does not justify it.
++
++Accepted evidence: [14D r1](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/640d83f72d727c2145635751c4d1642c48b0fd97/astra_response/Phase-14/14D/r1/REVIEW.md).
++Its exact nine-file local checkpoint is `9dfe8868b9271eeed84831ce60f71a8df2b6d7dd`.
++
++## Product and architecture disposition
++
++- Normal direct catalog/set search continues independently of recognition.
++- No automatic photo-based catalog confirmation, automatic exact-minifigure-ID
++  confirmation or valuation triggered by a model prediction is approved.
++- No production provider recognition endpoint is enabled by Phase 14. Candidate
++  and operator-review code remains local/non-production evidence until separately
++  promoted by an authorized future phase.
++- **Sets:** direct multimodal results are promising but insufficiently sampled and
++  not production-qualified.
++- **Minifigures:** exact unaided recognition is not viable on current evidence.
++  Reference-assisted comparison may help with valid candidates/views; ambiguity
++  must remain explicit.
++- **Description retrieval:** not useful enough to pursue on current evidence.
++
++## Image-driven retrieval — DEFERRED / UNRESOLVED
++
++This option is not failed or qualified. A meaningful benchmark requires additional
++rights-cleared reference-image coverage and/or new image-embedding/provider
++infrastructure. Current evidence does not justify full-catalog/vector infrastructure
++and establishes no conclusion about whether image embeddings would work.
++
++Revisit only after a larger independently confirmed, rights-cleared corpus exists,
++including data from later reviewed capture/outcome workflows. Provider/model,
++image-use, retention, cost and feasibility approvals remain separate future decisions.
++The fourteen missing mappings stay unresolved in the existing catalog model.
++
++## Roadmap transition and preservation
++
++**Phase 15: NEXT / NOT STARTED / NOT AUTHORIZED.** Any later capture work must retain
++a supported workflow when recognition is disabled or unavailable. Phase 16 remains
++later and unchanged. Neither phase starts in this closeout.
++
++Plans [104](plans/104-recognition-quality-pilot.md),
++[105](plans/105-reference-candidate-retrieval.md),
++[106](plans/106-retrieval-quality-gate.md) and
++[107](plans/107-kind-partitioned-retrieval.md) are closed with their dated histories intact.
++Approved inputs/labels, responses, accounting, reference/license evidence, frozen
++queries/results and private notes remain local. Main remains unpushed. This closeout
++runs documentation/Git checks only: no tests, evaluation, lint/types, database,
++browser/device, build, provider, image sourcing, model research or production work.
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 4a5a264..027b058 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1289,19 +1289,14 @@ accepted 13C implementation/schedule evidence above close this phase.
+ 
+ ## Phase 14 — Recognition quality spike
+ 
+-**IN PROGRESS.** Phase 14A is **COMPLETED / ACCEPTED AS FEASIBILITY EVIDENCE**.
+-Exact minifigure recognition is **NOT QUALIFIED FOR PRODUCTION**; no production
+-recognition capability or further calls are approved. Further work requires
+-separate authorization. See [Plan 104](plans/104-recognition-quality-pilot.md).
+-
+-Phase 14B's local description-assisted retrieval/comparison foundation is
+-**ACCEPTED / CLOSED**; see [Plan 105](plans/105-reference-candidate-retrieval.md).
+-Phase 14C is **CLOSED / NOT USEFUL BASELINE**; see
+-[Plan 106](plans/106-retrieval-quality-gate.md). Phase 14D is **READY FOR REVIEW**:
+-independent kind buckets removed starvation, but its one frozen before/after
+-diagnostic remained **STILL NOT USEFUL**. See [Plan 107](plans/107-kind-partitioned-retrieval.md).
+-No further description-ranking optimization follows; image-driven retrieval is the
+-next separate decision. No new provider calls/spend or production qualification.
++**COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. Phase 14A–14D CLOSED.**
++**PRODUCTION RECOGNITION: NOT QUALIFIED.** Description-ranking optimization is
++stopped; image-driven retrieval is **DEFERRED / UNRESOLVED**, pending a suitable
++confirmed, rights-cleared corpus and separately approved feasibility scope.
++See the [canonical closeout](PHASE_14_CLOSEOUT.md) and closed Plans
++[104](plans/104-recognition-quality-pilot.md), [105](plans/105-reference-candidate-retrieval.md),
++[106](plans/106-retrieval-quality-gate.md), [107](plans/107-kind-partitioned-retrieval.md).
++The original scope/gates below retain planning context and confer no new authorization.
+ 
+ - **Inputs:** Proven core/image ingestion, rights-cleared catalog references, separately confirmed listing examples, and approved provider/spending scope.
+ - **Scope:** Candidate set/minifigure identities using shared catalog/mappings, server-side OpenAI/Gemini adapters, text clues, retrieval/verification comparison, analysis provenance, and separate corrections.
+@@ -1312,6 +1307,9 @@ next separate decision. No new provider calls/spend or production qualification.
+ 
+ ## Phase 15 — Android share and overlay capture
+ 
++**NEXT / NOT STARTED / NOT AUTHORIZED.** Future capture/share/manual review must
++retain a supported workflow when recognition is disabled or unavailable.
++
+ - **Inputs:** Working shared-UI Android core, proven image API, recognition findings, approved retention policy, and Brian's physical-device details.
+ - **Scope:** Needed native Share extension and isolated visible user-triggered allowlisted capture spike; only after device proof, manual multi-photo review/crop/order and result handoff with robust partial retries.
+ - **Exclusions:** A second native core app, automatic browsing/swipes/clicks, Facebook traffic/credential interception, unattended capture, independent valuation, and unapproved infrastructure access.
+diff --git a/docs/plans/104-recognition-quality-pilot.md b/docs/plans/104-recognition-quality-pilot.md
+index 9efc22d..e8767da 100644
+--- a/docs/plans/104-recognition-quality-pilot.md
++++ b/docs/plans/104-recognition-quality-pilot.md
+@@ -1,5 +1,12 @@
+ # Plan 104 — Phase 14A recognition pilot
+ 
++## Current closeout — 2026-10-06
++
++**ACCEPTED / CLOSED AS FEASIBILITY EVIDENCE.** No further pilot calls. Production recognition remains NOT QUALIFIED.
++Wider Phase 14 is COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. See the
++[canonical final disposition](../PHASE_14_CLOSEOUT.md). The execution record below
++retains its accepted history; it authorizes no new work.
++
+ ## Accepted feasibility closeout — 2026-10-04
+ 
+ **Phase 14A: COMPLETED / ACCEPTED AS FEASIBILITY EVIDENCE.** Brian accepted r5.
+diff --git a/docs/plans/105-reference-candidate-retrieval.md b/docs/plans/105-reference-candidate-retrieval.md
+index 68812a0..fe13190 100644
+--- a/docs/plans/105-reference-candidate-retrieval.md
++++ b/docs/plans/105-reference-candidate-retrieval.md
+@@ -1,5 +1,12 @@
+ # Plan 105 — Phase 14B local candidate retrieval foundation
+ 
++## Current closeout — 2026-10-06
++
++**ACCEPTED / CLOSED.** The local foundation works technically; it establishes no retrieval-quality or production-recognition claim.
++Wider Phase 14 is COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. See the
++[canonical final disposition](../PHASE_14_CLOSEOUT.md). The execution record below
++retains its accepted history; it authorizes no new work.
++
+ ## Goal and user-visible outcome
+ 
+ Explicitly selected photos plus a short visible description produce a deterministic
+diff --git a/docs/plans/106-retrieval-quality-gate.md b/docs/plans/106-retrieval-quality-gate.md
+index f284c94..04ce5cd 100644
+--- a/docs/plans/106-retrieval-quality-gate.md
++++ b/docs/plans/106-retrieval-quality-gate.md
+@@ -1,5 +1,12 @@
+ # Plan 106 — Phase 14C small retrieval quality gate
+ 
++## Current closeout — 2026-10-06
++
++**ACCEPTED / CLOSED — NOT USEFUL BASELINE.** Original frozen inputs, scores and corpus limitations remain unchanged.
++Wider Phase 14 is COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. See the
++[canonical final disposition](../PHASE_14_CLOSEOUT.md). The execution record below
++retains its accepted history; it authorizes no new work.
++
+ ## Goal and user-visible outcome
+ 
+ One frozen sample measures exact top-1/3/8 retrieval, reciprocal rank within the
+diff --git a/docs/plans/107-kind-partitioned-retrieval.md b/docs/plans/107-kind-partitioned-retrieval.md
+index 627b2fa..4356999 100644
+--- a/docs/plans/107-kind-partitioned-retrieval.md
++++ b/docs/plans/107-kind-partitioned-retrieval.md
+@@ -1,5 +1,12 @@
+ # Plan 107 — Phase 14D kind-partitioned retrieval
+ 
++## Current closeout — 2026-10-06
++
++**ACCEPTED / CLOSED — STILL NOT USEFUL.** Further deterministic description-ranking optimization is stopped.
++Wider Phase 14 is COMPLETED / ACCEPTED AS QUALITY-SPIKE EVIDENCE. See the
++[canonical final disposition](../PHASE_14_CLOSEOUT.md). The execution record below
++retains its accepted history; it authorizes no new work.
++
+ ## Goal and user-visible outcome
+ 
+ Rank and return up to eight sets and eight minifigures independently, with explicit
