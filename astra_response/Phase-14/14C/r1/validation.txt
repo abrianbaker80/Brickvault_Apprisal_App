@@ -1,0 +1,7 @@
+Phase 14B checkpoint: exact 10-file staged inventory; full cached diff inspected; git diff --cached --check PASS; 2 added Markdown links resolved; protected hashes PASS. No foundation checks rerun.
+Phase 14C: only tests/unit/test_retrieval_evaluation.py: 3 passed in 0.39s.
+Changed-file Ruff: All checks passed (test import ordering corrected).
+Strict mypy --follow-imports=silent: Success: no issues found in 3 source files.
+ONE frozen evaluation run; four ranked queries; exact accepted snapshot; read-only existing runtime transaction; owned development stopped before/after.
+No retriever correction, tuning, browser smoke, broad suites, builds, migrations, provider/model/counting/metadata calls.
+Main index empty; 14C uncommitted; all 3 protected hashes and 14A/14B retained-evidence hashes unchanged; frozen query/truth hashes unchanged.

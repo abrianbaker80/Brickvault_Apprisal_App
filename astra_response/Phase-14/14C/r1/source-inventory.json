@@ -1,0 +1,38 @@
+[
+  {
+    "path": "CODEX_WORKFLOW.md",
+    "local_sha256": "047e8559a70e3c824912fdee6c3666d93135d4c8e06ec1db319f83c226932020",
+    "published_normalized_sha256": "4a4ddd877337b574e59cfd4d766630824aa1d6c678c76621234be74406d83844",
+    "publication_only_legacy_path_redaction": true
+  },
+  {
+    "path": "docs/ROADMAP.md",
+    "local_sha256": "cea7adac553b44115163690ccd7c9cf8fe4ddb4a69b307bca1ae1eef1b05e4b1",
+    "published_normalized_sha256": "cea7adac553b44115163690ccd7c9cf8fe4ddb4a69b307bca1ae1eef1b05e4b1",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "docs/plans/106-retrieval-quality-gate.md",
+    "local_sha256": "09db8d21e918b063af1dc18a96aa676da5c75f36c6bd8aa743114b7fe666fde8",
+    "published_normalized_sha256": "09db8d21e918b063af1dc18a96aa676da5c75f36c6bd8aa743114b7fe666fde8",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "scripts/evaluate_retrieval.py",
+    "local_sha256": "333c396f29e74c12640231b08752ee259f408e7ead13f82d15c8b5546642727f",
+    "published_normalized_sha256": "333c396f29e74c12640231b08752ee259f408e7ead13f82d15c8b5546642727f",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/src/brickvault_api/recognition/evaluation.py",
+    "local_sha256": "d6883a6f914d14ec494959088ebe13969f461eef8014e2d4ab8b0583f4491e5c",
+    "published_normalized_sha256": "d6883a6f914d14ec494959088ebe13969f461eef8014e2d4ab8b0583f4491e5c",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/tests/unit/test_retrieval_evaluation.py",
+    "local_sha256": "ed39565d6ba1f14ee1d04cdead3225e3fdf404a45c7dadffc37605dd866c11b0",
+    "published_normalized_sha256": "ed39565d6ba1f14ee1d04cdead3225e3fdf404a45c7dadffc37605dd866c11b0",
+    "publication_only_legacy_path_redaction": false
+  }
+]

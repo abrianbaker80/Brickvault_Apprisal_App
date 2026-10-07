@@ -1,0 +1,526 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 222196d..173c561 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,15 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 14C retrieval quality gate — 2026-10-06
++
++**Phase 14A CLOSED; Phase 14B ACCEPTED / CLOSED; Phase 14C IMPLEMENTED / READY FOR
++REVIEW; Phase 14 IN PROGRESS.** Accepted 14B's exact ten files were checkpointed
++locally as 44a1e15bc0d45f996d3eb6898534cd2f202ca275. One frozen description-assisted
++evaluation found the current baseline **NOT USEFUL** for this sample. No ranking
++tuning or new provider calls/spend. Main remains unpushed; 14C uncommitted/index
++empty; development stopped and protected evidence preserved.
++See [Plan 106](docs/plans/106-retrieval-quality-gate.md). Earlier dated entries retain history.
++
+ ## Phase 14B local retrieval foundation — 2026-10-04
+ 
+ **READY FOR PHASE 14B FOUNDATION REVIEW.** Description-assisted CLI retrieval,
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 9f5ee81..9f2fbf1 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1294,9 +1294,12 @@ Exact minifigure recognition is **NOT QUALIFIED FOR PRODUCTION**; no production
+ recognition capability or further calls are approved. Further work requires
+ separate authorization. See [Plan 104](plans/104-recognition-quality-pilot.md).
+ 
+-Phase 14B's local description-assisted retrieval/comparison foundation is ready for
+-review; see [Plan 105](plans/105-reference-candidate-retrieval.md). Image-only retrieval
+-and fresh AI verification remain deferred.
++Phase 14B's local description-assisted retrieval/comparison foundation is
++**ACCEPTED / CLOSED**; see [Plan 105](plans/105-reference-candidate-retrieval.md).
++Phase 14C is **IMPLEMENTED / READY FOR REVIEW** after one frozen small evaluation;
++the current baseline was **NOT USEFUL** on that sample. See
++[Plan 106](plans/106-retrieval-quality-gate.md). Image-only retrieval, ranking changes
++and fresh AI verification remain separately authorized work. No new provider spend.
+ 
+ - **Inputs:** Proven core/image ingestion, rights-cleared catalog references, separately confirmed listing examples, and approved provider/spending scope.
+ - **Scope:** Candidate set/minifigure identities using shared catalog/mappings, server-side OpenAI/Gemini adapters, text clues, retrieval/verification comparison, analysis provenance, and separate corrections.
+diff --git a/docs/plans/106-retrieval-quality-gate.md b/docs/plans/106-retrieval-quality-gate.md
+new file mode 100644
+index 0000000..f284c94
+--- /dev/null
++++ b/docs/plans/106-retrieval-quality-gate.md
+@@ -0,0 +1,105 @@
++# Plan 106 — Phase 14C small retrieval quality gate
++
++## Goal and user-visible outcome
++
++One frozen sample measures exact top-1/3/8 retrieval, reciprocal rank within the
++eight-candidate shortlist, coverage and truncation for the accepted 14B baseline.
++
++## Why now
++
++Brian accepted 14B r1. Its ten files are checkpointed locally as
++44a1e15bc0d45f996d3eb6898534cd2f202ca275 without rerunning foundation checks.
++Qualitative usefulness precedes any new verification or embedding infrastructure.
++
++## In scope
++
++Fresh visible descriptions from the approved G01/G02/G03/G05 photos; separate
++corpus-availability audit of all 17 confirmed 14A identities. No extra examples are
++manufactured to reach the suggested 6–10 scoreable cases. Four frozen queries and
++one existing guarded development read-only lifecycle; three scoring/integrity fixtures.
++
++## Explicit non-goals
++
++No provider calls, paid inference, embeddings, tuning, new images/references,
++crosswalks, migrations, production, browser smoke, broad tests or 14A/14B reruns.
++
++## Current repository state
++
++14C baseline: 44a1e15bc0d45f996d3eb6898534cd2f202ca275. Main remains unpushed;
++14C changes remain uncommitted with empty index. Three protected files stay intact.
++Phase 14A CLOSED; 14B ACCEPTED / CLOSED; wider Phase 14 IN PROGRESS.
++
++## Decisions and assumptions
++
++- Freeze private query bytes/hash before ranked results; separately retain confirmed
++  label bytes/hash and their prepared-source hash. Ground truth is never a query input.
++- Exclude listing/placard text, IDs, names, filenames, earlier predictions and reviewer
++  conclusions. Describe visible colors, object type and construction only.
++- Score exact kind/namespace/identifier when present in the native snapshot or the
++  three-reference corpus. Missing corpus/mapping is unscoreable, never a retrieval miss.
++- G05 is curated-reference evidence, not independent image/reference coverage.
++- RR@8 is zero if absent from the retained top eight; full-corpus rank is unknown.
++- Use Brian's predeclared qualitative USEFUL / PARTIAL / NOT USEFUL rule; no new
++  numerical pass threshold. Preserve all 14A scores and unresolved mappings.
++
++## Data model and interface changes
++
++Small evaluation-only models/helpers and scripts/evaluate_retrieval.py reuse the
++unchanged 14B retriever/lifecycle. Private hash-bound inputs, admission marker and
++ranked outputs stay local; public results contain case codes/metrics only.
++
++## Implementation sequence
++
++1. Commit exact accepted 14B inventory after closeout-only checks.
++2. Freeze descriptions; separately bind confirmed labels, corpus and baseline.
++3. Validate the harness with three fixtures and affected lint/types.
++4. Admit one evaluation; retain per-case ranks and coverage, then stop.
++5. Publish sanitized r1 evidence; leave application changes uncommitted.
++
++## Validation and acceptance
++
++Three fixtures check exact-key/rank boundaries, absent-corpus denominator separation,
++and independent query/truth integrity. No repeat of the six 14B cases. One guarded
++read-only evaluation returns development to its initial stopped state.
++
++## Security, privacy and integrity
++
++Use existing protected-folder/read/write helpers. An exclusive run-started marker
++refuses repeats, including interrupted runs. No private query, figure ID, photo,
++credential or asset path enters the public review. No ledger/reservation changes.
++
++## Failure modes, rollback and recovery
++
++Changed frozen bytes, unexpected scoreable identity without a query, or snapshot
++drift stops before ranking. Retain incomplete evidence; no automatic rerun. Weak
++results do not authorize a ranking change. No cleanup/reset of unrelated work.
++
++## Progress log
++
++- [x] 2026-10-06: 14B checkpoint and separate four-query freeze completed.
++- [x] Three fixtures passed (0.39 seconds); affected Ruff and strict mypy passed.
++  A test import-order correction needed no foundation-test rerun.
++- [x] One four-query evaluation; development verified stopped before and after.
++- [x] Sanitized result and disposition prepared for astra-response 14C/r1.
++
++## Open questions and manual checks
++
++The scored sample may be below six because reusable independently confirmed,
++visible examples are limited. Further independent examples require a separate slice.
++
++## Outcome and follow-up
++
++**READY FOR PHASE 14C RETRIEVAL QUALITY REVIEW.** Four identities scoreable, thirteen
++unscoreable because corpus/mapping is absent. Exact top-1/3: 0/4; top-8: 1/4, the
++curated G05 reference at rank 7. All four searches truncated. Disposition:
++**NOT USEFUL** for this sample; no source defect or ranking optimization pursued.
++
++The three set shortlists contained only minifigures. The sole external-ID hit remains
++canonically unresolved and does not prove hidden-part uniqueness. The sample is
++smaller than suggested; there are no added independent catalog examples. Detailed
++sanitized ranks/coverage and the checkpoint receipt are in the 14C/r1 review package.
++
++This is description-assisted feasibility evidence only; image-only/general
++recognition, production minifigure accuracy, canonical crosswalk completeness and
++AI-verification accuracy remain unestablished. Phase 14A scores/ledger and 14B
++retrieval source remain unchanged. Stop for review; no next slice is authorized.
+diff --git a/scripts/evaluate_retrieval.py b/scripts/evaluate_retrieval.py
+new file mode 100644
+index 0000000..bd4c85d
+--- /dev/null
++++ b/scripts/evaluate_retrieval.py
+@@ -0,0 +1,74 @@
++"""Phase 14C one-run private harness; reuse the accepted guarded catalog lifecycle."""
++
++import json
++from pathlib import Path
++
++from brickvault_api.recognition.evaluation import (
++    Labels,
++    QueryFile,
++    aggregate,
++    evaluate,
++    frozen_bytes,
++)
++from brickvault_api.recognition.local import private_directory, read_bytes, write_bytes
++from brickvault_api.recognition.retrieval import Registry
++from database import ROOT
++from reference_candidates import development_catalog
++
++
++def run(root: Path) -> dict[str, object]:
++    private_directory(root)
++    frozen = json.loads(read_bytes(root / "frozen.json"))
++    queries = QueryFile.model_validate_json(
++        frozen_bytes(root / "queries.json", frozen["query_sha256"])
++    )
++    labels = Labels.model_validate_json(
++        frozen_bytes(root / "ground-truth.json", frozen["ground_truth_sha256"])
++    )
++    registry = Registry.model_validate_json(
++        frozen_bytes(
++            ROOT / ".local/recognition-14b/reference-index.json", frozen["registry_sha256"]
++        )
++    )
++    # Exclusive durable admission prevents a second evaluation, including after interruption.
++    write_bytes(root / "run-started.json", json.dumps({"frozen": frozen, "runs": 1}).encode())
++    try:
++        with development_catalog() as catalog:
++            if str(catalog.snapshot.id) != frozen["catalog_snapshot"]:
++                raise ValueError("accepted_snapshot_changed")
++            scores, results = evaluate(queries, labels, registry, catalog)
++            snapshot = str(catalog.snapshot.id)
++        private_results = {code: result.model_dump(mode="json") for code, result in results.items()}
++        write_bytes(
++            root / "ranked-results-private.json", json.dumps(private_results, indent=2).encode()
++        )
++        summary: dict[str, object] = {
++            "version": "14c-evaluation-v1",
++            "baseline": frozen["baseline"],
++            "catalog_snapshot": snapshot,
++            "query_sha256": frozen["query_sha256"],
++            "ground_truth_sha256": frozen["ground_truth_sha256"],
++            "retrieval_runs": 1,
++            "ranked_queries": len(results),
++            "aggregate": aggregate(scores),
++            "cases": [score.model_dump(mode="json") for score in scores],
++            "excluded_groups": labels.excluded_groups,
++            "interpretation": "Description-assisted exact-key retrieval only; curated figure reference; RR@8 is zero when absent from the retained shortlist. Unscoreable identities excluded from ranking metrics.",
++        }
++        write_bytes(root / "results-public.json", json.dumps(summary, indent=2).encode())
++        return summary
++    except Exception:
++        write_bytes(
++            root / "run-incomplete.json", b'{"state":"incomplete","rerun_authorized":false}'
++        )
++        raise
++
++
++if __name__ == "__main__":
++    try:
++        summary = run(ROOT / ".local/recognition-14c")
++    except Exception:
++        # Never emit private labels, queries, credentials, paths or native error text.
++        print("Evaluation stopped. Retain local evidence; no automatic rerun.")
++        raise SystemExit(1) from None
++    print(json.dumps(summary, indent=2))
+diff --git a/services/api/src/brickvault_api/recognition/evaluation.py b/services/api/src/brickvault_api/recognition/evaluation.py
+new file mode 100644
+index 0000000..d0a91aa
+--- /dev/null
++++ b/services/api/src/brickvault_api/recognition/evaluation.py
+@@ -0,0 +1,187 @@
++"""One frozen description-retrieval evaluation; absent corpus keys are unscoreable."""
++
++from collections.abc import Mapping
++from pathlib import Path
++from typing import Literal
++
++from brickvault_api.catalog.repository import PinnedCatalog
++from brickvault_api.recognition.local import digest, read_bytes
++from brickvault_api.recognition.retrieval import (
++    Key,
++    Query,
++    Record,
++    Registry,
++    Retrieval,
++    RetrievalError,
++    query_from,
++    retrieve,
++)
++
++
++class VisibleQuery(Record):
++    group: str
++    description: str
++
++
++class QueryFile(Record):
++    version: Literal["14c-queries-v1"]
++    queries: dict[str, VisibleQuery]
++    basis: str
++
++
++class LabelCase(Record):
++    code: str
++    group: str
++    query_code: str | None
++    expected: Key
++    labels_exhaustive: bool
++
++
++class Labels(Record):
++    version: Literal["14c-labels-v1"]
++    prepared_sha256: str
++    cases: list[LabelCase]
++    excluded_groups: dict[str, str]
++
++
++class CaseScore(Record):
++    code: str
++    group: str
++    kind: str
++    namespace: str
++    status: Literal["scoreable", "not_scoreable"]
++    reason: str | None = None
++    corpus_identity: Literal["catalog_native", "external_unresolved", "unavailable"]
++    curated_reference: bool
++    rank: int | None = None
++    top1: bool | None = None
++    top3: bool | None = None
++    top8: bool | None = None
++    reciprocal_rank_at8: float | None = None
++    no_match: bool | None = None
++    pool_count: int | None = None
++    truncated: bool | None = None
++    reference_images_in_shortlist: int | None = None
++    target_returned_reference: bool | None = None
++
++
++def frozen_bytes(path: Path, expected_hash: str) -> bytes:
++    raw = read_bytes(path, 4 * 1024 * 1024)
++    if digest(raw) != expected_hash:
++        raise RetrievalError("frozen_evaluation_input_changed")
++    return raw
++
++
++def score_case(
++    case: LabelCase,
++    result: Retrieval | None,
++    *,
++    available: bool,
++    curated_reference: bool,
++) -> CaseScore:
++    fields = {
++        "code": case.code,
++        "group": case.group,
++        "kind": case.expected.kind,
++        "namespace": case.expected.namespace,
++        "curated_reference": curated_reference,
++    }
++    if not available:
++        return CaseScore.model_validate(
++            {
++                **fields,
++                "status": "not_scoreable",
++                "reason": "not scoreable: corpus/mapping unavailable",
++                "corpus_identity": "unavailable",
++            }
++        )
++    if result is None:
++        raise RetrievalError("scoreable_case_requires_frozen_retrieval")
++    rank = next(
++        (i for i, match in enumerate(result.matches, 1) if match.candidate.key == case.expected),
++        None,
++    )
++    return CaseScore.model_validate(
++        {
++            **fields,
++            "status": "scoreable",
++            "corpus_identity": "external_unresolved" if curated_reference else "catalog_native",
++            "rank": rank,
++            "top1": rank == 1,
++            "top3": rank is not None and rank <= 3,
++            "top8": rank is not None and rank <= 8,
++            "reciprocal_rank_at8": 1 / rank if rank is not None else 0,
++            "no_match": result.state == "no_match",
++            "pool_count": result.pool_count,
++            "truncated": result.catalog_truncated,
++            "reference_images_in_shortlist": sum(
++                m.candidate.reference is not None for m in result.matches
++            ),
++            "target_returned_reference": result.matches[rank - 1].candidate.reference is not None
++            if rank is not None
++            else None,
++        }
++    )
++
++
++def aggregate(scores: list[CaseScore]) -> dict[str, int | float]:
++    scored = [row for row in scores if row.status == "scoreable"]
++    n = len(scored)
++    if not n:
++        raise RetrievalError("no_scoreable_evaluation_cases")
++    return {
++        "scoreable": n,
++        "not_scoreable_corpus_mapping_unavailable": len(scores) - n,
++        "top1_hits": sum(row.top1 is True for row in scored),
++        "top3_hits": sum(row.top3 is True for row in scored),
++        "top8_hits": sum(row.top8 is True for row in scored),
++        "mean_reciprocal_rank_at8": sum(row.reciprocal_rank_at8 or 0 for row in scored) / n,
++        "no_match_cases": sum(row.no_match is True for row in scored),
++        "average_candidate_pool": sum(row.pool_count or 0 for row in scored) / n,
++        "truncated_cases": sum(row.truncated is True for row in scored),
++        "truncated_fraction": sum(row.truncated is True for row in scored) / n,
++        "shortlist_entries_with_reference": sum(
++            row.reference_images_in_shortlist or 0 for row in scored
++        ),
++        "target_hits_with_reference": sum(row.target_returned_reference is True for row in scored),
++    }
++
++
++def evaluate(
++    queries: QueryFile, labels: Labels, registry: Registry, catalog: PinnedCatalog
++) -> tuple[list[CaseScore], Mapping[str, Retrieval]]:
++    if len({c.code for c in labels.cases}) != len(labels.cases):
++        raise RetrievalError("duplicate_evaluation_case")
++    # Corpus membership is independent of query results; no label is a retrieval input.
++    refs = {ref.key.token for ref in registry.references}
++    available: dict[str, bool] = {}
++    validated: dict[str, Query] = {}
++    for case in labels.cases:
++        native = any(
++            identity.namespace == case.expected.namespace
++            for identity in catalog.resolve_identity(
++                case.expected.kind, case.expected.identifier
++            ).data
++        )
++        available[case.code] = native or case.expected.token in refs
++        if available[case.code]:
++            if case.query_code not in queries.queries:
++                raise RetrievalError("scoreable_case_requires_frozen_query")
++            assert case.query_code is not None
++            visible = queries.queries[case.query_code]
++            if visible.group != case.group:
++                raise RetrievalError("query_group_mismatch")
++            validated[case.query_code] = query_from({"description": visible.description})
++    results = {
++        code: retrieve(query, registry, catalog, limit=8) for code, query in validated.items()
++    }
++    scores = [
++        score_case(
++            case,
++            results.get(case.query_code or ""),
++            available=available[case.code],
++            curated_reference=case.expected.token in refs,
++        )
++        for case in labels.cases
++    ]
++    return scores, results
+diff --git a/services/api/tests/unit/test_retrieval_evaluation.py b/services/api/tests/unit/test_retrieval_evaluation.py
+new file mode 100644
+index 0000000..c8251aa
+--- /dev/null
++++ b/services/api/tests/unit/test_retrieval_evaluation.py
+@@ -0,0 +1,96 @@
++"""Three scoring/integrity fixtures; no 14B test rerun or catalog startup."""
++
++from pathlib import Path
++
++import pytest
++from brickvault_api.recognition.evaluation import LabelCase, aggregate, frozen_bytes, score_case
++from brickvault_api.recognition.local import digest
++from brickvault_api.recognition.retrieval import (
++    Candidate,
++    Key,
++    Match,
++    Retrieval,
++    RetrievalError,
++    query_from,
++)
++
++
++def result(keys: list[Key], *, truncated: bool = False, pool: int = 10) -> Retrieval:
++    return Retrieval(
++        query=query_from({"description": "gray robot"}),
++        matches=[
++            Match(
++                candidate=Candidate(
++                    key=key, name="Gray robot", provenance={}, resolution="verified"
++                ),
++                score=3,
++                matched_terms={"name": ["robot"]},
++            )
++            for key in keys
++        ],
++        pool_count=pool,
++        reference_count=0,
++        catalog_status="synthetic fixture",
++        catalog_truncated=truncated,
++        state="shortlist" if keys else "no_match",
++    )
++
++
++def label(code: str = "fixture") -> LabelCase:
++    return LabelCase(
++        code=code,
++        group="synthetic",
++        query_code="query",
++        expected=Key(kind="set", namespace="native", identifier="target"),
++        labels_exhaustive=True,
++    )
++
++
++def test_exact_key_rank_and_top8_boundary() -> None:
++    case = label()
++    wrong_namespace = Key(kind="set", namespace="other", identifier="target")
++    wrong_kind = Key(kind="minifigure", namespace="native", identifier="target")
++    ranked = result([wrong_namespace, wrong_kind, case.expected])
++    score = score_case(case, ranked, available=True, curated_reference=False)
++    assert score.rank == 3 and not score.top1 and score.top3 and score.top8
++    assert score.reciprocal_rank_at8 == pytest.approx(1 / 3)
++    eight = result(
++        [Key(kind="set", namespace="native", identifier=str(i)) for i in range(7)] + [case.expected]
++    )
++    boundary = score_case(case, eight, available=True, curated_reference=False)
++    assert boundary.rank == 8 and not boundary.top3 and boundary.top8
++    assert boundary.reciprocal_rank_at8 == 0.125
++
++
++def test_unavailable_excluded_and_no_match_counted_as_scoreable_miss() -> None:
++    hit = score_case(
++        label("hit"),
++        result([label().expected], truncated=True, pool=4),
++        available=True,
++        curated_reference=False,
++    )
++    miss = score_case(label("miss"), result([], pool=2), available=True, curated_reference=False)
++    absent = score_case(label("absent"), None, available=False, curated_reference=False)
++    assert absent.top8 is None and absent.no_match is None and absent.rank is None
++    totals = aggregate([hit, miss, absent])
++    assert totals["scoreable"] == 2 and totals["not_scoreable_corpus_mapping_unavailable"] == 1
++    assert totals["top8_hits"] == 1 and totals["no_match_cases"] == 1
++    assert totals["mean_reciprocal_rank_at8"] == 0.5
++    assert totals["average_candidate_pool"] == 3 and totals["truncated_fraction"] == 0.5
++
++
++def test_query_and_truth_hashes_refuse_changes_independently(tmp_path: Path) -> None:
++    query = tmp_path / "query.json"
++    truth = tmp_path / "truth.json"
++    query.write_bytes(b'{"description":"gray robot"}')
++    truth.write_bytes(b'{"identity":"synthetic"}')
++    qhash, thash = digest(query.read_bytes()), digest(truth.read_bytes())
++    assert frozen_bytes(query, qhash) == query.read_bytes()
++    assert frozen_bytes(truth, thash) == truth.read_bytes()
++    query.write_bytes(b'{"description":"changed after ranking"}')
++    with pytest.raises(RetrievalError, match="frozen_evaluation_input_changed"):
++        frozen_bytes(query, qhash)
++    assert frozen_bytes(truth, thash) == truth.read_bytes()
++    truth.write_bytes(b'{"identity":"changed label"}')
++    with pytest.raises(RetrievalError, match="frozen_evaluation_input_changed"):
++        frozen_bytes(truth, thash)

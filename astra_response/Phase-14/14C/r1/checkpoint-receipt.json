@@ -1,0 +1,35 @@
+{
+  "14b_local_commit": "44a1e15bc0d45f996d3eb6898534cd2f202ca275",
+  "14b_parent": "7149f83dd7a16092bc2dfa12cd1ab1935073f537",
+  "committed_inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/105-reference-candidate-retrieval.md",
+    "scripts/reference_candidates.py",
+    "services/api/src/brickvault_api/catalog/query_types.py",
+    "services/api/src/brickvault_api/catalog/repository.py",
+    "services/api/src/brickvault_api/catalog/search.py",
+    "services/api/src/brickvault_api/recognition/comparison.py",
+    "services/api/src/brickvault_api/recognition/retrieval.py",
+    "services/api/tests/unit/test_reference_retrieval.py"
+  ],
+  "complete_staged_diff_review": "PASS",
+  "exact_staged_inventory": "PASS",
+  "cached_diff_check": "PASS",
+  "14b_changed_markdown_links": 2,
+  "14c_changed_markdown_links": 3,
+  "14b_tests_smoke_browser_catalog_rerun": false,
+  "protected_hashes_unchanged": true,
+  "retained_evidence_unchanged": true,
+  "frozen_query_and_truth_unchanged": true,
+  "main_unpushed": true,
+  "main_index": "empty",
+  "14c_changes_uncommitted": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/106-retrieval-quality-gate.md",
+    "scripts/evaluate_retrieval.py",
+    "services/api/src/brickvault_api/recognition/evaluation.py",
+    "services/api/tests/unit/test_retrieval_evaluation.py"
+  ]
+}
