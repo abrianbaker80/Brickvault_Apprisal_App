@@ -1,0 +1,721 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index 173c561..d20b511 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,16 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 14D structural retrieval diagnostic — 2026-10-06
++
++**Phase 14A/14B CLOSED; Phase 14C CLOSED / NOT USEFUL BASELINE; Phase 14D READY
++FOR REVIEW; Phase 14 IN PROGRESS.** 14C was checkpointed locally as
++7d664487ab436547dfa8293f4359ea4e38e59523. One diagnostic on its unchanged frozen
++inputs removed shared-kind starvation, but no known set recovered: **STILL NOT
++USEFUL**. No further text optimization; image-driven retrieval is the next separate
++decision. Main unpushed; 14D uncommitted/index empty; development stopped;
++protected/private evidence preserved; zero new provider calls/spend.
++See [Plan 107](docs/plans/107-kind-partitioned-retrieval.md). Dated history stays intact.
++
+ ## Phase 14C retrieval quality gate — 2026-10-06
+ 
+ **Phase 14A CLOSED; Phase 14B ACCEPTED / CLOSED; Phase 14C IMPLEMENTED / READY FOR
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 9f2fbf1..4a5a264 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1296,10 +1296,12 @@ separate authorization. See [Plan 104](plans/104-recognition-quality-pilot.md).
+ 
+ Phase 14B's local description-assisted retrieval/comparison foundation is
+ **ACCEPTED / CLOSED**; see [Plan 105](plans/105-reference-candidate-retrieval.md).
+-Phase 14C is **IMPLEMENTED / READY FOR REVIEW** after one frozen small evaluation;
+-the current baseline was **NOT USEFUL** on that sample. See
+-[Plan 106](plans/106-retrieval-quality-gate.md). Image-only retrieval, ranking changes
+-and fresh AI verification remain separately authorized work. No new provider spend.
++Phase 14C is **CLOSED / NOT USEFUL BASELINE**; see
++[Plan 106](plans/106-retrieval-quality-gate.md). Phase 14D is **READY FOR REVIEW**:
++independent kind buckets removed starvation, but its one frozen before/after
++diagnostic remained **STILL NOT USEFUL**. See [Plan 107](plans/107-kind-partitioned-retrieval.md).
++No further description-ranking optimization follows; image-driven retrieval is the
++next separate decision. No new provider calls/spend or production qualification.
+ 
+ - **Inputs:** Proven core/image ingestion, rights-cleared catalog references, separately confirmed listing examples, and approved provider/spending scope.
+ - **Scope:** Candidate set/minifigure identities using shared catalog/mappings, server-side OpenAI/Gemini adapters, text clues, retrieval/verification comparison, analysis provenance, and separate corrections.
+diff --git a/docs/plans/107-kind-partitioned-retrieval.md b/docs/plans/107-kind-partitioned-retrieval.md
+new file mode 100644
+index 0000000..627b2fa
+--- /dev/null
++++ b/docs/plans/107-kind-partitioned-retrieval.md
+@@ -0,0 +1,106 @@
++# Plan 107 — Phase 14D kind-partitioned retrieval
++
++## Goal and user-visible outcome
++
++Rank and return up to eight sets and eight minifigures independently, with explicit
++no-match per kind and separate comparison sections. Test the starvation hypothesis.
++
++## Why now
++
++Accepted 14C was NOT USEFUL: all three set shortlists contained only minifigures.
++This correction follows those observations; its evaluation is a before/after
++structural diagnostic, not an independent benchmark.
++
++## In scope
++
++One partition after the existing scoring/sort; rendering and bucket-aware local
++review/scoring. Reuse the exact four frozen 14C queries, seventeen labels, snapshot
++and references, reading the original files directly. One evaluation; three fixtures.
++
++## Explicit non-goals
++
++No tokenization/weight/bonus/tie/term-cap changes, synonyms, new cases/references,
++corpus or resolution changes, provider calls, embeddings, production, migrations,
++old-suite reruns or iterative optimization.
++
++## Current repository state
++
++14C's exact six accepted files were committed locally as
++7d664487ab436547dfa8293f4359ea4e38e59523, after staged-diff/link/hash checks only.
++Use this as the 14D baseline. Main unpushed; 14D uncommitted/index empty; three
++protected files remain unstaged/intact. 14A/14B closed; 14C closed/NOT USEFUL.
++
++## Decisions and assumptions
++
++- Produce both kinds for every query without a ground-truth kind input. A label
++  selects a bucket only in the scorer after retrieval.
++- Preserve all weights, query terms, names, source features and deterministic ties.
++- New versioned results expose sets/minifigures. A flat projection contains both
++  buckets for note-key compatibility; it is not an overall rank. Legacy saved
++  combined results remain readable without rewriting their bytes.
++- Keep overall pool/truncation evidence and exact per-kind pool counts. Reported
++  truncation remains overall term/type saturation, not inferred per-kind completeness.
++- Preserve thirteen unscoreable corpus/mapping identities and original 14C results.
++
++## Data model and interface changes
++
++Local KindBucket result; per-kind report and operator rank selection; bucket-aware
++score fields and a separate 14D harness output folder using frozen 14C inputs.
++No HTTP/database/14A provider contract changes.
++
++## Implementation sequence
++
++1. Checkpoint exact accepted 14C inventory without requalification.
++2. Partition existing scored candidates; update local report/note/scorer.
++3. Three targeted fixtures and changed-file Ruff/mypy.
++4. Verify original query/truth hashes and run one diagnostic, restoring development.
++5. Preserve before/after evidence and publish r1; stop.
++
++## Validation and acceptance
++
++Fixtures: buckets cannot starve; within-kind score/tie order stays unchanged; query
++leakage/exact canonical boundaries stay intact. Inspect generated HTML in a fixture;
++no browser smoke required. One guarded read-only development evaluation.
++
++## Security, privacy and integrity
++
++Existing private ACL/exclusive writes and hash guards; original 14C inputs/results
++read directly, never edited or regenerated. No private queries, figure IDs, photos,
++credentials or asset paths published. Ledger/reservations remain closed and intact.
++
++## Failure modes, rollback and recovery
++
++Bad hashes/snapshot/config stop; interrupted run retained without retry. Empty bucket
++does not borrow another kind's candidates. Poor results do not authorize tuning.
++Removing local changes requires Brian's instruction; no unrelated cleanup/reset.
++
++## Progress log
++
++- [x] 2026-10-06: Accepted 14C checkpoint; 14D structural changes prepared.
++- [x] Three focused fixtures passed; one bonus expectation corrected and that fixture
++  rerun alone (0.33 seconds). Changed-file Ruff and strict mypy passed on six files.
++- [x] Original query/truth/registry hashes and unchanged scoring/search AST verified.
++  One diagnostic completed; owned development stopped before/after.
++- [x] Before/after result and disposition prepared for 14D/r1 publication.
++
++## Open questions and manual checks
++
++Single curated figure evidence cannot establish production accuracy or hidden-part
++uniqueness. If set top-eight recovery remains poor, image-driven retrieval is the
++next separate decision; no further text-ranking optimization follows here.
++
++## Outcome and follow-up
++
++**READY FOR PHASE 14D STRUCTURAL RETRIEVAL REVIEW.** Disposition: **STILL NOT USEFUL**.
++Every query now returns eight sets plus eight minifigures, but all three known sets
++remain outside the set top-eight. Old/new top-1/3/8 on the four scoreable cases:
++0/4, 0/4, 1/4 in both. G05 remains rank 7 in the minifigure bucket; thirteen corpus
++identities stay unscoreable. All four searches are saturated/truncated.
++
++Original 14C evidence remains unchanged. This is a diagnostic designed after its
++results, not independent accuracy evidence. Kind capacity is corrected; deterministic
++description retrieval is not worth further optimization on this evidence. Recommend
++image-driven retrieval as the next separate decision, without starting it here.
++
++The one curated figure result supports no production-quality or hidden-part identity
++claim. Wider Phase 14 stays IN PROGRESS. No new provider calls/spend; stop for review.
+diff --git a/scripts/evaluate_retrieval.py b/scripts/evaluate_retrieval.py
+index bd4c85d..6f7ed47 100644
+--- a/scripts/evaluate_retrieval.py
++++ b/scripts/evaluate_retrieval.py
+@@ -1,5 +1,6 @@
+-"""Phase 14C one-run private harness; reuse the accepted guarded catalog lifecycle."""
++"""One-run 14C/14D private harness; reuse the accepted guarded catalog lifecycle."""
+ 
++import argparse
+ import json
+ from pathlib import Path
+ 
+@@ -16,14 +17,15 @@ from database import ROOT
+ from reference_candidates import development_catalog
+ 
+ 
+-def run(root: Path) -> dict[str, object]:
++def run(root: Path, *, input_root: Path | None = None) -> dict[str, object]:
+     private_directory(root)
++    inputs = input_root if input_root is not None else root
+     frozen = json.loads(read_bytes(root / "frozen.json"))
+     queries = QueryFile.model_validate_json(
+-        frozen_bytes(root / "queries.json", frozen["query_sha256"])
++        frozen_bytes(inputs / "queries.json", frozen["query_sha256"])
+     )
+     labels = Labels.model_validate_json(
+-        frozen_bytes(root / "ground-truth.json", frozen["ground_truth_sha256"])
++        frozen_bytes(inputs / "ground-truth.json", frozen["ground_truth_sha256"])
+     )
+     registry = Registry.model_validate_json(
+         frozen_bytes(
+@@ -43,7 +45,7 @@ def run(root: Path) -> dict[str, object]:
+             root / "ranked-results-private.json", json.dumps(private_results, indent=2).encode()
+         )
+         summary: dict[str, object] = {
+-            "version": "14c-evaluation-v1",
++            "version": "14d-structural-diagnostic-v1" if input_root else "14c-evaluation-v1",
+             "baseline": frozen["baseline"],
+             "catalog_snapshot": snapshot,
+             "query_sha256": frozen["query_sha256"],
+@@ -53,7 +55,22 @@ def run(root: Path) -> dict[str, object]:
+             "aggregate": aggregate(scores),
+             "cases": [score.model_dump(mode="json") for score in scores],
+             "excluded_groups": labels.excluded_groups,
+-            "interpretation": "Description-assisted exact-key retrieval only; curated figure reference; RR@8 is zero when absent from the retained shortlist. Unscoreable identities excluded from ranking metrics.",
++            "kind_buckets": {
++                code: {
++                    "overall_pool": result.pool_count,
++                    "overall_truncated": result.catalog_truncated,
++                    "sets": result.sets.model_dump(exclude={"matches"}) if result.sets else None,
++                    "minifigures": result.minifigures.model_dump(exclude={"matches"})
++                    if result.minifigures
++                    else None,
++                    "set_shortlist_count": len(result.sets.matches) if result.sets else None,
++                    "minifigure_shortlist_count": len(result.minifigures.matches)
++                    if result.minifigures
++                    else None,
++                }
++                for code, result in results.items()
++            },
++            "interpretation": "Before/after structural diagnostic when using kind buckets; designed after 14C, not an independent benchmark. Description-assisted exact-key retrieval; curated figure reference; RR@8 zero outside the relevant shortlist. Unscoreable identities excluded; truncation is overall term-result saturation.",
+         }
+         write_bytes(root / "results-public.json", json.dumps(summary, indent=2).encode())
+         return summary
+@@ -65,8 +82,16 @@ def run(root: Path) -> dict[str, object]:
+ 
+ 
+ if __name__ == "__main__":
++    parser = argparse.ArgumentParser(
++        description="One admitted frozen evaluation; no provider calls."
++    )
++    parser.add_argument("--phase", choices=["14c", "14d"], default="14c")
++    args = parser.parse_args()
+     try:
+-        summary = run(ROOT / ".local/recognition-14c")
++        summary = run(
++            ROOT / f".local/recognition-{args.phase}",
++            input_root=ROOT / ".local/recognition-14c" if args.phase == "14d" else None,
++        )
+     except Exception:
+         # Never emit private labels, queries, credentials, paths or native error text.
+         print("Evaluation stopped. Retain local evidence; no automatic rerun.")
+diff --git a/scripts/reference_candidates.py b/scripts/reference_candidates.py
+index eacbfdd..c39f816 100644
+--- a/scripts/reference_candidates.py
++++ b/scripts/reference_candidates.py
+@@ -111,14 +111,19 @@ def review_interactive(root: Path, run: str) -> Path:
+     identity = None
+     needed_view = ""
+     if decision in ("provisional", "compatible"):
+-        ranks = [
+-            int(v) for v in input("Candidate ranks, separated by commas: ").split(",")
+-        ]
+-        if any(not 1 <= rank <= len(comparison.retrieval.matches) for rank in ranks):
++        matches = comparison.retrieval.matches
++        if comparison.retrieval.sets is not None and comparison.retrieval.minifigures is not None:
++            kind = input("Candidate section: set / minifigure: ")
++            if kind not in ("set", "minifigure"):
++                raise RetrievalError("candidate_kind_unavailable")
++            bucket = (
++                comparison.retrieval.sets if kind == "set" else comparison.retrieval.minifigures
++            )
++            matches = bucket.matches
++        ranks = [int(v) for v in input("Candidate ranks, separated by commas: ").split(",")]
++        if any(not 1 <= rank <= len(matches) for rank in ranks):
+             raise RetrievalError("candidate_rank_unavailable")
+-        selected = [
+-            comparison.retrieval.matches[rank - 1].candidate.key for rank in ranks
+-        ]
++        selected = [matches[rank - 1].candidate.key for rank in ranks]
+     if decision == "insufficient_evidence":
+         needed_view = input("Needed view: ")
+     if decision == "known_identity":
+@@ -126,9 +131,7 @@ def review_interactive(root: Path, run: str) -> Path:
+             {
+                 "kind": input("Kind: set / minifigure: "),
+                 "namespace": input("Namespace: "),
+-                "identifier": input(
+-                    "Independently known identifier (operator-supplied): "
+-                ),
++                "identifier": input("Independently known identifier (operator-supplied): "),
+             }
+         )
+     note = ReviewNote.model_validate(
+@@ -182,9 +185,7 @@ def main() -> int:
+             raise RetrievalError("repository_private_14b_directory_required")
+         private_directory(PRIVATE)
+         if args.command == "compare":
+-            registry = Registry.model_validate_json(
+-                read_bytes(PRIVATE / "reference-index.json")
+-            )
++            registry = Registry.model_validate_json(read_bytes(PRIVATE / "reference-index.json"))
+             query = selected_query(args)
+             if args.reference_only:
+                 result = retrieve(query, registry, None, limit=args.limit)
+@@ -205,14 +206,10 @@ def main() -> int:
+                 raise RetrievalError("operator_note_unavailable")
+             note = ReviewNote.model_validate_json(read_bytes(notes[-1]))
+             if note.comparison_sha256 != digest(
+-                read_bytes(
+-                    PRIVATE / comparison.run / "comparison.json", 4 * 1024 * 1024
+-                )
++                read_bytes(PRIVATE / comparison.run / "comparison.json", 4 * 1024 * 1024)
+             ):
+                 raise RetrievalError("note_comparison_mismatch")
+-            print(
+-                f"Saved note: {notes[-1].with_suffix('.html')}; decision: {note.decision}"
+-            )
++            print(f"Saved note: {notes[-1].with_suffix('.html')}; decision: {note.decision}")
+     except (RetrievalError, CatalogError, DatabaseError) as error:
+         print(f"Local candidate workflow stopped: {error}")
+         return 1
+diff --git a/services/api/src/brickvault_api/recognition/comparison.py b/services/api/src/brickvault_api/recognition/comparison.py
+index f4fd8b3..56f2b07 100644
+--- a/services/api/src/brickvault_api/recognition/comparison.py
++++ b/services/api/src/brickvault_api/recognition/comparison.py
+@@ -76,49 +76,64 @@ def render(comparison: Comparison) -> bytes:
+         parts.append(
+             f"<article>{inline_image(Path(image.path), image.sha256, f'Selected view {i}')}</article>"
+         )
+-    parts.append("</div><h2>Ranked candidates</h2>")
+-    if result.state == "no_match":
+-        parts.append("<p>No matching candidate in the queried coverage.</p>")
+-    parts.append("<div class=grid>")
+-    for rank, match in enumerate(result.matches, 1):
+-        c = match.candidate
+-        parts.extend(
+-            [
+-                f"<article><h3>{rank}. {escaped(c.name)}</h3>",
+-                f"<p>{escaped(c.key.token)} — candidate, not confirmed</p>",
+-                f"<p>Retrieval score {match.score}; {escaped(match.ranking_basis)}.</p>",
+-                f"<p>Matched terms: {escaped(json.dumps(match.matched_terms))}</p>",
+-                f"<p>Source-supported features: {escaped(c.features or 'No feature description available')}</p>",
+-                f"<p>Canonical resolution: {escaped(c.resolution)}; "
+-                f"{escaped(json.dumps(c.canonical) if c.canonical else 'No verified canonical identity')}</p>",
+-                f"<small>Catalog/name provenance: {escaped(json.dumps(c.provenance))}</small>",
+-            ]
+-        )
+-        if c.reference:
+-            ref = c.reference
++    parts.append("</div>")
++    sections = [("Ranked candidates", result.matches, result.state, result.pool_count)]
++    if result.sets is not None and result.minifigures is not None:
++        sections = [
++            ("Set candidates", result.sets.matches, result.sets.state, result.sets.pool_count),
++            (
++                "Minifigure candidates",
++                result.minifigures.matches,
++                result.minifigures.state,
++                result.minifigures.pool_count,
++            ),
++        ]
++    for title, matches, state, pool in sections:
++        parts.append(f"<h2>{escaped(title)}</h2><p>Kind pool: {pool}; state: {escaped(state)}.</p>")
++        if state == "no_match":
++            parts.append("<p>No matching candidate of this kind in the queried coverage.</p>")
++        parts.append("<div class=grid>")
++        for rank, match in enumerate(matches, 1):
++            c = match.candidate
+             parts.extend(
+                 [
+-                    inline_image(Path(ref.image_path), ref.image_sha256, "Approved reference"),
+-                    f"<p>Photo association: {escaped(ref.identity_status)}. "
+-                    f"{escaped(ref.association_basis)}</p>",
+-                    f"<p>Available views: {escaped(', '.join(ref.views))}. Missing/unverified: "
+-                    f"{escaped(', '.join(ref.missing_views))}.</p>",
+-                    f"<small>Identity sources: {escaped(' ; '.join(ref.source_urls))}</small>",
+-                    f"<small>Attribution: {escaped(json.dumps(ref.attribution))}</small>",
+-                    f"<small>Permission evidence: {escaped(ref.permission)} "
+-                    f"Retained evidence hash: {escaped(ref.license_evidence['sha256'])}</small>",
++                    f"<article><h3>{rank}. {escaped(c.name)}</h3>",
++                    f"<p>{escaped(c.key.token)} — candidate, not confirmed</p>",
++                    f"<p>Retrieval score {match.score}; {escaped(match.ranking_basis)}.</p>",
++                    f"<p>Matched terms: {escaped(json.dumps(match.matched_terms))}</p>",
++                    f"<p>Source-supported features: {escaped(c.features or 'No feature description available')}</p>",
++                    f"<p>Canonical resolution: {escaped(c.resolution)}; "
++                    f"{escaped(json.dumps(c.canonical) if c.canonical else 'No verified canonical identity')}</p>",
++                    f"<small>Catalog/name provenance: {escaped(json.dumps(c.provenance))}</small>",
+                 ]
+             )
+-        else:
++            if c.reference:
++                ref = c.reference
++                parts.extend(
++                    [
++                        inline_image(Path(ref.image_path), ref.image_sha256, "Approved reference"),
++                        f"<p>Photo association: {escaped(ref.identity_status)}. "
++                        f"{escaped(ref.association_basis)}</p>",
++                        f"<p>Available views: {escaped(', '.join(ref.views))}. Missing/unverified: "
++                        f"{escaped(', '.join(ref.missing_views))}.</p>",
++                        f"<small>Identity sources: {escaped(' ; '.join(ref.source_urls))}</small>",
++                        f"<small>Attribution: {escaped(json.dumps(ref.attribution))}</small>",
++                        f"<small>Permission evidence: {escaped(ref.permission)} "
++                        f"Retained evidence hash: {escaped(ref.license_evidence['sha256'])}</small>",
++                    ]
++                )
++            else:
++                parts.append(
++                    "<p>Reference image unavailable. Visual compatibility and hidden components "
++                    "cannot be assessed from this catalog record alone.</p>"
++                )
+             parts.append(
+-                "<p>Reference image unavailable. Visual compatibility and hidden components "
+-                "cannot be assessed from this catalog record alone.</p>"
++                "<p>Visual compatibility: not assessed; unique identity: not established.</p></article>"
+             )
+-        parts.append(
+-            "<p>Visual compatibility: not assessed; unique identity: not established.</p></article>"
+-        )
++        parts.append("</div>")
+     parts.append(
+-        "</div><h2>Private operator review</h2><p>Use the local review CLI to record one "
++        "<h2>Private operator review</h2><p>For partitioned results, ranks restart per kind. "
++        "Select that kind in the local review CLI to record one "
+         "provisional candidate, several compatible candidates, none, insufficient evidence "
+         "with a needed view, or an independently known operator-supplied identity. Notes "
+         "are separate append-only files; no catalog or valuation follows.</p>"
+diff --git a/services/api/src/brickvault_api/recognition/evaluation.py b/services/api/src/brickvault_api/recognition/evaluation.py
+index d0a91aa..950d51c 100644
+--- a/services/api/src/brickvault_api/recognition/evaluation.py
++++ b/services/api/src/brickvault_api/recognition/evaluation.py
+@@ -60,6 +60,9 @@ class CaseScore(Record):
+     reciprocal_rank_at8: float | None = None
+     no_match: bool | None = None
+     pool_count: int | None = None
++    overall_pool_count: int | None = None
++    shortlist_count: int | None = None
++    rank_scope: Literal["combined_top8", "correct_kind_bucket"] = "combined_top8"
+     truncated: bool | None = None
+     reference_images_in_shortlist: int | None = None
+     target_returned_reference: bool | None = None
+@@ -97,8 +100,11 @@ def score_case(
+         )
+     if result is None:
+         raise RetrievalError("scoreable_case_requires_frozen_retrieval")
++    # Both kinds were retrieved independently before the scorer consults the label.
++    bucket = result.sets if case.expected.kind == "set" else result.minifigures
++    matches = bucket.matches if bucket is not None else result.matches
+     rank = next(
+-        (i for i, match in enumerate(result.matches, 1) if match.candidate.key == case.expected),
++        (i for i, match in enumerate(matches, 1) if match.candidate.key == case.expected),
+         None,
+     )
+     return CaseScore.model_validate(
+@@ -111,13 +117,16 @@ def score_case(
+             "top3": rank is not None and rank <= 3,
+             "top8": rank is not None and rank <= 8,
+             "reciprocal_rank_at8": 1 / rank if rank is not None else 0,
+-            "no_match": result.state == "no_match",
+-            "pool_count": result.pool_count,
++            "no_match": (bucket.state if bucket is not None else result.state) == "no_match",
++            "pool_count": bucket.pool_count if bucket is not None else result.pool_count,
++            "overall_pool_count": result.pool_count,
++            "shortlist_count": len(matches),
++            "rank_scope": "correct_kind_bucket" if bucket is not None else "combined_top8",
+             "truncated": result.catalog_truncated,
+             "reference_images_in_shortlist": sum(
+-                m.candidate.reference is not None for m in result.matches
++                m.candidate.reference is not None for m in matches
+             ),
+-            "target_returned_reference": result.matches[rank - 1].candidate.reference is not None
++            "target_returned_reference": matches[rank - 1].candidate.reference is not None
+             if rank is not None
+             else None,
+         }
+@@ -138,6 +147,11 @@ def aggregate(scores: list[CaseScore]) -> dict[str, int | float]:
+         "mean_reciprocal_rank_at8": sum(row.reciprocal_rank_at8 or 0 for row in scored) / n,
+         "no_match_cases": sum(row.no_match is True for row in scored),
+         "average_candidate_pool": sum(row.pool_count or 0 for row in scored) / n,
++        "average_overall_pool": sum(
++            row.overall_pool_count if row.overall_pool_count is not None else row.pool_count or 0
++            for row in scored
++        )
++        / n,
+         "truncated_cases": sum(row.truncated is True for row in scored),
+         "truncated_fraction": sum(row.truncated is True for row in scored) / n,
+         "shortlist_entries_with_reference": sum(
+diff --git a/services/api/src/brickvault_api/recognition/retrieval.py b/services/api/src/brickvault_api/recognition/retrieval.py
+index 4330dc7..49fb60d 100644
+--- a/services/api/src/brickvault_api/recognition/retrieval.py
++++ b/services/api/src/brickvault_api/recognition/retrieval.py
+@@ -92,10 +92,31 @@ class Match(Record):
+     ranking_basis: str = "name=3, source features=2; exact name phrase=6; identity keys excluded"
+ 
+ 
++class KindBucket(Record):
++    kind: Literal["set", "minifigure"]
++    matches: list[Match]
++    pool_count: int
++    state: Literal["shortlist", "no_match"]
++
++    @model_validator(mode="after")
++    def consistent(self) -> "KindBucket":
++        if (
++            any(m.candidate.key.kind != self.kind for m in self.matches)
++            or (self.state == "no_match") != (not self.matches)
++            or self.pool_count < len(self.matches)
++        ):
++            raise RetrievalError("invalid_kind_bucket")
++        return self
++
++
+ class Retrieval(Record):
+-    version: Literal["14b-description-v1"] = "14b-description-v1"
++    version: Literal["14b-description-v1", "14d-kind-partitioned-v1"] = "14b-description-v1"
+     query: Query
++    # Legacy records have a combined list. New records flatten both independent buckets
++    # for note-key validation; this is not a shared rank or shared capacity.
+     matches: list[Match]
++    sets: KindBucket | None = None
++    minifigures: KindBucket | None = None
+     pool_count: int
+     reference_count: int
+     catalog_status: str
+@@ -103,6 +124,19 @@ class Retrieval(Record):
+     state: Literal["shortlist", "no_match"]
+     claim: str = "Description-assisted retrieval; scores are not confidence or identity proof."
+ 
++    @model_validator(mode="after")
++    def partition(self) -> "Retrieval":
++        if self.version == "14d-kind-partitioned-v1" and (
++            self.sets is None
++            or self.minifigures is None
++            or self.sets.kind != "set"
++            or self.minifigures.kind != "minifigure"
++            or self.matches != [*self.sets.matches, *self.minifigures.matches]
++            or self.pool_count != self.sets.pool_count + self.minifigures.pool_count
++        ):
++            raise RetrievalError("invalid_kind_partition")
++        return self
++
+ 
+ class SelectedImage(Record):
+     path: str
+@@ -353,9 +387,26 @@ def retrieve(
+         if score:
+             matches.append(Match(candidate=candidate, score=score, matched_terms=hits))
+     matches.sort(key=lambda m: (-m.score, m.candidate.key.token))
++    sets = KindBucket(
++        kind="set",
++        matches=[m for m in matches if m.candidate.key.kind == "set"][:limit],
++        pool_count=sum(c.key.kind == "set" for c in candidates.values()),
++        state="shortlist" if any(m.candidate.key.kind == "set" for m in matches) else "no_match",
++    )
++    figures = KindBucket(
++        kind="minifigure",
++        matches=[m for m in matches if m.candidate.key.kind == "minifigure"][:limit],
++        pool_count=sum(c.key.kind == "minifigure" for c in candidates.values()),
++        state="shortlist"
++        if any(m.candidate.key.kind == "minifigure" for m in matches)
++        else "no_match",
++    )
+     return Retrieval(
++        version="14d-kind-partitioned-v1",
+         query=query,
+-        matches=matches[:limit],
++        matches=[*sets.matches, *figures.matches],
++        sets=sets,
++        minifigures=figures,
+         pool_count=len(candidates),
+         reference_count=len(registry.references),
+         catalog_status=f"accepted snapshot {catalog.snapshot.id}"
+diff --git a/services/api/tests/unit/test_kind_partitioned_retrieval.py b/services/api/tests/unit/test_kind_partitioned_retrieval.py
+new file mode 100644
+index 0000000..9050c2d
+--- /dev/null
++++ b/services/api/tests/unit/test_kind_partitioned_retrieval.py
+@@ -0,0 +1,159 @@
++"""Three structural fixtures; no older suites, provider or database calls."""
++
++from typing import Literal, cast
++from uuid import UUID
++
++import pytest
++from brickvault_api.catalog.query_types import Identity, QueryResult, QueryState, SnapshotRef
++from brickvault_api.catalog.repository import PinnedCatalog
++from brickvault_api.recognition import retrieval
++from brickvault_api.recognition.comparison import render
++from brickvault_api.recognition.evaluation import LabelCase, score_case
++from brickvault_api.recognition.retrieval import (
++    Candidate,
++    Comparison,
++    Key,
++    Query,
++    Reference,
++    Registry,
++    Retrieval,
++    query_from,
++    retrieve,
++)
++
++UID = UUID(int=1)
++SNAPSHOT = SnapshotRef(UID, UID, UID, "fixture", True)
++
++
++class Catalog:
++    snapshot = SNAPSHOT
++
++    def resolve_identity(self, kind: str, identifier: str) -> QueryResult[tuple[Identity, ...]]:
++        return QueryResult(
++            SNAPSHOT, QueryState.OK, (Identity(UID, kind, "native-fixture", identifier),)
++        )
++
++
++def candidate(kind: Literal["set", "minifigure"], identifier: str, name: str) -> Candidate:
++    key = Key(kind=kind, namespace="native-fixture", identifier=identifier)
++    return Candidate(
++        key=key, name=name, provenance={}, canonical=key.model_dump(), resolution="verified"
++    )
++
++
++def pool_fixture(
++    monkeypatch: pytest.MonkeyPatch, pool: list[Candidate], *, truncated: bool = False
++) -> None:
++    def pool_for(catalog: PinnedCatalog, query: Query) -> tuple[list[Candidate], bool]:
++        return pool, truncated
++
++    monkeypatch.setattr(retrieval, "catalog_candidates", pool_for)
++
++
++def test_buckets_cannot_starve_and_report_has_both_sections(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    pool = [candidate("set", str(i), "Fighter") for i in range(3)] + [
++        candidate("minifigure", str(i), "Gray fighter") for i in range(10)
++    ]
++    pool_fixture(monkeypatch, pool, truncated=True)
++    registry = Registry(source_sha256="fixture", references=[])
++    result = retrieve(
++        query_from({"description": "gray fighter"}), registry, cast(PinnedCatalog, Catalog())
++    )
++    assert result.sets is not None and result.minifigures is not None
++    assert len(result.sets.matches) == 3 and len(result.minifigures.matches) == 8
++    assert result.sets.pool_count == 3 and result.minifigures.pool_count == 10
++    assert result.pool_count == 13 and result.catalog_truncated
++    assert all(m.score == 3 for m in result.sets.matches)
++    assert all(m.score == 12 for m in result.minifigures.matches)  # Includes unchanged exact-name bonus.
++    text = render(Comparison(run="0" * 32, retrieval=result, images=[])).decode()
++    assert "<h2>Set candidates</h2>" in text and "<h2>Minifigure candidates</h2>" in text
++    assert "connect-src &apos;none&apos;" in text
++    empty = retrieve(
++        query_from({"description": "purple castle"}), registry, cast(PinnedCatalog, Catalog())
++    )
++    assert empty.sets is not None and empty.minifigures is not None
++    assert empty.sets.state == empty.minifigures.state == "no_match"
++
++
++def test_within_kind_ranking_ties_and_legacy_reading_unchanged(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    kinds: tuple[Literal["set", "minifigure"], ...] = ("set", "minifigure")
++    pool = [
++        candidate(kind, key, name)
++        for kind in kinds
++        for key, name in [("z", "Gray fighter"), ("a", "Gray fighter"), ("bonus", "Fighter")]
++    ]
++    registry = Registry(source_sha256="fixture", references=[])
++    query = query_from({"description": "fighter"})
++    pool_fixture(monkeypatch, pool)
++    first = retrieve(query, registry, cast(PinnedCatalog, Catalog()))
++    pool_fixture(monkeypatch, pool[::-1])
++    second = retrieve(query, registry, cast(PinnedCatalog, Catalog()))
++    assert first.sets == second.sets and first.minifigures == second.minifigures
++    assert first.sets is not None and first.minifigures is not None
++    for bucket in (first.sets, first.minifigures):
++        assert [m.candidate.key.identifier for m in bucket.matches] == ["bonus", "a", "z"]
++        assert [m.score for m in bucket.matches] == [9, 3, 3]
++        assert bucket.matches[0].matched_terms == {"name": ["fighter"], "source_features": []}
++    legacy = first.model_dump(exclude={"sets", "minifigures"})
++    legacy["version"] = "14b-description-v1"
++    loaded = Retrieval.model_validate(legacy)
++    assert loaded.sets is None and loaded.matches == first.matches
++
++
++def test_query_leakage_and_exact_namespace_canonical_boundary(
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    query = query_from(
++        {
++            "description": "gray fighter",
++            "expected": ["secret-fixture"],
++            "filename": "answer-fixture.png",
++            "previous_answer": "secret-fixture",
++        }
++    )
++    assert query.terms == ["fighter", "gray"]
++    assert query.excluded_fields == ["expected", "filename", "previous_answer"]
++    native = candidate("minifigure", "same-fixture", "Gray fighter")
++    pool_fixture(monkeypatch, [native])
++    key = Key(kind="minifigure", namespace="external-fixture", identifier="same-fixture")
++    ref = Reference(
++        key=key,
++        name="Gray fighter",
++        features="gray armor",
++        name_basis="fixture",
++        association_basis="fixture, concealed head unverified",
++        identity_status="provenance_supported",
++        source_urls=[],
++        image_path="synthetic",
++        image_sha256="0" * 64,
++        views=["front"],
++        missing_views=["uncovered head"],
++        attribution={},
++        permission="fixture",
++        license_evidence={},
++    )
++    result = retrieve(
++        query, Registry(source_sha256="fixture", references=[ref]), cast(PinnedCatalog, Catalog())
++    )
++    assert result.sets is not None and result.sets.state == "no_match"
++    assert result.minifigures is not None
++    external = next(m.candidate for m in result.minifigures.matches if m.candidate.reference)
++    assert (
++        external.key == key and external.resolution == "unresolved" and external.canonical is None
++    )
++    assert native.key != key and len(result.minifigures.matches) == 2
++    label = LabelCase(
++        code="fixture",
++        group="synthetic",
++        query_code="fixture",
++        expected=key,
++        labels_exhaustive=True,
++    )
++    score = score_case(label, result, available=True, curated_reference=True)
++    assert score.rank == 1 and score.rank_scope == "correct_kind_bucket"
++    absent = score_case(label, None, available=False, curated_reference=False)
++    assert absent.status == "not_scoreable" and absent.top8 is None

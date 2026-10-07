@@ -1,0 +1,8 @@
+14C closeout only: exact six staged files, complete cached diff, git diff --cached --check, three changed Markdown links and protected hashes PASS. No 14C evaluation/test/static/database requalification.
+14D only three new structural fixtures: initially two passed; capacity/render fixture corrected its expectation to include the unchanged +6 exact-name bonus, then passed a focused rerun (1 passed in 0.33s). No old suite rerun.
+Changed-file Ruff: All checks passed on six Python files. Strict mypy: Success, no issues found in six source files. A test Literal annotation was corrected.
+Both report sections/no-match states and CSP inspected by fixture; no browser smoke.
+Scoring/search/sort prefix AST and six existing query/reference/resolution helper ASTs match the accepted baseline.
+Original 14C query/truth/registry hashes verified before ONE 14D diagnostic; same accepted snapshot and read-only owned development runtime lifecycle; stopped before and after.
+Protected files, retained 14A/14B/14C evidence and original 14C inputs/results unchanged. Main index empty; nine 14D changes uncommitted; main unpushed.
+No provider/model/counting/metadata calls, paid spend, new cases/references, weights/synonyms/cap changes, embeddings, builds, migrations, catalog writes or production work.

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "CODEX_WORKFLOW.md",
+    "local_sha256": "64d802db3456c95586f1950f000092a68c069112118ec9e264a957166488c3e2",
+    "published_normalized_sha256": "e8a2016774f2fd2ade344da8e486f621094e2da17a994ad8b8401a76cd801201",
+    "publication_only_legacy_path_redaction": true
+  },
+  {
+    "path": "docs/ROADMAP.md",
+    "local_sha256": "ba312791b99ef3d46c58e488e1abbff89bd89204e403b57e1862391a79e45cdb",
+    "published_normalized_sha256": "ba312791b99ef3d46c58e488e1abbff89bd89204e403b57e1862391a79e45cdb",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "docs/plans/107-kind-partitioned-retrieval.md",
+    "local_sha256": "fd808d4fb281627be98fbd8000d862fd50c69dc61022eec59e7ee31ffa7062be",
+    "published_normalized_sha256": "fd808d4fb281627be98fbd8000d862fd50c69dc61022eec59e7ee31ffa7062be",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "scripts/reference_candidates.py",
+    "local_sha256": "dcd99755a06a3b752dff2dde1b11d9393a06e45273fc49d72858e9e86fe54f68",
+    "published_normalized_sha256": "dcd99755a06a3b752dff2dde1b11d9393a06e45273fc49d72858e9e86fe54f68",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "scripts/evaluate_retrieval.py",
+    "local_sha256": "a7b427c9b685cf5d31540577e7e35be985df697c2222eacffb4e871119f4c1e6",
+    "published_normalized_sha256": "a7b427c9b685cf5d31540577e7e35be985df697c2222eacffb4e871119f4c1e6",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/src/brickvault_api/recognition/retrieval.py",
+    "local_sha256": "78166198ac6d67f1ffeb0cde0990c779a706cfd0e116872840b84e9a80ccd8bc",
+    "published_normalized_sha256": "78166198ac6d67f1ffeb0cde0990c779a706cfd0e116872840b84e9a80ccd8bc",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/src/brickvault_api/recognition/comparison.py",
+    "local_sha256": "a7f9f1e81d1afcee86a32d47dd6f381b937e64d860773612de53bf4de99d43d2",
+    "published_normalized_sha256": "a7f9f1e81d1afcee86a32d47dd6f381b937e64d860773612de53bf4de99d43d2",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/src/brickvault_api/recognition/evaluation.py",
+    "local_sha256": "a2e22d0164f10ba4ded009a62aa464cd9b4f818e0824bc3b5479923b4e4fa891",
+    "published_normalized_sha256": "a2e22d0164f10ba4ded009a62aa464cd9b4f818e0824bc3b5479923b4e4fa891",
+    "publication_only_legacy_path_redaction": false
+  },
+  {
+    "path": "services/api/tests/unit/test_kind_partitioned_retrieval.py",
+    "local_sha256": "62be0c66f942a90764c024e13f874b14b7fa691b43807da5f706212f2d455dfd",
+    "published_normalized_sha256": "62be0c66f942a90764c024e13f874b14b7fa691b43807da5f706212f2d455dfd",
+    "publication_only_legacy_path_redaction": false
+  }
+]

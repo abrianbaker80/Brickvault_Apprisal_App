@@ -1,0 +1,47 @@
+{
+  "14c_local_commit": "7d664487ab436547dfa8293f4359ea4e38e59523",
+  "14c_parent": "44a1e15bc0d45f996d3eb6898534cd2f202ca275",
+  "14c_exact_committed_inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/106-retrieval-quality-gate.md",
+    "scripts/evaluate_retrieval.py",
+    "services/api/src/brickvault_api/recognition/evaluation.py",
+    "services/api/tests/unit/test_retrieval_evaluation.py"
+  ],
+  "closeout_exact_staged_inventory": "PASS",
+  "closeout_complete_staged_diff": "PASS",
+  "closeout_git_diff_cached_check": "PASS",
+  "closeout_changed_links": 3,
+  "protected_hashes_unchanged": true,
+  "14c_qualification_rerun": false,
+  "14d_changed_links": 3,
+  "14d_inventory": [
+    "CODEX_WORKFLOW.md",
+    "docs/ROADMAP.md",
+    "docs/plans/107-kind-partitioned-retrieval.md",
+    "scripts/reference_candidates.py",
+    "scripts/evaluate_retrieval.py",
+    "services/api/src/brickvault_api/recognition/retrieval.py",
+    "services/api/src/brickvault_api/recognition/comparison.py",
+    "services/api/src/brickvault_api/recognition/evaluation.py",
+    "services/api/tests/unit/test_kind_partitioned_retrieval.py"
+  ],
+  "retained_hashes_unchanged": 45,
+  "main_unpushed": true,
+  "main_index": "empty",
+  "14d_uncommitted": true,
+  "original_14c_public_results_sha256": "157ff5a7a28a30a0420ea45c633ae2f7fc1d86ee4c573d4cce084823e1eff24a",
+  "structural_invariants": {
+    "unchanged_helpers": [
+      "terms",
+      "query_from",
+      "retained_clues",
+      "prepare_registry",
+      "catalog_candidates",
+      "reference_candidate"
+    ],
+    "unchanged_scoring_sort_search_ast": true,
+    "original_14c_hashes_verified": true
+  }
+}
