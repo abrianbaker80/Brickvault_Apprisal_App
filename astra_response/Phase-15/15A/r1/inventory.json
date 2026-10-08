@@ -1,0 +1,164 @@
+{
+  "status": "PARTIAL - SOURCE READY / PHYSICAL DEVICE REQUIRED",
+  "source_base_commit": "5b029368e0bf8f810deb2a305aa1a03cff5c5c95",
+  "implementation_committed": false,
+  "main_pushed": false,
+  "normalization": "UTF-8 without BOM, CRLF normalized to LF",
+  "files": [
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "change": "M",
+      "sha256_lf_utf8": "de852ae3730b74252627e0bae92ba4ab0474547e898591cf4b221f8c4868b61c"
+    },
+    {
+      "path": "apps/android/README.md",
+      "change": "M",
+      "sha256_lf_utf8": "835e4741cbcb48ee7a522e9a6ebc933b2c28ac35bda7a454c41f4ed550b186ff"
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "change": "M",
+      "sha256_lf_utf8": "d2712ee8d2a80b35652f8a92dff00c31a3a97fd02a8d92099f7f16ce0cc4f517"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "change": "M",
+      "sha256_lf_utf8": "e94ecf0531af84c55d87488775987986858f7c2a783acf83cad7647120bd71b0"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "change": "M",
+      "sha256_lf_utf8": "4f0e01012b81208bcb6d7ff0a3f5a3c90801ba770f01cb248d471bd76ec518b4"
+    },
+    {
+      "path": "apps/web/src/Authentication.tsx",
+      "change": "M",
+      "sha256_lf_utf8": "994086bbbdfcab6a953928700458b2ddf4e1b412e967780931c6778b1b0289bf"
+    },
+    {
+      "path": "apps/web/src/ListingsPage.tsx",
+      "change": "M",
+      "sha256_lf_utf8": "fd6072f7160db794554fcd4af094d9a3cd6edf657b58c38599dc01660dfd6d66"
+    },
+    {
+      "path": "apps/web/src/NativeLifecycle.test.tsx",
+      "change": "M",
+      "sha256_lf_utf8": "af74b72ee3d2780049d49cf17a87e06ebb14843e655f776d862083cd749d3614"
+    },
+    {
+      "path": "apps/web/src/listings-api.ts",
+      "change": "M",
+      "sha256_lf_utf8": "8fb35872a2de72aa9d6f6774422e86f7d0d94c15bd222aa4e3e95108a99854ce"
+    },
+    {
+      "path": "apps/web/src/upload-queue.ts",
+      "change": "M",
+      "sha256_lf_utf8": "26aec466df9720ce50046ee86d8868c8dfc9f67bd206b479eb8415d14da41da2"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "change": "M",
+      "sha256_lf_utf8": "25be2edceeaba80a6fabeb5ae0febd47a786e961663f6f13d37bbeb3af066777"
+    },
+    {
+      "path": "docs/PROVIDER_GATES.md",
+      "change": "M",
+      "sha256_lf_utf8": "ed99c9c96618307676f7632caee35802a724e7b443b251f71052f50a0b27c0f8"
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "change": "M",
+      "sha256_lf_utf8": "6e4de6238c8df315ee45743f9cec3246e0de751b27e5959efbcf3b9272f8fb1d"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "change": "M",
+      "sha256_lf_utf8": "0ed91e98fa750e3eb111aa93d37eab094b6428157000f809a2d2b78fd8b1330e"
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "change": "M",
+      "sha256_lf_utf8": "51b121ee8b681ce0f508f4085c1d1d452f0b62a891b488fab5caf78cfa2bc84e"
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "change": "M",
+      "sha256_lf_utf8": "ccecc9a15b712170d563a1310ef328d0ed08b4d363198115ac48b7c9096352fa"
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "change": "M",
+      "sha256_lf_utf8": "e290f7d935992d4c0a770d91769ceb60c455b805de7d3e1c41f2065826d0c454"
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "change": "M",
+      "sha256_lf_utf8": "4bfba4f4c39f8520dfba859243b15b5a135a54457763962648adb26fd4dbe3e1"
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/listings.py",
+      "change": "M",
+      "sha256_lf_utf8": "f750931befa4ff39bf972271ecbcb7157dd6b9049a26b825ca84539abee468c9"
+    },
+    {
+      "path": "services/api/src/brickvault_api/listings/models.py",
+      "change": "M",
+      "sha256_lf_utf8": "7cae1029a26e199983b14b707f8939999d481a6870775f5e3fafd05c94c4896c"
+    },
+    {
+      "path": "services/api/src/brickvault_api/listings/service.py",
+      "change": "M",
+      "sha256_lf_utf8": "f3388868ec4864021cf5630719ce2dd4620d86fc3ae25d3efe809a8d5859715d"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "change": "??",
+      "sha256_lf_utf8": "55e8122fb9a23fe775ad385764b4710aa880b4fbd9ecf56f29e82127021ab135"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "change": "??",
+      "sha256_lf_utf8": "77403c12b4e5afff83bd4049d7d6eff138a09a6b9a572c4f664c45bcdb2485a4"
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/ShareIntakeTest.java",
+      "change": "??",
+      "sha256_lf_utf8": "8cb13457776fe8901335c50dfa9c09202daae96c27710417d78e347cfaa24094"
+    },
+    {
+      "path": "apps/web/src/NativeShare.test.tsx",
+      "change": "??",
+      "sha256_lf_utf8": "6dfb5fa065a02050ffe224a6bcfa55963ff678cddfa6200137d0e2400894d252"
+    },
+    {
+      "path": "apps/web/src/NativeShareReview.test.tsx",
+      "change": "??",
+      "sha256_lf_utf8": "7793c96926db08ec560e1b827e61c38be8f91f86fbb4c2ad153ab3463c2add5d"
+    },
+    {
+      "path": "apps/web/src/NativeShareReview.tsx",
+      "change": "??",
+      "sha256_lf_utf8": "a9180974cd9b8d2a1706916457062518d02892c9067df7d93c1e18c2992ac2cf"
+    },
+    {
+      "path": "apps/web/src/NativeShareSession.test.tsx",
+      "change": "??",
+      "sha256_lf_utf8": "4d081247e584a1b4f5a1690839657570c2d79f9262ec7a550468c8d579dc61cc"
+    },
+    {
+      "path": "apps/web/src/native-share.ts",
+      "change": "??",
+      "sha256_lf_utf8": "b44cc309d7418cf9707100f8c327901c96226dabbcc8b389fdea04406c4b6f95"
+    },
+    {
+      "path": "services/api/tests/integration/test_listing_share_privacy.py",
+      "change": "??",
+      "sha256_lf_utf8": "a42b8d9a663dd7fc9c5a377ac17e07fc2ee52a0bfecb0ea92011f77da899bb2d"
+    },
+    {
+      "path": "services/api/tests/unit/test_listing_upload_arguments.py",
+      "change": "??",
+      "sha256_lf_utf8": "e6396b4cc7935d82c6ac56a891977917684ef9eb0716f5c1858d63f931045701"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+[
+  {
+    "run_status": "passed",
+    "pytest_exit": 0,
+    "recorded_count": 1,
+    "removed_count": 1,
+    "leftovers_count": 0,
+    "test_state_restored": true,
+    "volumes_preserved": true
+  },
+  {
+    "run_status": "failed_or_interrupted",
+    "pytest_exit": 1,
+    "recorded_count": 1,
+    "removed_count": 1,
+    "leftovers_count": 0,
+    "test_state_restored": true,
+    "volumes_preserved": true
+  },
+  {
+    "run_status": "passed",
+    "pytest_exit": 0,
+    "recorded_count": 1,
+    "removed_count": 1,
+    "leftovers_count": 0,
+    "test_state_restored": true,
+    "volumes_preserved": true
+  }
+]

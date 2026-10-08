@@ -1,0 +1,19 @@
+{
+  "scope": "Seven accepted Phase 15 planning files only",
+  "accepted_publication": "cb31da6769dcf85e5b1a816d29e4f24daf356ed0",
+  "local_commit": "5b029368e0bf8f810deb2a305aa1a03cff5c5c95",
+  "parent": "e9c7d1f14ccfdf8784a9d4402a2fc0641184dab9",
+  "branch": "main",
+  "main_pushed": false,
+  "files": [
+    "CODEX_WORKFLOW.md",
+    "docs/PROVIDER_GATES.md",
+    "docs/REQUIREMENTS_TRACEABILITY.md",
+    "docs/ROADMAP.md",
+    "docs/SECURITY_PRIVACY.md",
+    "docs/plans/108-phase-15-android-share-capture.md",
+    "prompts/15_android_capture_overlay.md"
+  ],
+  "protected_unchanged": true,
+  "implementation_committed": false
+}

@@ -1,0 +1,19 @@
+{
+  "status": "TEST APK BUILT / PHYSICAL NOT RUN",
+  "apk_sha256": "c98c05f0d1c4154c4d2527c030ac07332bfc949e2148a366ead6b0a2abfee4c1",
+  "package": "com.abrianbaker.brickvault.appraisal",
+  "version_name": "1.0",
+  "version_code": 1,
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "compile_sdk": 36,
+  "mode": "android-qualification",
+  "api_origin": "https://localhost:18443",
+  "webview_origin": "https://localhost",
+  "packaged_web_files_exact": 8,
+  "public_certificate_sha256": "775e75c85b6ec3fe77e60384877664a9a48beaa87ddcceb6cc603a516180cb51",
+  "contains_private_key": false,
+  "installed": false,
+  "device_ui_or_share_tests": false,
+  "preexisting_apk_preserved_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2"
+}
