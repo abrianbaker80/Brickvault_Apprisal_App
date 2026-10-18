@@ -1,0 +1,14 @@
+def fixturePath = System.getProperty('phase15HarnessRoot')
+if (!fixturePath) throw new GradleException('phase15HarnessRoot must name the ignored TEST source directory')
+def fixtureRoot = new File(fixturePath).canonicalFile
+
+allprojects { project ->
+    project.plugins.withId('com.android.application') {
+        if (project.path == ':app') {
+            def android = project.extensions.getByName('android')
+            android.defaultConfig.testApplicationId = 'com.abrianbaker.brickvault.appraisal.phase15harness'
+            android.sourceSets.androidTest.java.setSrcDirs([new File(fixtureRoot, 'src')])
+            android.sourceSets.androidTest.manifest.srcFile(new File(fixtureRoot, 'AndroidManifest.xml'))
+        }
+    }
+}

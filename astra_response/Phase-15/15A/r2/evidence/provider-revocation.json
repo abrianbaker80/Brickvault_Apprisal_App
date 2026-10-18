@@ -1,0 +1,13 @@
+{
+  "method": "Private distinct-UID fixture ContentProvider revoked its exact unique B URI during A open; Android enforced denial",
+  "before": "GRANTED",
+  "after": "DENIED",
+  "other_readable_indices": [
+    0,
+    2
+  ],
+  "native_error": "URI_UNREADABLE",
+  "b_bytes_retained": 0,
+  "helper_apk_sha256": "c7a4b7740e52e417cb02fe2a8d1ad4b94aab7aa7d5a03e132805cb4fd4cb4ed9",
+  "tested_target_apk_sha256": "eb18c9119ac483c41c70c9387dec1e3baf268a792a18b07dfbcbcbc421085bcf"
+}

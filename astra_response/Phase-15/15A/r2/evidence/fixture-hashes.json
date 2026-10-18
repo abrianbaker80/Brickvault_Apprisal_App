@@ -1,0 +1,56 @@
+{
+  "myfiles": [
+    {
+      "bytes": 48,
+      "filename": "corrupt.png",
+      "sha256": "264327f61f88a2465e2f4b37fb092b22bff4ef630b1ba09f3c5bc50e7ed62f17"
+    },
+    {
+      "bytes": 27262976,
+      "filename": "oversized-26mib.png",
+      "sha256": "43c491680c2847ab172bec93222b5e53618a54a8e6e436a83ea171ed974993d2"
+    },
+    {
+      "bytes": 10543,
+      "filename": "share-blue.jpg",
+      "sha256": "bb190fd0bfc4a607ac295bb7eb03f8ba958e441eed93630f2dd2057bd4694a9c"
+    },
+    {
+      "bytes": 3000,
+      "filename": "share-green.webp",
+      "sha256": "f7234f66d2be628c5c9da6ec4f3700ff95b0e3664b643ca0120706e162f11992"
+    },
+    {
+      "bytes": 2671,
+      "filename": "share-red.png",
+      "sha256": "23dd070db5dbddcf48fad992bec0a166d08c71c946401411694d6ab11f4cce31"
+    }
+  ],
+  "provider": {
+    "A.png": {
+      "bytes": 115,
+      "sha256": "a48ba490de9e5ff252ebf53d013e917f4bbcc49f7c22d6a28eb04c1b9a9d5143"
+    },
+    "B.png": {
+      "bytes": 115,
+      "sha256": "9bcea9a9ea73b6f6a7a22421cc9d3483b57473a5cd5b490a0507be62ea2a8409"
+    },
+    "C.png": {
+      "bytes": 116,
+      "sha256": "f667f23c32cdbbe39f5d40521dbb28aad5c88bfe08e1907e0e126742630e206d"
+    },
+    "corrupt.png": {
+      "bytes": 40,
+      "sha256": "e5d237b4aee69450a0daca8ebff9607c0560f697633f98497fd4ea28c868e0ac"
+    },
+    "unsupported.gif": {
+      "bytes": 42,
+      "sha256": "ef1955ae757c8b966c83248350331bd3a30f658ced11f387f8ebf05ab3368629"
+    },
+    "oversize.png": {
+      "bytes": 26214401,
+      "sha256": "59fbb96f14cf2f094cde627aaeccf34a307e0821eea844b70c14e0416e62d17d",
+      "generation": "A.png bytes followed by zero bytes to exactly 25 MiB plus 1"
+    }
+  }
+}

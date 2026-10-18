@@ -1,0 +1,41 @@
+{
+  "initial_installed_production_apk_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+  "reviewed_r1_apk_sha256": "c98c05f0d1c4154c4d2527c030ac07332bfc949e2148a366ead6b0a2abfee4c1",
+  "initial_update_rejected": "INSTALL_FAILED_UPDATE_INCOMPATIBLE",
+  "initial_installed_app_unchanged": true,
+  "root_cause": "Build invocation omitted retained ANDROID_USER_HOME and chose default debug key",
+  "final_installed": {
+    "installed_apk_sha256": "fcc37bfe0acaabe2fcc1f5c9c3d9faae6c00227e4dc3cac2c857ff518fb22c9c",
+    "matches_corrected_test_apk": true,
+    "package": "com.abrianbaker.brickvault.appraisal",
+    "update_preserved_app_data": true,
+    "model": "SM-S948U",
+    "android_release": "17",
+    "api": 37
+  },
+  "no_uninstall_or_data_clear": true,
+  "prior_artifacts_and_keys_preserved": true,
+  "historical_corrected_test_build_before_install": {
+    "status": "TEST APK SIGNING ROOT CAUSE CORRECTED / NOT INSTALLED",
+    "apk_sha256": "eb18c9119ac483c41c70c9387dec1e3baf268a792a18b07dfbcbcbc421085bcf",
+    "signer_certificate_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "r1_retained_sha256": "c98c05f0d1c4154c4d2527c030ac07332bfc949e2148a366ead6b0a2abfee4c1",
+    "non_signature_payload_entries_equal": 454,
+    "web_files_unchanged": 10,
+    "capacitor_config_unchanged": true,
+    "mode": "android-qualification",
+    "api_origin": "https://localhost:18443",
+    "webview_origin": "https://localhost",
+    "public_certificate_sha256": "775e75c85b6ec3fe77e60384877664a9a48beaa87ddcceb6cc603a516180cb51",
+    "private_key_or_env_entries": false,
+    "package_facts": [
+      "package: name='com.abrianbaker.brickvault.appraisal' versionCode='1' versionName='1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+      "sdkVersion:'24'",
+      "targetSdkVersion:'36'",
+      "uses-permission: name='android.permission.INTERNET'",
+      "uses-permission: name='com.abrianbaker.brickvault.appraisal.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'"
+    ],
+    "installed": false,
+    "keystores_byte_preserved": true
+  }
+}

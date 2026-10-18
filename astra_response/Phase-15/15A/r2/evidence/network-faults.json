@@ -1,0 +1,127 @@
+{
+  "response_abort": {
+    "dropped": 1,
+    "events": [
+      {
+        "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+        "status": 201,
+        "action": "drop_after_server_response"
+      }
+    ],
+    "errors": []
+  },
+  "recovery": {
+    "beforeRecreate": {
+      "maxConcurrentUploads": 2,
+      "requests": [
+        {
+          "method": "POST",
+          "path": "/api/listings",
+          "id": "20933.12",
+          "at": "2026-10-18T13:03:49.687Z"
+        },
+        {
+          "method": "OPTIONS",
+          "path": "/api/listings",
+          "id": "1DD4902616BE17B839A33E100F92E290",
+          "at": "2026-10-18T13:03:49.687Z"
+        },
+        {
+          "method": "GET",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99",
+          "id": "20933.13",
+          "at": "2026-10-18T13:03:49.818Z"
+        },
+        {
+          "method": "OPTIONS",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "8040A211078EA4064EF174DC47C230FF",
+          "at": "2026-10-18T13:03:49.925Z"
+        },
+        {
+          "method": "POST",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "20933.14",
+          "at": "2026-10-18T13:03:49.929Z"
+        },
+        {
+          "method": "POST",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "20933.15",
+          "at": "2026-10-18T13:03:49.929Z"
+        },
+        {
+          "method": "OPTIONS",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "C0C5545C12B55D3CA5F003AA6C6BA4B0",
+          "at": "2026-10-18T13:03:49.929Z"
+        },
+        {
+          "method": "GET",
+          "path": "/api/auth/session",
+          "id": "20933.16",
+          "at": "2026-10-18T13:04:29.545Z"
+        }
+      ]
+    },
+    "afterRecreate": {
+      "maxConcurrentUploads": 1,
+      "requests": [
+        {
+          "method": "OPTIONS",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "96AF29FB937F36112F256362CD4D2E63",
+          "at": "2026-10-18T13:06:10.054Z"
+        },
+        {
+          "method": "POST",
+          "path": "/api/listings/daada22f-d1b1-4974-869e-916733dd2d99/images",
+          "id": "20933.26",
+          "at": "2026-10-18T13:06:10.059Z"
+        }
+      ]
+    }
+  },
+  "backend_unavailable_posts": 0,
+  "after_backend_restart": {
+    "maxConcurrentUploads": 1,
+    "requests": [
+      {
+        "method": "GET",
+        "path": "/api/listings/86c59e23-1405-4fd8-9ceb-91f2d1d8a2d6",
+        "id": "24401.11",
+        "at": "2026-10-18T13:08:33.456Z"
+      },
+      {
+        "method": "GET",
+        "path": "/api/auth/session",
+        "id": "24401.12",
+        "at": "2026-10-18T13:08:50.621Z"
+      },
+      {
+        "method": "GET",
+        "path": "/api/listings",
+        "id": "24401.13",
+        "at": "2026-10-18T13:08:50.751Z"
+      },
+      {
+        "method": "GET",
+        "path": "/api/listings/86c59e23-1405-4fd8-9ceb-91f2d1d8a2d6",
+        "id": "24401.14",
+        "at": "2026-10-18T13:09:38.657Z"
+      },
+      {
+        "method": "OPTIONS",
+        "path": "/api/listings/86c59e23-1405-4fd8-9ceb-91f2d1d8a2d6/images",
+        "id": "00DE7E3A3CC607E63831B3D02361442B",
+        "at": "2026-10-18T13:09:38.772Z"
+      },
+      {
+        "method": "POST",
+        "path": "/api/listings/86c59e23-1405-4fd8-9ceb-91f2d1d8a2d6/images",
+        "id": "24401.15",
+        "at": "2026-10-18T13:09:38.773Z"
+      }
+    ]
+  }
+}

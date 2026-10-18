@@ -1,0 +1,27 @@
+[
+  {
+    "asset_id": "a30c1f80-f9e9-41fa-8d82-068f3f25502f",
+    "bytes": 2671,
+    "sha256": "23dd070db5dbddcf48fad992bec0a166d08c71c946401411694d6ab11f4cce31"
+  },
+  {
+    "asset_id": "4d3f8153-a4e6-40b1-92ee-85bddc1e7b44",
+    "bytes": 10543,
+    "sha256": "bb190fd0bfc4a607ac295bb7eb03f8ba958e441eed93630f2dd2057bd4694a9c"
+  },
+  {
+    "asset_id": "dbcad4d7-7aba-41c1-a59f-c1476eed4fd2",
+    "bytes": 3000,
+    "sha256": "f7234f66d2be628c5c9da6ec4f3700ff95b0e3664b643ca0120706e162f11992"
+  },
+  {
+    "asset_id": "edd2fb64-1c8a-4ceb-bc23-8ced3b64b8b9",
+    "bytes": 115,
+    "sha256": "a48ba490de9e5ff252ebf53d013e917f4bbcc49f7c22d6a28eb04c1b9a9d5143"
+  },
+  {
+    "asset_id": "ac0dea3d-0c53-49f0-a83f-34ccfade7b5e",
+    "bytes": 116,
+    "sha256": "f667f23c32cdbbe39f5d40521dbb28aad5c88bfe08e1907e0e126742630e206d"
+  }
+]

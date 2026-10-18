@@ -1,0 +1,179 @@
+{
+  "revoked": {
+    "notice": null,
+    "batch": {
+      "id": "bc4cbce1-10e4-4063-b03e-48013f3fc7b4",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "e9f682ef-c67c-43fc-8e27-dd7d60e6574e",
+          "index": 0,
+          "filename": "shared-image-1.png",
+          "mimeType": "image/png",
+          "byteCount": 115,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "1c264955-b04c-4087-a1e6-6b0636fe2e68",
+          "index": 1,
+          "filename": "shared-image-2.png",
+          "mimeType": "image/png",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "URI_UNREADABLE"
+        },
+        {
+          "id": "4c630d6d-22fa-41c8-bad0-deaa5f5febb6",
+          "index": 2,
+          "filename": "shared-image-3.png",
+          "mimeType": "image/png",
+          "byteCount": 116,
+          "state": "ready",
+          "errorCode": null
+        }
+      ],
+      "reviewContext": null,
+      "queueContext": null
+    }
+  },
+  "unsupported": {
+    "notice": null,
+    "batch": {
+      "id": "dcf5c761-e2ec-4bcc-8ba2-c4b4e7b66148",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "aa4321aa-0762-4458-aaed-c3cc3818b612",
+          "index": 0,
+          "filename": "shared-image-1.png",
+          "mimeType": "image/png",
+          "byteCount": 115,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "e1753dd4-e44e-45a3-ae0d-528a477420cb",
+          "index": 1,
+          "filename": "shared-image-2.bin",
+          "mimeType": null,
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "UNSUPPORTED_MIME"
+        },
+        {
+          "id": "6535fed4-1b8c-4670-98a8-4616b126b8b6",
+          "index": 2,
+          "filename": "shared-image-3.png",
+          "mimeType": "image/png",
+          "byteCount": 116,
+          "state": "ready",
+          "errorCode": null
+        }
+      ],
+      "reviewContext": null,
+      "queueContext": null
+    }
+  },
+  "missing": {
+    "notice": null,
+    "batch": {
+      "id": "6f29f85c-d932-4504-a031-9db885364aea",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "8482d01d-5f87-4b0d-b94f-e358278b0f02",
+          "index": 0,
+          "filename": "shared-image-1.png",
+          "mimeType": "image/png",
+          "byteCount": 115,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "1ae0d360-7dd4-4161-a641-b03e0810198e",
+          "index": 1,
+          "filename": "shared-image-2.png",
+          "mimeType": "image/png",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "URI_UNREADABLE"
+        },
+        {
+          "id": "11bd53fb-4a40-49d4-ae4a-58557c08dd2f",
+          "index": 2,
+          "filename": "shared-image-3.png",
+          "mimeType": "image/png",
+          "byteCount": 116,
+          "state": "ready",
+          "errorCode": null
+        }
+      ],
+      "reviewContext": null,
+      "queueContext": null
+    }
+  },
+  "oversize": {
+    "notice": null,
+    "batch": {
+      "id": "994eed0a-1d1e-47bf-9bea-e5609e897a1c",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "69536827-4b51-4a73-a2c8-6d4c56dfa5ed",
+          "index": 0,
+          "filename": "shared-image-1.png",
+          "mimeType": "image/png",
+          "byteCount": 115,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "21da5d51-560c-4a07-9343-9243860f3d89",
+          "index": 1,
+          "filename": "shared-image-2.png",
+          "mimeType": "image/png",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "IMAGE_FILE_TOO_LARGE"
+        },
+        {
+          "id": "37a118c4-2c71-4c45-a3b9-f47190fac720",
+          "index": 2,
+          "filename": "shared-image-3.png",
+          "mimeType": "image/png",
+          "byteCount": 116,
+          "state": "ready",
+          "errorCode": null
+        }
+      ],
+      "reviewContext": null,
+      "queueContext": null
+    }
+  },
+  "malformed_shell": {
+    "notice": null,
+    "batch": {
+      "id": "39d53ce2-99ce-4f09-8415-4acacfdbf2eb",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "4a8f1d4e-f2eb-4073-9b3c-5261084465f2",
+          "index": 0,
+          "filename": "shared-image-1.bin",
+          "mimeType": null,
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "INVALID_CONTENT_URI"
+        }
+      ],
+      "reviewContext": null,
+      "queueContext": null
+    }
+  }
+}

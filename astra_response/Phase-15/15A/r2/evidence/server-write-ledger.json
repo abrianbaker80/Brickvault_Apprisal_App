@@ -1,0 +1,133 @@
+{
+  "image_posts": 17,
+  "successful_image_posts": 15,
+  "failed_corrupt_image_posts": 2,
+  "stored_receipts": 13,
+  "explicit_same_uuid_replays": 2,
+  "listing_creates": 3,
+  "private_seed_listing_creates": 1,
+  "phone_listing_creates": 2,
+  "unaccounted_write_requests": 0,
+  "requests": [
+    {
+      "timestamp": "2026-10-18T12:40:40.718134+00:00",
+      "method": "POST",
+      "route": "/api/listings",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:40:40.879373+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:40:41.061577+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:46:14.929845+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    },
+    {
+      "timestamp": "2026-10-18T12:47:24.195163+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    },
+    {
+      "timestamp": "2026-10-18T12:48:49.595628+00:00",
+      "method": "POST",
+      "route": "/api/listings",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:48:49.920738+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:48:49.978857+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:50:45.458827+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:50:45.487536+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T12:52:39.091979+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 422
+    },
+    {
+      "timestamp": "2026-10-18T12:52:39.124170+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    },
+    {
+      "timestamp": "2026-10-18T12:52:39.248210+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    },
+    {
+      "timestamp": "2026-10-18T12:53:11.541700+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 422
+    },
+    {
+      "timestamp": "2026-10-18T13:01:47.396345+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T13:03:49.819983+00:00",
+      "method": "POST",
+      "route": "/api/listings",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T13:03:50.094999+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T13:03:50.177859+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 201
+    },
+    {
+      "timestamp": "2026-10-18T13:06:10.260801+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    },
+    {
+      "timestamp": "2026-10-18T13:09:39.043201+00:00",
+      "method": "POST",
+      "route": "/api/listings/{listing_id}/images",
+      "status": 200
+    }
+  ]
+}

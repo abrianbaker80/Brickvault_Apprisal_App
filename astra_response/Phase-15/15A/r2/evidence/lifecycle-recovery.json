@@ -1,0 +1,301 @@
+{
+  "before": {
+    "notice": null,
+    "batch": {
+      "id": "4a6dada0-edd0-4225-9784-8678cccc4140",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+          "index": 0,
+          "filename": "shared-image-1.jpg",
+          "mimeType": "image/jpeg",
+          "byteCount": 10543,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+          "index": 1,
+          "filename": "shared-image-2.webp",
+          "mimeType": "image/webp",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "SHARE_REMOVED"
+        }
+      ],
+      "reviewContext": {
+        "selectedItemIds": [
+          "bb11a2a5-a800-4c5b-b515-9981fca7795b"
+        ],
+        "creationUncertain": false
+      },
+      "queueContext": {
+        "listingId": "daada22f-d1b1-4974-869e-916733dd2d99",
+        "items": [
+          {
+            "itemId": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+            "clientUploadId": "6ec4770f-b87c-4956-a18a-87fe49fa84cf",
+            "displayOrder": 0
+          },
+          {
+            "itemId": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+            "clientUploadId": "2bd6e1b2-8d58-4ce5-9314-8b5eb30ae8f1",
+            "displayOrder": 1
+          }
+        ]
+      }
+    }
+  },
+  "after_recreation": {
+    "notice": null,
+    "batch": {
+      "id": "4a6dada0-edd0-4225-9784-8678cccc4140",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+          "index": 0,
+          "filename": "shared-image-1.jpg",
+          "mimeType": "image/jpeg",
+          "byteCount": 10543,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+          "index": 1,
+          "filename": "shared-image-2.webp",
+          "mimeType": "image/webp",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "SHARE_REMOVED"
+        }
+      ],
+      "reviewContext": {
+        "selectedItemIds": [
+          "bb11a2a5-a800-4c5b-b515-9981fca7795b"
+        ],
+        "creationUncertain": false
+      },
+      "queueContext": {
+        "listingId": "daada22f-d1b1-4974-869e-916733dd2d99",
+        "items": [
+          {
+            "itemId": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+            "clientUploadId": "6ec4770f-b87c-4956-a18a-87fe49fa84cf",
+            "displayOrder": 0
+          },
+          {
+            "itemId": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+            "clientUploadId": "2bd6e1b2-8d58-4ce5-9314-8b5eb30ae8f1",
+            "displayOrder": 1
+          }
+        ]
+      }
+    }
+  },
+  "after_explicit_retry": {
+    "notice": null,
+    "batch": {
+      "id": "4a6dada0-edd0-4225-9784-8678cccc4140",
+      "state": "ready",
+      "handedOff": true,
+      "items": [
+        {
+          "id": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+          "index": 0,
+          "filename": "shared-image-1.jpg",
+          "mimeType": "image/jpeg",
+          "byteCount": 10543,
+          "state": "ready",
+          "errorCode": null
+        },
+        {
+          "id": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+          "index": 1,
+          "filename": "shared-image-2.webp",
+          "mimeType": "image/webp",
+          "byteCount": 0,
+          "state": "failed",
+          "errorCode": "SHARE_REMOVED"
+        }
+      ],
+      "reviewContext": {
+        "selectedItemIds": [
+          "bb11a2a5-a800-4c5b-b515-9981fca7795b"
+        ],
+        "creationUncertain": false
+      },
+      "queueContext": {
+        "listingId": "daada22f-d1b1-4974-869e-916733dd2d99",
+        "items": [
+          {
+            "itemId": "bb11a2a5-a800-4c5b-b515-9981fca7795b",
+            "clientUploadId": "6ec4770f-b87c-4956-a18a-87fe49fa84cf",
+            "displayOrder": 0
+          },
+          {
+            "itemId": "10c650e2-fd66-482a-8a4f-c52cde89aea8",
+            "clientUploadId": "2bd6e1b2-8d58-4ce5-9314-8b5eb30ae8f1",
+            "displayOrder": 1
+          }
+        ]
+      }
+    }
+  },
+  "activity_events": [
+    {
+      "stage": "ACTIVITY_CREATED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "ACTIVITY_RESUMED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "READY",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 59073514,
+      "recreations": 0
+    },
+    {
+      "stage": "ACTIVITY_RESUMED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "BEFORE_RECREATE",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 59073514,
+      "recreations": 0
+    },
+    {
+      "stage": "ACTIVITY_DESTROYED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 1177326,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "ACTIVITY_CREATED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "ACTIVITY_RESUMED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 0,
+      "recreations": 0
+    },
+    {
+      "stage": "RECREATED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "recreations": 1
+    },
+    {
+      "stage": "BEFORE_ORIENTATION",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "orientation": 1,
+      "requestedOrientation": -1,
+      "widthPx": 1440,
+      "heightPx": 2915,
+      "requests": 0
+    },
+    {
+      "stage": "ORIENTATION_CHANGED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "orientation": 2,
+      "requestedOrientation": 0,
+      "widthPx": 2981,
+      "heightPx": 1271,
+      "requests": 1
+    },
+    {
+      "stage": "BEFORE_ORIENTATION",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "orientation": 2,
+      "requestedOrientation": 0,
+      "widthPx": 2981,
+      "heightPx": 1271,
+      "requests": 1
+    },
+    {
+      "stage": "ORIENTATION_CHANGED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "orientation": 1,
+      "requestedOrientation": 1,
+      "widthPx": 1440,
+      "heightPx": 2915,
+      "requests": 2
+    },
+    {
+      "stage": "FINISHED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 0,
+      "webView": 0,
+      "recreations": 1
+    },
+    {
+      "stage": "ORIENTATION_REQUEST_RESTORED",
+      "runId": "phase15a_final_20261018_r3",
+      "pid": 20869,
+      "activity": 63833499,
+      "webView": 193002869,
+      "orientation": 1,
+      "requestedOrientation": -1,
+      "widthPx": 1440,
+      "heightPx": 2915,
+      "requests": 0
+    }
+  ],
+  "landscape": {
+    "width": 795,
+    "height": 339,
+    "orientation": "landscape-primary"
+  },
+  "portrait": {
+    "width": 384,
+    "height": 777,
+    "orientation": "portrait-primary"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "status": "READY FOR PHASE 15A REVIEW",
+  "date": "2026-10-18",
+  "device": {
+    "model": "SM-S948U",
+    "android_release": "17",
+    "api": 37
+  },
+  "tested_apks": {
+    "initial_signing_corrected": "eb18c9119ac483c41c70c9387dec1e3baf268a792a18b07dfbcbcbc421085bcf",
+    "final": "fcc37bfe0acaabe2fcc1f5c9c3d9faae6c00227e4dc3cac2c857ff518fb22c9c"
+  },
+  "ordinary_source_app": "Samsung My Files",
+  "manual_picker": "Android Photo Picker > Browse > DocumentsUI",
+  "physical_share": "PASS",
+  "restricted_privacy": "PASS",
+  "same_process_native_recreation": "PASS",
+  "native_orientation": "PASS",
+  "explicit_receipt_recovery": "PASS",
+  "process_death_no_draft": "PASS",
+  "signout_and_real_server_revocation": "PASS",
+  "elapsed_expiry_campaign": "NOT RERUN; accepted Phase 9 core evidence reused, focused new Share auth tests passed",
+  "core_catalog": "Fresh isolated TEST has no active official catalog; honest unavailable response observed; accepted Phase 9 core evidence reused; no new valuation qualification claimed",
+  "native_harness_result": {
+    "tests": 1,
+    "failures": 0,
+    "duration_seconds": 242.849
+  },
+  "final_source_frontend_tests": {
+    "files": 4,
+    "tests": 25,
+    "passed": true
+  },
+  "backend_native_baselines": "Unchanged from r1; reused rather than rerun",
+  "cleanup": "PASS; final signed-out TEST app remains installed/stopped",
+  "outside_scope": [
+    "Facebook compatibility",
+    "15B capture",
+    "15C polish",
+    "production infrastructure contact or changes",
+    "external provider/model activity"
+  ]
+}

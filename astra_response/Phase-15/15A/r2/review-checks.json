@@ -1,0 +1,244 @@
+{
+  "status": "PASS",
+  "source_inventory_paths": 31,
+  "code_snapshots": 23,
+  "review_local_links": 36,
+  "source_patch_reverse_check": true,
+  "protected_files_unchanged": true,
+  "main_index_empty": true,
+  "forbidden_private_content_found": false,
+  "prior_review_tree_ids": {
+    "astra_response/Phase-15/15A/r1": "8f1f84194d583dd47f5e267470b594d6d8791bc3",
+    "astra_response/Phase-15/15A-plan/r1": "b64852ff27de1109c10742e87ce1076b08fa119d"
+  },
+  "publication_files": [
+    {
+      "path": "astra_response/Phase-15/15A/r2/apk-receipt.json",
+      "sha256": "2b31a7cce125d665e4889b3ceee937550d22973120858f86735a388cbff0eb73"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/auth-lifecycle-clearing.json",
+      "sha256": "16b4f0167e43e186caf961c2fe57d3d144b7de5cd2a3d1df6e8235b88a983591"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/authenticated-originals.json",
+      "sha256": "532bf54c26a983f22cb64d1b797f26bfc9d4fb281754af9cac0916c41208df2a"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/cleanup.json",
+      "sha256": "156c9a0c1193bd5909f973d2b56a96e2be30e4de27e17dc70e2f8445936038e5"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/final-saved-state.json",
+      "sha256": "c27997514714597c1ba7dd5354b28c8c1110e753fa5c186e334a18b1a30843a7"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/fixture-hashes.json",
+      "sha256": "5f366369625a056444bbc7384a773955fed9e9bf3ec3f4de2f6260d1b579d802"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/initial-duplicate-replay.json",
+      "sha256": "0a8a452e04d102008bafa052e8b9f93ce6a32742ee70937e969a6be385b28fe1"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/input-refusals.json",
+      "sha256": "25d81063ad141b5f589d7cc90e242e6fd752204d25d2ca7a721267f19ae205d3"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/lifecycle-recovery.json",
+      "sha256": "3181f4f40e345c56bd13da08e30f7600bfd70c44912c9af78ff7e81797696525"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/lost-before-retry.json",
+      "sha256": "3bd19b4fdbbb00884c924acd898c77d63dc4cbb93a05a500e9f6f13d3937da66"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/network-faults.json",
+      "sha256": "43a964fc268afd420f84cff65d7c9034c9e6c72178c4f1689901be338d249443"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/provider-revocation.json",
+      "sha256": "fe953a4c66001691b05bcf481c19db1c9d064c8d95faad49dfefa6307a75e517"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/replay-same-receipts.json",
+      "sha256": "3bd19b4fdbbb00884c924acd898c77d63dc4cbb93a05a500e9f6f13d3937da66"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/server-write-ledger.json",
+      "sha256": "2c0175700d366d50abd7cff4d1d1c7028d437d10e7959f86e45947aceb8ba4cf"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/evidence/signing-provenance.json",
+      "sha256": "9287ab38d9539306222206f5b77bbe15e23ea5c453a8b0bb8a9be749e152adee"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/android/android/app/src/main/AndroidManifest.xml",
+      "sha256": "d2712ee8d2a80b35652f8a92dff00c31a3a97fd02a8d92099f7f16ce0cc4f517"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "sha256": "55e8122fb9a23fe775ad385764b4710aa880b4fbd9ecf56f29e82127021ab135"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "sha256": "e94ecf0531af84c55d87488775987986858f7c2a783acf83cad7647120bd71b0"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "sha256": "77403c12b4e5afff83bd4049d7d6eff138a09a6b9a572c4f664c45bcdb2485a4"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/ShareIntakeTest.java",
+      "sha256": "8cb13457776fe8901335c50dfa9c09202daae96c27710417d78e347cfaa24094"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/App.tsx",
+      "sha256": "4f0e01012b81208bcb6d7ff0a3f5a3c90801ba770f01cb248d471bd76ec518b4"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/Authentication.tsx",
+      "sha256": "994086bbbdfcab6a953928700458b2ddf4e1b412e967780931c6778b1b0289bf"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/listings-api.ts",
+      "sha256": "8fb35872a2de72aa9d6f6774422e86f7d0d94c15bd222aa4e3e95108a99854ce"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/ListingsPage.tsx",
+      "sha256": "fd6072f7160db794554fcd4af094d9a3cd6edf657b58c38599dc01660dfd6d66"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/native-share.ts",
+      "sha256": "b529e0a21860ddafdd0cf55dfea488085c3e7066272c0ac2b01b4bc2ea444a4b"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/NativeLifecycle.test.tsx",
+      "sha256": "af74b72ee3d2780049d49cf17a87e06ebb14843e655f776d862083cd749d3614"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/NativeShare.test.tsx",
+      "sha256": "d26a077c918e95bc4f0713d11606f2a95a9077733c792fd51735a263a51b1823"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/NativeShareReview.test.tsx",
+      "sha256": "7793c96926db08ec560e1b827e61c38be8f91f86fbb4c2ad153ab3463c2add5d"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/NativeShareReview.tsx",
+      "sha256": "a9180974cd9b8d2a1706916457062518d02892c9067df7d93c1e18c2992ac2cf"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/NativeShareSession.test.tsx",
+      "sha256": "4d081247e584a1b4f5a1690839657570c2d79f9262ec7a550468c8d579dc61cc"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/apps/web/src/upload-queue.ts",
+      "sha256": "26aec466df9720ce50046ee86d8868c8dfc9f67bd206b479eb8415d14da41da2"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/packages/contracts/openapi.json",
+      "sha256": "ccecc9a15b712170d563a1310ef328d0ed08b4d363198115ac48b7c9096352fa"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/packages/contracts/src/schema.d.ts",
+      "sha256": "e290f7d935992d4c0a770d91769ceb60c455b805de7d3e1c41f2065826d0c454"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/services/api/src/brickvault_api/api/listings.py",
+      "sha256": "f750931befa4ff39bf972271ecbcb7157dd6b9049a26b825ca84539abee468c9"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/services/api/src/brickvault_api/listings/models.py",
+      "sha256": "7cae1029a26e199983b14b707f8939999d481a6870775f5e3fafd05c94c4896c"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/services/api/src/brickvault_api/listings/service.py",
+      "sha256": "f3388868ec4864021cf5630719ce2dd4620d86fc3ae25d3efe809a8d5859715d"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/services/api/tests/integration/test_listing_share_privacy.py",
+      "sha256": "a42b8d9a663dd7fc9c5a377ac17e07fc2ee52a0bfecb0ea92011f77da899bb2d"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/files/services/api/tests/unit/test_listing_upload_arguments.py",
+      "sha256": "e6396b4cc7935d82c6ac56a891977917684ef9eb0716f5c1858d63f931045701"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/AndroidManifest.xml",
+      "sha256": "7a84366e8e7167f9e7c82315b458ec858af86d478ebe39b37493664a9fa93f6e"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/receipt.json",
+      "sha256": "253747c66f43193d156f5d0464e461b7a156b42b5da940022635fcc86e26f6cd"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/src/com/abrianbaker/brickvault/phase15fixture/FixtureCases.java",
+      "sha256": "a81cf7e687aa26900740028274f4d202f704f6c09ca9525f71b8d87f8e382418"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/src/com/abrianbaker/brickvault/phase15fixture/FixtureProvider.java",
+      "sha256": "55453304f9291ed0edd9f27e8502df4ad8ed29f92f911a282c41d96d58706e92"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/src/com/abrianbaker/brickvault/phase15fixture/FixtureShareActivity.java",
+      "sha256": "64e5ef5e649568b60bbb19ff57881985da20d660b442bf45941ddfc0dedd6fe0"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/fixture/src/com/abrianbaker/brickvault/phase15fixture/FixtureTarget.java",
+      "sha256": "52dc59ee988ba1194acd6cb38ff427079b24da8f508f5e7110e04c8d0bb2a67f"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/instrumentation/AndroidManifest.xml",
+      "sha256": "c48e82e7c930cb72efbf5e809e345cb10fd14462d0322db0d942fdc419e2f035"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/instrumentation/init.gradle",
+      "sha256": "b8c0457b93d9dd74ddba862fc1e28def8d41270120962753659992375e0ac0cb"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/instrumentation/receipt.json",
+      "sha256": "7f7f1b3c75b2df8574a4949a9f93c4172a30014a6faec4f2291afe6902e802a5"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/harness/instrumentation/src/com/abrianbaker/brickvault/appraisal/phase15test/Phase15RecreationTest.java",
+      "sha256": "0403e1a96d91f10a64c4344db9b4847c0dfce5b994bdf5a4a83c55a2c963f948"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/HARNESSES.md",
+      "sha256": "3c2660af75602b139a0c299baf2e14442f2a49656fa9ce36e0cee4798d787d9e"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/IMPLEMENTATION.md",
+      "sha256": "787ea4d16785b52b2a4fa1d0f428218ad39dff83addf7442f865e3ab72782aa4"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/implementation.patch",
+      "sha256": "99726983296440ea5d811bf6b76b1d4ed130088b8b804081ed236f51134a8b04"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/inventory.json",
+      "sha256": "26447b728ffbd8224250bafddf3c517a2e7e903b3944e2599086a51e65f68097"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/physical-device-evidence.json",
+      "sha256": "9112f75104d0315e041a4e414ce83abde0c84158210dda1f51adfbc79f5fe56b"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/PHYSICAL_DEVICE.md",
+      "sha256": "58468271c65b2de4cd8139481b745f3bccb0c81ecf23f22c81f5d6fea8dc474b"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/planning-checkpoint.json",
+      "sha256": "56d37556ebf27c758c033a03dab17021d3fed56ff9794852c4e58451f9b2a441"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/REVIEW.md",
+      "sha256": "5b5257da860097d3b687eda1469243e41ad5cccfd4a97c54a6d0f016424ccd9d"
+    },
+    {
+      "path": "astra_response/Phase-15/15A/r2/VALIDATION.md",
+      "sha256": "33d41a954f2a996e0b6539fcc21d7fe66eae5ec6c8eb3f65ea68881ff6aa0c14"
+    }
+  ]
+}

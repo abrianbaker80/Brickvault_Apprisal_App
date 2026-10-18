@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.abrianbaker.brickvault.phase15fixture">
+  <uses-sdk android:minSdkVersion="24" android:targetSdkVersion="36" />
+  <queries><package android:name="com.abrianbaker.brickvault.appraisal" /></queries>
+  <application android:label="BrickVault 15A TEST Fixtures" android:debuggable="true" android:allowBackup="false" android:usesCleartextTraffic="false" android:theme="@android:style/Theme.Material.Light.NoActionBar">
+    <activity android:name=".FixtureShareActivity" android:exported="true">
+      <intent-filter><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LAUNCHER" /></intent-filter>
+    </activity>
+    <provider android:name=".FixtureProvider" android:authorities="com.abrianbaker.brickvault.phase15fixture.images" android:exported="false" android:grantUriPermissions="true" />
+  </application>
+</manifest>

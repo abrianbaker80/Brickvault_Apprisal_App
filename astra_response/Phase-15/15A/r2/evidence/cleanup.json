@@ -1,0 +1,45 @@
+{
+  "device": {
+    "target_test_apk_left_installed": true,
+    "target_signed_out_and_stopped": true,
+    "production_rollback": "not authorized or performed",
+    "removed_packages": [
+      "com.abrianbaker.brickvault.appraisal.phase15harness",
+      "com.abrianbaker.brickvault.phase15fixture"
+    ],
+    "removed_forward_ports": [
+      19173,
+      63498,
+      64543,
+      8353,
+      7088,
+      7221,
+      7686,
+      61201,
+      37386,
+      49004
+    ],
+    "removed_fixture_files": [
+      "corrupt.png",
+      "oversized-26mib.png",
+      "share-blue.jpg",
+      "share-green.webp",
+      "share-red.png"
+    ],
+    "test_reverse_removed": true,
+    "unrelated_adb_rules_preserved": true,
+    "remaining_owned_forward_ports": [],
+    "owned_fixture_media_rows_remaining": 0
+  },
+  "backend": {
+    "status": "cleaned",
+    "database_removed": true,
+    "leftovers": [],
+    "prior_test_running": false,
+    "final_test_running": false,
+    "volumes_preserved": true,
+    "blob_store_removed": true,
+    "credential_file_removed": true,
+    "listener_18443_closed": true
+  }
+}

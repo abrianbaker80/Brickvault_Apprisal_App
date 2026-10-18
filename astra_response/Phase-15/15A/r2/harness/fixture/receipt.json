@@ -1,0 +1,68 @@
+{
+  "status": "USED IN OWNED PHYSICAL TEST; TEST HARNESS PACKAGE REMOVED",
+  "package": "com.abrianbaker.brickvault.phase15fixture",
+  "provider_authority": "com.abrianbaker.brickvault.phase15fixture.images",
+  "target": "com.abrianbaker.brickvault.appraisal",
+  "target_guard": {
+    "debuggable_required": true,
+    "exact_apk_sha256": "eb18c9119ac483c41c70c9387dec1e3baf268a792a18b07dfbcbcbc421085bcf",
+    "exact_signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "checked_before_session_or_grant": true
+  },
+  "apk_sha256": "c7a4b7740e52e417cb02fe2a8d1ad4b94aab7aa7d5a03e132805cb4fd4cb4ed9",
+  "signer_certificate_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "separate_application_uid": true,
+  "shared_user_id_declared": false,
+  "provider_exported": false,
+  "grant_uri_permissions": true,
+  "network_or_other_permissions": [],
+  "known_cases": [
+    "single",
+    "triple",
+    "duplicate",
+    "missing",
+    "unsupported",
+    "corrupt",
+    "oversize",
+    "revoked"
+  ],
+  "visible_button_required": true,
+  "fixed_log_tag": "BV15Fixture",
+  "revocation": "On target openFile(A), require current target UID READ(unique B) GRANTED, clear Binder identity, revokeUriPermission(unique B, READ) all-grants overload, assert OS DENIED, record evidence, then return A. Android enforces target B denial.",
+  "fixtures": {
+    "A.png": {
+      "bytes": 115,
+      "sha256": "a48ba490de9e5ff252ebf53d013e917f4bbcc49f7c22d6a28eb04c1b9a9d5143"
+    },
+    "B.png": {
+      "bytes": 115,
+      "sha256": "9bcea9a9ea73b6f6a7a22421cc9d3483b57473a5cd5b490a0507be62ea2a8409"
+    },
+    "C.png": {
+      "bytes": 116,
+      "sha256": "f667f23c32cdbbe39f5d40521dbb28aad5c88bfe08e1907e0e126742630e206d"
+    },
+    "corrupt.png": {
+      "bytes": 40,
+      "sha256": "e5d237b4aee69450a0daca8ebff9607c0560f697633f98497fd4ea28c868e0ac"
+    },
+    "unsupported.gif": {
+      "bytes": 42,
+      "sha256": "ef1955ae757c8b966c83248350331bd3a30f658ced11f387f8ebf05ab3368629"
+    },
+    "oversize.png": {
+      "bytes": 26214401,
+      "sha256": "59fbb96f14cf2f094cde627aaeccf34a307e0821eea844b70c14e0416e62d17d",
+      "generation": "A.png bytes followed by zero bytes to exactly 25 MiB plus 1"
+    }
+  },
+  "package_facts": [
+    "package: name='com.abrianbaker.brickvault.phase15fixture' versionCode='1' versionName='1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "sdkVersion:'24'",
+    "targetSdkVersion:'36'"
+  ],
+  "retained_keystore_unchanged": true,
+  "device_actions_performed": true,
+  "historical_pre_install_build_status": "BUILT / NOT INSTALLED / NO DEVICE ACTION",
+  "historical_status_note": "This build-time status predates root installation/execution. The top-level status and device_actions_performed record the completed physical run and cleanup."
+}

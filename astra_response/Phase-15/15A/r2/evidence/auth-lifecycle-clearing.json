@@ -1,0 +1,125 @@
+{
+  "signout": {
+    "before": {
+      "notice": null,
+      "batch": {
+        "id": "eff7dc99-79a0-4c33-b652-969be363a026",
+        "state": "ready",
+        "handedOff": true,
+        "items": [
+          {
+            "id": "bb09a976-aa9e-4b70-b70f-6be44bea84d4",
+            "index": 0,
+            "filename": "shared-image-1.png",
+            "mimeType": "image/png",
+            "byteCount": 115,
+            "state": "ready",
+            "errorCode": null
+          }
+        ],
+        "reviewContext": null,
+        "queueContext": null
+      }
+    },
+    "after": {
+      "notice": "SIGN_IN_AND_RESHARE",
+      "batch": null
+    }
+  },
+  "server_revocation": {
+    "mechanism": "Real revoked_at + 401; no clock alteration",
+    "after": {
+      "notice": "SIGN_IN_AND_RESHARE",
+      "batch": null
+    },
+    "blobPreviews": 0
+  },
+  "process_death": {
+    "before": {
+      "pid": 15166,
+      "native": {
+        "notice": null,
+        "batch": {
+          "id": "8ba93cca-09bd-4e3e-87b2-2eb0f25eaa48",
+          "state": "ready",
+          "handedOff": true,
+          "items": [
+            {
+              "id": "c5b7c5d3-951c-4260-ac37-560de50d713c",
+              "index": 0,
+              "filename": "shared-image-1.png",
+              "mimeType": "image/png",
+              "byteCount": 2671,
+              "state": "ready",
+              "errorCode": null
+            }
+          ],
+          "reviewContext": null,
+          "queueContext": null
+        }
+      }
+    },
+    "after": {
+      "pid": 16072,
+      "native": {
+        "notice": null,
+        "batch": null
+      }
+    }
+  },
+  "cold_signed_out": {
+    "native": {
+      "notice": "SIGN_IN_AND_RESHARE",
+      "batch": null
+    },
+    "requires_reshare": true
+  },
+  "cold_authenticated": {
+    "pid": 16864,
+    "native": {
+      "notice": null,
+      "batch": {
+        "id": "86919250-aeff-4bba-b565-45b23cb4e0a3",
+        "state": "ready",
+        "handedOff": true,
+        "items": [
+          {
+            "id": "e44552b7-647b-4b03-97ca-e672411b2339",
+            "index": 0,
+            "filename": "shared-image-1.jpg",
+            "mimeType": "image/jpeg",
+            "byteCount": 10543,
+            "state": "ready",
+            "errorCode": null
+          }
+        ],
+        "reviewContext": null,
+        "queueContext": null
+      }
+    }
+  },
+  "notice_regression": {
+    "native": {
+      "notice": null,
+      "batch": {
+        "id": "8ba93cca-09bd-4e3e-87b2-2eb0f25eaa48",
+        "state": "ready",
+        "handedOff": true,
+        "items": [
+          {
+            "id": "c5b7c5d3-951c-4260-ac37-560de50d713c",
+            "index": 0,
+            "filename": "shared-image-1.png",
+            "mimeType": "image/png",
+            "byteCount": 2671,
+            "state": "ready",
+            "errorCode": null
+          }
+        ],
+        "reviewContext": null,
+        "queueContext": null
+      }
+    },
+    "old_auth_notice_visible": false
+  }
+}

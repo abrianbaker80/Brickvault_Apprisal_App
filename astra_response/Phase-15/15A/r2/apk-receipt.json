@@ -1,0 +1,28 @@
+{
+  "status": "INSTALLED AND PHYSICALLY TESTED; LEFT SIGNED OUT AND STOPPED",
+  "apk_path": ".local/phase15-device-20261018/final-apk/brickvault-phase15a-final-test.apk",
+  "apk_sha256": "fcc37bfe0acaabe2fcc1f5c9c3d9faae6c00227e4dc3cac2c857ff518fb22c9c",
+  "signer_certificate_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "package_facts": [
+    "package: name='com.abrianbaker.brickvault.appraisal' versionCode='1' versionName='1.0' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+    "sdkVersion:'24'",
+    "targetSdkVersion:'36'",
+    "uses-permission: name='android.permission.INTERNET'",
+    "uses-permission: name='com.abrianbaker.brickvault.appraisal.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION'",
+    "application-debuggable"
+  ],
+  "mode": "android-qualification",
+  "api_origin": "https://localhost:18443",
+  "webview_origin": "https://localhost",
+  "public_certificate_sha256": "775e75c85b6ec3fe77e60384877664a9a48beaa87ddcceb6cc603a516180cb51",
+  "packaged_web_dist_files_equal": 8,
+  "native_config_certificate_payload_unchanged_from_installed": true,
+  "source_inventory_unchanged": true,
+  "source_inventory_file_count": 176,
+  "source_inventory_sha256": "9d4acf995a77aee94aa3fdd5e0d62ff9578118b27c2e6da3f788d9d1c2bc9914",
+  "keystores_byte_preserved": true,
+  "stable_installed_apk_preserved_sha256": "eb18c9119ac483c41c70c9387dec1e3baf268a792a18b07dfbcbcbc421085bcf",
+  "private_key_env_keystore_entries": false,
+  "production_origin_in_bundle": false,
+  "device_actions": true
+}
