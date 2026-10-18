@@ -1,0 +1,29 @@
+{
+  "status": "PHASE 15A CLOSED",
+  "disposition": "15A ACCEPTED / PHYSICAL TEST QUALIFIED",
+  "local_commit": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "parent": "5b029368e0bf8f810deb2a305aa1a03cff5c5c95",
+  "message": "Implement and qualify Phase 15A Android Share intake",
+  "branch": "main",
+  "committed_path_count": 31,
+  "main_pushed": false,
+  "index_empty": true,
+  "remaining_dirty_paths": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "protected_unchanged_and_unstaged": true,
+  "private_evidence_file_count_unchanged": 194,
+  "accepted_physical_evidence": "335b76098acc4c9130a3b8b8120b770b207781e8",
+  "accepted_test_apk_preserved_without_device_actions": true,
+  "tests_builds_browser_device_database_provider_work_rerun": false,
+  "next": "15B NEXT / NOT STARTED / NOT AUTHORIZED",
+  "phase_15c": "NOT STARTED",
+  "production_deployment": "NOT AUTHORIZED"
+}

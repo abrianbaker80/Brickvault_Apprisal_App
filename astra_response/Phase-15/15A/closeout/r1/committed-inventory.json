@@ -1,0 +1,225 @@
+{
+  "commit": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "parent": "5b029368e0bf8f810deb2a305aa1a03cff5c5c95",
+  "accepted_inventory_publication": "335b76098acc4c9130a3b8b8120b770b207781e8",
+  "normalization": "Git committed UTF-8/LF bytes",
+  "files": [
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "sha256": "a1e54ebfc5c1c0d32900a36240e41eff6567f5afde45a2ef582bbc51b85892d2",
+      "git_blob": "e370396e20e601af1a330e9a2da91e41c9920bb5",
+      "accepted_r2_sha256_lf_utf8": "122318582bfede48f5e50909874ae21c996e09cbac64e81e206adf27fcb79ac0",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "apps/android/README.md",
+      "sha256": "e1590c0b07c5eb2bbc1e8e4620edac0a9384653198ab2545a9c2a1f3c9bdb3aa",
+      "git_blob": "14200b0157a02668830fcc2b292a83b688aff7b5",
+      "accepted_r2_sha256_lf_utf8": "0547bb3fe869fae9609cd5f95c86bd44278de596f73a75ac258c269e5d4d4336",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "sha256": "d2712ee8d2a80b35652f8a92dff00c31a3a97fd02a8d92099f7f16ce0cc4f517",
+      "git_blob": "d758ef881b739dbf1d196bc8cfb705e36908f9cf",
+      "accepted_r2_sha256_lf_utf8": "d2712ee8d2a80b35652f8a92dff00c31a3a97fd02a8d92099f7f16ce0cc4f517",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "sha256": "55e8122fb9a23fe775ad385764b4710aa880b4fbd9ecf56f29e82127021ab135",
+      "git_blob": "f8b879c4c16cf07ab23244817192cb2d020620c9",
+      "accepted_r2_sha256_lf_utf8": "55e8122fb9a23fe775ad385764b4710aa880b4fbd9ecf56f29e82127021ab135",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "sha256": "e94ecf0531af84c55d87488775987986858f7c2a783acf83cad7647120bd71b0",
+      "git_blob": "b015afd82f95c45c0f8662c2b66ca5fee814552d",
+      "accepted_r2_sha256_lf_utf8": "e94ecf0531af84c55d87488775987986858f7c2a783acf83cad7647120bd71b0",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "sha256": "77403c12b4e5afff83bd4049d7d6eff138a09a6b9a572c4f664c45bcdb2485a4",
+      "git_blob": "e1148c2206be7c3893ced1496381307f7a628992",
+      "accepted_r2_sha256_lf_utf8": "77403c12b4e5afff83bd4049d7d6eff138a09a6b9a572c4f664c45bcdb2485a4",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/ShareIntakeTest.java",
+      "sha256": "8cb13457776fe8901335c50dfa9c09202daae96c27710417d78e347cfaa24094",
+      "git_blob": "584fe42a9b4b0331b35409803b7b4a70e7d5d4a1",
+      "accepted_r2_sha256_lf_utf8": "8cb13457776fe8901335c50dfa9c09202daae96c27710417d78e347cfaa24094",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "4f0e01012b81208bcb6d7ff0a3f5a3c90801ba770f01cb248d471bd76ec518b4",
+      "git_blob": "a9f0604f8ef75a9e07f01fe8a135f76b15bae8bd",
+      "accepted_r2_sha256_lf_utf8": "4f0e01012b81208bcb6d7ff0a3f5a3c90801ba770f01cb248d471bd76ec518b4",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/Authentication.tsx",
+      "sha256": "994086bbbdfcab6a953928700458b2ddf4e1b412e967780931c6778b1b0289bf",
+      "git_blob": "0318825581f48e51084470882aad44d2de62ee4f",
+      "accepted_r2_sha256_lf_utf8": "994086bbbdfcab6a953928700458b2ddf4e1b412e967780931c6778b1b0289bf",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/ListingsPage.tsx",
+      "sha256": "fd6072f7160db794554fcd4af094d9a3cd6edf657b58c38599dc01660dfd6d66",
+      "git_blob": "93261e19abb92ed2bb7da4d96ea967a69caee481",
+      "accepted_r2_sha256_lf_utf8": "fd6072f7160db794554fcd4af094d9a3cd6edf657b58c38599dc01660dfd6d66",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/NativeLifecycle.test.tsx",
+      "sha256": "af74b72ee3d2780049d49cf17a87e06ebb14843e655f776d862083cd749d3614",
+      "git_blob": "6b4dee819412954c5744ecc55219b8c7b70d4d86",
+      "accepted_r2_sha256_lf_utf8": "af74b72ee3d2780049d49cf17a87e06ebb14843e655f776d862083cd749d3614",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/NativeShare.test.tsx",
+      "sha256": "d26a077c918e95bc4f0713d11606f2a95a9077733c792fd51735a263a51b1823",
+      "git_blob": "0ecd69ee3f07a552f8e3c6a7605131afa67812b2",
+      "accepted_r2_sha256_lf_utf8": "d26a077c918e95bc4f0713d11606f2a95a9077733c792fd51735a263a51b1823",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/NativeShareReview.test.tsx",
+      "sha256": "7793c96926db08ec560e1b827e61c38be8f91f86fbb4c2ad153ab3463c2add5d",
+      "git_blob": "d298598004296ca8001409fa73e3840f8302e12e",
+      "accepted_r2_sha256_lf_utf8": "7793c96926db08ec560e1b827e61c38be8f91f86fbb4c2ad153ab3463c2add5d",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/NativeShareReview.tsx",
+      "sha256": "a9180974cd9b8d2a1706916457062518d02892c9067df7d93c1e18c2992ac2cf",
+      "git_blob": "a51babd37b69077cacf0ebeb20afe3b9c7e926fe",
+      "accepted_r2_sha256_lf_utf8": "a9180974cd9b8d2a1706916457062518d02892c9067df7d93c1e18c2992ac2cf",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/NativeShareSession.test.tsx",
+      "sha256": "4d081247e584a1b4f5a1690839657570c2d79f9262ec7a550468c8d579dc61cc",
+      "git_blob": "7e036f792c05bcd285244cb6d178c1319aa09f9b",
+      "accepted_r2_sha256_lf_utf8": "4d081247e584a1b4f5a1690839657570c2d79f9262ec7a550468c8d579dc61cc",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/listings-api.ts",
+      "sha256": "8fb35872a2de72aa9d6f6774422e86f7d0d94c15bd222aa4e3e95108a99854ce",
+      "git_blob": "b8304d21f88a228b0f2aa2ec76a82b8471613e2e",
+      "accepted_r2_sha256_lf_utf8": "8fb35872a2de72aa9d6f6774422e86f7d0d94c15bd222aa4e3e95108a99854ce",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/native-share.ts",
+      "sha256": "b529e0a21860ddafdd0cf55dfea488085c3e7066272c0ac2b01b4bc2ea444a4b",
+      "git_blob": "ab9570e644fc8dbe2f2120929248fcbf288e9c7e",
+      "accepted_r2_sha256_lf_utf8": "b529e0a21860ddafdd0cf55dfea488085c3e7066272c0ac2b01b4bc2ea444a4b",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "apps/web/src/upload-queue.ts",
+      "sha256": "26aec466df9720ce50046ee86d8868c8dfc9f67bd206b479eb8415d14da41da2",
+      "git_blob": "c823ae496c596a5bbc189a6d839ae4d2b4f05a3a",
+      "accepted_r2_sha256_lf_utf8": "26aec466df9720ce50046ee86d8868c8dfc9f67bd206b479eb8415d14da41da2",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "183a1c3cac6b11575f081b15bf01dd735b3c418e92226be7732b1d7178497d68",
+      "git_blob": "e7d74244ab51dfc35da3a3860051b485c2fbb042",
+      "accepted_r2_sha256_lf_utf8": "9d3c7c0d5191e95ada555b2f72f35235e2cb42a5a957510538e5f11b99730a03",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "docs/PROVIDER_GATES.md",
+      "sha256": "ebe1b7269fc52b465ab621167276f45320fc636b680deecec2e13071914a6e4d",
+      "git_blob": "1012903306cb833eb423af8fa6a8c3b453777ce6",
+      "accepted_r2_sha256_lf_utf8": "ee193462985e1b0fd8d7d4bb026dbf922ded022f27f76511d7e7b3fe36cc7ccd",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "sha256": "66309cb26487729a5c793969d313ac97b3697970bc26932ae3f2c3831749c1a8",
+      "git_blob": "b5d89d0f2e210e88bfa9abfab398e00fe9ce96d3",
+      "accepted_r2_sha256_lf_utf8": "33aa0d1e01de1d277046158b19d9ae8ac8291394961aa515ddd5ce0f34eb8bcf",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "sha256": "e324f96892db4d6c1ba11ed7bf136052b3987a3b616994075b50f0e1cbe8757d",
+      "git_blob": "33c5c07fe369a7cc2ffb49daffcd64281655a851",
+      "accepted_r2_sha256_lf_utf8": "92b9abcff5963e06daf08ba03e5d13b327d87e3829a01fa7d617f2184660c367",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "sha256": "1637086a606cb4899124542507cb79bca344b71f2fe6001e5763d1fe291609ea",
+      "git_blob": "284a5fc3505d24ac7ff14d8af57d087454c4d98a",
+      "accepted_r2_sha256_lf_utf8": "99273fb3f93a31689bef08e1e74bfc03fa27362e3e7584a9a74598343bb1e050",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "sha256": "ccecc9a15b712170d563a1310ef328d0ed08b4d363198115ac48b7c9096352fa",
+      "git_blob": "8d20c0e24f8a0575aabb7f90078a4c7a9a04ebf8",
+      "accepted_r2_sha256_lf_utf8": "ccecc9a15b712170d563a1310ef328d0ed08b4d363198115ac48b7c9096352fa",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "sha256": "e290f7d935992d4c0a770d91769ceb60c455b805de7d3e1c41f2065826d0c454",
+      "git_blob": "a5c9c139cd56b8e7bd517a087560b0fd7294274e",
+      "accepted_r2_sha256_lf_utf8": "e290f7d935992d4c0a770d91769ceb60c455b805de7d3e1c41f2065826d0c454",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "sha256": "c934bd0560d918cc371348078182370da256da087fcc724337c10c0f37091518",
+      "git_blob": "d1c464268c298a48833348a4709eadd08496793b",
+      "accepted_r2_sha256_lf_utf8": "1950dcceffda592267639d9ae291b1d49930a431117621d7709f299430a7a910",
+      "closeout_status_addition": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/listings.py",
+      "sha256": "f750931befa4ff39bf972271ecbcb7157dd6b9049a26b825ca84539abee468c9",
+      "git_blob": "4b257a3e360d05b4c4d79a924c50396a84357b7e",
+      "accepted_r2_sha256_lf_utf8": "f750931befa4ff39bf972271ecbcb7157dd6b9049a26b825ca84539abee468c9",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/listings/models.py",
+      "sha256": "7cae1029a26e199983b14b707f8939999d481a6870775f5e3fafd05c94c4896c",
+      "git_blob": "06eb2d9fa3bfb46d05ede217c31081928dd784e1",
+      "accepted_r2_sha256_lf_utf8": "7cae1029a26e199983b14b707f8939999d481a6870775f5e3fafd05c94c4896c",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "services/api/src/brickvault_api/listings/service.py",
+      "sha256": "f3388868ec4864021cf5630719ce2dd4620d86fc3ae25d3efe809a8d5859715d",
+      "git_blob": "75c76dc1b4f691975a03a74a8c1a52b697316343",
+      "accepted_r2_sha256_lf_utf8": "f3388868ec4864021cf5630719ce2dd4620d86fc3ae25d3efe809a8d5859715d",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "services/api/tests/integration/test_listing_share_privacy.py",
+      "sha256": "a42b8d9a663dd7fc9c5a377ac17e07fc2ee52a0bfecb0ea92011f77da899bb2d",
+      "git_blob": "0d071b869aebc247ba4c94e9022a19979e56d19d",
+      "accepted_r2_sha256_lf_utf8": "a42b8d9a663dd7fc9c5a377ac17e07fc2ee52a0bfecb0ea92011f77da899bb2d",
+      "closeout_status_addition": false
+    },
+    {
+      "path": "services/api/tests/unit/test_listing_upload_arguments.py",
+      "sha256": "e6396b4cc7935d82c6ac56a891977917684ef9eb0716f5c1858d63f931045701",
+      "git_blob": "a58ff7c6181b11bb24a9a50d59b8bd7ed4d5271a",
+      "accepted_r2_sha256_lf_utf8": "e6396b4cc7935d82c6ac56a891977917684ef9eb0716f5c1858d63f931045701",
+      "closeout_status_addition": false
+    }
+  ]
+}

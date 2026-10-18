@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "accepted_paths_matched_before_status_edits": 31,
+  "non_document_paths_unchanged": 23,
+  "status_only_additive_document_paths": [
+    "CODEX_WORKFLOW.md",
+    "apps/android/README.md",
+    "docs/DECISIONS.md",
+    "docs/PROVIDER_GATES.md",
+    "docs/REQUIREMENTS_TRACEABILITY.md",
+    "docs/ROADMAP.md",
+    "docs/plans/108-phase-15-android-share-capture.md",
+    "prompts/15_android_capture_overlay.md"
+  ],
+  "staged_path_count": 31,
+  "full_staged_diff_sha256": "ea58a7c664011f842f6e8aadc5c8ca8be0b60ee019bb243838e96fe8e758ccfe",
+  "staged_whitespace": "PASS",
+  "local_markdown_targets": 488,
+  "local_markdown_fragments": 93,
+  "protected_sha256": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "protected_staged": false,
+  "private_evidence_files_unchanged": 194,
+  "active_commit_hooks": [],
+  "tests_builds_browser_device_database_provider_work_rerun": false,
+  "accepted_patch_checks": true,
+  "full_staged_diff_inspection": "Every staged blob reconciled to accepted r2; 23 exact code/test/generated files, 8 documents reconstructed from accepted patch with additive status-only changes; complete status delta manually inspected",
+  "local_commit": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "committed_path_count": 31,
+  "index_empty_after_commit": true,
+  "residual_dirty_paths": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "protected_hashes_after_match_before": true,
+  "private_evidence_unchanged": true,
+  "private_evidence_files": 194,
+  "prior_review_tree_ids": {
+    "astra_response/Phase-15/15A/r1": "8f1f84194d583dd47f5e267470b594d6d8791bc3",
+    "astra_response/Phase-15/15A/r2": "73da8b039c57d218aa0a794e556c4aa0d5a6bdf1",
+    "astra_response/Phase-15/15A-plan/r1": "b64852ff27de1109c10742e87ce1076b08fa119d"
+  },
+  "remote_main_before_publication": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "production_deployment_authorized": false,
+  "device_operations_performed": 0,
+  "source_tests_rerun": 0,
+  "postgresql_tests_rerun": 0,
+  "physical_tests_rerun": 0,
+  "builds_rerun": 0,
+  "browser_checks_rerun": 0,
+  "phase9_qualification_rerun": false,
+  "provider_recognition_calls": 0
+}
