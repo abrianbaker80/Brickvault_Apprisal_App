@@ -1,0 +1,12 @@
+{
+  "status": "PRODUCTION_RESTORED_AND_LAUNCHED",
+  "sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+  "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "signer_evidence": "exact preserved signed APK bytes",
+  "uid_first_install_preserved": true,
+  "test_reverse_removed": true,
+  "production_destination": "https://appraisal.abrianbaker.com",
+  "test_certificate_absent": "verified in exact preserved APK",
+  "user_search_confirmation": "Brian confirmed set 10350 found after first restoration; same exact final APK restored, final authenticated check not repeated",
+  "market_observation": "Brian reports absent market data/numbers for set 10350; unresolved and outside capture spike"
+}

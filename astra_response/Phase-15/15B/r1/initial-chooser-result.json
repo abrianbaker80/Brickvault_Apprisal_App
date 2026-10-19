@@ -1,0 +1,34 @@
+{
+  "test_db_counts_after": {
+    "upload_receipt": 2,
+    "listing_image": 2,
+    "listing": 1
+  },
+  "android_api": 37,
+  "exact_system_cause": "Unresolved; compiled source configuration is correct but observed chooser does not restrict to APP",
+  "status": "APP_ONLY_CHOOSER_GATE_FAILED",
+  "counts_note": "Unchanged synthetic baseline only; no capture/listing/image writes",
+  "preview": false,
+  "screenshot": false,
+  "projection_started": false,
+  "device_model": "SM-S948U",
+  "save": false,
+  "observed_controls": [
+    {
+      "text": "Share one app",
+      "enabled": true
+    },
+    {
+      "text": "Share entire screen",
+      "enabled": true
+    }
+  ],
+  "bytecode_configuration": {
+    "APP": true,
+    "DISPLAY": false,
+    "APP_CONTENT": false,
+    "audio_requested": false
+  },
+  "test_apk_sha256": "a1bfcc41c24d658082cc08805fcc29f6deb9be18cf57318a2fcbadca74d3326b",
+  "evidence": "Read-only Android UI hierarchy; source selection and consent were not automated"
+}

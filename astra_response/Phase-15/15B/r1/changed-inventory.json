@@ -1,0 +1,123 @@
+{
+  "main_head": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "paths": [
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "a1e54ebfc5c1c0d32900a36240e41eff6567f5afde45a2ef582bbc51b85892d2",
+      "after_sha256": "d940115177434f798c8722b45a9d3670b60823764b9b1a27b2dab2971520cbc4"
+    },
+    {
+      "path": "apps/android/android/app/build.gradle",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "f99de3ff2873f73cb3d05ebc59a263d011909712a78176dff8699bd4610903ab",
+      "after_sha256": "341e10705cb4998710f17673b09406bd1014c298af42596583f04e1b63028a4a"
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "d2712ee8d2a80b35652f8a92dff00c31a3a97fd02a8d92099f7f16ce0cc4f517",
+      "after_sha256": "82fa1190d3b3fd720b5cc127663824db3515fa4c81d8d25b665ac167448e3507"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java",
+      "before_basis": "new file",
+      "before_sha256": null,
+      "after_sha256": "ce5e97c9ca61c4d3dcb3c4bb9dd89bcf7fb59ff5ce178965a5f868c298d64995"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "55e8122fb9a23fe775ad385764b4710aa880b4fbd9ecf56f29e82127021ab135",
+      "after_sha256": "f36a18c6cd3d5f0c9dbc4072575fe677f5fc2967f1e218a6000a41df416748fc"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java",
+      "before_basis": "new file",
+      "before_sha256": null,
+      "after_sha256": "e1cc7aacb59c5c4ab8629fbad00809fd0dceacf14da1280732f27567bbe01f0d"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java",
+      "before_basis": "new file",
+      "before_sha256": null,
+      "after_sha256": "bf82a42f84e815b843755bf1862aab298fd97f9ab2b2f69691cc1f8e633bf528"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "e94ecf0531af84c55d87488775987986858f7c2a783acf83cad7647120bd71b0",
+      "after_sha256": "ba3b49ab33acd979982148cc5acb7b98692c30055527c7a01b519d650fa260f0"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "77403c12b4e5afff83bd4049d7d6eff138a09a6b9a572c4f664c45bcdb2485a4",
+      "after_sha256": "441e43c9ae52352da04892281ad39fadd335e9b9778af5cbf69912c0ba6b786d"
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java",
+      "before_basis": "new file",
+      "before_sha256": null,
+      "after_sha256": "8c39c08d2d97d93bcf99a1fcf797ab3a44e4fc754c1fa7bca80a5b8e88629cc7"
+    },
+    {
+      "path": "apps/android/android/variables.gradle",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "83d502c9ed8fcf1dd4791482067abeedbebae49fafe9cd14a8a1f5891deb0d88",
+      "after_sha256": "f9865d0fece4b46a97f61ed6e346bf51c6bd03b337851f9e300bc6cc05420e96"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "4f0e01012b81208bcb6d7ff0a3f5a3c90801ba770f01cb248d471bd76ec518b4",
+      "after_sha256": "854a61e3eeed5220922167f7f3b92a41bddf74bb17daca96ab00d04b033a562f"
+    },
+    {
+      "path": "apps/web/src/NativeCapture.tsx",
+      "before_basis": "new file",
+      "before_sha256": null,
+      "after_sha256": "abffa551bbf2ec60564e3b828b29526b7a1d5560eded03067ed7080a25e1f9c3"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "183a1c3cac6b11575f081b15bf01dd735b3c418e92226be7732b1d7178497d68",
+      "after_sha256": "bc90765361dbc88c4c7b8b2392aee198be98508e97a500cac210141c24f0fbbb"
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "66309cb26487729a5c793969d313ac97b3697970bc26932ae3f2c3831749c1a8",
+      "after_sha256": "f41c809d3c8d6ca15e4cc32cb0f619ce7c28ad5ab1cb5c680cce20d4c8ca653b"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "e324f96892db4d6c1ba11ed7bf136052b3987a3b616994075b50f0e1cbe8757d",
+      "after_sha256": "04462b739ae4a5d36afc1f23922de21471cd1e2cbb404e785aa068f12d546613"
+    },
+    {
+      "path": "docs/SECURITY_PRIVACY.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "f3ee8114755359ded769ea4bad495d9f362694862db8c223195c5345bf5b9da2",
+      "after_sha256": "306807c913470acb432fefae70eb22dea8c34c83580ebc79aa14cb3ef343574b"
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "before_basis": "preserved uncommitted preimage",
+      "before_sha256": "5bd4f99359ebe36afce0a8a015fb788bb217bd4bea183929827c5b05486432c7",
+      "after_sha256": "a93fe73afdf66c758734a362ab66ec488ddd0f2289b4583a8cf26acbf252992a"
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "before_basis": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "before_sha256": "c934bd0560d918cc371348078182370da256da087fcc724337c10c0f37091518",
+      "after_sha256": "5871ca31c04f7dd6c3f948290a8f228fa1b2e13717a1f0a525aca9f12b817285"
+    }
+  ],
+  "protected_preimages_preserved": true,
+  "plan_prior_notes_preserved": true,
+  "patch_replay": "PASS, all changed files; line-ending normalized comparison",
+  "main_index_empty": true
+}

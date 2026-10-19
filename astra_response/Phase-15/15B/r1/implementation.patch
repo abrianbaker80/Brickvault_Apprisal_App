@@ -1,0 +1,1049 @@
+diff --git a/CODEX_WORKFLOW.md b/CODEX_WORKFLOW.md
+index e370396..6a12d8f 100644
+--- a/CODEX_WORKFLOW.md
++++ b/CODEX_WORKFLOW.md
+@@ -1,5 +1,19 @@
+ # Codex Workflow for BrickVault Appraisal App
+ 
++## Phase 15B partial TEST spike; experiment stopped — 2026-10-19
++
++Brian ended [Plan 108's capture experiment](docs/plans/108-phase-15-android-share-capture.md#15b-authorized-single-app-test-spike--2026-10-19)
++after actual neutral-task capture, PNG preview and byte-exact restricted TEST Save.
++Remaining physical checks and final notification-action hardening are not qualified.
++Production APK is restored byte-exactly; owned TEST/device resources are cleaned.
++The chooser offered entire-screen capture despite APP-only API configuration;
++Brian then approved personally selecting “Share one app”. The app relies on his
++choice, not package/scope enforcement. Code still requests APP only/audio off.
++Normal screenshot -> accepted 15A Share -> review/Save is the recommended simpler
++workflow; its production promotion is a separate task. 15A stays closed; 15C/16,
++production feature deployment and Git checkpoint remain unauthorized. Main source
++is uncommitted/index empty/unpushed; protected bytes and earlier notes are preserved.
++
+ ## Phase 15A accepted and closed — 2026-10-18
+ 
+ **15A ACCEPTED / PHYSICAL TEST QUALIFIED / CLOSED.** Brian accepted
+diff --git a/apps/android/android/app/build.gradle b/apps/android/android/app/build.gradle
+index ee5dfd8..92052c8 100644
+--- a/apps/android/android/app/build.gradle
++++ b/apps/android/android/app/build.gradle
+@@ -4,12 +4,16 @@ apply plugin: 'com.android.application'
+ android {
+     namespace = "com.abrianbaker.brickvault.appraisal"
+     compileSdk = rootProject.ext.compileSdkVersion
++    compileSdkMinor = 0
++    buildFeatures { buildConfig = true }
+     defaultConfig {
+         applicationId "com.abrianbaker.brickvault.appraisal"
+         minSdkVersion rootProject.ext.minSdkVersion
+         targetSdkVersion rootProject.ext.targetSdkVersion
+         versionCode 1
+         versionName "1.0"
++        // This spike is unavailable in ordinary/production builds.
++        buildConfigField 'boolean', 'CAPTURE_SPIKE', providers.gradleProperty('brickvaultCaptureSpike').orElse('false').get()
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+         aaptOptions {
+              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
+@@ -48,6 +52,10 @@ apply from: 'capacitor.build.gradle'
+ // Opt-in debug-only localhost trust. Only a public X.509 certificate enters the APK.
+ // Ordinary debug/release resources contain system trust only. Never trust user CAs.
+ def qualificationCertificate = providers.gradleProperty('brickvaultQualificationCertificate')
++if (providers.gradleProperty('brickvaultCaptureSpike').orElse('false').get() == 'true'
++        && !qualificationCertificate.isPresent()) {
++    throw new GradleException('Capture spike requires the owned TEST certificate build')
++}
+ if (qualificationCertificate.isPresent()) {
+     def copiedConfig = file('src/main/assets/capacitor.config.json')
+     if (copiedConfig.exists()) {
+diff --git a/apps/android/android/app/src/main/AndroidManifest.xml b/apps/android/android/app/src/main/AndroidManifest.xml
+index d758ef8..d7b1ad7 100644
+--- a/apps/android/android/app/src/main/AndroidManifest.xml
++++ b/apps/android/android/app/src/main/AndroidManifest.xml
+@@ -39,9 +39,14 @@
+ 
+         </activity>
+ 
++        <service android:name=".CaptureService" android:exported="false"
++            android:foregroundServiceType="mediaProjection" />
+     </application>
+ 
+     <!-- Permissions -->
+ 
+     <uses-permission android:name="android.permission.INTERNET" />
++    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
++    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PROJECTION" />
++    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+ </manifest>
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java
+index f8b879c..d13825f 100644
+--- a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java
+@@ -26,6 +26,8 @@ import org.json.JSONObject;
+ @CapacitorPlugin(name = "BrickVaultShare")
+ public final class BrickVaultSharePlugin extends Plugin {
+     private static final ShareIntake INTAKE = new ShareIntake();
++    static boolean captureAllowed() { return INTAKE.captureAllowed(); }
++    static boolean admitCapture(byte[] original) { return INTAKE.receiveCapture(original); }
+     // At most one active read and one replacement task after a lifecycle interruption.
+     private static final ThreadPoolExecutor READER = new ThreadPoolExecutor(
+             1, 1, 30, TimeUnit.SECONDS, new ArrayBlockingQueue<>(1),
+@@ -114,6 +116,7 @@ public final class BrickVaultSharePlugin extends Plugin {
+         Boolean authenticated = call.getBoolean("authenticated");
+         if (authenticated == null) { call.reject("INVALID_SESSION_STATE"); return; }
+         INTAKE.session(authenticated);
++        if (!authenticated) getActivity().runOnUiThread(() -> CaptureService.discard(getContext()));
+         call.resolve();
+     }
+ 
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java
+index b015afd..2493026 100644
+--- a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java
+@@ -14,6 +14,7 @@ public class MainActivity extends BridgeActivity {
+             setIntent(ordinaryLaunch());
+         }
+         registerPlugin(BrickVaultSharePlugin.class);
++        registerPlugin(BrickVaultCapturePlugin.class);
+         super.onCreate(state);
+     }
+ 
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java
+index e1148c2..21f7e48 100644
+--- a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java
+@@ -231,6 +231,26 @@ final class ShareIntake {
+         changed();
+     }
+ 
++    synchronized boolean captureAllowed() {
++        return sessionKnown && authenticated && foreground && batchId == null;
++    }
++
++    /** Ownership transfer of one already encoded screenshot; no URI/background read. */
++    boolean receiveCapture(byte[] original) {
++        synchronized (this) {
++            if (!captureAllowed() || original == null || original.length == 0
++                    || original.length > MAX_FILE_BYTES) return false;
++            batchId = UUID.randomUUID().toString();
++            notice = null;
++            Item item = new Item(0, "image/png", null);
++            item.bytes = original;
++            item.finished = true;
++            items.add(item);
++        }
++        changed();
++        return true;
++    }
++
+     boolean receive(List<Source> incoming, boolean overflow) {
+         synchronized (this) {
+             if (sessionKnown && !authenticated) {
+diff --git a/apps/android/android/variables.gradle b/apps/android/android/variables.gradle
+index ee4ba41..eccbbda 100644
+--- a/apps/android/android/variables.gradle
++++ b/apps/android/android/variables.gradle
+@@ -1,6 +1,6 @@
+ ext {
+     minSdkVersion = 24
+-    compileSdkVersion = 36
++    compileSdkVersion = 37
+     targetSdkVersion = 36
+     androidxActivityVersion = '1.11.0'
+     androidxAppCompatVersion = '1.7.1'
+@@ -13,4 +13,4 @@ ext {
+     androidxJunitVersion = '1.3.0'
+     androidxEspressoCoreVersion = '3.7.0'
+     cordovaAndroidVersion = '14.0.1'
+-}
+\ No newline at end of file
++}
+diff --git a/apps/web/src/App.tsx b/apps/web/src/App.tsx
+index a9f0604..b8a651d 100644
+--- a/apps/web/src/App.tsx
++++ b/apps/web/src/App.tsx
+@@ -30,6 +30,7 @@ import { HuntWorkspace } from './HuntWorkspace';
+ import { HuntPage } from './HuntPage';
+ import { ListingDetailPage, ListingsPage, openListings } from './ListingsPage';
+ import { NativeShareReview } from './NativeShareReview';
++import { NativeCapture } from './NativeCapture';
+ 
+ export default function App() {
+   const inherited = useDraftMemory();
+@@ -229,6 +230,7 @@ function Workspace() {
+       }
+     >
+       <ForecastWorkspace>
++        <NativeCapture />
+         <NativeShareReview />
+         {listings && (
+           <OnlineOnly>
+diff --git a/docs/DECISIONS.md b/docs/DECISIONS.md
+index e7d7424..12ac620 100644
+--- a/docs/DECISIONS.md
++++ b/docs/DECISIONS.md
+@@ -1,5 +1,24 @@
+ # Project Decisions
+ 
++## Phase 15B single-app capture amendment — 2026-10-19
++
++**Further owner amendment after physical evidence, same date:** Android still
++offered entire-screen capture. Brian explicitly approved relying on his own
++“Share one app” selection in Android's normal chooser. The UI discloses that
++reliance; the app does not claim to enforce or verify the selected scope/package.
++This supersedes the actual-chooser DISPLAY-disabled requirement in the first
++amendment below. One fresh frame/consent, no audio, explicit review/Save and all
++TEST/restoration/privacy gates remain. First-attempt negative evidence is retained.
++
++Brian approved OS-mediated, user-selected SINGLE-APP capture in place of app-enforced
++Facebook package allowlisting for the bounded TEST-only 15B spike. The official API
++37 chooser enables APP and disables DISPLAY, APP_CONTENT and audio. This does not
++establish a selected package identity or Facebook compatibility. All other manual
++trigger, privacy, protected-content and production gates remain. See
++[Plan 108](plans/108-phase-15-android-share-capture.md#15b-authorized-single-app-test-spike--2026-10-19).
++The protected AGENTS.md remains byte-for-byte unchanged; this explicit later owner
++amendment governs only the superseded 15B requirement. Historical decisions remain.
++
+ ## Phase 15A acceptance and local closeout — 2026-10-18
+ 
+ Brian accepts physical r2 `335b76098acc4c9130a3b8b8120b770b207781e8`:
+diff --git a/docs/REQUIREMENTS_TRACEABILITY.md b/docs/REQUIREMENTS_TRACEABILITY.md
+index b5d89d0..38fb1e9 100644
+--- a/docs/REQUIREMENTS_TRACEABILITY.md
++++ b/docs/REQUIREMENTS_TRACEABILITY.md
+@@ -1,5 +1,16 @@
+ # Requirements Traceability
+ 
++## Phase 15B scope amendment — 2026-10-19
++
++R-09 optional native intake has partial TEST-only capture evidence under
++[Plan 108](plans/108-phase-15-android-share-capture.md): actual owned task scope,
++one PNG preview and exact restricted Save through 15A/Phase 13. Brian ended the
++experiment with remaining physical checks pending; production was restored.
++After APP-only chooser enforcement failed, Brian approved selecting “Share one app”
++in the normal chooser. The app relies on that choice; code requests APP only/audio
++off but claims no selected package/scope enforcement. Source/build and phone
++evidence remain separate. 15A stays closed; 15C/16 and deployment remain gated.
++
+ ## Phase 15A accepted trace — 2026-10-18
+ 
+ **15A ACCEPTED / PHYSICAL TEST QUALIFIED / CLOSED:** Android 17/API 37 physical
+diff --git a/docs/ROADMAP.md b/docs/ROADMAP.md
+index 33c5c07..88ff56d 100644
+--- a/docs/ROADMAP.md
++++ b/docs/ROADMAP.md
+@@ -1307,6 +1307,15 @@ The original scope/gates below retain planning context and confer no new authori
+ 
+ ## Phase 15 — Android share and overlay capture
+ 
++**15B PARTIAL — 2026-10-19:** [Plan 108](plans/108-phase-15-android-share-capture.md)
++records actual owned-task capture, PNG preview and exact restricted TEST Save.
++Brian ended the experiment with remaining physical checks pending; production was
++restored. He approved selecting “Share one app” in the normal chooser after APP-only
++chooser enforcement failed; the app relies on that choice, while configuration
++requests APP only/audio off. Normal screenshot -> accepted 15A Share -> review/Save
++is recommended; its production promotion remains separate. 15A stays closed;
++15C/16 and feature deployment remain unauthorized. Earlier gates below are historical.
++
+ **15A ACCEPTED / PHYSICAL TEST QUALIFIED / CLOSED — 2026-10-18.** Brian accepted
+ physical r2 `335b76098acc4c9130a3b8b8120b770b207781e8`; Android 17/API 37 TEST Share
+ qualification passed. [Local closeout](plans/108-phase-15-android-share-capture.md#phase-15a-accepted-and-closed--2026-10-18)
+diff --git a/docs/SECURITY_PRIVACY.md b/docs/SECURITY_PRIVACY.md
+index 658c61d..4eb9b44 100644
+--- a/docs/SECURITY_PRIVACY.md
++++ b/docs/SECURITY_PRIVACY.md
+@@ -234,6 +234,20 @@ Decode and validate real formats, size/dimensions, and malicious inputs. Store b
+ 
+ ## Later capture, AI, and training safeguards — Phases 14–16
+ 
++**15B owner amendment, 2026-10-19:** the bounded TEST spike uses Android API 37
++OS-mediated, user-selected single-app projection, superseding strict Facebook package
++allowlisting for 15B. Configuration requests APP only/audio off. A visible notification
++(explicit notification permission) provides Capture/Stop; one fresh screenshot is
++reviewed before explicit restricted Save. OS transient buffers are not zero capture.
++See [Plan 108](plans/108-phase-15-android-share-capture.md). No broader capture,
++production deployment or Facebook compatibility follows this amendment.
++
++Follow-up owner amendment after the physical chooser still offered whole-screen:
++Android's normal chooser is permitted, Brian selects “Share one app” each session,
++and the app explicitly relies on his choice. This supersedes actual-chooser
++DISPLAY-disabled enforcement from the original request; the API configuration still requests APP
++only/audio off. No selected scope or package identity is inferred or guaranteed.
++
+ Every capture is an explicit Brian action, visibly enabled and restricted to intended packages where supported. No Facebook scraping, traffic/credential interception, automatic swipes/clicks, background collection, or seller automation. Share/manual upload remain fallbacks. Device testing is required; official API documentation and APK builds do not prove Facebook compatibility.
+ 
+ Submit only the necessary permitted image/context to server-side OpenAI/Gemini adapters; verify provider data-use/retention settings in that phase. Record model/prompt/version/cost metadata without raw secret-bearing payloads.
+diff --git a/prompts/15_android_capture_overlay.md b/prompts/15_android_capture_overlay.md
+index d1c4642..501fda9 100644
+--- a/prompts/15_android_capture_overlay.md
++++ b/prompts/15_android_capture_overlay.md
+@@ -2,6 +2,15 @@
+ 
+ **Mode:** Plan first; implement only on a separate explicit request
+ 
++**15B PARTIAL — 2026-10-19:** Brian ended the bounded TEST
++[capture spike](../docs/plans/108-phase-15-android-share-capture.md#15b-authorized-single-app-test-spike--2026-10-19)
++after actual neutral-task capture, preview and exact restricted Save. Production
++was restored; remaining physical checks are pending. He approved the normal chooser
++with him selecting “Share one app” after APP-only chooser enforcement failed.
++The app relies on his choice; configuration requests APP only/audio off without
++selected package/scope enforcement. This supersedes older strict package/chooser
++gates below for 15B only. 15A stays closed; 15C/16 and deployment remain unauthorized.
++
+ **Accepted 15A closeout — 2026-10-18: 15A ACCEPTED / PHYSICAL TEST QUALIFIED / CLOSED.**
+ Brian accepted r2 `335b76098acc4c9130a3b8b8120b770b207781e8`, Android 17/API 37.
+ See [Plan 108 closeout](../docs/plans/108-phase-15-android-share-capture.md#phase-15a-accepted-and-closed--2026-10-18).
+diff --git a/docs/plans/108-phase-15-android-share-capture.md b/docs/plans/108-phase-15-android-share-capture.md
+index 7acf78b..b254b73 100644
+--- a/docs/plans/108-phase-15-android-share-capture.md
++++ b/docs/plans/108-phase-15-android-share-capture.md
+@@ -1,5 +1,115 @@
+ # ExecPlan 108 — Phase 15 Android Share and capture preflight
+ 
++## 15B authorized single-app TEST spike — 2026-10-19
++
++### Closeout — PARTIAL / remaining physical checks stopped by Brian
++
++Brian chose **“End capture experiment and restore production (recommended)”**.
++The bounded spike ends here. It is not fully physically qualified and does not
++authorize production deployment, 15C/16 or a Share deployment. Everyday workflow
++recommendation: normal phone screenshot -> accepted 15A Share -> review/Save;
++15A/Phase 13 promotion to production remains a separate task.
++
++What actually worked on the API 37 phone: manual sign-in/consent/source selection,
++visible notification Capture, one 1440x3120 PNG preview, projection/service stopped
++after capture, and Brian's explicit Save to the existing TEST listing. Android's
++projection readback was `RECORD_CONTENT_TASK` for the owned neutral helper and
++`displayToRecord=-1`: actual task scope was physically verified for that session,
++without app-enforced package/scope claims. Screenshot original SHA-256
++`e60b7f4c3f58caf4e847991fc4c3d0e65778742d9ae82257380385298c7ab1dd`,
++108477 bytes, matches actual stored TEST blob bytes. Original and thumbnail are
++restricted. Preview made no database writes; explicit Save added one image/receipt
++to the seeded 1 listing/2 images/2 receipts. Portrait UI was 384x777 with no horizontal
++overflow. No Facebook content was opened or captured.
++
++Focused checks: six native state/intake fixtures, 21 existing Share frontend
++regressions, affected ESLint/Prettier/TypeScript, TEST web/Capacitor/APK origin and
++signer verification, Android lint (0 errors, 19 warnings). Compile 37.0/min 24/target
++36; no dependency upgrades or migrations. Initial chooser failure was retained;
++the amended UI justified its candidate rebuild. The physically exercised amended
++APK is `76abdc59b92f607fed5c5b6acdc300c974030b4b2d892f5f6d1ddcd12649f73b`.
++Final same-scope generation-bound notification-action/teardown hardening passes
++the affected six fixtures, compilation and lint; it was **not physically tested**.
++An intermediate hardened APK was built but never installed; no further build or
++phone experiment follows Brian's stop. Protected-content, rotation/visibility race,
++Stop/revocation/lock/process restart and disabled-capture fallback physical checks
++remain pending. Existing 15A physical evidence is reused, not rerun or broadened.
++
++Production was restored in place and launched: SHA-256
++`045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2`,
++signer `e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72`.
++Read-back bytes, UID/first-install identity, system-only trust and production
++destination match the preserved APK. No uninstall/data clear/forced downgrade/key
++replacement or production backend mutation. Brian confirmed set 10350 was found
++after the first restoration; he also reported absent market data/numbers for it.
++That unresolved market observation is separate from capture and was not diagnosed.
++The final restoration launches the same exact APK; authenticated search was not
++repeated automatically. Task-owned helper, projection/service and ADB rules are
++removed; owned disposable API/database/blobs/credentials are cleaned, prior TEST
++service state and unrelated ADB rules preserved. Source/docs stay uncommitted,
++main unpushed, index empty; all three protected preimages remain byte-identical.
++
++Sanitized review: `astra_response/Phase-15/15B/r1/` on `astra-response`, including
++the task patch (Plan 108 relative to its preserved uncommitted preimage), inventory,
++checks, physical limits and restoration receipts. No private pixels/secrets/device
++serials/signing material. Earlier Plan 108 restoration/mechanism updates remain intact.
++
++### Follow-up owner amendment after chooser evidence — current scope
++
++The first physical attempt showed enabled “Share one app” and “Share entire screen”
++choices despite the correct API 37 configuration in the compiled candidate. No app
++was selected, projection/frame/preview/save did not start, and production was restored
++byte-exactly. The isolated TEST database remained at its two seeded images/two receipts
++and was cleaned. The exact OS reason for ignoring the chooser restriction is unresolved.
++
++Brian then explicitly answered **“Yes—use my single-app selection (recommended)”**
++to allowing Android's normal chooser and relying on him to select “Share one app”.
++This further amendment supersedes the original request to disable DISPLAY in the
++actual chooser. The implementation still requests APP only and audio off through
++official configuration; that request is not claimed to enforce chooser scope.
++The UI explains reliance on Brian's choice. No package/scope identity is inferred.
++The failed restriction evidence is retained. A follow-up candidate rebuild/compact
++physical pass is justified by this concrete owner-amended boundary and UI change.
++All one-frame, manual consent, privacy, TEST and mandatory restoration gates remain.
++
++Brian explicitly approved implementation and one bounded physical TEST experiment,
++including a temporary compatible APK and mandatory in-place production restoration.
++This supersedes the earlier strict app-enforced Facebook package allowlist **for
++15B only**. The OS chooser must offer APP only, with DISPLAY, APP_CONTENT and audio
++disabled through official API 37 configuration. This is user-selected single-app
++scope, not package identity enforcement or Facebook compatibility. Historical
++mechanism-blocked findings below retain their original context. 15A stays closed;
++15C, production feature deployment and Phase 16 are not authorized.
++
++Implementation: TEST opt-in Capacitor bridge plus a nonexported mediaProjection
++foreground service. Start opens Android consent; Brian alone selects the app.
++Notification Capture admits one timestamp-fresh visible frame; pre-action images
++are immediately closed. Android transient projection buffers do exist (two bounded
++ImageReader slots); this is not zero capture. Resize/visibility loss disarms pending
++capture, and another explicit action is required. Stop, revocation, lock, timeout,
++process death and stale generation callbacks cannot restart a session. No audio,
++overlay/accessibility/usage access, broad storage, navigation or source-app discovery.
++
++The PNG screenshot original is encoded once, held only in bounded process memory,
++then transferred after foreground authenticated-session verification to the accepted
++15A review/destination/queue. Explicit Save alone writes through Phase 13, restricted.
++No backend/migration/protocol change. Protected regions remain protected/blank;
++darkness is not treated as a secure-window detector. Older/unsupported platforms
++retain Share/manual upload. Default builds disable this TEST spike.
++
++Baseline: main `e3c04d90b1646b9b9dad73325bf1491fb8326943`, index empty;
++three protected dirty files preserved. Existing uncommitted restoration/mechanism
++notes below are preserved as a preimage privately. SDK 37.0 (API 37) installation is
++authorized; min 24/target 36 and dependency versions are retained where compatible.
++Actual checks, physical results and restoration receipt will be recorded here.
++
++- [x] Authorization and superseded package boundary recorded.
++- [x] Baseline/preimages and connected API 37 phone established read-only.
++- [x] Focused state/intake tests, static checks and candidate TEST build.
++- [x] Reversible same-signer/version restoration path verified before replacement.
++- [x] Partial human-consent physical pass; Brian ended remaining checks; cleanup/restoration complete.
++- [x] Sanitized review package prepared; main implementation uncommitted/index empty.
++
+ ## Production Android restoration and 15B mechanism review - 2026-10-18
+ 
+ Brian authorized restoring the newest verified compatible production APK and a
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java
+new file mode 100644
+index 0000000..b811e16
+--- /dev/null
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java
+@@ -0,0 +1,122 @@
++package com.abrianbaker.brickvault.appraisal;
++
++import android.app.Activity;
++import android.app.KeyguardManager;
++import android.content.Intent;
++import android.media.projection.MediaProjectionConfig;
++import android.media.projection.MediaProjectionManager;
++import android.os.Build;
++import android.Manifest;
++import com.getcapacitor.*;
++import com.getcapacitor.annotation.ActivityCallback;
++import com.getcapacitor.annotation.CapacitorPlugin;
++import com.getcapacitor.annotation.Permission;
++import com.getcapacitor.annotation.PermissionCallback;
++
++@CapacitorPlugin(name = "BrickVaultCapture", permissions = {
++    @Permission(alias = "notifications", strings = { Manifest.permission.POST_NOTIFICATIONS })
++})
++public final class BrickVaultCapturePlugin extends Plugin {
++    // Brian's follow-up amendment permits the normal chooser and relies on his APP choice.
++    // Configuration requests APP only, but is not proof that the system enforces it.
++    private long consentGeneration = -1;
++    private boolean foreground;
++
++    @androidx.annotation.RequiresApi(37)
++    static MediaProjectionConfig singleAppConfiguration() {
++        return new MediaProjectionConfig.Builder()
++                .setSourceEnabled(MediaProjectionConfig.PROJECTION_SOURCE_APP, true)
++                .setSourceEnabled(MediaProjectionConfig.PROJECTION_SOURCE_DISPLAY, false)
++                .setSourceEnabled(MediaProjectionConfig.PROJECTION_SOURCE_APP_CONTENT, false)
++                .setAudioRequested(false)
++                .setInitiallySelectedSource(MediaProjectionConfig.PROJECTION_SOURCE_APP).build();
++    }
++    @androidx.annotation.ChecksSdkIntAtLeast(api = 37)
++    private boolean supported() {
++        return BuildConfig.CAPTURE_SPIKE && Build.VERSION.SDK_INT >= 37;
++    }
++    @Override protected void handleOnResume() { foreground = true; }
++    @Override protected void handleOnPause() { foreground = false; }
++    @Override protected void handleOnDestroy() {
++        consentGeneration = -1;
++        if (getActivity().isFinishing()) CaptureService.discard(getContext());
++    }
++    @PluginMethod public void status(PluginCall call) {
++        getActivity().runOnUiThread(() -> {
++            JSObject value = new JSObject();
++            value.put("supported", supported());
++            value.put("state", CaptureService.SESSION.state().name());
++            value.put("notice", CaptureService.notice);
++            call.resolve(value);
++        });
++    }
++    @PluginMethod public void start(PluginCall call) {
++        if (!supported()) { call.reject("CAPTURE_UNSUPPORTED"); return; }
++        if (getPermissionState("notifications") != PermissionState.GRANTED) {
++            requestPermissionForAlias("notifications", call, "notificationResult"); return;
++        }
++        beginCapture(call);
++    }
++    @PermissionCallback private void notificationResult(PluginCall call) {
++        if (getPermissionState("notifications") != PermissionState.GRANTED) {
++            call.reject("VISIBLE_NOTIFICATION_REQUIRED"); return;
++        }
++        beginCapture(call);
++    }
++    private void beginCapture(PluginCall call) {
++        getActivity().runOnUiThread(() -> {
++            if (!supported() || !foreground || !BrickVaultSharePlugin.captureAllowed()
++                    || CaptureService.SESSION.state() != CaptureSession.State.IDLE) {
++                call.reject("CAPTURE_UNAVAILABLE"); return;
++            }
++            try {
++                if (!getContext().getSystemService(android.app.NotificationManager.class).areNotificationsEnabled()) {
++                    call.reject("VISIBLE_NOTIFICATION_REQUIRED"); return;
++                }
++                consentGeneration = CaptureService.SESSION.begin();
++                CaptureService.watchLock(getContext(), consentGeneration);
++                Intent chooser = getContext().getSystemService(MediaProjectionManager.class)
++                        .createScreenCaptureIntent(singleAppConfiguration());
++                startActivityForResult(call, chooser, "consentResult");
++            } catch (RuntimeException | LinkageError error) {
++                CaptureService.discard(getContext());
++                call.reject("SINGLE_APP_CONFIGURATION_UNSUPPORTED");
++            }
++        });
++    }
++    @ActivityCallback private void consentResult(PluginCall call, androidx.activity.result.ActivityResult result) {
++        // Human-only chooser. A replaced/destroyed/expired session cannot reuse consent.
++        if (!supported() || call == null || consentGeneration != CaptureService.SESSION.generation()
++                || result.getResultCode() != Activity.RESULT_OK || result.getData() == null) {
++            CaptureService.discard(getContext());
++            if (call != null) call.resolve();
++            return;
++        }
++        try {
++            getContext().startForegroundService(new Intent(getContext(), CaptureService.class)
++                    .setAction(CaptureService.START).putExtra("consent", result.getData())
++                    .putExtra("generation", consentGeneration));
++            call.resolve();
++        } catch (RuntimeException error) {
++            CaptureService.discard(getContext()); call.reject("CAPTURE_SERVICE_UNAVAILABLE");
++        } finally { consentGeneration = -1; }
++    }
++    @PluginMethod public void stop(PluginCall call) {
++        getActivity().runOnUiThread(() -> { CaptureService.discard(getContext()); call.resolve(); });
++    }
++    @PluginMethod public void review(PluginCall call) {
++        getActivity().runOnUiThread(() -> {
++            if (!foreground || !BrickVaultSharePlugin.captureAllowed()
++                    || getContext().getSystemService(KeyguardManager.class).isKeyguardLocked()) {
++                call.reject("VERIFY_FOREGROUND_TEST_SESSION"); return;
++            }
++            byte[] bytes = CaptureService.SESSION.take();
++            CaptureService.unwatchLock();
++            if (bytes == null || !BrickVaultSharePlugin.admitCapture(bytes)) {
++                if (bytes != null) java.util.Arrays.fill(bytes, (byte) 0);
++                call.reject("CAPTURE_INTAKE_UNAVAILABLE"); return;
++            }
++            call.resolve();
++        });
++    }
++}
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java
+new file mode 100644
+index 0000000..541aecd
+--- /dev/null
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java
+@@ -0,0 +1,252 @@
++package com.abrianbaker.brickvault.appraisal;
++
++import android.app.*;
++import android.content.*;
++import android.content.pm.ServiceInfo;
++import android.graphics.Bitmap;
++import android.graphics.PixelFormat;
++import android.hardware.display.DisplayManager;
++import android.hardware.display.VirtualDisplay;
++import android.media.Image;
++import android.media.ImageReader;
++import android.media.projection.MediaProjection;
++import android.media.projection.MediaProjectionManager;
++import android.os.*;
++import android.view.WindowManager;
++import java.io.ByteArrayOutputStream;
++import java.nio.ByteBuffer;
++
++/** TEST-only visible projection. OS buffers are drained, never analyzed before Capture. */
++public final class CaptureService extends Service {
++    static final CaptureSession SESSION = new CaptureSession();
++    static final String START = "capture.start", CAPTURE = "capture.frame", STOP = "capture.stop";
++    static final Handler MAIN = new Handler(Looper.getMainLooper());
++    static String notice = "Capture disabled. Share/manual upload remains available.";
++    private static final int NOTIFICATION = 1502;
++    private static final long MAX_PIXELS = 12_000_000;
++    private static final long SESSION_MS = 120_000, FRAME_MS = 5_000;
++    private MediaProjection projection;
++    private VirtualDisplay display;
++    private ImageReader reader;
++    private long token;
++    private int width, height;
++    private boolean encoding;
++    private static BroadcastReceiver lockReceiver;
++    private static Context lockContext;
++    private final Runnable deadline = () -> stop("Capture timed out. Start again for fresh consent.");
++    private final Runnable frameDeadline = () -> stop("No fresh visible frame. Capture stopped.");
++    private final MediaProjection.Callback callback = new MediaProjection.Callback() {
++        @Override public void onStop() { stop("Projection stopped or revoked."); }
++        @Override public void onCapturedContentVisibilityChanged(boolean visible) {
++            SESSION.visibility(visible);
++            if (!visible) {
++                MAIN.removeCallbacks(frameDeadline);
++                notice = "Selected content is unavailable. Return to it, then press Capture again.";
++            }
++        }
++        @Override public void onCapturedContentResize(int w, int h) {
++            if (encoding || projection == null) return;
++            SESSION.invalidateFrame();
++            MAIN.removeCallbacks(frameDeadline);
++            try { resize(w, h); }
++            catch (RuntimeException error) { stop("Selected content dimensions are unsupported."); }
++        }
++    };
++
++    static void discard(Context context) {
++        SESSION.clear();
++        unwatchLock();
++        context.stopService(new Intent(context, CaptureService.class));
++        notice = "Capture discarded. Share/manual upload remains available.";
++    }
++
++    @androidx.annotation.RequiresApi(33)
++    static void watchLock(Context context, long generation) {
++        unwatchLock();
++        lockContext = context.getApplicationContext();
++        lockReceiver = new BroadcastReceiver() {
++            @Override public void onReceive(Context owner, Intent event) { discard(owner); }
++        };
++        lockContext.registerReceiver(lockReceiver, new IntentFilter(Intent.ACTION_SCREEN_OFF), RECEIVER_NOT_EXPORTED);
++        MAIN.postDelayed(() -> {
++            if (SESSION.generation() == generation) discard(context.getApplicationContext());
++        }, SESSION_MS);
++    }
++
++    static void unwatchLock() {
++        if (lockReceiver != null) lockContext.unregisterReceiver(lockReceiver);
++        lockReceiver = null; lockContext = null;
++    }
++
++    @Override public int onStartCommand(Intent intent, int flags, int startId) {
++        if (!BuildConfig.CAPTURE_SPIKE || Build.VERSION.SDK_INT < 37 || intent == null) {
++            stop("Single-app capture is unsupported or disabled.");
++            return START_NOT_STICKY;
++        }
++        if ((STOP.equals(intent.getAction()) || CAPTURE.equals(intent.getAction()))
++                && !SESSION.currentAction(intent.getLongExtra("generation", -1))) {
++            // A delayed notification action must not create a dormant service or affect a new session.
++            if (projection == null && !encoding) stopSelf(startId);
++            return START_NOT_STICKY;
++        }
++        if (STOP.equals(intent.getAction()) || CAPTURE.equals(intent.getAction()))
++            token = intent.getLongExtra("generation", -1);
++        if (STOP.equals(intent.getAction())) stop("Capture stopped.");
++        else if (CAPTURE.equals(intent.getAction())) {
++            if (projection == null) {
++                if (!encoding) stopSelf(startId);
++                return START_NOT_STICKY;
++            }
++            if (projection != null && !locked() && SESSION.arm(System.nanoTime())) {
++                notice = "Waiting for one fresh frame.";
++                MAIN.postDelayed(frameDeadline, FRAME_MS);
++            }
++        } else if (START.equals(intent.getAction())) {
++            token = intent.getLongExtra("generation", -1);
++            if (projection != null || !SESSION.activate(token) || locked()) {
++                stop("Capture session is no longer valid.");
++                return START_NOT_STICKY;
++            }
++            try {
++                NotificationManager notifications = getSystemService(NotificationManager.class);
++                notifications.createNotificationChannel(new NotificationChannel(
++                        "single-app-capture", "Active single-app capture", NotificationManager.IMPORTANCE_LOW));
++                startForeground(NOTIFICATION, notification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION);
++                Intent consent = intent.getParcelableExtra("consent", Intent.class);
++                if (consent == null) throw new IllegalArgumentException("missing consent");
++                projection = getSystemService(MediaProjectionManager.class).getMediaProjection(Activity.RESULT_OK, consent);
++                projection.registerCallback(callback, MAIN);
++                android.graphics.Rect bounds = getSystemService(WindowManager.class).getMaximumWindowMetrics().getBounds();
++                resize(bounds.width(), bounds.height());
++                notice = "Single-app session active. Open selected content; use notification Capture or Stop.";
++                MAIN.postDelayed(deadline, SESSION_MS);
++            } catch (RuntimeException error) { stop("Single-app projection unavailable. Use Share/manual upload."); }
++        }
++        return START_NOT_STICKY;
++    }
++
++    private boolean locked() {
++        return getSystemService(KeyguardManager.class).isKeyguardLocked()
++                || !getSystemService(PowerManager.class).isInteractive();
++    }
++
++    @androidx.annotation.RequiresApi(26)
++    private Notification notification() {
++        PendingIntent open = PendingIntent.getActivity(this, 0, new Intent(this, MainActivity.class), PendingIntent.FLAG_IMMUTABLE);
++        return new Notification.Builder(this, "single-app-capture")
++                .setSmallIcon(android.R.drawable.ic_menu_camera).setContentTitle("BrickVault single-app capture")
++                .setContentText("One screenshot only after Capture. Stop discards pending content.")
++                .setContentIntent(open).setOngoing(true)
++                .addAction(new Notification.Action.Builder(null, "Capture", action(CAPTURE, 1)).build())
++                .addAction(new Notification.Action.Builder(null, "Stop", action(STOP, 2)).build()).build();
++    }
++    private PendingIntent action(String action, int request) {
++        return PendingIntent.getService(this, request, new Intent(this, CaptureService.class).setAction(action)
++                        .putExtra("generation", token),
++                PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_CANCEL_CURRENT);
++    }
++    private void resize(int w, int h) {
++        if (w <= 0 || h <= 0 || (long) w * h > MAX_PIXELS) throw new IllegalArgumentException("dimensions");
++        if (w == width && h == height && reader != null) return;
++        width = w; height = h;
++        ImageReader previous = reader;
++        reader = ImageReader.newInstance(w, h, PixelFormat.RGBA_8888, 2);
++        final ImageReader current = reader;
++        current.setOnImageAvailableListener(source -> frame(source, current), MAIN);
++        int density = getResources().getDisplayMetrics().densityDpi;
++        if (display == null) display = projection.createVirtualDisplay("BrickVault one frame", w, h, density,
++                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR, reader.getSurface(), null, MAIN);
++        else { display.setSurface(null); display.resize(w, h, density); display.setSurface(reader.getSurface()); }
++        if (previous != null) { previous.setOnImageAvailableListener(null, null); previous.close(); }
++    }
++    private void frame(ImageReader source, ImageReader expected) {
++        if (source != reader || source != expected) return;
++        Bitmap bitmap = null;
++        try (Image image = source.acquireLatestImage()) {
++            if (image == null || locked() || image.getWidth() != width || image.getHeight() != height
++                    || !SESSION.admit(token, image.getTimestamp())) return;
++            MAIN.removeCallbacks(frameDeadline);
++            Image.Plane plane = image.getPlanes()[0];
++            int rowBytes = Math.multiplyExact(width, 4);
++            if (plane.getPixelStride() != 4 || plane.getRowStride() < rowBytes) throw new IllegalArgumentException("format");
++            ByteBuffer input = plane.getBuffer();
++            ByteBuffer packed = ByteBuffer.allocate(Math.multiplyExact(rowBytes, height));
++            int initial = input.position();
++            for (int row = 0; row < height; row++) {
++                ByteBuffer line = input.duplicate();
++                line.position(initial + row * plane.getRowStride()); line.limit(line.position() + rowBytes);
++                packed.put(line);
++            }
++            packed.flip();
++            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
++            bitmap.copyPixelsFromBuffer(packed);
++        } catch (RuntimeException error) {
++            if (bitmap != null) bitmap.recycle();
++            stop("Frame unavailable or protected. Nothing retained.");
++            return;
++        }
++        if (bitmap == null) return;
++        encoding = true;
++        releaseProjection();
++        Bitmap captured = bitmap;
++        long admittedToken = token;
++        // One bounded encoding, no frame history or image analysis. A protected blank is never bypassed.
++        new Thread(() -> {
++            byte[] bytes = null;
++            try (ByteArrayOutputStream output = new ByteArrayOutputStream() {
++                @Override public synchronized void write(byte[] data, int offset, int length) {
++                    if ((long) size() + length > ShareIntake.MAX_FILE_BYTES) throw new IllegalStateException("size");
++                    super.write(data, offset, length);
++                }
++                @Override public synchronized void write(int data) {
++                    if (size() >= ShareIntake.MAX_FILE_BYTES) throw new IllegalStateException("size");
++                    super.write(data);
++                }
++            }) {
++                if (captured.compress(Bitmap.CompressFormat.PNG, 100, output)
++                        && output.size() <= ShareIntake.MAX_FILE_BYTES) bytes = output.toByteArray();
++            } catch (Exception error) { /* Honest unavailable state below; never log pixels. */ }
++            finally { captured.recycle(); }
++            byte[] encoded = bytes;
++            MAIN.post(() -> {
++                if (SESSION.generation() != admittedToken) {
++                    if (encoded != null) java.util.Arrays.fill(encoded, (byte) 0);
++                    return;
++                }
++                if (locked() || !SESSION.complete(admittedToken, encoded)) {
++                    if (encoded != null) java.util.Arrays.fill(encoded, (byte) 0);
++                    stop("Capture discarded or unavailable.");
++                    return;
++                }
++                notice = "Screenshot ready. Return to BrickVault to review; protected regions may be blank.";
++                MAIN.removeCallbacks(deadline);
++                stopForeground(STOP_FOREGROUND_REMOVE);
++                stopSelf();
++            });
++        }, "brickvault-one-png").start();
++    }
++    private void releaseProjection() {
++        if (projection != null) projection.unregisterCallback(callback);
++        if (display != null) { display.release(); display = null; }
++        if (reader != null) { reader.setOnImageAvailableListener(null, null); reader.close(); reader = null; }
++        if (projection != null) { MediaProjection old = projection; projection = null; old.stop(); }
++    }
++    private void stop(String reason) {
++        if (SESSION.generation() == token) {
++            SESSION.clear(); notice = reason;
++            unwatchLock();
++        }
++        MAIN.removeCallbacks(deadline); MAIN.removeCallbacks(frameDeadline);
++        releaseProjection();
++        stopForeground(STOP_FOREGROUND_REMOVE); stopSelf();
++    }
++    @Override public void onDestroy() {
++        MAIN.removeCallbacks(frameDeadline); MAIN.removeCallbacks(deadline);
++        releaseProjection();
++        if (SESSION.generation() == token && SESSION.state() != CaptureSession.State.READY) {
++            SESSION.clear(); unwatchLock();
++        }
++        super.onDestroy();
++    }
++    @Override public IBinder onBind(Intent intent) { return null; }
++}
+diff --git a/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java
+new file mode 100644
+index 0000000..ff23fa7
+--- /dev/null
++++ b/apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java
+@@ -0,0 +1,64 @@
++package com.abrianbaker.brickvault.appraisal;
++
++/** Process-only one-frame admission. All calls run on the service's main looper. */
++final class CaptureSession {
++    enum State { IDLE, CONSENT, ACTIVE, ARMED, ENCODING, READY }
++    private long generation;
++    private long requestedAt;
++    private boolean visible;
++    private byte[] original;
++    private State state = State.IDLE;
++    State state() { return state; }
++    long generation() { return generation; }
++    boolean currentAction(long token) {
++        return token == generation && state != State.IDLE && state != State.CONSENT;
++    }
++    long begin() { clear(); state = State.CONSENT; return generation; }
++    boolean activate(long token) {
++        if (token != generation || state != State.CONSENT) return false;
++        state = State.ACTIVE;
++        return true;
++    }
++    void visibility(boolean value) {
++        visible = value;
++        if (!value) invalidateFrame();
++    }
++    void invalidateFrame() {
++        if (state == State.ARMED) state = State.ACTIVE;
++        requestedAt = Long.MAX_VALUE;
++    }
++    boolean arm(long now) {
++        if (!visible || state != State.ACTIVE) return false;
++        requestedAt = now;
++        state = State.ARMED;
++        return true;
++    }
++    boolean admit(long token, long timestamp) {
++        if (token != generation || !visible || state != State.ARMED || timestamp <= requestedAt)
++            return false;
++        state = State.ENCODING;
++        return true;
++    }
++    boolean complete(long token, byte[] bytes) {
++        if (token != generation || state != State.ENCODING || bytes == null
++                || bytes.length == 0 || bytes.length > ShareIntake.MAX_FILE_BYTES) return false;
++        original = bytes;
++        state = State.READY;
++        return true;
++    }
++    byte[] take() {
++        if (state != State.READY) return null;
++        byte[] result = original;
++        original = null;
++        clear();
++        return result;
++    }
++    void clear() {
++        generation++;
++        if (original != null) java.util.Arrays.fill(original, (byte) 0);
++        original = null;
++        visible = false;
++        requestedAt = Long.MAX_VALUE;
++        state = State.IDLE;
++    }
++}
+diff --git a/apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java b/apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java
+new file mode 100644
+index 0000000..74a1a89
+--- /dev/null
++++ b/apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java
+@@ -0,0 +1,73 @@
++package com.abrianbaker.brickvault.appraisal;
++
++import org.junit.Test;
++import static org.junit.Assert.*;
++
++public class CaptureSessionTest {
++    private CaptureSession active() {
++        CaptureSession session = new CaptureSession();
++        assertTrue(session.activate(session.begin()));
++        session.visibility(true);
++        return session;
++    }
++    @Test public void consentRequiredForEverySession() {
++        CaptureSession session = new CaptureSession();
++        assertFalse(session.activate(0));
++        long old = session.begin(); session.clear();
++        assertFalse(session.activate(old));
++        assertFalse(session.arm(1));
++        assertTrue(session.activate(session.begin()));
++    }
++    @Test public void onlyOneFreshExplicitlyArmedFrame() {
++        CaptureSession session = active(); long token = session.generation();
++        assertFalse(session.admit(token, 99));
++        assertTrue(session.arm(100));
++        assertFalse(session.admit(token, 99)); assertFalse(session.admit(token, 100));
++        assertTrue(session.admit(token, 101));
++        assertFalse(session.admit(token, 102)); assertFalse(session.arm(103));
++        assertTrue(session.complete(token, new byte[] {1}));
++        assertFalse(session.arm(104));
++    }
++    @Test public void stopRevocationAndRestartRefuseLateCompletion() {
++        CaptureSession session = active(); long token = session.generation();
++        assertTrue(session.currentAction(token));
++        session.arm(10); assertTrue(session.admit(token, 11)); session.clear();
++        assertFalse(session.complete(token, new byte[] {1})); assertNull(session.take());
++        assertFalse(session.currentAction(token));
++        session.activate(session.begin());
++        assertFalse(session.currentAction(token));
++        CaptureSession restarted = new CaptureSession();
++        assertNull(restarted.take()); assertFalse(restarted.currentAction(0));
++    }
++    @Test public void visibilityAndResizeRequireAnotherExplicitAction() {
++        CaptureSession session = active(); long token = session.generation();
++        session.arm(10); session.visibility(false);
++        assertFalse(session.admit(token, 11)); assertFalse(session.arm(12));
++        session.visibility(true); assertFalse(session.admit(token, 13));
++        session.arm(14); session.invalidateFrame(); assertFalse(session.admit(token, 15));
++        assertTrue(session.arm(16)); assertTrue(session.admit(token, 17));
++    }
++    @Test public void originalHasBoundedSingleOwnershipAndDiscardClearsIt() {
++        CaptureSession session = active(); long token = session.generation();
++        session.arm(1); session.admit(token, 2);
++        assertFalse(session.complete(token, new byte[0]));
++        byte[] bytes = {1, 2}; assertTrue(session.complete(token, bytes));
++        assertSame(bytes, session.take()); assertNull(session.take());
++        token = session.begin(); session.activate(token); session.visibility(true);
++        session.arm(1); session.admit(token, 2); session.complete(token, bytes); session.clear();
++        assertArrayEquals(new byte[] {0, 0}, bytes);
++    }
++    @Test public void screenshotHandoffRequiresVerifiedForegroundAndReusesShareChunks() {
++        ShareIntake intake = new ShareIntake(); Object owner = new Object();
++        intake.attach(owner, () -> {}); byte[] png = {1, 2, 3};
++        assertFalse(intake.receiveCapture(png));
++        intake.foreground(owner, true); intake.session(true);
++        assertTrue(intake.receiveCapture(png)); assertFalse(intake.receiveCapture(png));
++        ShareIntake.View view = intake.view(); assertEquals(1, view.items.size());
++        assertEquals("image/png", view.items.get(0).mimeType);
++        assertArrayEquals(png, intake.chunk(view.id, view.items.get(0).id, 0, 3));
++        intake.foreground(owner, false);
++        assertThrows(IllegalArgumentException.class, () -> intake.chunk(view.id, view.items.get(0).id, 0, 3));
++        intake.foreground(owner, true); intake.session(false); assertNull(intake.view());
++    }
++}
+diff --git a/apps/web/src/NativeCapture.tsx b/apps/web/src/NativeCapture.tsx
+new file mode 100644
+index 0000000..1e29f8f
+--- /dev/null
++++ b/apps/web/src/NativeCapture.tsx
+@@ -0,0 +1,95 @@
++import { useEffect, useState } from 'react';
++import { Capacitor, registerPlugin } from '@capacitor/core';
++import { useConnection } from './Connectivity';
++import { nativeShareSnapshot } from './native-share';
++import { privateSessionValid } from './private-views';
++
++type Status = { supported: boolean; state: string; notice: string };
++interface CapturePort {
++  status(): Promise<Status>;
++  start(): Promise<void>;
++  stop(): Promise<void>;
++  review(): Promise<void>;
++}
++const capture = registerPlugin<CapturePort>('BrickVaultCapture');
++
++/** TEST-only controls. A capture enters the accepted review; it never dispatches HTTP. */
++export function NativeCapture() {
++  const online = useConnection().state === 'ONLINE_VERIFIED';
++  const [status, setStatus] = useState<Status | null>(null);
++  const [busy, setBusy] = useState(false);
++  const [error, setError] = useState('');
++  const enabled = Capacitor.isNativePlatform() && import.meta.env.MODE === 'android-qualification';
++  useEffect(() => {
++    if (!enabled) return;
++    let active = true;
++    const poll = () => {
++      if (document.visibilityState === 'hidden') return;
++      void capture.status().then(
++        (value) => {
++          if (active) setStatus(value);
++        },
++        () => {
++          if (active) setError('Capture is unavailable. Use Share/manual upload.');
++        },
++      );
++    };
++    poll();
++    const timer = window.setInterval(poll, 1000);
++    return () => {
++      active = false;
++      window.clearInterval(timer);
++    };
++  }, [enabled]);
++  if (!enabled) return null;
++  const verified = online && privateSessionValid() && nativeShareSnapshot().verified;
++  async function action(kind: 'start' | 'stop' | 'review') {
++    setBusy(true);
++    setError('');
++    try {
++      if (kind !== 'stop' && (!verified || !nativeShareSnapshot().foreground))
++        throw new Error('Verify session first');
++      await capture[kind]();
++      setStatus(await capture.status());
++    } catch {
++      setError(
++        'Capture unavailable or session unverified. Check connection or use Share/manual upload.',
++      );
++    } finally {
++      setBusy(false);
++    }
++  }
++  return (
++    <section aria-label="TEST single-app capture" className="native-share-review">
++      <h2>TEST single-app capture</h2>
++      <p>
++        In Android, choose “Share one app”. Android may also offer the entire screen; BrickVault
++        relies on your single-app selection. Open harmless content, then use the notification’s
++        Capture action. One screenshot per consent; no audio. Protected regions may remain blank.
++      </p>
++      <p role="status">{error || status?.notice || 'Checking capture support…'}</p>
++      <button
++        disabled={busy || !verified || !status?.supported || status.state !== 'IDLE'}
++        onClick={() => void action('start')}
++      >
++        Start capture
++      </button>
++      <button
++        disabled={busy || !verified || status?.state !== 'READY'}
++        onClick={() => void action('review')}
++      >
++        Review screenshot
++      </button>
++      <button
++        disabled={busy || !status || status.state === 'IDLE'}
++        onClick={() => void action('stop')}
++      >
++        Stop / discard capture
++      </button>
++      <p>
++        Review and explicit Save use the existing restricted image intake. No image is saved before
++        Save.
++      </p>
++    </section>
++  );
++}

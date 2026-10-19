@@ -1,0 +1,18 @@
+{
+  "projection_and_service_stopped_after_capture": true,
+  "screenshot_bytes": 108477,
+  "original_privacy": "restricted",
+  "image_count_before_save": 2,
+  "matching_original_hash_and_byte_count": true,
+  "image_count_after_save": 3,
+  "preview": "Brian confirmed, one loaded native PNG 1440x3120",
+  "restricted_original_and_thumbnail_count": 2,
+  "screenshot_sha256": "e60b7f4c3f58caf4e847991fc4c3d0e65778742d9ae82257380385298c7ab1dd",
+  "actual_blob_bytes_match": true,
+  "receipt_count_after_save": 3,
+  "listing_count_after_save": 1,
+  "save": "Brian explicitly tapped upload",
+  "listing_count_before_save": 1,
+  "receipt_count_before_save": 2,
+  "foreground_viewport": "384x777, scrollWidth 384"
+}

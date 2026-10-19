@@ -1,0 +1,30 @@
+{
+  "native_fixtures": {
+    "passed": 6,
+    "failures": 0,
+    "scope": "consent/fresh-one-frame/late-completion+actions/visibility+resize/memory/intake-handoff"
+  },
+  "frontend_regression": {
+    "tests": 21,
+    "files": 3,
+    "passed": true
+  },
+  "affected_eslint_prettier_typescript": "PASS",
+  "web_build_capacitor_copy_privacy_origin": "PASS",
+  "android_lint": {
+    "errors": 0,
+    "warnings": 19
+  },
+  "final_source_compile_and_fixtures": "PASS",
+  "backend_changes": false,
+  "migration_changes": false,
+  "dependency_upgrades": false,
+  "sdk_platform_installed": "official android-37.0 revision 2",
+  "min_sdk": 24,
+  "target_sdk": 36,
+  "physically_exercised_apk_sha256": "76abdc59b92f607fed5c5b6acdc300c974030b4b2d892f5f6d1ddcd12649f73b",
+  "physically_exercised_apk_signer": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "final_hardening_device_test": "NOT RUN; Brian ended experiment",
+  "full_15a_campaign": "not repeated; accepted evidence reused",
+  "patch_replay": "PASS"
+}

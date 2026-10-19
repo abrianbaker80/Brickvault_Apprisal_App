@@ -1,0 +1,7 @@
+{
+  "capture_service_absent": true,
+  "forwards_match_prior": true,
+  "helper_absent": true,
+  "reverse_match_prior": true,
+  "projection_absent": true
+}

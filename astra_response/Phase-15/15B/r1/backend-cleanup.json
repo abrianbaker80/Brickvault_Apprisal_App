@@ -1,0 +1,9 @@
+{
+  "leftovers": [],
+  "volumes_preserved": true,
+  "status": "cleaned",
+  "temporary_credentials_removed": true,
+  "database_removed": true,
+  "prior_test_service_running": false,
+  "database_cleanup_confirmed": true
+}
