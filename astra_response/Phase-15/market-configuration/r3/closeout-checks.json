@@ -1,0 +1,171 @@
+{
+  "scope": "LOCAL Git/documentation closeout only; accepted r2 validation reused",
+  "staged_inventory_exactly_four_approved_files": "PASS",
+  "complete_staged_diff_inspected": true,
+  "git_diff_cached_check": "PASS (before local commit)",
+  "accepted_r2_patch_reverse_check": "PASS",
+  "accepted_r2_source_and_test_sha256_match": {
+    "services/api/src/brickvault_api/production_backup.py": "18e718dc281589a778a0e88bddcb1a03dfceb60d95e9aea7a9efec9fe33f88c9",
+    "services/api/tests/unit/test_production_backup.py": "d7292ca4a0bcb3d250f37e1b604deffaa9ec3af105d5c159ee821e649fe14c93"
+  },
+  "committed_source_and_test_content_match": "PASS: accepted working bytes equal committed blobs after normal Git CRLF-to-LF normalization; inventory records the canonical blob hashes.",
+  "committed_patch_equals_reviewed_staged_diff": true,
+  "plan108_pending_restoration_capture_hunks_excluded": true,
+  "plan108_original_pending_preimage_byte_identical": true,
+  "plan108_pending_additions_retained": 179,
+  "final_main_index_empty": true,
+  "main_unpushed": true,
+  "pending_entries": [
+    {
+      "path": "AGENTS.md",
+      "status": " M",
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4"
+    },
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "status": " M",
+      "sha256": "d940115177434f798c8722b45a9d3670b60823764b9b1a27b2dab2971520cbc4"
+    },
+    {
+      "path": "apps/android/android/app/build.gradle",
+      "status": " M",
+      "sha256": "341e10705cb4998710f17673b09406bd1014c298af42596583f04e1b63028a4a"
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "status": " M",
+      "sha256": "82fa1190d3b3fd720b5cc127663824db3515fa4c81d8d25b665ac167448e3507"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "status": " M",
+      "sha256": "f36a18c6cd3d5f0c9dbc4072575fe677f5fc2967f1e218a6000a41df416748fc"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "status": " M",
+      "sha256": "ba3b49ab33acd979982148cc5acb7b98692c30055527c7a01b519d650fa260f0"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "status": " M",
+      "sha256": "441e43c9ae52352da04892281ad39fadd335e9b9778af5cbf69912c0ba6b786d"
+    },
+    {
+      "path": "apps/android/android/variables.gradle",
+      "status": " M",
+      "sha256": "f9865d0fece4b46a97f61ed6e346bf51c6bd03b337851f9e300bc6cc05420e96"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "status": " M",
+      "sha256": "854a61e3eeed5220922167f7f3b92a41bddf74bb17daca96ab00d04b033a562f"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "status": " M",
+      "sha256": "bc90765361dbc88c4c7b8b2392aee198be98508e97a500cac210141c24f0fbbb"
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "status": " M",
+      "sha256": "f41c809d3c8d6ca15e4cc32cb0f619ce7c28ad5ab1cb5c680cce20d4c8ca653b"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "status": " M",
+      "sha256": "04462b739ae4a5d36afc1f23922de21471cd1e2cbb404e785aa068f12d546613"
+    },
+    {
+      "path": "docs/SECURITY_PRIVACY.md",
+      "status": " M",
+      "sha256": "306807c913470acb432fefae70eb22dea8c34c83580ebc79aa14cb3ef343574b"
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "status": " M",
+      "sha256": "858f6dd3039e947496bb480afad41baef1294b9d509e2b8fb2328c43c77f48f9"
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "status": " M",
+      "sha256": "5871ca31c04f7dd6c3f948290a8f228fa1b2e13717a1f0a525aca9f12b817285"
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "status": " M",
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7"
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "status": " M",
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java",
+      "status": "??",
+      "sha256": "ce5e97c9ca61c4d3dcb3c4bb9dd89bcf7fb59ff5ce178965a5f868c298d64995"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java",
+      "status": "??",
+      "sha256": "e1cc7aacb59c5c4ab8629fbad00809fd0dceacf14da1280732f27567bbe01f0d"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java",
+      "status": "??",
+      "sha256": "bf82a42f84e815b843755bf1862aab298fd97f9ab2b2f69691cc1f8e633bf528"
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java",
+      "status": "??",
+      "sha256": "8c39c08d2d97d93bcf99a1fcf797ab3a44e4fc754c1fa7bca80a5b8e88629cc7"
+    },
+    {
+      "path": "apps/web/src/NativeCapture.tsx",
+      "status": "??",
+      "sha256": "abffa551bbf2ec60564e3b828b29526b7a1d5560eded03067ed7080a25e1f9c3"
+    }
+  ],
+  "protected_files": [
+    {
+      "path": "AGENTS.md",
+      "byte_identical": true,
+      "unstaged": true,
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4"
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "byte_identical": true,
+      "unstaged": true,
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7"
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "byte_identical": true,
+      "unstaged": true,
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+    }
+  ],
+  "private_evidence": "Earlier evidence and secret/archive files were not modified; no credential values or decrypted archives read.",
+  "changed_links": "Pinned r2 REVIEW resolves in accepted local Git tree; all new package-relative links resolve.",
+  "not_run": [
+    "tests",
+    "lint/types",
+    "builds",
+    "backups",
+    "recovery checks",
+    "provider calls",
+    "phone/server connections",
+    "restarts",
+    "live health checks"
+  ],
+  "production": {
+    "action": "untouched; no new live verification",
+    "accepted_r2_release": "phase15a-market-credential-recovery-r3",
+    "accepted_r2_manifest_sha256": "e6db4af79626eb5ca3289513356aa1361607b345f3ffbbccbc1e200d0d2eb9ac",
+    "phone_runtime_backup_schedule": "untouched"
+  },
+  "capture": "not resumed",
+  "phase16": "PAUSED"
+}

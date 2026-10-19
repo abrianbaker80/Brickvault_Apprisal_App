@@ -1,0 +1,30 @@
+[
+  {
+    "path": "docs/IMAGE_BACKUP_RECOVERY.md",
+    "change": "M",
+    "git_blob": "77daa94b17a93e9cf82cbcfa487cc66b31152a53",
+    "committed_blob_sha256": "493faa64529f095380baff14a0eaaf304634e2915ab368cd514b91887fd49344",
+    "scope": "Accepted r2 changes only"
+  },
+  {
+    "path": "docs/plans/108-phase-15-android-share-capture.md",
+    "change": "M",
+    "git_blob": "7ad7fbba3bc72695214f48e77e1d68f8335483ad",
+    "committed_blob_sha256": "9885b3300bb8b22cc526d3ccb95a369e662783c083f005b8cdecf9f700d9161f",
+    "scope": "Market activation/refresh/credential-recovery and acceptance hunks only"
+  },
+  {
+    "path": "services/api/src/brickvault_api/production_backup.py",
+    "change": "M",
+    "git_blob": "6815cff316dddf8d1e99614063af4b03a1651517",
+    "committed_blob_sha256": "6f499949ab1222de4155e1efdd9d4f6baa459c4d5c39300c1082a2e935bf5dd6",
+    "scope": "Accepted r2 changes only"
+  },
+  {
+    "path": "services/api/tests/unit/test_production_backup.py",
+    "change": "M",
+    "git_blob": "d03e85fe120a8986e5cb5dec9f4c8dafa6716957",
+    "committed_blob_sha256": "d4e7449fa3342d59bef365169b984e304b8fcc20b6488d8364aa1844b09b58bb",
+    "scope": "Accepted r2 changes only"
+  }
+]
