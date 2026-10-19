@@ -1,0 +1,167 @@
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -25,0 +26 @@
++from uuid import UUID
+@@ -37,0 +39,2 @@
++from brickvault_api.providers.bricklink import configuration as bricklink_configuration
++from brickvault_api.settings import production_credentials_root_is_safe
+@@ -245,0 +249,79 @@
++def _market_service_identity() -> tuple[int, int]:
++    import pwd
++
++    account = pwd.getpwnam("brickvault")
++    return account.pw_uid, account.pw_gid
++
++
++def _market_credential_file(environment_file: Path) -> Path | None:
++    """Admit only the configured ordinary, private, API-readable BrickLink file.
++
++    The normal root-owned-file validator remains unchanged. This one file is
++    owned by the API account; its private parent must also be traversable by it.
++    Parsing is local and never authenticates or contacts the provider.
++    """
++    failed = False
++    result: Path | None = None
++    try:
++        _regular_root_file(environment_file, (0o400, 0o600, 0o640))
++        before = environment_file.lstat()
++        with environment_file.open("rb") as stream:
++            opened = os.fstat(stream.fileno())
++            if opened.st_nlink != 1 or (opened.st_dev, opened.st_ino) != (
++                before.st_dev,
++                before.st_ino,
++            ):
++                raise ValueError
++            raw = stream.read(16 * 1024 + 1)
++        if len(raw) > 16 * 1024:
++            raise ValueError
++        names = ("BVA_MARKET_CREDENTIALS_ROOT", "BVA_MARKET_ACCOUNT_SCOPE")
++        settings: dict[str, str] = {}
++        for line in raw.decode("utf-8").splitlines():
++            key, separator, value = line.partition("=")
++            key, value = key.strip(), value.strip()
++            if separator and key in names:
++                if key in settings or not value:
++                    raise ValueError
++                settings[key] = value
++        if settings:
++            if set(settings) != set(names):
++                raise ValueError
++            value = settings[names[0]]
++            root = Path(value)
++            if (
++                str(root) != value
++                or ".." in root.parts
++                or not production_credentials_root_is_safe(value)
++                or str(UUID(settings[names[1]])) != settings[names[1]]
++            ):
++                raise ValueError
++            result = bricklink_configuration.check_location(root)
++            uid, gid = _market_service_identity()
++            info = result.lstat()
++            if (
++                not stat.S_ISREG(info.st_mode)
++                or info.st_nlink != 1
++                or info.st_uid != uid
++                or info.st_gid != gid
++                or stat.S_IMODE(info.st_mode) not in (0o400, 0o600)
++            ):
++                raise ValueError
++            for parent in (result.parent, *result.parent.parents):
++                info = parent.lstat()
++                execute = 0o100 if info.st_uid == uid else 0o010 if info.st_gid == gid else 0o001
++                if (
++                    not stat.S_ISDIR(info.st_mode)
++                    or info.st_uid not in (0, uid)
++                    or info.st_mode & 0o022
++                    or not info.st_mode & execute
++                ):
++                    raise ValueError
++            bricklink_configuration.load_configuration(root)
++    except (OSError, ValueError, KeyError):
++        failed = True
++    if failed:
++        raise BackupError("Configured market credential recovery input is missing or unsafe.")
++    return result
++
++
+@@ -264 +346 @@
+-    return tuple(
++    files = tuple(
+@@ -266,0 +349,3 @@
++    environment = Path("/etc/brickvault/api.env")
++    credential = _market_credential_file(environment) if environment.exists() else None
++    return (*files, str(credential).lstrip("/")) if credential is not None else files
+--- a/docs/IMAGE_BACKUP_RECOVERY.md
++++ b/docs/IMAGE_BACKUP_RECOVERY.md
+@@ -94,0 +95,28 @@
++
++
++## Configured BrickLink credential recovery coverage
++
++When api.env enables market access, configuration.tar must also contain exactly
++`<BVA_MARKET_CREDENTIALS_ROOT>/.local/secrets/bricklink.env`. The existing api.env
++member preserves the root/account-scope settings. No credential directory or
++unrelated secret is added. Paired settings, a canonical production root/account
++identity, ordinary paths, private single-link file ownership, API-user traversal
++and the existing local credential parser are required; unsafe or incomplete
++configuration refuses capture rather than claiming market recovery coverage.
++The credential-specific service-owner admission does not relax root-owned checks
++for any other configuration file. Live permissions are not changed.
++
++Receipt schemas 2/3 and the encrypted repositories are unchanged. Historical
++backups remain readable and retain their actual captured coverage; an older
++configuration archive without the credential cannot be described as covering it.
++The credential is included only in a newly verified complete run.
++
++A configuration-only recovery must verify the exact receipt/snapshot bytes,
++reject duplicate, absolute, traversing, link or special archive members, and
++restore only the selected environment and credential files into fresh protected
++disposable storage. Preserve archived file ownership/mode and reconstruct a
++traversable protected root with a private service-owned secrets directory. Verify
++credential equality privately and run the existing loader as the API user under
++its service protections with networking disabled. Never overwrite live settings
++or restore a database for this check. Remove only ownership-verified disposable
++plaintext; retain encrypted snapshots and protected receipts.
+--- a/docs/plans/108-phase-15-android-share-capture.md
++++ b/docs/plans/108-phase-15-android-share-capture.md
+@@ -837,0 +838,39 @@
++
++
++## Authorized market credential backup correction - 2026-10-19
++
++Reuse the accepted five-attempt 10350-1 refresh and four matching fresh/priced
++phone/server views. Phase 16 remains paused. Brian authorizes only the exact
++configured BrickLink credential inclusion, narrow credential-owner validation,
++focused synthetic checks, a new immutable backend-only release retaining the
++accepted web/runtime/retention/LF hook bytes, one normal dual encrypted backup,
++and one isolated Drive-only configuration recovery with protected cleanup.
++No provider or phone work, new repository, migration, APK/frontend rebuild,
++prune, live data restore or pending 15B checkpoint is authorized.
++Execution: validate source and input refusal; prepare/verify immutable artifact;
++activate with rollback state retained; announce the normal backup pause; capture
++one complete run; recover only configuration into disposable protected storage;
++verify equality/loader behavior and clean plaintext; publish additive r2 evidence.
++Outcome and exact code/artifact identities will be recorded below after execution.
++
++
++### Market credential backup correction outcome - 2026-10-19
++
++**PRODUCTION MARKET ACCESS AND CREDENTIAL RECOVERY READY FOR REVIEW.**
++Reuse the accepted 10350-1 five-request refresh: verified mapping, four fresh/priced
++phone/server-matching views, no retries. No further provider or phone work occurred.
++Installed immutable release `phase15a-market-credential-recovery-r3`, manifest SHA-256
++`e6db4af79626eb5ca3289513356aa1361607b345f3ffbbccbc1e200d0d2eb9ac`, changes only the backup helper in the API wheel.
++Accepted frontend, Python 3.13.16, retention amendment and canonical LF hook remain.
++The exact configured private credential now joins the existing api.env allowlist;
++missing/unsafe/unusable inputs refuse capture, with unrelated root-file checks intact.
++Twelve focused synthetic cases, affected lint/format and Linux production-helper
++strict typing pass. One normal dual run passed eight artifact readbacks and both
++repository checks. One Drive-only configuration recovery verified exact coverage,
++private equality, layout/ownership/mode and the restricted service-identity loader;
++its owned tmpfs plaintext was removed. Historical receipts/coverage are unchanged.
++A preliminary runtime-permission failure was rolled back; its artifact is retained.
++The corrected candidate passed the service-user import probe before activation.
++Final health and unchanged 04:00 America/Chicago schedule pass. Provider attempts
++remain five, with zero added. Source/docs remain uncommitted; main unpushed/index
++empty; original pending/protected bytes preserved. Phase 16 remains PAUSED.

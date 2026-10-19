@@ -1,0 +1,144 @@
+{
+  "status": "PRODUCTION MARKET ACCESS AND CREDENTIAL RECOVERY READY FOR REVIEW",
+  "accepted_local_main": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+  "functional_refresh_reused": {
+    "set": "10350-1",
+    "mapping": "VERIFIED",
+    "fresh_priced_views": 4,
+    "phone_server_amounts_matched": true,
+    "identity_requests": 1,
+    "price_requests": 4,
+    "retries": 0,
+    "total_attempts": 5
+  },
+  "new_provider_attempts": 0,
+  "release": {
+    "release": "phase15a-market-credential-recovery-r3",
+    "manifest_sha256": "e6db4af79626eb5ca3289513356aa1361607b345f3ffbbccbc1e200d0d2eb9ac",
+    "source": {
+      "commit": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+      "reviewed_id": "d6ba6a119c3eb7285852cd583ab76bbf0c352a5d18517292adb4abb9b308d48c"
+    },
+    "identity": {
+      "accepted_main": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+      "clean_source_id": "a290ddab47d7d3c74616b73cbff2c48d9576809c7f77be9b84f4c3fe19dc4340",
+      "parent_manifest_sha256": "24d90a375ba4f099c84a7770aa3dfa06335a38e9e9d3d28975464680112d2099",
+      "change": "exact-configured-bricklink-credential-backup",
+      "api_source_sha256": "18e718dc281589a778a0e88bddcb1a03dfceb60d95e9aea7a9efec9fe33f88c9",
+      "retention_sha256": "8f7c172eab653bd4e622be37158c68927cd2d9eb4286d731f269005470f74e65",
+      "canonical_lf_hook_sha256": "7a87bb323025a0aaab9575e42519bfc885217da5bd7dbf817c85353395db05f7",
+      "runtime": "3.13.16",
+      "runtime_permissions": "root:brickvault directories 0750, files 0640, executables 0750; service-identity imports required",
+      "web_reused_without_rebuild": true
+    },
+    "archive_sha256": "ee7ce3ac4abe9e80f2024d420de575b37ae0f0f5d552beb600a8750d8459f561",
+    "changed_artifacts": [
+      "api/brickvault_api-0.0.0-py3-none-any.whl",
+      "api/brickvault_api-0.0.0.tar.gz"
+    ],
+    "changed_api_modules": [
+      "brickvault_api/production_backup.py"
+    ],
+    "frontend_rebuilt": false,
+    "capture_excluded": true,
+    "tests": {
+      "focused_pytest": "12 passed",
+      "ruff": "PASS",
+      "production_linux_mypy": "PASS"
+    }
+  },
+  "backup": {
+    "normal_dual_runs": 1,
+    "destinations": [
+      "existing encrypted Proxmox",
+      "existing encrypted Google Drive"
+    ],
+    "complete_new_run_receipt": true,
+    "artifact_readbacks": 8,
+    "repository_checks": 2,
+    "configuration_artifact_bytes": 30720,
+    "added_member": "<configured-root>/.local/secrets/bricklink.env",
+    "existing_api_env_preserves": [
+      "BVA_MARKET_CREDENTIALS_ROOT",
+      "BVA_MARKET_ACCOUNT_SCOPE"
+    ],
+    "entire_credential_root_archived": false,
+    "unrelated_new_secrets": false,
+    "historical_receipts_unchanged": true,
+    "historical_coverage_not_relabelled": true
+  },
+  "isolated_recovery": {
+    "status": "PASS",
+    "started_at_utc": "2026-10-19T21:12:19.884615+00:00",
+    "source_destinations": [
+      "drive"
+    ],
+    "database_restore": false,
+    "provider_calls": 0,
+    "configuration_artifact_contains_exact_credential": true,
+    "root_and_account_settings_preserved": true,
+    "credential_equality_private": true,
+    "credential_uid_gid_mode_preserved": true,
+    "ordinary_member_paths": true,
+    "restricted_service_identity_loader": "PASS",
+    "live_configuration_untouched": true,
+    "disposable_plaintext_cleanup": "PASS",
+    "plaintext_restore_root_absent": true,
+    "completed_at_utc": "2026-10-19T21:12:34.528060+00:00"
+  },
+  "final_operational_state": {
+    "status": "PRODUCTION MARKET ACCESS AND CREDENTIAL RECOVERY READY FOR REVIEW",
+    "release": "phase15a-market-credential-recovery-r3",
+    "manifest_sha256": "e6db4af79626eb5ca3289513356aa1361607b345f3ffbbccbc1e200d0d2eb9ac",
+    "schema": [
+      "0017_listing_images"
+    ],
+    "normal_health": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true
+    },
+    "api_active": true,
+    "backup_timer_active": true,
+    "backup_schedule_unchanged": true,
+    "older_receipts_unchanged": true,
+    "credential_bytes_and_permissions_unchanged": true,
+    "provider_attempts_total": 5,
+    "provider_attempts_added": 0,
+    "phase16": "PAUSED",
+    "completed_at_utc": "2026-10-19T21:13:03.269759+00:00"
+  },
+  "source_changes_uncommitted": [
+    "services/api/src/brickvault_api/production_backup.py",
+    "services/api/tests/unit/test_production_backup.py",
+    "docs/IMAGE_BACKUP_RECOVERY.md",
+    "docs/plans/108-phase-15-android-share-capture.md"
+  ],
+  "focused_test_file_sha256": "d7292ca4a0bcb3d250f37e1b604deffaa9ec3af105d5c159ee821e649fe14c93",
+  "validation": {
+    "synthetic_pytest": "12 passed; 16 unrelated cases deselected",
+    "ruff_affected_files": "PASS",
+    "strict_mypy_production_linux_helper": "PASS",
+    "installed_service_identity_import": "PASS",
+    "installed_exact_file_inclusion": "PASS"
+  },
+  "deployment_exception": {
+    "failed_candidate_retained": "phase15a-market-credential-recovery-r2",
+    "cause": "runtime directories inherited 0077 creation mask and were not traversable by API identity",
+    "prior_release_restored_before_corrected_candidate": true,
+    "corrected_runtime_permissions_and_service_identity_probe": "PASS"
+  },
+  "phase16": "PAUSED",
+  "remaining_limitations": []
+}
