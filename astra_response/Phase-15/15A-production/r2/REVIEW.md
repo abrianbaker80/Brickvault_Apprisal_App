@@ -1,9 +1,9 @@
 # 15A production continuation — 2026-10-19
 
-**BLOCKED — local phone sign-in and the single production Share smoke remain.**
-All three maintenance blockers are resolved. The corrected production backend and
-matching production APK are installed and retained; no TEST app remains. This is
-not a claim of completed production Share qualification.
+**SHARE-ONLY PRODUCTION DEPLOYMENT COMPLETE — READY FOR REVIEW**
+All three maintenance blockers are resolved. The accepted Share-only application
+is available in production; its matching production APK remains installed, signed
+in and usable. The single two-image physical production integration workflow passed.
 
 Current release: `phase15a-share-production-r2`, database `0017_listing_images`.
 Manifest SHA-256: `24d90a375ba4f099c84a7770aa3dfa06335a38e9e9d3d28975464680112d2099`.
@@ -69,13 +69,27 @@ The same-signer/code-1 APK was installed with `adb install -r`. Installed bytes 
 UID/first-install identity and app data are preserved. No uninstall, data clear,
 forced downgrade or signing-key replacement. [Phone receipt](phone-installation.json).
 
-The phone was observed locked. Brian has been asked to unlock/sign in locally;
-no password/cookie was read and local readiness was not confirmed. Therefore normal
-authenticated search and the two-image Sharesheet/explicit destination/Save/gallery/
-original-hash/receipt/reopen smoke have **not run**. No synthetic listing, images or
-receipts were created; prior counts remain 1 listing / 3 images / 3 receipts.
-The two unused task-owned phone fixtures and owned inspection forward were removed.
-The new production APK stays installed. [Pending smoke](production-smoke.json).
+Brian confirmed local sign-in, then normal set search for 10350 passed. Samsung
+My Files sent exactly two harmless task-owned images through the ordinary Android
+Sharesheet to BrickVault. Both native originals and decoded review previews matched
+the selected order. The new synthetic Marketplace Listing destination was explicit,
+and Save was clicked once: one listing and two uploads returned HTTP 201.
+
+Authenticated original-content readbacks matched both fixture SHA-256 hashes and
+byte lengths. All four original/thumbnail content responses returned `no-store`.
+Read-only admin joins verified restricted originals and thumbnails, positions 0/1,
+client UUID/content-hash/receipt-to-listing-image identities and thumbnail-v1 lineage.
+After clearing only the live Share queue, the saved listing reopened from Marketplace
+Listings with both decoded images in order. The clearly labeled synthetic record is
+retained under the approved policy; no persisted data was deleted. Final counts are
+2 listings / 5 listing images / 5 receipts, exactly the expected smoke deltas.
+The two task-owned phone fixtures and inspection forward were removed. The new
+production APK stays installed and signed in. [Smoke receipt](production-smoke.json).
+
+One initial read-only evidence assertion incorrectly required an extra `private`
+cache directive. The accepted contract requires exactly `no-store`, which all four
+live responses supplied. The local checker was corrected; no application change,
+repeat Save/upload, maintenance or build followed.
 
 The healthy rollback pair is `phase13c-runtime-ops-r1` plus the retained prior
 production APK `045210d0…1ddd2`; it preserves the corrected operational ledger/runtime.
@@ -91,9 +105,8 @@ only one additive Plan 108 section and the separately authorized operational sou
 fixture changes are task-owned. Main is unpushed; its index is empty and all main
 work remains uncommitted. [Preservation](preservation-validation.json).
 
-**Next:** unlock/sign in locally, then resume only the already-authorized single
-two-image production Share workflow and readbacks. No new maintenance/deployment
-approval is required. Accepted [15A physical TEST evidence](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/335b76098acc4c9130a3b8b8120b770b207781e8/astra_response/Phase-15/15A/r2/REVIEW.md)
-is reused. 15A production integration acceptance is pending. 15B capture is excluded,
-partial/unqualified, preserved and not resumed. 15C is not started. Set 10350's prior
-missing market values remain separate; no pricing/recognition/provider investigation.
+15A Share is production available. Accepted [15A physical TEST evidence](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/335b76098acc4c9130a3b8b8120b770b207781e8/astra_response/Phase-15/15A/r2/REVIEW.md)
+was reused; no lifecycle/permission/fault campaign was repeated. 15B capture remains
+excluded, partial/unqualified, preserved and not resumed. 15C is not started. Set
+10350's prior missing market values remain separate; no pricing/recognition/provider
+investigation was performed. No operational failure remains unresolved.

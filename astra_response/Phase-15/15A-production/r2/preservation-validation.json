@@ -30,5 +30,7 @@
   "capture_work_committed_or_discarded": false,
   "task_owned_worktrees_removed": 2,
   "original_generated_assets_used": false,
-  "accepted_app_source_modified": false
+  "accepted_app_source_modified": false,
+  "rechecked_after_production_smoke": true,
+  "remote_main_unchanged": true
 }

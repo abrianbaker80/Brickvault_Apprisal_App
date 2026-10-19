@@ -3,7 +3,7 @@
   "accepted_closeout": "f8291d5b3b32f4c068d4be3b8803783728057bbf",
   "accepted_physical_test": "335b76098acc4c9130a3b8b8120b770b207781e8",
   "release": {
-    "status": "SHARE_RELEASE_VERIFIED_NOT_DEPLOYED",
+    "status": "DEPLOYED_HEALTHY_PRODUCTION_SHARE_SMOKE_PASS",
     "release": "phase15a-share-production-r2",
     "application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
     "source": {
@@ -29,7 +29,8 @@
     "archive_sha256": "b427e705969e531c4c738e18dc0b02578ae359653c9bdf4b6bc4ad36e2168de3",
     "file_count": 36,
     "capture_excluded": true,
-    "packaging_correction": "Canonical accepted Git LF bytes for the POSIX executable; no application source/wheel/web/APK change"
+    "packaging_correction": "Canonical accepted Git LF bytes for the POSIX executable; no application source/wheel/web/APK change",
+    "build_verification_status": "SHARE_RELEASE_VERIFIED_NOT_DEPLOYED"
   },
   "installed_apk": {
     "sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",

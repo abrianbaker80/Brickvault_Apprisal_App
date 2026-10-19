@@ -22,17 +22,17 @@
     "uninstall_data_clear_downgrade": false
   },
   "final": {
-    "status": "PRODUCTION_INSTALLED_LOCAL_SIGNIN_AND_SHARE_SMOKE_PENDING",
+    "status": "PRODUCTION_SHARE_SMOKE_PASS_READY",
     "installed_apk_sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",
     "task_owned_phone_images_removed": 2,
     "owned_debug_forwards_removed": true,
     "unrelated_adb_rules_preserved": true,
     "test_reverse_created": false,
-    "keyguard_showing_last_observation": true,
+    "signed_in_and_reopened_synthetic_listing": true,
     "local_credentials_not_read": true,
-    "synthetic_listing_created": false,
-    "new_image_uploads": 0,
-    "new_upload_receipts": 0,
+    "synthetic_listing_created": true,
+    "new_image_uploads": 2,
+    "new_upload_receipts": 2,
     "production_app_data_preserved": true,
     "new_production_apk_left_installed": true
   },

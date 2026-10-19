@@ -1,11 +1,30 @@
 {
-  "status": "NOT_RUN_LOCAL_PHONE_SIGNIN_REQUIRED",
-  "last_observed_keyguard_showing": true,
-  "local_signin_confirmation_received": false,
-  "new_listing_records": 0,
-  "new_image_uploads": 0,
-  "new_upload_receipts": 0,
-  "retained_synthetic_record": null,
+  "status": "PASS",
+  "local_signin_confirmation_received": true,
+  "normal_catalog_search": {
+    "status": "PASS",
+    "catalog_search": "10350",
+    "pricing_provider_calls": 0,
+    "market_value_fix_claimed": false
+  },
+  "source": "Samsung My Files ordinary Android Sharesheet; explicitly selected two harmless task-owned images in order",
+  "review": {
+    "decoded_previews": 2,
+    "native_bytes_and_order_verified": true,
+    "explicit_destination": "new synthetic Marketplace Listing",
+    "explicit_save_clicks": 1,
+    "restricted_elevation_on_both_requests": true
+  },
+  "new_listing_records": 1,
+  "new_image_uploads": 2,
+  "new_upload_receipts": 2,
+  "retained_synthetic_record": {
+    "listing_id": "5fb4287e-ea9f-4c87-9968-cf374a803aba",
+    "title": "SYNTHETIC 15A production Share smoke 2026-10-19",
+    "created_at": "2026-10-19T18:33:06.830311Z",
+    "retained_under_approved_image_policy": true,
+    "no_server_delete_or_manual_database_cleanup": true
+  },
   "fixtures": [
     {
       "name": "share-1.png",
@@ -20,8 +39,164 @@
       "selection_order": 1
     }
   ],
+  "upload_results": [
+    {
+      "path": "/api/listings",
+      "status": 201,
+      "body": {
+        "source_type": "manual",
+        "source_url": null,
+        "title": "SYNTHETIC 15A production Share smoke 2026-10-19",
+        "description": "Synthetic production integration proof. Two harmless task-owned images; retained under approved image policy.",
+        "asking_price": null,
+        "currency": "USD",
+        "id": "5fb4287e-ea9f-4c87-9968-cf374a803aba",
+        "created_at": "2026-10-19T18:33:06.830311Z",
+        "updated_at": "2026-10-19T18:33:06.830311Z"
+      }
+    },
+    {
+      "path": "/api/listings/5fb4287e-ea9f-4c87-9968-cf374a803aba/images",
+      "status": 201,
+      "body": {
+        "client_upload_id": "fa318c35-7576-4fc4-826c-9c153536ee93",
+        "filename": "shared-image-1.png",
+        "status": "uploaded",
+        "listing_image_id": "0d31b424-5bec-4a5d-8c80-cb320b246391",
+        "error": null
+      }
+    },
+    {
+      "path": "/api/listings/5fb4287e-ea9f-4c87-9968-cf374a803aba/images",
+      "status": 201,
+      "body": {
+        "client_upload_id": "224efadc-c997-4389-bf78-871ef13f2dbe",
+        "filename": "shared-image-2.png",
+        "status": "uploaded",
+        "listing_image_id": "0629e6a7-e174-41db-8c4d-630e9a8b7cf7",
+        "error": null
+      }
+    }
+  ],
+  "upload_request_identity_fields": [
+    {
+      "client_upload_id": "fa318c35-7576-4fc4-826c-9c153536ee93",
+      "display_order": "0",
+      "privacy_elevation": "restricted"
+    },
+    {
+      "client_upload_id": "224efadc-c997-4389-bf78-871ef13f2dbe",
+      "display_order": "1",
+      "privacy_elevation": "restricted"
+    }
+  ],
+  "authenticated_content_readbacks": [
+    {
+      "kind": "original",
+      "display_order": 0,
+      "asset_id": "af5062fe-9deb-443b-90cf-c3cef3718fe7",
+      "bytes": 6061,
+      "sha256": "5cd2715d56497e5ea47f79023d36ef62d66281cc1b2bafb60d8bea1eff1fa552",
+      "cache_control": "no-store",
+      "content_type": "image/png"
+    },
+    {
+      "kind": "thumbnail",
+      "display_order": 0,
+      "asset_id": "784e6ccf-2e5f-4139-9939-9d78cf312b5b",
+      "bytes": 11998,
+      "sha256": "c1f21303210c4e519bb13772dfa76f3e26383c29e2681ae1b88e252d34923266",
+      "cache_control": "no-store",
+      "content_type": "image/jpeg"
+    },
+    {
+      "kind": "original",
+      "display_order": 1,
+      "asset_id": "25c184a7-1410-4959-bb7c-22ec8e0c7347",
+      "bytes": 6152,
+      "sha256": "31ecdf7f8683622926833a54792056a3aa350bf734af6d964a8b8919bf408599",
+      "cache_control": "no-store",
+      "content_type": "image/png"
+    },
+    {
+      "kind": "thumbnail",
+      "display_order": 1,
+      "asset_id": "62c39d3c-dcf5-4b96-a058-4f123635766e",
+      "bytes": 12114,
+      "sha256": "cf8c202847814734b5d0f17f97db6452caba256e9dd0b12c0de62e4d16baff51",
+      "cache_control": "no-store",
+      "content_type": "image/jpeg"
+    }
+  ],
+  "gallery_order": [
+    "Image 1 · Position 0",
+    "Image 2 · Position 1"
+  ],
+  "decoded_gallery_images": 2,
+  "exact_original_hashes": "PASS",
+  "restricted_original_and_thumbnail_assets": "PASS",
+  "uuid_receipt_lineage_admin_readback": {
+    "status": "PASS",
+    "listing_id": "5fb4287e-ea9f-4c87-9968-cf374a803aba",
+    "synthetic_title": "SYNTHETIC 15A production Share smoke 2026-10-19",
+    "source_type": "manual",
+    "counts": {
+      "listing_image": 2,
+      "upload_receipt": 2
+    },
+    "rows": [
+      {
+        "listing_image_id": "0d31b424-5bec-4a5d-8c80-cb320b246391",
+        "display_order": 0,
+        "original_asset_id": "af5062fe-9deb-443b-90cf-c3cef3718fe7",
+        "original_privacy": "restricted",
+        "original_sha256": "5cd2715d56497e5ea47f79023d36ef62d66281cc1b2bafb60d8bea1eff1fa552",
+        "thumbnail_asset_id": "784e6ccf-2e5f-4139-9939-9d78cf312b5b",
+        "thumbnail_privacy": "restricted",
+        "transformation_version": "thumbnail-v1",
+        "client_upload_id": "fa318c35-7576-4fc4-826c-9c153536ee93",
+        "content_hash": "5cd2715d56497e5ea47f79023d36ef62d66281cc1b2bafb60d8bea1eff1fa552",
+        "receipt_display_order": 0,
+        "receipt_listing_image_id": "0d31b424-5bec-4a5d-8c80-cb320b246391",
+        "stored_result": {
+          "error": null,
+          "status": "uploaded",
+          "filename": "shared-image-1.png",
+          "client_upload_id": "fa318c35-7576-4fc4-826c-9c153536ee93",
+          "listing_image_id": "0d31b424-5bec-4a5d-8c80-cb320b246391"
+        }
+      },
+      {
+        "listing_image_id": "0629e6a7-e174-41db-8c4d-630e9a8b7cf7",
+        "display_order": 1,
+        "original_asset_id": "25c184a7-1410-4959-bb7c-22ec8e0c7347",
+        "original_privacy": "restricted",
+        "original_sha256": "31ecdf7f8683622926833a54792056a3aa350bf734af6d964a8b8919bf408599",
+        "thumbnail_asset_id": "62c39d3c-dcf5-4b96-a058-4f123635766e",
+        "thumbnail_privacy": "restricted",
+        "transformation_version": "thumbnail-v1",
+        "client_upload_id": "224efadc-c997-4389-bf78-871ef13f2dbe",
+        "content_hash": "31ecdf7f8683622926833a54792056a3aa350bf734af6d964a8b8919bf408599",
+        "receipt_display_order": 1,
+        "receipt_listing_image_id": "0629e6a7-e174-41db-8c4d-630e9a8b7cf7",
+        "stored_result": {
+          "error": null,
+          "status": "uploaded",
+          "filename": "shared-image-2.png",
+          "client_upload_id": "224efadc-c997-4389-bf78-871ef13f2dbe",
+          "listing_image_id": "0629e6a7-e174-41db-8c4d-630e9a8b7cf7"
+        }
+      }
+    ],
+    "database_write_operations": 0,
+    "retained_under_approved_image_policy": true
+  },
+  "reopened_after_live_queue_cleared": true,
+  "credentials_or_cookies_read": false,
   "task_phone_fixture_files_removed": 2,
-  "production_integration_qualification": "PENDING",
-  "next_action": "Brian unlocks and signs in locally; resume the already-authorized one two-image normal Sharesheet workflow and readbacks. No new maintenance/deployment approval or accepted test campaign is needed.",
+  "owned_inspection_forward_removed": true,
+  "production_integration_qualification": "PASS_SINGLE_BOUNDED_WORKFLOW",
+  "readback_checker_correction": "The first read-only check incorrectly required an additional private cache directive. Accepted RequestBoundary and listing-image tests require exactly no-store. All four live responses returned no-store. Only the local evidence checker was corrected; application bytes and persisted records were unchanged, and Save/uploads were not repeated.",
+  "accepted_lifecycle_permission_fault_campaign": "REUSED_NOT_RERUN",
   "set_10350_market_values": "Separate prior limitation; no pricing investigation, provider calls or claimed correction."
 }
