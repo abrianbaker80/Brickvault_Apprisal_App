@@ -1,0 +1,21 @@
+{
+  "source_authority": "Current local checkout, not remote main",
+  "local_main_unchanged": "6242904bd396eaf1f4ad064e8540f69035527839",
+  "local_documentation_changes": [
+    {
+      "path": "docs/plans/109-phase-16a-actual-outcomes.md",
+      "status": "untracked/uncommitted/unstaged",
+      "sha256": "f3d5b052a3c64d3f903a0ae3871f8188eaa1e16c84428629d5ea510794816286"
+    }
+  ],
+  "publication_documentation_inventory": [
+    "astra_response/Phase-16/16A-plan/r1/REVIEW.md",
+    "astra_response/Phase-16/16A-plan/r1/109-phase-16a-actual-outcomes.md",
+    "astra_response/Phase-16/16A-plan/r1/inventory.json",
+    "astra_response/Phase-16/16A-plan/r1/checks.json"
+  ],
+  "published_plan_sha256": "22b4247791bcaab86496b427e5a2c85e4173d923d71704815657e63f76080bf5",
+  "publication_plan_representation": "Same design; local relative links rendered as repository paths so unpublished-main links are not presented as reachable GitHub sources.",
+  "existing_pending_paths_modified": [],
+  "application_migration_generated_contract_dependency_changes": []
+}

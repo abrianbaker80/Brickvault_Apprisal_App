@@ -1,0 +1,183 @@
+{
+  "mode": "Planning documentation only",
+  "new_plan_number": 109,
+  "existing_16a_plan_found": false,
+  "publication_revision": 1,
+  "changed_plan_links": [
+    {
+      "target": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/1b0aa9771c5fcbdaf44c6e4190fd2a425e1412f3/astra_response/Phase-15/market-configuration/r3/REVIEW.md",
+      "check": "Pinned Git target exists locally; no operational evidence rerun."
+    },
+    {
+      "target": "../../prompts/16_training_dataset_and_hardening.md",
+      "resolved_repository_path": "prompts/16_training_dataset_and_hardening.md",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../ROADMAP.md#phase-16--training-datasets-outcomes-and-recognition-hardening",
+      "resolved_repository_path": "docs/ROADMAP.md",
+      "anchor_checked": true,
+      "check": "PASS"
+    },
+    {
+      "target": "../DATA_MODEL.md#later-listing-image-recognition-and-dataset-module--phases-1316",
+      "resolved_repository_path": "docs/DATA_MODEL.md",
+      "anchor_checked": true,
+      "check": "PASS"
+    },
+    {
+      "target": "102-manual-deal-economics-admission-repair.md",
+      "resolved_repository_path": "docs/plans/102-manual-deal-economics-admission-repair.md",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/forecasts.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/forecasts.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/forecast_models.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/forecast_models.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/migrations/sql/0010_saved_forecasts_up.sql",
+      "resolved_repository_path": "services/api/src/brickvault_api/migrations/sql/0010_saved_forecasts_up.sql",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/migrations/sql/0011_forecast_revisions_up.sql",
+      "resolved_repository_path": "services/api/src/brickvault_api/migrations/sql/0011_forecast_revisions_up.sql",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/lineage_metadata.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/lineage_metadata.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/migrations/sql/0015_notes_source_urls_up.sql",
+      "resolved_repository_path": "services/api/src/brickvault_api/migrations/sql/0015_notes_source_urls_up.sql",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/economics_v1.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/economics_v1.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/economics_snapshot.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/economics_snapshot.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/api/forecasts.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/api/forecasts.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../services/api/src/brickvault_api/persistence/runtime_grants.py",
+      "resolved_repository_path": "services/api/src/brickvault_api/persistence/runtime_grants.py",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../apps/web/src/HistoricalForecastPage.tsx",
+      "resolved_repository_path": "apps/web/src/HistoricalForecastPage.tsx",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../apps/web/src/LineageMetadataSection.tsx",
+      "resolved_repository_path": "apps/web/src/LineageMetadataSection.tsx",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../apps/web/src/forecast-api.ts",
+      "resolved_repository_path": "apps/web/src/forecast-api.ts",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../../packages/contracts/src/schema.d.ts",
+      "resolved_repository_path": "packages/contracts/src/schema.d.ts",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../VALUATION_RULES.md",
+      "resolved_repository_path": "docs/VALUATION_RULES.md",
+      "anchor_checked": false,
+      "check": "PASS"
+    },
+    {
+      "target": "../SECURITY_PRIVACY.md#financial-and-saved-data-integrity",
+      "resolved_repository_path": "docs/SECURITY_PRIVACY.md",
+      "anchor_checked": true,
+      "check": "PASS"
+    },
+    {
+      "target": "../VALUATION_RULES.md#gross-proceeds-and-selling-costs",
+      "resolved_repository_path": "docs/VALUATION_RULES.md",
+      "anchor_checked": true,
+      "check": "PASS"
+    }
+  ],
+  "new_document_whitespace": "PASS: no trailing whitespace, conflict markers, or missing final newline",
+  "git_diff_no_index_check_new_plan": "PASS",
+  "publication_package_relative_links": "PASS",
+  "publication_staged_inventory_exact": "Four planning-package files only",
+  "publication_complete_staged_diff_inspected": true,
+  "publication_git_diff_cached_check": "PASS",
+  "main_head_unchanged": "6242904bd396eaf1f4ad064e8540f69035527839",
+  "main_index_empty": true,
+  "main_unpushed": true,
+  "existing_pending_entries_byte_identical": 22,
+  "protected": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+      "byte_identical": true,
+      "unstaged": true
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+      "byte_identical": true,
+      "unstaged": true
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041",
+      "byte_identical": true,
+      "unstaged": true
+    }
+  ],
+  "plan108_byte_identical": true,
+  "private_evidence": "Earlier private evidence untouched; no secret or decrypted archive read.",
+  "not_run": [
+    "tests",
+    "builds",
+    "application lint/types",
+    "database/service startup",
+    "credential reads",
+    "phone/server connections",
+    "provider requests",
+    "deployments",
+    "operational changes",
+    "market/backup requalification"
+  ],
+  "remaining_gate": "Brian's plan approval and separate implementation authorization"
+}
