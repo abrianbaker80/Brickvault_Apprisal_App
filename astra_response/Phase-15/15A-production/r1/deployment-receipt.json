@@ -1,0 +1,101 @@
+{
+  "status": "BLOCKED_BEFORE_BUILD_OR_ACTIVATION",
+  "observed_at_utc": "2026-10-19T17:17:28Z",
+  "vm": "115 / brickvault-appraisal",
+  "current_release": "phase13c-marketplace-intake-r1",
+  "current_manifest_sha256": "378bce4053dd9afb6d0d229536475353c727a80fecb25be2ca488a2740697d11",
+  "schema": [
+    "0017_listing_images"
+  ],
+  "chosen_target_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "planned_target_release": "phase15a-share-production-r1",
+  "blocked_on": [
+    "Overdue required kernel reboot",
+    "Partial/unrecognized encrypted backup history",
+    "Python maintenance alert reports installed 3.13.15 and available 3.13.16"
+  ],
+  "booted_kernel": "6.8.0-142-generic",
+  "reboot_packages": [
+    "linux-image-6.8.0-146-generic",
+    "linux-base",
+    "linux-image-6.8.0-147-generic",
+    "linux-base"
+  ],
+  "failed_operational_units": {
+    "brickvault-health.service": {
+      "state": "Result=exit-code\nExecMainStartTimestamp=Mon 2026-10-19 17:09:32 UTC\nExecMainExitTimestamp=Mon 2026-10-19 17:09:34 UTC\nExecMainCode=1\nExecMainStatus=1"
+    },
+    "brickvault-health-deep.service": {
+      "state": "Result=exit-code\nExecMainStartTimestamp=Mon 2026-10-19 08:23:09 UTC\nExecMainExitTimestamp=Mon 2026-10-19 08:24:03 UTC\nExecMainCode=1\nExecMainStatus=1"
+    },
+    "brickvault-python-version.service": {
+      "state": "Result=exit-code\nExecMainStartTimestamp=Sun 2026-10-18 10:28:47 UTC\nExecMainExitTimestamp=Sun 2026-10-18 10:28:47 UTC\nExecMainCode=1\nExecMainStatus=1"
+    },
+    "brickvault-retention.service": {
+      "state": "Result=exit-code\nExecMainStartTimestamp=Sun 2026-10-18 09:23:09 UTC\nExecMainExitTimestamp=Sun 2026-10-18 09:23:48 UTC\nExecMainCode=1\nExecMainStatus=1"
+    }
+  },
+  "normal_health_checks": {
+    "PRIVATE_IMAGE_STORAGE": true,
+    "SERVICES": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "UFW": true,
+    "CLOCK": true,
+    "ROOT_SPACE": true,
+    "DATA_SPACE": true,
+    "REBOOT_PENDING": false,
+    "SECURITY_UPDATES": true
+  },
+  "builds": 0,
+  "release_transfers": 0,
+  "application_restarts": 0,
+  "server_reboots": 0,
+  "migrations": 0,
+  "database_or_blob_restores": 0,
+  "backup_or_retention_repairs": 0,
+  "unapproved_service_changes": 0,
+  "rollback_performed": false,
+  "final": {
+    "release": "phase13c-marketplace-intake-r1",
+    "manifest_sha256": "378bce4053dd9afb6d0d229536475353c727a80fecb25be2ca488a2740697d11",
+    "schema": [
+      "0017_listing_images"
+    ],
+    "units": {
+      "brickvault-api.service": "MainPID=302722\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "caddy.service": "MainPID=1010\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "postgresql@18-main.service": "MainPID=253001\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "brickvault-backup.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-retention.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health-deep.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-python-version.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "certbot.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled"
+    },
+    "trusted_https_unauthenticated": {
+      "/": {
+        "transport_returncode": 0,
+        "http_status": "200"
+      },
+      "/api/health": {
+        "transport_returncode": 0,
+        "http_status": "200"
+      },
+      "/api/auth/session": {
+        "transport_returncode": 0,
+        "http_status": "401"
+      },
+      "/api/listings": {
+        "transport_returncode": 0,
+        "http_status": "401"
+      }
+    },
+    "readback_at_utc": "2026-10-19T17:17:28Z",
+    "reboot_required": true
+  }
+}

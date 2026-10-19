@@ -1,0 +1,22 @@
+{
+  "status": "EXISTING_PRODUCTION_APK_PRESERVED_INSTALLED",
+  "sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+  "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "version_code": 1,
+  "same_version_install_r_restore_path": true,
+  "system_only_trust": true,
+  "production_api": "https://appraisal.abrianbaker.com",
+  "device_model": "SM-S948U",
+  "device_api": 37,
+  "no_uninstall_data_clear_downgrade": true,
+  "new_apk_installed": false,
+  "install_invocations": 0,
+  "new_sign_in": false,
+  "new_private_app_data_read": false,
+  "smoke_status": "NOT_RUN_BACKEND_NOT_PROMOTED",
+  "api_backend_pair": "Existing production pair preserved",
+  "final_installed_apk_hash_reverified": true,
+  "uid_and_first_install_preserved": true,
+  "adb_rules_unchanged": true,
+  "retained_apk_copy_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2"
+}

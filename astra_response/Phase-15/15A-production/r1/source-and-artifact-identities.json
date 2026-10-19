@@ -1,0 +1,27 @@
+{
+  "source_commit": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "accepted_closeout": "f8291d5b3b32f4c068d4be3b8803783728057bbf",
+  "accepted_physical_test": "335b76098acc4c9130a3b8b8120b770b207781e8",
+  "isolated_worktree_clean": true,
+  "android_permissions": [
+    "android.permission.INTERNET"
+  ],
+  "android_share_actions": [
+    "android.intent.action.MAIN",
+    "android.intent.action.SEND",
+    "android.intent.action.SEND_MULTIPLE"
+  ],
+  "android_services": 0,
+  "capture_prototype_files_absent": true,
+  "capture_native_references_absent": true,
+  "new_release": null,
+  "new_manifest": null,
+  "new_apk": null,
+  "build_status": "NOT_STARTED_PREACTIVATION_BLOCKER",
+  "accepted_test_campaign": "REUSED_NOT_RERUN",
+  "source_lock_sha256": {
+    "pnpm-lock.yaml": "abcf4a200865f59a34df01444470d935574baee6b092847b6eb4d3ffc4a40681",
+    "services/api/uv.lock": "f969b2aea654a54096321275b4cb08454f90c1b7a6f194c81b694d7d739dab14",
+    "apps/android/android/gradle/wrapper/gradle-wrapper.properties": "1adf3caeedad6ae5b3a0a410e1dd94ca552d6e6f02ee68cbaf849cd5e7877d17"
+  }
+}

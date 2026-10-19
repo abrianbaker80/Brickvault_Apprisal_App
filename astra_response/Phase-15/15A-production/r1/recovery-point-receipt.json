@@ -1,0 +1,83 @@
+{
+  "latest_protected_receipt": {
+    "sha256": "c176e97368a157c8c954ce71dc60e00e74a0346e8713c789e50ce0cdc69fcf30",
+    "verified_at_utc": "2026-10-19T09:07:19.591804+00:00",
+    "schema": 3,
+    "revisions": [
+      "0017_listing_images"
+    ],
+    "artifacts": [
+      "configuration.tar",
+      "database.dump",
+      "globals.sql",
+      "image-blobs.tar"
+    ],
+    "destinations": [
+      "drive",
+      "proxmox"
+    ]
+  },
+  "destinations": {
+    "proxmox": {
+      "snapshots": 85,
+      "expected": 81,
+      "unreceipted_or_unrecognized_snapshots": 4,
+      "missing_expected_snapshots": 0,
+      "unexpected_snapshot_dates_utc": [
+        "2026-10-13"
+      ],
+      "latest_receipt_snapshots_present": true
+    },
+    "drive": {
+      "snapshots": 84,
+      "expected": 81,
+      "unreceipted_or_unrecognized_snapshots": 3,
+      "missing_expected_snapshots": 0,
+      "unexpected_snapshot_dates_utc": [
+        "2026-10-13"
+      ],
+      "latest_receipt_snapshots_present": true
+    }
+  },
+  "retention_ledger_status": "READY",
+  "protected_receipt_count": 29,
+  "destination_identity_check": {
+    "status": "PASS",
+    "result": null
+  },
+  "retention_plan_check": {
+    "status": "FAILED",
+    "category": "RetentionError",
+    "message": "Partial or unrecognized backup history.",
+    "trace": [
+      [
+        "<stdin>",
+        "<module>",
+        11
+      ],
+      [
+        "<stdin>",
+        "<lambda>",
+        9
+      ],
+      [
+        "complete_run_retention.py",
+        "run",
+        339
+      ],
+      [
+        "complete_run_retention.py",
+        "gather",
+        294
+      ],
+      [
+        "complete_run_retention.py",
+        "make_plan",
+        157
+      ]
+    ]
+  },
+  "new_backup_invocations": 0,
+  "new_release_recovery_point": "NOT_CREATED_NO_ACTIVATION",
+  "existing_receipt_qualification": "Protected metadata and snapshot presence only; no new archive readback or restore qualification"
+}

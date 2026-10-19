@@ -1,0 +1,15 @@
+{
+  "status": "NOT_RUN_PREACTIVATION_BLOCKER",
+  "new_listing_records": 0,
+  "new_image_uploads": 0,
+  "new_receipts": 0,
+  "synthetic_listing": null,
+  "original_hashes": [],
+  "reason": "Backend was not promoted; production Share APK was not installed",
+  "accepted_prior_physical_test": "335b76098acc4c9130a3b8b8120b770b207781e8",
+  "campaign_repeated": false,
+  "set_10350_market_values": "Previously reported separate limitation; no diagnosis, provider call or claimed fix",
+  "phase_15a": "Accepted TEST qualification retained; Share not promoted to production",
+  "phase_15b": "Excluded from accepted source; partial/unqualified working tree preserved; not resumed",
+  "phase_15c": "Not started"
+}
