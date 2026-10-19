@@ -1,0 +1,27 @@
+{
+  "status": "NOT_RUN_LOCAL_PHONE_SIGNIN_REQUIRED",
+  "last_observed_keyguard_showing": true,
+  "local_signin_confirmation_received": false,
+  "new_listing_records": 0,
+  "new_image_uploads": 0,
+  "new_upload_receipts": 0,
+  "retained_synthetic_record": null,
+  "fixtures": [
+    {
+      "name": "share-1.png",
+      "bytes": 6061,
+      "sha256": "5cd2715d56497e5ea47f79023d36ef62d66281cc1b2bafb60d8bea1eff1fa552",
+      "selection_order": 0
+    },
+    {
+      "name": "share-2.png",
+      "bytes": 6152,
+      "sha256": "31ecdf7f8683622926833a54792056a3aa350bf734af6d964a8b8919bf408599",
+      "selection_order": 1
+    }
+  ],
+  "task_phone_fixture_files_removed": 2,
+  "production_integration_qualification": "PENDING",
+  "next_action": "Brian unlocks and signs in locally; resume the already-authorized one two-image normal Sharesheet workflow and readbacks. No new maintenance/deployment approval or accepted test campaign is needed.",
+  "set_10350_market_values": "Separate prior limitation; no pricing investigation, provider calls or claimed correction."
+}

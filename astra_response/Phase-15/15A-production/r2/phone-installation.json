@@ -1,0 +1,43 @@
+{
+  "installation": {
+    "status": "PRODUCTION_SHARE_INSTALLED_READBACK_VERIFIED",
+    "application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+    "sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",
+    "bytes": 4315392,
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "version_code": 1,
+    "min_sdk": 24,
+    "target_sdk": 36,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "webview_origin": "https://android.appraisal.abrianbaker.com",
+    "share_plugin_filters_present": true,
+    "capture_prototype_classes_ui_permissions_absent": true,
+    "unchanged_dependency_contains_framework_media_projection_reference": true,
+    "system_only_trust": true,
+    "absolute_retained_signing_cache_paths": true,
+    "native_http_cookie_bypass": false,
+    "inspection_correction": "Class exclusion uses the application namespace; unchanged AndroidX framework references were present in the prior production APK. No rebuild or source change.",
+    "uid_first_install_preserved": true,
+    "in_place": true,
+    "uninstall_data_clear_downgrade": false
+  },
+  "final": {
+    "status": "PRODUCTION_INSTALLED_LOCAL_SIGNIN_AND_SHARE_SMOKE_PENDING",
+    "installed_apk_sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",
+    "task_owned_phone_images_removed": 2,
+    "owned_debug_forwards_removed": true,
+    "unrelated_adb_rules_preserved": true,
+    "test_reverse_created": false,
+    "keyguard_showing_last_observation": true,
+    "local_credentials_not_read": true,
+    "synthetic_listing_created": false,
+    "new_image_uploads": 0,
+    "new_upload_receipts": 0,
+    "production_app_data_preserved": true,
+    "new_production_apk_left_installed": true
+  },
+  "data_preserving_same_version_same_signer": true,
+  "private_password_cookie_access": false,
+  "capture_exclusion_scope": "No application-owned 15B classes/bridge/UI/service/permissions. The prior production APK and new APK both contain unchanged AndroidX references to framework capture types; those are not the prototype.",
+  "one_apk_built": true
+}

@@ -1,0 +1,146 @@
+{
+  "maintenance_activation": {
+    "status": "PASS_REBOOT_PENDING",
+    "gate": "maintenance-health-probe",
+    "release_before": "phase13c-marketplace-intake-r1",
+    "paused": [
+      "brickvault-backup.timer",
+      "brickvault-retention.timer",
+      "brickvault-health.timer",
+      "brickvault-health-deep.timer",
+      "brickvault-python-version.timer"
+    ],
+    "activation_started": true,
+    "release_after": "phase13c-runtime-ops-r1",
+    "manifest_sha256": "bfb082c4593cb596dfcae92004b104ff28fb0c97d421d422db114a9d069c1466",
+    "python_runtime": "3.13.16",
+    "retention_plan": "RETENTION_PLAN keep=21 delete=0 digest=af7ba3d070fedacc1a252300822ebf2127a49ef9ed800df0e19500f93b591911",
+    "health": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": false,
+      "SECURITY_UPDATES": true,
+      "REPOSITORY_IDENTITIES": true
+    },
+    "original_receipts_pins_unchanged": true,
+    "backup_schedule_unchanged": true,
+    "all_seven_snapshots_retained": true,
+    "partial_history_ineligible_for_success": true,
+    "rollback_backend": "phase13c-runtime-ops-r1",
+    "rollback_apk_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2"
+  },
+  "first_share_activation_preserved": {
+    "status": "BLOCKED",
+    "gate": "share-startup-health",
+    "activation_started": true,
+    "paused": [
+      "brickvault-backup.timer",
+      "brickvault-retention.timer",
+      "brickvault-health.timer",
+      "brickvault-health-deep.timer",
+      "brickvault-python-version.timer"
+    ],
+    "rollback_release": "phase13c-runtime-ops-r1",
+    "rollback_apk": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+    "category": "AssertionError",
+    "message": "Share activation startup health failed",
+    "trace": [
+      [
+        "<stdin>",
+        "<module>",
+        49
+      ]
+    ],
+    "durable_release": "phase15a-share-production-r1"
+  },
+  "failure_diagnosis": {
+    "config_release": "phase15a-share-production-r1",
+    "actual_release": "phase15a-share-production-r1",
+    "config_manifest": "94d94dfbd41228d7096d9571d3549532657018e8193c132a8cc7a8e5480804e8",
+    "actual_manifest": "94d94dfbd41228d7096d9571d3549532657018e8193c132a8cc7a8e5480804e8",
+    "manifest_file_failures": [],
+    "hook_symlink": false,
+    "hook_owner": 0,
+    "hook_mode": "0o100755",
+    "hook_sha256": "7a87bb323025a0aaab9575e42519bfc885217da5bd7dbf817c85353395db05f7",
+    "release_hook_sha256": "5b211e3d2dbc83bd6beeea732e5fafa98a4c218678f27c084e8be4a6d54e27cf",
+    "hook_bytes_equal": false,
+    "hook_equal_after_line_endings": true,
+    "python_config": [
+      3,
+      13,
+      16
+    ],
+    "python_actual": [
+      3,
+      13,
+      16
+    ],
+    "python_path": "/opt/python/3.13.16/bin/python3.13"
+  },
+  "corrected_share_activation": {
+    "status": "PASS",
+    "gate": "share-backend-active-ready-for-matching-apk",
+    "activation_started": true,
+    "paused": [
+      "brickvault-backup.timer",
+      "brickvault-retention.timer",
+      "brickvault-health.timer",
+      "brickvault-health-deep.timer",
+      "brickvault-python-version.timer"
+    ],
+    "rollback_release": "phase13c-runtime-ops-r1",
+    "rollback_apk": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2",
+    "release": "phase15a-share-production-r2",
+    "manifest_sha256": "24d90a375ba4f099c84a7770aa3dfa06335a38e9e9d3d28975464680112d2099",
+    "application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+    "schema": [
+      "0017_listing_images"
+    ],
+    "checks": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true
+    },
+    "https": {
+      "/": 200,
+      "/api/health": 200,
+      "/api/auth/session": 401,
+      "/api/listings": 401
+    },
+    "new_backup": false,
+    "reused_verified_recovery": true
+  },
+  "installed_contract": {
+    "status": "PASS",
+    "old_multipart_fields_accepted": true,
+    "restricted_elevation_accepted": true,
+    "other_elevation_refused": true,
+    "http_or_database_writes": 0
+  },
+  "packaging_correction": "New immutable r2 uses canonical LF bytes from the exact accepted Git hook. The initial r1 artifact is retained; all other application wheel/web/APK bytes are unchanged. Readiness waits for HTTPS before integrity probes. Health validation was not weakened.",
+  "new_database_revision": false,
+  "database_or_privacy_rollback": false,
+  "restoration_performed": false
+}

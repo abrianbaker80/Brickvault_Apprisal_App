@@ -1,0 +1,110 @@
+{
+  "server": {
+    "status": "PASS",
+    "release": "phase15a-share-production-r2",
+    "manifest_sha256": "24d90a375ba4f099c84a7770aa3dfa06335a38e9e9d3d28975464680112d2099",
+    "python_runtime": "3.13.16",
+    "kernel": "6.8.0-147-generic",
+    "reboot_required": false,
+    "checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "REPOSITORY_IDENTITIES": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "failed_units": "",
+    "units": {
+      "brickvault-api.service": "Result=success\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "caddy.service": "Result=success\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "postgresql@18-main.service": "Result=success\nActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "brickvault-backup.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-retention.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health-deep.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-python-version.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "certbot.timer": "Result=success\nActiveState=active\nSubState=waiting\nUnitFileState=enabled"
+    },
+    "backup_schedule": "04:00 America/Chicago",
+    "backup_schedule_sha256": "320059d7e5ecf47d74da702e25caea6ced3a1fbd94b8a5765f706a9a34eb0040",
+    "non_web_application_configuration_unchanged": true,
+    "prior_ledger_fields_unchanged": true,
+    "partial_dispositions_retained": 1,
+    "prior_runtime_and_release_preserved": true,
+    "at_utc": "2026-10-19T18:15:36Z"
+  },
+  "short_final_readback": {
+    "status": "SERVER_HEALTHY_PHONE_SIGNIN_REQUIRED",
+    "release": "phase15a-share-production-r2",
+    "image_table_counts": {
+      "listing": 1,
+      "blob": 6,
+      "image_asset": 6,
+      "image_relation": 3,
+      "listing_image": 3,
+      "upload_receipt": 3
+    },
+    "unchanged_since_smoke_admission": true,
+    "units": {
+      "brickvault-api.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "caddy.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "postgresql@18-main.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "brickvault-backup.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-retention.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health-deep.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-python-version.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "certbot.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled"
+    },
+    "failed_units": "",
+    "at_utc": "2026-10-19T18:22:39Z"
+  },
+  "phone": {
+    "status": "PRODUCTION_INSTALLED_LOCAL_SIGNIN_AND_SHARE_SMOKE_PENDING",
+    "installed_apk_sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",
+    "task_owned_phone_images_removed": 2,
+    "owned_debug_forwards_removed": true,
+    "unrelated_adb_rules_preserved": true,
+    "test_reverse_created": false,
+    "keyguard_showing_last_observation": true,
+    "local_credentials_not_read": true,
+    "synthetic_listing_created": false,
+    "new_image_uploads": 0,
+    "new_upload_receipts": 0,
+    "production_app_data_preserved": true,
+    "new_production_apk_left_installed": true
+  },
+  "cleanup": {
+    "worktrees": {
+      "status": "PASS",
+      "removed_task_worktrees": 2,
+      "original_dependency_cache_preserved": true,
+      "accepted_base_and_final_artifacts_retained": true,
+      "windows_long_path_cleanup": "Explicit extended-path cleanup for the verified unregistered task residue; Git longpaths enabled only for the second removal"
+    },
+    "server_temporary_resources": {
+      "status": "PASS",
+      "removed": [
+        "verified task transfer phase15a-share-production-r1",
+        "verified task transfer phase15a-share-production-r2",
+        "completed task-owned Python build tree"
+      ],
+      "signed_source_archives_and_signature_logs_retained": true,
+      "recovery_and_failure_evidence_retained": true,
+      "all_immutable_releases_and_prior_runtime_retained": true
+    }
+  },
+  "phase_15a": "Backend/APK promoted; production integration acceptance pending local sign-in and single Share smoke",
+  "phase_15b": "Excluded; partial/unqualified source and evidence preserved; not resumed",
+  "phase_15c": "Not started"
+}

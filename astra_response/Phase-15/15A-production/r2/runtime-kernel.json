@@ -1,0 +1,91 @@
+{
+  "official_source_verification": {
+    "status": "PASS",
+    "version": "3.13.16",
+    "expected_sha256": "f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d",
+    "official_release": "https://www.python.org/downloads/release/python-31316/",
+    "signer_expected": "7169605F62C751356D054A26A821E680E5FA6305",
+    "sha256": "f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d",
+    "bytes": 23225704,
+    "signature_verified": true,
+    "retained_release_key_verified": true,
+    "system_python_unchanged": true
+  },
+  "runtime_build": {
+    "status": "PASS",
+    "gate": "runtime-built-not-activated",
+    "version": "3.13.16",
+    "runtime_probe": [
+      "3.13.16",
+      "OpenSSL 3.0.13 30 Jan 2024"
+    ],
+    "old_runtime_preserved": true,
+    "system_python_unchanged": true
+  },
+  "maintenance_environment": {
+    "status": "PASS",
+    "gate": "replacement-runtime-ready-not-activated",
+    "runtime_probe": [
+      "3.13.16",
+      "OpenSSL 3.0.13 30 Jan 2024"
+    ],
+    "release": "phase13c-runtime-ops-r1",
+    "manifest_sha256": "bfb082c4593cb596dfcae92004b104ff28fb0c97d421d422db114a9d069c1466",
+    "unchanged_application_wheel": true
+  },
+  "guest_reboot": {
+    "status": "AUTHORIZED_GUEST_REBOOT_REQUESTED",
+    "guest": "brickvault-appraisal",
+    "vmid": 115,
+    "kernel_before": "6.8.0-142-generic",
+    "requested_at_utc": "2026-10-19T18:07:44Z",
+    "host_or_other_guest_reboot": false
+  },
+  "post_maintenance": {
+    "status": "PASS",
+    "release": "phase13c-runtime-ops-r1",
+    "manifest_sha256": "bfb082c4593cb596dfcae92004b104ff28fb0c97d421d422db114a9d069c1466",
+    "python_runtime": "3.13.16",
+    "kernel": "6.8.0-147-generic",
+    "guest_boot_id_changed": true,
+    "reboot_required": false,
+    "schema": [
+      "0017_listing_images"
+    ],
+    "checks": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "REPOSITORY_IDENTITIES": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "retention_plan": "Non-destructive retention plan passed through installed deep health",
+    "retention_deletion_performed": false,
+    "failed_units": "",
+    "units": {
+      "brickvault-api.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "caddy.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "postgresql@18-main.service": "ActiveState=active\nSubState=running\nUnitFileState=enabled",
+      "brickvault-backup.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-retention.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-health-deep.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "brickvault-python-version.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled",
+      "certbot.timer": "ActiveState=active\nSubState=waiting\nUnitFileState=enabled"
+    },
+    "at_utc": "2026-10-19T18:09:13Z"
+  },
+  "system_python_unchanged": true,
+  "old_runtime_and_immutable_releases_preserved": true,
+  "host_or_other_guest_reboot": false
+}

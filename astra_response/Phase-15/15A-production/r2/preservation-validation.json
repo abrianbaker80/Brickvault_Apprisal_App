@@ -1,0 +1,34 @@
+{
+  "original_head": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "main_unpushed": true,
+  "original_index_empty": true,
+  "original_dirty_untracked_paths": 22,
+  "all_original_bytes_preserved_except_new_additive_plan_section": true,
+  "private_evidence_files": 387,
+  "private_evidence_unchanged": true,
+  "protected": {
+    "AGENTS.md": {
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+      "unchanged": true,
+      "staged": false
+    },
+    "services/api/tests/integration/test_catalog_search.py": {
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+      "unchanged": true,
+      "staged": false
+    },
+    "services/api/tests/unit/test_catalog_parser.py": {
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041",
+      "unchanged": true,
+      "staged": false
+    }
+  },
+  "operational_work_uncommitted": [
+    "scripts/complete_run_retention.py",
+    "scripts/test_partial_backup_history.py"
+  ],
+  "capture_work_committed_or_discarded": false,
+  "task_owned_worktrees_removed": 2,
+  "original_generated_assets_used": false,
+  "accepted_app_source_modified": false
+}

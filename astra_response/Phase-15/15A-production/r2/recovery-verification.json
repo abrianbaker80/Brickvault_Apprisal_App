@@ -1,0 +1,39 @@
+{
+  "status": "PASS",
+  "gate": "existing-dual-artifact-readback",
+  "started_at_utc": "2026-10-19T17:36:30.593022+00:00",
+  "completed_at_utc": "2026-10-19T17:41:08.322570+00:00",
+  "receipt_sha256": "c176e97368a157c8c954ce71dc60e00e74a0346e8713c789e50ce0cdc69fcf30",
+  "backup_verified_at_utc": "2026-10-19T09:07:19.591804+00:00",
+  "artifacts": {
+    "configuration.tar": {
+      "bytes": 20480,
+      "sha256": "1452af734f8bfc63ae4d145f2fca88750c8741cfa94b825378b0ee428d9fd819"
+    },
+    "database.dump": {
+      "bytes": 768650991,
+      "sha256": "5ddceba8987780c94e737bb083d5454c5a4b828315781dd2210386e996e8e675"
+    },
+    "globals.sql": {
+      "bytes": 1454,
+      "sha256": "314e5c009aff9fab832486e4a7dc0d1aa1fae671ca248ad5667da947cfb262da"
+    },
+    "image-blobs.tar": {
+      "bytes": 143360,
+      "sha256": "ed6b3a224e780ae0616118a0d7a1085bf32272cbb91da8596fd63dfdaea50e67"
+    }
+  },
+  "destinations": [
+    "proxmox",
+    "drive"
+  ],
+  "artifact_readbacks": 8,
+  "repository_checks": 2,
+  "existing_receipt_unchanged": true,
+  "new_backup": false,
+  "same_existing_point_reused_for_maintenance_and_deployment": true,
+  "freshness_rule": "Original protected verification less than 24 hours old; current database ownership and schema match",
+  "new_backup_invocations": 0,
+  "restore_rehearsals": 0,
+  "live_data_restores": 0
+}

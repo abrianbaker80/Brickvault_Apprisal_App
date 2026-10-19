@@ -1,0 +1,49 @@
+{
+  "application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "accepted_closeout": "f8291d5b3b32f4c068d4be3b8803783728057bbf",
+  "accepted_physical_test": "335b76098acc4c9130a3b8b8120b770b207781e8",
+  "release": {
+    "status": "SHARE_RELEASE_VERIFIED_NOT_DEPLOYED",
+    "release": "phase15a-share-production-r2",
+    "application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+    "source": {
+      "commit": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "reviewed_id": "de4b3d134159a51df6bf0aa2cc2b1beaefa1740c336b9a5d39259896be6619c3"
+    },
+    "manifest_sha256": "24d90a375ba4f099c84a7770aa3dfa06335a38e9e9d3d28975464680112d2099",
+    "wheel_sha256": "7433e0c5db00a849970448eab1eb8bf4b493435881fada6b1b358523e475ca7c",
+    "operational_amendment": {
+      "accepted_application_source": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+      "accepted_base_manifest_sha256": "a73bdcd97002c96884a1d82dc7fa98f50e4c29de2210af6c5e6ce6325685d71f",
+      "accepted_base_source_id": "8c90dca5184c0ae2e726be4f999370e996c51e0e0a40ef6301692ac4ad1956ea",
+      "operational_amendment": "strict-partial-backup-history-ledger-v2",
+      "operational_script_sha256": "8f7c172eab653bd4e622be37158c68927cd2d9eb4286d731f269005470f74e65",
+      "runtime": "3.13.16",
+      "posix_hook_canonical_git_sha256": "7a87bb323025a0aaab9575e42519bfc885217da5bd7dbf817c85353395db05f7",
+      "superseded_manifest_sha256": "94d94dfbd41228d7096d9571d3549532657018e8193c132a8cc7a8e5480804e8"
+    },
+    "changed_from_accepted_application_bundle": [
+      "deploy/complete_run_retention.py",
+      "deploy/certbot/renewal-hooks/deploy/brickvault-certificate"
+    ],
+    "archive_sha256": "b427e705969e531c4c738e18dc0b02578ae359653c9bdf4b6bc4ad36e2168de3",
+    "file_count": 36,
+    "capture_excluded": true,
+    "packaging_correction": "Canonical accepted Git LF bytes for the POSIX executable; no application source/wheel/web/APK change"
+  },
+  "installed_apk": {
+    "sha256": "724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc",
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "version_code": 1,
+    "min_sdk": 24,
+    "target_sdk": 36,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "webview_origin": "https://android.appraisal.abrianbaker.com"
+  },
+  "rollback_pair": {
+    "backend": "phase13c-runtime-ops-r1",
+    "manifest_sha256": "bfb082c4593cb596dfcae92004b104ff28fb0c97d421d422db114a9d069c1466",
+    "apk_sha256": "045210d00ecf200b4579aed1ab0bb869c5c9d09eee7328c64472902d7851ddd2"
+  },
+  "original_release_retained": "phase13c-marketplace-intake-r1"
+}

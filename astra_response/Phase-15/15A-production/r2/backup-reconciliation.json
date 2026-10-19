@@ -1,0 +1,103 @@
+{
+  "status": "PASS",
+  "snapshot_count": 7,
+  "snapshots": [
+    {
+      "destination": "proxmox",
+      "artifact": "database.dump",
+      "snapshot_date_utc": "2026-10-13T09:00:26.156457945Z",
+      "bytes": 768650998,
+      "sha256": "378a09365010c015235e68a32d98124edafa304f569e75ea4aeeba0fe0858a76",
+      "metadata_sha256": "bc968317395cd8e62ece4aa48ce2e1d10983c77c4f9223ff3e0b432e58a6283f",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "proxmox",
+      "artifact": "globals.sql",
+      "snapshot_date_utc": "2026-10-13T09:03:52.965827899Z",
+      "bytes": 1454,
+      "sha256": "55c19c0943c558d06c87b43b52d66806f7dfcdd60c29e451d0a8bc5d9a7a0a7a",
+      "metadata_sha256": "662bc8d5eea120e6172533b8b1c723561d6420ad9fb1ab8ab602827e677d4f04",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "proxmox",
+      "artifact": "configuration.tar",
+      "snapshot_date_utc": "2026-10-13T09:04:35.184405775Z",
+      "bytes": 20480,
+      "sha256": "1452af734f8bfc63ae4d145f2fca88750c8741cfa94b825378b0ee428d9fd819",
+      "metadata_sha256": "994e9b94e9b11c79e64ef544a982ec0d85888486b882cf5e960b961e82368ecb",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "proxmox",
+      "artifact": "image-blobs.tar",
+      "snapshot_date_utc": "2026-10-13T09:05:19.75389825Z",
+      "bytes": 143360,
+      "sha256": "ed6b3a224e780ae0616118a0d7a1085bf32272cbb91da8596fd63dfdaea50e67",
+      "metadata_sha256": "94a042a831e37fad7c647ae720e7bd7154cfed22c4c5319e2a4f277554833f56",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "drive",
+      "artifact": "database.dump",
+      "snapshot_date_utc": "2026-10-13T09:00:26.156458652Z",
+      "bytes": 768650998,
+      "sha256": "378a09365010c015235e68a32d98124edafa304f569e75ea4aeeba0fe0858a76",
+      "metadata_sha256": "a8bcdfb8fceb572821f3ff270bce4688908109ccc98cc3bc26747ead9f95cdc2",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "drive",
+      "artifact": "globals.sql",
+      "snapshot_date_utc": "2026-10-13T09:03:52.96455341Z",
+      "bytes": 1454,
+      "sha256": "55c19c0943c558d06c87b43b52d66806f7dfcdd60c29e451d0a8bc5d9a7a0a7a",
+      "metadata_sha256": "c19b3f84c8a1f7ce072c7feec8573615f8d429511cd07f01a214ae5c9602da16",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    },
+    {
+      "destination": "drive",
+      "artifact": "configuration.tar",
+      "snapshot_date_utc": "2026-10-13T09:04:35.185160507Z",
+      "bytes": 20480,
+      "sha256": "1452af734f8bfc63ae4d145f2fca88750c8741cfa94b825378b0ee428d9fd819",
+      "metadata_sha256": "611fe9686b11e85de162cbbbc0b2f09688ed213dc3c74ce62088c32938654719",
+      "disposition": "FAILED_INCOMPLETE_RETAINED_NOT_RECOVERY_ELIGIBLE"
+    }
+  ],
+  "missing_artifacts": {
+    "proxmox": [],
+    "drive": [
+      "image-blobs.tar"
+    ]
+  },
+  "ownership": {
+    "proxmox": {
+      "marker_matches": true,
+      "database_matches": true,
+      "captured_release": "phase13c-marketplace-intake-r1"
+    },
+    "drive": {
+      "marker_matches": true,
+      "database_matches": true,
+      "captured_release": "phase13c-marketplace-intake-r1"
+    }
+  },
+  "common_artifact_bytes_identical": true,
+  "complete_success_receipt_exists": false,
+  "historical_journal": "The same production backup service invocation failed. Snapshots have one matching run tag, exact artifact paths and production host/root identity. The low-level original transfer error was not logged; it is not guessed.",
+  "retention_ledger_version": 2,
+  "original_ledger_fields_preserved": true,
+  "original_success_receipts_and_permanent_pins_unchanged": true,
+  "retention_plan": "RETENTION_PLAN keep=21 delete=0 digest=af7ba3d070fedacc1a252300822ebf2127a49ef9ed800df0e19500f93b591911",
+  "snapshot_deletion_forget_prune": false,
+  "validation": {
+    "new_focused_fixtures": 7,
+    "existing_partial_receipt_refusal_fixture": 1,
+    "ruff_format_check": "PASS",
+    "ruff_static_check": "PASS",
+    "accepted_15a_campaign": "REUSED_NOT_RERUN"
+  },
+  "operational_script_sha256": "8f7c172eab653bd4e622be37158c68927cd2d9eb4286d731f269005470f74e65"
+}
