@@ -1,0 +1,25 @@
+--- a/docs/plans/108-phase-15-android-share-capture.md
++++ b/docs/plans/108-phase-15-android-share-capture.md
+@@ -816,3 +816,22 @@
+ Sanitized publication is separate from local main; main stays at the accepted baseline,
+ with planning docs uncommitted and the protected dirty files unchanged/unstaged.
+ Next separately authorizable milestone is **15A only**, subject to the listed approvals.
++
++
++## Production market configuration prerequisite — 2026-10-19
++
++Brian authorized only protected credential/configuration setup, accepted policy/scope
++initialization and one actual authenticated phone plan; Phase 16 remains paused.
++VM115 remains `phase15a-share-production-r2` / `0017_listing_images`. The original
++approved account/provider/quota identities and immutable `market-v1` policy were
++reused through guarded owner administration. The actual restricted API-identity loader
++passes; unrelated configuration bytes are preserved; one API restart and normal
++service health passed. Actual phone plan: **HTTP 200 / READY**; 1 identity + 4 price initials; 2 retry reserve; hard maximum 10 attempts.
++Provider attempts and refresh confirmations remain **zero**; stop before Refresh now.
++External credential validity, production registered-IP compatibility and external
++account remaining quota are unverified. Current automated configuration backups do
++not include the new credential file; protected original and exact rollback state
++remain private. No backup-code change, fresh campaign, migration, application-code
++change, APK replacement, or later-phase authorization is implied.
++Status: **PRODUCTION MARKET CONFIGURED — AWAITING USER REFRESH CONFIRMATION**. Main remains uncommitted/unpushed with an empty index;
++all original pending/protected bytes are preserved apart from this additive record.

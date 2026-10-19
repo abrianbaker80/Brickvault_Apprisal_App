@@ -1,0 +1,143 @@
+{
+  "status": "PRODUCTION MARKET CONFIGURED \u2014 AWAITING USER REFRESH CONFIRMATION",
+  "accepted_main": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+  "production": {
+    "vm": 115,
+    "release": "phase15a-share-production-r2",
+    "schema": "0017_listing_images"
+  },
+  "configuration": {
+    "market_credentials_root": {
+      "before": null,
+      "after": "<protected stable root outside releases>"
+    },
+    "market_account_scope": {
+      "before": null,
+      "after": "<existing approved stable account scope>"
+    },
+    "unrelated_configuration_bytes_preserved": true,
+    "service_restarts": 1,
+    "restricted_service_identity_loader": "PASS",
+    "ordinary_path_and_permissions": "PASS",
+    "service_sandbox_credentials_read_only": true
+  },
+  "initialization": {
+    "method": "MarketRepository.install_policy through existing guarded effective-owner administration",
+    "policy_scope_absent_before": true,
+    "policy_scope_rows_after": {
+      "policy": 1,
+      "scope": 1
+    },
+    "identity_provenance": "Accepted Phase 4B foundation identities and policy; no new account/quota identity",
+    "policy_version": "market-v1",
+    "fresh_seconds": 14400,
+    "display_seconds": 20700,
+    "hard_display_seconds": 21600,
+    "retention_seconds": 86400,
+    "minimum_interval_seconds": 5,
+    "concurrency": 1,
+    "interactive_limit": 8,
+    "global_rolling_day_limit": 1000
+  },
+  "normal_health": {
+    "PRIVATE_IMAGE_STORAGE": true,
+    "SERVICES": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "UFW": true,
+    "CLOCK": true,
+    "ROOT_SPACE": true,
+    "DATA_SPACE": true,
+    "REBOOT_PENDING": true,
+    "SECURITY_UPDATES": true
+  },
+  "plan": {
+    "method": "POST",
+    "path": "/api/sets/10350-1/market-refresh/plan",
+    "status": 200,
+    "result": {
+      "set_number": "10350-1",
+      "scope": "COMPLETE_SET",
+      "currency": "USD",
+      "country": "US",
+      "mapping": "MISSING",
+      "current_views": 0,
+      "work_views": 4,
+      "discovery_required": true,
+      "identity_initials": 1,
+      "price_initials": 4,
+      "retry_reserve": 2,
+      "maximum_attempts": 10,
+      "state": "READY",
+      "admissible": true,
+      "cooldown_until": null,
+      "expires_at": "2026-10-19T20:31:36.745112Z",
+      "views": [
+        {
+          "condition": "N",
+          "basis": "sold",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        },
+        {
+          "condition": "N",
+          "basis": "stock",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        },
+        {
+          "condition": "U",
+          "basis": "sold",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        },
+        {
+          "condition": "U",
+          "basis": "stock",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        }
+      ]
+    },
+    "ui": {
+      "confirmationVisible": true,
+      "confirmationText": "Review market refresh\n\nMapping: Discovery required\n\n0 current \u00b7 4 require work\n\nNew sold: Refresh needed\nNew stock: Refresh needed\nUsed sold: Refresh needed\nUsed stock: Refresh needed\n\nUp to 1 identity requests \u00b7 4 price requests \u00b7 retry reserve 2 \u00b7 hard maximum 10 total.\n\nReady to refresh\n\nNo provider work starts until you confirm. This plan expires at 3:31:36 PM.\n\nRefresh nowCancel",
+      "refreshNowEnabled": true
+    },
+    "observed_at_utc": "2026-10-19T20:16:36.472Z",
+    "confirmation_clicked": false,
+    "provider_requests_dispatched_by_monitor": 0
+  },
+  "provider_attempts": 0,
+  "refresh_confirmations": 0,
+  "recovery": {
+    "recent_verified_evidence_reused": true,
+    "exact_prior_configuration_retained_privately": true,
+    "initialization_provenance_retained_privately": true,
+    "new_backup": false,
+    "credential_automated_backup_coverage": false,
+    "limitation": "Current automated configuration-backup allowlist excludes the new credential file. Approved protected workstation original remains retained; no backup code was changed."
+  },
+  "remaining_access_uncertainties": [
+    "Local parsing does not verify external credential validity.",
+    "Production outbound-IP registration compatibility is unverified.",
+    "Production zero attempts does not establish external account remaining quota or usage elsewhere."
+  ],
+  "unchanged": [
+    "application release",
+    "schema",
+    "catalog",
+    "saved work",
+    "Share workflow",
+    "image storage",
+    "unfinished 15B source",
+    "protected files"
+  ],
+  "phase16": "PAUSED",
+  "no_provider_requests": true,
+  "no_refresh_confirmation": true
+}
