@@ -1,0 +1,53 @@
+{
+  "status": "PASS",
+  "staged_inventory": [
+    "M\tdocs/plans/108-phase-15-android-share-capture.md",
+    "M\tscripts/complete_run_retention.py",
+    "A\tscripts/test_partial_backup_history.py"
+  ],
+  "complete_staged_diff_inspected": true,
+  "cached_diff_check": "PASS",
+  "changed_links": [
+    "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/b1c56f0307ea68bf025dbdb60f05bf0b7ed5d9cf/astra_response/Phase-15/15A-production/r2/identities.json",
+    "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/b1c56f0307ea68bf025dbdb60f05bf0b7ed5d9cf/astra_response/Phase-15/15A-production/r2/REVIEW.md"
+  ],
+  "link_check_method": "Exact commit and path resolve to existing Git blobs; no live HTTP connection",
+  "operational_code_test_exact_accepted_r2": "PASS",
+  "pre_existing_restoration_and_15b_plan_bytes_preserved_and_unstaged": true,
+  "protected_paths_byte_identical_and_unstaged": true,
+  "private_evidence_files_unchanged": 663,
+  "no_tests_lint_types_builds_device_server_health_backup_restore_retention_provider_work": true,
+  "deployed_manifest_unchanged": true,
+  "no_main_push": true,
+  "local_commit": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+  "main_unpushed": true,
+  "final_index_empty": true,
+  "remaining_dirty_untracked_paths": 22,
+  "protected": {
+    "AGENTS.md": {
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+      "byte_identical": true,
+      "unstaged": true,
+      "committed": false
+    },
+    "services/api/tests/integration/test_catalog_search.py": {
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+      "byte_identical": true,
+      "unstaged": true,
+      "committed": false
+    },
+    "services/api/tests/unit/test_catalog_parser.py": {
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041",
+      "byte_identical": true,
+      "unstaged": true,
+      "committed": false
+    }
+  },
+  "all_other_pending_work_bytes_unchanged": true,
+  "committed_patch_format": "Git binary-capable patch with zero context; reverse-checked against index using --unidiff-zero; no files applied",
+  "phone_and_production_backend_entirely_untouched": true,
+  "phase_15a": "PRODUCTION DEPLOYED / ACCEPTED / CLOSED",
+  "phase_15b": "EXCLUDED, PARTIAL / UNQUALIFIED, NOT RESUMED",
+  "phase_15c": "NOT STARTED",
+  "wider_phase_15_closed": false
+}

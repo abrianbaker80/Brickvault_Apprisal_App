@@ -1,0 +1,36 @@
+{
+  "local_commit": "1b66ba305823dc5d7dc4d60c8d0e71243441cefa",
+  "parent": "e3c04d90b1646b9b9dad73325bf1491fb8326943",
+  "exact_path_count": 3,
+  "files": [
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "change": "M",
+      "blob": "ff160a9c24ce8735e4730fc89c3929fa6dcb1839",
+      "sha256": "5d495433f51be4abd7a9c5e85bbab6b2211501cacc046c68d6f1e29595427b71",
+      "bytes": 47382,
+      "mode": "100644",
+      "scope": "deployment/maintenance hunks and acceptance status only; pre-existing restoration/15B notes excluded"
+    },
+    {
+      "path": "scripts/complete_run_retention.py",
+      "change": "M",
+      "blob": "3a01bddf49cba2b21baebc2191547adbeb7443df",
+      "sha256": "8f7c172eab653bd4e622be37158c68927cd2d9eb4286d731f269005470f74e65",
+      "bytes": 21683,
+      "mode": "100644",
+      "scope": "exact accepted r2 operational content"
+    },
+    {
+      "path": "scripts/test_partial_backup_history.py",
+      "change": "A",
+      "blob": "40e09a4117b674f852351965b30bf18c3dbef818",
+      "sha256": "55edef1c7ab67b21c49f1226e0717caee9c0b1c7c2b977c0eea4427f72b075d3",
+      "bytes": 8319,
+      "mode": "100644",
+      "scope": "exact accepted r2 operational content"
+    }
+  ],
+  "capture_or_protected_files_committed": false,
+  "plan_index_content": "HEAD plus accepted production-deployment/maintenance hunks and minimal closeout status; pre-existing restoration/15B notes excluded"
+}
