@@ -1,0 +1,97 @@
+.outcome-section {
+  margin-block: 1.5rem;
+  padding: 1.1rem;
+  border: 1px solid var(--border, #c6c9c4);
+  border-radius: 0.65rem;
+  overflow-wrap: anywhere;
+}
+.outcome-section fieldset {
+  min-width: 0;
+  margin-block: 1rem;
+  padding: 1rem;
+}
+.outcome-section label {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.outcome-section input,
+.outcome-section textarea,
+.outcome-section select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+.outcome-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1rem;
+}
+.outcome-money {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
+}
+.outcome-money button {
+  justify-self: start;
+}
+.outcome-totals {
+  display: grid;
+  gap: 0.6rem;
+}
+.outcome-totals > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.7rem;
+}
+.outcome-totals dd {
+  margin: 0;
+  white-space: pre-wrap;
+}
+.outcome-totals small {
+  display: block;
+}
+.outcome-baseline {
+  font-size: 0.85rem;
+}
+.outcome-actions {
+  display: flex;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+.outcome-section details {
+  margin-block: 1rem;
+}
+.outcome-section summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.outcome-section li {
+  margin-block: 0.5rem;
+}
+.outcome-metric {
+  border-top: 1px solid var(--border, #c6c9c4);
+  padding-block: 0.6rem;
+}
+.outcome-metric h4 {
+  margin: 0.25rem 0;
+}
+@media (max-width: 540px) {
+  .outcome-section {
+    padding: 0.75rem;
+  }
+  .outcome-section fieldset {
+    padding: 0.6rem;
+  }
+  .outcome-fields,
+  .outcome-totals > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .outcome-section button {
+    max-width: 100%;
+    white-space: normal;
+  }
+}

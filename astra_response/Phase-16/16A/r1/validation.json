@@ -1,0 +1,70 @@
+{
+  "status": "PASS_FOCUSED_SOURCE_AND_TEST_WORKFLOW",
+  "python_unit_cases": 11,
+  "real_postgresql_api_cases": 6,
+  "react_cases": 6,
+  "real_browser_flows": 1,
+  "affected_select_label_case_rerun": 1,
+  "browser": {
+    "outcome_revisions": 2,
+    "history_preserved": true,
+    "desktop_and_320px": true,
+    "original_actual_profit": "47.00",
+    "corrected_actual_profit": "57.00",
+    "explicit_outcome_writes": 2,
+    "errors": [],
+    "forbidden": [],
+    "persistent_private_browser_storage": false,
+    "frozen_original_and_revision_rows_unchanged": true,
+    "real_database_history_verified": true,
+    "owned_api_stopped": true
+  },
+  "static": {
+    "ruff": "PASS",
+    "python_format": "PASS",
+    "strict_mypy": "PASS: six affected production modules",
+    "eslint": "PASS",
+    "typescript": "PASS",
+    "generated_contract_check": "PASS"
+  },
+  "existing_contract_paths_and_schemas_unchanged": true,
+  "old_forecast_code_modified": false,
+  "migration": "0017 -> 0018 on owned TEST; empty down/up; populated downgrade refused; runtime grants checked",
+  "test_cleanup": [
+    {
+      "status": "passed",
+      "running_before": false,
+      "running_after": false,
+      "leftovers": []
+    },
+    {
+      "status": "failed_or_interrupted",
+      "running_before": false,
+      "running_after": false,
+      "leftovers": []
+    },
+    {
+      "status": "passed",
+      "running_before": false,
+      "running_after": false,
+      "leftovers": []
+    }
+  ],
+  "initial_failures": [
+    "OS-only runner environment initially omitted Compose-discovery variables; refused before database provisioning; corrected without Docker/source changes.",
+    "Type/static findings corrected in new code/fixtures before final checks.",
+    "First real-browser pass could not target a select by its exact label; explicit stable labels added and affected fixture plus same workflow passed."
+  ],
+  "web_builds": 2,
+  "build_scope": "Dedicated ignored TEST web bundles; second only after select-label correction; no APK.",
+  "screenshots": "Retained locally; element screenshots can include the existing sticky AppShell at the capture position. No new navigation redesign is claimed.",
+  "warnings": "Existing Starlette/httpx/AnyIO warnings retained; no dependency upgrades.",
+  "production_operations": 0,
+  "phone_actions": 0,
+  "external_provider_calls": 0,
+  "committed_main": false,
+  "pushed_main": false,
+  "pending_protected_entries_byte_preserved": 22,
+  "index_empty": true,
+  "cumulative_patch_reconstruction": "PASS"
+}
