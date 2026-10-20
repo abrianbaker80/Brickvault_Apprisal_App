@@ -1,0 +1,14 @@
+{
+  "status": "16A SOURCE ACCEPTED / CLOSED; NOT DEPLOYED",
+  "local_commit": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "parent": "6242904bd396eaf1f4ad064e8540f69035527839",
+  "subject": "Implement Phase 16A actual purchase and resale outcomes",
+  "tree": "77f38e4ced511aa3f6af6527b99e73e89fafac82",
+  "main_pushed": false,
+  "index_empty": true,
+  "pending_entries_preserved": 22,
+  "protected_hashes_unchanged": true,
+  "private_16a_evidence_files_preserved": 111,
+  "tests_builds_rerun": false,
+  "production_phone_provider_actions": 0
+}

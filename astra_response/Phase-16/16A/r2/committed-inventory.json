@@ -1,0 +1,111 @@
+{
+  "local_commit": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "parent": "6242904bd396eaf1f4ad064e8540f69035527839",
+  "files": [
+    {
+      "path": "apps/web/e2e/outcomes-real.mjs",
+      "blob": "7d23a6ad3cfb940103ecea8375317f11b284fbde",
+      "sha256_lf_utf8": "f6996a2dd7aa85ef46bcaca205a5adfbff2325a4789007489ea2c0a6ecb35771"
+    },
+    {
+      "path": "apps/web/src/HistoricalForecastPage.tsx",
+      "blob": "5b347f13ff572f40e8dbe1a3830ea7360ab81771",
+      "sha256_lf_utf8": "56da2c0d0c54c765abff6c3243c3d41296c361bb1977d63b3f1f0f79665435c8"
+    },
+    {
+      "path": "apps/web/src/OutcomeSection.test.tsx",
+      "blob": "8062bab10206b92a449ec49027679acb35a32ccc",
+      "sha256_lf_utf8": "b56bd4544d4873f5ba40080017c744acc3df78c7eef82040166fb2ae21595da1"
+    },
+    {
+      "path": "apps/web/src/OutcomeSection.tsx",
+      "blob": "05888bca5d5b10e3ce44bda455a63f813a5f5de1",
+      "sha256_lf_utf8": "c2b57e1006884e5367d44a3140fa8ed7c77e89f293f9276ea096f2855a00aa17"
+    },
+    {
+      "path": "apps/web/src/outcome-api.ts",
+      "blob": "b9bf894c7bc136722ec245629ebd574dbb8151df",
+      "sha256_lf_utf8": "582968158da472bfc79fb5116bb2d48250115bf38179cfbd15972c378ba2e32f"
+    },
+    {
+      "path": "apps/web/src/outcomes.css",
+      "blob": "cf4e37d9365c42f4f03d725f0591846ed7c470ff",
+      "sha256_lf_utf8": "b6a13db0ea0dd91055aa1d4c04f0efa8f4b21935c8878668a182ccc7dc652bfc"
+    },
+    {
+      "path": "docs/plans/109-phase-16a-actual-outcomes.md",
+      "blob": "27d029f8dbf46217c5c762449b424d8356330cf9",
+      "sha256_lf_utf8": "45fd938fcbce5bfc5796819a0ccce43667d0c701af44d286ceea48cf8e4cfaca"
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "blob": "974d053946bb4b022bc9cbc3088b162c50f81d12",
+      "sha256_lf_utf8": "5ddb2899319915f4bbac3b70be7154455b451c161d8130049d0b5a64c505b5b1"
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "blob": "63c64f7f2e837343e91ad2bef26a0ee3eebc24c1",
+      "sha256_lf_utf8": "88055d3a75a6e386ad79757a63940f56831e588484074998862728621eebc212"
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/outcomes.py",
+      "blob": "3ac5a2cc3c8331439d02e53e9800bb2ed536dcb4",
+      "sha256_lf_utf8": "28158836e9dd6d45ccc31b6bd9878d3d519cdf4574eafba60765f196d6033803"
+    },
+    {
+      "path": "services/api/src/brickvault_api/main.py",
+      "blob": "cf8693ca78c266b4019bb31ab191cb4525eece51",
+      "sha256_lf_utf8": "c46da5048f0acb2f982ad84acec0692c2d6a33c3e3b6b51480c8d8fb405eaa53"
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0018_deal_outcome_revisions_down.sql",
+      "blob": "d2a6776ae4564e71698be437ee10664c93cf9e38",
+      "sha256_lf_utf8": "9c061ba249b382cf92a0936920de6798792bff540e60805653ddc247fb9f69c5"
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0018_deal_outcome_revisions_up.sql",
+      "blob": "1cbac13d56157cabde46750423bc4b3039fcc681",
+      "sha256_lf_utf8": "374b31758376c44fee7a13e28bd51e6844eabb0ab0f794d5b8f712a6b98d2da2"
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/versions/0018_deal_outcome_revisions.py",
+      "blob": "b25eb7d7d69f45144e8d0a95c049bdce16b87a4f",
+      "sha256_lf_utf8": "3f91d7a20978920da70abb5dbac3d41bc0487e6425b5dda962ba29ee6abeb790"
+    },
+    {
+      "path": "services/api/src/brickvault_api/outcome_calculation.py",
+      "blob": "fad1339056502030fe00ad56ed9ef6e63d0a655a",
+      "sha256_lf_utf8": "0089c24f9acc6ca5cabbc5008c7b8a7e85fe5cdb37d69fbcd828157cf3ef0b11"
+    },
+    {
+      "path": "services/api/src/brickvault_api/outcome_models.py",
+      "blob": "7f89ef5c2347ff7c0bd36bdc9314d08ab9596983",
+      "sha256_lf_utf8": "b7f4d7d8a6da53e0040c55325d8ff54f3d8da60a9fb9d2a41f7d5e1652e253f6"
+    },
+    {
+      "path": "services/api/src/brickvault_api/outcomes.py",
+      "blob": "a5e2a4ce6ff0f94f1e11c6cda3471c5e266d5cec",
+      "sha256_lf_utf8": "e9bc4742df3a3c5bd3a85d9628daec7ed46a1887dc167ac51dbb3c285a12e68b"
+    },
+    {
+      "path": "services/api/src/brickvault_api/persistence/runtime_grants.py",
+      "blob": "29fa10ffcbf135c30ae7bd006766d93a3350ba4b",
+      "sha256_lf_utf8": "3f427bfa958ba58a4be422411bfe1c68f2c78d683c78df65f2224b25ece574a3"
+    },
+    {
+      "path": "services/api/tests/integration/test_outcomes.py",
+      "blob": "c8bdb86e1b758d6beee6241784e547d00735be49",
+      "sha256_lf_utf8": "239e93475e545999844ee8abf1c987ab99a8fa3bc953e257a3335ce8d2989019"
+    },
+    {
+      "path": "services/api/tests/integration/test_outcomes_browser.py",
+      "blob": "b4f3dec8fe9291c71f70b10d74d5f3d542c40165",
+      "sha256_lf_utf8": "53139c9bc3194c81062440c6820b39a660bb58a6ac2383d5ee4a0766506b08d8"
+    },
+    {
+      "path": "services/api/tests/unit/test_outcomes.py",
+      "blob": "01e574203ae542f1112f5650e8814fe319fab837",
+      "sha256_lf_utf8": "dd85514760d25b318d892188566115938af1005fbc8ed5f4ec516710f3f050e0"
+    }
+  ]
+}
