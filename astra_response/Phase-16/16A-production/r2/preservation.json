@@ -1,0 +1,11 @@
+{
+  "main_head": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "main_unpushed": true,
+  "index_empty": true,
+  "prior_pending_protected_paths_byte_preserved": 22,
+  "source_compatibility_and_plan_paths_uncommitted": 9,
+  "private_prior_evidence_preserved": true,
+  "patch_reconstructs_exact_nine_paths": true,
+  "capture_not_resumed": true,
+  "new_provider_calls": 0
+}

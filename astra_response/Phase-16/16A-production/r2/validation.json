@@ -1,0 +1,19 @@
+{
+  "reused_compatibility_tests": "19 passed plus 9 subtests",
+  "reused_affected_static_checks": "PASS",
+  "new_tests_this_continuation": 0,
+  "new_builds_this_continuation": 0,
+  "server_archive_hash": "1e6f816351a898b58475acff8bc2700652e27140fe4f1ec16d6a920d0238d65e",
+  "manifest_hash": "b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f",
+  "staging_service_identity_imports": "PASS",
+  "packaged_migration_and_private_API_contract": "PASS",
+  "prior_0017_and_new_0018_backup_formats": "Explicit admission; unknown schemas still refused",
+  "new_0018_backup_run": false,
+  "phone_artifact_readback": "PASS",
+  "production_outcome_smoke": "PENDING_LOCAL_SIGN_IN",
+  "no_password_cookie_or_token_extraction": true,
+  "earlier_upload_block_record_preserved": true,
+  "tool_permission_changes": 0,
+  "alternate_transfer_routes": 0,
+  "rollback": "Prior immutable artifact retained; reverse migration refuses nonempty history; no rollback used."
+}

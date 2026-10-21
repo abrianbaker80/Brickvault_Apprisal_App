@@ -1,0 +1,77 @@
+{
+  "api_pause_ended_at_utc": "2026-10-21T07:40:00.997274+00:00",
+  "api_pause_started_at_utc": "2026-10-21T07:40:00.179487+00:00",
+  "api_pauses": 1,
+  "backup_schedule_unchanged": true,
+  "completed_at_utc": "2026-10-21T07:40:05.403728+00:00",
+  "credentials_preserved": true,
+  "failed_units": 0,
+  "health": {
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "CLOCK": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "DATA_SPACE": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "PRIVATE_IMAGE_STORAGE": true,
+    "REBOOT_PENDING": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "ROOT_SPACE": true,
+    "SECURITY_UPDATES": true,
+    "SERVICES": true,
+    "UFW": true
+  },
+  "manifest_sha256": "b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f",
+  "migration_admission_readbacks": 8,
+  "migration_admission_repository_checks": 2,
+  "new_backups": 0,
+  "post_migration_image_and_credential_backup_admission": true,
+  "provider_attempts_added": 0,
+  "provider_calls": 0,
+  "recovery_admitted_at_utc": "2026-10-21T07:40:00.159909+00:00",
+  "release": "phase16a-outcomes-production-r3",
+  "runtime_grants": {
+    "append": true,
+    "change": false,
+    "read": true,
+    "remove": false,
+    "truncate": false
+  },
+  "schema": [
+    "0018_deal_outcome_revisions"
+  ],
+  "started_at_utc": "2026-10-21T07:35:47.159318+00:00",
+  "status": "PASS",
+  "final_readback": {
+    "status": "BACKEND_DEPLOYED_HEALTHY_PHONE_SMOKE_AWAITING_LOCAL_SIGN_IN",
+    "release": "phase16a-outcomes-production-r3",
+    "manifest_sha256": "b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f",
+    "schema": [
+      "0018_deal_outcome_revisions"
+    ],
+    "runtime": "3.13.16",
+    "units": {
+      "brickvault-api.service": "active",
+      "caddy.service": "active",
+      "postgresql@18-main.service": "active",
+      "brickvault-backup.timer": "active",
+      "brickvault-health.timer": "active",
+      "brickvault-health-deep.timer": "active",
+      "brickvault-retention.timer": "active",
+      "brickvault-python-version.timer": "active",
+      "certbot.timer": "active"
+    },
+    "failed_units": 0,
+    "image_pause_journal_absent": true,
+    "provider_attempts_added": 0,
+    "outcome_writes": 0,
+    "prior_selected_data_counts_unchanged": true,
+    "backup_schedule": "04:00 America/Chicago",
+    "completed_at_utc": "2026-10-21T07:41:46.848812+00:00"
+  },
+  "maintenance_helper_pause_seconds": 0.817787,
+  "pause_measurement_note": "Helper stop/start interval only, not an end-to-end availability measurement.",
+  "rollback_used": false,
+  "recovery_capture": "Existing complete October 20 backup; repeated migration admission verification does not change capture time."
+}

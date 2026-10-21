@@ -1,0 +1,41 @@
+{
+  "base_commit": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "paths": [
+    {
+      "path": "docs/plans/109-phase-16a-actual-outcomes.md",
+      "sha256_lf_utf8": "13dee557daaf9bef0924ab13df8fc1b5b3683cb3a60e7ebbf693f7eef9af5523"
+    },
+    {
+      "path": "scripts/complete_run_retention.py",
+      "sha256_lf_utf8": "5330e27998e2c212660285078757bda517609e1a8cc430a0531123ca2e5b0863"
+    },
+    {
+      "path": "scripts/package_api.py",
+      "sha256_lf_utf8": "40bbdf5d35a3ad2a4e7bb61f5dc67730bc7878136315c2b1024707f0d6aa3c2a"
+    },
+    {
+      "path": "scripts/production_health.py",
+      "sha256_lf_utf8": "9dc06f00b5b2ea07705a48d13ea5cfb37dd90ce27f45131ca73e1d985d081ff3"
+    },
+    {
+      "path": "scripts/release_manifest.py",
+      "sha256_lf_utf8": "a0fc745fb07bef4aa78fc270ff36675b529c447d26b26cabd2b170b181fb6199"
+    },
+    {
+      "path": "services/api/src/brickvault_api/backup_format.py",
+      "sha256_lf_utf8": "e264e9d3084d669ed7bcf4f418d0ec834e279c4ad904ad4e7aa422e00e4b3845"
+    },
+    {
+      "path": "services/api/src/brickvault_api/image_backup.py",
+      "sha256_lf_utf8": "3f554b8e2265945003c87968c08b6a42377cd28a61220bcbed0b2cadb72aa273"
+    },
+    {
+      "path": "services/api/src/brickvault_api/production_backup.py",
+      "sha256_lf_utf8": "24bdc7533a1a18b0f7dcba39557db4ff4c4a75e6ff6a285c9d18e5bce8ad8832"
+    },
+    {
+      "path": "services/api/tests/unit/test_outcome_backup_compatibility.py",
+      "sha256_lf_utf8": "7b7d92392e5199527d6e878752dc5a8267beb1a297122e06a5e7025cd2d11da5"
+    }
+  ]
+}

@@ -1,0 +1,366 @@
+diff --git a/docs/plans/109-phase-16a-actual-outcomes.md b/docs/plans/109-phase-16a-actual-outcomes.md
+index 27d029f..78b4ade 100644
+--- a/docs/plans/109-phase-16a-actual-outcomes.md
++++ b/docs/plans/109-phase-16a-actual-outcomes.md
+@@ -372,3 +372,92 @@ smoke require separate authorization. No phone/server/provider, backup/recovery,
+ service, test, build or lint/type work ran during closeout. Existing live pricing
+ and Share are untouched. R1's product and UI limitations remain explicit. 15B is
+ stopped/partial/unqualified; 15C is not started; later Phase 16 work is not begun.
++
++
++## Production deployment preparation - 2026-10-21
++
++**BLOCKED BEFORE RELEASE UPLOAD; EXISTING PRODUCTION APP PRESERVED.** Brian
++authorized migration 0018, the matching backend/web/Android release and one bounded
++production check. The live preflight passed all 14 ordinary health checks with zero
++failed units. The actual production release remains `phase15a-market-credential-recovery-r3`
++and schema `0017_listing_images`; no migration, activation, restart or APK installation
++occurred. The candidate upload command was blocked by the tool's security check
++before execution. No alternate transfer route was attempted.
++
++Preparation found literal 0017-only checks in packaging, backup schema selection,
++image inventory, failed-run disposition and image-storage health. A bounded operational
++amendment now explicitly supports 0018 alongside historical 0017 recovery where
++applicable, without admitting unknown/multiple heads, omitting image blobs or weakening
++receipt/pin/credential rules. The installed package probe now requires the exact new
++migration graph. Two pre-existing helper-typing issues were corrected without changing
++behavior. The original accepted outcomes implementation remains unchanged.
++
++Nineteen focused compatibility/backup/retention cases plus nine subtests passed.
++Affected lint/format and strict Linux helper typing passed. The accepted 16A money,
++database, UI and browser campaign was not repeated. A fresh existing scheduled backup
++was reused; its eight artifact readbacks and two repository checks passed without
++pausing the API or creating a new backup. Its recovery proof remains time-sensitive.
++
++The final local candidate is `phase16a-outcomes-production-r3`; the manifest and
++archive identities are recorded in the task receipts. A normal production APK was
++built and verified but not installed. A broad capture-string scan initially matched
++AndroidX ContentCaptureSession and a platform MediaProjectionManager reference; both
++already exist in the installed predecessor. Exact app-class namespace, manifest
++permission, source and JavaScript checks confirm the unfinished 15B prototype is
++excluded. No second APK build was needed. The known POSIX hook packaging correction
++uses exact accepted Git LF bytes; both earlier local bundle candidates are retained.
++
++The phone's read-back APK remains `724f5da86fad1dbf3fa0c7cbb5ace022e02115b84f96427d4f40f932f773efbc`.
++No phone launch, sign-out, data clear, provider request, backup-schedule change,
++server reboot, live outcomes write or later-feature work occurred. All 22 original
++pending/protected paths are byte-preserved. Operational source amendments and this
++section remain uncommitted; main is unchanged/unpushed and its index is empty.
++
++Artifacts, source before-images, focused evidence and the clean isolated build
++worktree are preserved under the owned task for continuation. Recovery admission
++must be rechecked when deployment can resume. Do not install the new APK ahead of
++the compatible backend/schema. No deployment-complete or production-acceptance claim
++is made, and this entry does not authorize bypassing the tool restriction.
++
++
++## Production resume — 2026-10-21
++
++**BACKEND/WEB AND PRODUCTION APK DEPLOYED; AUTHENTICATED ACCEPTANCE PENDING LOCAL SIGN-IN.**
++
++Brian requested continuation of the already-authorized rollout. The normal SCP
++transfer through Desktop Commander succeeded and the server verified the exact
++prepared archive. No permissions were weakened, no alternate transfer route was
++used, and no artifacts were rebuilt for this continuation. Earlier blocked evidence
++is preserved.
++
++Current backend: `phase16a-outcomes-production-r3`; schema
++`0018_deal_outcome_revisions`; manifest
++`b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f`.
++The existing October 20 recovery point passed the migration guard's eight artifact
++readbacks and two repository checks while the API stayed online. Migration and
++enumerated grants then committed in one guarded owner transaction during the
++normal maintenance pause, followed by the configuration/release switch. No new
++backup, restore rehearsal, database reset or provider request occurred. Selected
++existing table counts and frozen forecast payload bytes matched across migration.
++The new outcome table is empty pending the user-authorized smoke.
++
++All 14 normal health checks passed; required services/timers are active with zero
++failed units. Private image and credential-backup admission supports schema 0018;
++no new 0018 backup is claimed. The 04:00 America/Chicago backup schedule and live
++market credentials are unchanged. The old immutable release and exact prior APK
++are retained. Rollback cannot discard outcome history: the reverse migration
++refuses a populated outcome table; no rollback or database restoration was used.
++
++The matching production APK was installed via same-signer `adb install -r` and
++read back as `a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3`.
++App UID/first-install identity are unchanged; there was no uninstall, data clear,
++forced downgrade, TEST trust or unfinished capture feature. It opened to Sign in.
++No password/cookie/token was read and no authenticated outcome workflow is claimed.
++The temporary owned WebView inspection forward was removed; prior forwarding
++state was restored. Brian must sign in locally before the one small synthetic
++outcome-entry/reopen check. No other approval or repeat TEST campaign is needed.
++
++The original 22 pending/protected paths are byte-preserved. The eight operational
++compatibility paths and this additive plan record remain uncommitted; main stays
++unpushed with an empty index. Review evidence: `astra_response/Phase-16/16A-production/r2/`.
++Capture stays stopped; later Phase 16 dataset/training work has not started.
+diff --git a/scripts/complete_run_retention.py b/scripts/complete_run_retention.py
+index 3a01bdd..2f4452b 100644
+--- a/scripts/complete_run_retention.py
++++ b/scripts/complete_run_retention.py
+@@ -99,6 +99,8 @@ def partial_snapshot_ids(
+     now: datetime,
+ ) -> dict[str, set[str]]:
+     """Admit only protected, byte-verified failed history; never a recovery receipt."""
++    from brickvault_api.backup_format import IMAGE_REVISIONS
++
+     admitted: dict[str, set[str]] = {d: set() for d in DESTINATIONS}
+     if disposition is None:
+         return admitted
+@@ -132,7 +134,8 @@ def partial_snapshot_ids(
+                 "snapshots",
+             }
+             or record["status"] != "FAILED_INCOMPLETE"
+-            or record["revisions_at_capture"] != ["0017_listing_images"]
++            or type(record["revisions_at_capture"]) is not list
++            or tuple(record["revisions_at_capture"]) not in IMAGE_REVISIONS
+             or not isinstance(record["evidence_sha256"], str)
+             or HEX64.fullmatch(record["evidence_sha256"]) is None
+             or not isinstance(record["snapshots"], dict)
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index bbe3585..1af0db7 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -67,6 +67,13 @@ def package() -> None:
+     wheel = ROOT / "services/api/dist/brickvault_api-0.0.0-py3-none-any.whl"
+     sdist = ROOT / "services/api/dist/brickvault_api-0.0.0.tar.gz"
+     required = {
++        "brickvault_api/outcome_models.py",
++        "brickvault_api/outcome_calculation.py",
++        "brickvault_api/outcomes.py",
++        "brickvault_api/api/outcomes.py",
++        "brickvault_api/migrations/versions/0018_deal_outcome_revisions.py",
++        "brickvault_api/migrations/sql/0018_deal_outcome_revisions_up.sql",
++        "brickvault_api/migrations/sql/0018_deal_outcome_revisions_down.sql",
+         "brickvault_api/backup_format.py",
+         "brickvault_api/image_backup.py",
+         "brickvault_api/images/storage.py",
+@@ -257,14 +264,14 @@ from brickvault_api.calibration.corpus import load_corpus
+ from brickvault_api.calibration.budget import corpus_demand
+ assert len(load_corpus().cases) == 12
+ assert corpus_demand(load_corpus())['mapping_attempts'] is None
+-assert expected_revisions() == ('0017_listing_images',)
+-assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0017_listing_images','0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
++assert expected_revisions() == ('0018_deal_outcome_revisions',)
++assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0018_deal_outcome_revisions','0017_listing_images','0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
+ assert len(CATALOG_TABLES) == 53
+ assert 'catalog_image_reference' not in CATALOG_TABLES
+ assert search_input('  Synthetic name  ', 20) == 'Synthetic name'
+ assert expand_graph(SnapshotRef(UUID(int=1), UUID(int=2), UUID(int=3), 'synthetic', True), UUID(int=4), {}).state == QueryState.INCOMPLETE
+ assert BenchmarkManifest.model_validate_json('{"benchmark_version":"catalog-2c-v1","cases":[{"case_id":"official","capability":"metadata","source_reference":"official-2d","evidence_reference":"deferred","acceptance_category":"OFFICIAL","expected":{}}]}').benchmark_version == 'catalog-2c-v1'
+-for revision in ('0017_listing_images', '0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
++for revision in ('0018_deal_outcome_revisions', '0017_listing_images', '0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
+     for direction in ('up', 'down'):
+         assert files('brickvault_api').joinpath('migrations','sql',revision+'_'+direction+'.sql').read_text()
+ socket.create_connection = lambda *a, **k: (_ for _ in ()).throw(AssertionError('unexpected connection'))
+diff --git a/scripts/production_health.py b/scripts/production_health.py
+index 7b305da..d9ea851 100644
+--- a/scripts/production_health.py
++++ b/scripts/production_health.py
+@@ -187,14 +187,16 @@ def checks(deep: bool) -> dict[str, bool]:
+ 
+     def image_storage() -> bool:
+         from brickvault_api import production_admin as admin
++        from brickvault_api.backup_format import IMAGE_REVISIONS
+         from brickvault_api.image_backup import configured_root
++        from brickvault_api.persistence.database import expected_revisions
+         from sqlalchemy import text
+ 
+         cfg = admin._load_config(admin.CONFIG_PATH)
+         with admin._owner_connection(cfg) as owner:
+             owner.execute(text("SET TRANSACTION READ ONLY"))
+             revisions = admin._revisions(owner)
+-        if revisions != ("0017_listing_images",):
++        if revisions != expected_revisions() or revisions not in IMAGE_REVISIONS:
+             return False
+         root = configured_root()
+         import pwd
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index 8d484f4..bcad1a0 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -95,6 +95,7 @@ RELEASE_SOURCE_PATHS = (
+     "services/api/src/brickvault_api/backup_format.py",
+     "services/api/src/brickvault_api/image_backup.py",
+     "services/api/tests/unit/test_image_backup_seams.py",
++    "services/api/tests/unit/test_outcome_backup_compatibility.py",
+     "apps/web/src/AppShell.tsx",
+     "apps/web/src/ListingsPage.tsx",
+     "apps/web/src/Listings.test.tsx",
+diff --git a/services/api/src/brickvault_api/backup_format.py b/services/api/src/brickvault_api/backup_format.py
+index f26f01c..4953cca 100644
+--- a/services/api/src/brickvault_api/backup_format.py
++++ b/services/api/src/brickvault_api/backup_format.py
+@@ -8,6 +8,8 @@ LEGACY_ARTIFACTS = ("database.dump", "globals.sql", "configuration.tar")
+ IMAGE_ARTIFACTS = (*LEGACY_ARTIFACTS, "image-blobs.tar")
+ LEGACY_REVISION = "0016_hunt_cached_runs"
+ IMAGE_REVISION = "0017_listing_images"
++# Explicitly reviewed heads sharing the same four-artifact recovery contract.
++IMAGE_REVISIONS = ((IMAGE_REVISION,), ("0018_deal_outcome_revisions",))
+ HEX32 = re.compile(r"[a-f0-9]{32}\Z")
+ HEX64 = re.compile(r"[a-f0-9]{64}\Z")
+ FIELDS = {
+@@ -23,12 +25,20 @@ FIELDS = {
+ }
+ 
+ 
++def schema_for_revisions(revisions: tuple[str, ...]) -> int:
++    if revisions in IMAGE_REVISIONS:
++        return 3
++    if revisions in ((), (LEGACY_REVISION,)):
++        return 2
++    raise ValueError("Unsupported recovery revision.")
++
++
+ def required_artifacts(schema: Any, revisions: Any) -> tuple[str, ...]:
+     if type(schema) is not int or type(revisions) is not list:
+         raise ValueError("Invalid recovery format.")
+     if schema == 2 and revisions in ([], [LEGACY_REVISION]):
+         return LEGACY_ARTIFACTS
+-    if schema == 3 and revisions == [IMAGE_REVISION]:
++    if schema == 3 and tuple(revisions) in IMAGE_REVISIONS:
+         return IMAGE_ARTIFACTS
+     raise ValueError("Unsupported recovery format or revision.")
+ 
+diff --git a/services/api/src/brickvault_api/image_backup.py b/services/api/src/brickvault_api/image_backup.py
+index 69fc358..ec68a80 100644
+--- a/services/api/src/brickvault_api/image_backup.py
++++ b/services/api/src/brickvault_api/image_backup.py
+@@ -12,11 +12,13 @@ import tarfile
+ from collections.abc import Iterator
+ from contextlib import contextmanager
+ from pathlib import Path
+-from typing import Any
++from typing import Any, cast
+ 
+ from sqlalchemy import Connection, text
+ 
+-from brickvault_api.images.storage import FilesystemBlobStore, key_for
++from brickvault_api.backup_format import IMAGE_REVISIONS
++from brickvault_api.images.storage import FilesystemBlobStore as FilesystemBlobStore
++from brickvault_api.images.storage import key_for
+ 
+ STATE = Path("/run/brickvault-image-capture")
+ JOURNAL = STATE / "pause.json"
+@@ -229,7 +231,8 @@ def validate_inventory(value: Any) -> list[dict[str, Any]]:
+         type(value) is not dict
+         or set(value) != {"schema", "revisions", "database"}
+         or value["schema"] != 1
+-        or value["revisions"] != ["0017_listing_images"]
++        or type(value["revisions"]) is not list
++        or tuple(value["revisions"]) not in IMAGE_REVISIONS
+     ):
+         raise ValueError("Invalid image inventory format.")
+     database = value["database"]
+@@ -330,7 +333,7 @@ def extract_archive(archive_path: Path, destination: Path) -> dict[str, Any]:
+             seen.add(member.name)
+         if seen != set(rows):
+             raise ValueError("Recovery archive is incomplete.")
+-    return value
++    return cast(dict[str, Any], value)
+ 
+ 
+ def main() -> int:
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index 6815cff..9aff7dd 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -31,9 +31,9 @@ from brickvault_api import image_backup
+ from brickvault_api import production_admin as admin
+ from brickvault_api.backup_format import (
+     IMAGE_ARTIFACTS,
+-    IMAGE_REVISION,
+     LEGACY_ARTIFACTS,
+     required_artifacts,
++    schema_for_revisions,
+     validate_receipt,
+ )
+ from brickvault_api.providers.bricklink import configuration as bricklink_configuration
+@@ -616,7 +616,7 @@ def backup() -> str:
+ def _backup_locked() -> str:
+     config = _preflight()
+     revisions = _current_revisions(config)
+-    schema = 3 if revisions == (IMAGE_REVISION,) else 2
++    schema = schema_for_revisions(revisions)
+     names = required_artifacts(schema, list(revisions))
+     pause = image_backup.maintenance_pause() if schema == 3 else nullcontext()
+     with pause:
+diff --git a/services/api/tests/unit/test_outcome_backup_compatibility.py b/services/api/tests/unit/test_outcome_backup_compatibility.py
+new file mode 100644
+--- /dev/null
++++ b/services/api/tests/unit/test_outcome_backup_compatibility.py
+@@ -0,0 +1,73 @@
++"""Only the 0018 operational recovery boundary; no live services or provider work."""
++
++import copy
++import io
++from pathlib import Path
++from types import SimpleNamespace
++
++import pytest
++
++from brickvault_api import backup_format as fmt
++from brickvault_api import image_backup as images
++from brickvault_api import production_admin as admin
++from brickvault_api import production_backup as backup
++
++from .test_image_backup_seams import MARKER, NOW, REPOS, fixture_archive, receipt
++
++
++@pytest.mark.parametrize("revision", ["0017_listing_images", "0018_deal_outcome_revisions"])
++def test_exact_supported_heads_keep_complete_backup_and_recovery_proof(
++    revision: str,
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    value = receipt()
++    value["revisions_at_backup"] = [revision]
++    assert fmt.schema_for_revisions((revision,)) == 3
++    assert fmt.validate_receipt(value["run_id"], value, REPOS, MARKER, NOW) == fmt.IMAGE_ARTIFACTS
++    raw = images.canonical(value)
++    proof = backup._proof_from_receipt(value["run_id"], value, raw, (revision,), NOW)
++    monkeypatch.setattr(admin, "_protected_file", lambda _: images.canonical(proof))
++    monkeypatch.setattr(backup, "verified_receipt", lambda _: (value, raw))
++    cfg = admin.AdminConfig("unused-owner", "unused-runtime", MARKER)
++    admin._recovery_proof(backup._proof_path(value["run_id"]), cfg, (revision,))
++    damaged = copy.deepcopy(value)
++    damaged["artifacts"].pop("image-blobs.tar")
++    with pytest.raises(ValueError):
++        fmt.validate_receipt(damaged["run_id"], damaged, REPOS, MARKER, NOW)
++    with pytest.raises(ValueError):
++        fmt.required_artifacts(2, [revision])
++
++
++def test_unknown_multiple_heads_and_legacy_semantics_are_not_weakened() -> None:
++    assert fmt.schema_for_revisions(()) == 2
++    assert fmt.schema_for_revisions((fmt.LEGACY_REVISION,)) == 2
++    assert fmt.required_artifacts(2, [fmt.LEGACY_REVISION]) == fmt.LEGACY_ARTIFACTS
++    for head in [("0019_unknown",), ("0018_deal_outcome_revisions", "0017_listing_images")]:
++        with pytest.raises(ValueError):
++            fmt.schema_for_revisions(head)
++        with pytest.raises(ValueError):
++            fmt.required_artifacts(3, list(head))
++
++
++def test_0018_archive_roundtrip_keeps_full_database_inventory(
++    tmp_path: Path,
++    monkeypatch: pytest.MonkeyPatch,
++) -> None:
++    _, source, value = fixture_archive(tmp_path, monkeypatch)
++    value["revisions"] = ["0018_deal_outcome_revisions"]
++    value["database"]["counts"]["deal_outcome_revision"] = 2
++    inventory = tmp_path / "outcomes-inventory.json"
++    inventory.write_bytes(images.canonical(value))
++    out = io.BytesIO()
++    monkeypatch.setattr(images.sys, "stdout", SimpleNamespace(buffer=out))
++    images.write_archive(inventory, source)
++    archive = tmp_path / "outcomes-images.tar"
++    archive.write_bytes(out.getvalue())
++    assert images.extract_archive(archive, tmp_path / "outcomes-recovered") == value
++    for row in value["database"]["blobs"]:
++        assert (source / row["storage_key"]).read_bytes() == (
++            tmp_path / "outcomes-recovered" / row["storage_key"]
++        ).read_bytes()
++    value["revisions"] = ["0019_unknown"]
++    with pytest.raises(ValueError):
++        images.validate_inventory(value)

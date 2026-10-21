@@ -1,0 +1,31 @@
+{
+  "installation": {
+    "status": "PRODUCTION_OUTCOMES_APK_INSTALLED",
+    "apk_sha256": "a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3",
+    "source": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "uid_first_install_preserved": true,
+    "in_place": true,
+    "uninstall_data_clear_downgrade": false,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "capture_excluded": true
+  },
+  "observed_session": {
+    "status": "LOCAL_SIGN_IN_REQUIRED",
+    "signedOut": true,
+    "webview_origin": "https://android.appraisal.abrianbaker.com",
+    "pathname": "/",
+    "password_values_read": false,
+    "cookies_tokens_extracted": false,
+    "outcome_writes": 0
+  },
+  "cleanup": {
+    "status": "PHONE_TASK_CLEANUP_PASS",
+    "owned_forward_removed": true,
+    "prior_forward_reverse_state_restored": true,
+    "data_identity_preserved": true,
+    "installed_apk_sha256": "a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3"
+  },
+  "authenticated_outcome_smoke": "PENDING_LOCAL_USER_SIGN_IN",
+  "production_outcome_writes": 0
+}
