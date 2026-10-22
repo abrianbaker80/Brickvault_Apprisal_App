@@ -1,0 +1,45 @@
+--- a/docs/plans/109-phase-16a-actual-outcomes.md
++++ b/docs/plans/109-phase-16a-actual-outcomes.md
+@@ -461,3 +461,42 @@
+ compatibility paths and this additive plan record remain uncommitted; main stays
+ unpushed with an empty index. Review evidence: `astra_response/Phase-16/16A-production/r2/`.
+ Capture stays stopped; later Phase 16 dataset/training work has not started.
++
++
++## Production outcome acceptance — 2026-10-22
++
++**16A PRODUCTION DEPLOYED / ACCEPTED. LOCAL DEPLOYMENT-AMENDMENT CHECKPOINT PENDING.**
++
++After Brian signed in locally, the remaining bounded workflow passed on the
++installed production phone: one new, explicitly labeled synthetic saved deal,
++one outcome append, reopen, and exact history-entry readback. The phone displayed
++192.00 USD gross, 152.00 USD net, 105.00 USD acquisition and 47.00 USD profit.
++Server readback matched the exact submitted normalized actuals and returned results.
++The original historical forecast projection remained unchanged, no existing saved
++forecast was overwritten, and no retry/correction/second outcome was submitted.
++
++The fixture is retained and visibly marked SYNTHETIC / NOT A REAL PURCHASE OR SALE
++in the saved-deal note and actual-outcome fields. No physical inspection was
++asserted. Its original forecast comparison is UNAVAILABLE (ORIGINAL_NOT_SUPPORTED /
++ORIGINAL_VALUE_UNAVAILABLE), not a fabricated prediction; this acceptance establishes
++actual-outcome persistence/calculation, not new market-price freshness or forecast
++accuracy. Future analytics/training must exclude this labeled fixture; automatic
++exclusion was not implemented or claimed in this slice.
++
++Final server checks: all 14 ordinary health checks pass, zero failed units, schema
++0018_deal_outcome_revisions, release phase16a-outcomes-production-r3. Provider
++attempts remain unchanged, and listing/image/upload-receipt counts match the
++pre-smoke state. Backup schedule remains 04:00 America/Chicago. No backup/restore,
++rebuild, restart, migration, additional provider request or accepted TEST campaign
++was triggered during this acceptance check.
++
++APK remains a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3.
++The owned inspection forward was removed, previous forwarding/reverse state and
++app-data identity were preserved, and the phone was left signed in. Password,
++cookie and CSRF values were not read. No TEST APK or capture feature was installed.
++
++Evidence: astra_response/Phase-16/16A-production/r3/ (prior r1/r2 retained).
++The eight deployed compatibility source/test paths and this additive plan remain
++uncommitted; main is unpushed with an empty index. All 22 prior pending/protected
++paths remain byte-identical. No further live qualification is needed for 16A.
++Wider Phase 16 remains open; capture remains stopped; no dataset work started.

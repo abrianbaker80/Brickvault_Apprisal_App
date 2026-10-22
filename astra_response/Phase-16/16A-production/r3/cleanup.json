@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "owned_inspection_forward_removed": true,
+  "prior_forward_and_reverse_state_restored": true,
+  "installed_apk_sha256": "a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3",
+  "data_identity_preserved": true,
+  "signed_in_at_final_phone_check": true,
+  "sign_out_performed": false,
+  "task_phone_files_created": 0,
+  "synthetic_record_retained": true
+}

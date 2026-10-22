@@ -1,0 +1,17 @@
+{
+  "main_head": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "main_unpushed": true,
+  "index_empty": true,
+  "prior_pending_protected_paths_byte_preserved": 22,
+  "deployment_amendment_paths_uncommitted": 9,
+  "operational_bytes_match_deployed_receipt": true,
+  "new_application_source_changes_this_smoke": 0,
+  "plan_sha256": "f5e3fc215ca3ac094850f8f3e5674bfc74b4160706ff2774d267652429de46f5",
+  "new_automated_test_runs": 0,
+  "new_builds": 0,
+  "new_provider_calls": 0,
+  "new_backup_restore_or_restart": 0,
+  "phone_left_signed_in": true,
+  "pending_capture_not_resumed": true,
+  "earlier_reviews_and_private_receipts_preserved": true
+}
