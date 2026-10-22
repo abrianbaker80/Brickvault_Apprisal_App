@@ -1,0 +1,32 @@
+{
+  "baseline": "a68c9682ef4e31e00202984daace4a5d1a61f85a",
+  "accepted_review": "a8282ddd4b10cdab5fd13cde1d63a5f8425f7619",
+  "paths": [
+    "docs/plans/109-phase-16a-actual-outcomes.md",
+    "scripts/complete_run_retention.py",
+    "scripts/package_api.py",
+    "scripts/production_health.py",
+    "scripts/release_manifest.py",
+    "services/api/src/brickvault_api/backup_format.py",
+    "services/api/src/brickvault_api/image_backup.py",
+    "services/api/src/brickvault_api/production_backup.py",
+    "services/api/tests/unit/test_outcome_backup_compatibility.py"
+  ],
+  "tree": "595b9e543d37007a1192be7df1b2bdeb5f99d8f1",
+  "staged_patch_sha256": "ebde31ac4b6ff84255755850554659cc85d74bc09200a08c04110efef376ff08",
+  "plan_only_additive_closure": true,
+  "deployed_amendment_bytes_match": true,
+  "whitespace": "PASS",
+  "local_markdown_targets": 21,
+  "prior_pending_entries": 22,
+  "private_deployment_evidence_files": 264,
+  "live_test_build_actions": 0,
+  "full_staged_diff_inspected": true,
+  "commit_parent_and_tree_verified": true,
+  "exact_committed_inventory_passed": true,
+  "final_index_empty": true,
+  "source_tests_and_static_checks_rerun": false,
+  "production_phone_provider_backup_actions": 0,
+  "new_independent_review_claimed": false,
+  "accepted_evidence_reused": "Phase-16/16A-production/r3 and its linked source/deployment packages"
+}

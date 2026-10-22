@@ -1,0 +1,50 @@
+{
+  "commit": "e76d5f18f810c5942d6c1c8692c261015229c802",
+  "paths": [
+    {
+      "path": "docs/plans/109-phase-16a-actual-outcomes.md",
+      "git_blob": "808bd17887c193dbcc374d0d20621e4ffde9664d",
+      "sha256_lf_utf8": "d5fdc23788a69b1e93dc5b79f380829ab2213ceb994307fa2a42d43b5c619d01"
+    },
+    {
+      "path": "scripts/complete_run_retention.py",
+      "git_blob": "2f4452b563d03de5a91f3d7b7bd79402bf194a5d",
+      "sha256_lf_utf8": "5330e27998e2c212660285078757bda517609e1a8cc430a0531123ca2e5b0863"
+    },
+    {
+      "path": "scripts/package_api.py",
+      "git_blob": "1af0db7de6be69a8f46bd51e923a85452e82ecd1",
+      "sha256_lf_utf8": "40bbdf5d35a3ad2a4e7bb61f5dc67730bc7878136315c2b1024707f0d6aa3c2a"
+    },
+    {
+      "path": "scripts/production_health.py",
+      "git_blob": "d9ea85111453be5d60a4542f9565bc6a0d820240",
+      "sha256_lf_utf8": "9dc06f00b5b2ea07705a48d13ea5cfb37dd90ce27f45131ca73e1d985d081ff3"
+    },
+    {
+      "path": "scripts/release_manifest.py",
+      "git_blob": "bcad1a0d4e1a5c5a575aab343d51354e289be1eb",
+      "sha256_lf_utf8": "a0fc745fb07bef4aa78fc270ff36675b529c447d26b26cabd2b170b181fb6199"
+    },
+    {
+      "path": "services/api/src/brickvault_api/backup_format.py",
+      "git_blob": "4953ccaa6ba3e3db2eacc38da865fccc0e21bd8e",
+      "sha256_lf_utf8": "e264e9d3084d669ed7bcf4f418d0ec834e279c4ad904ad4e7aa422e00e4b3845"
+    },
+    {
+      "path": "services/api/src/brickvault_api/image_backup.py",
+      "git_blob": "ec68a80f0fc4f881aa7ad012e6dde571acc1afc5",
+      "sha256_lf_utf8": "3f554b8e2265945003c87968c08b6a42377cd28a61220bcbed0b2cadb72aa273"
+    },
+    {
+      "path": "services/api/src/brickvault_api/production_backup.py",
+      "git_blob": "9aff7dd9081d16bf92f647fae21808a4e649abf7",
+      "sha256_lf_utf8": "24bdc7533a1a18b0f7dcba39557db4ff4c4a75e6ff6a285c9d18e5bce8ad8832"
+    },
+    {
+      "path": "services/api/tests/unit/test_outcome_backup_compatibility.py",
+      "git_blob": "ecbb25772d3515e4516a0a150a4437fa68fc6694",
+      "sha256_lf_utf8": "7b7d92392e5199527d6e878752dc5a8267beb1a297122e06a5e7025cd2d11da5"
+    }
+  ]
+}
