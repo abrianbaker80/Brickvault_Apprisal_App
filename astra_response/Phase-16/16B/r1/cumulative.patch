@@ -1,0 +1,3008 @@
+diff --git a/docs/plans/110-phase-16b-reviewed-datasets.md b/docs/plans/110-phase-16b-reviewed-datasets.md
+new file mode 100644
+index 0000000..2c2d420
+--- /dev/null
++++ b/docs/plans/110-phase-16b-reviewed-datasets.md
+@@ -0,0 +1,371 @@
++# ExecPlan 110 — Phase 16B reviewed labels and sanitized dataset foundation
++
++**2026-10-23 — READY FOR PHASE 16B PLAN REVIEW. Planning only; uncommitted.**
++
++**2026-10-26 — Grouped decisions approved; fixture-only source/TEST implementation authorized.**
++Reviewed bytes preserved privately at `.local/phase16b/reviewed-plan-110.md`, SHA-256
++`86d5341c82e499f810815f924cb5ff627bcc884efdac3396b598ee6e1d876123`.
++Binding clarifications: preview/release bind explicit bounded owned targets and
++purpose into the digest; bridge metadata is allowed but only selected image bytes
++are prepared/exported. Encoding/copying stays outside locks; final publication
++rechecks ownership, eligibility, permissions/expiry and withdrawal under the shared
++principal lock. Releases reproduce independently; no safe-combination claim.
++Component growth and shared-derivative links also withdraw affected releases.
++Production smoke-root registration and real-source export remain unauthorized.
++
++## 1. Goal and user-visible outcome
++
++One CLI-first vertical slice lets Brian explicitly review image identities, privacy
++and rights, then preview and materialize a reproducible private dataset release.
++Prove the entire path with generated synthetic images; this does not establish a
++real training-ready corpus. No custom training or new recognition calls.
++
++## 2. Why now; delivered versus remaining Phase 16
++
++[Plan 109's final closeout](109-phase-16a-actual-outcomes.md#production-deployment-local-closeout---2026-10-22)
++and [accepted publication](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/a79a7de14b0bbccbecfb2a9e8038f17b28cc2c3e/astra_response/Phase-16/16A-production/r4/REVIEW.md)
++close 16A source AND production. Delivered: owner-scoped append-only actuals,
++exact-money results, immutable original-forecast comparison with per-metric
++comparability, correction/history UI and operational schema compatibility.
++Production identity remains `phase16a-outcomes-production-r3`, schema
++`0018_deal_outcome_revisions`; no fresh operational verification is claimed.
++
++Remaining under [Prompt 16](../../prompts/16_training_dataset_and_hardening.md):
++reviewed labels/negatives, privacy/rights admission, sanitized reproducible releases,
++connected splits, and affected image/security/recovery regression evidence. 16A's
++per-deal comparison is delivered; cross-deal forecast-error/cohort reporting,
++normalized verified-contents inventory and broader recognition-quality/hardening
++remain outstanding. They are not silently satisfied by this foundation. Older
++workflow/roadmap status and pending capture edits are historical, not authority to
++reopen 16A. Wider Phase 16 remains OPEN.
++
++## 3. In scope
++
++One additive migration, five small dataset tables, a private authenticated local
++CLI, deterministic selection/splitting/materialization, and directly affected
++compatibility checks. Real-source records default ineligible. Fixture releases
++use a distinct purpose that cannot be promoted to a real training release.
++
++## 4. Explicit non-goals
++
++No React/Android UI, HTTP API, generated contracts, new dependencies, image-upload
++protocol changes, automatic label imports, embeddings, vectors, training, new AI
++calls, acquisition or source fetching. No cross-deal financial report, new valuation
++math, automatic live deletion or general consent platform. 15B stays stopped and
++unqualified; 15C stays unstarted. No deployment or real-corpus export is authorized.
++
++## 5. Current state and reusable implementation
++
++Local `main` is `e76d5f18f810c5942d6c1c8692c261015229c802`, unpushed; index empty.
++All 22 pre-existing pending paths are preserved, including AGENTS.md, both protected
++catalog tests and stopped capture code. 109 is the highest existing plan; 110 was
++unused. The requested `astra_response/Phase-16/16B-plan/r1/` was unused locally and
++in the inspected local publication refs. No server, device or private corpus read.
++
++| Existing implementation | Reuse and limit |
++| --- | --- |
++| `listings/service.py`, migration `0017_listing_images` | Owned listings, listing_image IDs, original asset/blob SHA-256, thumbnail lineage, immutable receipts and deterministic order. No existing dataset tables. |
++| `images/processing.py`, `images/storage.py` | Bounded real decode and atomic immutable BlobStore publication/read/stat. Do not change original bytes or thumbnail recipe. |
++| `recognition/local.py: sanitized_image`, private-file/ACL helpers | Existing metadata-free RGB JPEG recipe and filesystem checks; extract provider-independent helpers without importing pilot execution. Metadata stripping does not remove private pixels. |
++| `recognition/contracts.py`, `recognition/evaluation.py` | Distinction between proposals, independently confirmed labels and exhaustive labels; existing private pilot files are not durable dataset reviews or training permission. No automatic import. |
++| `outcomes.py`, `auth.py`, `catalog/connection.py` | Ownership guard, authenticated transaction, principal serialization, append/replay/conflict patterns. Financial actuals never become labels. |
++| `backup_format.py`, `image_backup.py`, operational scripts | Existing four-artifact image-inclusive recovery contract and dynamic inventory; extend exact supported heads, never accept arbitrary future schemas. |
++
++Paths in this table are relative to `services/api/src/brickvault_api/` unless stated.
++Conceptual analysis/capture/confirmation tables in older docs are not evidence that
++those tables exist. The current image_relation permits only thumbnail-v1; dataset
++crop lineage belongs in the new review/item records, not a silent widening of it.
++
++## 6. Decisions and assumptions — one grouped approval
++
++Recommend approving together: **(a)** CLI-first local workflow and the bounded
++0019 migration; **(b)** conservative unknown/fixture/source-rights rules and explicit
++reviewed negative pairs; **(c)** private immutable release retention plus append-only
++withdrawal, with no automatic deletion or redistribution. Retain released sanitized
++bytes/manifests privately until separately authorized disposal; corrections withdraw
++use immediately but do not rewrite history. Existing encrypted backup/pin rules
++remain; pinned copies are not promised to expire.
++
++This grouped approval would authorize fixture-only implementation and isolated TEST
++checks, not production operations, a real corpus, real export or training. Actual
++real-corpus source/export/training permissions and any incompatible retention terms
++must be reviewed together later; no approval marathon for routine coding decisions.
++
++## 7. Data model and interface changes
++
++Propose `0019_reviewed_dataset_foundation` after 0018, with normal Alembic version
++and paired up/down SQL files. No existing outcome, forecast, receipt or image row
++is rewritten. Five tables, UUID IDs, owner FK, server UTC times, bounded strict
++payloads (64 KiB/review), no PUBLIC privileges:
++
++| Table | Exact responsibility |
++| --- | --- |
++| `dataset_subject_revision` | Full-state append-only classification of exactly one owned listing OR saved original forecast root (exclusive nullable FKs). Fields: submission id, owner, subject FK, revision, expected predecessor, `UNKNOWN/REAL/SYNTHETIC/EXCLUDED`, reason/evidence reference, and listing-only declared source-group UUIDs (max 32) plus `related_sources_reviewed` attestation. Unique subject/revision; reason required for correction. Shared original hashes inherit the strictest exclusion. Group assertions remain conservative historical edges. |
++| `dataset_review_revision` | Append-only full review of an owned listing_image: submission id, revision/predecessor, original hash, optional proposed identities with private evidence digest, independent positive labels and explicit negative pairs, Brian reviewer/time/basis, privacy review, source/export/training permission decisions and evidence references, prepared derivative blob FK/hash/recipe. Missing states are UNKNOWN; reason required on correction. |
++| `dataset_release` | Immutable release UUID/owner/purpose, seed, algorithm/recipe/schema/tool versions, pinned selection and graph snapshot, canonical sanitized manifest JSON/hash, private lineage/selection JSON/hash, submission request hash. No mutable status column. |
++| `dataset_item` | Immutable release membership: release/item IDs, exact review and subject revision FKs, derivative blob FK/hash, opaque group and partition, independent label keys/negative pairs, crop/transform lineage. Unique release/listing_image and same-owner enforced across all references. |
++| `dataset_release_event` | Append-only release withdrawal (reason code, cause review/classification ID, server time); effective usability is derived. Corrections/revocations atomically withdraw every affected release. No destructive rewrite or automatic reactivation. |
++
++Use typed Pydantic models in `datasets/models.py`, not unconstrained JSON. DB checks,
++FKs and guards enforce same-owner membership, append ordering, immutable rows and
++fresh authenticated write context. Use existing principal-lock order consistently
++for review, classification, release finalization and withdrawal. Submission UUID
++plus equal normalized content replays the original result; changed content conflicts;
++stale expected revision conflicts. No process-local lock as database authority.
++
++**Independent admission dimensions.** Each positive is `UNREVIEWED`,
++`BRIAN_CONFIRMED`, `PURCHASE_VERIFIED` or `WITHDRAWN`, with image-specific scope,
++quantity when actually known, evidence basis and reviewer. Purchase verification
++requires explicit inspection evidence; BOUGHT/CONFIRMED_MATCH in outcome actuals
++does not suffice. Partial labels remain partial, never exhaustive by implication.
++Negatives require an explicit `CONFIRMED_NOT_THIS_IDENTITY` decision for this
++image/selected region, identity and reason. Rejection, omission, low score, unknown
++contents or a positive for another identity supplies no automatic negative.
++
++Privacy is `UNREVIEWED/APPROVED/REJECTED` for the exact sanitized-byte hash and
++recipe. Rights record separate `UNKNOWN/PERMITTED/DENIED/REVOKED` source-use,
++export and training decisions, with provenance, evidence reference, scope and
++optional expiry; private display/download/API-submission permission never fills
++them. Eligibility is computed, never an operator-editable training_ready flag.
++Require applicable positive/negative review, all permissions, approved final pixels,
++known real classification and no conflicting shared-source prohibition. Rebrickable
++images AND downloaded catalog content remain excluded, including derivative data.
++Private canonical identity links can use the existing catalog; exported label keys
++and label evidence must be independently authored/permitted. Do not copy catalog
++names, descriptions, inventories or provider payloads into training material.
++
++**Fixture exclusion.** Absent subject revision means UNKNOWN/ineligible for real
++analytics/selection, not REAL. Add a shared classification predicate for future
++analytics and this exporter; there is no analytics job in this slice. Fixture mode
++accepts only explicit SYNTHETIC subjects, emits `FIXTURE_ONLY_NOT_TRAINING_DATA`,
++and never mixes real rows. Keep the retained 16A smoke root immutable. Its exact
++UUID must later be resolved from the accepted private receipt by authorized Brian
++and entered through `subject-review`; never discover it through note-text matching
++alone. No production backfill now. Real analytics/export remains blocked until that
++durable classification and real-corpus admission are complete. Synthetic status
++cannot be cleared by an ordinary review; correcting it needs explicit owner guidance.
++
++**CLI, no API/UI changes.** Add `datasets/{__init__,__main__,models,service,export}.py`
++and provider-independent `images/sanitization.py`. Proposed invocation:
++`uv run --project services/api python -m brickvault_api.datasets <command>`.
++Commands: `subject-review --input`, `prepare --input`, `review --input`,
++`preview --purpose --seed`, `release --preview-id --id`,
++`materialize --release-id --output`, `verify --release-id --output`, and
++`withdraw --release-id --reason-code`. A `status --submission-id` read recovers
++uncertain writes and their exact committed results. Input documents carry submission UUID,
++expected revision and explicit targets; bounded strict parsing, no arbitrary SQL,
++source URLs, credential arguments or arbitrary corpus traversal. `preview` is
++read-only and returns its canonical selection digest as preview-id, not another table.
++
++Use guarded configured runtime DB/BlobStore only, with interactive `getpass` and
++existing AuthService login/check/session lifecycle; tokens stay in memory and are
++revoked on exit. No owner-role bypass, new authentication system or server endpoint.
++Brian's minimum flow: classify a listing, prepare a crop, inspect the private local
++preview, submit independent identity/privacy/rights decisions, inspect eligibility
++counts/reasons, then explicitly release/materialize/verify. All commands fail closed
++on unavailable DB, ownership/auth failure or unknown scope. New sessions do not
++silently retry uncertain writes: reread the submission UUID before deliberate retry.
++
++## 8. Selection, sanitization and reproducibility contract
++
++Prepare only from committed owned originals through BlobStore. Fully decode with
++existing limits, orient, optionally crop by explicit integer bounds in oriented
++coordinates, fit within 1024 square, RGB/white, JPEG quality 85, strip metadata.
++Record `dataset-sanitize-v1`, crop, Pillow version and output hash. Brian must inspect
++the final pixels for seller faces/names, addresses, notifications and unrelated text;
++reject unsafe images that a crop cannot safely isolate. No OCR/redaction model or
++automatic approval. Store derivative bytes as a new existing blob row; review/item
++FKs preserve original-to-derivative lineage without changing image_asset kinds.
++Preparing or correcting bytes invalidates the prior privacy approval.
++
++Build an undirected graph over ALL owned listings, original hashes, known derivative
++lineage and declared source-group edges, including ineligible/excluded bridge nodes.
++Connected components include transitive A–B–C relationships. Links using the same
++sanitized output hash also connect. Same listing, shared exact original and declared
++related source/capture groups can never cross splits. No URL fetch or seller-identity
++inference. Brian must attest source-group completeness for a real admitted corpus;
++unknown relatedness blocks admission. No claim of perceptual-duplicate detection.
++
++Pin a sorted graph snapshot, all eligibility revision IDs and selected items in one
++coordinated selection. Require an explicit bounded manifest of owned listing_image
++targets and purpose; never implicitly select every eligible record.
++Component ID is a hash of canonical sorted internal
++node keys; SHA-256 of version/seed/component ID assigns integer buckets 0–7999 train,
++8000–8999 validation, 9000–9999 test. Seed is an explicit unsigned 64-bit decimal;
++use canonical UTF-8 JSON and SHA-256, never Python hash/random iteration order.
++Small fixtures may yield empty partitions; never split a component to fill quotas.
++
++At finalization recheck auth, latest reviews/permissions/expiry and graph digest
++under the principal lock; stale preview conflicts. Serialize listing upload commit
++and privacy escalation with this same short lock (before listing row lock), so new
++shared content cannot race finalization. On graph/privacy change withdraw releases
++whose pinned components/admission are invalidated. Keep decode outside locks.
++Derivative preparation/review uses this lock too; adding equal sanitized hashes
++must invalidate any prior conflicting partition assignments.
++Across releases, a newly merged component spanning prior partitions withdraws the
++affected releases; never silently present combined releases as leakage-free.
++
++Immutable manifest contains purpose, versions, seed, selection/split rules, opaque
++item/group IDs, independent labels, partitions, dimensions and derivative hashes.
++The private DB lineage snapshot retains original hashes, receipt/listing_image and
++review references; the materialized export excludes original hashes, private input
++filenames, source URLs, seller/listing text, financial actuals and raw provider data.
++Payload names are opaque hashes. Canonical manifest and sorted file checksum list
++are identical when replaying the same pinned release; wall clock and machine paths
++are excluded from hashed content. Historical reproduction never reselects latest data.
++
++Materialize into a fresh private directory outside Git/static roots; restrictive
++ACLs, no symlink traversal or overwrite. Stage and fsync complete files, verify all
++hashes, recheck release eligibility then atomically publish the directory. Interrupted
++release/materialization recovers by submission/release ID; existing blobs are verified,
++not overwritten. No archive reader or new testing framework. Withdrawn releases fail
++materialize/verify-for-use; private audit metadata remains readable. Already copied
++bytes cannot be recalled: mark unusable, report affected release IDs, and require a
++new release after correction. Retention/deletion conflicts block use pending guidance.
++
++## 9. Migration and operational compatibility
++
++Implement compatibility in this slice, before readiness claims: update
++`persistence/runtime_grants.py` with enumerated SELECT/INSERT only on the five
++tables and reviewed guard functions; no UPDATE/DELETE. Update
++`scripts/package_api.py` wheel/sdist inclusion and literal migration graph/head;
++`scripts/release_manifest.py` source inventory; `backup_format.py` exact head
++allowlist; `production_backup.py`, `image_backup.py`,
++`scripts/complete_run_retention.py` and `scripts/production_health.py` consumers.
++Inspect `production_admin.py`/schema ownership guards for literal assumptions too.
++Keep accepted 0016 legacy and 0017/0018 recovery admission unchanged; unknown and
++multiple heads still fail. Do not change the 53-table catalog inventory count.
++
++Recommend retaining backup schema 3 and its four artifacts: full database.dump
++already carries new rows and image-blobs.tar carries derivative blobs. Manifest
++bytes are DB-backed; materialized directories are disposable, reconstructible and
++not a fifth backup artifact. Extend inventory fingerprints for all five tables,
++including review/rights/withdrawal contents, not just counts. Verify restore can
++reconstruct the exact release and its withdrawn state. New live head requires its
++matching package/grants/health version; old runtime compatibility is not presumed.
++Existing backup retention, encryption and permanent pins remain unchanged.
++
++## 10. Implementation sequence after approval
++
++1. Add schema/models/classification and review service with real disposable
++   PostgreSQL admission, conflicts and replay; generated synthetic fixtures only.
++2. Add crop preparation, explicit review CLI, graph selector and immutable release
++   materialization; connect upload/privacy finalization locking without changing
++   receipt/order semantics. No prediction promotion or imported real corpus.
++3. Finish operational compatibility and one affected acceptance pass; record exact
++   evidence and remaining real-data/production gates. One review stop for the slice.
++
++## 11. Targeted validation and acceptance criteria
++
++No checks below run during planning. Later use existing pytest infrastructure:
++
++- New `test_dataset_admission.py` and real-PostgreSQL `test_datasets.py`: independent
++  identity/privacy/rights gates, partial labels, explicit negatives, Rebrickable and
++  unknown/expired/revoked permissions, same-owner guards, revision/idempotency races,
++  sticky fixture/root exclusion and fixture/real mode separation.
++- New `test_dataset_export.py`: metadata/private-pixel fixture crop review, strict
++  input bounds, stable bytes/hash/seed, A–B–C ineligible bridge and duplicate-derived
++  leakage, changed group withdrawal, review/revocation-finalization barriers,
++  interrupted publication and zero raw text/URLs/financial/provider metadata output.
++- Focus existing `test_listing_images.py`, `test_listing_share_privacy.py` and
++  `test_listing_upload_arguments.py` on changed lock/privacy and real decoder paths:
++  duplicate/lost-response receipt recovery, order/minimum/high-water, malformed
++  multipart/decode/size rejection. Reuse unchanged accepted parser evidence; do not
++  edit or rerun protected catalog tests merely for this slice.
++- Extend `test_outcome_backup_compatibility.py`/`test_image_backup_seams.py` and
++  relevant packaging/health/retention cases for 0019 versus accepted old heads.
++  One disposable DB+blob round-trip containing reviews, fixture classification,
++  active/withdrawn release and receipts/order proves exact re-materialization and
++  grants/inventory. No full production disaster-recovery rehearsal.
++- Focus Ruff/mypy on changed Python, and one affected wheel/package check. No web
++  or Android build, physical-device campaign, provider call or blanket TEST replay.
++
++## 12. Security, failure modes, rollback and recovery
++
++Follow [image policy](../IMAGE_PRIVACY_POLICY.md),
++[ingestion](../IMAGE_INGESTION.md), [privacy](../SECURITY_PRIVACY.md), and
++[provider prohibition](../PHASE_2D_PROVIDER_GATE.md). Fixed error codes/counts only
++in ordinary logs. Raw review evidence references remain private, not export payload.
++Missing/corrupt blobs fail closed; published unreferenced derivative blobs are
++preserved for report-only audit/retry. No automated orphan purge.
++Corrections, classification changes and revocations append history and withdraw
++affected releases atomically. No forecast/outcome rewrite. After live use, recover
++forward; downgrade/drop tests are disposable-only. Deployment, backup operations,
++private receipt access and production fixture registration require separate scope.
++
++## 13. Progress and open checks
++
++- [x] 2026-10-23: Read accepted closeout, current implementation and relevant policy;
++  drafted one plan. No tests/builds, dependencies, services or exports.
++- [x] 2026-10-26: Brian approved grouped decisions and fixture-only implementation,
++  with explicit bounded selection, short final-publication coordination and standalone
++  release clarifications recorded above. No second plan-review cycle.
++- [x] 2026-10-26: Five tables and authenticated CLI implemented. Affected validation
++  passes; no physical-device check needed. Source/TEST implementation awaits review.
++- [ ] Later, separately: independently permitted real corpus and exact retained
++  smoke-root classification. No IDs/private evidence copied into this publication.
++
++## 14. Outcome and stop condition
++
++Planning ends at this reviewable uncommitted plan/package. Implementation completes
++only when synthetic reviews/releases reproduce exactly, admission and transitive
++split failures are proved, withdrawal and fixture exclusions persist, and 0019
++package/grants/backup/inventory/retention/health compatibility passes affected checks.
++Report FIXTURE-ONLY evidence and stop for review. Real readiness, deployment,
++training, capture and wider Phase 16 completion are not conferred.
++
++### Fixture-only implementation outcome — 2026-10-26
++
++Implemented `datasets/{models,service,export,__main__}.py`, shared bounded
++`images/sanitization.py`, migration 0019, enumerated runtime grants, and five-table
++inventory fingerprints. Exact schema admission is centralized in `backup_format.py`;
++existing health, backup and retention consumers inherit the reviewed 0019 head while
++retaining old-head validation. Wheel/sdist and release source inventories include
++the new source/migration/tests. No dependency, router, contract or screen changes.
++
++Actual CLI: `python -m brickvault_api.datasets` in the repository-managed uv/venv.
++It accepts configured owned TEST runtime settings only, prompts through getpass,
++uses existing AuthService, and revokes its session on exit. JSON inputs are strict,
++private and at most 64 KiB. Workflow: `subject-review --input`,
++`prepare --input --output` (private selected-image preview), `review --input`,
++`preview --input` (explicit purpose/targets/seed), `release --input` (same selection
++plus preview digest/submission ID), `materialize --release-id --output`,
++`verify --release-id --output`, `withdraw --input`, and `status --submission-id`.
++Status separates the immutable result from current release usability. The CLI has
++no production mode and no real-training purpose.
++
++All decoding/copying occurs before final publication coordination. Persistent
++private exact-release reservation markers use kernel locks that release on process
++exit; atomic per-file publication and exact byte checks recover interrupted writes
++without overwriting originals or mixing releases. Relevant uploads/privacy changes,
++subject/review corrections and newly shared crop derivatives invalidate affected
++component snapshots. Independent releases remain unsupported for combining.
++
++Validation: 65 affected unit/operational cases passed. Nine release-manifest cases
++were rerun after adding affected test paths to its inventory and passed. The final
++PostgreSQL pass had 39 passing cases and one stale historical test assertion that
++still expected 0017; updating that assertion to the reviewed 0019 head and rerunning
++only that case passed. Thus all 40 selected integration cases have passing evidence,
++including the full authenticated CLI flow, expiry/revocation/publication barriers,
++new shared-crop growth and one real disposable pg_dump/restore plus blob archive
++round-trip retaining active/withdrawn releases and exact fingerprints/outputs.
++The CLI entry point runs in-process in the harness with generated TEST settings
++and password-prompt input; authentication, parsing, database and blob operations
++are real. This is source/TEST evidence, not a deployed interactive-terminal claim.
++All runner ledgers report no leftovers and preserve volumes/prior running state.
++
++Focused Ruff formatting/lint and mypy checks passed (Windows source and Linux
++types for Linux operational image-backup code). API wheel/sdist, isolated installed
++imports, exact migration graph and credential-free schema check passed. Windows
++ACL creation was corrected to use access-only .NET control sections rather than
++requesting unavailable SACL privileges. Existing pytest/Starlette warnings remain;
++no dependency expansion follows from those warnings. No full historical suite,
++web/APK build, production recovery, phone/server or provider activity occurred.
++
++Limitations: fixture-only, generated images, Windows filesystem/ACL execution and
++real PostgreSQL in owned local Docker TEST. Linux materialization filesystem runtime
++is unqualified. No private corpus or real permissions are admitted, no 16A smoke
++root is backfilled, and real analytics/export/training readiness is not claimed.
++16A stays closed, capture stays stopped, wider Phase 16 remains open. Main source,
++migration, tests and this plan remain uncommitted; only the sanitized review package
++may be committed/pushed on astra-response under the explicit publication exception.
+diff --git a/scripts/package_api.py b/scripts/package_api.py
+index 1af0db7..b1a7716 100644
+--- a/scripts/package_api.py
++++ b/scripts/package_api.py
+@@ -68,6 +68,15 @@ def package() -> None:
+     sdist = ROOT / "services/api/dist/brickvault_api-0.0.0.tar.gz"
+     required = {
+         "brickvault_api/outcome_models.py",
++        "brickvault_api/datasets/__init__.py",
++        "brickvault_api/datasets/__main__.py",
++        "brickvault_api/datasets/models.py",
++        "brickvault_api/datasets/service.py",
++        "brickvault_api/datasets/export.py",
++        "brickvault_api/images/sanitization.py",
++        "brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py",
++        "brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql",
++        "brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql",
+         "brickvault_api/outcome_calculation.py",
+         "brickvault_api/outcomes.py",
+         "brickvault_api/api/outcomes.py",
+@@ -264,17 +273,19 @@ from brickvault_api.calibration.corpus import load_corpus
+ from brickvault_api.calibration.budget import corpus_demand
+ assert len(load_corpus().cases) == 12
+ assert corpus_demand(load_corpus())['mapping_attempts'] is None
+-assert expected_revisions() == ('0018_deal_outcome_revisions',)
+-assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0018_deal_outcome_revisions','0017_listing_images','0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
++assert expected_revisions() == ('0019_reviewed_dataset_foundation',)
++assert tuple(r.revision for r in ScriptDirectory.from_config(migration_config()).walk_revisions()) == ('0019_reviewed_dataset_foundation','0018_deal_outcome_revisions','0017_listing_images','0016_hunt_cached_runs','0015_notes_source_urls','0014_settings_profiles','0013_watchlist_targets','0012_product_identity_qualifiers','0011_forecast_revisions','0010_saved_forecasts','0009_private_authentication','0008_product_refresh_operations','0007_provider_discovery_accounting','0006_market_cache','0005_catalog_search_indexes','0004_catalog_staging','0003_catalog_inventory','0002_catalog_identity','0001_foundation')
+ assert len(CATALOG_TABLES) == 53
+ assert 'catalog_image_reference' not in CATALOG_TABLES
+ assert search_input('  Synthetic name  ', 20) == 'Synthetic name'
+ assert expand_graph(SnapshotRef(UUID(int=1), UUID(int=2), UUID(int=3), 'synthetic', True), UUID(int=4), {}).state == QueryState.INCOMPLETE
+ assert BenchmarkManifest.model_validate_json('{"benchmark_version":"catalog-2c-v1","cases":[{"case_id":"official","capability":"metadata","source_reference":"official-2d","evidence_reference":"deferred","acceptance_category":"OFFICIAL","expected":{}}]}').benchmark_version == 'catalog-2c-v1'
+-for revision in ('0018_deal_outcome_revisions', '0017_listing_images', '0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
++for revision in ('0019_reviewed_dataset_foundation', '0018_deal_outcome_revisions', '0017_listing_images', '0016_hunt_cached_runs', '0015_notes_source_urls', '0002_catalog_identity', '0003_catalog_inventory', '0004_catalog_staging', '0005_catalog_search_indexes', '0006_market_cache', '0007_provider_discovery_accounting', '0008_product_refresh_operations', '0009_private_authentication', '0010_saved_forecasts'):
+     for direction in ('up', 'down'):
+         assert files('brickvault_api').joinpath('migrations','sql',revision+'_'+direction+'.sql').read_text()
+ socket.create_connection = lambda *a, **k: (_ for _ in ()).throw(AssertionError('unexpected connection'))
++from brickvault_api.datasets.__main__ import parser as dataset_parser
++assert dataset_parser().parse_args(['status','--submission-id',str(UUID(int=1))]).command == 'status'
+ assert b'/api/ready' in export()
+ print('Independent installed wheel import, migration graph and credential-free schema passed.')
+ """
+diff --git a/scripts/release_manifest.py b/scripts/release_manifest.py
+index bcad1a0..a8727d5 100644
+--- a/scripts/release_manifest.py
++++ b/scripts/release_manifest.py
+@@ -94,6 +94,23 @@ RELEASE_SOURCE_PATHS = (
+     "services/api/uv.lock",
+     "services/api/src/brickvault_api/backup_format.py",
+     "services/api/src/brickvault_api/image_backup.py",
++    "services/api/src/brickvault_api/datasets/__init__.py",
++    "services/api/src/brickvault_api/datasets/__main__.py",
++    "services/api/src/brickvault_api/datasets/models.py",
++    "services/api/src/brickvault_api/datasets/export.py",
++    "services/api/src/brickvault_api/datasets/service.py",
++    "services/api/src/brickvault_api/images/sanitization.py",
++    "services/api/src/brickvault_api/listings/service.py",
++    "services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py",
++    "services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql",
++    "services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql",
++    "services/api/tests/unit/test_dataset_admission.py",
++    "services/api/tests/unit/test_dataset_export.py",
++    "services/api/tests/integration/test_datasets.py",
++    "services/api/tests/integration/test_dataset_recovery.py",
++    "services/api/tests/integration/test_listing_images.py",
++    "services/api/tests/integration/test_listing_share_privacy.py",
++    "services/api/tests/unit/test_listing_upload_arguments.py",
+     "services/api/tests/unit/test_image_backup_seams.py",
+     "services/api/tests/unit/test_outcome_backup_compatibility.py",
+     "apps/web/src/AppShell.tsx",
+diff --git a/services/api/src/brickvault_api/backup_format.py b/services/api/src/brickvault_api/backup_format.py
+index 4953cca..154b918 100644
+--- a/services/api/src/brickvault_api/backup_format.py
++++ b/services/api/src/brickvault_api/backup_format.py
+@@ -9,7 +9,11 @@ IMAGE_ARTIFACTS = (*LEGACY_ARTIFACTS, "image-blobs.tar")
+ LEGACY_REVISION = "0016_hunt_cached_runs"
+ IMAGE_REVISION = "0017_listing_images"
+ # Explicitly reviewed heads sharing the same four-artifact recovery contract.
+-IMAGE_REVISIONS = ((IMAGE_REVISION,), ("0018_deal_outcome_revisions",))
++IMAGE_REVISIONS = (
++    (IMAGE_REVISION,),
++    ("0018_deal_outcome_revisions",),
++    ("0019_reviewed_dataset_foundation",),
++)
+ HEX32 = re.compile(r"[a-f0-9]{32}\Z")
+ HEX64 = re.compile(r"[a-f0-9]{64}\Z")
+ FIELDS = {
+diff --git a/services/api/src/brickvault_api/datasets/__init__.py b/services/api/src/brickvault_api/datasets/__init__.py
+new file mode 100644
+index 0000000..fcc85fc
+--- /dev/null
++++ b/services/api/src/brickvault_api/datasets/__init__.py
+@@ -0,0 +1 @@
++"""Private reviewed datasets; fixture proof does not authorize real training."""
+diff --git a/services/api/src/brickvault_api/datasets/__main__.py b/services/api/src/brickvault_api/datasets/__main__.py
+new file mode 100644
+index 0000000..74e9a82
+--- /dev/null
++++ b/services/api/src/brickvault_api/datasets/__main__.py
+@@ -0,0 +1,161 @@
++"""Local authenticated fixture CLI. No provider calls, bootstrap or production mode."""
++
++import argparse
++import getpass
++import json
++import sys
++from pathlib import Path
++from typing import Any
++from uuid import UUID
++
++import psycopg
++from pydantic import ValidationError
++
++from brickvault_api.auth import AuthError, AuthService
++from brickvault_api.catalog.connection import CatalogDatabase
++from brickvault_api.datasets.export import safe_output, write_exclusive
++from brickvault_api.datasets.models import (
++    DatasetError,
++    ImageReview,
++    Prepare,
++    ReleaseRequest,
++    Selection,
++    Strict,
++    SubjectReview,
++    Withdrawal,
++    canonical,
++)
++from brickvault_api.datasets.service import DatasetService
++from brickvault_api.images.sanitization import ordinary, private_directory
++from brickvault_api.images.storage import FilesystemBlobStore, ImageError
++from brickvault_api.settings import ConfigurationError, RuntimeSettings
++
++
++def read_input(path: Path, model: type[Strict]) -> Any:
++    ordinary(path)
++    private_directory(path.parent)
++    if not path.is_file() or path.stat().st_size > 65536:
++        raise DatasetError("DATASET_INPUT_LIMIT")
++    return model.model_validate_json(path.read_bytes())
++
++
++def parser() -> argparse.ArgumentParser:
++    result = argparse.ArgumentParser(description="Private fixture-only dataset workflow")
++    commands = result.add_subparsers(dest="command", required=True)
++    for name in ("subject-review", "prepare", "review", "preview", "release", "withdraw"):
++        child = commands.add_parser(name)
++        child.add_argument("--input", type=Path, required=True)
++        if name == "prepare":
++            child.add_argument(
++                "--output", type=Path, required=True, help="Fresh private preview directory"
++            )
++    child = commands.add_parser("status")
++    child.add_argument("--submission-id", type=UUID, required=True)
++    for name in ("materialize", "verify"):
++        child = commands.add_parser(name)
++        child.add_argument("--release-id", type=UUID, required=True)
++        child.add_argument("--output", type=Path, required=True)
++    return result
++
++
++def execute(
++    service: DatasetService, token: str, csrf: str, args: argparse.Namespace
++) -> dict[str, Any]:
++    models: dict[str, type[Strict]] = {
++        "subject-review": SubjectReview,
++        "prepare": Prepare,
++        "review": ImageReview,
++        "preview": Selection,
++        "release": ReleaseRequest,
++        "withdraw": Withdrawal,
++    }
++    if args.command == "status":
++        return service.status(token, args.submission_id)
++    if args.command in ("materialize", "verify"):
++        if args.command == "materialize":
++            service.materialize(token, csrf, args.release_id, args.output)
++        else:
++            service.verify(token, args.release_id, args.output)
++        return {"release_id": str(args.release_id), "state": args.command + "_verified"}
++    body = read_input(args.input, models[args.command])
++    if args.command == "preview":
++        return service.preview(token, body)
++    if args.command == "subject-review":
++        value = service.subject(token, csrf, body)
++    elif args.command == "prepare":
++        value = service.prepare(token, csrf, body)
++    elif args.command == "review":
++        value = service.review(token, csrf, body)
++    elif args.command == "release":
++        value = service.release(token, csrf, body)
++    else:
++        value = service.withdraw(token, csrf, body)
++    if args.command == "prepare":
++        safe_output(args.output)
++        if not args.output.exists():
++            private_directory(args.output, create=True)
++        private_directory(args.output)
++        sha = value["data"]["derivative_sha256"]
++        file = args.output / (sha + ".jpg")
++        service.store.stat(sha)
++        with service.store.read(sha) as stream:
++            raw = stream.read(1024 * 1024 + 1)
++        if file.exists():
++            ordinary(file)
++            if file.read_bytes() != raw:
++                raise DatasetError("DATASET_PREVIEW_MISMATCH")
++        else:
++            write_exclusive(file, raw)
++    return value
++
++
++def main(argv: list[str] | None = None) -> int:
++    args = parser().parse_args(argv)
++    token = csrf = None
++    auth = None
++    try:
++        settings = RuntimeSettings.from_environment()
++        if (
++            settings.purpose != "test"
++            or not settings.database_ownership_marker
++            or not settings.image_blob_root
++        ):
++            raise DatasetError("DATASET_OWNED_TEST_REQUIRED")
++        database = CatalogDatabase(
++            settings.database_url.get_secret_value(),
++            "test",
++            settings.database_ownership_marker.get_secret_value(),
++            role="runtime",
++        )
++        auth = AuthService(database)
++        token, csrf, _ = auth.login(getpass.getpass("BrickVault owner password: "), None)
++        service = DatasetService(database, FilesystemBlobStore(Path(settings.image_blob_root)))
++        value = execute(service, token, csrf, args)
++        sys.stdout.buffer.write(canonical(value) + b"\n")
++        return 0
++    except (
++        DatasetError,
++        ImageError,
++        AuthError,
++        ConfigurationError,
++        ValidationError,
++        psycopg.Error,
++        OSError,
++        ValueError,
++    ):
++        # Never print native exceptions, credential-bearing configuration or input values.
++        print(
++            json.dumps({"error": "DATASET_COMMAND_FAILED", "recovery": "status --submission-id"}),
++            file=sys.stderr,
++        )
++        return 1
++    finally:
++        if auth and token and csrf:
++            try:
++                auth.check(token, csrf, logout=True)
++            except (AuthError, psycopg.Error):
++                pass
++
++
++if __name__ == "__main__":
++    raise SystemExit(main())
+diff --git a/services/api/src/brickvault_api/datasets/export.py b/services/api/src/brickvault_api/datasets/export.py
+new file mode 100644
+index 0000000..11db0af
+--- /dev/null
++++ b/services/api/src/brickvault_api/datasets/export.py
+@@ -0,0 +1,187 @@
++"""Deterministic connected components and private, recoverable directory publication."""
++
++import hashlib
++import os
++import sys
++import tempfile
++from collections.abc import Callable, Iterator
++from contextlib import AbstractContextManager, contextmanager
++from pathlib import Path
++from typing import Any
++
++from brickvault_api.datasets.models import DatasetError, canonical, digest
++from brickvault_api.images.sanitization import ordinary, private_directory
++from brickvault_api.images.storage import BlobStore
++
++
++def components(edges: list[list[str]]) -> dict[str, list[str]]:
++    parent: dict[str, str] = {}
++
++    def root(node: str) -> str:
++        parent.setdefault(node, node)
++        while parent[node] != node:
++            parent[node] = parent[parent[node]]
++            node = parent[node]
++        return node
++
++    for edge in edges:
++        if edge:
++            first = root(edge[0])
++            for node in edge[1:]:
++                other = root(node)
++                if other != first:
++                    parent[other] = first
++    groups: dict[str, list[str]] = {}
++    for node in sorted(parent):
++        groups.setdefault(root(node), []).append(node)
++    return {node: groups[root(node)] for node in parent}
++
++
++def partition(seed: int, nodes: list[str]) -> tuple[str, str]:
++    group = digest(nodes)
++    bucket = int(digest(["dataset-split-v1", seed, group]), 16) % 10000
++    return group, "train" if bucket < 8000 else "validation" if bucket < 9000 else "test"
++
++
++def payloads(data: dict[str, Any], store: BlobStore) -> Iterator[tuple[str, bytes]]:
++    manifest = canonical(data["manifest"])
++    yield "manifest.json", manifest
++    checksums = {"manifest.json": hashlib.sha256(manifest).hexdigest()}
++    for sha in sorted({item["derivative_sha256"] for item in data["manifest"]["items"]}):
++        store.stat(sha)
++        with store.read(sha) as stream:
++            raw = stream.read(1024 * 1024 + 1)
++        if len(raw) > 1024 * 1024 or hashlib.sha256(raw).hexdigest() != sha:
++            raise DatasetError("DATASET_BLOB_CORRUPT")
++        filename = sha + ".jpg"
++        checksums[filename] = sha
++        yield filename, raw
++    yield "checksums.json", canonical(checksums)
++
++
++def safe_output(path: Path) -> None:
++    ordinary(path)
++    for directory in (path, *path.parents):
++        if (directory / ".git").exists() or (directory / "index.html").exists():
++            raise DatasetError("DATASET_OUTPUT_OUTSIDE_GIT_STATIC_REQUIRED")
++    if not path.parent.is_dir():
++        raise DatasetError("DATASET_OUTPUT_PARENT_REQUIRED")
++    private_directory(path.parent)
++
++
++def write_exclusive(path: Path, raw: bytes, *, temporary_directory: Path | None = None) -> None:
++    ordinary(path)
++    # Atomic publication leaves no partly written named payload after a crash.
++    # Release staging uses its private parent for temporary files, so abandoned
++    # anonymous files can never enter the published dataset directory.
++    temporary: str | None = None
++    try:
++        with tempfile.NamedTemporaryFile(
++            dir=temporary_directory or path.parent, prefix=".dataset-pending-", delete=False
++        ) as stream:
++            temporary = stream.name
++            stream.write(raw)
++            stream.flush()
++            os.fsync(stream.fileno())
++        os.link(temporary, path)
++    finally:
++        if temporary is not None:
++            Path(temporary).unlink(missing_ok=True)
++
++
++def sync_directory(path: Path) -> None:
++    if os.name == "posix":
++        descriptor = os.open(path, os.O_RDONLY)
++        try:
++            os.fsync(descriptor)
++        finally:
++            os.close(descriptor)
++
++
++@contextmanager
++def reservation(path: Path, identity: bytes) -> Iterator[None]:
++    # Kernel locks release on process death. The private exact-ID marker remains
++    # recoverable; no PID guessing or stale-lock deletion is needed.
++    try:
++        write_exclusive(path, identity)
++    except FileExistsError:
++        pass
++    ordinary(path)
++    with path.open("r+b") as stream:
++        try:
++            if sys.platform == "win32":
++                import msvcrt
++
++                msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
++            else:
++                import fcntl
++
++                fcntl.flock(stream.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
++        except OSError:
++            raise DatasetError("DATASET_OUTPUT_BUSY") from None
++        try:
++            stream.seek(0)
++            if stream.read(4097) != identity:
++                raise DatasetError("DATASET_OUTPUT_RESERVED_FOR_OTHER_RELEASE")
++            yield
++        finally:
++            stream.seek(0)
++            if sys.platform == "win32":
++                msvcrt.locking(stream.fileno(), msvcrt.LK_UNLCK, 1)
++            else:
++                fcntl.flock(stream.fileno(), fcntl.LOCK_UN)
++
++
++def verify_files(path: Path, data: dict[str, Any], store: BlobStore) -> None:
++    safe_output(path)
++    private_directory(path)
++    expected = set()
++    for name, raw in payloads(data, store):
++        expected.add(name)
++        file = path / name
++        ordinary(file)
++        if not file.is_file() or file.stat().st_size != len(raw) or file.read_bytes() != raw:
++            raise DatasetError("DATASET_OUTPUT_MISMATCH")
++    if {p.name for p in path.iterdir()} != expected:
++        raise DatasetError("DATASET_UNEXPECTED_OUTPUT")
++
++
++def materialize(
++    path: Path,
++    release_id: str,
++    data: dict[str, Any],
++    store: BlobStore,
++    final: Callable[[], AbstractContextManager[None]],
++) -> None:
++    safe_output(path)
++    # A private reservation serializes only this output, not decoding or DB work.
++    claim = path.parent / ("." + path.name + ".claim")
++    with reservation(
++        claim, canonical({"release_id": release_id, "manifest": data["manifest_hash"]})
++    ):
++        if path.exists():
++            verify_files(path, data, store)
++            with final():
++                return  # Exact-ID recovery of a completed publication.
++        stage = path.parent / ("." + path.name + ".stage-" + release_id)
++        if not stage.exists():
++            private_directory(stage, create=True)
++        private_directory(stage)
++        for name, raw in payloads(data, store):
++            target = stage / name
++            ordinary(target)
++            if target.exists():
++                if target.read_bytes() != raw:
++                    raise DatasetError("DATASET_INTERRUPTED_OUTPUT_MISMATCH")
++            else:
++                write_exclusive(target, raw, temporary_directory=path.parent)
++        verify_files(stage, data, store)
++        sync_directory(stage)
++        # Byte processing is complete. This short context owns final reauthorization
++        # and shares coordination with withdrawal, uploads and review mutations.
++        with final():
++            ordinary(path)
++            if path.exists():
++                raise DatasetError("DATASET_OUTPUT_EXISTS")
++            stage.rename(path)
++            sync_directory(path.parent)
+diff --git a/services/api/src/brickvault_api/datasets/models.py b/services/api/src/brickvault_api/datasets/models.py
+new file mode 100644
+index 0000000..feb8b65
+--- /dev/null
++++ b/services/api/src/brickvault_api/datasets/models.py
+@@ -0,0 +1,188 @@
++"""Bounded review inputs. Independent review dimensions never imply one another."""
++
++import hashlib
++import json
++from datetime import datetime
++from typing import Annotated, Any, Literal, Self
++from uuid import UUID
++
++from pydantic import BaseModel, ConfigDict, Field, model_validator
++
++PURPOSE = "FIXTURE_ONLY_NOT_TRAINING_DATA"
++VERSION = "dataset-v1"
++TABLES = (
++    "dataset_subject_revision",
++    "dataset_review_revision",
++    "dataset_release",
++    "dataset_item",
++    "dataset_release_event",
++)
++Digest = Annotated[str, Field(pattern=r"^[a-f0-9]{64}$")]
++Key = Annotated[str, Field(pattern=r"^[A-Za-z0-9_-]{1,80}$")]
++Reason = Annotated[str, Field(min_length=1, max_length=500)]
++
++
++class DatasetError(ValueError):
++    """Fixed codes, never input text or native exceptions."""
++
++
++def canonical(value: Any) -> bytes:
++    return json.dumps(
++        value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False
++    ).encode("utf-8")
++
++
++def digest(value: Any) -> str:
++    return hashlib.sha256(canonical(value)).hexdigest()
++
++
++class Strict(BaseModel):
++    model_config = ConfigDict(extra="forbid", strict=True, frozen=True, hide_input_in_errors=True)
++
++
++class Revision(Strict):
++    id: UUID
++    expected_revision: int = Field(ge=0, le=2147483645)
++    reason: Reason
++
++
++class SubjectReview(Revision):
++    listing_id: UUID | None = None
++    root_forecast_id: UUID | None = None
++    classification: Literal["UNKNOWN", "REAL", "SYNTHETIC", "EXCLUDED"]
++    evidence_ref: Key
++    source_groups: list[UUID] = Field(default_factory=list, max_length=32)
++    related_sources_reviewed: bool = False
++
++    @model_validator(mode="after")
++    def subject(self) -> Self:
++        if (self.listing_id is None) == (self.root_forecast_id is None):
++            raise ValueError("exactly_one_subject")
++        if len(set(self.source_groups)) != len(self.source_groups):
++            raise ValueError("duplicate_source_group")
++        if self.root_forecast_id and (self.source_groups or self.related_sources_reviewed):
++            raise ValueError("listing_only_source_groups")
++        return self
++
++
++class Prepare(Revision):
++    purpose: Literal["FIXTURE_ONLY_NOT_TRAINING_DATA"]
++    listing_image_id: UUID
++    crop: tuple[int, int, int, int] | None = None
++
++    @model_validator(mode="after")
++    def bounds(self) -> Self:
++        if self.crop:
++            left, top, right, bottom = self.crop
++            if not (0 <= left < right <= 16000 and 0 <= top < bottom <= 16000):
++                raise ValueError("invalid_crop")
++        return self
++
++
++class Label(Strict):
++    key: Key
++    state: Literal["UNREVIEWED", "BRIAN_CONFIRMED", "PURCHASE_VERIFIED", "WITHDRAWN"]
++    evidence_ref: Key
++    quantity: int | None = Field(default=None, ge=1, le=10000)
++    canonical_identity_id: UUID | None = None  # Private link, never exported.
++
++
++class Negative(Strict):
++    key: Key
++    state: Literal["CONFIRMED_NOT_THIS_IDENTITY"]
++    evidence_ref: Key
++
++
++class Permission(Strict):
++    state: Literal["UNKNOWN", "PERMITTED", "DENIED", "REVOKED"] = "UNKNOWN"
++    evidence_ref: Key | None = None
++    expires_at: datetime | None = None
++
++    @model_validator(mode="after")
++    def evidence(self) -> Self:
++        if self.state != "UNKNOWN" and self.evidence_ref is None:
++            raise ValueError("permission_evidence_required")
++        if self.expires_at and self.expires_at.utcoffset() is None:
++            raise ValueError("timezone_required")
++        return self
++
++
++class ImageReview(Revision):
++    listing_image_id: UUID
++    prepared_revision_id: UUID
++    derivative_sha256: Digest
++    proposed_keys: list[Key] = Field(default_factory=list, max_length=32)
++    positives: list[Label] = Field(default_factory=list, max_length=32)
++    negatives: list[Negative] = Field(default_factory=list, max_length=32)
++    labels_exhaustive: bool = False
++    label_provenance: Literal["INDEPENDENT", "REBRICKABLE", "UNKNOWN"] = "UNKNOWN"
++    privacy: Literal["UNREVIEWED", "APPROVED", "REJECTED"] = "UNREVIEWED"
++    privacy_evidence_ref: Key | None = None
++    source: Literal["SYNTHETIC_GENERATED", "USER_OWNED", "REBRICKABLE", "UNKNOWN"] = "UNKNOWN"
++    source_use: Permission = Field(default_factory=Permission)
++    export: Permission = Field(default_factory=Permission)
++    training: Permission = Field(default_factory=Permission)
++
++    @model_validator(mode="after")
++    def independent(self) -> Self:
++        keys = [x.key for x in self.positives]
++        negative = [x.key for x in self.negatives]
++        if len(set(keys)) != len(keys) or len(set(negative)) != len(negative):
++            raise ValueError("duplicate_labels")
++        if set(keys) & set(negative):
++            raise ValueError("contradictory_labels")
++        if self.privacy == "APPROVED" and self.privacy_evidence_ref is None:
++            raise ValueError("privacy_evidence_required")
++        return self
++
++
++class Selection(Strict):
++    purpose: Literal["FIXTURE_ONLY_NOT_TRAINING_DATA"]
++    targets: list[UUID] = Field(min_length=1, max_length=128)
++    seed: int = Field(ge=0, le=18446744073709551615)
++
++    @model_validator(mode="after")
++    def unique(self) -> Self:
++        if len(set(self.targets)) != len(self.targets):
++            raise ValueError("duplicate_selection")
++        return self
++
++
++class ReleaseRequest(Strict):
++    id: UUID
++    selection: Selection
++    preview_id: Digest
++
++
++class Withdrawal(Strict):
++    id: UUID
++    release_id: UUID
++    reason_code: Key
++
++
++def is_real(classification: str | None) -> bool:
++    """Shared exclusion predicate for future analytics; unknown never means real."""
++    return classification == "REAL"
++
++
++def admission(review: ImageReview, classification: str | None, now: datetime) -> list[str]:
++    reasons = []
++    if classification != "SYNTHETIC":
++        reasons.append("FIXTURE_CLASSIFICATION_REQUIRED")
++    if review.source != "SYNTHETIC_GENERATED":
++        reasons.append("FIXTURE_SOURCE_REQUIRED")
++    if review.label_provenance != "INDEPENDENT":
++        reasons.append("INDEPENDENT_LABEL_PROVENANCE_REQUIRED")
++    if not (review.positives or review.negatives) or any(
++        x.state not in ("BRIAN_CONFIRMED", "PURCHASE_VERIFIED") for x in review.positives
++    ):
++        reasons.append("REVIEWED_LABEL_REQUIRED")
++    if review.privacy != "APPROVED":
++        reasons.append("PRIVACY_REVIEW_REQUIRED")
++    for name in ("source_use", "export", "training"):
++        permission = getattr(review, name)
++        if permission.state != "PERMITTED" or (
++            permission.expires_at is not None and permission.expires_at <= now
++        ):
++            reasons.append(name.upper() + "_PERMISSION_REQUIRED")
++    return reasons
+diff --git a/services/api/src/brickvault_api/datasets/service.py b/services/api/src/brickvault_api/datasets/service.py
+new file mode 100644
+index 0000000..ccfa898
+--- /dev/null
++++ b/services/api/src/brickvault_api/datasets/service.py
+@@ -0,0 +1,625 @@
++"""Authenticated append-only reviews and standalone immutable fixture releases."""
++
++from collections.abc import Iterator
++from contextlib import contextmanager
++from pathlib import Path
++from typing import Any
++from uuid import UUID, uuid4
++
++import psycopg
++from psycopg.types.json import Jsonb
++
++from brickvault_api.auth import AuthError, AuthService, Session
++from brickvault_api.auth import digest as token_digest
++from brickvault_api.catalog.connection import CatalogConnection, CatalogDatabase
++from brickvault_api.datasets import export
++from brickvault_api.datasets.models import (
++    PURPOSE,
++    TABLES,
++    VERSION,
++    DatasetError,
++    ImageReview,
++    Prepare,
++    ReleaseRequest,
++    Selection,
++    SubjectReview,
++    Withdrawal,
++    admission,
++    canonical,
++    digest,
++)
++from brickvault_api.images.sanitization import sanitized_image
++from brickvault_api.images.storage import BlobStore
++from brickvault_api.listings.service import ListingService
++
++
++def authorize(
++    c: CatalogConnection, database: CatalogDatabase, token: str | None, csrf: str | None
++) -> Session:
++    clock = c.execute("SELECT public.forecast_clock() AS now").fetchone()
++    assert clock is not None
++    session = AuthService(database, clock=lambda: clock["now"]).check_in_transaction(c, token, csrf)
++    if csrf is not None:
++        assert token is not None
++        c.execute(
++            "SELECT set_config('brickvault.dataset_session',%s,true),"
++            "set_config('brickvault.dataset_auth_until',%s,true)",
++            (
++                token_digest(token),
++                min(session.idle_expires_at, session.absolute_expires_at).isoformat(),
++            ),
++        )
++    return session
++
++
++def lock(c: CatalogConnection, owner: UUID) -> None:
++    c.execute("SELECT pg_advisory_xact_lock(hashtextextended(%s,19))", (str(owner),))
++
++
++def rows(c: CatalogConnection, query: str, owner: UUID) -> list[dict[str, Any]]:
++    result = c.execute(query + " LIMIT 10001", (owner,)).fetchall()
++    if len(result) > 10000:
++        raise DatasetError("DATASET_METADATA_LIMIT")
++    return result
++
++
++def graph(
++    c: CatalogConnection, owner: UUID
++) -> tuple[dict[str, list[str]], dict[str, Any], dict[str, Any]]:
++    images = rows(
++        c,
++        "SELECT i.id,i.listing_id,i.original_asset_id,b.sha256,a.privacy "
++        "FROM listing_image i JOIN listing l ON l.id=i.listing_id "
++        "JOIN image_asset a ON a.id=i.original_asset_id JOIN blob b ON b.id=a.blob_id "
++        "WHERE l.owner_id=%s ORDER BY i.id",
++        owner,
++    )
++    subjects = rows(
++        c,
++        "SELECT DISTINCT ON (listing_id) * FROM dataset_subject_revision "
++        "WHERE owner_id=%s AND listing_id IS NOT NULL ORDER BY listing_id,revision DESC",
++        owner,
++    )
++    reviews = rows(
++        c,
++        "SELECT DISTINCT ON (listing_image_id) * FROM dataset_review_revision "
++        "WHERE owner_id=%s ORDER BY listing_image_id,revision DESC",
++        owner,
++    )
++    by_subject = {str(r["listing_id"]): r for r in subjects}
++    by_review = {str(r["listing_image_id"]): r for r in reviews}
++    edges = []
++    for row in images:
++        edges.append(
++            [
++                "image:" + str(row["id"]),
++                "listing:" + str(row["listing_id"]),
++                "original:" + row["sha256"],
++                "asset:" + str(row["original_asset_id"]),
++                "privacy:" + str(row["original_asset_id"]) + ":" + row["privacy"],
++            ]
++        )
++    # Historical source assertions/derivatives remain conservative edges, even after correction.
++    history = rows(
++        c,
++        "SELECT listing_id,data FROM dataset_subject_revision WHERE owner_id=%s ORDER BY id",
++        owner,
++    )
++    for row in history:
++        if row["listing_id"]:
++            edges.append(
++                [
++                    "listing:" + str(row["listing_id"]),
++                    *["source:" + x for x in row["data"]["source_groups"]],
++                ]
++            )
++    derivatives = rows(
++        c,
++        "SELECT listing_image_id,data FROM dataset_review_revision WHERE owner_id=%s ORDER BY id",
++        owner,
++    )
++    for row in derivatives:
++        edges.append(
++            ["image:" + str(row["listing_image_id"]), "derived:" + row["data"]["derivative_sha256"]]
++        )
++    lineage = rows(
++        c,
++        "SELECT r.parent_id,r.child_id,b.sha256 FROM image_relation r "
++        "JOIN image_asset a ON a.id=r.child_id JOIN blob b ON b.id=a.blob_id "
++        "WHERE EXISTS(SELECT 1 FROM listing_image i JOIN listing l ON l.id=i.listing_id "
++        "WHERE i.original_asset_id=r.parent_id AND l.owner_id=%s) ORDER BY r.id",
++        owner,
++    )
++    for row in lineage:
++        edges.append(
++            [
++                "asset:" + str(row["parent_id"]),
++                "asset:" + str(row["child_id"]),
++                "derived:" + row["sha256"],
++            ]
++        )
++    return (
++        export.components(edges),
++        {str(r["id"]): r for r in images},
++        {
++            "subjects": by_subject,
++            "reviews": by_review,
++        },
++    )
++
++
++def select(c: CatalogConnection, owner: UUID, selection: Selection) -> dict[str, Any]:
++    groups, images, states = graph(c, owner)
++    now_row = c.execute("SELECT public.forecast_clock() AS now").fetchone()
++    assert now_row is not None
++    lineage, items, exclusions = [], [], []
++    for identifier in sorted(selection.targets, key=str):
++        key = str(identifier)
++        image = images.get(key)
++        if image is None:
++            raise DatasetError("DATASET_NOT_FOUND")
++        subject = states["subjects"].get(str(image["listing_id"]))
++        review = states["reviews"].get(key)
++        reasons = []
++        if subject is None or subject["data"]["classification"] != "SYNTHETIC":
++            reasons.append("FIXTURE_CLASSIFICATION_REQUIRED")
++        if not subject or not subject["data"]["related_sources_reviewed"]:
++            reasons.append("SOURCE_GROUP_REVIEW_REQUIRED")
++        if not review or review["data"]["review"] is None:
++            reasons.append("REVIEW_REQUIRED")
++        else:
++            reviewed = ImageReview.model_validate_json(canonical(review["data"]["review"]))
++            reasons += admission(
++                reviewed, subject["data"]["classification"] if subject else None, now_row["now"]
++            )
++        # Equal originals cannot evade fixture/source denial through another listing.
++        for other in images.values():
++            if other["sha256"] != image["sha256"]:
++                continue
++            source = states["subjects"].get(str(other["listing_id"]))
++            if not source or source["data"]["classification"] != "SYNTHETIC":
++                reasons.append("SHARED_SOURCE_EXCLUDED")
++            other_review = states["reviews"].get(str(other["id"]))
++            if other_review and other_review["data"]["review"]:
++                r = other_review["data"]["review"]
++                if (
++                    r["source"] == "REBRICKABLE"
++                    or r["label_provenance"] == "REBRICKABLE"
++                    or any(
++                        r[name]["state"] in ("DENIED", "REVOKED")
++                        for name in ("source_use", "export", "training")
++                    )
++                ):
++                    reasons.append("SHARED_SOURCE_DENIED")
++        if reasons:
++            exclusions.append({"target": key, "reasons": sorted(set(reasons))})
++            continue
++        assert subject and review
++        nodes = groups["image:" + key]
++        group, split = export.partition(selection.seed, nodes)
++        r = review["data"]["review"]
++        # Only independent opaque keys/quantities enter sanitized output.
++        item = {
++            "id": digest(["item", key]),
++            "group": group,
++            "partition": split,
++            "derivative_sha256": review["data"]["derivative_sha256"],
++            "width": review["data"]["recipe"]["width"],
++            "height": review["data"]["recipe"]["height"],
++            "positives": [{"key": x["key"], "quantity": x["quantity"]} for x in r["positives"]],
++            "negatives": [x["key"] for x in r["negatives"]],
++            "labels_exhaustive": r["labels_exhaustive"],
++        }
++        items.append(item)
++        lineage.append(
++            {
++                "listing_image_id": key,
++                "review_id": str(review["id"]),
++                "subject_id": str(subject["id"]),
++                "derivative_blob_id": str(review["derivative_blob_id"]),
++                "original_sha256": image["sha256"],
++                "nodes": nodes,
++                "recipe": review["data"]["recipe"],
++            }
++        )
++    manifest = {
++        "purpose": PURPOSE,
++        "version": VERSION,
++        "sanitizer": "dataset-sanitize-v1",
++        "decoder_versions": sorted({entry["recipe"]["decoder"] for entry in lineage}),
++        "selection_hash": digest(selection.model_dump(mode="json")),
++        "seed": selection.seed,
++        "split": "dataset-split-v1-sha256-mod10000-8000-1000-1000",
++        "items": items,
++        "combine_releases": "NOT_SUPPORTED",
++    }
++    private = {
++        "selection": selection.model_dump(mode="json"),
++        "lineage": lineage,
++        "exclusions": exclusions,
++    }
++    return {
++        "manifest": manifest,
++        "manifest_hash": digest(manifest),
++        "private": private,
++        "preview_id": digest({"manifest": manifest, "private": private}),
++    }
++
++
++def withdraw_stale(c: CatalogConnection, owner: UUID) -> None:
++    active = rows(
++        c,
++        "SELECT * FROM dataset_release r WHERE owner_id=%s AND NOT EXISTS("
++        "SELECT 1 FROM dataset_release_event e WHERE e.release_id=r.id) ORDER BY id",
++        owner,
++    )
++    for row in active:
++        selection = Selection.model_validate_json(canonical(row["data"]["private"]["selection"]))
++        current = select(c, owner, selection)
++        if current["preview_id"] != row["data"]["preview_id"] or current["private"]["exclusions"]:
++            request = {
++                "id": str(uuid4()),
++                "release_id": str(row["id"]),
++                "reason_code": "ADMISSION_OR_GRAPH_CHANGED",
++            }
++            c.execute(
++                "INSERT INTO dataset_release_event(id,owner_id,release_id,request_hash,request,data) "
++                "VALUES(%s,%s,%s,%s,%s,%s)",
++                (
++                    UUID(request["id"]),
++                    owner,
++                    row["id"],
++                    digest(request),
++                    Jsonb(request),
++                    Jsonb(
++                        {
++                            "reason_code": request["reason_code"],
++                            "cause_digest": current["preview_id"],
++                        }
++                    ),
++                ),
++            )
++
++
++class DatasetService:
++    def __init__(self, database: CatalogDatabase, store: BlobStore) -> None:
++        if database.role != "runtime":
++            raise DatasetError("DATASET_RUNTIME_ROLE_REQUIRED")
++        self.database, self.store = database, store
++
++    @contextmanager
++    def transaction(
++        self, token: str | None, csrf: str | None, *, write: bool = False
++    ) -> Iterator[tuple[CatalogConnection, UUID]]:
++        if write and csrf is None:
++            raise AuthError(403)
++        try:
++            with self.database.connect() as c, c.transaction():
++                session = authorize(c, self.database, token, csrf)
++                lock(c, session.principal_id)
++                yield c, session.principal_id
++                authorize(c, self.database, token, csrf)
++        except psycopg.errors.CheckViolation as error:
++            if error.diag.message_primary == "DATASET_UNAUTHORIZED":
++                raise AuthError() from None
++            raise DatasetError("DATASET_INTEGRITY_CONFLICT") from None
++        except psycopg.errors.UniqueViolation:
++            raise DatasetError("DATASET_ID_REUSED") from None
++        except (
++            psycopg.errors.LockNotAvailable,
++            psycopg.errors.DeadlockDetected,
++            psycopg.errors.QueryCanceled,
++            psycopg.errors.SerializationFailure,
++        ):
++            raise DatasetError("DATASET_UNAVAILABLE") from None
++
++    @staticmethod
++    def _status(
++        c: CatalogConnection, owner: UUID, identifier: UUID
++    ) -> tuple[str, dict[str, Any]] | None:
++        for table in TABLES:
++            if table == "dataset_item":
++                continue
++            row = c.execute(
++                f"SELECT * FROM public.{table} WHERE id=%s AND owner_id=%s", (identifier, owner)
++            ).fetchone()
++            if row:
++                return table, row
++        return None
++
++    def status(self, token: str | None, identifier: UUID) -> dict[str, Any]:
++        with self.transaction(token, None) as (c, owner):
++            entry = self._status(c, owner, identifier)
++            if entry is None:
++                raise DatasetError("DATASET_NOT_FOUND")
++            result = self.projection(*entry)
++            if entry[0] == "dataset_release":
++                try:
++                    self._active(c, owner, identifier)
++                    result["current_state"] = "ACTIVE"
++                except DatasetError as error:
++                    result["current_state"] = str(error)
++            return result
++
++    @staticmethod
++    def projection(table: str, row: dict[str, Any]) -> dict[str, Any]:
++        return {
++            "table": table,
++            "id": str(row["id"]),
++            "revision": row.get("revision"),
++            "data": row["data"],
++        }
++
++    def _replay(
++        self, c: CatalogConnection, owner: UUID, table: str, request: Any
++    ) -> dict[str, Any] | None:
++        entry = self._status(c, owner, request.id)
++        if entry is None:
++            return None
++        if entry[0] != table or entry[1]["request_hash"] != digest(request.model_dump(mode="json")):
++            raise DatasetError("DATASET_ID_REUSED")
++        return self.projection(*entry)
++
++    @staticmethod
++    def _image(c: CatalogConnection, owner: UUID, identifier: UUID) -> dict[str, Any]:
++        row = c.execute(
++            "SELECT i.*,b.sha256,a.privacy FROM listing_image i JOIN listing l ON l.id=i.listing_id "
++            "JOIN image_asset a ON a.id=i.original_asset_id JOIN blob b ON b.id=a.blob_id "
++            "WHERE i.id=%s AND l.owner_id=%s",
++            (identifier, owner),
++        ).fetchone()
++        if row is None:
++            raise DatasetError("DATASET_NOT_FOUND")
++        return row
++
++    def subject(
++        self, token: str | None, csrf: str | None, request: SubjectReview
++    ) -> dict[str, Any]:
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[0], request)
++            if replay:
++                return replay
++            if request.listing_id:
++                owned = c.execute(
++                    "SELECT 1 FROM listing WHERE id=%s AND owner_id=%s", (request.listing_id, owner)
++                ).fetchone()
++            else:
++                owned = c.execute(
++                    "SELECT 1 FROM deal_forecast WHERE id=%s AND owner_id=%s AND saved_at IS NOT NULL "
++                    "AND root_id IS NULL AND parent_id IS NULL",
++                    (request.root_forecast_id, owner),
++                ).fetchone()
++            if not owned:
++                raise DatasetError("DATASET_NOT_FOUND")
++            prior = c.execute(
++                "SELECT * FROM dataset_subject_revision WHERE owner_id=%s "
++                "AND listing_id IS NOT DISTINCT FROM %s AND root_forecast_id IS NOT DISTINCT FROM %s "
++                "ORDER BY revision DESC LIMIT 1",
++                (owner, request.listing_id, request.root_forecast_id),
++            ).fetchone()
++            if (prior["revision"] if prior else 0) != request.expected_revision:
++                raise DatasetError("DATASET_CONFLICT")
++            if (
++                prior
++                and prior["data"]["classification"] == "SYNTHETIC"
++                and request.classification != "SYNTHETIC"
++            ):
++                raise DatasetError("DATASET_FIXTURE_STICKY")
++            value = request.model_dump(mode="json")
++            row = c.execute(
++                "INSERT INTO dataset_subject_revision(id,owner_id,listing_id,root_forecast_id,revision,request_hash,request,data) "
++                "VALUES(%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *",
++                (
++                    request.id,
++                    owner,
++                    request.listing_id,
++                    request.root_forecast_id,
++                    request.expected_revision + 1,
++                    digest(value),
++                    Jsonb(value),
++                    Jsonb(value),
++                ),
++            ).fetchone()
++            assert row
++            withdraw_stale(c, owner)
++            return self.projection(TABLES[0], row)
++
++    def prepare(self, token: str | None, csrf: str | None, request: Prepare) -> dict[str, Any]:
++        # Explicit target only. Admission before any image read/encode.
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[1], request)
++            if replay:
++                return replay
++            image = self._image(c, owner, request.listing_image_id)
++            subject = c.execute(
++                "SELECT data FROM dataset_subject_revision WHERE listing_id=%s AND owner_id=%s "
++                "ORDER BY revision DESC LIMIT 1",
++                (image["listing_id"], owner),
++            ).fetchone()
++            if not subject or subject["data"]["classification"] != "SYNTHETIC":
++                raise DatasetError("DATASET_FIXTURE_CLASSIFICATION_REQUIRED")
++        self.store.stat(image["sha256"])
++        with self.store.read(image["sha256"]) as stream:
++            raw = stream.read(25 * 1024 * 1024 + 1)
++        clean, recipe = sanitized_image(raw, request.crop)
++        stored = self.store.publish(clean)
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[1], request)
++            if replay:
++                return replay
++            self._image(c, owner, request.listing_image_id)
++            subject = c.execute(
++                "SELECT data FROM dataset_subject_revision WHERE listing_id=%s AND owner_id=%s "
++                "ORDER BY revision DESC LIMIT 1",
++                (image["listing_id"], owner),
++            ).fetchone()
++            if not subject or subject["data"]["classification"] != "SYNTHETIC":
++                raise DatasetError("DATASET_FIXTURE_CLASSIFICATION_REQUIRED")
++            blob_id = ListingService.record_blob(c, stored)
++            data = {
++                "original_sha256": image["sha256"],
++                "derivative_sha256": stored.sha256,
++                "recipe": recipe,
++                "review": None,
++            }
++            return self._append_review(c, owner, request, blob_id, data)
++
++    def _append_review(
++        self,
++        c: CatalogConnection,
++        owner: UUID,
++        request: Prepare | ImageReview,
++        blob_id: UUID,
++        data: dict[str, Any],
++    ) -> dict[str, Any]:
++        prior = c.execute(
++            "SELECT revision FROM dataset_review_revision WHERE owner_id=%s AND listing_image_id=%s "
++            "ORDER BY revision DESC LIMIT 1",
++            (owner, request.listing_image_id),
++        ).fetchone()
++        if (prior["revision"] if prior else 0) != request.expected_revision:
++            raise DatasetError("DATASET_CONFLICT")
++        value = request.model_dump(mode="json")
++        row = c.execute(
++            "INSERT INTO dataset_review_revision(id,owner_id,listing_image_id,derivative_blob_id,revision,request_hash,request,data) "
++            "VALUES(%s,%s,%s,%s,%s,%s,%s,%s) RETURNING *",
++            (
++                request.id,
++                owner,
++                request.listing_image_id,
++                blob_id,
++                request.expected_revision + 1,
++                digest(value),
++                Jsonb(value),
++                Jsonb(data),
++            ),
++        ).fetchone()
++        assert row
++        withdraw_stale(c, owner)
++        return self.projection(TABLES[1], row)
++
++    def review(self, token: str | None, csrf: str | None, request: ImageReview) -> dict[str, Any]:
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[1], request)
++            if replay:
++                return replay
++            image = self._image(c, owner, request.listing_image_id)
++            prepared = c.execute(
++                "SELECT * FROM dataset_review_revision WHERE id=%s AND owner_id=%s AND listing_image_id=%s",
++                (request.prepared_revision_id, owner, request.listing_image_id),
++            ).fetchone()
++            if not prepared or prepared["data"]["derivative_sha256"] != request.derivative_sha256:
++                raise DatasetError("DATASET_DERIVATIVE_MISMATCH")
++            if image["sha256"] != prepared["data"]["original_sha256"]:
++                raise DatasetError("DATASET_ORIGINAL_MISMATCH")
++            data = {**prepared["data"], "review": request.model_dump(mode="json")}
++            return self._append_review(c, owner, request, prepared["derivative_blob_id"], data)
++
++    def preview(self, token: str | None, selection: Selection) -> dict[str, Any]:
++        with self.transaction(token, None) as (c, owner):
++            return select(c, owner, selection)
++
++    def release(
++        self, token: str | None, csrf: str | None, request: ReleaseRequest
++    ) -> dict[str, Any]:
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[2], request)
++            if replay:
++                return replay
++            value = select(c, owner, request.selection)
++            if value["preview_id"] != request.preview_id:
++                raise DatasetError("DATASET_STALE_PREVIEW")
++            if value["private"]["exclusions"] or not value["manifest"]["items"]:
++                raise DatasetError("DATASET_SELECTION_INELIGIBLE")
++            body = request.model_dump(mode="json")
++            row = c.execute(
++                "INSERT INTO dataset_release(id,owner_id,purpose,request_hash,request,data) VALUES(%s,%s,%s,%s,%s,%s) RETURNING *",
++                (request.id, owner, PURPOSE, digest(body), Jsonb(body), Jsonb(value)),
++            ).fetchone()
++            assert row
++            for private, item in zip(
++                value["private"]["lineage"], value["manifest"]["items"], strict=True
++            ):
++                c.execute(
++                    "INSERT INTO dataset_item(id,owner_id,release_id,listing_image_id,review_id,subject_id,derivative_blob_id,data) "
++                    "VALUES(%s,%s,%s,%s,%s,%s,%s,%s)",
++                    (
++                        uuid4(),
++                        owner,
++                        request.id,
++                        UUID(private["listing_image_id"]),
++                        UUID(private["review_id"]),
++                        UUID(private["subject_id"]),
++                        UUID(private["derivative_blob_id"]),
++                        Jsonb(item),
++                    ),
++                )
++            return self.projection(TABLES[2], row)
++
++    def withdraw(self, token: str | None, csrf: str | None, request: Withdrawal) -> dict[str, Any]:
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            replay = self._replay(c, owner, TABLES[4], request)
++            if replay:
++                return replay
++            if not c.execute(
++                "SELECT 1 FROM dataset_release WHERE id=%s AND owner_id=%s",
++                (request.release_id, owner),
++            ).fetchone():
++                raise DatasetError("DATASET_NOT_FOUND")
++            value = request.model_dump(mode="json")
++            row = c.execute(
++                "INSERT INTO dataset_release_event(id,owner_id,release_id,request_hash,request,data) VALUES(%s,%s,%s,%s,%s,%s) RETURNING *",
++                (
++                    request.id,
++                    owner,
++                    request.release_id,
++                    digest(value),
++                    Jsonb(value),
++                    Jsonb({"reason_code": request.reason_code}),
++                ),
++            ).fetchone()
++            assert row
++            return self.projection(TABLES[4], row)
++
++    def _active(self, c: CatalogConnection, owner: UUID, identifier: UUID) -> dict[str, Any]:
++        row = c.execute(
++            "SELECT * FROM dataset_release WHERE id=%s AND owner_id=%s", (identifier, owner)
++        ).fetchone()
++        if not row:
++            raise DatasetError("DATASET_NOT_FOUND")
++        if c.execute(
++            "SELECT 1 FROM dataset_release_event WHERE release_id=%s AND owner_id=%s",
++            (identifier, owner),
++        ).fetchone():
++            raise DatasetError("DATASET_RELEASE_WITHDRAWN")
++        selection = Selection.model_validate_json(canonical(row["data"]["private"]["selection"]))
++        current = select(c, owner, selection)
++        if current["preview_id"] != row["data"]["preview_id"] or current["private"]["exclusions"]:
++            raise DatasetError("DATASET_RELEASE_INELIGIBLE")
++        if digest(row["data"]["manifest"]) != row["data"]["manifest_hash"]:
++            raise DatasetError("DATASET_MANIFEST_CORRUPT")
++        return dict(row["data"])
++
++    def materialize(
++        self, token: str | None, csrf: str | None, identifier: UUID, output: Path
++    ) -> None:
++        with self.transaction(token, csrf, write=True) as (c, owner):
++            data = self._active(c, owner, identifier)
++
++        @contextmanager
++        def final() -> Iterator[None]:
++            with self.transaction(token, csrf, write=True) as (c, owner):
++                if self._active(c, owner, identifier) != data:
++                    raise DatasetError("DATASET_RELEASE_CHANGED")
++                # Reauthorization must precede the irreversible directory rename.
++                authorize(c, self.database, token, csrf)
++                yield
++
++        export.materialize(output, str(identifier), data, self.store, final)
++
++    def verify(self, token: str | None, identifier: UUID, output: Path) -> None:
++        with self.transaction(token, None) as (c, owner):
++            data = self._active(c, owner, identifier)
++        export.verify_files(output, data, self.store)
++        with self.transaction(token, None) as (c, owner):
++            self._active(c, owner, identifier)
+diff --git a/services/api/src/brickvault_api/image_backup.py b/services/api/src/brickvault_api/image_backup.py
+index ec68a80..c97afff 100644
+--- a/services/api/src/brickvault_api/image_backup.py
++++ b/services/api/src/brickvault_api/image_backup.py
+@@ -58,6 +58,8 @@ def security_inventory(connection: Connection) -> dict[str, Any]:
+ 
+ 
+ def database_inventory(connection: Connection) -> dict[str, Any]:
++    from brickvault_api.datasets.models import TABLES as DATASET_TABLES
++
+     tables = (
+         connection.execute(
+             text("SELECT tablename FROM pg_tables WHERE schemaname='public' ORDER BY tablename")
+@@ -76,7 +78,7 @@ def database_inventory(connection: Connection) -> dict[str, Any]:
+             dict(r)
+             for r in connection.execute(text(f"SELECT * FROM public.{name} ORDER BY id")).mappings()
+         ]
+-        for name in IMAGE_TABLES
++        for name in (*IMAGE_TABLES, *(name for name in DATASET_TABLES if name in tables))
+     }
+     objects = [
+         dict(r)
+diff --git a/services/api/src/brickvault_api/images/sanitization.py b/services/api/src/brickvault_api/images/sanitization.py
+new file mode 100644
+index 0000000..f1e48c4
+--- /dev/null
++++ b/services/api/src/brickvault_api/images/sanitization.py
+@@ -0,0 +1,113 @@
++"""Metadata-free bounded derivatives; private pixels still require human review."""
++
++import io
++import os
++import subprocess
++import sys
++from pathlib import Path
++
++import PIL
++from PIL import Image, ImageOps
++
++from brickvault_api.images.processing import process_image
++from brickvault_api.images.storage import ImageError
++
++
++def sanitized_image(
++    data: bytes, crop: tuple[int, int, int, int] | None = None
++) -> tuple[bytes, dict[str, object]]:
++    process_image(data)
++    with Image.open(io.BytesIO(data)) as source:
++        source.load()
++        oriented = ImageOps.exif_transpose(source)
++        if crop:
++            left, top, right, bottom = crop
++            if not (0 <= left < right <= oriented.width and 0 <= top < bottom <= oriented.height):
++                raise ImageError("INVALID_CROP")
++            oriented = oriented.crop(crop)
++        oriented.thumbnail((1024, 1024), Image.Resampling.LANCZOS)
++        rgba = oriented.convert("RGBA")
++        clean = Image.new("RGB", rgba.size, "white")
++        clean.paste(rgba, mask=rgba.getchannel("A"))
++        output = io.BytesIO()
++        clean.save(output, format="JPEG", quality=85)
++        result = output.getvalue()
++        if len(result) > 1024 * 1024:
++            raise ImageError("SANITIZED_IMAGE_SIZE_LIMIT")
++        return result, {
++            "recipe": "dataset-sanitize-v1",
++            "crop": list(crop) if crop else None,
++            "decoder": PIL.__version__,
++            "width": clean.width,
++            "height": clean.height,
++            "fit": [1024, 1024],
++            "mode": "RGB",
++            "background": "white",
++            "format": "JPEG",
++            "quality": 85,
++            "source_metadata": False,
++        }
++
++
++def ordinary(path: Path) -> None:
++    if (
++        not path.is_absolute()
++        or str(path).startswith(("\\\\", "//"))
++        or any(p.is_symlink() or p.is_junction() for p in (path, *path.parents))
++    ):
++        raise ImageError("UNSAFE_PRIVATE_PATH")
++    if os.name == "nt" and ":" in str(path)[2:]:
++        raise ImageError("UNSAFE_PRIVATE_PATH")
++
++
++def private_directory(path: Path, *, create: bool = False) -> None:
++    ordinary(path)
++    if create:
++        path.mkdir(mode=0o700)
++    if not path.is_dir():
++        raise ImageError("PRIVATE_DIRECTORY_REQUIRED")
++    for child in path.rglob("*"):
++        ordinary(child)
++    if sys.platform == "win32":
++        script = """
++$ErrorActionPreference = 'Stop'
++$p = $env:BVA_DATASET_DIRECTORY
++$sid = [System.Security.Principal.WindowsIdentity]::GetCurrent().User
++if ($env:BVA_DATASET_CREATE -eq '1') {
++ $acl = [System.IO.Directory]::GetAccessControl($p,
++ [System.Security.AccessControl.AccessControlSections]::Access)
++ $acl.SetAccessRuleProtection($true, $false)
++ foreach ($existing in @($acl.Access)) { $acl.RemoveAccessRuleSpecific($existing) }
++ $rule = New-Object System.Security.AccessControl.FileSystemAccessRule(
++ $sid, 'FullControl', 'ContainerInherit,ObjectInherit', 'None', 'Allow')
++ $acl.AddAccessRule($rule)
++ [System.IO.Directory]::SetAccessControl($p, $acl)
++}
++foreach ($entry in @((Get-Item -LiteralPath $p)) + @(Get-ChildItem -LiteralPath $p -Force -Recurse)) {
++ $a = Get-Acl -LiteralPath $entry.FullName
++ if ($a.GetOwner([System.Security.Principal.SecurityIdentifier]).Value -ne $sid.Value) { exit 1 }
++ foreach ($r in $a.Access) {
++  $s = $r.IdentityReference.Translate([System.Security.Principal.SecurityIdentifier]).Value
++  if ($r.AccessControlType -eq 'Allow' -and $s -notin @($sid.Value,'S-1-3-4','S-1-5-18','S-1-5-32-544')) { exit 1 }
++ }
++}
++"""
++        result = subprocess.run(
++            ["powershell.exe", "-NoProfile", "-NonInteractive", "-Command", script],
++            env={
++                **{k: v for k, v in os.environ.items() if k.upper() != "PSMODULEPATH"},
++                "BVA_DATASET_DIRECTORY": str(path),
++                "BVA_DATASET_CREATE": "1" if create else "0",
++            },
++            capture_output=True,
++            timeout=15,
++            check=False,
++            creationflags=subprocess.CREATE_NO_WINDOW,
++        )
++        if result.returncode:
++            raise ImageError("PRIVATE_PERMISSIONS_REQUIRED")
++    elif any(
++        p.stat().st_mode & 0o077 or p.stat().st_uid != os.geteuid()
++        for p in (path, *path.rglob("*"))
++    ):
++        raise ImageError("PRIVATE_PERMISSIONS_REQUIRED")
+diff --git a/services/api/src/brickvault_api/listings/service.py b/services/api/src/brickvault_api/listings/service.py
+index 75c76dc..1a1adf3 100644
+--- a/services/api/src/brickvault_api/listings/service.py
++++ b/services/api/src/brickvault_api/listings/service.py
+@@ -25,7 +25,17 @@ class ListingService:
+     ) -> Iterator[tuple[CatalogConnection, Session]]:
+         with self.database.connect() as c, c.transaction():
+             session = AuthService(self.database).check_in_transaction(c, token, csrf)
++            if csrf is not None:
++                from brickvault_api.datasets.service import authorize, lock
++
++                session = authorize(c, self.database, token, csrf)
++                lock(c, session.principal_id)
+             yield c, session
++            if csrf is not None:
++                from brickvault_api.datasets.service import authorize, withdraw_stale
++
++                withdraw_stale(c, session.principal_id)
++                authorize(c, self.database, token, csrf)
+ 
+     @staticmethod
+     def projection(row: dict[str, Any]) -> dict[str, Any]:
+diff --git a/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql b/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql
+new file mode 100644
+index 0000000..712bbbc
+--- /dev/null
++++ b/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql
+@@ -0,0 +1,9 @@
++DO $$ BEGIN
++ IF EXISTS(SELECT 1 FROM public.dataset_subject_revision) OR EXISTS(SELECT 1 FROM public.dataset_review_revision)
++  OR EXISTS(SELECT 1 FROM public.dataset_release) THEN
++  RAISE EXCEPTION 'dataset_history_prevents_downgrade';
++ END IF;
++END $$;
++DROP TABLE public.dataset_release_event,public.dataset_item,public.dataset_release,
++ public.dataset_review_revision,public.dataset_subject_revision;
++DROP FUNCTION public.dataset_record_guard();
+diff --git a/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql b/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql
+new file mode 100644
+index 0000000..533d2b0
+--- /dev/null
++++ b/services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql
+@@ -0,0 +1,130 @@
++CREATE TABLE public.dataset_subject_revision (
++ id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES public.auth_principal(id),
++ listing_id uuid REFERENCES public.listing(id),
++ root_forecast_id uuid REFERENCES public.deal_forecast(id),
++ revision integer NOT NULL CHECK(revision>0),
++ recorded_at timestamptz NOT NULL DEFAULT public.forecast_clock(),
++ request_hash varchar(64) NOT NULL CHECK(request_hash ~ '^[a-f0-9]{64}$'),
++ request jsonb NOT NULL CHECK(jsonb_typeof(request)='object' AND octet_length(request::text)<=65536),
++ data jsonb NOT NULL CHECK(jsonb_typeof(data)='object' AND octet_length(data::text)<=65536),
++ CHECK((listing_id IS NULL)<>(root_forecast_id IS NULL)),
++ UNIQUE(owner_id,listing_id,revision), UNIQUE(owner_id,root_forecast_id,revision)
++);
++CREATE TABLE public.dataset_review_revision (
++ id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES public.auth_principal(id),
++ listing_image_id uuid NOT NULL REFERENCES public.listing_image(id),
++ derivative_blob_id uuid NOT NULL REFERENCES public.blob(id),
++ revision integer NOT NULL CHECK(revision>0),
++ recorded_at timestamptz NOT NULL DEFAULT public.forecast_clock(),
++ request_hash varchar(64) NOT NULL CHECK(request_hash ~ '^[a-f0-9]{64}$'),
++ request jsonb NOT NULL CHECK(jsonb_typeof(request)='object' AND octet_length(request::text)<=65536),
++ data jsonb NOT NULL CHECK(jsonb_typeof(data)='object' AND octet_length(data::text)<=65536),
++ UNIQUE(owner_id,listing_image_id,revision)
++);
++CREATE TABLE public.dataset_release (
++ id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES public.auth_principal(id),
++ recorded_at timestamptz NOT NULL DEFAULT public.forecast_clock(),
++ purpose text NOT NULL CHECK(purpose='FIXTURE_ONLY_NOT_TRAINING_DATA'),
++ request_hash varchar(64) NOT NULL CHECK(request_hash ~ '^[a-f0-9]{64}$'),
++ request jsonb NOT NULL CHECK(jsonb_typeof(request)='object' AND octet_length(request::text)<=65536),
++ data jsonb NOT NULL CHECK(jsonb_typeof(data)='object' AND octet_length(data::text)<=8388608)
++);
++CREATE TABLE public.dataset_item (
++ id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES public.auth_principal(id),
++ release_id uuid NOT NULL REFERENCES public.dataset_release(id),
++ listing_image_id uuid NOT NULL REFERENCES public.listing_image(id),
++ review_id uuid NOT NULL REFERENCES public.dataset_review_revision(id),
++ subject_id uuid NOT NULL REFERENCES public.dataset_subject_revision(id),
++ derivative_blob_id uuid NOT NULL REFERENCES public.blob(id),
++ recorded_at timestamptz NOT NULL DEFAULT public.forecast_clock(),
++ data jsonb NOT NULL CHECK(jsonb_typeof(data)='object' AND octet_length(data::text)<=65536),
++ UNIQUE(release_id,listing_image_id)
++);
++CREATE TABLE public.dataset_release_event (
++ id uuid PRIMARY KEY, owner_id uuid NOT NULL REFERENCES public.auth_principal(id),
++ release_id uuid NOT NULL REFERENCES public.dataset_release(id),
++ recorded_at timestamptz NOT NULL DEFAULT public.forecast_clock(),
++ request_hash varchar(64) NOT NULL CHECK(request_hash ~ '^[a-f0-9]{64}$'),
++ request jsonb NOT NULL CHECK(jsonb_typeof(request)='object' AND octet_length(request::text)<=65536),
++ data jsonb NOT NULL CHECK(jsonb_typeof(data)='object' AND octet_length(data::text)<=65536)
++);
++CREATE INDEX ix_dataset_events_release ON public.dataset_release_event(owner_id,release_id);
++REVOKE ALL ON public.dataset_subject_revision,public.dataset_review_revision,
++ public.dataset_release,public.dataset_item,public.dataset_release_event FROM PUBLIC;
++-- statement-break
++CREATE FUNCTION public.dataset_record_guard() RETURNS trigger LANGUAGE plpgsql
++SET search_path=pg_catalog,public AS $$
++DECLARE n timestamptz; prior record; li uuid; rid uuid; sid uuid; bid uuid;
++BEGIN
++ IF TG_OP<>'INSERT' THEN
++  RAISE EXCEPTION 'DATASET_IMMUTABLE' USING ERRCODE='23514';
++ END IF;
++ PERFORM pg_advisory_xact_lock(hashtextextended(NEW.owner_id::text,19));
++ n=public.forecast_clock();
++ IF NOT EXISTS(SELECT 1 FROM public.auth_session s WHERE s.principal_id=NEW.owner_id
++  AND s.token_hash=NULLIF(current_setting('brickvault.dataset_session',true),'')
++  AND s.revoked_at IS NULL AND n>=s.last_activity_at AND n<s.expires_at
++  AND n<NULLIF(current_setting('brickvault.dataset_auth_until',true),'')::timestamptz) THEN
++  RAISE EXCEPTION 'DATASET_UNAUTHORIZED' USING ERRCODE='23514';
++ END IF;
++ IF TG_TABLE_NAME='dataset_subject_revision' THEN
++  IF NEW.listing_id IS NOT NULL THEN
++   IF NOT EXISTS(SELECT 1 FROM public.listing WHERE id=NEW.listing_id AND owner_id=NEW.owner_id) THEN
++    RAISE EXCEPTION 'DATASET_NOT_FOUND' USING ERRCODE='23514';
++   END IF;
++  ELSIF NOT EXISTS(SELECT 1 FROM public.deal_forecast WHERE id=NEW.root_forecast_id
++   AND owner_id=NEW.owner_id AND root_id IS NULL AND parent_id IS NULL AND saved_at IS NOT NULL) THEN
++   RAISE EXCEPTION 'DATASET_NOT_FOUND' USING ERRCODE='23514';
++  END IF;
++  SELECT revision,data INTO prior FROM public.dataset_subject_revision WHERE owner_id=NEW.owner_id
++   AND listing_id IS NOT DISTINCT FROM NEW.listing_id
++   AND root_forecast_id IS NOT DISTINCT FROM NEW.root_forecast_id ORDER BY revision DESC LIMIT 1;
++  IF prior.data->>'classification'='SYNTHETIC' AND NEW.data->>'classification'<>'SYNTHETIC' THEN
++   RAISE EXCEPTION 'DATASET_FIXTURE_STICKY' USING ERRCODE='23514';
++  END IF;
++ ELSIF TG_TABLE_NAME='dataset_review_revision' THEN
++  IF NOT EXISTS(SELECT 1 FROM public.listing_image i JOIN public.listing l ON l.id=i.listing_id
++   WHERE i.id=NEW.listing_image_id AND l.owner_id=NEW.owner_id) THEN
++   RAISE EXCEPTION 'DATASET_NOT_FOUND' USING ERRCODE='23514';
++  END IF;
++  IF NEW.data->>'derivative_sha256' IS DISTINCT FROM
++   (SELECT sha256 FROM public.blob WHERE id=NEW.derivative_blob_id) THEN
++   RAISE EXCEPTION 'DATASET_DERIVATIVE_MISMATCH' USING ERRCODE='23514';
++  END IF;
++  SELECT revision,data INTO prior FROM public.dataset_review_revision WHERE owner_id=NEW.owner_id
++   AND listing_image_id=NEW.listing_image_id ORDER BY revision DESC LIMIT 1;
++ ELSIF TG_TABLE_NAME='dataset_item' THEN
++  IF NOT EXISTS(SELECT 1 FROM public.dataset_release r,public.dataset_review_revision v,
++   public.dataset_subject_revision s,public.listing_image i
++   WHERE r.id=NEW.release_id AND v.id=NEW.review_id AND s.id=NEW.subject_id
++   AND i.id=NEW.listing_image_id AND r.owner_id=NEW.owner_id AND v.owner_id=NEW.owner_id
++   AND s.owner_id=NEW.owner_id AND v.listing_image_id=i.id AND s.listing_id=i.listing_id
++   AND v.derivative_blob_id=NEW.derivative_blob_id) THEN
++   RAISE EXCEPTION 'DATASET_NOT_FOUND' USING ERRCODE='23514';
++  END IF;
++ ELSIF TG_TABLE_NAME='dataset_release_event' THEN
++  IF NOT EXISTS(SELECT 1 FROM public.dataset_release WHERE id=NEW.release_id AND owner_id=NEW.owner_id) THEN
++   RAISE EXCEPTION 'DATASET_NOT_FOUND' USING ERRCODE='23514';
++  END IF;
++ END IF;
++ IF TG_TABLE_NAME IN ('dataset_subject_revision','dataset_review_revision') THEN
++  IF NEW.revision<>COALESCE(prior.revision,0)+1 OR
++   NEW.revision<>(NEW.request->>'expected_revision')::integer+1 THEN
++   RAISE EXCEPTION 'DATASET_CONFLICT' USING ERRCODE='23514';
++  END IF;
++ END IF;
++ NEW.recorded_at=n;
++ RETURN NEW;
++END $$;
++REVOKE ALL ON FUNCTION public.dataset_record_guard() FROM PUBLIC;
++-- statement-break
++CREATE TRIGGER dataset_subject_guard BEFORE INSERT OR UPDATE OR DELETE ON public.dataset_subject_revision
++ FOR EACH ROW EXECUTE FUNCTION public.dataset_record_guard();
++CREATE TRIGGER dataset_review_guard BEFORE INSERT OR UPDATE OR DELETE ON public.dataset_review_revision
++ FOR EACH ROW EXECUTE FUNCTION public.dataset_record_guard();
++CREATE TRIGGER dataset_release_guard BEFORE INSERT OR UPDATE OR DELETE ON public.dataset_release
++ FOR EACH ROW EXECUTE FUNCTION public.dataset_record_guard();
++CREATE TRIGGER dataset_item_guard BEFORE INSERT OR UPDATE OR DELETE ON public.dataset_item
++ FOR EACH ROW EXECUTE FUNCTION public.dataset_record_guard();
++CREATE TRIGGER dataset_event_guard BEFORE INSERT OR UPDATE OR DELETE ON public.dataset_release_event
++ FOR EACH ROW EXECUTE FUNCTION public.dataset_record_guard();
+diff --git a/services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py b/services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py
+new file mode 100644
+index 0000000..8f7f45c
+--- /dev/null
++++ b/services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py
+@@ -0,0 +1,16 @@
++"""Private append-only reviewed dataset foundation."""
++
++from brickvault_api.migrations.catalog_ddl import execute_resource
++
++revision = "0019_reviewed_dataset_foundation"
++down_revision = "0018_deal_outcome_revisions"
++branch_labels = None
++depends_on = None
++
++
++def upgrade() -> None:
++    execute_resource("0019_reviewed_dataset_foundation_up.sql")
++
++
++def downgrade() -> None:
++    execute_resource("0019_reviewed_dataset_foundation_down.sql")
+diff --git a/services/api/src/brickvault_api/persistence/runtime_grants.py b/services/api/src/brickvault_api/persistence/runtime_grants.py
+index 29fa10f..3e58ee6 100644
+--- a/services/api/src/brickvault_api/persistence/runtime_grants.py
++++ b/services/api/src/brickvault_api/persistence/runtime_grants.py
+@@ -92,6 +92,7 @@ def grant_runtime(connection: Connection, role: str) -> None:
+         connection.execute(
+             text(f'REVOKE ALL ON public.deal_outcome_revision FROM PUBLIC, "{role}"')
+         )
++
+         connection.execute(
+             text(
+                 f"GRANT SELECT, INSERT(id,owner_id,root_forecast_id,revision,correction_reason,actuals,results) "
+@@ -99,6 +100,13 @@ def grant_runtime(connection: Connection, role: str) -> None:
+             )
+         )
+ 
++    if connection.scalar(text("SELECT to_regclass('public.dataset_release')")):
++        from brickvault_api.datasets.models import TABLES
++
++        for name in TABLES:
++            connection.execute(text(f'REVOKE ALL ON public.{name} FROM PUBLIC, "{role}"'))
++            connection.execute(text(f'GRANT SELECT, INSERT ON public.{name} TO "{role}"'))
++
+     if connection.scalar(text("SELECT to_regclass('public.deal_lineage_metadata')")):
+         connection.execute(
+             text(f'REVOKE ALL ON public.deal_lineage_metadata FROM PUBLIC, "{role}"')
+diff --git a/services/api/tests/integration/test_dataset_recovery.py b/services/api/tests/integration/test_dataset_recovery.py
+new file mode 100644
+index 0000000..c216b65
+--- /dev/null
++++ b/services/api/tests/integration/test_dataset_recovery.py
+@@ -0,0 +1,141 @@
++"""One bounded, owned TEST database/blob round-trip; no production operations."""
++
++import io
++import secrets
++from pathlib import Path
++from types import SimpleNamespace
++from typing import Any
++from uuid import uuid4
++
++import pytest
++from alembic import command
++
++from brickvault_api import image_backup
++from brickvault_api.auth import AuthService
++from brickvault_api.catalog.connection import CatalogDatabase
++from brickvault_api.datasets.models import TABLES, DatasetError, Withdrawal
++from brickvault_api.datasets.service import DatasetService
++from brickvault_api.images.storage import FilesystemBlobStore
++from brickvault_api.listings.service import ListingService
++from brickvault_api.persistence.database import create_database_engine, migration_config
++from brickvault_api.persistence.runtime_grants import grant_runtime
++
++from .test_datasets import Harness
++from .test_datasets import external_output as external_output
++from .test_datasets import local_only as local_only
++
++
++def test_0019_disposable_database_blob_roundtrip(
++    owned_instance: Any, tmp_path: Path, monkeypatch: pytest.MonkeyPatch, external_output: Path
++) -> None:
++    from database import LOCAL, cleanup_database, database_marker, migrate, provision, write_record
++    from recovery_runner import backup_restore
++
++    run_id = uuid4().hex
++    source, destination = "brickvault_test_" + uuid4().hex, "brickvault_test_" + uuid4().hex
++    record = {
++        "run_id": run_id,
++        "kind": "dataset-0019-fixture-recovery",
++        "project": owned_instance.project,
++        "instance_owner": owned_instance.owner,
++        "recorded_databases": [source, destination],
++        "removed_databases": [],
++    }
++    journal = LOCAL / "runs" / (run_id + ".json")
++    write_record(journal, record)
++    try:
++        provision(owned_instance, source, run_id)
++        migrate(owned_instance, source, run_id=run_id)
++        provision(owned_instance, destination, run_id)
++        owner = CatalogDatabase(
++            owned_instance.target(source, "owner"), "test", database_marker(owned_instance, run_id)
++        )
++        runtime = CatalogDatabase(
++            owned_instance.target(source, "runtime"), "test", owner.ownership_marker, role="runtime"
++        )
++        engine = create_database_engine(owner.url, "test", "owner")
++        try:
++            # Empty downgrade/re-upgrade only, before any retained dataset history.
++            with engine.begin() as c:
++                config = migration_config()
++                config.attributes["connection"] = c
++                command.downgrade(config, "0018_deal_outcome_revisions")
++                command.upgrade(config, "head")
++                grant_runtime(c, "brickvault_test_runtime")
++            password = secrets.token_urlsafe(32)
++            AuthService(owner).provision(password)
++            token, csrf, _ = AuthService(runtime).login(password, None)
++            store = FilesystemBlobStore(tmp_path / "blobs")
++            output = external_output
++            h = Harness(
++                DatasetService(runtime, store),
++                ListingService(runtime, store),
++                owner,
++                token,
++                csrf,
++                password,
++                output,
++            )
++            _, image = h.ready()
++            active, active_row = h.release([image])
++            withdrawn, _ = h.release([image])
++            h.service.withdraw(
++                token,
++                csrf,
++                Withdrawal(id=uuid4(), release_id=withdrawn, reason_code="RETAIN_WITHDRAWAL"),
++            )
++            h.service.materialize(token, csrf, active, output / "before")
++            with engine.connect() as c:
++                before = image_backup.database_inventory(c)
++            assert all(name in before["image_tables"] for name in TABLES)
++            inventory = {
++                "schema": 1,
++                "revisions": ["0019_reviewed_dataset_foundation"],
++                "database": before,
++            }
++            inventory_path = tmp_path / "inventory.json"
++            inventory_path.write_bytes(image_backup.canonical(inventory))
++            archive = io.BytesIO()
++            with monkeypatch.context() as scoped:
++                scoped.setattr(image_backup.sys, "stdout", SimpleNamespace(buffer=archive))
++                image_backup.write_archive(inventory_path, store.root)
++            archive_path = tmp_path / "blobs.tar"
++            archive_path.write_bytes(archive.getvalue())
++            extracted = tmp_path / "recovered-blobs"
++            assert image_backup.extract_archive(archive_path, extracted) == inventory
++            backup_restore(owned_instance, run_id, source, destination, record)
++            recovered_db = CatalogDatabase(
++                owned_instance.target(destination, "runtime"),
++                "test",
++                owner.ownership_marker,
++                role="runtime",
++            )
++            recovered = DatasetService(recovered_db, FilesystemBlobStore(extracted))
++            assert recovered.status(token, active) == {**active_row, "current_state": "ACTIVE"}
++            recovered.materialize(token, csrf, active, output / "after")
++            recovered.verify(token, active, output / "after")
++            assert {p.name: p.read_bytes() for p in (output / "before").iterdir()} == {
++                p.name: p.read_bytes() for p in (output / "after").iterdir()
++            }
++            with pytest.raises(DatasetError, match="WITHDRAWN"):
++                recovered.materialize(token, csrf, withdrawn, output / "revoked")
++            restored_engine = create_database_engine(
++                owned_instance.target(destination, "owner"), "test", "owner"
++            )
++            try:
++                with restored_engine.connect() as c:
++                    after = image_backup.database_inventory(c)
++                assert before["image_tables"] == after["image_tables"]
++                assert before["counts"] == after["counts"]
++            finally:
++                restored_engine.dispose()
++            record["fixture_release_reproduced"] = True
++            record["withdrawal_retained"] = True
++            record["dataset_inventory_fingerprints_match"] = True
++        finally:
++            engine.dispose()
++    finally:
++        for name in (destination, source):
++            if cleanup_database(owned_instance, name, run_id, [source, destination]):
++                record["removed_databases"].append(name)
++        write_record(journal, record)
+diff --git a/services/api/tests/integration/test_datasets.py b/services/api/tests/integration/test_datasets.py
+new file mode 100644
+index 0000000..b2a57ef
+--- /dev/null
++++ b/services/api/tests/integration/test_datasets.py
+@@ -0,0 +1,538 @@
++"""Synthetic end-to-end CLI/service, real PostgreSQL and coordinated publication."""
++
++import io
++import json
++import secrets
++import socket
++import tempfile
++from collections.abc import Iterator
++from concurrent.futures import ThreadPoolExecutor
++from dataclasses import dataclass
++from datetime import UTC, datetime, timedelta
++from pathlib import Path
++from threading import Barrier, Event
++from typing import Any
++from uuid import UUID, uuid4
++
++import psycopg
++import pytest
++from PIL import Image
++from pydantic import SecretStr
++
++from brickvault_api.auth import AuthError, AuthService
++from brickvault_api.catalog.connection import CatalogDatabase
++from brickvault_api.datasets import export
++from brickvault_api.datasets.__main__ import main as cli
++from brickvault_api.datasets.models import (
++    PURPOSE,
++    TABLES,
++    DatasetError,
++    ImageReview,
++    Permission,
++    Prepare,
++    ReleaseRequest,
++    Selection,
++    SubjectReview,
++    Withdrawal,
++    canonical,
++)
++from brickvault_api.datasets.service import DatasetService
++from brickvault_api.images.sanitization import private_directory
++from brickvault_api.images.storage import FilesystemBlobStore
++from brickvault_api.listings.models import ListingCreate, UploadArguments
++from brickvault_api.listings.service import ListingService
++from brickvault_api.settings import RuntimeSettings, validate_target
++
++from ..unit.test_dataset_admission import reviewed
++
++
++@dataclass
++class Harness:
++    service: DatasetService
++    listings: ListingService
++    owner: CatalogDatabase
++    token: str
++    csrf: str
++    password: str
++    output: Path
++
++    def image(self, color: str = "red", listing: UUID | None = None) -> tuple[UUID, UUID]:
++        listing = listing or UUID(
++            str(
++                self.listings.create(
++                    self.token,
++                    self.csrf,
++                    ListingCreate(currency="USD", source_type="listing_photo"),
++                )["id"]
++            )
++        )
++        raw = io.BytesIO()
++        Image.new("RGB", (32, 32), color).save(raw, "PNG")
++        position = self.listings.detail(self.token, listing)["next_display_order"]
++        _, value = self.listings.upload(
++            self.token,
++            self.csrf,
++            listing,
++            UploadArguments(client_upload_id=uuid4(), display_order=position),
++            "synthetic.png",
++            raw.getvalue(),
++        )
++        return listing, UUID(value["listing_image_id"])
++
++    def subject(self, listing: UUID, **changes: Any) -> dict[str, Any]:
++        value = {
++            "id": uuid4(),
++            "expected_revision": 0,
++            "reason": "Generated fixture only",
++            "listing_id": listing,
++            "classification": "SYNTHETIC",
++            "evidence_ref": "generated",
++            "related_sources_reviewed": True,
++        }
++        value.update(changes)
++        return self.service.subject(self.token, self.csrf, SubjectReview.model_validate(value))
++
++    def prepare(self, image: UUID) -> dict[str, Any]:
++        return self.service.prepare(
++            self.token,
++            self.csrf,
++            Prepare(
++                id=uuid4(),
++                expected_revision=0,
++                reason="Prepare selected fixture",
++                purpose=PURPOSE,
++                listing_image_id=image,
++            ),
++        )
++
++    def review(self, image: UUID, prepared: dict[str, Any], **changes: Any) -> ImageReview:
++        value = reviewed(
++            listing_image_id=image,
++            prepared_revision_id=UUID(prepared["id"]),
++            derivative_sha256=prepared["data"]["derivative_sha256"],
++            **changes,
++        )
++        self.service.review(self.token, self.csrf, value)
++        return value
++
++    def ready(self, color: str = "red") -> tuple[UUID, UUID]:
++        listing, image = self.image(color)
++        self.subject(listing)
++        self.review(image, self.prepare(image))
++        return listing, image
++
++    def release(self, targets: list[UUID]) -> tuple[UUID, dict[str, Any]]:
++        selection = Selection(purpose=PURPOSE, targets=targets, seed=41)
++        preview = self.service.preview(self.token, selection)
++        identifier = uuid4()
++        value = self.service.release(
++            self.token,
++            self.csrf,
++            ReleaseRequest(id=identifier, selection=selection, preview_id=preview["preview_id"]),
++        )
++        return identifier, value
++
++
++@pytest.fixture(autouse=True)
++def local_only(monkeypatch: pytest.MonkeyPatch) -> None:
++    connect = socket.socket.connect
++
++    def guarded(sock: socket.socket, address: Any) -> None:
++        if not isinstance(address, tuple) or address[0] not in ("127.0.0.1", "localhost", "::1"):
++            raise AssertionError("Fixture dataset tests forbid external connections")
++        connect(sock, address)
++
++    monkeypatch.setattr(socket.socket, "connect", guarded)
++
++
++@pytest.fixture
++def external_output() -> Iterator[Path]:
++    # Materialization remains outside Git, including ignored TEST paths.
++    with tempfile.TemporaryDirectory(prefix="bva-dataset-fixture-") as directory:
++        path = Path(directory) / "private"
++        private_directory(path, create=True)
++        yield path
++
++
++@pytest.fixture
++def d(
++    catalog_db: CatalogDatabase, owned_instance: Any, tmp_path: Path, external_output: Path
++) -> Harness:
++    name = validate_target(catalog_db.url, "test", "owner").database
++    runtime = CatalogDatabase(
++        owned_instance.target(name, "runtime"), "test", catalog_db.ownership_marker, role="runtime"
++    )
++    password = secrets.token_urlsafe(32)
++    AuthService(catalog_db).provision(password)
++    token, csrf, _ = AuthService(runtime).login(password, None)
++    store = FilesystemBlobStore(tmp_path / "blobs")
++    output = external_output
++    return Harness(
++        DatasetService(runtime, store),
++        ListingService(runtime, store),
++        catalog_db,
++        token,
++        csrf,
++        password,
++        output,
++    )
++
++
++def test_admission_exact_replay_private_payload_and_no_implicit_selection(d: Harness) -> None:
++    listing, image = d.image()
++    request = Prepare(
++        id=uuid4(), expected_revision=0, purpose=PURPOSE, listing_image_id=image, reason="fixture"
++    )
++    with pytest.raises(DatasetError, match="CLASSIFICATION"):
++        d.service.prepare(d.token, d.csrf, request)
++    subject = d.subject(listing)
++    prepared = d.service.prepare(d.token, d.csrf, request)
++    assert d.service.prepare(d.token, d.csrf, request) == prepared
++    selection = Selection(purpose=PURPOSE, targets=[image], seed=12)
++    assert d.service.preview(d.token, selection)["private"]["exclusions"]
++    review = d.review(image, prepared)
++    assert d.service.review(d.token, d.csrf, review)["id"] == str(review.id)
++    _, unselected = d.ready("blue")
++    preview = d.service.preview(d.token, selection)
++    assert len(preview["manifest"]["items"]) == 1
++    assert str(unselected) not in json.dumps(preview["private"]["lineage"])
++    assert d.service.preview(d.token, selection) == preview
++    identifier = uuid4()
++    release = ReleaseRequest(id=identifier, selection=selection, preview_id=preview["preview_id"])
++    first = d.service.release(d.token, d.csrf, release)
++    assert d.service.release(d.token, d.csrf, release) == first
++    assert d.service.status(d.token, identifier) == {**first, "current_state": "ACTIVE"}
++    for output in (d.output / "one", d.output / "two"):
++        d.service.materialize(d.token, d.csrf, identifier, output)
++        d.service.verify(d.token, identifier, output)
++    assert {p.name: p.read_bytes() for p in (d.output / "one").iterdir()} == {
++        p.name: p.read_bytes() for p in (d.output / "two").iterdir()
++    }
++    manifest = (d.output / "one" / "manifest.json").read_text()
++    for private in [
++        "original_sha256",
++        "source_url",
++        "evidence_ref",
++        "canonical_identity",
++        "actuals",
++        "reason",
++    ]:
++        assert private not in manifest
++    assert PURPOSE in manifest and "NOT_SUPPORTED" in manifest
++    with pytest.raises(DatasetError, match="ID_REUSED"):
++        d.service.review(d.token, d.csrf, review.model_copy(update={"reason": "changed"}))
++    with pytest.raises(DatasetError, match="FIXTURE_STICKY"):
++        d.subject(listing, classification="REAL", expected_revision=1)
++    assert d.service.status(d.token, UUID(subject["id"])) == subject
++
++
++@pytest.mark.parametrize(
++    "change",
++    [
++        {"source": "REBRICKABLE"},
++        {"label_provenance": "UNKNOWN"},
++        {"privacy": "UNREVIEWED"},
++        {"training": {"state": "UNKNOWN"}},
++        {"positives": [], "proposed_keys": ["unverified"]},
++    ],
++)
++def test_independent_reviews_refuse_nonadmitted_release(d: Harness, change: dict[str, Any]) -> None:
++    listing, image = d.image()
++    d.subject(listing)
++    d.review(image, d.prepare(image), **change)
++    selection = Selection(purpose=PURPOSE, targets=[image], seed=0)
++    preview = d.service.preview(d.token, selection)
++    with pytest.raises(DatasetError, match="INELIGIBLE"):
++        d.service.release(
++            d.token,
++            d.csrf,
++            ReleaseRequest(id=uuid4(), selection=selection, preview_id=preview["preview_id"]),
++        )
++
++
++def test_transitive_excluded_bridge_and_growth_withdrawal(d: Harness) -> None:
++    a, ia = d.image("red")
++    b, ib = d.image("blue")
++    c, ic = d.image("green")
++    g1, g2 = uuid4(), uuid4()
++    d.subject(a, source_groups=[g1])
++    d.subject(b, source_groups=[g1, g2], classification="EXCLUDED")
++    d.subject(c, source_groups=[g2])
++    d.review(ia, d.prepare(ia))
++    d.review(ic, d.prepare(ic))
++    identifier, value = d.release([ia, ic])
++    items = value["data"]["manifest"]["items"]
++    assert items[0]["group"] == items[1]["group"]
++    assert items[0]["partition"] == items[1]["partition"]
++    assert len(items) == 2 and str(ib) not in json.dumps(items)
++    # A new unrelated listing cannot withdraw an unaffected release.
++    d.image("yellow")
++    d.service.materialize(d.token, d.csrf, identifier, d.output / "before")
++    # Component growth without a merge still invalidates the pinned release.
++    d.image("purple", listing=b)
++    with pytest.raises(DatasetError, match="WITHDRAWN"):
++        d.service.materialize(d.token, d.csrf, identifier, d.output / "after")
++    assert not (d.output / "after").exists()
++
++
++def test_shared_derivative_and_privacy_escalation_invalidate(d: Harness) -> None:
++    listing, image = d.ready("red")
++    identifier, _ = d.release([image])
++    other, duplicate = d.image("red")
++    # Shared original grows the component even without another review.
++    with pytest.raises(DatasetError, match="WITHDRAWN"):
++        d.service.verify(d.token, identifier, d.output / "absent")
++    d.subject(other)
++    d.review(duplicate, d.prepare(duplicate))
++    newer, _ = d.release([image])
++    raw = io.BytesIO()
++    Image.new("RGB", (32, 32), "red").save(raw, "PNG")
++    d.listings.upload(
++        d.token,
++        d.csrf,
++        listing,
++        UploadArguments(client_upload_id=uuid4(), display_order=1, privacy_elevation="restricted"),
++        "fixture.png",
++        raw.getvalue(),
++    )
++    with pytest.raises(DatasetError, match="WITHDRAWN"):
++        d.service.materialize(d.token, d.csrf, newer, d.output / "restricted")
++
++
++def test_review_conflicts_auth_ownership_and_database_immutability(d: Harness) -> None:
++    listing, image = d.image()
++    d.subject(listing)
++    prepared = d.prepare(image)
++    request = reviewed(
++        listing_image_id=image,
++        prepared_revision_id=UUID(prepared["id"]),
++        derivative_sha256=prepared["data"]["derivative_sha256"],
++    )
++    gate = Barrier(2)
++
++    def append() -> str:
++        gate.wait(timeout=10)
++        try:
++            d.service.review(d.token, d.csrf, request.model_copy(update={"id": uuid4()}))
++            return "saved"
++        except DatasetError as error:
++            return str(error)
++
++    with ThreadPoolExecutor(max_workers=2) as pool:
++        one, two = pool.submit(append), pool.submit(append)
++        assert sorted([one.result(timeout=15), two.result(timeout=15)]) == [
++            "DATASET_CONFLICT",
++            "saved",
++        ]
++    with pytest.raises(AuthError):
++        d.service.subject(
++            d.token,
++            None,
++            SubjectReview(
++                id=uuid4(),
++                expected_revision=0,
++                reason="unauthorized",
++                listing_id=listing,
++                classification="SYNTHETIC",
++                evidence_ref="fixture",
++            ),
++        )
++    with pytest.raises(DatasetError, match="NOT_FOUND"):
++        d.service.preview(d.token, Selection(purpose=PURPOSE, targets=[uuid4()], seed=0))
++    with d.service.database.connect() as c:
++        for table in TABLES:
++            for operation in (
++                f"UPDATE {table} SET owner_id=owner_id",
++                f"DELETE FROM {table}",
++                f"TRUNCATE {table}",
++            ):
++                with pytest.raises(psycopg.errors.InsufficientPrivilege):
++                    c.execute(operation)
++    with d.owner.connect() as c:
++        for table in TABLES[:2]:
++            with pytest.raises(psycopg.errors.CheckViolation, match="IMMUTABLE"):
++                c.execute(f"UPDATE {table} SET owner_id=owner_id")
++
++
++def test_withdrawal_before_final_publication_and_exact_recovery(
++    d: Harness, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    _, image = d.ready()
++    identifier, _ = d.release([image])
++    copied, proceed = Event(), Event()
++    original = export.verify_files
++
++    def pause(path: Path, data: Any, store: Any) -> None:
++        original(path, data, store)
++        if ".stage-" in path.name:
++            copied.set()
++            assert proceed.wait(timeout=20)
++
++    monkeypatch.setattr(export, "verify_files", pause)
++    with ThreadPoolExecutor(max_workers=1) as pool:
++        work = pool.submit(d.service.materialize, d.token, d.csrf, identifier, d.output / "racing")
++        assert copied.wait(timeout=20)
++        request = Withdrawal(id=uuid4(), release_id=identifier, reason_code="OWNER_REVOKED")
++        withdrawn = d.service.withdraw(d.token, d.csrf, request)
++        assert d.service.withdraw(d.token, d.csrf, request) == withdrawn
++        proceed.set()
++        with pytest.raises(DatasetError, match="WITHDRAWN"):
++            work.result(timeout=20)
++    assert not (d.output / "racing").exists()
++    assert d.service.status(d.token, identifier)["current_state"] == "DATASET_RELEASE_WITHDRAWN"
++    assert d.service.status(d.token, request.id) == withdrawn
++
++
++def test_new_equal_crop_derivative_withdraws_previously_separate_component(d: Harness) -> None:
++    _, selected = d.ready("red")
++    identifier, _ = d.release([selected])
++    listing = UUID(str(d.listings.create(d.token, d.csrf, ListingCreate(currency="USD"))["id"]))
++    image = Image.new("RGB", (64, 32), "blue")
++    image.paste("red", (0, 0, 32, 32))
++    raw = io.BytesIO()
++    image.save(raw, "PNG")
++    _, result = d.listings.upload(
++        d.token,
++        d.csrf,
++        listing,
++        UploadArguments(client_upload_id=uuid4(), display_order=0),
++        "fixture.png",
++        raw.getvalue(),
++    )
++    d.subject(listing)
++    assert d.service.status(d.token, identifier)["current_state"] == "ACTIVE"
++    d.service.prepare(
++        d.token,
++        d.csrf,
++        Prepare(
++            id=uuid4(),
++            expected_revision=0,
++            purpose=PURPOSE,
++            listing_image_id=UUID(str(result["listing_image_id"])),
++            crop=(0, 0, 32, 32),
++            reason="Explicit selected crop",
++        ),
++    )
++    assert d.service.status(d.token, identifier)["current_state"] == "DATASET_RELEASE_WITHDRAWN"
++
++
++def test_permission_expiry_and_correction_prevent_new_publication(d: Harness) -> None:
++    listing, image = d.image()
++    d.subject(listing)
++    prepared = d.prepare(image)
++    expires = datetime.now(UTC) + timedelta(seconds=30)
++    request = d.review(
++        image,
++        prepared,
++        training=Permission(state="PERMITTED", evidence_ref="bounded-fixture", expires_at=expires),
++    )
++    identifier, _ = d.release([image])
++    # A real TEST database clock advances past permission expiry, while session
++    # lifetime remains valid. No mocked selector, image store or auth behavior.
++    from psycopg import sql
++
++    body = "SELECT TIMESTAMPTZ '" + (expires + timedelta(seconds=1)).isoformat() + "'"
++    with d.owner.connect() as c:
++        c.execute(
++            sql.SQL(
++                "CREATE OR REPLACE FUNCTION public.forecast_clock() RETURNS timestamptz LANGUAGE SQL AS {}"
++            ).format(sql.Literal(body))
++        )
++    with pytest.raises(DatasetError, match="INELIGIBLE"):
++        d.service.materialize(d.token, d.csrf, identifier, d.output / "expired")
++    corrected = request.model_copy(
++        update={
++            "id": uuid4(),
++            "expected_revision": 2,
++            "reason": "Permission revoked",
++            "training": Permission(state="REVOKED", evidence_ref="explicit-revocation"),
++        }
++    )
++    d.service.review(d.token, d.csrf, corrected)
++    assert d.service.status(d.token, identifier)["current_state"] == "DATASET_RELEASE_WITHDRAWN"
++
++
++def test_authenticated_cli_full_fixture_flow(
++    d: Harness, monkeypatch: pytest.MonkeyPatch, capsys: Any
++) -> None:
++    listing, image = d.image()
++    settings = RuntimeSettings(
++        purpose="test",
++        database_url=SecretStr(d.service.database.url),
++        database_ownership_marker=SecretStr(d.service.database.ownership_marker),
++        port=18000,
++        auth_allow_loopback_http=True,
++        image_blob_root=str(d.service.store.root),
++    )
++    monkeypatch.setattr(RuntimeSettings, "from_environment", classmethod(lambda cls: settings))
++    monkeypatch.setattr("getpass.getpass", lambda prompt: d.password)
++
++    def run(command: str, body: Any = None, *args: str) -> Any:
++        argv = [command]
++        if body is not None:
++            path = d.output / (uuid4().hex + ".json")
++            path.write_bytes(canonical(body))
++            argv += ["--input", str(path)]
++        assert cli([*argv, *args]) == 0
++        out = capsys.readouterr()
++        assert d.password not in out.out and d.password not in out.err
++        return json.loads(out.out)
++
++    run(
++        "subject-review",
++        SubjectReview(
++            id=uuid4(),
++            expected_revision=0,
++            reason="CLI fixture",
++            listing_id=listing,
++            classification="SYNTHETIC",
++            evidence_ref="generated",
++            related_sources_reviewed=True,
++        ).model_dump(mode="json"),
++    )
++    prepared = run(
++        "prepare",
++        Prepare(
++            id=uuid4(),
++            expected_revision=0,
++            reason="CLI preview",
++            purpose=PURPOSE,
++            listing_image_id=image,
++        ).model_dump(mode="json"),
++        "--output",
++        str(d.output / "preview"),
++    )
++    request = reviewed(
++        listing_image_id=image,
++        prepared_revision_id=UUID(prepared["id"]),
++        derivative_sha256=prepared["data"]["derivative_sha256"],
++    )
++    run("review", request.model_dump(mode="json"))
++    selection = Selection(purpose=PURPOSE, targets=[image], seed=4)
++    preview = run("preview", selection.model_dump(mode="json"))
++    identifier = uuid4()
++    release = run(
++        "release",
++        ReleaseRequest(
++            id=identifier, selection=selection, preview_id=preview["preview_id"]
++        ).model_dump(mode="json"),
++    )
++    assert run("status", None, "--submission-id", str(identifier)) == {
++        **release,
++        "current_state": "ACTIVE",
++    }
++    run(
++        "materialize",
++        None,
++        "--release-id",
++        str(identifier),
++        "--output",
++        str(d.output / "cli-release"),
++    )
++    run("verify", None, "--release-id", str(identifier), "--output", str(d.output / "cli-release"))
++    run(
++        "withdraw",
++        Withdrawal(id=uuid4(), release_id=identifier, reason_code="FIXTURE_COMPLETE").model_dump(
++            mode="json"
++        ),
++    )
+diff --git a/services/api/tests/integration/test_listing_images.py b/services/api/tests/integration/test_listing_images.py
+index a73beb8..d11b52b 100644
+--- a/services/api/tests/integration/test_listing_images.py
++++ b/services/api/tests/integration/test_listing_images.py
+@@ -503,7 +503,7 @@ def test_disposable_0016_upgrade_preservation_and_downgrade_smoke(
+             command.upgrade(cfg, "head")
+             assert (
+                 c.execute(text("SELECT version_num FROM public.alembic_version")).scalar()
+-                == "0017_listing_images"
++                == "0019_reviewed_dataset_foundation"
+             )
+             assert c.execute(text("SELECT count(*) FROM public.auth_control")).scalar() == before
+             grant_runtime(c, "brickvault_test_runtime")
+diff --git a/services/api/tests/unit/test_dataset_admission.py b/services/api/tests/unit/test_dataset_admission.py
+new file mode 100644
+index 0000000..bc3b5b5
+--- /dev/null
++++ b/services/api/tests/unit/test_dataset_admission.py
+@@ -0,0 +1,126 @@
++"""Independent dimensions, explicit negatives and strict fixture-only inputs."""
++
++from datetime import UTC, datetime, timedelta
++from typing import Any
++from uuid import uuid4
++
++import pytest
++from pydantic import ValidationError
++
++from brickvault_api.datasets.models import (
++    PURPOSE,
++    ImageReview,
++    Permission,
++    Selection,
++    SubjectReview,
++    admission,
++    is_real,
++)
++
++
++def reviewed(**changes: Any) -> ImageReview:
++    permitted = Permission(state="PERMITTED", evidence_ref="synthetic-owner")
++    value: dict[str, Any] = {
++        "id": uuid4(),
++        "expected_revision": 1,
++        "reason": "Fixture visual review",
++        "listing_image_id": uuid4(),
++        "prepared_revision_id": uuid4(),
++        "derivative_sha256": "a" * 64,
++        "positives": [
++            {
++                "key": "independent-toy",
++                "state": "BRIAN_CONFIRMED",
++                "evidence_ref": "fixture-inspection",
++            }
++        ],
++        "privacy": "APPROVED",
++        "privacy_evidence_ref": "pixel-inspection",
++        "source": "SYNTHETIC_GENERATED",
++        "label_provenance": "INDEPENDENT",
++        "source_use": permitted,
++        "export": permitted,
++        "training": permitted,
++    }
++    value.update(changes)
++    return ImageReview.model_validate(value)
++
++
++@pytest.mark.parametrize(
++    "field,value",
++    [
++        ("source", "REBRICKABLE"),
++        ("source", "UNKNOWN"),
++        ("label_provenance", "REBRICKABLE"),
++        ("privacy", "UNREVIEWED"),
++        ("privacy", "REJECTED"),
++        ("positives", []),
++        ("training", Permission()),
++        ("export", Permission(state="REVOKED", evidence_ref="withdrawn")),
++        ("source_use", Permission(state="DENIED", evidence_ref="not-owned")),
++        (
++            "training",
++            Permission(
++                state="PERMITTED",
++                evidence_ref="expired",
++                expires_at=datetime.now(UTC) - timedelta(seconds=1),
++            ),
++        ),
++    ],
++)
++def test_each_dimension_independently_blocks(field: str, value: Any) -> None:
++    assert admission(reviewed(**{field: value}), "SYNTHETIC", datetime.now(UTC))
++
++
++def test_negatives_never_come_from_proposals_omissions_or_actuals() -> None:
++    assert admission(
++        reviewed(positives=[], proposed_keys=["guess"]), "SYNTHETIC", datetime.now(UTC)
++    )
++    assert not admission(
++        reviewed(
++            positives=[],
++            negatives=[
++                {
++                    "key": "wrong-toy",
++                    "state": "CONFIRMED_NOT_THIS_IDENTITY",
++                    "evidence_ref": "explicit-pair-inspection",
++                }
++            ],
++        ),
++        "SYNTHETIC",
++        datetime.now(UTC),
++    )
++    with pytest.raises(ValidationError):
++        reviewed(actuals={"purchase_decision": "BOUGHT"})
++    with pytest.raises(ValidationError):
++        reviewed(
++            negatives=[
++                {
++                    "key": "independent-toy",
++                    "state": "CONFIRMED_NOT_THIS_IDENTITY",
++                    "evidence_ref": "conflict",
++                }
++            ]
++        )
++
++
++@pytest.mark.parametrize("classification", [None, "UNKNOWN", "REAL", "EXCLUDED"])
++def test_fixture_and_analytics_exclusion(classification: str | None) -> None:
++    assert admission(reviewed(), classification, datetime.now(UTC))
++    assert is_real(classification) == (classification == "REAL")
++
++
++def test_explicit_bounded_unique_selection_and_no_real_purpose() -> None:
++    for targets in ([], [uuid4()] * 2, [uuid4() for _ in range(129)]):
++        with pytest.raises(ValidationError):
++            Selection(purpose=PURPOSE, targets=targets, seed=1)
++    with pytest.raises(ValidationError):
++        Selection(purpose="TRAINING", targets=[uuid4()], seed=1)
++    with pytest.raises(ValidationError):
++        SubjectReview(
++            id=uuid4(),
++            expected_revision=0,
++            reason="no subject",
++            classification="REAL",
++            evidence_ref="fixture",
++        )
+diff --git a/services/api/tests/unit/test_dataset_export.py b/services/api/tests/unit/test_dataset_export.py
+new file mode 100644
+index 0000000..e1d4cd7
+--- /dev/null
++++ b/services/api/tests/unit/test_dataset_export.py
+@@ -0,0 +1,131 @@
++"""Real image/metadata processing, deterministic graph and interruption recovery."""
++
++import hashlib
++import io
++import os
++import subprocess
++import sys
++from contextlib import contextmanager
++from pathlib import Path
++from typing import Any
++
++import pytest
++from PIL import Image
++
++from brickvault_api.datasets import export
++from brickvault_api.datasets.models import PURPOSE, DatasetError, canonical, digest
++from brickvault_api.images.sanitization import private_directory, sanitized_image
++from brickvault_api.images.storage import FilesystemBlobStore, ImageError
++
++
++def test_metadata_strip_crop_bounds_and_original_unchanged() -> None:
++    image = Image.new("RGB", (100, 50), "red")
++    exif = Image.Exif()
++    exif[270] = "PRIVATE-NOTIFICATION"
++    out = io.BytesIO()
++    image.save(out, "JPEG", exif=exif)
++    raw = out.getvalue()
++    clean, recipe = sanitized_image(raw, (0, 0, 50, 50))
++    assert sanitized_image(raw, (0, 0, 50, 50)) == (clean, recipe)
++    assert b"PRIVATE" in raw and b"PRIVATE" not in clean
++    with Image.open(io.BytesIO(clean)) as decoded:
++        assert decoded.size == (50, 50) and not decoded.getexif()
++    for crop in [(-1, 0, 5, 5), (0, 0, 101, 50), (10, 0, 5, 50)]:
++        with pytest.raises(ImageError):
++            sanitized_image(raw, crop)
++
++
++def test_connected_components_include_transitive_excluded_bridge() -> None:
++    edges = [
++        ["selected-A", "original-1"],
++        ["excluded-B", "original-1", "group-2"],
++        ["selected-C", "group-2", "derived-3"],
++        ["elsewhere", "unrelated"],
++    ]
++    groups = export.components(edges)
++    assert groups["selected-A"] == groups["selected-C"]
++    assert export.partition(42, groups["selected-A"]) == export.partition(42, groups["selected-C"])
++    assert export.components(list(reversed(edges))) == groups
++    assert (
++        export.partition(42, groups["selected-A"])[0]
++        != export.partition(42, groups["elsewhere"])[0]
++    )
++
++
++def test_private_directory_recover_interruption_exact_bytes_and_fail_closed(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    parent = tmp_path / "private"
++    private_directory(parent, create=True)
++    store = FilesystemBlobStore(tmp_path / "blobs")
++    raw = io.BytesIO()
++    Image.new("RGB", (10, 10), "green").save(raw, "JPEG")
++    stored = store.publish(raw.getvalue())
++    manifest = {"purpose": PURPOSE, "items": [{"derivative_sha256": stored.sha256}]}
++    data = {"manifest": manifest, "manifest_hash": digest(manifest)}
++    output = parent / "release"
++    fail = True
++
++    @contextmanager
++    def final() -> Any:
++        if fail:
++            raise DatasetError("WITHDRAWN_BEFORE_PUBLICATION")
++        yield
++
++    with pytest.raises(DatasetError, match="WITHDRAWN"):
++        export.materialize(output, "fixture", data, store, final)
++    assert not output.exists()
++    fail = False
++    export.materialize(output, "fixture", data, store, final)
++    export.verify_files(output, data, store)
++    before = {p.name: p.read_bytes() for p in output.iterdir()}
++    export.materialize(output, "fixture", data, store, final)
++    assert before == {p.name: p.read_bytes() for p in output.iterdir()}
++    assert (output / "manifest.json").read_bytes() == canonical(manifest)
++    checks = output / "checksums.json"
++    assert stored.sha256.encode() in checks.read_bytes()
++    (output / (stored.sha256 + ".jpg")).write_bytes(b"corrupt")
++    with pytest.raises(DatasetError):
++        export.verify_files(output, data, store)
++
++
++def test_reject_git_output_and_unsafe_symlink(tmp_path: Path) -> None:
++    (tmp_path / ".git").mkdir()
++    with pytest.raises(DatasetError):
++        export.safe_output(tmp_path / "output")
++    assert hashlib.sha256(canonical({"b": 1, "a": 2})).hexdigest() == digest({"a": 2, "b": 1})
++
++
++def test_kernel_reservation_recovers_exact_id_after_process_exit(tmp_path: Path) -> None:
++    claim = tmp_path / "fixture.claim"
++    script = "from pathlib import Path; import os,sys; from brickvault_api.datasets.export import reservation\nwith reservation(Path(sys.argv[1]),b'fixture'): os._exit(0)\n"
++    result = subprocess.run(
++        [sys.executable, "-c", script, str(claim)],
++        capture_output=True,
++        timeout=15,
++        creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
++    )
++    assert result.returncode == 0
++    with export.reservation(claim, b"fixture"):
++        pass
++    with pytest.raises(DatasetError, match="OTHER_RELEASE"):
++        with export.reservation(claim, b"other"):
++            pytest.fail("Another release reused a reserved path")
++
++
++def test_atomic_payload_write_leaves_no_partial_named_file(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    destination = tmp_path / "manifest.json"
++    link = os.link
++
++    def interrupted(*args: Any, **kwargs: Any) -> None:
++        raise OSError("Synthetic failure before atomic link")
++
++    monkeypatch.setattr(os, "link", interrupted)
++    with pytest.raises(OSError):
++        export.write_exclusive(destination, b"fixture")
++    assert not destination.exists()
++    monkeypatch.setattr(os, "link", link)
++    export.write_exclusive(destination, b"fixture")
++    assert destination.read_bytes() == b"fixture"
+diff --git a/services/api/tests/unit/test_outcome_backup_compatibility.py b/services/api/tests/unit/test_outcome_backup_compatibility.py
+index ecbb257..f87be65 100644
+--- a/services/api/tests/unit/test_outcome_backup_compatibility.py
++++ b/services/api/tests/unit/test_outcome_backup_compatibility.py
+@@ -15,7 +15,10 @@ from brickvault_api import production_backup as backup
+ from .test_image_backup_seams import MARKER, NOW, REPOS, fixture_archive, receipt
+ 
+ 
+-@pytest.mark.parametrize("revision", ["0017_listing_images", "0018_deal_outcome_revisions"])
++@pytest.mark.parametrize(
++    "revision",
++    ["0017_listing_images", "0018_deal_outcome_revisions", "0019_reviewed_dataset_foundation"],
++)
+ def test_exact_supported_heads_keep_complete_backup_and_recovery_proof(
+     revision: str,
+     monkeypatch: pytest.MonkeyPatch,

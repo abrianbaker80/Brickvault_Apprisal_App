@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-26",
+  "evidence": "SOURCE / SYNTHETIC OWNED TEST ONLY",
+  "unit_operational": {
+    "passed": 65,
+    "log_sha256": "90dbf1ff880766384b4dcb7a43793e57d1ad7372b5021a2579918b20b9ac3875",
+    "selection": [
+      "test_dataset_admission.py",
+      "test_dataset_export.py",
+      "test_listing_upload_arguments.py",
+      "test_outcome_backup_compatibility.py",
+      "test_image_backup_seams.py",
+      "scripts/test_release_manifest.py",
+      "scripts/test_complete_run_retention.py::PolicyTests",
+      "scripts/test_operations_health.py"
+    ]
+  },
+  "release_manifest_after_inventory_update": {
+    "passed": 9,
+    "log_sha256": "df0db6b767f8e2719390257fd09ce8ee9daced1e98c13630de68abd24d494a32"
+  },
+  "postgresql": {
+    "unique_cases_with_passing_evidence": 40,
+    "acceptance_run": {
+      "passed": 39,
+      "failed": 1,
+      "cause": "Already-loaded historical image migration test expected 0017, not the new 0019 head."
+    },
+    "targeted_correction_rerun": {
+      "passed": 1,
+      "node": "test_listing_images.py::test_disposable_0016_upgrade_preservation_and_downgrade_smoke"
+    },
+    "selection": [
+      "test_datasets.py",
+      "test_dataset_recovery.py",
+      "test_listing_images.py",
+      "test_listing_share_privacy.py"
+    ],
+    "cli_method": "In-process CLI main with synthetic settings/getpass input; real AuthService, PostgreSQL, BlobStore and filesystem. No deployed-terminal claim.",
+    "recovery": "One real disposable pg_dump/pg_restore plus blob archive preserves active/withdrawn releases, receipts/order, fingerprints and byte-identical materialization.",
+    "recovery_receipt": {
+      "run_id": "d2704d6047264403b738335018036369",
+      "status": "restored",
+      "fixture_release_reproduced": true,
+      "withdrawal_retained": true,
+      "dataset_inventory_fingerprints_match": true,
+      "removed_database_count": 2
+    }
+  },
+  "package": {
+    "passed": true,
+    "receipt": ".local/package-check/4a2183f331b0434c847e7ecab7eee841/result.json",
+    "checks": [
+      "wheel/sdist inclusion",
+      "independent installed import",
+      "0019 migration graph",
+      "credential-free OpenAPI",
+      "dataset CLI parser"
+    ]
+  },
+  "static": {
+    "ruff_format_lint": "PASS, affected files only",
+    "mypy_windows": "PASS, 11 affected source/script files",
+    "mypy_linux": "PASS, 7 dataset/image/operational source files"
+  },
+  "warnings": [
+    "Existing pytest rewrite and Starlette/httpx/anyio deprecations; no new dependency introduced."
+  ],
+  "cleanup": [
+    {
+      "run_id": "fe1145473e5d46c290438acaed8a4165",
+      "status": "failed_or_interrupted",
+      "leftovers": [],
+      "running_before": false,
+      "running_after": false,
+      "removed_database_count": 1
+    },
+    {
+      "run_id": "d1e7554466e341e1bf813080035e06d2",
+      "status": "passed",
+      "leftovers": [],
+      "running_before": false,
+      "running_after": false,
+      "removed_database_count": 1
+    }
+  ],
+  "not_run": [
+    "blanket historical suite",
+    "web/APK build",
+    "physical-device campaign",
+    "production recovery",
+    "provider/model calls",
+    "training",
+    "real-source acquisition"
+  ],
+  "raw_logs": "Private; not published because failing test tracebacks can contain generated TEST session values. Only sanitized summaries/hashes are included.",
+  "publication_checks": {
+    "local_links": "PASS",
+    "source_and_document_whitespace": "PASS",
+    "cumulative_patch": "PASS: applied to accepted base in a separate index; exact 22-path inventory; resulting source whitespace clean",
+    "scope_and_byte_preservation": "PASS",
+    "secret_pattern_scan": "PASS; code/summaries also reviewed",
+    "raw_diff_context_note": "Literal blank context spaces in cumulative.patch are unified-diff syntax, not source trailing whitespace."
+  }
+}
