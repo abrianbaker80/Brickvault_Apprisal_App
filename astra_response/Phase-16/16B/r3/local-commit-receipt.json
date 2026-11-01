@@ -1,0 +1,16 @@
+{
+  "status": "PHASE 16B FIXTURE-ONLY SOURCE/TEST FOUNDATION - ACCEPTED / CLOSED",
+  "local_commit": "e0deef0ba065d19377525a1ba36fc436ee254e6c",
+  "subject": "Implement Phase 16B reviewed fixture dataset foundation",
+  "parent": "e76d5f18f810c5942d6c1c8692c261015229c802",
+  "tree": "65c3938b67acc38fad90ba1dce14fda9fb3304d9",
+  "committed_path_count": 22,
+  "accepted_review_commit": "e29d67a3069b32832d644497bc027c51804cf1c2",
+  "branch": "main",
+  "local_only": true,
+  "main_pushed": false,
+  "index_empty": true,
+  "remote_main_unchanged": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "source_changes_beyond_accepted_r2": "Only the minimal additive Plan 110 acceptance entry",
+  "committed_patch_sha256": "5302626b1e75b162d9c2132f9a5003745fa8f0a5a0f7637d1e14fa8294e0404e"
+}

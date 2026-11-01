@@ -1,0 +1,228 @@
+{
+  "local_commit": "e0deef0ba065d19377525a1ba36fc436ee254e6c",
+  "accepted_r2": "e29d67a3069b32832d644497bc027c51804cf1c2",
+  "path_count": 22,
+  "paths": [
+    {
+      "path": "docs/plans/110-phase-16b-reviewed-datasets.md",
+      "status": "added",
+      "accepted_r2_sha256": "d29a7299fc98255b7b59c7f308c3326099cdc8d1d1e32bd4207c67a2098be554",
+      "working_sha256": "65fdf1a797ad8266b81da93aebc594e9906744e540918cf3381fda6d693165a1",
+      "committed_sha256": "65fdf1a797ad8266b81da93aebc594e9906744e540918cf3381fda6d693165a1",
+      "git_blob": "166fd7826a038b6c4e7c36bc486ed71c4188ce8d",
+      "bytes": 30195,
+      "change_beyond_r2": "append-only acceptance"
+    },
+    {
+      "path": "scripts/package_api.py",
+      "status": "modified",
+      "accepted_r2_sha256": "2917fe5006791e895424300589c5c5704cda2759f292c512b3bb1a325ce53d92",
+      "working_sha256": "2917fe5006791e895424300589c5c5704cda2759f292c512b3bb1a325ce53d92",
+      "committed_sha256": "2917fe5006791e895424300589c5c5704cda2759f292c512b3bb1a325ce53d92",
+      "git_blob": "b1a7716e062cc40c245042798f074c8fe8c77ba1",
+      "bytes": 16624,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "scripts/release_manifest.py",
+      "status": "modified",
+      "accepted_r2_sha256": "792ddf103fe344cfbb80bacb1edf82a1c0647dc5877b45ca38a7ce06664aa986",
+      "working_sha256": "792ddf103fe344cfbb80bacb1edf82a1c0647dc5877b45ca38a7ce06664aa986",
+      "committed_sha256": "792ddf103fe344cfbb80bacb1edf82a1c0647dc5877b45ca38a7ce06664aa986",
+      "git_blob": "a8727d5b4851cef72c6b648981fa4eb827aa1019",
+      "bytes": 24529,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/backup_format.py",
+      "status": "modified",
+      "accepted_r2_sha256": "c6b684255a1f1e02586fc8881a421b020efbd012230661b3dbb69b78a44bcb23",
+      "working_sha256": "c6b684255a1f1e02586fc8881a421b020efbd012230661b3dbb69b78a44bcb23",
+      "committed_sha256": "c6b684255a1f1e02586fc8881a421b020efbd012230661b3dbb69b78a44bcb23",
+      "git_blob": "154b918311d4b2efe07cda8b69d3242c3160ef49",
+      "bytes": 3353,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/__init__.py",
+      "status": "added",
+      "accepted_r2_sha256": "88cdc6406a9f1ab9254942cb37666b58d19e7b0f002d8df987168041d1441f7e",
+      "working_sha256": "88cdc6406a9f1ab9254942cb37666b58d19e7b0f002d8df987168041d1441f7e",
+      "committed_sha256": "88cdc6406a9f1ab9254942cb37666b58d19e7b0f002d8df987168041d1441f7e",
+      "git_blob": "fcc85fce31c044a4e281d57e154a910029830fe9",
+      "bytes": 81,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/__main__.py",
+      "status": "added",
+      "accepted_r2_sha256": "9e8fcd3ae363eb1ae81984c9108857f7cda88c5d9cc9ec9ebf6daebe21a8effd",
+      "working_sha256": "9e8fcd3ae363eb1ae81984c9108857f7cda88c5d9cc9ec9ebf6daebe21a8effd",
+      "committed_sha256": "9e8fcd3ae363eb1ae81984c9108857f7cda88c5d9cc9ec9ebf6daebe21a8effd",
+      "git_blob": "74e9a828ffa792fdd6d321a7151e09482b27c399",
+      "bytes": 5769,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/export.py",
+      "status": "added",
+      "accepted_r2_sha256": "e246107a3fec2cc6e4be8d1fdb48fec6770b8605d9a93196dd5b60cee548b01e",
+      "working_sha256": "e246107a3fec2cc6e4be8d1fdb48fec6770b8605d9a93196dd5b60cee548b01e",
+      "committed_sha256": "e246107a3fec2cc6e4be8d1fdb48fec6770b8605d9a93196dd5b60cee548b01e",
+      "git_blob": "11db0afbd62c780f8dbb4ca61361e57dc4a85464",
+      "bytes": 6889,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/models.py",
+      "status": "added",
+      "accepted_r2_sha256": "b267c736dfc14ae8406f4edccee1d59e089b67456fc255dbb9c7ea619210d6fa",
+      "working_sha256": "b267c736dfc14ae8406f4edccee1d59e089b67456fc255dbb9c7ea619210d6fa",
+      "committed_sha256": "b267c736dfc14ae8406f4edccee1d59e089b67456fc255dbb9c7ea619210d6fa",
+      "git_blob": "feb8b659a1e44d476f7a45d531cc69028f3d6721",
+      "bytes": 6601,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/service.py",
+      "status": "added",
+      "accepted_r2_sha256": "1b4f9c88b9d3bd7acd901fb7681bc64be46de03c0537db86dda890f6913a70da",
+      "working_sha256": "1b4f9c88b9d3bd7acd901fb7681bc64be46de03c0537db86dda890f6913a70da",
+      "committed_sha256": "1b4f9c88b9d3bd7acd901fb7681bc64be46de03c0537db86dda890f6913a70da",
+      "git_blob": "4e078a6b237b26b0fa32dd4a98c17e7dfebccee0",
+      "bytes": 26998,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/image_backup.py",
+      "status": "modified",
+      "accepted_r2_sha256": "7ac083bf0cc7069fbf9019ef9657f328af1a69977b4804c4e5bead6a5ff2c15f",
+      "working_sha256": "7ac083bf0cc7069fbf9019ef9657f328af1a69977b4804c4e5bead6a5ff2c15f",
+      "committed_sha256": "7ac083bf0cc7069fbf9019ef9657f328af1a69977b4804c4e5bead6a5ff2c15f",
+      "git_blob": "c97afff2336faf76b1f023711cc4a450396ba239",
+      "bytes": 14192,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/images/sanitization.py",
+      "status": "added",
+      "accepted_r2_sha256": "0b95e772362e984992800f7cc6c1f7b0624aebb1d8808a7bc47b691520e19882",
+      "working_sha256": "0b95e772362e984992800f7cc6c1f7b0624aebb1d8808a7bc47b691520e19882",
+      "committed_sha256": "0b95e772362e984992800f7cc6c1f7b0624aebb1d8808a7bc47b691520e19882",
+      "git_blob": "f1e48c4ea707c8090985bb1ced1924227fccfa39",
+      "bytes": 4293,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/listings/service.py",
+      "status": "modified",
+      "accepted_r2_sha256": "73d13490d929380cde922e1ce4fabcb9b6e59d4dd513afd24b21fb4aa27986d3",
+      "working_sha256": "73d13490d929380cde922e1ce4fabcb9b6e59d4dd513afd24b21fb4aa27986d3",
+      "committed_sha256": "73d13490d929380cde922e1ce4fabcb9b6e59d4dd513afd24b21fb4aa27986d3",
+      "git_blob": "1a1adf39f4d13f07cc4de4291c39505a3dbedf19",
+      "bytes": 13731,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_down.sql",
+      "status": "added",
+      "accepted_r2_sha256": "ffef6496cdc6904518fd2fb5b686fb9baf26ea46a882d05cc065a5d17d9e0dc0",
+      "working_sha256": "ffef6496cdc6904518fd2fb5b686fb9baf26ea46a882d05cc065a5d17d9e0dc0",
+      "committed_sha256": "ffef6496cdc6904518fd2fb5b686fb9baf26ea46a882d05cc065a5d17d9e0dc0",
+      "git_blob": "712bbbc77f464a16f0e9828b8f3fd8fad43cce92",
+      "bytes": 448,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0019_reviewed_dataset_foundation_up.sql",
+      "status": "added",
+      "accepted_r2_sha256": "f838e8cddb7ec4789d273bfa7ec504403087bb8795dbcdbab8a6e8db34882158",
+      "working_sha256": "f838e8cddb7ec4789d273bfa7ec504403087bb8795dbcdbab8a6e8db34882158",
+      "committed_sha256": "f838e8cddb7ec4789d273bfa7ec504403087bb8795dbcdbab8a6e8db34882158",
+      "git_blob": "533d2b077369460a68b06735e80ea987a26055e3",
+      "bytes": 7902,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py",
+      "status": "added",
+      "accepted_r2_sha256": "bd6d5778019b5d329895d8c476fa1b9a2f610c68e455e0bf51f46bb584ad73f2",
+      "working_sha256": "bd6d5778019b5d329895d8c476fa1b9a2f610c68e455e0bf51f46bb584ad73f2",
+      "committed_sha256": "bd6d5778019b5d329895d8c476fa1b9a2f610c68e455e0bf51f46bb584ad73f2",
+      "git_blob": "8f7f45cae18e311411bc50998a752ab2ed946d93",
+      "bytes": 437,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/persistence/runtime_grants.py",
+      "status": "modified",
+      "accepted_r2_sha256": "78c2f547082f6c61fc1ec71e1632f0fdda3c0c60ae230dce431ceffaf550b63f",
+      "working_sha256": "78c2f547082f6c61fc1ec71e1632f0fdda3c0c60ae230dce431ceffaf550b63f",
+      "committed_sha256": "78c2f547082f6c61fc1ec71e1632f0fdda3c0c60ae230dce431ceffaf550b63f",
+      "git_blob": "3e58ee6f4ed3853165216344d58f337cabe632cb",
+      "bytes": 8928,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/integration/test_dataset_recovery.py",
+      "status": "added",
+      "accepted_r2_sha256": "ad4f1b53617752fd5c301895e0d66f2808870c8e824553d6cfdb38286e3977fc",
+      "working_sha256": "ad4f1b53617752fd5c301895e0d66f2808870c8e824553d6cfdb38286e3977fc",
+      "committed_sha256": "ad4f1b53617752fd5c301895e0d66f2808870c8e824553d6cfdb38286e3977fc",
+      "git_blob": "c216b654daf99fff6f48ba463c03f20e51ea72a0",
+      "bytes": 6434,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/integration/test_datasets.py",
+      "status": "added",
+      "accepted_r2_sha256": "3294c949a3755edfeba1b3f4b3eac718570fbbc3b4fca6245515b7fac5b3da75",
+      "working_sha256": "3294c949a3755edfeba1b3f4b3eac718570fbbc3b4fca6245515b7fac5b3da75",
+      "committed_sha256": "3294c949a3755edfeba1b3f4b3eac718570fbbc3b4fca6245515b7fac5b3da75",
+      "git_blob": "65552bdf1e5bc2af0d5868218946061c683038a1",
+      "bytes": 26672,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/integration/test_listing_images.py",
+      "status": "modified",
+      "accepted_r2_sha256": "cac83ae13b85d59cd9b4ebcef3f0ddc16a57ae4f586dece53d7f963a5c22e4d0",
+      "working_sha256": "cac83ae13b85d59cd9b4ebcef3f0ddc16a57ae4f586dece53d7f963a5c22e4d0",
+      "committed_sha256": "cac83ae13b85d59cd9b4ebcef3f0ddc16a57ae4f586dece53d7f963a5c22e4d0",
+      "git_blob": "d11b52be8006cdacfae7130063f5fe3f516ea954",
+      "bytes": 21615,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/unit/test_dataset_admission.py",
+      "status": "added",
+      "accepted_r2_sha256": "48cea6af86b44895e2fbb6d8e51a8f9763876ebec305a9c68f54dda926a878da",
+      "working_sha256": "48cea6af86b44895e2fbb6d8e51a8f9763876ebec305a9c68f54dda926a878da",
+      "committed_sha256": "48cea6af86b44895e2fbb6d8e51a8f9763876ebec305a9c68f54dda926a878da",
+      "git_blob": "bc3b5b57090d4ab2a57d52d2fca67eb7c0770cb7",
+      "bytes": 3992,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/unit/test_dataset_export.py",
+      "status": "added",
+      "accepted_r2_sha256": "2172a3d87111355d19b5479c9fbd80df66b19471dc4dc4439472b55f453118f1",
+      "working_sha256": "2172a3d87111355d19b5479c9fbd80df66b19471dc4dc4439472b55f453118f1",
+      "committed_sha256": "2172a3d87111355d19b5479c9fbd80df66b19471dc4dc4439472b55f453118f1",
+      "git_blob": "e1d4cd7a3e939ccb801706251ac45dc473d0956d",
+      "bytes": 5160,
+      "change_beyond_r2": null
+    },
+    {
+      "path": "services/api/tests/unit/test_outcome_backup_compatibility.py",
+      "status": "modified",
+      "accepted_r2_sha256": "1b997abdc7d7136e6d4daea4076c0ef0781aec3e3636cb86b23026e807e9dbc0",
+      "working_sha256": "1b997abdc7d7136e6d4daea4076c0ef0781aec3e3636cb86b23026e807e9dbc0",
+      "committed_sha256": "1b997abdc7d7136e6d4daea4076c0ef0781aec3e3636cb86b23026e807e9dbc0",
+      "git_blob": "f87be6519f5d333d5718342ba3c448517271c9a8",
+      "bytes": 3272,
+      "change_beyond_r2": null
+    }
+  ],
+  "hash_semantics": "Accepted/working hashes identify exact local bytes; committed hashes and Git blob IDs identify exact committed bytes. Only Plan 110 has a change beyond accepted r2."
+}
