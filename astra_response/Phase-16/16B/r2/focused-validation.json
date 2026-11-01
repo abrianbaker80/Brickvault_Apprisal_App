@@ -1,0 +1,110 @@
+{
+  "date": "2026-11-01",
+  "evidence": "SOURCE / GENERATED SYNTHETIC OWNED TEST ONLY",
+  "before_fix": {
+    "initial_probe": "Shared-source prohibited provenance failed as expected. Flat-color cross-role fixture passed accidentally via an identical automatic thumbnail; replaced with patterned pixels.",
+    "cross_role_patterned_probe": "Both dataset and thumbnail roles failed as expected: upload did not append a withdrawal event. Distinct automatic thumbnail hashes asserted.",
+    "expected_failure_runs": [
+      "5275d92ee62f4983a5e298e7d8d63037",
+      "4c38eed93f784a0c936b13af1f67ef40"
+    ]
+  },
+  "postgresql": {
+    "passed": 15,
+    "failed": 0,
+    "selected_nodes": [
+      "services/api/tests/integration/test_datasets.py::test_derivative_uploaded_as_original_connects_before_preparation",
+      "services/api/tests/integration/test_datasets.py::test_preparation_preserves_shared_source_prohibition",
+      "services/api/tests/integration/test_datasets.py::test_transitive_excluded_bridge_and_growth_withdrawal",
+      "services/api/tests/integration/test_datasets.py::test_shared_derivative_and_privacy_escalation_invalidate",
+      "services/api/tests/integration/test_datasets.py::test_new_equal_crop_derivative_withdraws_previously_separate_component",
+      "services/api/tests/integration/test_datasets.py::test_permission_expiry_and_correction_prevent_new_publication",
+      "services/api/tests/integration/test_datasets.py::test_withdrawal_before_final_publication_and_exact_recovery"
+    ],
+    "new_cases": {
+      "cross_role_reupload": 2,
+      "shared_prohibitions_across_preparations": 8
+    },
+    "existing_affected_cases": 5,
+    "details": [
+      "Dataset and thumbnail exact bytes reuploaded as originals; withdrawal event exists before classification/preparation; distinct B thumbnail and later crop cannot hide graph defect.",
+      "Selected A/B share component and partition; original pinned release data stays identical and withdrawn.",
+      "All three permission fields with DENIED and REVOKED, plus REBRICKABLE source and label provenance, remain blocking through two unreviewed preparations.",
+      "Release attempts refused while prohibited; new derivative remains REVIEW_REQUIRED; explicit reviewed correction permits a new release but never reactivates withdrawn history.",
+      "Transitive excluded bridges, growth, shared-original privacy escalation, equal crops, expiry and final-publication withdrawal barrier remain passing."
+    ]
+  },
+  "unit": {
+    "passed": 1,
+    "node": "services/api/tests/unit/test_dataset_export.py::test_connected_components_include_transitive_excluded_bridge"
+  },
+  "static": {
+    "ruff_format_lint": "PASS: service.py and test_datasets.py",
+    "mypy": "PASS: datasets/service.py"
+  },
+  "package": {
+    "passed": true,
+    "receipt": ".local/package-check/85e2d7f484f248f89119a078f09014ea/result.json",
+    "source": "services/api/src/brickvault_api/datasets/service.py",
+    "source_sha256": "1b4f9c88b9d3bd7acd901fb7681bc64be46de03c0537db86dda890f6913a70da",
+    "wheel_sha256": "6c264ae155dac59ca3057f66e10259eedce933285d89d09561e8a4bf93093f7b",
+    "sdist_sha256": "5572e2ffffee26bc21b64f96c41c8639d6d534b51096a85dd352beaa30e281af",
+    "wheel_and_sdist_service_bytes_match_final_source": true,
+    "checks": [
+      "fresh wheel/sdist",
+      "isolated installed import",
+      "0019 migration graph",
+      "credential-free schema",
+      "exact corrected service bytes in both archives"
+    ]
+  },
+  "reused_evidence": {
+    "publication_commit": "29e33cb7fbc472439915c981f50df297943a99db",
+    "validation": "https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/29e33cb7fbc472439915c981f50df297943a99db/astra_response/Phase-16/16B/r1/focused-validation.json",
+    "scope": [
+      "unchanged auth and CLI parsing",
+      "migration and runtime grants",
+      "upload receipt/order/parser",
+      "disposable DB/blob recovery",
+      "backup/retention/health compatibility"
+    ],
+    "not_a_new_run": "R1 65 unit/operational and 40 selected integration passing-evidence summary is historical; it is not claimed rerun. R2 tests supersede affected grouping/shared-admission evidence. Fresh r2 package binds corrected code."
+  },
+  "cleanup": {
+    "run_id": "02f14fbfefd74d43b5912741a095d9b2",
+    "status": "passed",
+    "leftovers": [],
+    "running_before": false,
+    "running_after": false,
+    "removed_database_count": 1,
+    "volumes": "preserved"
+  },
+  "private_log_sha256": {
+    "before-fix.log": "7465270e1f342e886fcf4e61372088d134155678b5264eb052f4d04890d9c15f",
+    "cross-role-before-fix.log": "4721fe14cfbc676ffd0171be29283711b538bba8c6ee214aef41a977a903ae7b",
+    "integration-final.log": "2b626bdc48b825f293636cebb32d762363e3db938325ac22a70240381aa93418",
+    "graph-unit.log": "d6617b5a3df48e5fcbd1418f167973ac852d9ac1994ed8b6242b0355df934f24",
+    "types.log": "8e63ae22e8213e327a5e9cbd584067681681bd8ef7f25c869877887ccdcfc4ff",
+    "lint.log": "d274e701791783b5793fd62be1f220e76171814cba14b0d01ae379489a17dc43",
+    "package-final.log": "2b724e35f294c91a9721ae876ec40b9b5e3a2f8b382a4aff5e299804a296527a"
+  },
+  "raw_logs": "Remain private; no session-bearing traces published.",
+  "publication_checks": {
+    "source_scope_hashes_preservation": "PASS: only three correction paths; protected/planning and r1 package bytes unchanged",
+    "local_links_and_source_whitespace": "PASS",
+    "cumulative_patch": "PASS: applies in an isolated index to accepted main and matches final source",
+    "r1_to_r2_patch": "PASS: applying after r1 cumulative patch yields the identical final source tree",
+    "secret_pattern_scan": "PASS; correction source and summaries also inspected",
+    "cleanup": "PASS: both expected-failure runs and the final passing run removed owned databases and restored prior state"
+  },
+  "not_run": [
+    "broad 65/40-case replay",
+    "new disposable recovery campaign",
+    "web/APK build",
+    "phone check",
+    "production operations",
+    "provider/model calls",
+    "real corpus",
+    "training"
+  ]
+}

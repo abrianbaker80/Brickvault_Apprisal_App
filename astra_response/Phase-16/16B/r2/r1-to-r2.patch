@@ -1,0 +1,323 @@
+--- a/docs/plans/110-phase-16b-reviewed-datasets.md
++++ b/docs/plans/110-phase-16b-reviewed-datasets.md
+@@ -302,6 +302,10 @@
+   release clarifications recorded above. No second plan-review cycle.
+ - [x] 2026-10-26: Five tables and authenticated CLI implemented. Affected validation
+   passes; no physical-device check needed. Source/TEST implementation awaits review.
++- [x] 2026-11-01: R1 review identified two in-scope defects. Exact blob hashes now
++  connect original, dataset-derivative and thumbnail roles; shared-source checks
++  retain the latest explicit permission/provenance review across preparations.
++  No new planning round, schema change, pinned-manifest rewrite or production action.
+ - [ ] Later, separately: independently permitted real corpus and exact retained
+   smoke-root classification. No IDs/private evidence copied into this publication.
+ 
+@@ -369,3 +373,31 @@
+ 16A stays closed, capture stays stopped, wider Phase 16 remains open. Main source,
+ migration, tests and this plan remain uncommitted; only the sanitized review package
+ may be committed/pushed on astra-response under the explicit publication exception.
++
++### R2 targeted source-review corrections — 2026-11-01
++
++R1 and its evidence remain immutable history. Its separate original/derived hash
++nodes missed cross-role exact-byte links; its latest-row lookup let preparation
++hide an explicit shared-source prohibition. The corrected graph uses `blob:<sha256>`
++for every byte role while retaining semantic lineage privately. Uploading a known
++derivative as an original now immediately grows the component and appends withdrawal
++for an affected pinned release, before the new image is classified or prepared.
++Historical source-group and derivative edges and excluded bridges remain intact.
++
++Exact-byte admission still requires the latest derivative review. Separately, shared
++original checks consult the latest non-null explicit review for source/export/training
++denials or revocations and prohibited source/label provenance. Any number of new
++preparations leaves those prohibitions effective; only an explicit evidence-backed
++review can correct them. Such a correction cannot reactivate a withdrawn release.
++No permissions or pixel approval are copied onto a newly prepared derivative.
++
++Targeted verification passed: 15 PostgreSQL cases (two cross-role reuploads, eight
++shared-prohibition cases, five affected regressions), one deterministic graph unit,
++Ruff on both changed Python files and mypy on the service. The fresh wheel/sdist
++passed isolated installed import, migration graph and credential-free schema checks;
++both archives contain the exact corrected service bytes. Owned TEST cleanup reports
++no leftovers and restores prior running state. Details are in the R2 review package.
++Unchanged R1 auth, schema, receipt/order and disposable DB/blob
++recovery evidence is reused, not rerun or represented as a new recovery campaign.
++Source, tests and this plan remain uncommitted; only sanitized R2 review artifacts
++may be published. Stop for review; fixture, real-data and production limits remain.
+--- a/services/api/src/brickvault_api/datasets/service.py
++++ b/services/api/src/brickvault_api/datasets/service.py
+@@ -86,6 +86,15 @@
+         "WHERE owner_id=%s ORDER BY listing_image_id,revision DESC",
+         owner,
+     )
++    # Preparation invalidates exact-byte review but cannot erase an explicit
++    # shared-source prohibition. Only a later explicit review replaces this state.
++    source_reviews = rows(
++        c,
++        "SELECT DISTINCT ON (listing_image_id) * FROM dataset_review_revision "
++        "WHERE owner_id=%s AND data->>'review' IS NOT NULL "
++        "ORDER BY listing_image_id,revision DESC",
++        owner,
++    )
+     by_subject = {str(r["listing_id"]): r for r in subjects}
+     by_review = {str(r["listing_image_id"]): r for r in reviews}
+     edges = []
+@@ -94,11 +103,12 @@
+             [
+                 "image:" + str(row["id"]),
+                 "listing:" + str(row["listing_id"]),
+-                "original:" + row["sha256"],
++                "blob:" + row["sha256"],
+                 "asset:" + str(row["original_asset_id"]),
+                 "privacy:" + str(row["original_asset_id"]) + ":" + row["privacy"],
+             ]
+         )
++    # Exact bytes share a node across original, dataset and thumbnail roles.
+     # Historical source assertions/derivatives remain conservative edges, even after correction.
+     history = rows(
+         c,
+@@ -120,7 +130,7 @@
+     )
+     for row in derivatives:
+         edges.append(
+-            ["image:" + str(row["listing_image_id"]), "derived:" + row["data"]["derivative_sha256"]]
++            ["image:" + str(row["listing_image_id"]), "blob:" + row["data"]["derivative_sha256"]]
+         )
+     lineage = rows(
+         c,
+@@ -135,7 +145,7 @@
+             [
+                 "asset:" + str(row["parent_id"]),
+                 "asset:" + str(row["child_id"]),
+-                "derived:" + row["sha256"],
++                "blob:" + row["sha256"],
+             ]
+         )
+     return (
+@@ -144,6 +154,7 @@
+         {
+             "subjects": by_subject,
+             "reviews": by_review,
++            "source_reviews": {str(r["listing_image_id"]): r for r in source_reviews},
+         },
+     )
+ 
+@@ -179,7 +190,7 @@
+             source = states["subjects"].get(str(other["listing_id"]))
+             if not source or source["data"]["classification"] != "SYNTHETIC":
+                 reasons.append("SHARED_SOURCE_EXCLUDED")
+-            other_review = states["reviews"].get(str(other["id"]))
++            other_review = states["source_reviews"].get(str(other["id"]))
+             if other_review and other_review["data"]["review"]:
+                 r = other_review["data"]["review"]
+                 if (
+--- a/services/api/tests/integration/test_datasets.py
++++ b/services/api/tests/integration/test_datasets.py
+@@ -56,7 +56,9 @@
+     password: str
+     output: Path
+ 
+-    def image(self, color: str = "red", listing: UUID | None = None) -> tuple[UUID, UUID]:
++    def image(
++        self, color: str = "red", listing: UUID | None = None, *, content: bytes | None = None
++    ) -> tuple[UUID, UUID]:
+         listing = listing or UUID(
+             str(
+                 self.listings.create(
+@@ -75,7 +77,7 @@
+             listing,
+             UploadArguments(client_upload_id=uuid4(), display_order=position),
+             "synthetic.png",
+-            raw.getvalue(),
++            content if content is not None else raw.getvalue(),
+         )
+         return listing, UUID(value["listing_image_id"])
+ 
+@@ -92,7 +94,9 @@
+         value.update(changes)
+         return self.service.subject(self.token, self.csrf, SubjectReview.model_validate(value))
+ 
+-    def prepare(self, image: UUID) -> dict[str, Any]:
++    def prepare(
++        self, image: UUID, *, crop: tuple[int, int, int, int] | None = None
++    ) -> dict[str, Any]:
+         return self.service.prepare(
+             self.token,
+             self.csrf,
+@@ -102,6 +106,7 @@
+                 reason="Prepare selected fixture",
+                 purpose=PURPOSE,
+                 listing_image_id=image,
++                crop=crop,
+             ),
+         )
+ 
+@@ -299,6 +304,169 @@
+         d.service.materialize(d.token, d.csrf, newer, d.output / "restricted")
+ 
+ 
++@pytest.mark.parametrize("role", ["dataset", "thumbnail"])
++def test_derivative_uploaded_as_original_connects_before_preparation(d: Harness, role: str) -> None:
++    # Patterned pixels avoid a flat JPEG whose automatic thumbnail re-encode is
++    # byte-identical and would accidentally conceal the cross-role graph defect.
++    pixels = Image.new("RGB", (64, 48))
++    pixels.putdata(
++        [(x * 17 % 256, y * 29 % 256, x * y * 13 % 256) for y in range(48) for x in range(64)]
++    )
++    original = io.BytesIO()
++    pixels.save(original, "PNG")
++    listing, image = d.image(content=original.getvalue())
++    d.subject(listing)
++    prepared = d.prepare(image, crop=(0, 0, 24, 24))
++    d.review(image, prepared)
++    identifier, pinned = d.release([image])
++    derivative_hash = prepared["data"]["derivative_sha256"]
++    if role == "thumbnail":
++        with d.owner.connect() as c:
++            row = c.execute(
++                "SELECT b.sha256 FROM listing_image i "
++                "JOIN image_relation r ON r.parent_id=i.original_asset_id "
++                "JOIN image_asset a ON a.id=r.child_id JOIN blob b ON b.id=a.blob_id "
++                "WHERE i.id=%s",
++                (image,),
++            ).fetchone()
++            assert row is not None
++            derivative_hash = row["sha256"]
++        # Exercise thumbnail lineage independently of dataset-derivative equality.
++        assert derivative_hash != prepared["data"]["derivative_sha256"]
++    with d.service.store.read(derivative_hash) as stream:
++        raw = stream.read()
++    other = UUID(str(d.listings.create(d.token, d.csrf, ListingCreate(currency="USD"))["id"]))
++    assert d.service.status(d.token, identifier)["current_state"] == "ACTIVE"
++    _, uploaded = d.listings.upload(
++        d.token,
++        d.csrf,
++        other,
++        UploadArguments(client_upload_id=uuid4(), display_order=0),
++        "synthetic-derivative.jpg",
++        raw,
++    )
++    duplicate = UUID(uploaded["listing_image_id"])
++    # Upload alone must append withdrawal, before B is classified or prepared.
++    with d.owner.connect() as c:
++        thumbnail = c.execute(
++            "SELECT b.sha256 FROM listing_image i "
++            "JOIN image_relation r ON r.parent_id=i.original_asset_id "
++            "JOIN image_asset a ON a.id=r.child_id JOIN blob b ON b.id=a.blob_id "
++            "WHERE i.id=%s",
++            (duplicate,),
++        ).fetchone()
++        assert thumbnail is not None
++        assert thumbnail["sha256"] not in {derivative_hash, prepared["data"]["derivative_sha256"]}
++        event = c.execute(
++            "SELECT data FROM dataset_release_event WHERE release_id=%s", (identifier,)
++        ).fetchone()
++        assert event is not None
++        assert event["data"]["reason_code"] == "ADMISSION_OR_GRAPH_CHANGED"
++    assert d.service.status(d.token, identifier) == {
++        **pinned,
++        "current_state": "DATASET_RELEASE_WITHDRAWN",
++    }
++    d.subject(other)
++    different = d.service.prepare(
++        d.token,
++        d.csrf,
++        Prepare(
++            id=uuid4(),
++            expected_revision=0,
++            purpose=PURPOSE,
++            listing_image_id=duplicate,
++            crop=(0, 0, 16, 16),
++            reason="Different fixture crop after derivative reupload",
++        ),
++    )
++    assert different["data"]["original_sha256"] == derivative_hash
++    assert different["data"]["derivative_sha256"] not in {
++        derivative_hash,
++        prepared["data"]["derivative_sha256"],
++    }
++    d.review(duplicate, different)
++    _, joined = d.release([image, duplicate])
++    one, two = joined["data"]["manifest"]["items"]
++    assert one["group"] == two["group"]
++    assert one["partition"] == two["partition"]
++    assert d.service.status(d.token, identifier) == {
++        **pinned,
++        "current_state": "DATASET_RELEASE_WITHDRAWN",
++    }
++
++
++@pytest.mark.parametrize(
++    "field,value",
++    [
++        (field, Permission(state=state, evidence_ref="explicit-fixture-restriction"))
++        for field in ("source_use", "export", "training")
++        for state in ("DENIED", "REVOKED")
++    ]
++    + [("source", "REBRICKABLE"), ("label_provenance", "REBRICKABLE")],
++)
++def test_preparation_preserves_shared_source_prohibition(
++    d: Harness, field: str, value: Any
++) -> None:
++    _, image = d.ready()
++    other, duplicate = d.image()
++    d.subject(other)
++    prepared = d.prepare(duplicate)
++    d.review(duplicate, prepared)
++    identifier, pinned = d.release([image])
++    d.review(duplicate, prepared, expected_revision=2, **{field: value})
++    selection = Selection(purpose=PURPOSE, targets=[image], seed=41)
++
++    def blocked() -> None:
++        preview = d.service.preview(d.token, selection)
++        assert preview["manifest"]["items"] == []
++        assert preview["private"]["exclusions"] == [
++            {"target": str(image), "reasons": ["SHARED_SOURCE_DENIED"]}
++        ]
++        with pytest.raises(DatasetError, match="INELIGIBLE"):
++            d.service.release(
++                d.token,
++                d.csrf,
++                ReleaseRequest(id=uuid4(), selection=selection, preview_id=preview["preview_id"]),
++            )
++        assert d.service.status(d.token, identifier) == {
++            **pinned,
++            "current_state": "DATASET_RELEASE_WITHDRAWN",
++        }
++
++    blocked()
++    # Multiple unreviewed preparations cannot clear the last explicit source review.
++    for revision, size in ((3, 16), (4, 8)):
++        prepared = d.service.prepare(
++            d.token,
++            d.csrf,
++            Prepare(
++                id=uuid4(),
++                expected_revision=revision,
++                purpose=PURPOSE,
++                listing_image_id=duplicate,
++                crop=(0, 0, size, size),
++                reason="New crop is not a permission review",
++            ),
++        )
++        assert prepared["data"]["review"] is None
++        blocked()
++        unreviewed = d.service.preview(
++            d.token, Selection(purpose=PURPOSE, targets=[duplicate], seed=41)
++        )
++        assert "REVIEW_REQUIRED" in unreviewed["private"]["exclusions"][0]["reasons"]
++    # Only an explicit evidence-backed review can correct the source state.
++    # It still cannot reactivate the older immutable release.
++    d.review(duplicate, prepared, expected_revision=5)
++    corrected = d.service.preview(d.token, selection)
++    assert not corrected["private"]["exclusions"]
++    assert len(corrected["manifest"]["items"]) == 1
++    d.release([image, duplicate])
++    assert d.service.status(d.token, identifier) == {
++        **pinned,
++        "current_state": "DATASET_RELEASE_WITHDRAWN",
++    }
++
++
+ def test_review_conflicts_auth_ownership_and_database_immutability(d: Harness) -> None:
+     listing, image = d.image()
+     d.subject(listing)

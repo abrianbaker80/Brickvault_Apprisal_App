@@ -1,0 +1,120 @@
+{
+  "head": "e76d5f18f810c5942d6c1c8692c261015229c802",
+  "branch": "main",
+  "index_empty": true,
+  "source_committed": false,
+  "main_pushed": false,
+  "all_22_original_pending_paths_byte_identical": true,
+  "both_planning_files_byte_identical": true,
+  "preserved_paths": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4"
+    },
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "sha256": "d940115177434f798c8722b45a9d3670b60823764b9b1a27b2dab2971520cbc4"
+    },
+    {
+      "path": "apps/android/android/app/build.gradle",
+      "sha256": "341e10705cb4998710f17673b09406bd1014c298af42596583f04e1b63028a4a"
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "sha256": "82fa1190d3b3fd720b5cc127663824db3515fa4c81d8d25b665ac167448e3507"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "sha256": "f36a18c6cd3d5f0c9dbc4072575fe677f5fc2967f1e218a6000a41df416748fc"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "sha256": "ba3b49ab33acd979982148cc5acb7b98692c30055527c7a01b519d650fa260f0"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "sha256": "441e43c9ae52352da04892281ad39fadd335e9b9778af5cbf69912c0ba6b786d"
+    },
+    {
+      "path": "apps/android/android/variables.gradle",
+      "sha256": "f9865d0fece4b46a97f61ed6e346bf51c6bd03b337851f9e300bc6cc05420e96"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "854a61e3eeed5220922167f7f3b92a41bddf74bb17daca96ab00d04b033a562f"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "bc90765361dbc88c4c7b8b2392aee198be98508e97a500cac210141c24f0fbbb"
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "sha256": "f41c809d3c8d6ca15e4cc32cb0f619ce7c28ad5ab1cb5c680cce20d4c8ca653b"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "sha256": "04462b739ae4a5d36afc1f23922de21471cd1e2cbb404e785aa068f12d546613"
+    },
+    {
+      "path": "docs/SECURITY_PRIVACY.md",
+      "sha256": "306807c913470acb432fefae70eb22dea8c34c83580ebc79aa14cb3ef343574b"
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "sha256": "858f6dd3039e947496bb480afad41baef1294b9d509e2b8fb2328c43c77f48f9"
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "sha256": "5871ca31c04f7dd6c3f948290a8f228fa1b2e13717a1f0a525aca9f12b817285"
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7"
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java",
+      "sha256": "ce5e97c9ca61c4d3dcb3c4bb9dd89bcf7fb59ff5ce178965a5f868c298d64995"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java",
+      "sha256": "e1cc7aacb59c5c4ab8629fbad00809fd0dceacf14da1280732f27567bbe01f0d"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java",
+      "sha256": "bf82a42f84e815b843755bf1862aab298fd97f9ab2b2f69691cc1f8e633bf528"
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java",
+      "sha256": "8c39c08d2d97d93bcf99a1fcf797ab3a44e4fc754c1fa7bca80a5b8e88629cc7"
+    },
+    {
+      "path": "apps/web/src/NativeCapture.tsx",
+      "sha256": "abffa551bbf2ec60564e3b828b29526b7a1d5560eded03067ed7080a25e1f9c3"
+    },
+    {
+      "path": "astra_response/Phase-16/16B-plan/r1/REVIEW.md",
+      "sha256": "a30a6c59b0ec7a1a855d93b6e348a921cb2ae8f1ce99f770ee06f5895104d21c"
+    },
+    {
+      "path": "astra_response/Phase-16/16B-plan/r1/scope-and-validation.json",
+      "sha256": "e81eeec4f46bed60d8e46b87bd5bcd762713137f7b134322592bf2e19ee43053"
+    }
+  ],
+  "r1_package_sha256": {
+    "astra_response/Phase-16/16B/r1/REVIEW.md": "b811e0575690de49f4918d8ffa1f917cdd6bb4fbce783fdc1d43b7427b00b2d8",
+    "astra_response/Phase-16/16B/r1/PLAN-110.md": "a9a5aa622a49ce8d00ebf52d2a4c06b5a2f749856a1407707c179b016a01bbf0",
+    "astra_response/Phase-16/16B/r1/changed-inventory.json": "56b683e901bb1eda92ecddf97a3d3f24976768a45507f5b312de350bde1e8393",
+    "astra_response/Phase-16/16B/r1/cumulative.patch": "184783c23e35f08ee24f5a80c59144710bbb00cdb6b54a420a2284467c5f4497",
+    "astra_response/Phase-16/16B/r1/focused-validation.json": "12e1ef45337412fad8ba4fea0b50be1e1db819ee1c0454a0da11d5f35f8f23f2",
+    "astra_response/Phase-16/16B/r1/preservation.json": "a963bdeae85c3933ead3fb9fec251086a02dfada5bed1d140c6ff592bce75b73"
+  },
+  "r1_package_byte_identical": true,
+  "unchanged_r1_source_paths": 19,
+  "publication_parent": "29e33cb7fbc472439915c981f50df297943a99db",
+  "publication_scope": "astra_response/Phase-16/16B/r2/ only; isolated index; no source/main commit",
+  "private_evidence": "Prior private evidence preserved; generated TEST logs remain private. No real corpus or production evidence accessed."
+}
