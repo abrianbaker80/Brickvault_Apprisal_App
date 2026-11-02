@@ -1,0 +1,26 @@
+{
+  "plan_approval": {
+    "commit": "8db34043d280bb8a13329d9c434a5c6f251d65c0",
+    "path": "astra_response/Phase-16/16C-plan/r1/",
+    "note": "Brian approved the grouped Plan 111 decisions; no new planning revision was created."
+  },
+  "phase_16a": {
+    "references": [
+      "docs/plans/109-phase-16a-actual-outcomes.md",
+      "services/api/src/brickvault_api/outcomes.py",
+      "services/api/src/brickvault_api/outcome_calculation.py"
+    ],
+    "reused": "Stored versioned outcome calculations, exact signed comparison errors, and original-forecast eligibility; no historical requalification."
+  },
+  "phase_16b": {
+    "accepted_closeout_commit": "f8d52dccd005af113fa92eec74c9b30ac7a1a119",
+    "accepted_closeout_path": "astra_response/Phase-16/16B/r3/REVIEW.md",
+    "references": [
+      "docs/plans/110-phase-16b-reviewed-datasets.md",
+      "services/api/src/brickvault_api/migrations/versions/0019_reviewed_dataset_foundation.py",
+      "services/api/src/brickvault_api/datasets/"
+    ],
+    "reused": "The accepted 0019 subject ledger, owner/replay/CAS/append-only/sticky-SYNTHETIC rules, and source/TEST disposition; no 16B qualification repeated."
+  },
+  "phase_16_status": "16A and 16B remain closed; wider Phase 16 remains open."
+}

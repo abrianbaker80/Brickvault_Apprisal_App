@@ -1,0 +1,133 @@
+{
+  "date": "2026-11-02",
+  "baseline_commit": "e0deef0ba065d19377525a1ba36fc436ee254e6c",
+  "scope": "Phase 16C approved source/TEST implementation only",
+  "path_count": 19,
+  "files": [
+    {
+      "path": "apps/web/e2e/deal-outcomes-real.mjs",
+      "status": "added",
+      "bytes": 7250,
+      "sha256": "6e831b41f29d447dc2eb7fe3e56831dfe77e6ef98913153c53ad7be0e6c9a8dd"
+    },
+    {
+      "path": "apps/web/src/DealClassificationControl.tsx",
+      "status": "added",
+      "bytes": 10117,
+      "sha256": "0c6840e723ffbeb858a562793d56a4d1fb4d1e8d310616ae8a76d1dd54cd6937"
+    },
+    {
+      "path": "apps/web/src/DealOutcomesReport.tsx",
+      "status": "added",
+      "bytes": 15566,
+      "sha256": "38be74b9ed9801ee33e8799d0b4812a58ddca18194009f92421c2ad2c276f77c"
+    },
+    {
+      "path": "apps/web/src/DealsPage.tsx",
+      "status": "modified",
+      "bytes": 9005,
+      "sha256": "211c9f00511b9d1c96c3e13f407367cb7f16d5577e07df0073d8153d9c1b0794",
+      "baseline_sha256": "3b746f3c9bac722e31617d4deebc8d82ec04b2edf0ae68c1d7773455cea20f80"
+    },
+    {
+      "path": "apps/web/src/HistoricalForecastPage.tsx",
+      "status": "modified",
+      "bytes": 12800,
+      "sha256": "069232d86f334530f1b4d82d27b97367cc01cd0ae3e0999179538e5c9aac4dd4",
+      "baseline_sha256": "56da2c0d0c54c765abff6c3243c3d41296c361bb1977d63b3f1f0f79665435c8"
+    },
+    {
+      "path": "apps/web/src/deal-outcomes-api.ts",
+      "status": "added",
+      "bytes": 3480,
+      "sha256": "a8881c518f95162feb2c1652569ba623dd047fff4ac499a313820721ebc3cb05"
+    },
+    {
+      "path": "apps/web/src/outcomes-report.css",
+      "status": "added",
+      "bytes": 2713,
+      "sha256": "019aa6874ff8f38d84b3567fa69e59e3b27da3c69a9d42ec68f96899577c9dd2"
+    },
+    {
+      "path": "docs/plans/111-phase-16c-outcomes-reporting.md",
+      "status": "added",
+      "bytes": 20740,
+      "sha256": "6da0b07f84b0a419dc30f4a88ea0394efa7f4bb6604655809042e4c11237e16d"
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "status": "modified",
+      "bytes": 411215,
+      "sha256": "5ba8fe93b702b523ff39ab0737ccf50ce52bc67e0af09d627dacffdde0ddd107",
+      "baseline_sha256": "5ddb2899319915f4bbac3b70be7154455b451c161d8130049d0b5a64c505b5b1"
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "status": "modified",
+      "bytes": 299916,
+      "sha256": "f7f0901d4d619f277d8b4921484acda364e5b1d62b1e42f9e9d3cf9ad4ae93c9",
+      "baseline_sha256": "88055d3a75a6e386ad79757a63940f56831e588484074998862728621eebc212"
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/deal_outcomes.py",
+      "status": "added",
+      "bytes": 5704,
+      "sha256": "377098656e41a3cb567d666f34710c6c75382024b8458f8c9584ab04642d113e"
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/service.py",
+      "status": "modified",
+      "bytes": 23023,
+      "sha256": "5ea24f2aea2b7965d8657d8f5fbf819707ef3a593fb8536f0a758d155695ee45",
+      "baseline_sha256": "1b4f9c88b9d3bd7acd901fb7681bc64be46de03c0537db86dda890f6913a70da"
+    },
+    {
+      "path": "services/api/src/brickvault_api/datasets/subjects.py",
+      "status": "added",
+      "bytes": 6859,
+      "sha256": "9a326560538a9fe3742bc7ff8f9059b2441d6e80055e29522969d85c9b9b67f5"
+    },
+    {
+      "path": "services/api/src/brickvault_api/deal_outcomes.py",
+      "status": "added",
+      "bytes": 31571,
+      "sha256": "f75d3de9edc6d4ac550d013890fbad8e553e0d4e58cc0430d5c5d91ae00f3eed"
+    },
+    {
+      "path": "services/api/src/brickvault_api/deal_outcomes_models.py",
+      "status": "added",
+      "bytes": 5498,
+      "sha256": "cd5a5d850d02bc159fcd1e6dda1e75f5b7d9cdce0d3ea1acf11c85bf36a2b823"
+    },
+    {
+      "path": "services/api/src/brickvault_api/main.py",
+      "status": "modified",
+      "bytes": 5597,
+      "sha256": "c55b08ef744d33c0fa916ea73151129e1d1259f2d042529a25c4005fb3e82828",
+      "baseline_sha256": "c46da5048f0acb2f982ad84acec0692c2d6a33c3e3b6b51480c8d8fb405eaa53"
+    },
+    {
+      "path": "services/api/tests/integration/test_deal_outcomes_browser.py",
+      "status": "added",
+      "bytes": 7559,
+      "sha256": "a1febede4e36048cb33740ab96cb17cf50fa2d73175f4ffa049095736c2ec52b"
+    },
+    {
+      "path": "services/api/tests/integration/test_deal_outcomes_report.py",
+      "status": "added",
+      "bytes": 13053,
+      "sha256": "0e23491cb8785001004acf9837056b14a60654b41ae39202b0e4d24fe1f72f32"
+    },
+    {
+      "path": "services/api/tests/unit/test_dataset_subject_graph.py",
+      "status": "added",
+      "bytes": 790,
+      "sha256": "1cbe2987e97fe4ca9ff01e35a7c94e90f56ce8da8f86af448efd3d370ddbe8f1"
+    }
+  ],
+  "cumulative_patch": {
+    "path": "cumulative.patch",
+    "bytes": 322877,
+    "sha256": "ec2412a4fa9cd23754c65d7f86439413b0796ff0b8ea7cf1eb3c0ea0ee0d2fdb"
+  }
+}
