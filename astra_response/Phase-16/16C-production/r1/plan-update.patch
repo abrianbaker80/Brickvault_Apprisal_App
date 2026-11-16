@@ -1,0 +1,56 @@
+--- a/docs/plans/111-phase-16c-outcomes-reporting.md
++++ b/docs/plans/111-phase-16c-outcomes-reporting.md
+@@ -320,3 +320,53 @@
+ unpushed. Publish only a sanitized closeout package on `astra-response` and stop.
+ Do not deploy, classify the retained production smoke record, close wider Phase 16
+ or begin another slice.
++
++
++## Authorized production rollout preflight — 2026-11-16
++
++**BLOCKED BEFORE BUILD OR PRODUCTION MUTATION; EXISTING 16A RELEASE PRESERVED.**
++
++Brian authorized the bounded production rollout of exact accepted application
++commit `50f66837addf77ddd1c1a69eed0a873c17163a81`, existing migration 0019 and
++enumerated grants, matching backend/web/APK, exact-ID retained-fixture classification
++and one authenticated phone workflow. This supersedes the earlier rollout prohibition
++for that scope only; source/TEST acceptance remains closed and wider Phase 16 open.
++
++Read-only preflight confirmed `phase16a-outcomes-production-r3`, manifest
++`b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f`,
++schema `0018_deal_outcome_revisions`, Python 3.13.16 and an active API. Thirteen
++of fourteen ordinary health checks passed. Four operational units were failed:
++lightweight health, deep health, Python-version monitoring and retention.
++The guest reboot marker was approximately 60.5 hours old; the maintenance record
++reported Python 3.13.18 available. Direct encrypted-repository identity verification
++passed; the retention ledger was READY with its last transaction COMPLETE. However,
++the read-only retention plan refused `Partial or unrecognized backup history.`
++The deep-health REPOSITORY_IDENTITIES label covers this retention-plan check too;
++this is not evidence of a repository identity mismatch. No history was deleted,
++ledger rewritten, failed unit cleared, security exception added or maintenance run.
++
++A complete schema-3/0018 scheduled backup receipt dated 2026-11-16 10:11:42 UTC
++was observed for database, globals, configuration and image blobs. Current configured
++market-credential backup admission passed. No new artifact readbacks, repository
++integrity checks, migration proof, backup or restore were performed; this receipt
++was not admitted as a verified deployment recovery point in this blocked attempt.
++The backup schedule remains 04:00 America/Chicago.
++
++ADB listed no connected phone. The historical installed APK remains recorded as
++`a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3`;
++its current installed identity, signer and authenticated session were not verified.
++No build, upload, migration, release switch, service interruption, APK installation,
++fixture receipt/root read, classification append, outcome write or phone acceptance
++ran. No accepted TEST suites or recovery rehearsal were repeated.
++
++The 22 existing pending paths, three protected files and untracked review artifacts
++remain preserved; the expanded preservation inventory contains 43 files. Only this
++additive plan entry changes tracked main content for the task. Main remains at the
++accepted commit, unpushed with an empty index; this entry remains uncommitted.
++Sanitized publication: `astra_response/Phase-16/16C-production/r1/`.
++
++Resume requires a separately authorized resolution of the operational blockers and
++an accessible phone, followed by fresh bounded preflight. Do not bypass the failures,
++blindly run an old runtime on 0019, delete subject/outcome history, or restore over
++newer user records. No feature work starts. CONTENTS PRICING remains the recommended
++next planning target after this deployment is completed and reviewed.

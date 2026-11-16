@@ -1,0 +1,92 @@
+{
+  "status": "BLOCKED_BEFORE_BUILD_OR_PRODUCTION_MUTATION",
+  "observed_at_utc": "2026-11-16T18:50:08.483784+00:00",
+  "accepted_application_source": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "release": "phase16a-outcomes-production-r3",
+  "manifest_sha256": "b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f",
+  "schema": [
+    "0018_deal_outcome_revisions"
+  ],
+  "runtime": "3.13.16",
+  "api_active": "active",
+  "ordinary_health": {
+    "PRIVATE_IMAGE_STORAGE": true,
+    "SERVICES": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "UFW": true,
+    "CLOCK": true,
+    "ROOT_SPACE": true,
+    "DATA_SPACE": true,
+    "REBOOT_PENDING": false,
+    "SECURITY_UPDATES": true
+  },
+  "failed_units": [
+    "brickvault-health-deep.service",
+    "brickvault-health.service",
+    "brickvault-python-version.service",
+    "brickvault-retention.service"
+  ],
+  "reboot_required": {
+    "required": true,
+    "marker_modified_utc": "2026-11-14T06:21:02.355866+00:00",
+    "age_hours": 60.5,
+    "packages": [
+      "linux-image-6.8.0-149-generic",
+      "linux-base",
+      "libc6"
+    ]
+  },
+  "maintenance_notice": {
+    "checked_at": 1794737924.2829936,
+    "installed": [
+      3,
+      13,
+      16
+    ],
+    "latest": [
+      3,
+      13,
+      18
+    ],
+    "status": "UPDATE_AVAILABLE"
+  },
+  "repository_identity_check": "PASS",
+  "retention_ledger_status": "READY",
+  "last_retention_transaction_status": "COMPLETE",
+  "retention_plan_check": "FAIL",
+  "retention_plan_refusal": "Partial or unrecognized backup history.",
+  "observed_backup": {
+    "schema": 3,
+    "revisions": [
+      "0018_deal_outcome_revisions"
+    ],
+    "verified_at_utc": "2026-11-16T10:11:42.030793+00:00",
+    "artifacts": [
+      "configuration.tar",
+      "database.dump",
+      "globals.sql",
+      "image-blobs.tar"
+    ]
+  },
+  "market_credential_backup_admission": true,
+  "new_backup_or_restore": false,
+  "artifact_readbacks_or_repository_integrity_checks": 0,
+  "migration_recovery_proof_admitted": false,
+  "backup_schedule": "04:00 America/Chicago",
+  "backup_schedule_sha256": "320059d7e5ecf47d74da702e25caea6ced3a1fbd94b8a5765f706a9a34eb0040",
+  "phone_access": "NO_ADB_DEVICE",
+  "current_installed_apk": "NOT_VERIFIED",
+  "historical_apk_sha256": "a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3",
+  "new_release_or_apk_built": false,
+  "production_mutation": false,
+  "fixture_identity_or_classification_read": false,
+  "fixture_classification_appends": 0,
+  "production_acceptance": "NOT_RUN",
+  "provider_calls": 0,
+  "dataset_operations": 0
+}
