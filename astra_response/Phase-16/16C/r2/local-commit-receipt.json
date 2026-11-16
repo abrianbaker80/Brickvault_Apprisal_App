@@ -1,0 +1,16 @@
+{
+  "status": "PHASE 16C SOURCE/TEST IMPLEMENTATION ACCEPTED / CLOSED",
+  "local_commit": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "subject": "Close Phase 16C outcomes reporting source/TEST slice",
+  "parent": "e0deef0ba065d19377525a1ba36fc436ee254e6c",
+  "tree": "fdcaa714ca632cb832159ed63a94f0b78df3ae8f",
+  "committed_path_count": 19,
+  "accepted_review_commit": "4ecf01a897a0ab6a4bb82fb9ffa15535c1783990",
+  "branch": "main",
+  "local_only": true,
+  "main_pushed": false,
+  "index_empty": true,
+  "remote_main_observed_before": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "implementation_patch_sha256_not_published": "5ac5fa43efc52ecbb810e1d1f169bf49ff857a655d01aa9efafae335566b47f8",
+  "implementation_source_or_patch_in_package": false
+}
