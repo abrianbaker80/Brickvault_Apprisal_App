@@ -1,0 +1,871 @@
+diff --git a/docs/plans/112-selected-contents-market-refresh.md b/docs/plans/112-selected-contents-market-refresh.md
+index bca2c78..aa7f453 100644
+--- a/docs/plans/112-selected-contents-market-refresh.md
++++ b/docs/plans/112-selected-contents-market-refresh.md
+@@ -455,0 +456,390 @@ refresh, server/phone work or next feature is authorized by this closeout.
++
++## 18. Read-only production mapping readiness (2026-11-17)
++
++**CONTENTS PRICING LIVE-MAPPING READINESS — BLOCKED.** Authorized guarded,
++read-only, repeatable-read inspection confirmed `brickvault-appraisal` (the established
++VM115 administrative endpoint), release `phase16c-outcomes-production-r2`, source
++`50f66837addf77ddd1c1a69eed0a873c17163a81`, and schema
++`0019_reviewed_dataset_foundation`. No 0020 application/function was invoked.
++The active real Rebrickable catalog remains accepted generation 1: snapshot
++`9ba3056b-690d-4686-bd96-109981f696ea`, source
++`cdf842d4-c525-4324-a990-55cbfaedaa4a`.
++
++There are **zero MINIFIG and zero PART market mapping rows**, including closed or
++unreviewed history; the sole market mapping is an open verified SET. Thus neither
++contents type has an eligible mapping, target or occurrence. Across 28,278 selected
++set inventories, figures have 23,441 supported direct occurrences / 16,780 distinct
++targets. Parts have 1,335,651 supported direct occurrences / 70,012 distinct exact
++part/color targets including extras; regular-only is 1,234,732 / 69,789. Another
++10,208 part occurrences have unknown color semantics and are unsupported.
++These are occurrence-row counts, not piece quantities. Set `10350-1` has eight direct
++figure rows and 882 part rows, all unmapped. Rebrickable catalog associations do not
++constitute verified BrickLink market mappings; the historical fourteen-figure sample
++is neither repaired nor used as the catalog-wide denominator.
++
++The smallest useful next action is a separately authorized, bounded reviewed mapping
++onboarding of two retained-evidence candidates: whole figure `fig-012609` in `21333-1`
++(quantity 1) to BrickLink `MINIFIG idea106`, and part `3001`, Rebrickable White `15`,
++in `10016-1` (quantity 2) to BrickLink `PART 3001`, White `1`, via element `300101`.
++Neither is ready now. Accepted Phase 3B review evidence already supports these exact
++identities; the five relevant retained source-file hashes match production. Its old
++snapshot/canonical UUIDs must not be copied: explicitly bind current production
++snapshot/source, canonical identity, exact color and evidence through the existing
++reviewed market-mapping operation. This is an admission/binding gap for these two
++candidates, unlike the missing authoritative crosswalk for the fourteen other figures.
++No general audit, reimport or new external crosswalk is needed to propose this step.
++
++Provider configuration files exist with protected permissions; only file metadata was
++read. Scope is not locally suspended; four retained successful SET fetches last ended
++2026-10-19. None proves current credentials, component access, registered-IP validity,
++external quota or current prices. After separate mapping admission and deployment
++approval (including 0020), a provisional later selection is one USED/SOLD view per
++candidate: at most two initial price requests, zero identity requests, with retries
++under the accepted two-retry cap per separately confirmed set plan. This is not an
++executable plan or dispatch authorization: the deployed feature must display its
++actual plan and obtain Brian's
++separate confirmation. No provider calls, writes, deployment, tests or builds ran.
++
++Sanitized result package: `astra_response/Contents-Pricing/activation-readiness/r1/`.
++This additive note remains uncommitted. Main remains `f79e94092d272a050ced989eb1761b34320bdd28`
++and unpushed, index empty; all 22 pre-existing pending paths, protected files and prior
++evidence remain byte-identical. SOURCE/TEST acceptance and stopped capture are unchanged.
++
++## 19. Two-target production mapping admission (2026-11-17)
++
++**CONTENTS PRICING TWO-TARGET MAPPING ADMISSION — COMPLETE.** Brian separately
++authorized these two exact mappings. Both were reviewed and newly admitted atomically
++through the installed schema-0019 `MarketRepository.review_mapping`; zero were reused:
++
++- `21333-1`, whole Rebrickable `fig-012609`, quantity 1, to BrickLink `MINIFIG idea106`,
++  no provider color; mapping `a136912a-069e-4ea2-8817-d0a9dae641f2`.
++- `10016-1`, Rebrickable part `3001`, White `15`, quantity 2, to BrickLink `PART 3001`,
++  White `1`, via element `300101`; mapping `874d6fbf-81c1-4016-a950-685e3bbfe255`.
++
++Existing identity-review validators passed on the unchanged retained Phase 3B proof.
++Six retained source files and six selected rows matched current production evidence.
++Original provider evidence remains dated 2026-09-11; the new 2026-11-17 timestamps
++record current binding review, not new provider identity requests. Old proof IDs were
++preserved in lineage and not reused as production IDs. Policy was unchanged; existing
++rules do not require raw responses for this accepted minimal identity evidence.
++
++Guarded root-peer ownership and installed migration-head checks remained intact.
++Both candidates, physical-color admission, source bindings and conflicts were checked
++before the first write. Shared catalog locks and existing provider/advisory locks held
++through one transaction; the existing review operations used nested savepoints.
++Accepted offline custody and the existing 2026-11-17 10:08 UTC schema-0019 dual-backup
++receipt were reused; no backup, restore, proof generation or maintenance was performed.
++
++Durable readback confirms one eligible open verified mapping per target against
++snapshot `9ba3056b-690d-4686-bd96-109981f696ea`, source
++`cdf842d4-c525-4324-a990-55cbfaedaa4a`, with exact canonical/provider colors and direct
++occurrences. Production writes: **two mapping inserts, zero updates/deletes and zero
++other database rows**. The existing SET mapping and checked market, attempt, forecast,
++outcome and classification histories retain identical counts/fingerprints. Provider
++attempt, price-observation and refresh-operation deltas are all zero.
++
++Production remains `phase16c-outcomes-production-r2` / `0019_reviewed_dataset_foundation`.
++No provider credentials were loaded, and no provider/model requests, application edits,
++tests, builds, service changes, deployment or phone work occurred. Current external
++access and prices remain unverified; other components and the fourteen-figure gap are
++unchanged. Later selected refresh still requires separately approved deployment and
++Brian's confirmation of the deployed feature's actual displayed plan.
++
++Sanitized publication: `astra_response/Contents-Pricing/mapping-onboarding/r1/`.
++Private before/after receipts and evidence lineage are retained. This additive note is
++uncommitted; main remains `f79e94092d272a050ced989eb1761b34320bdd28`, unpushed, index empty.
++All 22 pre-existing pending paths, protected files, prior publications and original
++private evidence are preserved. SOURCE/TEST acceptance and stopped capture are unchanged.
++
++## 20. Production rollout blocked at recovery admission (2026-11-17)
++
++**BLOCKED / RECOVERED — the one authorized dual backup failed; original production
++remains active.** Exact accepted source `f79e94092d272a050ced989eb1761b34320bdd28`
++was built from a clean isolated canonical-LF materialization. Candidate
++`contents-pricing-production-r1` passed release-specific packaging and server staging,
++with manifest SHA-256 `c894c19cdaa2b75e12e29a3b872d04466af8cfd1f9e968b74e95cc6ab1eac103`.
++Matching production APK SHA-256 is
++`ef4eea9273929525f434fc464e30b81c1ab47ad1ae7b7675354d7b619c9b7db0`;
++same signer, production origins and system-only trust were verified. It was NOT installed.
++The staged release was NOT activated; migration 0020 and its grants were NOT applied.
++Accepted TEST evidence was reused; no accepted suite replay or source change occurred.
++
++No complete recovery point includes the two 14:17 UTC mapping inserts. The authorized
++single normal dual backup ran 14:41:04–14:43:17 UTC and failed in `stream_to_two`.
++API cleanup restored the original service; no backup journal remains. One new Proxmox
++`database.dump` snapshot and no new Drive snapshot were observed. No complete receipt
++or proof was created. Read-only retention planning rejects `Partial or unrecognized
++backup history.` No snapshot deletion, ledger amendment, second backup or restore ran.
++The stream discards producer/sink error details; the underlying failure cause remains
++unestablished. The existing 10:08 UTC complete receipt still predates both mappings.
++Exact protected mapping-admission and lineage bytes were retained.
++
++Final application remains `phase16c-outcomes-production-r2`, schema
++`0019_reviewed_dataset_foundation`, Python 3.13.18. Fourteen direct ordinary health
++checks pass; the health service still records its 14:43:19 UTC HTTPS/listener failure
++during recovery. This is not an all-units-healthy claim. Backup timer remains active
++at 04:00 America/Chicago. Both mappings and all 21 checked table fingerprints remain
++identical; provider attempts 5→5, observations 4→4 and refresh operations 1→1.
++No provider calls, credential probe, confirmation, Resume or refresh worker ran.
++
++The connected phone retains APK SHA-256
++`959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3`,
++unchanged application identity and inspection forwarding state. No phone changes,
++temporary inspection resources or authentication workflow occurred. Both intended
++Used/Sold plans (21333-1 / whole fig-012609 → MINIFIG idea106 / qty1, no color;
++10016-1 / part3001 White15 → PART3001 White1 / qty2; both exclude extras) are
++NOT PREPARED. No displayed action, request budget, admissibility or expiry exists.
++Mapping eligibility remains verified; actual provider access and prices are unproved.
++
++The smallest next scope is bounded diagnosis/correction of the failed backup stream,
++evidence-based treatment of its incomplete artifact through existing guarded retention
++procedures, and separately authorized recovery retry before any activation. Retention
++ledger acknowledgement alone would not establish a root-cause repair or qualifying
++recovery point. Preserve the original runtime, history and staged candidate meanwhile.
++
++Sanitized package: `astra_response/Contents-Pricing/production/r1/`. Main remains at
++the accepted commit, unpushed with empty index. This additive note is uncommitted;
++sections 18–19, 22 pre-existing pending paths, protected files, stopped capture,
++59 preservation-baseline files, original private proof and prior publications remain
++byte-identical. No new maintenance or deployment authorization is inferred.
++
++## 21. Authorized backup correction and rollout continuation (2026-11-17)
++
++Brian authorized bounded backup diagnosis/correction, reconciliation of the exact
++failed run, one additional complete dual-backup attempt, and resumption of the
++approved deployment only after recovery admission. Market/AI calls and confirmation
++remain prohibited. Original source/TEST acceptance and both admitted mappings stand.
++
++A real synthetic child reproduced an orchestration defect: a 31-second destination
++finalization was terminated after 30.07 seconds despite a 60-second stream deadline.
++The correction uses the single stream deadline through drain/finalization, records
++only bounded constructed diagnostic fields/categories, and cleans invocation-owned
++process groups. Original production cause remains unestablished; its failure timing
++is consistent with this defect but suppressed child errors prevent attribution.
++The one Proxmox database artifact was read back, ownership/schema validated, and
++recorded through the existing failed-incomplete ledger without deletion. No new
++unexplained snapshots, repository locks or overlapping backup children were found.
++
++Focused Windows validation: 42 passed, one POSIX-only test skipped; Ruff and Linux-
++platform static typing passed. Installed Linux synthetic checks separately verify
++process-group cleanup and secret-safe diagnostics. Immutable schema-0019 maintenance
++and schema-0020 contents candidates carry the same narrowly scoped amendment. Web,
++dependencies and the already verified APK are reused unchanged. No schema change,
++runtime upgrade or accepted application-suite replay is part of this correction.
++
++Continuation checkpoints: activate same-schema maintenance with compatible retained
++0019 rollback; run the one instrumented backup after operational admission; verify
++full recovery artifacts; apply existing 0020/grants and activate amended contents;
++update phone in place; prepare two Used/Sold plans and stop before confirmation.
++The final outcome below will record the actual stopping point and attempt count.
++
++## 22. Backup recovery and production planning acceptance (2026-11-17)
++
++**CONTENTS PRICING DEPLOYED — AWAITING USER PRICE CONFIRMATION.** The one additional
++normal dual backup completed, with all four artifacts read back on both destinations
++and repository integrity checks passing. Receipt SHA-256:
++`13a5e9fd2f7471d0dbd4ead912eeece5b17bcf921f0507cd5e809dde939a989d`.
++The complete capture includes both admitted mappings and current database/blob/
++configuration state, including the existing market credential recovery input. Proof
++verification passed at 15:41 UTC; the migration guard performed its required fresh
++readback of that same recovery set. No further full backup or restore rehearsal ran.
++API restoration was verified; no pause journal or orphan task backup process remained.
++
++The immutable schema-0019 maintenance release was
++`phase16c-backup-maintenance-r2`, manifest
++`84f1be4c6003b2287cd6ae2165fedbb4cb19f10590b427937ff86d36caa71ce8`.
++The final active backend is `contents-pricing-production-r2`, schema
++`0020_contents_market_refresh`, Python 3.13.18, manifest
++`29c347a9c1878ba3663b27172a70854fd4eab5d13b7f82dcaeb6970cfa1420ea`.
++Accepted feature source remains `f79e94092d272a050ced989eb1761b34320bdd28`; the separate
++operational amendment is
++`51dff96c361d812b28927c59f809d5c267791e037e645f3723b09ff1ad5b6d2e`,
++with production backup module SHA-256
++`53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df`.
++Only that module and wheel RECORD changed; web/contracts, dependencies and APK were
++reused. No finalized immutable release was patched. The failed preliminary maintenance
++materialization remains retained under its distinct unused identity.
++
++Existing 0020 and its enumerated grants were applied through the guarded owner path.
++Seventeen product functions have the required EXECUTE grants; target/mapping tables
++remain runtime SELECT-only. The migration pause was 15:46:55.055–15:46:55.931 UTC.
++All 24 checked history fingerprints are preserved after migration and phone planning,
++normalizing only the migration-added fields on existing SET records. Both exact
++mapping bindings, catalog-active state, settings, selling profile, image/receipt,
++forecast/outcome and classification records are unchanged. Fifteen required ordinary/
++deep checks and read-only retention PLAN pass, with no failed units. Backup remains
++scheduled at 04:00 America/Chicago. Preserve the compatible 0020 runtime for forward
++correction if later history makes guarded downgrade ineligible; never restore over
++newer records or delete history to force rollback.
++
++The retained matching APK was installed in place with the existing signer and app
++data identity preserved. Installed SHA-256:
++`ef4eea9273929525f434fc464e30b81c1ab47ad1ae7b7675354d7b619c9b7db0`.
++Brian signed in locally. No passwords, cookies or CSRF tokens were extracted.
++The normal phone UI produced these TWO separate plans, each Used/Sold only, no extras:
++
++| Set and exact target | Quantity | Action / eligibility | Identity / price / retry / maximum | Expiry (Central, Nov 17) |
++| --- | ---: | --- | --- | --- |
++| 21333-1, whole fig-012609 → MINIFIG idea106, no color | 1 | FETCH / VERIFIED / READY, admissible | 0 / 1 / 2 / 3 | 10:06:40 a.m. |
++| 10016-1, part3001 White15 → PART3001 White1 | 2 | FETCH / VERIFIED / READY, admissible | 0 / 1 / 2 / 3 | 10:07:28 a.m. |
++
++No account/policy blocker or cooldown was displayed. Stricter external limits still
++apply; no current provider access or price was proved. Quantity two requires one
++initial price request, not two. Both plans were inspected before confirmation; the
++10016-1 plan remains displayed on the signed-in phone. Navigated-away or expired
++plans must be prepared again and confirmed by Brian as actual current plans.
++Safe plan JSON/text and native screen evidence were retained without confirmation
++signatures. The task-owned inspection forward was removed and prior forwarding state
++restored. Phone data identity and installed bytes were read back after cleanup.
++
++Final database readback: provider attempts 5→5, observations 4→4, refresh operations
++1→1; zero contents operations or durable contents targets. No market/AI request,
++confirmation, Resume, pricing worker, discovery or new mapping occurred. The proven
++deadline defect and diagnostic improvement do not establish the historical backup
++failure's cause; the successful retry is current recovery evidence only. Exactly one
++partial run was reconciled without deletion; all original partial history and pins
++remain preserved. No forced unlock, policy change, runtime upgrade or reboot occurred.
++
++The backup module, focused synthetic test file and additive Plan 112 notes remain
++uncommitted. Main remains `f79e94092d272a050ced989eb1761b34320bdd28`, index empty and
++unpushed. All 22 original pending paths, three protected files, 59 baseline paths,
++stopped capture work, previous Plan 112 bytes and original private evidence are
++preserved. Only the sanitized continuation package is published at
++`astra_response/Contents-Pricing/production/r2/`; r1 and earlier publications remain.
++This is deployment/read-only planning acceptance, not live-price qualification or
++authorization to dispatch. The next action is Brian's confirmation of a current
++displayed plan, with a fresh read-only plan required if it expires or is no longer shown.
++
++After inspection cleanup, the phone foreground changed to an unrelated app. The incidental task-created screen capture was removed and excluded from publication; no other app was operated. BrickVault was last verified signed in with the second plan ready at 15:53 UTC; reopen it to review, or prepare a fresh plan if it is no longer available or has expired.
++
++## 23. Two-target live Used/Sold acceptance — 2026-11-17
++
++Brian explicitly authorized at most one new operation for each exact scope and a
++fresh equivalent plan if the prior plan expired. At 16:14:07 UTC there were no
++matching contents operations; normal phone UI readback also returned none for
++each target before confirmation. Both replacement plans were displayed and
++inspected as READY, admissible, unexpired FETCH plans: zero identity requests,
++one initial price request, two retry reserve, three maximum attempts each.
++Both were confirmed once through the signed-in production phone, sequentially.
++No Resume, duplicate confirmation, direct provider script or substitute view was used.
++Exact confirmation and operation identities remain in ignored private evidence.
++
++| Set / exact target | Recorded quantity | Result / displayed unit | Server quantity-weighted average | Actual identity / initial / retry / uncertain | Fetch (UTC) | Fresh until (UTC) |
++| --- | ---: | --- | --- | --- | --- | --- |
++| 21333-1, whole fig-012609 → MINIFIG idea106, no provider color | 1 | PRICED / USD 26.78 | USD 26.7780 | 0 / 1 / 0 / 0 | 16:14:51.500684 | 20:14:51.212216 |
++| 10016-1, part3001 White15 → PART3001 White1 | 2 | PRICED / USD 0.10 | USD 0.0989 | 0 / 1 / 0 / 0 | 16:16:09.458246 | 20:16:08.604842 |
++
++Times are November 17, 2026. Both operations reached COMPLETE, 1/1 selected views
++finished, 1/3 attempts, 0/2 retries. Total task consumption: two initial market
++requests, zero identity/retry/uncertain attempts, 2/6 authorized maximum. Quantity
++two produced only one request. The generic contents budget-group ceiling remains
++0 identity / 4 initial / 2 retry / 6 total; the immutable selected plans and database
++attempt guard impose the stricter 0 / 1 / 2 / 3 per operation. No policy was changed.
++
++Contents was reopened through Reload contents once per target for acceptance.
++The phone and matching server observations agree on rounded unit price, USD,
++quantity-weighted average, rolling last six months, fetched time and priced status;
++both were fresh at the 16:16:20 UTC readback. New/Sold, New/Active and Used/Active
++remain unknown/unrequested, with no substituted evidence. Extras were excluded.
++The server retains figure sample occurrence_count=5 and total_quantity=5; brick
++occurrence_count=1387 and total_quantity=29249. The Contents response returns
++sample_count=null and the phone does not display sample counts; sample-display
++parity is not claimed. Exact six-month boundaries are not supplied. The part
++response does not echo color (returned_color=null); its saved request/cache and
++reviewed mapping are exactly PART3001 color1, not independent returned-color proof.
++No component subtotal, quantity-based profit or broader coverage was qualified.
++
++Counts reconcile exactly: provider attempts 5→7, observations 4→6, refresh operations
++1→3, contents targets 0→2. The two new attempts belong to the two approved operations;
++zero unrelated attempt activity. Sixteen protected table fingerprints, including
++mappings, policy, forecasts/outcomes, classification history, images and upload
++receipts, are unchanged. Backend contents-pricing-production-r2 remains active
++on schema 0020_contents_market_refresh. Accepted APK identity is reused from the
++prior deployment evidence; no package check, reinstall, service restart, migration,
++backup, test or build occurred in this task.
++
++The phone remained signed in, showing 10016-1 Contents and USD0.10 unit evidence
++at inspection completion. Only the owned inspection forward was removed; prior
++forward/reverse state was restored. All 22 original pending paths, three protected
++files, 59 baseline paths, original private proof, prior publications and backup
++source/test amendment are preserved. This section is additive; the entire prior
++Plan112 byte prefix is preserved. Main remains f79e94092d272a050ced989eb1761b34320bdd28,
++index empty and unpushed. Plan112 and the backup amendment/tests remain uncommitted.
++The previously corrected backup deadline defect remains distinct from the unproven
++historical backup-failure cause; this live check adds no backup-cause evidence.
++
++Sanitized result package only: astra_response/Contents-Pricing/production/r3/.
++This completes the authorized two-target live check with the above display/provider
++limitations. Stop for review; no broader contents qualification or next feature.
++
++## 24. Sample-count projection corrected and deployed — 2026-11-17
++
++Brian accepted the r3 live pricing check and authorized only this metadata correction,
++focused source/TEST verification and a compatible backend-only update. Contents now
++projects sample_count from normalized market_observation.occurrence_count. Sold and
++Stock remain tied to their exact request; total_quantity and selected quantity are
++not substituted. Null, recorded zero and normal eligibility suppression are preserved.
++No contract, frontend, price, normalization, mapping or accounting change was made.
++
++Six focused synthetic PostgreSQL cases passed (Sold/Stock × positive/null/zero),
++including stored-row projection, other-view isolation and display-expiry suppression.
++Affected Python lint/format and production-module typing passed. A supplemental
++test-module typing check found the same five pre-existing diagnostics as HEAD,
++confirmed with a shadow-file baseline; no unrelated typing cleanup was included.
++No broad Python/UI suite or web/APK build ran. Existing UI rendering was reused
++and verified on the physical phone with the retained cached evidence.
++
++Immutable backend contents-sample-metadata-production-r1 was staged and activated
++on schema 0020; health passed and 25 data-table fingerprints were preserved. Manifest
++SHA256 ca6533b25b409c3154383449faba890a1d6a15200d533294cfd49f6a604131ee.
++It contains accepted feature f79e94092d272a050ced989eb1761b34320bdd28, the exact
++accepted backup-stream amendment and this projection correction. Only contents.py
++and wheel RECORD differ from the previous wheel; web assets/dependencies and the
++installed APK remain unchanged. Prior immutable releases remain available for
++same-schema rollback. Current recovery/deep-health checks reused qualifying prior
++recovery evidence; no new backup, restore, schema operation or runtime upgrade ran.
++Brian was warned before the controlled backend switch/restart.
++
++The existing authenticated phone UI displayed Used/Sold sample 5 for idea106 and
++sample 1387 for PART 3001 White 1, matching the corresponding stored occurrences.
++The cached evidence remained fresh at readback: USD 26.78 and USD 0.10, with original
++fetch times and expiry unchanged. Provider attempts 7→7, observations 6→6, refresh
++operations 3→3 and targets 2→2; zero new provider calls or refresh operations. No
++Confirm, Resume, discovery or credential probe occurred. Response color remains
++unconfirmed by the part response; exact rolling-window boundaries remain unspecified.
++
++Phone left signed in on Contents; owned inspection forward removed. All 22 original
++pending paths, protected files, stopped capture work, prior publications/private
++evidence and accepted backup source/tests are preserved. Prior Plan 112 bytes are
++preserved as a prefix. Correction/tests, backup amendment/tests and this plan remain
++uncommitted; main remains at accepted f79e940, index empty and unpushed. The backup
++deadline correction still does not establish the historical failure cause.
++Sanitized correction diff, exact hashes, focused results and backend/readback evidence
++are published only under astra_response/Contents-Pricing/production/r4/. Stop for review.
++
++## 25. Final bounded delivery acceptance and local closeout (2026-11-17)
++
++**SELECTED CONTENTS PRICING — BOUNDED SOURCE/TEST AND PRODUCTION DELIVERY
++ACCEPTED / CLOSED.** Brian accepted the r2 backup amendment, r3 two-target live
++evidence and r4 sample-count correction/delivery. Both admitted Used/Sold targets
++completed with two total initial requests, zero identity requests, retries or
++uncertain attempts. Sample counts now reach the existing UI without further
++provider requests. All accepted validation is reused; this closeout reruns none.
++
++Broader mapping coverage, the fourteen unresolved figures, nested/alternative
++selection, other live market views and alternative-sale economics remain open.
++Provider response color was not independently echoed; White 1 is established by
++the reviewed mapping and saved request. Exact rolling-window boundaries remain
++unspecified. The demonstrated backup timeout defect is corrected; the precise
++historical backup-failure cause remains unestablished. Wider Phase 16 and the full
++original specification remain open. Capture stays stopped/unqualified.
++
++The authorized five-file local checkpoint records the accepted amendments and
++this plan's retained dated history. It does not relabel, rebuild or replace deployed
++artifacts: contents-sample-metadata-production-r1, schema 0020_contents_market_refresh,
++manifest ca6533b25b409c3154383449faba890a1d6a15200d533294cfd49f6a604131ee,
++APK ef4eea9273929525f434fc464e30b81c1ab47ad1ae7b7675354d7b619c9b7db0.
++Main remains unpushed; all 22 unrelated pending paths, protected files, stopped
++capture work, private evidence and prior publications remain unchanged and unstaged.
++Only the sanitized r5 closeout package is separately published on astra-response.
++Server and phone are untouched. Stop after closeout; no next feature is authorized.
+diff --git a/services/api/src/brickvault_api/contents.py b/services/api/src/brickvault_api/contents.py
+index 243366b..48b3879 100644
+--- a/services/api/src/brickvault_api/contents.py
++++ b/services/api/src/brickvault_api/contents.py
+@@ -210,3 +210 @@ class ContentsService(RefreshService):
+-                                    sample_count=obs.get("sold_occurrence_count")
+-                                    if basis == Basis.SOLD
+-                                    else obs.get("active_inventory_count"),
++                                    sample_count=obs.get("occurrence_count"),
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index 9aff7dd..6d7f0b1 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -9,0 +10 @@ import hashlib
++import io
+@@ -10,0 +12 @@ import json
++import logging
+@@ -13,0 +16 @@ import re
++import signal
+@@ -67,0 +71,8 @@ class BackupError(RuntimeError):
++class BackupStreamError(BackupError):
++    """Fail-closed stream error carrying only constructed, secret-safe diagnostics."""
++
++    def __init__(self, diagnostic: dict[str, Any]) -> None:
++        super().__init__("Dual-destination backup did not complete.")
++        self.diagnostic = diagnostic
++
++
+@@ -359,0 +371 @@ def stream_to_two(
++    artifact: str = "unspecified",
+@@ -361 +373 @@ def stream_to_two(
+-    """Copy identical bounded chunks to both children; fail closed on any ambiguity."""
++    """Bound transfer AND finalization by one deadline; never retain child output."""
+@@ -364,12 +376,22 @@ def stream_to_two(
+-    deadline = time.monotonic() + deadline_seconds
+-    source = subprocess.Popen(
+-        source_command,
+-        stdin=subprocess.DEVNULL,
+-        stdout=subprocess.PIPE,
+-        stderr=subprocess.DEVNULL,
+-        env={"PATH": "/usr/bin:/bin", "HOME": "/nonexistent", "PGPASSFILE": "/dev/null"},
+-    )
+-    sinks: list[subprocess.Popen[bytes]] = []
+-    errors: queue.Queue[BaseException] = queue.Queue()
+-    source_chunks: queue.Queue[bytes | None] = queue.Queue(maxsize=4)
+-    sink_chunks: list[queue.Queue[bytes | None]] = [queue.Queue(maxsize=4), queue.Queue(maxsize=4)]
++    if artifact not in (*IMAGE_ARTIFACTS, *LEGACY_ARTIFACTS, "unspecified"):
++        raise BackupError("Unknown backup artifact.")
++    if not 0 < deadline_seconds <= STREAM_DEADLINE_SECONDS:
++        raise BackupError("Invalid backup stream deadline.")
++    started = time.monotonic()
++    deadline = started + deadline_seconds
++    labels = ("producer", "proxmox", "drive")
++    processes: list[subprocess.Popen[bytes]] = []
++    states: list[dict[str, Any]] = [
++        {"role": label, "bytes": 0, "stderr_bytes": 0, "stderr_categories": []} for label in labels
++    ]
++    # Fixed category names only: no raw stderr, paths, URLs, commands or environment.
++    patterns = {
++        "repository_locked": b"repository is already locked",
++        "space_exhausted": b"no space left on device",
++        "permission_denied": b"permission denied",
++        "connection_refused": b"connection refused",
++        "connection_reset": b"connection reset",
++        "deadline_reported": b"deadline exceeded",
++        "authentication_rejected": b"unauthorized",
++        "broken_pipe": b"broken pipe",
++    }
+@@ -376,0 +399,21 @@ def stream_to_two(
++    errors: queue.Queue[tuple[str, str]] = queue.Queue()
++    source_chunks: queue.Queue[bytes | None] = queue.Queue(maxsize=4)
++    sink_chunks: list[queue.Queue[bytes | None]] = [queue.Queue(maxsize=4) for _ in range(2)]
++    threads: list[threading.Thread] = []
++    stderr_threads: list[threading.Thread] = []
++    stage, role, reason = "spawn", "producer", "spawn_failure"
++    total = 0
++
++    def fail_if_needed() -> None:
++        nonlocal role, reason
++        # Natural nonzero exits take precedence over their secondary pipe errors.
++        for label, process in zip(labels, processes, strict=False):
++            if process.poll() not in (None, 0):
++                role, reason = label, "nonzero_exit"
++                raise BackupError("Backup child failed.")
++        if time.monotonic() >= deadline:
++            role, reason = "stream", "deadline"
++            raise BackupError("Backup deadline reached.")
++        if not errors.empty():
++            role, reason = errors.get_nowait()
++            raise BackupError("Backup pipe failed.")
+@@ -379,0 +423 @@ def stream_to_two(
++            fail_if_needed()
+@@ -381 +425 @@ def stream_to_two(
+-                channel.put(value, timeout=0.2)
++                channel.put(value, timeout=0.05)
+@@ -384,3 +428,2 @@ def stream_to_two(
+-                if time.monotonic() >= deadline:
+-                    raise BackupError("Backup stream timed out.") from None
+-        raise BackupError("Backup stream was cancelled.")
++                continue
++        raise BackupError("Backup cancelled.")
+@@ -390 +433,2 @@ def stream_to_two(
+-            assert source.stdout is not None
++            pipe = processes[0].stdout
++            assert pipe is not None
+@@ -392 +436 @@ def stream_to_two(
+-                chunk = source.stdout.read(CHUNK)
++                chunk = pipe.read(CHUNK)
+@@ -395,8 +439,18 @@ def stream_to_two(
+-                send(source_chunks, chunk)
+-            if not cancelled.is_set():
+-                send(source_chunks, None)
+-        except BaseException as exc:
+-            errors.put(exc)
+-            cancelled.set()
+-
+-    def write_sink(process: subprocess.Popen[bytes], channel: queue.Queue[bytes | None]) -> None:
++                states[0]["bytes"] += len(chunk)
++                # The coordinator owns diagnostics and process/deadline decisions.
++                while not cancelled.is_set():
++                    try:
++                        source_chunks.put(chunk, timeout=0.05)
++                        break
++                    except queue.Full:
++                        continue
++            while not cancelled.is_set():
++                try:
++                    source_chunks.put(None, timeout=0.05)
++                    break
++                except queue.Full:
++                    continue
++        except (OSError, ValueError):
++            errors.put(("producer", "read_failure"))
++
++    def write_sink(index: int, channel: queue.Queue[bytes | None]) -> None:
+@@ -404 +458,2 @@ def stream_to_two(
+-            assert process.stdin is not None
++            pipe = processes[index].stdin
++            assert pipe is not None
+@@ -407 +462 @@ def stream_to_two(
+-                    chunk = channel.get(timeout=0.2)
++                    chunk = channel.get(timeout=0.05)
+@@ -409,2 +463,0 @@ def stream_to_two(
+-                    if time.monotonic() >= deadline:
+-                        raise BackupError("Backup stream timed out.") from None
+@@ -414,6 +467,21 @@ def stream_to_two(
+-                process.stdin.write(chunk)
+-                process.stdin.flush()
+-            process.stdin.close()
+-        except BaseException as exc:
+-            errors.put(exc)
+-            cancelled.set()
++                pipe.write(chunk)
++                pipe.flush()
++                states[index]["bytes"] += len(chunk)
++            pipe.close()
++        except (OSError, ValueError):
++            errors.put((labels[index], "write_failure"))
++
++    def drain_stderr(index: int) -> None:
++        pipe = cast(io.BufferedReader, processes[index].stderr)
++        assert pipe is not None
++        tail = b""
++        try:
++            while chunk := pipe.read1(4096):
++                states[index]["stderr_bytes"] += len(chunk)
++                sample = (tail + chunk).lower()
++                for category, pattern in patterns.items():
++                    if pattern in sample and category not in states[index]["stderr_categories"]:
++                        states[index]["stderr_categories"].append(category)
++                tail = sample[-64:]
++        except (OSError, ValueError):
++            errors.put((labels[index], "stderr_read_failure"))
+@@ -421 +488,0 @@ def stream_to_two(
+-    threads: list[threading.Thread] = []
+@@ -423,2 +490,15 @@ def stream_to_two(
+-        for command, environment in zip(sink_commands, sink_environments, strict=True):
+-            sinks.append(
++        processes.append(
++            subprocess.Popen(
++                source_command,
++                stdin=subprocess.DEVNULL,
++                stdout=subprocess.PIPE,
++                stderr=subprocess.PIPE,
++                start_new_session=True,
++                env={"PATH": "/usr/bin:/bin", "HOME": "/nonexistent", "PGPASSFILE": "/dev/null"},
++            )
++        )
++        for index, (command, environment) in enumerate(
++            zip(sink_commands, sink_environments, strict=True), 1
++        ):
++            role = labels[index]
++            processes.append(
+@@ -429 +509,2 @@ def stream_to_two(
+-                    stderr=subprocess.DEVNULL,
++                    stderr=subprocess.PIPE,
++                    start_new_session=True,
+@@ -432,0 +514,3 @@ def stream_to_two(
++        stderr_threads = [
++            threading.Thread(target=drain_stderr, args=(i,), daemon=True) for i in range(3)
++        ]
+@@ -436,2 +520,2 @@ def stream_to_two(
+-                threading.Thread(target=write_sink, args=(sink, channel), daemon=True)
+-                for sink, channel in zip(sinks, sink_chunks, strict=True)
++                threading.Thread(target=write_sink, args=(i, channel), daemon=True)
++                for i, channel in enumerate(sink_chunks, 1)
+@@ -440 +524 @@ def stream_to_two(
+-        for thread in threads:
++        for thread in (*stderr_threads, *threads):
+@@ -441,0 +526 @@ def stream_to_two(
++        stage = "transfer"
+@@ -443 +527,0 @@ def stream_to_two(
+-        total = 0
+@@ -445,6 +529 @@ def stream_to_two(
+-            if (
+-                not errors.empty()
+-                or time.monotonic() >= deadline
+-                or any(sink.poll() not in (None, 0) for sink in sinks)
+-            ):
+-                raise BackupError("Backup stream failed or timed out.")
++            fail_if_needed()
+@@ -452 +531 @@ def stream_to_two(
+-                chunk = source_chunks.get(timeout=0.2)
++                chunk = source_chunks.get(timeout=0.05)
+@@ -460,0 +540 @@ def stream_to_two(
++        stage = "drain"
+@@ -463,8 +543,8 @@ def stream_to_two(
+-        for thread in threads:
+-            thread.join(timeout=max(0.1, min(30.0, deadline - time.monotonic())))
+-        if any(thread.is_alive() for thread in threads) or not errors.empty():
+-            raise BackupError("Backup stream workers did not finish.")
+-        if (
+-            source.wait(timeout=30) != 0
+-            or any(sink.wait(timeout=30) != 0 for sink in sinks)
+-            or total == 0
++        while any(thread.is_alive() for thread in threads):
++            fail_if_needed()
++            for thread in threads:
++                thread.join(timeout=0.02)
++        stage = "finalize"
++        # Upload/index/lock finalization is part of the same bounded stream, not 30s.
++        while any(process.poll() is None for process in processes) or any(
++            t.is_alive() for t in stderr_threads
+@@ -472 +552,6 @@ def stream_to_two(
+-            raise BackupError("Backup source or destination failed.")
++            fail_if_needed()
++            time.sleep(0.02)
++        fail_if_needed()
++        if total == 0 or any(state["bytes"] != total for state in states):
++            role, reason = "stream", "byte_count_mismatch"
++            raise BackupError("Backup stream is empty or incomplete.")
+@@ -476,12 +561,16 @@ def stream_to_two(
+-        for process in (source, *sinks):
+-            if process.poll() is None:
+-                process.terminate()
+-        for process in (source, *sinks):
+-            try:
+-                process.wait(timeout=5)
+-            except subprocess.TimeoutExpired:
+-                process.kill()
+-                process.wait(timeout=5)
+-        raise BackupError("Dual-destination backup did not complete.") from None
+-    finally:
+-        for thread in threads:
++        # Snapshot natural status before cancellation so SIGTERM is never called a cause.
++        for state, process in zip(states, processes, strict=False):
++            state["exit_before_cleanup"] = process.poll()
++        for sig in (signal.SIGTERM, signal.SIGKILL if os.name == "posix" else signal.SIGTERM):
++            for process in processes:
++                try:
++                    if os.name == "posix":
++                        os.killpg(process.pid, sig)  # Only groups created by this invocation.
++                    elif process.poll() is None:
++                        process.kill()
++                except ProcessLookupError:
++                    pass
++            until = time.monotonic() + 5
++            while any(p.poll() is None for p in processes) and time.monotonic() < until:
++                time.sleep(0.02)
++        for thread in (*threads, *stderr_threads):
+@@ -488,0 +578,25 @@ def stream_to_two(
++        for state, process in zip(states, processes, strict=False):
++            state["exit_after_cleanup"] = process.poll()
++        diagnostic = {
++            "artifact": artifact,
++            "stage": stage,
++            "role": role,
++            "reason": reason,
++            "elapsed_ms": round((time.monotonic() - started) * 1000),
++            "deadline_seconds": deadline_seconds,
++            "distributed_bytes": total,
++            "children": states,
++            "workers_alive": sum(t.is_alive() for t in (*threads, *stderr_threads)),
++        }
++        logging.getLogger(__name__).error(
++            "BACKUP_STREAM_FAILURE %s", json.dumps(diagnostic, sort_keys=True)
++        )
++        raise BackupStreamError(diagnostic) from None
++    finally:
++        for process in processes:
++            for pipe in (process.stdin, process.stdout, process.stderr):
++                if pipe is not None and not pipe.closed:
++                    try:
++                        pipe.close()
++                    except OSError:
++                        pass  # Preserve the original failure after child cleanup.
+@@ -684 +798,3 @@ def _capture(
+-        size, sha = stream_to_two(producer, commands, [d.environment() for d in DESTINATIONS])
++        size, sha = stream_to_two(
++            producer, commands, [d.environment() for d in DESTINATIONS], artifact=artifact
++        )
+diff --git a/services/api/tests/integration/test_contents_refresh.py b/services/api/tests/integration/test_contents_refresh.py
+index fa735a5..87eea43 100644
+--- a/services/api/tests/integration/test_contents_refresh.py
++++ b/services/api/tests/integration/test_contents_refresh.py
+@@ -2,0 +3 @@
++from typing import Literal
+@@ -66,0 +68,40 @@ def selection(*lines: str, all_views: bool = False, extras: bool = False) -> Con
++@pytest.mark.parametrize("basis", ["sold", "stock"])
++@pytest.mark.parametrize("count", [7, None, 0])
++def test_contents_sample_count_from_stored_observation(
++    contents_service: ContentsService,
++    product: ProductHarness,
++    basis: Literal["sold", "stock"],
++    count: int | None,
++) -> None:
++    s = contents_service
++    data: dict[str, object] = {"unit_quantity": count, "total_quantity": 0 if count == 0 else 23}
++    if count != 0:
++        data["qty_avg_price"] = "2.50"
++    s.provider = SyntheticProvider(data, product.market.clock)
++    chosen = selection("normal").model_copy(
++        update={"views": [ContentsView(condition="U", basis=basis)]}
++    )
++    plan = s.prepare("80000-1", chosen)
++    operation = s.confirm_selected(
++        "80000-1", ContentsConfirmation(selection=plan.selection, confirmation=plan.confirmation)
++    )
++    lease = s.acquire(operation)
++    assert lease
++    s.repository.advance(lease, s.provider)
++    assert s.contents_status(operation).terminal
++    with s.repository.database.connect() as c:
++        stored = c.execute(
++            "SELECT occurrence_count,total_quantity FROM market_observation"
++        ).fetchone()
++    assert stored == {"occurrence_count": count, "total_quantity": 0 if count == 0 else 23}
++    row = next(r for r in s.page("80000-1").rows if r.occurrence_id == key("normal"))
++    evidence = next(e for e in row.evidence if e.condition == "U" and e.basis == basis)
++    assert evidence.sample_count == count
++    assert evidence.state == ("confirmed_empty" if count == 0 else "priced")
++    assert all(e.sample_count is None for e in row.evidence if e is not evidence)
++    # Advance only the synthetic TEST clock past normal display eligibility.
++    product.advance_clock(product.market.policy.hard_display_seconds + 1)
++    expired = next(r for r in s.page("80000-1").rows if r.occurrence_id == key("normal"))
++    assert all(e.sample_count is None and e.unit_price is None for e in expired.evidence)
++
++
+diff --git a/services/api/tests/unit/test_backup_stream_failure.py b/services/api/tests/unit/test_backup_stream_failure.py
+new file mode 100644
+index 0000000..2dfa0d8
+--- /dev/null
++++ b/services/api/tests/unit/test_backup_stream_failure.py
+@@ -0,0 +1,112 @@
++"""Real synthetic children exercise finalization, redaction and failure cleanup."""
++
++import hashlib
++import json
++import os
++import subprocess
++import sys
++import time
++from pathlib import Path
++from types import SimpleNamespace
++from typing import Any
++
++import pytest
++
++from brickvault_api import production_backup as backup
++
++
++def child(code: str) -> list[str]:
++    return [sys.executable, "-c", code]
++
++
++SOURCE = child("import sys;sys.stdout.buffer.write(b'x'*1024)")
++SINK = child("import sys;sys.stdin.buffer.read()")
++
++
++def test_finalization_uses_stream_deadline_not_unrelated_30_second_cap() -> None:
++    slow = child("import sys,time;sys.stdin.buffer.read();time.sleep(31)")
++    assert backup.stream_to_two(
++        SOURCE, [SINK, slow], [os.environ, os.environ], deadline_seconds=45
++    ) == (1024, hashlib.sha256(b"x" * 1024).hexdigest())
++
++
++@pytest.mark.parametrize("failure", ["producer", "sink", "timeout", "spawn"])
++def test_failure_has_safe_stage_status_and_reaps_children(
++    failure: str, monkeypatch: pytest.MonkeyPatch, caplog: pytest.LogCaptureFixture
++) -> None:
++    created: list[subprocess.Popen[bytes]] = []
++    original = subprocess.Popen
++
++    def record(*args: object, **kwargs: object) -> subprocess.Popen[bytes]:
++        p = original(*args, **kwargs)  # type: ignore[call-overload]
++        created.append(p)
++        return p  # type: ignore[no-any-return]
++
++    monkeypatch.setattr(backup.subprocess, "Popen", record)
++    # Raw secrets, newline injection, signed URLs and stderr floods must never escape.
++    noisy = (
++        "import sys;sys.stderr.write(('secret-value https://private/?sig=secret-value\\n'*8192));"
++    )
++    source = SOURCE
++    sinks = [SINK, SINK]
++    deadline = 10.0
++    if failure == "producer":
++        source = child(noisy + "sys.stdout.buffer.write(b'x');sys.exit(7)")
++    elif failure == "sink":
++        sinks[1] = child(noisy + "sys.stdin.buffer.read();sys.exit(9)")
++    elif failure == "spawn":
++        sinks[1] = ["missing-synthetic-backup-command"]
++    else:
++        sinks[1] = child(noisy + "import time;sys.stdin.buffer.read();time.sleep(30)")
++        deadline = 0.5
++    started = time.monotonic()
++    with pytest.raises(backup.BackupStreamError) as error:
++        backup.stream_to_two(source, sinks, [os.environ, os.environ], deadline_seconds=deadline)
++    diagnostic = error.value.diagnostic
++    assert diagnostic["workers_alive"] == 0
++    assert created and all(p.poll() is not None for p in created)
++    assert "secret-value" not in caplog.text + str(error.value) + json.dumps(diagnostic)
++    assert "https://" not in caplog.text + json.dumps(diagnostic)
++    if failure in ("producer", "sink"):
++        index, code = (0, 7) if failure == "producer" else (2, 9)
++        assert diagnostic["reason"] == "nonzero_exit"
++        assert diagnostic["children"][index]["exit_before_cleanup"] == code
++        assert diagnostic["children"][index]["stderr_bytes"] > 100_000
++    elif failure == "timeout":
++        assert diagnostic["reason"] == "deadline" and diagnostic["stage"] == "finalize"
++        assert diagnostic["children"][2]["exit_before_cleanup"] is None
++        assert time.monotonic() - started < 8
++    else:
++        assert diagnostic["reason"] == "spawn_failure" and diagnostic["role"] == "drive"
++
++
++def test_failed_stream_cannot_write_complete_receipt(
++    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
++) -> None:
++    monkeypatch.setattr(backup, "RECEIPT_DIR", tmp_path)
++    monkeypatch.setattr(backup, "_configuration_files", lambda: ())
++    monkeypatch.setattr(backup, "_run_id", lambda: "a" * 32)
++    monkeypatch.setattr(backup, "_producer", lambda *_: SOURCE)
++    failed = child("import sys;sys.stdin.buffer.read();sys.exit(9)")
++    destinations = tuple(
++        SimpleNamespace(command=lambda *_, c=c: c, environment=lambda: os.environ)
++        for c in (SINK, failed)
++    )
++    monkeypatch.setattr(backup, "DESTINATIONS", destinations)
++    config: Any = SimpleNamespace()
++    with pytest.raises(backup.BackupStreamError):
++        backup._capture(config, ("0019_reviewed_dataset_foundation",), 3, ("database.dump",))
++    assert not list(tmp_path.iterdir())
++
++
++@pytest.mark.skipif(os.name != "posix", reason="Production process groups are POSIX")
++def test_timeout_closes_descendant_pipe_and_reaps_owned_parent() -> None:
++    sink = child(
++        "import subprocess,sys,time;sys.stdin.buffer.read();"
++        "subprocess.Popen([sys.executable,'-c','import time;time.sleep(60)']);"
++        "time.sleep(60)"
++    )
++    with pytest.raises(backup.BackupStreamError) as error:
++        backup.stream_to_two(SOURCE, [SINK, sink], [os.environ, os.environ], deadline_seconds=0.5)
++    assert error.value.diagnostic["workers_alive"] == 0
++    assert all(s["exit_after_cleanup"] is not None for s in error.value.diagnostic["children"])

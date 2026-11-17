@@ -1,0 +1,44 @@
+{
+  "commit": "20f78c74574834ade40dd4697e04ed3788e5f5d3",
+  "subject": "Accept selected contents pricing production delivery",
+  "parent": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "branch": "main",
+  "committed_inventory": [
+    {
+      "path": "services/api/src/brickvault_api/production_backup.py",
+      "worktree_sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df",
+      "staged_blob_sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df"
+    },
+    {
+      "path": "services/api/tests/unit/test_backup_stream_failure.py",
+      "worktree_sha256": "c7515a86c4e1332dac3097e651020c0642d1e059544648bc0386c5d75026b7ea",
+      "staged_blob_sha256": "c7515a86c4e1332dac3097e651020c0642d1e059544648bc0386c5d75026b7ea"
+    },
+    {
+      "path": "services/api/src/brickvault_api/contents.py",
+      "worktree_sha256": "9a7280e01c10738bb8511c964f73ae6b8a9f39e9eab7916088210af2d7997db9",
+      "staged_blob_sha256": "9a7280e01c10738bb8511c964f73ae6b8a9f39e9eab7916088210af2d7997db9"
+    },
+    {
+      "path": "services/api/tests/integration/test_contents_refresh.py",
+      "worktree_sha256": "a6beeab6082c5ebcb5a8100062a6b8b62749122969ccd2a0cbeae13191ad0566",
+      "staged_blob_sha256": "a6beeab6082c5ebcb5a8100062a6b8b62749122969ccd2a0cbeae13191ad0566"
+    },
+    {
+      "path": "docs/plans/112-selected-contents-market-refresh.md",
+      "worktree_sha256": "2d92217fd493222a3a3db5da16d2eb2368ed8865ae0b065e67c5b00141b4a272",
+      "staged_blob_sha256": "2d92217fd493222a3a3db5da16d2eb2368ed8865ae0b065e67c5b00141b4a272"
+    }
+  ],
+  "committed_patch_equals_reviewed_staged_patch": true,
+  "reviewed_staged_patch_sha256": "26f1b271901650dd71c4a695030e8e8a0d0692b7c7c286574bb5f101af33fb5f",
+  "main_index_empty": true,
+  "main_push_performed": false,
+  "original_pending_paths_preserved": 22,
+  "protected_files_preserved": 3,
+  "preservation_inventory_paths": 59,
+  "remaining_unrelated_dirty_files": 59,
+  "private_proof_files_preserved": 4,
+  "prior_publications_preserved": true,
+  "live_test_build_work_rerun": false
+}
