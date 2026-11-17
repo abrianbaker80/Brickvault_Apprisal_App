@@ -1,0 +1,24 @@
+{
+  "commit": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "subject": "Implement selected contents market refresh",
+  "parent": "97130dac80e3351af62ea8d2168c62fefcaae133",
+  "branch": "main",
+  "path_count": 32,
+  "committed_patch_sha256": "ccb901a621236dd8e48e7ada25d02809143d9c30a1fe0a50a5951913410f54a3",
+  "committed_patch_equals_reviewed_staged_patch": true,
+  "index_empty": true,
+  "tests_builds_live_work_rerun": false,
+  "source_commit_pushed": false,
+  "accepted_review_commit": "6261946047b65edfff9cdb7641aaabcf2fcbd5f8",
+  "accepted_review_package": "astra_response/Contents-Pricing/implementation/r2/",
+  "remote_main_before_closeout": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "original_pending_paths_preserved": 22,
+  "baseline_files_preserved": 59,
+  "residual_status_equals_preflight_minus_allowlist": true,
+  "protected_unstaged": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "publication_package": "astra_response/Contents-Pricing/implementation/r3/"
+}

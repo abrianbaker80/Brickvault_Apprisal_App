@@ -1,0 +1,388 @@
+{
+  "commit": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "path_count": 32,
+  "files": [
+    {
+      "path": "apps/web/e2e/contents-acceptance.mjs",
+      "git_blob_id": "3134f600f4a8dc0dd74dacbf80568a063ddaa8cf",
+      "committed_bytes": 4095,
+      "committed_sha256": "898d803c98a30ac32f2845897bf7bdc9696d4d8521daf24c90df0d340f5ee1fe",
+      "working_sha256": "898d803c98a30ac32f2845897bf7bdc9696d4d8521daf24c90df0d340f5ee1fe",
+      "accepted_r2_lf_sha256": "898d803c98a30ac32f2845897bf7bdc9696d4d8521daf24c90df0d340f5ee1fe",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/ContentsPricing.test.tsx",
+      "git_blob_id": "86062caec25e5279fb01d8c90307edd03d53d1d9",
+      "committed_bytes": 5692,
+      "committed_sha256": "c2abed48fd366ca1bd6bbbf25af73990700fb799173de863e0a9d66d3d1b2f10",
+      "working_sha256": "c2abed48fd366ca1bd6bbbf25af73990700fb799173de863e0a9d66d3d1b2f10",
+      "accepted_r2_lf_sha256": "c2abed48fd366ca1bd6bbbf25af73990700fb799173de863e0a9d66d3d1b2f10",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/ContentsPricing.tsx",
+      "git_blob_id": "3d06ae19907faa84451fbfc1c966d7db1630fe85",
+      "committed_bytes": 15104,
+      "committed_sha256": "2e1f93af306465daf125d79b0da10c6b36005863eaad8871233f323346bfe48f",
+      "working_sha256": "2e1f93af306465daf125d79b0da10c6b36005863eaad8871233f323346bfe48f",
+      "accepted_r2_lf_sha256": "2e1f93af306465daf125d79b0da10c6b36005863eaad8871233f323346bfe48f",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/MarketRefresh.tsx",
+      "git_blob_id": "f84a3c337cb24bc22447893f1feb67332a7c840d",
+      "committed_bytes": 9071,
+      "committed_sha256": "b1d0a53639abf3a2b517b61989802035344742dff699665b27e095f27c7b980b",
+      "working_sha256": "b1d0a53639abf3a2b517b61989802035344742dff699665b27e095f27c7b980b",
+      "accepted_r2_lf_sha256": "b1d0a53639abf3a2b517b61989802035344742dff699665b27e095f27c7b980b",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/SetDetailPage.tsx",
+      "git_blob_id": "882e05b23bdb634989a545c57a4509fa2db06153",
+      "committed_bytes": 13677,
+      "committed_sha256": "ce58aa126f53c28462d275cd1bdec943de0920598cc9733c3f7db8c4596bc0ef",
+      "working_sha256": "ce58aa126f53c28462d275cd1bdec943de0920598cc9733c3f7db8c4596bc0ef",
+      "accepted_r2_lf_sha256": "ce58aa126f53c28462d275cd1bdec943de0920598cc9733c3f7db8c4596bc0ef",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/contents-api.ts",
+      "git_blob_id": "4fc9e49eb05d864549b009f7b5291a2edda128d1",
+      "committed_bytes": 2965,
+      "committed_sha256": "a1f62a2cf5f2477e5d7cc6e4bc822afc45fbea9f429ce6e2bdc2909752f3752c",
+      "working_sha256": "a1f62a2cf5f2477e5d7cc6e4bc822afc45fbea9f429ce6e2bdc2909752f3752c",
+      "accepted_r2_lf_sha256": "a1f62a2cf5f2477e5d7cc6e4bc822afc45fbea9f429ce6e2bdc2909752f3752c",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/contents.css",
+      "git_blob_id": "76bbc4e3c6d9f78616fd01a3fba461d0e271d129",
+      "committed_bytes": 1346,
+      "committed_sha256": "80594a6ae5f1311140bc4c72edbc441e6c982f0d090f7fa0c6d8282d47891546",
+      "working_sha256": "80594a6ae5f1311140bc4c72edbc441e6c982f0d090f7fa0c6d8282d47891546",
+      "accepted_r2_lf_sha256": "80594a6ae5f1311140bc4c72edbc441e6c982f0d090f7fa0c6d8282d47891546",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "apps/web/src/useRefreshWorkflow.ts",
+      "git_blob_id": "6f3c0c214fbb140452ce729ab5edbb7829c3df14",
+      "committed_bytes": 3758,
+      "committed_sha256": "8911bf6bb20bc470ce80024dc789e0b4913996304611a5f94ba2919833660306",
+      "working_sha256": "8911bf6bb20bc470ce80024dc789e0b4913996304611a5f94ba2919833660306",
+      "accepted_r2_lf_sha256": "8911bf6bb20bc470ce80024dc789e0b4913996304611a5f94ba2919833660306",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "docs/plans/112-selected-contents-market-refresh.md",
+      "git_blob_id": "bca2c788765519986008a7a1a664fdb511977f63",
+      "committed_bytes": 34931,
+      "committed_sha256": "474f1ed29c312d7eec718dabc7d3e7182cf6aabad96e8cdff09b12f060ad02f9",
+      "working_sha256": "474f1ed29c312d7eec718dabc7d3e7182cf6aabad96e8cdff09b12f060ad02f9",
+      "accepted_r2_lf_sha256": "926e18842460130f44dc67cf39457f77c51ec618ea41d8a3c127575262fa91b5",
+      "accepted_r2_match": false
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "git_blob_id": "ffa63c7f7c5a6f6b1a1d79a3d4da2fdb30138090",
+      "committed_bytes": 452068,
+      "committed_sha256": "b4103607a45a8747a6deee3f3c2c8768873f854214382c4aeb5c40b43d0f42a1",
+      "working_sha256": "b4103607a45a8747a6deee3f3c2c8768873f854214382c4aeb5c40b43d0f42a1",
+      "accepted_r2_lf_sha256": "b4103607a45a8747a6deee3f3c2c8768873f854214382c4aeb5c40b43d0f42a1",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "git_blob_id": "60a1e0bfa76c4564664d89ab59425ee38278fec4",
+      "committed_bytes": 332753,
+      "committed_sha256": "b157bcd98a90a7106c0c8d44ee06efcba9499373c11b61e3e9e974a15425311f",
+      "working_sha256": "b157bcd98a90a7106c0c8d44ee06efcba9499373c11b61e3e9e974a15425311f",
+      "accepted_r2_lf_sha256": "b157bcd98a90a7106c0c8d44ee06efcba9499373c11b61e3e9e974a15425311f",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "scripts/package_api.py",
+      "git_blob_id": "0a54a09fc0160778b7df8a27b2e6fdb029fc34ac",
+      "committed_bytes": 17095,
+      "committed_sha256": "8df796b70ae92d4ef7b93c7cba3c9533e599f6537ad3deeefdc9981847c65d0e",
+      "working_sha256": "8df796b70ae92d4ef7b93c7cba3c9533e599f6537ad3deeefdc9981847c65d0e",
+      "accepted_r2_lf_sha256": "8df796b70ae92d4ef7b93c7cba3c9533e599f6537ad3deeefdc9981847c65d0e",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/contents.py",
+      "git_blob_id": "05aab74f58921d6d3787e606a7e29b86122264b1",
+      "committed_bytes": 4490,
+      "committed_sha256": "526e590caed6c46b4f9a6bdd74e8cd2f96b39cc3c4dac7c998593edfee0b5c07",
+      "working_sha256": "526e590caed6c46b4f9a6bdd74e8cd2f96b39cc3c4dac7c998593edfee0b5c07",
+      "accepted_r2_lf_sha256": "526e590caed6c46b4f9a6bdd74e8cd2f96b39cc3c4dac7c998593edfee0b5c07",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/refresh.py",
+      "git_blob_id": "c71242638ac0198839ae18d22eaf11880fd429ea",
+      "committed_bytes": 5440,
+      "committed_sha256": "8b452e1a71daacef1fbc1b07e36a1957ff2e630fad9e2f5b38b8f5f439336070",
+      "working_sha256": "8b452e1a71daacef1fbc1b07e36a1957ff2e630fad9e2f5b38b8f5f439336070",
+      "accepted_r2_lf_sha256": "8b452e1a71daacef1fbc1b07e36a1957ff2e630fad9e2f5b38b8f5f439336070",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/backup_format.py",
+      "git_blob_id": "529ed632cd0289dba7b991a2576c378a9894a814",
+      "committed_bytes": 3392,
+      "committed_sha256": "cab684efc277860f644e221d47410074d68515e087d0519cb0c63bb37e5a2808",
+      "working_sha256": "cab684efc277860f644e221d47410074d68515e087d0519cb0c63bb37e5a2808",
+      "accepted_r2_lf_sha256": "cab684efc277860f644e221d47410074d68515e087d0519cb0c63bb37e5a2808",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/contents.py",
+      "git_blob_id": "243366b27664c8931eb9163469cbcc2014c251d4",
+      "committed_bytes": 19947,
+      "committed_sha256": "d24092db588bc516ca6fe4f7963e6011f6fc7387230f1daa6676a6ec6283d325",
+      "working_sha256": "d24092db588bc516ca6fe4f7963e6011f6fc7387230f1daa6676a6ec6283d325",
+      "accepted_r2_lf_sha256": "d24092db588bc516ca6fe4f7963e6011f6fc7387230f1daa6676a6ec6283d325",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/contents_models.py",
+      "git_blob_id": "61c8a112039566bdff131c788b65fd0c276c48b6",
+      "committed_bytes": 3845,
+      "committed_sha256": "70d025aec3673555013fc3f48405dbb176dfd53450dcc7bc2ff8db92ef0751d2",
+      "working_sha256": "70d025aec3673555013fc3f48405dbb176dfd53450dcc7bc2ff8db92ef0751d2",
+      "accepted_r2_lf_sha256": "70d025aec3673555013fc3f48405dbb176dfd53450dcc7bc2ff8db92ef0751d2",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/main.py",
+      "git_blob_id": "b30230f4eade2e269136c4b066fb12b634c66630",
+      "committed_bytes": 5711,
+      "committed_sha256": "22667b7d2bcdd06e862eadf773df33746d463d52c053f0bfdc290d2dee224afb",
+      "working_sha256": "22667b7d2bcdd06e862eadf773df33746d463d52c053f0bfdc290d2dee224afb",
+      "accepted_r2_lf_sha256": "22667b7d2bcdd06e862eadf773df33746d463d52c053f0bfdc290d2dee224afb",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/contents_refresh.py",
+      "git_blob_id": "88a0433ed4ee6cfed2b3a2d8f239fe28ddde11a8",
+      "committed_bytes": 7170,
+      "committed_sha256": "c5da312bfed04f461d526601622053200718b66c9029ad4da5dc28290ca24422",
+      "working_sha256": "c5da312bfed04f461d526601622053200718b66c9029ad4da5dc28290ca24422",
+      "accepted_r2_lf_sha256": "c5da312bfed04f461d526601622053200718b66c9029ad4da5dc28290ca24422",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/models.py",
+      "git_blob_id": "3cfe260eac27cdcfbe465d90085ef624fe4be1c6",
+      "committed_bytes": 4906,
+      "committed_sha256": "bab6cedc6f29bd7b4147d02b2db10b657e6e8c7c80c146cf24a6d3a777e315ca",
+      "working_sha256": "bab6cedc6f29bd7b4147d02b2db10b657e6e8c7c80c146cf24a6d3a777e315ca",
+      "accepted_r2_lf_sha256": "bab6cedc6f29bd7b4147d02b2db10b657e6e8c7c80c146cf24a6d3a777e315ca",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/product_refresh_models.py",
+      "git_blob_id": "a707ebcb6a3cee31dd63d4ce48e4e9b2391ecf4d",
+      "committed_bytes": 5784,
+      "committed_sha256": "28ac8ff93cef20bc4949b0bf70aa102c91466580e4160e443ec83f519e1b1350",
+      "working_sha256": "28ac8ff93cef20bc4949b0bf70aa102c91466580e4160e443ec83f519e1b1350",
+      "accepted_r2_lf_sha256": "28ac8ff93cef20bc4949b0bf70aa102c91466580e4160e443ec83f519e1b1350",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/product_refresh_retention.py",
+      "git_blob_id": "9e39723520360732d7af4e72a3ce532a8c538488",
+      "committed_bytes": 4798,
+      "committed_sha256": "3e9a5b6070918b3ec37705024e2e0d60e8ce8cc1725d323935bfcf804636c81a",
+      "working_sha256": "3e9a5b6070918b3ec37705024e2e0d60e8ce8cc1725d323935bfcf804636c81a",
+      "accepted_r2_lf_sha256": "3e9a5b6070918b3ec37705024e2e0d60e8ce8cc1725d323935bfcf804636c81a",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/repository.py",
+      "git_blob_id": "6c41f73a976bc041026a2e5b5f203dc2a271a6c0",
+      "committed_bytes": 39444,
+      "committed_sha256": "b91ed1a95432ec0cc404b2392ab7c0280f000810725f7b2b725456fbe80a7838",
+      "working_sha256": "b91ed1a95432ec0cc404b2392ab7c0280f000810725f7b2b725456fbe80a7838",
+      "accepted_r2_lf_sha256": "b91ed1a95432ec0cc404b2392ab7c0280f000810725f7b2b725456fbe80a7838",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/retention.py",
+      "git_blob_id": "53b73a89a2e24eee7e82910a3b0efd41971ab77f",
+      "committed_bytes": 10200,
+      "committed_sha256": "fc651e6a5e56fee10f5a5e79fb68ade56730cc3391449577b87b1110e706764b",
+      "working_sha256": "fc651e6a5e56fee10f5a5e79fb68ade56730cc3391449577b87b1110e706764b",
+      "accepted_r2_lf_sha256": "fc651e6a5e56fee10f5a5e79fb68ade56730cc3391449577b87b1110e706764b",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0020_contents_market_refresh_down.sql",
+      "git_blob_id": "b80e8638c067288cd585559ef7f4c462cd6b81e9",
+      "committed_bytes": 24744,
+      "committed_sha256": "a292955957032862dd5a95e63a6b2cd9426b83922cc81ea664b8cdfe1f695d5c",
+      "working_sha256": "a292955957032862dd5a95e63a6b2cd9426b83922cc81ea664b8cdfe1f695d5c",
+      "accepted_r2_lf_sha256": "a292955957032862dd5a95e63a6b2cd9426b83922cc81ea664b8cdfe1f695d5c",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0020_contents_market_refresh_up.sql",
+      "git_blob_id": "3bd9475860c79171e44911624eedd321c7d8139b",
+      "committed_bytes": 47284,
+      "committed_sha256": "edae12de7eac9430a15a07b32e8d980c9f50dacfa95317c74389636e81cf8f3b",
+      "working_sha256": "edae12de7eac9430a15a07b32e8d980c9f50dacfa95317c74389636e81cf8f3b",
+      "accepted_r2_lf_sha256": "edae12de7eac9430a15a07b32e8d980c9f50dacfa95317c74389636e81cf8f3b",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/versions/0020_contents_market_refresh.py",
+      "git_blob_id": "d4fc5c592dcb9f79652f15f528039e467c84d077",
+      "committed_bytes": 449,
+      "committed_sha256": "d7086edc52fb78ecc7165a2609178e79b3a08f0a3326a6fd5e130e755063d164",
+      "working_sha256": "d7086edc52fb78ecc7165a2609178e79b3a08f0a3326a6fd5e130e755063d164",
+      "accepted_r2_lf_sha256": "d7086edc52fb78ecc7165a2609178e79b3a08f0a3326a6fd5e130e755063d164",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/refresh.py",
+      "git_blob_id": "708b5c7a7bcd369385bb25f389a580cf7569a652",
+      "committed_bytes": 14602,
+      "committed_sha256": "062afdd8ef6dc98f0aa547d68ede3c270892a8d1d8c20c94bc5c49dbedd6150b",
+      "working_sha256": "062afdd8ef6dc98f0aa547d68ede3c270892a8d1d8c20c94bc5c49dbedd6150b",
+      "accepted_r2_lf_sha256": "062afdd8ef6dc98f0aa547d68ede3c270892a8d1d8c20c94bc5c49dbedd6150b",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/src/brickvault_api/valuation/evidence.py",
+      "git_blob_id": "7c0c5928ad910c70c3773611b4d7716d938a433f",
+      "committed_bytes": 10563,
+      "committed_sha256": "078618d16191d863247ccb81ef5c97af0825e7c712fa3e76b94904aefa45f6b0",
+      "working_sha256": "078618d16191d863247ccb81ef5c97af0825e7c712fa3e76b94904aefa45f6b0",
+      "accepted_r2_lf_sha256": "078618d16191d863247ccb81ef5c97af0825e7c712fa3e76b94904aefa45f6b0",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/tests/integration/contents_browser_fixture.py",
+      "git_blob_id": "75a7bf0276e520a53c0878015f6612c2d3b7b666",
+      "committed_bytes": 3762,
+      "committed_sha256": "9af0f55a611d39daddb5ced4d2d9202e8e6aa39975211b24154421f8a2662bd6",
+      "working_sha256": "9af0f55a611d39daddb5ced4d2d9202e8e6aa39975211b24154421f8a2662bd6",
+      "accepted_r2_lf_sha256": "9af0f55a611d39daddb5ced4d2d9202e8e6aa39975211b24154421f8a2662bd6",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/tests/integration/test_contents_refresh.py",
+      "git_blob_id": "fa735a5dbdf89327ec1cb69c10aa67ea9384de93",
+      "committed_bytes": 27102,
+      "committed_sha256": "2d64ed16a0d9a54e4a9028c0b09ccc3b33ad71606234bc0a21f751210a70dd30",
+      "working_sha256": "2d64ed16a0d9a54e4a9028c0b09ccc3b33ad71606234bc0a21f751210a70dd30",
+      "accepted_r2_lf_sha256": "2d64ed16a0d9a54e4a9028c0b09ccc3b33ad71606234bc0a21f751210a70dd30",
+      "accepted_r2_match": true
+    },
+    {
+      "path": "services/api/tests/unit/test_outcome_backup_compatibility.py",
+      "git_blob_id": "79f96aa62e6b6db6ed58dcec6f7e76086c16c0f8",
+      "committed_bytes": 3343,
+      "committed_sha256": "3968e09abefcb904679d61c320b34f4552f5ebc5de26289fa7707244e3304707",
+      "working_sha256": "3968e09abefcb904679d61c320b34f4552f5ebc5de26289fa7707244e3304707",
+      "accepted_r2_lf_sha256": "3968e09abefcb904679d61c320b34f4552f5ebc5de26289fa7707244e3304707",
+      "accepted_r2_match": true
+    }
+  ],
+  "accepted_review_commit": "6261946047b65edfff9cdb7641aaabcf2fcbd5f8",
+  "accepted_source_files_unchanged": 31,
+  "only_difference_from_r2": "additive Plan 112 acceptance entry",
+  "preserved_pending_inventory": [
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultCapturePlugin.java",
+      "sha256": "CE5E97C9CA61C4D3DCB3C4BB9DD89BCF7FB59FF5CE178965A5F868C298D64995"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureService.java",
+      "sha256": "E1CC7AACB59C5C4AB8629FBAD00809FD0DCEACF14DA1280732F27567BBE01F0D"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/CaptureSession.java",
+      "sha256": "BF82A42F84E815B843755BF1862AAB298FD97F9AB2B2F69691CC1F8E633BF528"
+    },
+    {
+      "path": "apps/android/android/app/src/test/java/com/abrianbaker/brickvault/appraisal/CaptureSessionTest.java",
+      "sha256": "8C39C08D2D97D93BCF99A1FCF797AB3A44E4FC754C1FA7BCA80A5B8E88629CC7"
+    },
+    {
+      "path": "apps/web/src/NativeCapture.tsx",
+      "sha256": "ABFFA551BBF2EC60564E3B828B29526B7A1D5560EDED03067ED7080A25E1F9C3"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "F0A354ED80F631910F4CDCB64729209EF4758DE441F3EAAF509DA49395F969B4"
+    },
+    {
+      "path": "CODEX_WORKFLOW.md",
+      "sha256": "D940115177434F798C8722B45A9D3670B60823764B9B1A27B2DAB2971520CBC4"
+    },
+    {
+      "path": "apps/android/android/app/build.gradle",
+      "sha256": "341E10705CB4998710F17673B09406BD1014C298AF42596583F04E1B63028A4A"
+    },
+    {
+      "path": "apps/android/android/app/src/main/AndroidManifest.xml",
+      "sha256": "82FA1190D3B3FD720B5CC127663824DB3515FA4C81D8D25B665AC167448E3507"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/BrickVaultSharePlugin.java",
+      "sha256": "F36A18C6CD3D5F0C9DBC4072575FE677F5FC2967F1E218A6000A41DF416748FC"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/MainActivity.java",
+      "sha256": "BA3B49AB33ACD979982148CC5ACB7B98692C30055527C7A01B519D650FA260F0"
+    },
+    {
+      "path": "apps/android/android/app/src/main/java/com/abrianbaker/brickvault/appraisal/ShareIntake.java",
+      "sha256": "441E43C9AE52352DA04892281AD39FADD335E9B9778AF5CBF69912C0BA6B786D"
+    },
+    {
+      "path": "apps/android/android/variables.gradle",
+      "sha256": "F9865D0FECE4B46A97F61ED6E346BF51C6BD03B337851F9E300BC6CC05420E96"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "854A61E3EEED5220922167F7F3B92A41BDDF74BB17DACA96AB00D04B033A562F"
+    },
+    {
+      "path": "docs/DECISIONS.md",
+      "sha256": "BC90765361DBC88C4C7B8B2392AEE198BE98508E97A500CAC210141C24F0FBBB"
+    },
+    {
+      "path": "docs/REQUIREMENTS_TRACEABILITY.md",
+      "sha256": "F41C809D3C8D6CA15E4CC32CB0F619CE7C28AD5AB1CB5C680CCE20D4C8CA653B"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "sha256": "04462B739AE4A5D36AFC1F23922DE21471CD1E2CBB404E785AA068F12D546613"
+    },
+    {
+      "path": "docs/SECURITY_PRIVACY.md",
+      "sha256": "306807C913470ACB432FEFAE70EB22DEA8C34C83580EBC79AA14CB3EF343574B"
+    },
+    {
+      "path": "docs/plans/108-phase-15-android-share-capture.md",
+      "sha256": "858F6DD3039E947496BB480AFAD41BAEF1294B9D509E2B8FB2328C43C77F48F9"
+    },
+    {
+      "path": "prompts/15_android_capture_overlay.md",
+      "sha256": "5871CA31C04F7DD6C3F948290A8F228FA1B2E13717A1F0A525ACA9F12B817285"
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "sha256": "D06965D560361A06B7A33647EFA5B9B34829F8C34D5D912226D9CD5B3645ABF7"
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "sha256": "0251B5C358CD37DE9E07E2CBDFB44913752CADE7050D9EB1B3A885F57D27A041"
+    }
+  ],
+  "hash_note": "Committed SHA-256 identifies exact Git blob bytes. Working SHA-256 separately preserves Windows line-ending distinctions."
+}
