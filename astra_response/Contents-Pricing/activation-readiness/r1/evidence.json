@@ -1,0 +1,436 @@
+{
+  "baseline": {
+    "observed_utc": "2026-11-17T13:48:38.320751+00:00",
+    "hostname": "brickvault-appraisal",
+    "release": "phase16c-outcomes-production-r2",
+    "runtime_python": "3.13.18",
+    "transaction": [
+      {
+        "read_only": "on",
+        "isolation": "repeatable read"
+      }
+    ],
+    "schema": [
+      {
+        "version_num": "0019_reviewed_dataset_foundation"
+      }
+    ],
+    "active_catalog": [
+      {
+        "provider": "rebrickable",
+        "scope": "full-catalog",
+        "generation": 1,
+        "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+        "state": "accepted",
+        "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+        "synthetic": false,
+        "acquired_end": "2026-09-09 21:48:39.552697+00:00",
+        "manifest_digest": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15"
+      }
+    ],
+    "mapping_rows": [
+      {
+        "provider": "bricklink",
+        "item_type": "SET",
+        "review_state": "verified",
+        "closed": false,
+        "rows": 1,
+        "distinct_targets": 1
+      }
+    ],
+    "scope_metadata": [
+      {
+        "provider": "bricklink",
+        "suspended": null,
+        "version": "market-v1",
+        "fresh_seconds": 14400,
+        "mapping_seconds": 7776000,
+        "interactive_limit": 8,
+        "global_limit": 1000,
+        "retries": 2,
+        "effective_at": "2026-09-12 09:41:14.998092+00:00"
+      }
+    ],
+    "retained_access": [
+      {
+        "provider": "bricklink",
+        "item_type": "SET",
+        "outcome": "succeeded",
+        "failure": null,
+        "rows": 4,
+        "first_started": "2026-10-19 20:21:36.945645+00:00",
+        "last_finished": "2026-10-19 20:21:53.203559+00:00"
+      }
+    ],
+    "api_active": "active",
+    "configuration_metadata": [
+      {
+        "kind": "runtime_environment",
+        "present": true,
+        "regular": true,
+        "mode": "0o600",
+        "modified_utc": "2026-11-17T00:58:32.929199+00:00"
+      }
+    ]
+  },
+  "eligibility": {
+    "observed_utc": "2026-11-17T13:50:12.465759+00:00",
+    "release": "phase16c-outcomes-production-r2",
+    "source_manifest": {
+      "commit": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+      "reviewed_id": "8b23e0dfa9c39b3e7e42663ec35bb1a4d2576f826477e98c9d7307df8e6a1e03"
+    },
+    "catalog_denominators": [
+      {
+        "set_facts": 28278,
+        "selected_set_inventories": 28278,
+        "figure_facts": 17225
+      }
+    ],
+    "direct_counts": [
+      {
+        "item_type": "MINIFIG",
+        "direct_occurrences": 23441,
+        "direct_distinct_targets": 16780,
+        "supported_occurrences_including_extras": 23441,
+        "supported_distinct_targets_including_extras": 16780,
+        "supported_regular_occurrences": 23441,
+        "supported_regular_distinct_targets": 16780,
+        "choice_occurrences": 0,
+        "unknown_color_occurrences": 0,
+        "eligible_mapping_rows": 0,
+        "eligible_distinct_targets": 0,
+        "eligible_occurrences": 0
+      },
+      {
+        "item_type": "PART",
+        "direct_occurrences": 1345859,
+        "direct_distinct_targets": 79412,
+        "supported_occurrences_including_extras": 1335651,
+        "supported_distinct_targets_including_extras": 70012,
+        "supported_regular_occurrences": 1234732,
+        "supported_regular_distinct_targets": 69789,
+        "choice_occurrences": 0,
+        "unknown_color_occurrences": 10208,
+        "eligible_mapping_rows": 0,
+        "eligible_distinct_targets": 0,
+        "eligible_occurrences": 0
+      }
+    ],
+    "preferred_set_counts": [
+      {
+        "identifier": "10350-1",
+        "item_type": "MINIFIG",
+        "direct_occurrences": 8,
+        "distinct_targets": 8,
+        "eligible_occurrences": 0
+      },
+      {
+        "identifier": "10350-1",
+        "item_type": "PART",
+        "direct_occurrences": 882,
+        "distinct_targets": 767,
+        "eligible_occurrences": 0
+      }
+    ],
+    "minifigure_provider_mapping_counts": [
+      {
+        "provider": "rebrickable",
+        "review_state": "verified",
+        "association_rows": 17225
+      }
+    ],
+    "part_provider_mapping_counts": [
+      {
+        "provider": "rebrickable",
+        "review_state": "verified",
+        "association_rows": 64620
+      }
+    ],
+    "color_provider_mapping_counts": [
+      {
+        "provider": "rebrickable",
+        "review_state": "verified",
+        "association_rows": 275
+      }
+    ],
+    "element_mapping_counts": [
+      {
+        "provider": "rebrickable",
+        "review_state": "unresolved",
+        "association_rows": 4952
+      },
+      {
+        "provider": "rebrickable",
+        "review_state": "verified",
+        "association_rows": 109293
+      }
+    ],
+    "onboarding_candidates": [
+      {
+        "item_type": "MINIFIG",
+        "set_namespace": "rebrickable",
+        "set_number": "21333-1",
+        "set_id": "de3f9437-23a4-4f15-abe9-fcc2ac9c65bd",
+        "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+        "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+        "revision_id": "66f77536-fd04-4394-b7b0-6beec7c008c5",
+        "occurrence_id": "0e7de3b1-63f6-45c0-b595-4c2999a0e8e0",
+        "target_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+        "target_namespace": "rebrickable",
+        "target_identifier": "fig-012609",
+        "part_id": null,
+        "color_id": null,
+        "color_namespace": null,
+        "color_identifier": null,
+        "color_name": null,
+        "regular_quantity": 1,
+        "extra_quantity": 0,
+        "evidence_id": "16143ce1-d1e0-4cf8-bffb-28026b531fca",
+        "eligible_mapping": null
+      },
+      {
+        "item_type": "PART",
+        "set_namespace": "rebrickable",
+        "set_number": "10016-1",
+        "set_id": "8f9ada86-c277-46b8-ae07-e71e0e495fd8",
+        "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+        "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+        "revision_id": "12e689d0-4d4f-4197-8cad-5d68c21745db",
+        "occurrence_id": "587410c0-9252-427b-8fb1-3e9f781d8667",
+        "target_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+        "target_namespace": "rebrickable",
+        "target_identifier": "3001",
+        "part_id": "c2ddbb86-f38b-4aa7-9247-d16f9014b3c2",
+        "color_id": "14567467-26a3-4d98-b1ba-0c997443bb94",
+        "color_namespace": "rebrickable",
+        "color_identifier": "15",
+        "color_name": "White",
+        "regular_quantity": 2,
+        "extra_quantity": 0,
+        "evidence_id": "ec3b8bda-c03a-4d05-872d-4bc29e56e345",
+        "eligible_mapping": null
+      }
+    ],
+    "candidate_element": [
+      {
+        "element_identifier": "300101",
+        "part_namespace": "rebrickable",
+        "part_identifier": "3001",
+        "color_namespace": "rebrickable",
+        "color_identifier": "15",
+        "part_color_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+        "review_state": "verified",
+        "evidence_id": "869c2929-1865-40a2-ab8f-cc9a631d5ac0",
+        "row_sha256": "2b8aec7b9248789954aa0ffec0b0817ccbdb08d0c9da1e659b538c4bd628c85e",
+        "dataset_name": "elements",
+        "decompressed_sha256": "45f2a2aecfbd3f7f36e1c8bf5f1bafc4e16c9fe1fed8dd69aba5c28d6ffea6f7"
+      }
+    ],
+    "candidate_source_files": [
+      {
+        "dataset_name": "colors",
+        "decompressed_sha256": "6be1e6a60c6151b3f63b0a90d8df742faba107aa81d458923b7c20d40e5a3912"
+      },
+      {
+        "dataset_name": "elements",
+        "decompressed_sha256": "45f2a2aecfbd3f7f36e1c8bf5f1bafc4e16c9fe1fed8dd69aba5c28d6ffea6f7"
+      },
+      {
+        "dataset_name": "inventory_minifigs",
+        "decompressed_sha256": "3e266a9cb62bf91607bf6127d95de43283fb5237ea6ae81c3e96b73834e14c50"
+      },
+      {
+        "dataset_name": "minifigs",
+        "decompressed_sha256": "720daf07a9e4aa0bf52afd7181cdc0d906cf0e54fad94dd5a351058af4fe450a"
+      },
+      {
+        "dataset_name": "parts",
+        "decompressed_sha256": "34f0d5c3f6ce390c1029bcde700a028a4eb2292e76f1155c1a32a430ca51a4bb"
+      }
+    ],
+    "mapping_rows_recheck": [
+      {
+        "item_type": "SET",
+        "review_state": "verified",
+        "closed": false,
+        "rows": 1
+      }
+    ],
+    "bricklink_configuration_metadata": {
+      "present": true,
+      "regular": true,
+      "mode": "0o600",
+      "modified_utc": "2026-10-19T20:12:47.942310+00:00",
+      "contents_read": false
+    }
+  },
+  "binding_evidence": {
+    "observed_utc": "2026-11-17T13:52:24.520578+00:00",
+    "transaction_read_only": "on",
+    "figure_parent_membership": [
+      {
+        "identifier": "fig-012609",
+        "display_name": "Vincent van Gogh",
+        "occurrence_id": "0e7de3b1-63f6-45c0-b595-4c2999a0e8e0",
+        "minifigure_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+        "regular_quantity": 1,
+        "extra_quantity": 0,
+        "evidence_id": "16143ce1-d1e0-4cf8-bffb-28026b531fca",
+        "row_sha256": "d561f41a9589172c8cd99702c1abbf985db48dae9049e056a82cd25fe6f369da",
+        "dataset_name": "inventory_minifigs",
+        "decompressed_sha256": "3e266a9cb62bf91607bf6127d95de43283fb5237ea6ae81c3e96b73834e14c50",
+        "alternatives": 0
+      }
+    ],
+    "candidate_fact_evidence": [
+      {
+        "item_type": "MINIFIG",
+        "namespace": "rebrickable",
+        "identifier": "fig-012609",
+        "display_name": "Vincent van Gogh",
+        "evidence_id": "ac72da39-4f1d-48d4-a8ea-941f048d6589",
+        "row_sha256": "8df2fed3d3948655a18ca1789bf7a473666036ca84144055c2fd7a3e94e295f5",
+        "dataset_name": "minifigs",
+        "decompressed_sha256": "720daf07a9e4aa0bf52afd7181cdc0d906cf0e54fad94dd5a351058af4fe450a"
+      },
+      {
+        "item_type": "PART",
+        "namespace": "rebrickable",
+        "identifier": "3001",
+        "display_name": "Brick 2 x 4",
+        "evidence_id": "feb6fc86-77a7-4af8-805b-c86c617ea79d",
+        "row_sha256": "5e3cc3b9fb71ff050ea02fe8f8d9268dade7c53598eb47160b09ea5e00659a52",
+        "dataset_name": "parts",
+        "decompressed_sha256": "34f0d5c3f6ce390c1029bcde700a028a4eb2292e76f1155c1a32a430ca51a4bb"
+      }
+    ],
+    "final_baseline": [
+      {
+        "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+        "generation": 1,
+        "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+        "state": "accepted",
+        "manifest_digest": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15"
+      }
+    ],
+    "schema": [
+      {
+        "version_num": "0019_reviewed_dataset_foundation"
+      }
+    ],
+    "release": "phase16c-outcomes-production-r2"
+  },
+  "retained_evidence": {
+    "retained_proof_sha256": "1db3445152faae8a7024195f8d6f716600fc375dd60a1d1da9af55e52a61d29d",
+    "retained_proof_review_count": 3,
+    "retained_reviews": [
+      {
+        "status": "verified",
+        "canonical_id": "5838eb9c-d390-43db-bea8-61fa3de08fe6",
+        "target": {
+          "color_id": null,
+          "item_no": "21333-1",
+          "item_type": "SET"
+        },
+        "method": "exact_item",
+        "identity_references": [
+          0,
+          1,
+          3
+        ],
+        "selection_binding": "f8de846e107c590e9c23cc013b1e128dea4b0f2bca0531f1d01b521fab10ad4f"
+      },
+      {
+        "status": "verified",
+        "canonical_id": "03760fc9-c418-4996-b749-66bb52aeeacd",
+        "target": {
+          "color_id": null,
+          "item_no": "idea106",
+          "item_type": "MINIFIG"
+        },
+        "method": "parent_figure",
+        "identity_references": [
+          1,
+          3
+        ],
+        "selection_binding": "b6ed2b60ed5177e81b616c32603d84e66fa003e3cc800a6a751eaca03a0d59d7"
+      },
+      {
+        "status": "verified",
+        "canonical_id": "b366296d-1f7e-4313-a2e3-54e2e8172a6f",
+        "target": {
+          "color_id": 1,
+          "item_no": "3001",
+          "item_type": "PART"
+        },
+        "method": "source_element",
+        "identity_references": [
+          2,
+          4,
+          5,
+          6
+        ],
+        "selection_binding": "9f0a1155a7f0539c8dddc36181966b33cb254f9f651335ce6ee8583469ebd1c9"
+      }
+    ],
+    "retained_identity_outcomes": [
+      {
+        "index": 0,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:06.541561Z",
+        "finished_at": "2026-09-11T23:28:06.764472Z"
+      },
+      {
+        "index": 1,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:07.774020Z",
+        "finished_at": "2026-09-11T23:28:08.039396Z"
+      },
+      {
+        "index": 2,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:09.049636Z",
+        "finished_at": "2026-09-11T23:28:09.242095Z"
+      },
+      {
+        "index": 3,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:37.412603Z",
+        "finished_at": "2026-09-11T23:28:37.631488Z"
+      },
+      {
+        "index": 4,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:38.641339Z",
+        "finished_at": "2026-09-11T23:28:38.858314Z"
+      },
+      {
+        "index": 5,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:39.869110Z",
+        "finished_at": "2026-09-11T23:28:40.050348Z"
+      },
+      {
+        "index": 6,
+        "outcome": "validated",
+        "started_at": "2026-09-11T23:28:41.061249Z",
+        "finished_at": "2026-09-11T23:28:41.343062Z"
+      }
+    ],
+    "proof_source_snapshot": "243ee681-2c7d-4cfc-b7f1-204577fa93ba",
+    "proof_source_version": "83ee43af-e097-4a4c-894e-0a01e17bb3bd",
+    "source_file_comparison": [
+      {
+        "manifest": "manifest-59f733df9a574b1f9c7510892df5ac01.json",
+        "source_version": "official-59f733df9a574b1f9c7510892df5ac01",
+        "all_five_match": true
+      },
+      {
+        "manifest": "manifest-aa9a32c8fa634132b0c737680027853c.json",
+        "source_version": "official-aa9a32c8fa634132b0c737680027853c",
+        "all_five_match": true
+      }
+    ]
+  }
+}

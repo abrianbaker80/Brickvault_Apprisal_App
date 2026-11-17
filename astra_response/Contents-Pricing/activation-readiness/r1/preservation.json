@@ -1,0 +1,28 @@
+{
+  "main_head": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "main_remote_before": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "publication_parent": "b47736625e3d2c0672ec9f8f51b145bd4f387b15",
+  "main_index_empty": true,
+  "preexisting_pending_paths_unchanged": 22,
+  "baseline_files_unchanged": 59,
+  "plan_change": "Append section 18 only; left uncommitted",
+  "plan_before_sha256": "474f1ed29c312d7eec718dabc7d3e7182cf6aabad96e8cdff09b12f060ad02f9",
+  "plan_after_sha256": "c36a8d8683273c567078be2d7772f3c98e629ce198c87743e14ebe30baa099ad",
+  "protected_paths": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "retained_proof_bytes_unchanged": true,
+  "production_access": "Three bounded read-only repeatable-read transactions using the installed guarded owner path; no provider credentials read",
+  "operations_not_performed": [
+    "provider or AI calls",
+    "database writes or migrations",
+    "service changes or startup",
+    "backup or maintenance",
+    "deployment or phone work",
+    "application edits",
+    "tests or builds",
+    "main commit or push"
+  ]
+}
