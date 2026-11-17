@@ -1,0 +1,46 @@
+{
+  "accepted_deployed_identities_unchanged": true,
+  "branch": "main",
+  "cached_diff_check": "PASS",
+  "complete_staged_diff_reviewed": true,
+  "distinct_preserved_files": 45,
+  "documentation_commit_count": 1,
+  "final_index_empty": true,
+  "local_commit": "97130dac80e3351af62ea8d2168c62fefcaae133",
+  "main_remote": "5c57731c7e15abdae5d6d1e5a35e46e602bc3618",
+  "main_remote_unchanged": true,
+  "new_content_additive_only": true,
+  "new_pinned_link_resolves_in_retained_git_object": true,
+  "no_live_test_build_operations": true,
+  "not_run": [
+    "Tests, lint/type checks, builds or package checks",
+    "Production or phone connections, health checks or provider requests",
+    "Database/service startup, backups/restores, runtime work, reboot, migration or deployment",
+    "Dataset export, Linux materialization qualification, real-corpus work or training",
+    "Capture or contents-pricing work"
+  ],
+  "original_43_inventory_preserved": true,
+  "parent": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "pending_history_matches_r1_r2_r3": true,
+  "pending_paths_preserved_and_unstaged": 22,
+  "preservation_inventory_note": "Original 43-file inventory verified; the two protected test files additionally verified against accepted 16C source-closeout hashes, for 45 distinct preserved files.",
+  "prior_publication_files_preserved": 28,
+  "protected_file_hashes": {
+    "AGENTS.md": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+    "services/api/tests/integration/test_catalog_search.py": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+    "services/api/tests/unit/test_catalog_parser.py": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+  },
+  "protected_files_preserved": 3,
+  "publication": {
+    "branch": "astra-response",
+    "parent": "320436f5b5b247c6cfc09f97c99afbaa0ece6d99",
+    "path": "astra_response/Phase-16/16C-production/r4/",
+    "prior_r1_r2_r3_preserved": true
+  },
+  "source_application_amendments": 0,
+  "staged_inventory": [
+    "docs/plans/111-phase-16c-outcomes-reporting.md"
+  ],
+  "status": "PASS",
+  "unrelated_status_unchanged_and_unstaged": true
+}

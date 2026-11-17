@@ -1,0 +1,188 @@
+diff --git a/docs/plans/111-phase-16c-outcomes-reporting.md b/docs/plans/111-phase-16c-outcomes-reporting.md
+index 57d0f86..e1ea5a9 100644
+--- a/docs/plans/111-phase-16c-outcomes-reporting.md
++++ b/docs/plans/111-phase-16c-outcomes-reporting.md
+@@ -320,3 +320,183 @@ checkpoint records only its 19 intended paths on local `main`; `main` remains
+ unpushed. Publish only a sanitized closeout package on `astra-response` and stop.
+ Do not deploy, classify the retained production smoke record, close wider Phase 16
+ or begin another slice.
++
++
++## Authorized production rollout preflight — 2026-11-16
++
++**BLOCKED BEFORE BUILD OR PRODUCTION MUTATION; EXISTING 16A RELEASE PRESERVED.**
++
++Brian authorized the bounded production rollout of exact accepted application
++commit `50f66837addf77ddd1c1a69eed0a873c17163a81`, existing migration 0019 and
++enumerated grants, matching backend/web/APK, exact-ID retained-fixture classification
++and one authenticated phone workflow. This supersedes the earlier rollout prohibition
++for that scope only; source/TEST acceptance remains closed and wider Phase 16 open.
++
++Read-only preflight confirmed `phase16a-outcomes-production-r3`, manifest
++`b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f`,
++schema `0018_deal_outcome_revisions`, Python 3.13.16 and an active API. Thirteen
++of fourteen ordinary health checks passed. Four operational units were failed:
++lightweight health, deep health, Python-version monitoring and retention.
++The guest reboot marker was approximately 60.5 hours old; the maintenance record
++reported Python 3.13.18 available. Direct encrypted-repository identity verification
++passed; the retention ledger was READY with its last transaction COMPLETE. However,
++the read-only retention plan refused `Partial or unrecognized backup history.`
++The deep-health REPOSITORY_IDENTITIES label covers this retention-plan check too;
++this is not evidence of a repository identity mismatch. No history was deleted,
++ledger rewritten, failed unit cleared, security exception added or maintenance run.
++
++A complete schema-3/0018 scheduled backup receipt dated 2026-11-16 10:11:42 UTC
++was observed for database, globals, configuration and image blobs. Current configured
++market-credential backup admission passed. No new artifact readbacks, repository
++integrity checks, migration proof, backup or restore were performed; this receipt
++was not admitted as a verified deployment recovery point in this blocked attempt.
++The backup schedule remains 04:00 America/Chicago.
++
++ADB listed no connected phone. The historical installed APK remains recorded as
++`a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3`;
++its current installed identity, signer and authenticated session were not verified.
++No build, upload, migration, release switch, service interruption, APK installation,
++fixture receipt/root read, classification append, outcome write or phone acceptance
++ran. No accepted TEST suites or recovery rehearsal were repeated.
++
++The 22 existing pending paths, three protected files and untracked review artifacts
++remain preserved; the expanded preservation inventory contains 43 files. Only this
++additive plan entry changes tracked main content for the task. Main remains at the
++accepted commit, unpushed with an empty index; this entry remains uncommitted.
++Sanitized publication: `astra_response/Phase-16/16C-production/r1/`.
++
++Resume requires a separately authorized resolution of the operational blockers and
++an accessible phone, followed by fresh bounded preflight. Do not bypass the failures,
++blindly run an old runtime on 0019, delete subject/outcome history, or restore over
++newer user records. No feature work starts. CONTENTS PRICING remains the recommended
++next planning target after this deployment is completed and reviewed.
++
++
++### Phone-connected follow-up — 2026-11-16
++
++Brian connected the phone. ADB access now passes. Read-back installed APK SHA-256
++`a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3` matches the
++accepted 16A production artifact. APK signature verification passes with the existing
++signer `e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72`.
++A copy of the exact installed APK is retained privately for the later update.
++App UID/first-install identity and forwarding state are unchanged. No app launch,
++session inspection, installation, data clear or phone acceptance was performed.
++
++This removes the phone-access blocker only. The server was not accessed again;
++the previously recorded reboot, runtime-maintenance and backup-history issues
++remain unresolved by this task. No deployment or classification write occurred.
++Main preservation and the empty index were rechecked. This additive entry remains
++uncommitted; the sanitized follow-up is published at `astra_response/Phase-16/16C-production/r2/`
++with the earlier blocked package retained.
++
++
++### Authorized maintenance and completed production rollout — 2026-11-16
++
++**PHASE 16C PRODUCTION DEPLOYMENT COMPLETE — READY FOR REVIEW.**
++
++Brian separately authorized bounded backup-history reconciliation, a verified
++compatible Python patch update, one graceful VM115 reboot and continuation of the
++existing deployment. Only VM115 was maintained; no host/other-guest reboot, OS release
++upgrade, unrelated dependency update or feature work occurred.
++
++Exact repository inventory and dump readbacks attributed two new unmatched
++Proxmox-only database snapshots to failed November 1 and November 6 backup runs.
++Neither had a Drive copy or successful receipt. Both were added to the existing
++failed/partial-run ledger, with its earlier partial run preserved. Read-only retention
++PLAN then passed. All snapshots, original receipts and permanent pins remain;
++no forget/prune/deletion or broad ignore rule was used. Redacted failure logs do not
++establish the underlying transport failure; a recurring cause remains unproven.
++
++Reused the complete November 16 10:11:42 UTC schema-3/0018 recovery point after
++eight artifact readbacks, both repository integrity checks and an additional archived
++market-credential comparison. The guarded migration repeated its required fresh
++readbacks/checks. No new backup, restore rehearsal or data restore was performed.
++The 04:00 America/Chicago schedule and configured credentials remain unchanged.
++
++Official Python 3.13.18 source and the established release-manager signature were
++verified. The optimized side-by-side build, standard-library probes, locked dependencies
++and service-user 0018 compatibility passed. An immutable maintenance release retained
++the old application file bytes while separately binding the runtime amendment.
++Python 3.13.16 and the previous release remain retained; system Python is unchanged.
++One graceful VM115 reboot activated kernel `6.8.0-149-generic`. Data mount, PostgreSQL,
++API, HTTPS and required services/timers passed, with no remaining reboot marker.
++Failed statuses were cleared only after their conditions were resolved.
++
++Built accepted application commit `50f66837addf77ddd1c1a69eed0a873c17163a81`
++in an isolated clean worktree. The one backend/web build and matching production APK
++exclude unfinished capture work. Final immutable release is
++`phase16c-outcomes-production-r2`, manifest SHA-256
++`77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c`.
++Its certificate hook uses exact accepted Git LF bytes instead of the Windows CRLF
++materialization; the distinct packaging identity is recorded, not claimed identical.
++No application source amendment was needed. Existing guarded migration 0019 and
++enumerated runtime grants passed; runtime has read/append but no update/delete/truncate
++access to subject history. API, backup-format and credential-selection checks passed.
++
++Installed APK SHA-256
++`959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3`
++with signer `e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72`
++in place. Exact installed bytes and unchanged UID/first-install identity were verified.
++The prior APK remains retained. No uninstall, data clear, forced downgrade or signer
++replacement occurred. Brian signed in locally; no password, cookie or CSRF was read.
++
++The exact retained 16A root was resolved from its authorized private receipt and its
++ownership/original forecast/existing outcome matched. UNKNOWN became SYNTHETIC through
++one ordinary guarded UI submission and exact-ID readback. Phone report, exclusion from
++REAL totals, existing outcome history, report reopening and normal set search passed.
++There is one SYNTHETIC record and zero eligible REAL records. Server readback confirms
++all original forecast/outcome history unchanged, no provider attempts added, and no
++dataset reviews/releases. The task-owned phone forward was removed; the new APK remains
++installed and signed in. All 14 final health checks pass; zero failed units remain.
++
++Accepted TEST campaigns and recovery qualification were reused. No dataset CLI,
++export, training, new fixture, pricing refresh or provider/AI call was performed.
++Populated 0019 now prevents downgrade: retain the 0019-compatible runtime and history;
++do not switch an old 0018 release onto it or restore over newer records.
++
++All 43 originally inventoried files, including the 22 pending paths, protected files,
++stopped capture work and review artifacts, remain byte-identical. This additive Plan111
++record stays uncommitted; main remains at the accepted source with an empty index and
++is not pushed. Only the sanitized continuation package is published on astra-response:
++`astra_response/Phase-16/16C-production/r3/`. Earlier r1/r2 packages are preserved.
++Wider Phase16 remains open. CONTENTS PRICING is the next planning recommendation only.
++
++
++### Production acceptance and local documentation closeout — 2026-11-16
++
++**PHASE 16C SOURCE/TEST AND PRODUCTION DEPLOYMENT — ACCEPTED / CLOSED.**
++
++Brian accepts the rollout and bounded maintenance recorded in
++[production r3](https://github.com/abrianbaker80/Brickvault_Apprisal_App/blob/320436f5b5b247c6cfc09f97c99afbaa0ece6d99/astra_response/Phase-16/16C-production/r3/REVIEW.md).
++The dated blocked preflight, phone follow-up and completed deployment above remain
++historical records. This one-file documentation checkpoint does not relabel or rebuild
++deployed artifacts; no application source amendment was required during deployment.
++
++Accepted identities:
++
++- Application source: `50f66837addf77ddd1c1a69eed0a873c17163a81`.
++- Release: `phase16c-outcomes-production-r2`.
++- Manifest SHA-256: `77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c`.
++- Schema: `0019_reviewed_dataset_foundation`.
++- Installed APK SHA-256: `959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3`.
++
++Runtime, maintenance, recovery and phone evidence are reused from r3. The retained
++fixture's exact-ID SYNTHETIC classification and report exclusion passed without a real
++purchase/sale being fabricated; forecast/outcome history remained unchanged. Two
++incomplete backup runs were reconciled and excluded from recovery, but their underlying
++failure cause remains **UNESTABLISHED**, not repaired or proven absent. The existing
++November 16 schema-0018 recovery point was reverified; no new backup, schema-0019 backup
++or full restore rehearsal is claimed. Populated 0019 requires a compatible runtime;
++history must not be removed to force downgrade.
++
++Deploying reporting/classification tables does not confer real dataset/export/training
++readiness or Linux materialization qualification. Wider Phase 16 and the full original
++specification remain open. Capture remains stopped/unqualified. CONTENTS PRICING remains
++the next planning recommendation only; no implementation starts in this closeout.
++
++This closeout runs documentation/Git/preservation checks only. No live, test, build or
++operational work is repeated; the production server and signed-in phone are untouched.
++Only Plan 111 is committed locally, with main unpushed and the final index empty.
++Unrelated pending/protected files, prior publications and private evidence remain
++preserved and unstaged. A separate sanitized r4 closeout package is published on
++astra-response; the local documentation commit is distinct from the deployed source.

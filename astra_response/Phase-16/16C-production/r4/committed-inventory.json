@@ -1,0 +1,14 @@
+{
+  "application_source_paths": 0,
+  "path_count": 1,
+  "paths": [
+    {
+      "added_lines": 180,
+      "git_blob": "e1ea5a9f0c4e7c4bfda0fbc8f4889eeb41537a6c",
+      "path": "docs/plans/111-phase-16c-outcomes-reporting.md",
+      "removed_lines": 0,
+      "sha256": "c12652d59885abe843b5562b946a631eaa97e381ebb8b337bd55ac01779cdafa",
+      "status": "M"
+    }
+  ]
+}

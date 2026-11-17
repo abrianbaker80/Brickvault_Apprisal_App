@@ -1,0 +1,14 @@
+{
+  "accepted_operational_evidence_commit": "320436f5b5b247c6cfc09f97c99afbaa0ece6d99",
+  "branch": "main",
+  "commit": "97130dac80e3351af62ea8d2168c62fefcaae133",
+  "committed_paths": [
+    "docs/plans/111-phase-16c-outcomes-reporting.md"
+  ],
+  "deployed_application_source": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "deployed_artifacts_relabelled_or_rebuilt": false,
+  "main_pushed": false,
+  "parent": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "scope": "Local documentation-only checkpoint",
+  "subject": "Accept Phase 16C production outcomes reporting deployment"
+}
