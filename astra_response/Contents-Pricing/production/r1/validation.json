@@ -1,0 +1,125 @@
+{
+  "observed_utc": "2026-11-17T14:48:26.806366+00:00",
+  "ordinary_health": {
+    "PRIVATE_IMAGE_STORAGE": true,
+    "SERVICES": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "UFW": true,
+    "CLOCK": true,
+    "ROOT_SPACE": true,
+    "DATA_SPACE": true,
+    "REBOOT_PENDING": true,
+    "SECURITY_UPDATES": true
+  },
+  "operational_unit_state": {
+    "observed_utc": "2026-11-17T14:49:20.147735+00:00",
+    "retention_error": "Partial or unrecognized backup history.",
+    "failed_units": "brickvault-health.service loaded failed failed BrickVault lightweight production health",
+    "api_state": "active",
+    "health_unit": "Result=exit-code\nExecMainExitTimestamp=Tue 2026-11-17 14:43:19 UTC\nExecMainStatus=1\nActiveState=failed",
+    "backup_timer": "active"
+  },
+  "recovery_admitted": false,
+  "backup_attempts": 1,
+  "backup_failure": {
+    "api_state": "active",
+    "backup_journal_present": false,
+    "completed_utc": "2026-11-17T14:43:17.625127+00:00",
+    "failure_category": "BackupError",
+    "failure_locations": [
+      {
+        "function": "<module>",
+        "line": 20
+      },
+      {
+        "function": "backup",
+        "line": 611
+      },
+      {
+        "function": "_backup_locked",
+        "line": 647
+      },
+      {
+        "function": "_capture",
+        "line": 684
+      },
+      {
+        "function": "stream_to_two",
+        "line": 485
+      }
+    ],
+    "new_backups": 1,
+    "started_utc": "2026-11-17T14:41:04.546267+00:00",
+    "status": "BLOCKED"
+  },
+  "partial_artifacts": {
+    "proxmox": [
+      {
+        "time": "2026-11-17T14:41:14.975595603Z",
+        "artifact_names": [
+          "database.dump"
+        ]
+      }
+    ],
+    "drive": []
+  },
+  "complete_receipt_count": 57,
+  "latest_complete_receipt": {
+    "sha256": "0755204da15a11b16f81d066696be96d7e0a0a83b4ecc5a4200d76fe93f8c131",
+    "verified_at_utc": "2026-11-17T10:08:38.621868+00:00",
+    "revisions": [
+      "0019_reviewed_dataset_foundation"
+    ],
+    "proof_present": false
+  },
+  "unchanged_table_counts": {
+    "market_mapping_revision": 3,
+    "market_policy": 1,
+    "provider_scope_state": 1,
+    "provider_cache_entry": 4,
+    "market_observation": 4,
+    "provider_refresh_job": 4,
+    "provider_fetch_run": 5,
+    "provider_budget_group": 3,
+    "provider_discovery_evidence": 1,
+    "product_refresh_operation": 1,
+    "product_refresh_view": 4,
+    "deal_forecast": 1,
+    "deal_outcome_revision": 1,
+    "dataset_subject_revision": 1,
+    "listing": 2,
+    "blob": 10,
+    "image_asset": 10,
+    "image_relation": 5,
+    "listing_image": 5,
+    "upload_receipt": 5,
+    "auth_principal": 1
+  },
+  "all_21_checked_fingerprints_identical": true,
+  "provider_attempt_delta": 0,
+  "observation_delta": 0,
+  "refresh_operation_delta": 0,
+  "mapping_readbacks_unchanged": true,
+  "backup_schedule_unchanged": true,
+  "source_and_release_checks": {
+    "canonical_git_files": 760,
+    "corrected_confirmation_bytes": true,
+    "migration_head_packaged": "0020_contents_market_refresh",
+    "server_staging": "PASS",
+    "release_builds": "PASS",
+    "accepted_test_suite_replayed": false
+  },
+  "preservation": {
+    "original_pending_paths": 22,
+    "unchanged_baseline_paths": 59,
+    "plan_existing_bytes_preserved": true,
+    "main_index_empty": true,
+    "main_commit_unchanged": true,
+    "original_proof_and_lineage_hashes_match": true
+  }
+}

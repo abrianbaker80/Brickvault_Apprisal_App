@@ -1,0 +1,53 @@
+{
+  "accepted_source": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "active": {
+    "release": "phase16c-outcomes-production-r2",
+    "manifest_sha256": "77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c",
+    "source": {
+      "commit": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+      "reviewed_id": "8b23e0dfa9c39b3e7e42663ec35bb1a4d2576f826477e98c9d7307df8e6a1e03"
+    },
+    "python": "3.13.18",
+    "schema": [
+      "0019_reviewed_dataset_foundation"
+    ]
+  },
+  "staged_not_active": {
+    "release": "contents-pricing-production-r1",
+    "application_source": "f79e94092d272a050ced989eb1761b34320bdd28",
+    "source_reviewed_id": "da89e336fb278ccd571281e4773318933393917e3ed7754371da192bd0388062",
+    "manifest_sha256": "c894c19cdaa2b75e12e29a3b872d04466af8cfd1f9e968b74e95cc6ab1eac103",
+    "archive_sha256": "69d8bf6cf790f688d3e1f4d2126ff6428c43aa0020db8b84f8488ae7a555b08f",
+    "target_schema": "0020_contents_market_refresh",
+    "runtime_target": "3.13.18",
+    "source_amendments": [],
+    "hook_lf_verified": true,
+    "capture_excluded": true
+  },
+  "candidate_apk_not_installed": {
+    "status": "PRODUCTION_APK_VERIFIED_NOT_INSTALLED",
+    "application_source": "f79e94092d272a050ced989eb1761b34320bdd28",
+    "sha256": "ef4eea9273929525f434fc464e30b81c1ab47ad1ae7b7675354d7b619c9b7db0",
+    "bytes": 4330848,
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "version_code": 1,
+    "min_sdk": 24,
+    "target_sdk": 36,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "webview_origin": "https://android.appraisal.abrianbaker.com",
+    "outcomes_report_present": true,
+    "share_present": true,
+    "capture_absent": true,
+    "test_trust_absent": true,
+    "system_only_trust": true
+  },
+  "installed_phone": {
+    "status": "UNCHANGED_PRODUCTION_PHONE",
+    "apk_sha256": "959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3",
+    "data_identity_preserved": true,
+    "forward_reverse_unchanged": true,
+    "installed_apk_unchanged": true,
+    "phone_changes": 0,
+    "temporary_phone_resources_created": 0
+  }
+}
