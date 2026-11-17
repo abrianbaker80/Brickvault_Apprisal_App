@@ -1,0 +1,18 @@
+{
+  "status": "PHONE_ACCESS_VERIFIED_PRIOR_APK_PRESERVED",
+  "checked_at_utc": "2026-11-17T00:02:27.514255+00:00",
+  "apk_sha256": "a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3",
+  "apk_bytes": 4321804,
+  "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+  "signature_verification": "PASS",
+  "matches_accepted_16a_production_apk": true,
+  "version_code": 1,
+  "data_identity_unchanged": true,
+  "prior_forward_reverse_state_unchanged": true,
+  "apk_installed": false,
+  "app_launched": false,
+  "session_inspected": false,
+  "password_cookie_csrf_read": false,
+  "server_access_this_followup": false,
+  "server_blockers_resolved": false
+}

@@ -1,0 +1,24 @@
+--- a/docs/plans/111-phase-16c-outcomes-reporting.md
++++ b/docs/plans/111-phase-16c-outcomes-reporting.md
+@@ -370,3 +370,21 @@
+ blindly run an old runtime on 0019, delete subject/outcome history, or restore over
+ newer user records. No feature work starts. CONTENTS PRICING remains the recommended
+ next planning target after this deployment is completed and reviewed.
++
++
++### Phone-connected follow-up — 2026-11-16
++
++Brian connected the phone. ADB access now passes. Read-back installed APK SHA-256
++`a9549c6037f1031bc60711720ccbc49f4a8f6a7028eff628d79eca9f98272bb3` matches the
++accepted 16A production artifact. APK signature verification passes with the existing
++signer `e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72`.
++A copy of the exact installed APK is retained privately for the later update.
++App UID/first-install identity and forwarding state are unchanged. No app launch,
++session inspection, installation, data clear or phone acceptance was performed.
++
++This removes the phone-access blocker only. The server was not accessed again;
++the previously recorded reboot, runtime-maintenance and backup-history issues
++remain unresolved by this task. No deployment or classification write occurred.
++Main preservation and the empty index were rechecked. This additive entry remains
++uncommitted; the sanitized follow-up is published at `astra_response/Phase-16/16C-production/r2/`
++with the earlier blocked package retained.
