@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "source_main": "20f78c74574834ade40dd4697e04ed3788e5f5d3",
+  "publication_branch": "astra-response",
+  "publication_path": "astra_response/Contents-Mapping/plan/r1",
+  "canonical_uncommitted_document": {
+    "path": "docs/plans/113-selected-component-mapping-onboarding.md",
+    "sha256": "c12b8e857d9e583ba45772aeb2718e6ef5fc111d071f8f45543b5912c8aa8554"
+  },
+  "application_source_changes": [],
+  "publication_files": [
+    {
+      "path": "astra_response/Contents-Mapping/plan/r1/PLAN.md",
+      "sha256": "c12b8e857d9e583ba45772aeb2718e6ef5fc111d071f8f45543b5912c8aa8554",
+      "bytes": 29456
+    },
+    {
+      "path": "astra_response/Contents-Mapping/plan/r1/REVIEW.md",
+      "sha256": "a8bbe6d2c8ea0c83870d9f89e392716bef5392c4d32cac60c99d6c2a0d48f3b6",
+      "bytes": 3346
+    },
+    {
+      "path": "astra_response/Contents-Mapping/plan/r1/documentation-checks.json",
+      "sha256": "0d826d75bf7999eacf55afba3f8f3dc13e019a9902b3247f9fe689642bb978a7",
+      "bytes": 1895
+    },
+    {
+      "path": "astra_response/Contents-Mapping/plan/r1/documentation-inventory.json",
+      "sha256": null,
+      "note": "This inventory enumerates itself; no recursive self-hash."
+    }
+  ]
+}

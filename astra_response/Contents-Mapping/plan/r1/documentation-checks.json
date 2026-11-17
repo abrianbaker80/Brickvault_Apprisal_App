@@ -1,0 +1,47 @@
+{
+  "task": "selected-component-mapping-onboarding-plan",
+  "date": "2026-11-17",
+  "status": "PASS_DOCUMENTATION_ONLY",
+  "source_main": "20f78c74574834ade40dd4697e04ed3788e5f5d3",
+  "plan_number": 113,
+  "checks": {
+    "one_new_canonical_plan": true,
+    "plan_copy_byte_identical": true,
+    "required_execplan_sections": 14,
+    "prior_paths_sha256_verified": 59,
+    "pending_application_paths_preserved": 22,
+    "prior_local_publication_files_preserved": 37,
+    "protected_files_byte_identical_and_unstaged": [
+      "AGENTS.md",
+      "services/api/tests/integration/test_catalog_search.py",
+      "services/api/tests/unit/test_catalog_parser.py"
+    ],
+    "original_git_status_preserved": true,
+    "main_index_empty": true,
+    "main_head_unchanged": true,
+    "no_main_push": true,
+    "relative_documentation_links_resolved": true,
+    "complete_new_document_content_reviewed": true,
+    "independent_plan_review": "completed; conditional-sharing, evidence-reuse, default-limit and challenge-expiry clarifications incorporated",
+    "traceability": "advances bounded contents mapping only; Plan 112 remains closed; economics/Hunt/recognition/capture remain outstanding",
+    "no_unrelated_document_edits": true
+  },
+  "not_run": [
+    "tests",
+    "builds",
+    "dependency installation",
+    "provider requests",
+    "production or phone access",
+    "database or service startup",
+    "mapping admission",
+    "price refresh",
+    "backup or restore",
+    "deployment"
+  ],
+  "publication_scope": "Only four new files under astra_response/Contents-Mapping/plan/r1/; no application-main commit",
+  "private_evidence": "not opened or modified",
+  "limitations": [
+    "Planning only; no implementation or coverage qualification",
+    "Additional supported real target and current provider-use approval remain later live gates"
+  ]
+}
