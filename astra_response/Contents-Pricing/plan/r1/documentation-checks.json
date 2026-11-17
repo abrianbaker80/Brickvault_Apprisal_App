@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "scope": "Documentation and prepublication preservation only",
+  "date": "2026-11-16",
+  "main_head": "97130dac80e3351af62ea8d2168c62fefcaae133",
+  "main_index_empty": true,
+  "original_pending_count": 22,
+  "original_pending_bytes_preserved": true,
+  "prior_local_publication_files": 33,
+  "prior_publication_bytes_preserved": true,
+  "only_new_main_plan": "docs/plans/112-selected-contents-market-refresh.md",
+  "plan_copy_byte_identical": true,
+  "protected_files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4",
+      "unchanged": true,
+      "unstaged": true
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7",
+      "unchanged": true,
+      "unstaged": true
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041",
+      "unchanged": true,
+      "unstaged": true
+    }
+  ],
+  "independent_planning_review": "PASS; live mapping coverage and provider readiness remain unverified",
+  "tests_builds_services_provider_calls": "NOT RUN",
+  "documentation_review": "Complete new plan and review text inspected; scope traced to existing requirement register; no unrelated status rewrites",
+  "publication_parent": "2520e2a8e0b41e690c1f59db5183f288108d76fd",
+  "publication_allowed_prefix": "astra_response/Contents-Pricing/plan/r1/",
+  "publication_files": [
+    "REVIEW.md",
+    "PLAN.md",
+    "documentation-inventory.json",
+    "documentation-checks.json"
+  ],
+  "markdown_local_links_and_whitespace": "PASS",
+  "publication_sensitive_pattern_scan": "PASS; reviewed allowlisted documentation only"
+}

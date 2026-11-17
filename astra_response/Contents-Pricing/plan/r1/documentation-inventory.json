@@ -1,0 +1,40 @@
+{
+  "purpose": "Sanitized contents pricing planning package",
+  "source_authority": "local main 97130dac80e3351af62ea8d2168c62fefcaae133",
+  "local_plan": "docs/plans/112-selected-contents-market-refresh.md",
+  "local_plan_status": "Uncommitted and unstaged",
+  "package_inventory": [
+    "REVIEW.md",
+    "PLAN.md",
+    "documentation-inventory.json",
+    "documentation-checks.json"
+  ],
+  "content_hashes": [
+    {
+      "path": "REVIEW.md",
+      "sha256": "93ef3be303adb2ecdba99f88e17f5c27a2e6f37c5ecd6e45bba9e570937809f9"
+    },
+    {
+      "path": "PLAN.md",
+      "sha256": "2d92d4aeb29a6a16fe7059fcee9e91cb34a4ea84cef34bd6dc638d67fa0beb6f"
+    },
+    {
+      "path": "documentation-checks.json",
+      "sha256": "00f101d45e7001e7f8eb93073566c863c3a256d36dd5366c46c90ac716a54e9f"
+    }
+  ],
+  "self_hash": "Omitted to avoid a recursive inventory hash",
+  "changed_application_files": [],
+  "proposed_not_created_migration": "0020_contents_market_refresh",
+  "requirements": [
+    "R-03",
+    "R-04",
+    "R-11",
+    "R-12",
+    "R-13",
+    "R-14",
+    "R-35",
+    "R-37"
+  ],
+  "deferred_economics": "Unchanged; outstanding and deferred"
+}
