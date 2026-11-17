@@ -1,0 +1,172 @@
+{
+  "candidates": [
+    {
+      "color_id": null,
+      "color_identifier": null,
+      "color_name": null,
+      "color_namespace": null,
+      "eligible_mapping": null,
+      "evidence_id": "16143ce1-d1e0-4cf8-bffb-28026b531fca",
+      "extra_quantity": 0,
+      "item_type": "MINIFIG",
+      "occurrence_id": "0e7de3b1-63f6-45c0-b595-4c2999a0e8e0",
+      "part_id": null,
+      "regular_quantity": 1,
+      "revision_id": "66f77536-fd04-4394-b7b0-6beec7c008c5",
+      "set_id": "de3f9437-23a4-4f15-abe9-fcc2ac9c65bd",
+      "set_namespace": "rebrickable",
+      "set_number": "21333-1",
+      "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+      "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+      "target_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+      "target_identifier": "fig-012609",
+      "target_namespace": "rebrickable"
+    },
+    {
+      "color_id": "14567467-26a3-4d98-b1ba-0c997443bb94",
+      "color_identifier": "15",
+      "color_name": "White",
+      "color_namespace": "rebrickable",
+      "eligible_mapping": null,
+      "evidence_id": "ec3b8bda-c03a-4d05-872d-4bc29e56e345",
+      "extra_quantity": 0,
+      "item_type": "PART",
+      "occurrence_id": "587410c0-9252-427b-8fb1-3e9f781d8667",
+      "part_id": "c2ddbb86-f38b-4aa7-9247-d16f9014b3c2",
+      "regular_quantity": 2,
+      "revision_id": "12e689d0-4d4f-4197-8cad-5d68c21745db",
+      "set_id": "8f9ada86-c277-46b8-ae07-e71e0e495fd8",
+      "set_namespace": "rebrickable",
+      "set_number": "10016-1",
+      "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+      "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+      "target_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+      "target_identifier": "3001",
+      "target_namespace": "rebrickable"
+    }
+  ],
+  "current_active": {
+    "generation": 1,
+    "manifest_digest": "619af89bce55b040d2d745541793c33254e559a883b94ec6c9ab61d644e17f15",
+    "snapshot_id": "9ba3056b-690d-4686-bd96-109981f696ea",
+    "source_version_id": "cdf842d4-c525-4324-a990-55cbfaedaa4a",
+    "state": "accepted",
+    "synthetic": false
+  },
+  "original_identity_date": "2026-09-11",
+  "original_proof_snapshot": "243ee681-2c7d-4cfc-b7f1-204577fa93ba",
+  "retained_manifest_sha256": "9510217acf3d5fa81707b226f8b8d1088c2af3040cc395fbb0acf34d65d13145",
+  "retained_proof_sha256": "1db3445152faae8a7024195f8d6f716600fc375dd60a1d1da9af55e52a61d29d",
+  "review_bindings": [
+    {
+      "identity_indices": [
+        1,
+        3
+      ],
+      "original_canonical_id": "03760fc9-c418-4996-b749-66bb52aeeacd",
+      "original_identity_timestamps": [
+        {
+          "finished_at": "2026-09-11 23:28:08.039396+00:00",
+          "started_at": "2026-09-11 23:28:07.774020+00:00"
+        },
+        {
+          "finished_at": "2026-09-11 23:28:37.631488+00:00",
+          "started_at": "2026-09-11 23:28:37.412603+00:00"
+        }
+      ],
+      "selection_binding": "b6ed2b60ed5177e81b616c32603d84e66fa003e3cc800a6a751eaca03a0d59d7",
+      "target": {
+        "color_id": null,
+        "item_no": "idea106",
+        "item_type": "MINIFIG"
+      }
+    },
+    {
+      "identity_indices": [
+        2,
+        4,
+        5,
+        6
+      ],
+      "original_canonical_id": "b366296d-1f7e-4313-a2e3-54e2e8172a6f",
+      "original_identity_timestamps": [
+        {
+          "finished_at": "2026-09-11 23:28:09.242095+00:00",
+          "started_at": "2026-09-11 23:28:09.049636+00:00"
+        },
+        {
+          "finished_at": "2026-09-11 23:28:38.858314+00:00",
+          "started_at": "2026-09-11 23:28:38.641339+00:00"
+        },
+        {
+          "finished_at": "2026-09-11 23:28:40.050348+00:00",
+          "started_at": "2026-09-11 23:28:39.869110+00:00"
+        },
+        {
+          "finished_at": "2026-09-11 23:28:41.343062+00:00",
+          "started_at": "2026-09-11 23:28:41.061249+00:00"
+        }
+      ],
+      "selection_binding": "9f0a1155a7f0539c8dddc36181966b33cb254f9f651335ce6ee8583469ebd1c9",
+      "target": {
+        "color_id": 1,
+        "item_no": "3001",
+        "item_type": "PART"
+      }
+    }
+  ],
+  "source_validation": {
+    "files": [
+      {
+        "dataset": "colors",
+        "file_sha256": "6be1e6a60c6151b3f63b0a90d8df742faba107aa81d458923b7c20d40e5a3912",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "58dce31ff8089734fc39e30b57c55e7158eeca603666c55ab43feb12adc7abc4"
+        ]
+      },
+      {
+        "dataset": "elements",
+        "file_sha256": "45f2a2aecfbd3f7f36e1c8bf5f1bafc4e16c9fe1fed8dd69aba5c28d6ffea6f7",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "2b8aec7b9248789954aa0ffec0b0817ccbdb08d0c9da1e659b538c4bd628c85e"
+        ]
+      },
+      {
+        "dataset": "inventory_minifigs",
+        "file_sha256": "3e266a9cb62bf91607bf6127d95de43283fb5237ea6ae81c3e96b73834e14c50",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "d561f41a9589172c8cd99702c1abbf985db48dae9049e056a82cd25fe6f369da"
+        ]
+      },
+      {
+        "dataset": "inventory_parts",
+        "file_sha256": "caa5eb725b29e6b9f8a9f21e38588c259442f10e01067bff4ea1414e7aa12eac",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "3723f3945ef682d6515e65fbc6e2ae0c6448c4ea16c9e8005798f3798b852aad"
+        ]
+      },
+      {
+        "dataset": "minifigs",
+        "file_sha256": "720daf07a9e4aa0bf52afd7181cdc0d906cf0e54fad94dd5a351058af4fe450a",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "8df2fed3d3948655a18ca1789bf7a473666036ca84144055c2fd7a3e94e295f5"
+        ]
+      },
+      {
+        "dataset": "parts",
+        "file_sha256": "34f0d5c3f6ce390c1029bcde700a028a4eb2292e76f1155c1a32a430ca51a4bb",
+        "row_count_checked": 1,
+        "row_sha256": [
+          "5e3cc3b9fb71ff050ea02fe8f8d9268dade7c53598eb47160b09ea5e00659a52"
+        ]
+      }
+    ],
+    "records_checked": 6,
+    "status": "EXACT_RETAINED_SOURCE_FILES_AND_ROWS_MATCH_PRODUCTION"
+  }
+}

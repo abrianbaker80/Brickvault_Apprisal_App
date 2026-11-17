@@ -1,0 +1,23 @@
+{
+  "main_head": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "main_index_empty": true,
+  "main_push": false,
+  "preserved_pending_paths": 22,
+  "preserved_baseline_files": 59,
+  "plan_append_only": true,
+  "plan_left_uncommitted": true,
+  "plan_before_sha256": "c36a8d8683273c567078be2d7772f3c98e629ce198c87743e14ebe30baa099ad",
+  "plan_after_sha256": "2ec248b53d711bd3066f5f5b35e2cd7b67fbef6b71cb92163eae244432c8974d",
+  "protected_files_unchanged": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "original_proof_sha256": "1db3445152faae8a7024195f8d6f716600fc375dd60a1d1da9af55e52a61d29d",
+  "original_manifest_sha256": "9510217acf3d5fa81707b226f8b8d1088c2af3040cc395fbb0acf34d65d13145",
+  "original_proof_attempt_count_unchanged": 19,
+  "retained_source_files_checked": 6,
+  "retained_rows_checked": 6,
+  "publication_parent": "15cee5a1bca7d059546b14be5bc4ebb16348c169",
+  "scope": "No application edits, new tests, builds, dependencies, service changes, provider credentials, deployment, migration, phone or dataset operations."
+}
