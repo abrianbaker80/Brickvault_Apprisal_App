@@ -1,0 +1,223 @@
+{
+  "status": "COMPLETE",
+  "before_utc": "2026-11-17T16:14:07.881519+00:00",
+  "after_utc": "2026-11-17T16:16:20.364278+00:00",
+  "results": [
+    {
+      "set_number": "21333-1",
+      "identity": "rebrickable:fig-012609",
+      "color": null,
+      "provider_identity": "BrickLink MINIFIG idea106",
+      "regular_quantity": 1,
+      "extras_included": false,
+      "mapping_id": "a136912a-069e-4ea2-8817-d0a9dae641f2",
+      "target": {
+        "target_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+        "item_type": "MINIFIG",
+        "item_no": "idea106",
+        "provider_color": null,
+        "regular_quantity": 1,
+        "extra_quantity": 0,
+        "selected_quantity": 1,
+        "mapping": "VERIFIED"
+      },
+      "plan": {
+        "action": "FETCH",
+        "state": "READY",
+        "identity_initials": 0,
+        "price_initials": 1,
+        "retry_reserve": 2,
+        "maximum_attempts": 3,
+        "expires_at": "2026-11-17T16:29:33.459926Z",
+        "confirmed_at": "2026-11-17 16:14:50.417753+00:00"
+      },
+      "result": "PRICED",
+      "operation_state": "COMPLETE",
+      "actual": {
+        "identity": 0,
+        "price_initial": 1,
+        "retries": 0,
+        "uncertain": 0,
+        "total": 1
+      },
+      "displayed": {
+        "condition": "U",
+        "basis": "sold",
+        "state": "priced",
+        "unit_price": "26.78",
+        "currency": "USD",
+        "statistic": "quantity_weighted_average",
+        "fetched_at": "2026-11-17T16:14:51.500684Z",
+        "stale_after": "2026-11-17T20:14:51.212216Z",
+        "display_until": "2026-11-17T21:59:51.212216Z",
+        "window": "rolling_last_six_months",
+        "sample_count": null,
+        "refresh_state": "succeeded"
+      },
+      "server": {
+        "average": "26.7780",
+        "quantity_weighted_average": "26.7780",
+        "total_quantity": 5,
+        "occurrence_count": 5,
+        "returned_item_no": "idea106",
+        "returned_item_type": "MINIFIG",
+        "returned_condition": "U",
+        "returned_currency": "USD",
+        "returned_color": null,
+        "availability": "available",
+        "window_description": "rolling_last_six_months",
+        "boundary_certainty": "not_supplied",
+        "fetched_at": "2026-11-17 16:14:51.500684+00:00",
+        "fresh_until": "2026-11-17 20:14:51.212216+00:00",
+        "display_eligible_until": "2026-11-17 21:59:51.212216+00:00"
+      },
+      "ui_server_agreement": true,
+      "other_views": "unrequested",
+      "sample_limitation": "Contents response sample_count is null and the phone does not render a sample count; server occurrence_count and total_quantity retained below.",
+      "request_binding": {
+        "item_type": "MINIFIG",
+        "item_no": "idea106",
+        "color_id": null,
+        "condition": "U",
+        "basis": "sold",
+        "currency": "USD",
+        "country": "US"
+      }
+    },
+    {
+      "set_number": "10016-1",
+      "identity": "rebrickable:3001",
+      "color": "rebrickable:15",
+      "provider_identity": "BrickLink PART 3001 color 1",
+      "regular_quantity": 2,
+      "extras_included": false,
+      "mapping_id": "874d6fbf-81c1-4016-a950-685e3bbfe255",
+      "target": {
+        "target_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+        "item_type": "PART",
+        "item_no": "3001",
+        "provider_color": 1,
+        "regular_quantity": 2,
+        "extra_quantity": 0,
+        "selected_quantity": 2,
+        "mapping": "VERIFIED"
+      },
+      "plan": {
+        "action": "FETCH",
+        "state": "READY",
+        "identity_initials": 0,
+        "price_initials": 1,
+        "retry_reserve": 2,
+        "maximum_attempts": 3,
+        "expires_at": "2026-11-17T16:30:58.376281Z",
+        "confirmed_at": "2026-11-17 16:16:07.826444+00:00"
+      },
+      "result": "PRICED",
+      "operation_state": "COMPLETE",
+      "actual": {
+        "identity": 0,
+        "price_initial": 1,
+        "retries": 0,
+        "uncertain": 0,
+        "total": 1
+      },
+      "displayed": {
+        "condition": "U",
+        "basis": "sold",
+        "state": "priced",
+        "unit_price": "0.10",
+        "currency": "USD",
+        "statistic": "quantity_weighted_average",
+        "fetched_at": "2026-11-17T16:16:09.458246Z",
+        "stale_after": "2026-11-17T20:16:08.604842Z",
+        "display_until": "2026-11-17T22:01:08.604842Z",
+        "window": "rolling_last_six_months",
+        "sample_count": null,
+        "refresh_state": "succeeded"
+      },
+      "server": {
+        "average": "0.0918",
+        "quantity_weighted_average": "0.0989",
+        "total_quantity": 29249,
+        "occurrence_count": 1387,
+        "returned_item_no": "3001",
+        "returned_item_type": "PART",
+        "returned_condition": "U",
+        "returned_currency": "USD",
+        "returned_color": null,
+        "availability": "available",
+        "window_description": "rolling_last_six_months",
+        "boundary_certainty": "not_supplied",
+        "fetched_at": "2026-11-17 16:16:09.458246+00:00",
+        "fresh_until": "2026-11-17 20:16:08.604842+00:00",
+        "display_eligible_until": "2026-11-17 22:01:08.604842+00:00"
+      },
+      "ui_server_agreement": true,
+      "other_views": "unrequested",
+      "sample_limitation": "Contents response sample_count is null and the phone does not render a sample count; server occurrence_count and total_quantity retained below.",
+      "request_binding": {
+        "item_type": "PART",
+        "item_no": "3001",
+        "color_id": 1,
+        "condition": "U",
+        "basis": "sold",
+        "currency": "USD",
+        "country": "US"
+      }
+    }
+  ],
+  "counts_before": {
+    "provider_fetch_run": 5,
+    "market_observation": 4,
+    "product_refresh_operation": 1,
+    "product_refresh_target": 0
+  },
+  "counts_after": {
+    "provider_fetch_run": 7,
+    "market_observation": 6,
+    "product_refresh_operation": 3,
+    "product_refresh_target": 2
+  },
+  "actual_attempts": {
+    "identity": 0,
+    "price_initial": 2,
+    "retries": 0,
+    "uncertain": 0,
+    "total": 2,
+    "authorized_maximum": 6
+  },
+  "unrelated_activity": 0,
+  "preserved_tables": [
+    "market_mapping_revision",
+    "market_policy",
+    "provider_discovery_evidence",
+    "deal_forecast",
+    "deal_outcome_revision",
+    "dataset_subject_revision",
+    "listing",
+    "blob",
+    "image_asset",
+    "image_relation",
+    "listing_image",
+    "upload_receipt",
+    "auth_principal",
+    "application_settings",
+    "selling_profile",
+    "catalog_active_snapshot"
+  ],
+  "mappings_unchanged": true,
+  "api_active": true,
+  "release": "contents-pricing-production-r2",
+  "schema": [
+    "0020_contents_market_refresh"
+  ],
+  "accounting_note": "Generic contents budget group ceiling is 0 identity / 4 initial / 2 retries / 6 total. The immutable selected plan and database attempt guard impose the stricter 0 / 1 / 2 / 3 authorization per operation. Actual usage was 0 / 1 / 0 / 1 each.",
+  "response_color_limitation": "The part price response did not echo color (returned_color null); the saved request/cache and reviewed mapping are exactly BrickLink PART 3001 color 1. No assertion of independently echoed color is made.",
+  "phone": {
+    "owned_forward_removed": true,
+    "prior_forward_reverse_state_restored": true,
+    "app_left_signed_in": true,
+    "final_page": "10016-1 Contents",
+    "no_install_restart_clear_or_package_check": true
+  }
+}

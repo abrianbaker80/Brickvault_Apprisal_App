@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "original_pending_paths_preserved": 22,
+  "protected_files_preserved": [
+    "AGENTS.md",
+    "services/api/tests/integration/test_catalog_search.py",
+    "services/api/tests/unit/test_catalog_parser.py"
+  ],
+  "baseline_paths_preserved": 59,
+  "all_preexisting_dirty_paths_except_additive_plan_preserved": 61,
+  "private_proof_hashes_preserved": 3,
+  "prior_plan_byte_prefix_preserved": true,
+  "backup_source_and_tests_preserved": true,
+  "main_head": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "main_index_empty": true,
+  "main_push_performed": false,
+  "server_preserved_tables": [
+    "market_mapping_revision",
+    "market_policy",
+    "provider_discovery_evidence",
+    "deal_forecast",
+    "deal_outcome_revision",
+    "dataset_subject_revision",
+    "listing",
+    "blob",
+    "image_asset",
+    "image_relation",
+    "listing_image",
+    "upload_receipt",
+    "auth_principal",
+    "application_settings",
+    "selling_profile",
+    "catalog_active_snapshot"
+  ],
+  "owned_phone_inspection_removed": true
+}
