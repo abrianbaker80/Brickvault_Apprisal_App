@@ -1,0 +1,46 @@
+{
+  "api_pause_ended_at_utc": "2026-11-17T00:58:32.988536+00:00",
+  "api_pause_started_at_utc": "2026-11-17T00:58:31.884959+00:00",
+  "api_pauses": 1,
+  "backup_schedule_unchanged": true,
+  "completed_at_utc": "2026-11-17T00:58:38.077616+00:00",
+  "credentials_preserved": true,
+  "failed_units": 0,
+  "health": {
+    "BACKUP_FRESH_RETENTION_READY": true,
+    "CLOCK": true,
+    "DATABASE_READY": true,
+    "DATA_MOUNT": true,
+    "DATA_SPACE": true,
+    "HTTPS_CERTIFICATE": true,
+    "LISTENERS": true,
+    "PRIVATE_IMAGE_STORAGE": true,
+    "REBOOT_PENDING": true,
+    "RELEASE_RUNTIME_HOOK": true,
+    "ROOT_SPACE": true,
+    "SECURITY_UPDATES": true,
+    "SERVICES": true,
+    "UFW": true
+  },
+  "manifest_sha256": "77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c",
+  "migration_admission_readbacks": 8,
+  "migration_admission_repository_checks": 2,
+  "new_backups": 0,
+  "post_migration_image_and_credential_backup_admission": true,
+  "provider_attempts_added": 0,
+  "provider_calls": 0,
+  "recovery_admitted_at_utc": "2026-11-17T00:58:31.854388+00:00",
+  "release": "phase16c-outcomes-production-r2",
+  "runtime_grants": {
+    "append": true,
+    "change": false,
+    "read": true,
+    "remove": false,
+    "truncate": false
+  },
+  "schema": [
+    "0019_reviewed_dataset_foundation"
+  ],
+  "started_at_utc": "2026-11-17T00:53:06.027377+00:00",
+  "status": "PASS"
+}

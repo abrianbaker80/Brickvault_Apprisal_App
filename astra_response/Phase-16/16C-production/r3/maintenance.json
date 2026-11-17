@@ -1,0 +1,158 @@
+{
+  "backup_history": {
+    "cause": "Two new failed backup attempts; no Drive snapshots, no successful receipt; underlying transport failure not established by redacted logs",
+    "completed_at_utc": "2026-11-17T00:14:39.569359+00:00",
+    "deletion_invoked": false,
+    "failed_history_recovery_eligible": false,
+    "ledger_after_sha256": "1b3ab01132ec3acc1c09d6a576790dd447f6ee2a73dc62bd79af10c8157e9dc3",
+    "ledger_before_sha256": "7f8cd255998c899ae1a9c3462f31786130522839697b72f2211b0746aec35004",
+    "missing_expected_snapshots": 0,
+    "new_failed_snapshots_retained": 2,
+    "original_receipts_pins_preserved": true,
+    "previous_partial_runs_preserved": 1,
+    "reconciled_failed_runs": 2,
+    "retention_plan_valid": true,
+    "runtime_code_change_required": false,
+    "status": "PASS"
+  },
+  "guest_reboot": {
+    "guest": "brickvault-appraisal",
+    "host_or_other_guest_reboot": false,
+    "kernel_before": "6.8.0-147-generic",
+    "requested_at_utc": "2026-11-17T00:51:57Z",
+    "status": "AUTHORIZED_GUEST_REBOOT_REQUESTED",
+    "vmid": 115
+  },
+  "immutable_maintenance_release": {
+    "amendment": {
+      "base_manifest_sha256": "b6830ea40099505ee37f73697de0c0ecffb139a442d161fed9b7b93d138b2c0f",
+      "kind": "python-patch-runtime-only",
+      "runtime": "3.13.18",
+      "verified_python_source_sha256": "abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68"
+    },
+    "application_files_byte_identical": true,
+    "manifest_sha256": "069468d6a7f0e8f2384e1220d688f4022d0b7963a8d2f272da1861411f09a6d4",
+    "prior_runtime_release_preserved": true,
+    "release": "phase16a-python31318-maintenance-r1",
+    "runtime": "3.13.18",
+    "stage": "prepare-immutable-maintenance-release",
+    "status": "PASS"
+  },
+  "inspection_corrections": [
+    "An initial selective dump-reader harness left task-owned readers after an early consumer exit. Exact process identities were verified and those readers stopped gracefully; the corrected reader handles early pipe closure and waits for children. Normal recovery verification was rerun successfully, without forced unlock.",
+    "A guessed owner assertion in an early attribution probe was corrected to the established production owner constant before attribution passed.",
+    "The phone inspection selector was corrected to the observed combobox role before any classification submission. Production source was unchanged."
+  ],
+  "maintenance_activation": {
+    "api_pause": true,
+    "backup_schedule_unchanged": true,
+    "completed_at_utc": "2026-11-17T00:51:38.651553+00:00",
+    "credentials_unchanged": true,
+    "health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": false,
+      "RELEASE_RUNTIME_HOOK": true,
+      "REPOSITORY_IDENTITIES": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "manifest_sha256": "069468d6a7f0e8f2384e1220d688f4022d0b7963a8d2f272da1861411f09a6d4",
+    "pause_ended_at_utc": "2026-11-17T00:51:01.459550+00:00",
+    "pause_started_at_utc": "2026-11-17T00:51:01.401941+00:00",
+    "prior_runtime_release_retained": true,
+    "release": "phase16a-python31318-maintenance-r1",
+    "runtime": "3.13.18",
+    "schema": [
+      "0018_deal_outcome_revisions"
+    ],
+    "stage": "post-switch",
+    "status": "PASS_REBOOT_PENDING"
+  },
+  "post_reboot": {
+    "api_https_postgresql_data_mount_required_services_timers": "PASS",
+    "boot_changed": true,
+    "checked_at_utc": "2026-11-17T00:52:41.275434+00:00",
+    "failed_units": 0,
+    "guest_only_reboot_count": 1,
+    "health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "kernel": "6.8.0-149-generic",
+    "prior_runtime_retained": true,
+    "reboot_required": false,
+    "release": "phase16a-python31318-maintenance-r1",
+    "runtime": "3.13.18",
+    "schema": [
+      "0018_deal_outcome_revisions"
+    ],
+    "status": "PASS"
+  },
+  "python_build": {
+    "gate": "runtime-built-not-activated",
+    "old_runtime_preserved": true,
+    "runtime_probe": [
+      "3.13.18",
+      "OpenSSL 3.0.13 30 Jan 2024"
+    ],
+    "status": "PASS",
+    "system_python_unchanged": true,
+    "version": "3.13.18"
+  },
+  "python_source": {
+    "bytes": 23243936,
+    "expected_sha256": "abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68",
+    "official_release": "https://www.python.org/downloads/release/python-31318/",
+    "retained_release_key_verified": true,
+    "sha256": "abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68",
+    "signature_verified": true,
+    "signer_expected": "7169605F62C751356D054A26A821E680E5FA6305",
+    "status": "PASS",
+    "system_python_unchanged": true,
+    "version": "3.13.18"
+  },
+  "recovery": {
+    "api_paused": false,
+    "artifact_readbacks": 8,
+    "backup_verified_at_utc": "2026-11-16T10:11:42.030793+00:00",
+    "completed_at_utc": "2026-11-17T00:25:40.093597+00:00",
+    "configuration_extra_readbacks": 1,
+    "credential_archive_readback_and_current_match": true,
+    "new_backup": false,
+    "receipt_sha256": "268ca27101c3790d763171624cadc0f8b7ed10e29489321a1e58d0d87cc99797",
+    "repository_checks": 2,
+    "stage": "existing-complete-recovery-readbacks",
+    "started_at_utc": "2026-11-17T00:21:38.159284+00:00",
+    "status": "PASS"
+  },
+  "scope": {
+    "new_backups": 0,
+    "restores": 0,
+    "retention_apply": false,
+    "snapshots_deleted": 0,
+    "source_changes": 0,
+    "system_python_unchanged": true,
+    "vm": 115
+  }
+}

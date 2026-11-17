@@ -1,0 +1,66 @@
+{
+  "classification": {
+    "appends": 1,
+    "credentials_read": false,
+    "reused_existing": false,
+    "status": "SYNTHETIC_CLASSIFICATION_CONFIRMED"
+  },
+  "fixture_identity": {
+    "classification": "UNKNOWN",
+    "expected_outcome_exact_match": true,
+    "owned_saved_original": true,
+    "revision": 0,
+    "status": "EXACT_RECEIPT_FIXTURE_IDENTITY_PASS",
+    "writes": 0
+  },
+  "phone": {
+    "classification_appends": 1,
+    "exact_existing_outcome_entry_verified": true,
+    "fixture_classification": "SYNTHETIC",
+    "fixture_excluded_from_real_totals": true,
+    "forecast_and_outcome_history_unchanged": true,
+    "no_store": true,
+    "normal_set_search_pass": true,
+    "password_cookie_csrf_read": false,
+    "phone_left_signed_in": true,
+    "provider_calls_requested": 0,
+    "real_count": 0,
+    "report_reopened": true,
+    "status": "BOUNDED_PRODUCTION_PHONE_ACCEPTANCE_PASS",
+    "synthetic_count": 1
+  },
+  "server": {
+    "backup_schedule_unchanged": true,
+    "checked_at_utc": "2026-11-17T01:01:42.076506+00:00",
+    "classification_appends": 1,
+    "dataset_reviews_releases": 0,
+    "failed_units": 0,
+    "fixture_classification": "SYNTHETIC",
+    "forecast_and_outcome_history_unchanged": true,
+    "health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "kernel": "6.8.0-149-generic",
+    "manifest_sha256": "77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c",
+    "market_credentials_still_in_backup_selection": true,
+    "provider_attempts_added": 0,
+    "reboot_required": false,
+    "release": "phase16c-outcomes-production-r2",
+    "runtime": "3.13.18",
+    "schema": "0019_reviewed_dataset_foundation",
+    "status": "FINAL_PRODUCTION_READBACK_PASS"
+  }
+}

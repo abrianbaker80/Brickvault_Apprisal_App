@@ -1,0 +1,37 @@
+{
+  "build_verification": {
+    "application_source": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+    "bytes": 4327420,
+    "capture_absent": true,
+    "min_sdk": 24,
+    "outcomes_report_present": true,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "sha256": "959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3",
+    "share_present": true,
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "status": "PRODUCTION_APK_VERIFIED_NOT_INSTALLED",
+    "system_only_trust": true,
+    "target_sdk": 36,
+    "test_trust_absent": true,
+    "version_code": 1,
+    "webview_origin": "https://android.appraisal.abrianbaker.com"
+  },
+  "cleanup": {
+    "data_identity_preserved": true,
+    "installed_apk_sha256": "959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3",
+    "owned_forward_removed": true,
+    "prior_forward_reverse_state_restored": true,
+    "status": "PHONE_TASK_CLEANUP_PASS"
+  },
+  "installation": {
+    "apk_sha256": "959124a7581954eff2860f817e25c03cee2592f1d3b223d73880655be79852d3",
+    "capture_excluded": true,
+    "in_place": true,
+    "production_api": "https://appraisal.abrianbaker.com",
+    "signer_sha256": "e4d375e7f1611cb1113620379ea171a176f32bb11cc7528b6c176a1a08dffe72",
+    "source": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+    "status": "PRODUCTION_OUTCOMES_APK_INSTALLED",
+    "uid_first_install_preserved": true,
+    "uninstall_data_clear_downgrade": false
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "api_web_build_count": 1,
+  "application_source": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+  "archive_sha256": "002c9a538f044693affa7ae195bc649bc91d8fd0de4806a2cc62884f19e26226",
+  "capture_excluded": true,
+  "hook_lf_verified": true,
+  "manifest_sha256": "77106cc2df68812fbe7c9e459d1bb43b85f12e1163b2264a3a55a061d43b834c",
+  "packaging_identity": {
+    "application_commit": "50f66837addf77ddd1c1a69eed0a873c17163a81",
+    "base_manifest_sha256": "b21485258f067eb5b97f663632f9f8c83fe6bcb618108ed720e0fc3bf7015bdb",
+    "canonical_lf_hook_sha256": "7a87bb323025a0aaab9575e42519bfc885217da5bd7dbf817c85353395db05f7",
+    "clean_source_reviewed_id": "72cb5acf61debbdee902e606226c0985f1271097c731d017eb9fee4c5c83f038",
+    "reason": "Use exact accepted Git LF hook bytes instead of Windows CRLF materialization"
+  },
+  "r1_materialization_retained_not_deployed": true,
+  "release": "phase16c-outcomes-production-r2",
+  "runtime_target": "3.13.18",
+  "source_amendments": [],
+  "source_compatibility_evidence": "Accepted 16A/16B/16C reused; normal API wheel, sdist and web build passed",
+  "source_reviewed_id": "8b23e0dfa9c39b3e7e42663ec35bb1a4d2576f826477e98c9d7307df8e6a1e03",
+  "target_schema": "0019_reviewed_dataset_foundation"
+}
