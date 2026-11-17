@@ -1,0 +1,215 @@
+--- a/docs/plans/112-selected-contents-market-refresh.md
++++ b/docs/plans/112-selected-contents-market-refresh.md
+@@ -395,3 +395,38 @@
+ this slice. Prior accepted Phase 16C/provider/device evidence is historical evidence only,
+ not newly repeated qualification. Next action is implementation review, then separately
+ authorized activation/deployment if accepted. Stop here.
++
++## 16. Review correction — late confirmation replay (2026-11-17)
++
++Review of r1 found that a duplicate confirmation could miss its receipt, then reject
++cache/job drift caused by the other copy committing and advancing the same operation.
++The deterministic TEST PostgreSQL terminal-race regression reproduced `REPLAN_REQUIRED`
++before correction. `ContentsService` now follows the existing whole-set pattern: after
++a failed new-confirmation/revalidation path, recover only the exact durable receipt.
++One helper verifies normalized contents selection for both initial and late recovery;
++existing scope/set/key/digest/time checks remain authoritative. Signature validation
++stays outside the late-recovery handler. Recovery reads only; it never dispatches,
++changes signed authorization, creates a replacement operation or resets accounting.
++
++Nine focused cases have passing evidence: five barrier-controlled late-replay cases
++(progressed, terminal, changed selection, mismatched digest and invalid signature),
++genuine drift without a matching receipt, existing concurrent/exact replay with
++changed-selection conflict, mixed terminal replay, and mapping drift before dispatch.
++The final five-case race run passed in 26.08s; four directly affected controls passed
++in the earlier focused run. A test-only lookup counter was corrected to count a lookup
++that raises a mismatch. Both runs used owned disposable TEST PostgreSQL and synthetic
++providers; replay left the operation, views and accounting unchanged. No leftovers.
++
++Affected Python lint/format and service typing pass. API-only package verification
++passed; corrected service bytes match the wheel, sdist and independently installed
++wheel (package check `58e7f9f1949b4951be6caa470018bb92`). No web or migration changes.
++The unchanged r1 request-cap, grants/migration, financial/evidence, UI/browser and
++recovery results are reused; no full validation campaign or live qualification ran.
++
++Only the service, its existing integration-test file and this plan changed from r1.
++All other 29 implementation paths, 22 pre-existing pending paths and prior publications
++remain byte-identical. Publish only sanitized review package
++`astra_response/Contents-Pricing/implementation/r2/`, preserving r1. Source and Plan 112
++remain uncommitted, main index empty and main unpushed. Real mappings/live-use gates,
++stopped capture and deferred economics remain unchanged. Ready for corrected
++implementation review; no application checkpoint, deployment or next feature.
+--- a/services/api/src/brickvault_api/contents.py
++++ b/services/api/src/brickvault_api/contents.py
+@@ -304,17 +304,34 @@
+             cooldown_until=cooldown,
+         )
+ 
+-    def confirm_selected(self, number: str, body: ContentsConfirmation) -> UUID:
+-        sid, _ = self.identity(number)
+-        receipt = body.confirmation
+-        existing = self._receipt_operation(sid, receipt)
++    def _contents_receipt_operation(self, set_id: UUID, body: ContentsConfirmation) -> UUID | None:
++        existing = self._receipt_operation(set_id, body.confirmation)
+         if existing:
+             raw = self.repository.status(existing)
+             if raw["operation"]["plan_snapshot"]["selection"] != body.selection.normalized():
+                 raise ProductRefreshError("IDEMPOTENCY_CONFLICT")
++        return existing
++
++    def confirm_selected(self, number: str, body: ContentsConfirmation) -> UUID:
++        sid, _ = self.identity(number)
++        receipt = body.confirmation
++        existing = self._contents_receipt_operation(sid, body)
++        if existing:
+             return existing
+         if not hmac.compare_digest(receipt.signature, self.signature(receipt, sid)):
+             raise ProductRefreshError("REPLAN_REQUIRED")
++        try:
++            return self._confirm_selected_new(number, body)
++        except ProductRefreshError:
++            # A duplicate can commit and advance after the initial receipt miss.
++            # Recover only its exact receipt and normalized selection, even if terminal.
++            existing = self._contents_receipt_operation(sid, body)
++            if existing:
++                return existing
++            raise
++
++    def _confirm_selected_new(self, number: str, body: ContentsConfirmation) -> UUID:
++        receipt = body.confirmation
+         raw = self.selected_plan(number, body.selection)
+         p = raw["plan"]
+         if digest(p) != receipt.digest:
+--- a/services/api/tests/integration/test_contents_refresh.py
++++ b/services/api/tests/integration/test_contents_refresh.py
+@@ -225,6 +225,130 @@
+         )
+ 
+ 
++@pytest.mark.parametrize(
++    ("terminal", "change", "error"),
++    [
++        (False, None, None),
++        (True, None, None),
++        (True, "selection", "IDEMPOTENCY_CONFLICT"),
++        (True, "digest", "REPLAN_REQUIRED"),
++        (True, "signature", "REPLAN_REQUIRED"),
++    ],
++    ids=["progressed", "terminal", "changed-selection", "mismatched-receipt", "invalid-signature"],
++)
++def test_late_confirmation_replay_after_committed_progress(
++    contents_service: ContentsService,
++    product: ProductHarness,
++    monkeypatch: pytest.MonkeyPatch,
++    terminal: bool,
++    change: str | None,
++    error: str | None,
++) -> None:
++    from concurrent.futures import ThreadPoolExecutor
++    from threading import Barrier
++    from uuid import UUID
++
++    from brickvault_api.market.product_refresh import ProductRefreshError
++    from brickvault_api.market.product_refresh_models import digest
++    from brickvault_api.refresh_models import RefreshConfirmation
++
++    s = contents_service
++    plan = s.prepare("80000-1", selection("normal", "figure-line"))
++    body = ContentsConfirmation(selection=plan.selection, confirmation=plan.confirmation)
++    duplicate = ContentsService(s.product, s.repository, s.account, s.signing_key, s.provider)
++    held_body = body
++    if change == "selection":
++        held_body = body.model_copy(update={"selection": selection("normal")})
++    elif change == "digest":
++        receipt = body.confirmation.model_copy(update={"digest": "f" * 64})
++        receipt = receipt.model_copy(update={"signature": s.signature(receipt, key("set"))})
++        held_body = body.model_copy(update={"confirmation": receipt})
++    elif change == "signature":
++        held_body = body.model_copy(
++            update={"confirmation": body.confirmation.model_copy(update={"signature": "0" * 64})}
++        )
++    else:
++        # Exact normalized selection also admits a different occurrence ordering.
++        held_body = body.model_copy(
++            update={
++                "selection": body.selection.model_copy(
++                    update={"occurrences": list(reversed(body.selection.occurrences))}
++                )
++            }
++        )
++    looked_up, release = Barrier(2), Barrier(2)
++    original_lookup = duplicate._receipt_operation
++    lookups = 0
++
++    def held_lookup(set_id: UUID, receipt: RefreshConfirmation) -> UUID | None:
++        nonlocal lookups
++        lookups += 1
++        found = original_lookup(set_id, receipt)
++        if lookups == 1:
++            assert found is None
++            looked_up.wait(timeout=15)
++            release.wait(timeout=15)
++        return found
++
++    monkeypatch.setattr(duplicate, "_receipt_operation", held_lookup)
++    with ThreadPoolExecutor(1) as pool:
++        pending = pool.submit(duplicate.confirm_selected, "80000-1", held_body)
++        looked_up.wait(timeout=15)
++        try:
++            operation = s.confirm_selected("80000-1", body)
++            lease = s.acquire(operation)
++            assert lease
++            for _ in range(2 if terminal else 1):
++                s.repository.advance(lease, s.provider)
++                product.advance_clock(5)
++            assert s.contents_status(operation).terminal is terminal
++            assert (
++                digest(s.selected_plan("80000-1", body.selection)["plan"])
++                != plan.confirmation.digest
++            )
++            before = s.repository.status(operation)
++        finally:
++            release.wait(timeout=15)
++        if error:
++            with pytest.raises(ProductRefreshError, match=error):
++                pending.result(timeout=15)
++        else:
++            assert pending.result(timeout=15) == operation
++        assert lookups == (1 if change == "signature" else 2)
++    assert s.repository.status(operation) == before
++    with s.repository.database.connect() as c:
++        assert c.execute("SELECT count(*) AS n FROM product_refresh_operation").fetchone() == {
++            "n": 1
++        }
++        assert c.execute("SELECT count(*) AS n FROM provider_fetch_run").fetchone() == {
++            "n": 2 if terminal else 1
++        }
++
++
++def test_confirmation_drift_without_matching_receipt_still_rejected(
++    contents_service: ContentsService, product: ProductHarness
++) -> None:
++    from brickvault_api.market.product_refresh import ProductRefreshError
++
++    s = contents_service
++    p = s.prepare("80000-1", selection("normal"))
++    with product.market.owner.database.connect() as c:
++        mapping = c.execute(
++            "SELECT id FROM market_mapping_revision WHERE item_type='PART' AND closed_at IS NULL"
++        ).fetchone()
++    assert mapping
++    product.market.owner.revoke_mapping(mapping["id"])
++    with pytest.raises(ProductRefreshError, match="REPLAN_REQUIRED"):
++        s.confirm_selected(
++            "80000-1", ContentsConfirmation(selection=p.selection, confirmation=p.confirmation)
++        )
++    with s.repository.database.connect() as c:
++        assert c.execute("SELECT count(*) AS n FROM product_refresh_operation").fetchone() == {
++            "n": 0
++        }
++        assert c.execute("SELECT count(*) AS n FROM provider_fetch_run").fetchone() == {"n": 0}
++
++
+ def test_mapping_drift_stops_confirmation_and_dispatch(
+     contents_service: ContentsService, product: ProductHarness
+ ) -> None:
