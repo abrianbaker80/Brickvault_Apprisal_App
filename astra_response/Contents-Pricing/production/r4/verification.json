@@ -1,0 +1,112 @@
+{
+  "regression": {
+    "passed": 6,
+    "failed": 0,
+    "duration_seconds": 37.7,
+    "scope": "real stored-observation projection; Sold/Stock positive/null/zero; display expiry; other-view isolation",
+    "provider": "synthetic only; external provider sockets blocked",
+    "owned_test_cleanup": "no leftovers"
+  },
+  "ruff_lint": "PASS",
+  "ruff_format": "PASS",
+  "production_module_mypy": "PASS",
+  "supplemental_test_module_mypy": {
+    "result": "five pre-existing diagnostics; zero new",
+    "baseline_shadow_file_verified": true,
+    "issues": [
+      "two existing selector Literal argument annotations",
+      "two existing Optional account arguments",
+      "one existing untyped helper"
+    ]
+  },
+  "api_only_package": {
+    "build": "wheel and sdist PASS",
+    "changed_wheel_members": [
+      "brickvault_api/contents.py",
+      "brickvault_api-0.0.0.dist-info/RECORD"
+    ],
+    "backup_module_preserved": true,
+    "web_dependencies_contracts_unchanged": true,
+    "offline_install_dependency_check": "PASS",
+    "service_identity_import_schema_and_module_hashes": "PASS"
+  },
+  "preflight": {
+    "status": "PASS",
+    "observed_utc": "2026-11-17T16:55:46.987272+00:00",
+    "release": "contents-pricing-production-r2",
+    "manifest_sha256": "29c347a9c1878ba3663b27172a70854fd4eab5d13b7f82dcaeb6970cfa1420ea",
+    "schema": [
+      "0020_contents_market_refresh"
+    ],
+    "compatible_retained_rollback": true,
+    "health": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true,
+      "REPOSITORY_IDENTITIES": true
+    },
+    "reused_verified_recovery_evidence": true,
+    "no_new_backup_or_restore": true
+  },
+  "activation": {
+    "status": "PASS",
+    "schema_changes": 0,
+    "started_utc": "2026-11-17T16:57:28.879158+00:00",
+    "pause_started_utc": "2026-11-17T16:57:29.383436+00:00",
+    "service_pause_ended_utc": "2026-11-17T16:57:29.432485+00:00",
+    "history_tables_preserved": 25,
+    "pause_finished_utc": "2026-11-17T16:57:35.566780+00:00",
+    "release": "contents-sample-metadata-production-r1",
+    "schema": [
+      "0020_contents_market_refresh"
+    ],
+    "manifest_sha256": "ca6533b25b409c3154383449faba890a1d6a15200d533294cfd49f6a604131ee",
+    "health": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true
+    },
+    "api_state": "active",
+    "schedule_unchanged": true,
+    "completed_utc": "2026-11-17T16:57:35.580581+00:00"
+  },
+  "ui": {
+    "existing_renderer_reused": true,
+    "frontend_changes": 0,
+    "react_tests_run": 0,
+    "physical_cached_samples": [
+      5,
+      1387
+    ],
+    "inspection_cleaned": true
+  },
+  "not_run": [
+    "full 122-unit/22-database/UI suites",
+    "web/APK builds",
+    "provider refresh",
+    "backup/restore rehearsal",
+    "schema operations"
+  ]
+}

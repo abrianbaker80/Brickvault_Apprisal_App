@@ -1,0 +1,107 @@
+{
+  "before_utc": "2026-11-17T16:53:44.969059+00:00",
+  "after_utc": "2026-11-17T16:59:32.810511+00:00",
+  "counts_before": {
+    "provider_fetch_run": 7,
+    "market_observation": 6,
+    "product_refresh_operation": 3,
+    "product_refresh_target": 2
+  },
+  "counts_after": {
+    "provider_fetch_run": 7,
+    "market_observation": 6,
+    "product_refresh_operation": 3,
+    "product_refresh_target": 2
+  },
+  "new_provider_attempts": 0,
+  "new_refresh_operations": 0,
+  "all_existing_market_records_unchanged": true,
+  "server_active": true,
+  "release": "contents-sample-metadata-production-r1",
+  "results": [
+    {
+      "set_number": "21333-1",
+      "provider_identity": "BrickLink MINIFIG idea106",
+      "evidence": {
+        "condition": "U",
+        "basis": "sold",
+        "state": "priced",
+        "unit_price": "26.78",
+        "currency": "USD",
+        "statistic": "quantity_weighted_average",
+        "fetched_at": "2026-11-17T16:14:51.500684Z",
+        "stale_after": "2026-11-17T20:14:51.212216Z",
+        "display_until": "2026-11-17T21:59:51.212216Z",
+        "window": "rolling_last_six_months",
+        "sample_count": 5,
+        "refresh_state": "succeeded"
+      },
+      "server_occurrence_count": 5,
+      "server_total_quantity": 5,
+      "ui_sample_visible": true,
+      "other_views": [
+        {
+          "condition": "N",
+          "basis": "sold",
+          "state": "unrequested",
+          "sample_count": null
+        },
+        {
+          "condition": "N",
+          "basis": "stock",
+          "state": "unrequested",
+          "sample_count": null
+        },
+        {
+          "condition": "U",
+          "basis": "stock",
+          "state": "unrequested",
+          "sample_count": null
+        }
+      ],
+      "as_of": "2026-11-17T16:59:07.766139Z"
+    },
+    {
+      "set_number": "10016-1",
+      "provider_identity": "BrickLink PART 3001 color 1",
+      "evidence": {
+        "condition": "U",
+        "basis": "sold",
+        "state": "priced",
+        "unit_price": "0.10",
+        "currency": "USD",
+        "statistic": "quantity_weighted_average",
+        "fetched_at": "2026-11-17T16:16:09.458246Z",
+        "stale_after": "2026-11-17T20:16:08.604842Z",
+        "display_until": "2026-11-17T22:01:08.604842Z",
+        "window": "rolling_last_six_months",
+        "sample_count": 1387,
+        "refresh_state": "succeeded"
+      },
+      "server_occurrence_count": 1387,
+      "server_total_quantity": 29249,
+      "ui_sample_visible": true,
+      "other_views": [
+        {
+          "condition": "N",
+          "basis": "sold",
+          "state": "unrequested",
+          "sample_count": null
+        },
+        {
+          "condition": "N",
+          "basis": "stock",
+          "state": "unrequested",
+          "sample_count": null
+        },
+        {
+          "condition": "U",
+          "basis": "stock",
+          "state": "unrequested",
+          "sample_count": null
+        }
+      ],
+      "as_of": "2026-11-17T16:59:11.226322Z"
+    }
+  ]
+}

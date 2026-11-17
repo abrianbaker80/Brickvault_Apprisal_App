@@ -1,0 +1,56 @@
+diff --git a/services/api/src/brickvault_api/contents.py b/services/api/src/brickvault_api/contents.py
+index 243366b..48b3879 100644
+--- a/services/api/src/brickvault_api/contents.py
++++ b/services/api/src/brickvault_api/contents.py
+@@ -210,3 +210 @@ class ContentsService(RefreshService):
+-                                    sample_count=obs.get("sold_occurrence_count")
+-                                    if basis == Basis.SOLD
+-                                    else obs.get("active_inventory_count"),
++                                    sample_count=obs.get("occurrence_count"),
+diff --git a/services/api/tests/integration/test_contents_refresh.py b/services/api/tests/integration/test_contents_refresh.py
+index fa735a5..87eea43 100644
+--- a/services/api/tests/integration/test_contents_refresh.py
++++ b/services/api/tests/integration/test_contents_refresh.py
+@@ -2,0 +3 @@
++from typing import Literal
+@@ -66,0 +68,40 @@ def selection(*lines: str, all_views: bool = False, extras: bool = False) -> Con
++@pytest.mark.parametrize("basis", ["sold", "stock"])
++@pytest.mark.parametrize("count", [7, None, 0])
++def test_contents_sample_count_from_stored_observation(
++    contents_service: ContentsService,
++    product: ProductHarness,
++    basis: Literal["sold", "stock"],
++    count: int | None,
++) -> None:
++    s = contents_service
++    data: dict[str, object] = {"unit_quantity": count, "total_quantity": 0 if count == 0 else 23}
++    if count != 0:
++        data["qty_avg_price"] = "2.50"
++    s.provider = SyntheticProvider(data, product.market.clock)
++    chosen = selection("normal").model_copy(
++        update={"views": [ContentsView(condition="U", basis=basis)]}
++    )
++    plan = s.prepare("80000-1", chosen)
++    operation = s.confirm_selected(
++        "80000-1", ContentsConfirmation(selection=plan.selection, confirmation=plan.confirmation)
++    )
++    lease = s.acquire(operation)
++    assert lease
++    s.repository.advance(lease, s.provider)
++    assert s.contents_status(operation).terminal
++    with s.repository.database.connect() as c:
++        stored = c.execute(
++            "SELECT occurrence_count,total_quantity FROM market_observation"
++        ).fetchone()
++    assert stored == {"occurrence_count": count, "total_quantity": 0 if count == 0 else 23}
++    row = next(r for r in s.page("80000-1").rows if r.occurrence_id == key("normal"))
++    evidence = next(e for e in row.evidence if e.condition == "U" and e.basis == basis)
++    assert evidence.sample_count == count
++    assert evidence.state == ("confirmed_empty" if count == 0 else "priced")
++    assert all(e.sample_count is None for e in row.evidence if e is not evidence)
++    # Advance only the synthetic TEST clock past normal display eligibility.
++    product.advance_clock(product.market.policy.hard_display_seconds + 1)
++    expired = next(r for r in s.page("80000-1").rows if r.occurrence_id == key("normal"))
++    assert all(e.sample_count is None and e.unit_price is None for e in expired.evidence)
++
++

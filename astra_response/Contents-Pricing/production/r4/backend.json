@@ -1,0 +1,19 @@
+{
+  "release": "contents-sample-metadata-production-r1",
+  "application_source": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "source_reviewed_id": "c3c3fcab99fb24db3f2d87249bc05d9863ab6172690fa93d1744bd66014b0eb7",
+  "base_manifest_sha256": "29c347a9c1878ba3663b27172a70854fd4eab5d13b7f82dcaeb6970cfa1420ea",
+  "accepted_backup_amendment_sha256": "51dff96c361d812b28927c59f809d5c267791e037e645f3723b09ff1ad5b6d2e",
+  "sample_amendment_sha256": "0fbc07704abf5b6daf912d9a1e81adb9cc075706c8e48a48b6810bb6c92d44f5",
+  "manifest_sha256": "ca6533b25b409c3154383449faba890a1d6a15200d533294cfd49f6a604131ee",
+  "archive_sha256": "20dc41651a000726ca8c50c307a7992d4485f810ff415f917c1fb3a89721be89",
+  "target_schema": "0020_contents_market_refresh",
+  "contents_module_sha256": "9a7280e01c10738bb8511c964f73ae6b8a9f39e9eab7916088210af2d7997db9",
+  "backup_module_sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df",
+  "web_and_dependencies_identical": true,
+  "wheel_changed_members": [
+    "brickvault_api/contents.py",
+    "brickvault_api-0.0.0.dist-info/RECORD"
+  ],
+  "runtime_target": "3.13.18"
+}

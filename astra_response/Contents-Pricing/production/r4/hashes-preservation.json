@@ -1,0 +1,48 @@
+{
+  "changed_files": [
+    {
+      "path": "services/api/src/brickvault_api/contents.py",
+      "sha256": "9a7280e01c10738bb8511c964f73ae6b8a9f39e9eab7916088210af2d7997db9"
+    },
+    {
+      "path": "services/api/tests/integration/test_contents_refresh.py",
+      "sha256": "a6beeab6082c5ebcb5a8100062a6b8b62749122969ccd2a0cbeae13191ad0566"
+    },
+    {
+      "path": "docs/plans/112-selected-contents-market-refresh.md",
+      "sha256": "b992288edfc76b2bd1a726d0124dd5a8b560c8389929a874d4a900e27354022f"
+    }
+  ],
+  "accepted_backup_amendment_files": [
+    {
+      "path": "services/api/src/brickvault_api/production_backup.py",
+      "sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df",
+      "unchanged": true
+    },
+    {
+      "path": "services/api/tests/unit/test_backup_stream_failure.py",
+      "sha256": "c7515a86c4e1332dac3097e651020c0642d1e059544648bc0386c5d75026b7ea",
+      "unchanged": true
+    }
+  ],
+  "original_pending_paths_preserved": 22,
+  "baseline_paths_preserved": 59,
+  "protected_files": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "f0a354ed80f631910f4cdcb64729209ef4758de441f3eaaf509da49395f969b4"
+    },
+    {
+      "path": "services/api/tests/integration/test_catalog_search.py",
+      "sha256": "d06965d560361a06b7a33647efa5b9b34829f8c34d5d912226d9cd5b3645abf7"
+    },
+    {
+      "path": "services/api/tests/unit/test_catalog_parser.py",
+      "sha256": "0251b5c358cd37de9e07e2cbdfb44913752cade7050d9eb1b3a885f57d27a041"
+    }
+  ],
+  "prior_plan_prefix_preserved": true,
+  "main_head": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "main_index_empty": true,
+  "source_commit_or_main_push": false
+}
