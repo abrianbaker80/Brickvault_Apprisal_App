@@ -1,0 +1,25 @@
+{
+  "windows_focused_tests": {
+    "passed": 42,
+    "skipped": 1,
+    "skip_reason": "POSIX-only process-group case"
+  },
+  "linux_installed_synthetic": {
+    "status": "PASS",
+    "checks": [
+      "installed_amendment_success",
+      "POSIX_owned_group_timeout_cleanup",
+      "failed_sink_exit_status",
+      "secret_safe_diagnostics"
+    ],
+    "full_backups": 0,
+    "retention_plan": "RETENTION_PLAN keep=35 delete=13"
+  },
+  "ruff": "PASS",
+  "mypy_linux_platform": "PASS",
+  "manifest_verification": "PASS",
+  "accepted_application_suite_replayed": false,
+  "new_dependencies": false,
+  "tests_sha256": "c7515a86c4e1332dac3097e651020c0642d1e059544648bc0386c5d75026b7ea",
+  "production_module_sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df"
+}

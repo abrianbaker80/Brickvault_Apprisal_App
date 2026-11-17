@@ -1,0 +1,302 @@
+diff --git a/services/api/src/brickvault_api/production_backup.py b/services/api/src/brickvault_api/production_backup.py
+index 9aff7dd..6d7f0b1 100644
+--- a/services/api/src/brickvault_api/production_backup.py
++++ b/services/api/src/brickvault_api/production_backup.py
+@@ -9,0 +10 @@ import hashlib
++import io
+@@ -10,0 +12 @@ import json
++import logging
+@@ -13,0 +16 @@ import re
++import signal
+@@ -67,0 +71,8 @@ class BackupError(RuntimeError):
++class BackupStreamError(BackupError):
++    """Fail-closed stream error carrying only constructed, secret-safe diagnostics."""
++
++    def __init__(self, diagnostic: dict[str, Any]) -> None:
++        super().__init__("Dual-destination backup did not complete.")
++        self.diagnostic = diagnostic
++
++
+@@ -359,0 +371 @@ def stream_to_two(
++    artifact: str = "unspecified",
+@@ -361 +373 @@ def stream_to_two(
+-    """Copy identical bounded chunks to both children; fail closed on any ambiguity."""
++    """Bound transfer AND finalization by one deadline; never retain child output."""
+@@ -364,12 +376,22 @@ def stream_to_two(
+-    deadline = time.monotonic() + deadline_seconds
+-    source = subprocess.Popen(
+-        source_command,
+-        stdin=subprocess.DEVNULL,
+-        stdout=subprocess.PIPE,
+-        stderr=subprocess.DEVNULL,
+-        env={"PATH": "/usr/bin:/bin", "HOME": "/nonexistent", "PGPASSFILE": "/dev/null"},
+-    )
+-    sinks: list[subprocess.Popen[bytes]] = []
+-    errors: queue.Queue[BaseException] = queue.Queue()
+-    source_chunks: queue.Queue[bytes | None] = queue.Queue(maxsize=4)
+-    sink_chunks: list[queue.Queue[bytes | None]] = [queue.Queue(maxsize=4), queue.Queue(maxsize=4)]
++    if artifact not in (*IMAGE_ARTIFACTS, *LEGACY_ARTIFACTS, "unspecified"):
++        raise BackupError("Unknown backup artifact.")
++    if not 0 < deadline_seconds <= STREAM_DEADLINE_SECONDS:
++        raise BackupError("Invalid backup stream deadline.")
++    started = time.monotonic()
++    deadline = started + deadline_seconds
++    labels = ("producer", "proxmox", "drive")
++    processes: list[subprocess.Popen[bytes]] = []
++    states: list[dict[str, Any]] = [
++        {"role": label, "bytes": 0, "stderr_bytes": 0, "stderr_categories": []} for label in labels
++    ]
++    # Fixed category names only: no raw stderr, paths, URLs, commands or environment.
++    patterns = {
++        "repository_locked": b"repository is already locked",
++        "space_exhausted": b"no space left on device",
++        "permission_denied": b"permission denied",
++        "connection_refused": b"connection refused",
++        "connection_reset": b"connection reset",
++        "deadline_reported": b"deadline exceeded",
++        "authentication_rejected": b"unauthorized",
++        "broken_pipe": b"broken pipe",
++    }
+@@ -376,0 +399,21 @@ def stream_to_two(
++    errors: queue.Queue[tuple[str, str]] = queue.Queue()
++    source_chunks: queue.Queue[bytes | None] = queue.Queue(maxsize=4)
++    sink_chunks: list[queue.Queue[bytes | None]] = [queue.Queue(maxsize=4) for _ in range(2)]
++    threads: list[threading.Thread] = []
++    stderr_threads: list[threading.Thread] = []
++    stage, role, reason = "spawn", "producer", "spawn_failure"
++    total = 0
++
++    def fail_if_needed() -> None:
++        nonlocal role, reason
++        # Natural nonzero exits take precedence over their secondary pipe errors.
++        for label, process in zip(labels, processes, strict=False):
++            if process.poll() not in (None, 0):
++                role, reason = label, "nonzero_exit"
++                raise BackupError("Backup child failed.")
++        if time.monotonic() >= deadline:
++            role, reason = "stream", "deadline"
++            raise BackupError("Backup deadline reached.")
++        if not errors.empty():
++            role, reason = errors.get_nowait()
++            raise BackupError("Backup pipe failed.")
+@@ -379,0 +423 @@ def stream_to_two(
++            fail_if_needed()
+@@ -381 +425 @@ def stream_to_two(
+-                channel.put(value, timeout=0.2)
++                channel.put(value, timeout=0.05)
+@@ -384,3 +428,2 @@ def stream_to_two(
+-                if time.monotonic() >= deadline:
+-                    raise BackupError("Backup stream timed out.") from None
+-        raise BackupError("Backup stream was cancelled.")
++                continue
++        raise BackupError("Backup cancelled.")
+@@ -390 +433,2 @@ def stream_to_two(
+-            assert source.stdout is not None
++            pipe = processes[0].stdout
++            assert pipe is not None
+@@ -392 +436 @@ def stream_to_two(
+-                chunk = source.stdout.read(CHUNK)
++                chunk = pipe.read(CHUNK)
+@@ -395,8 +439,18 @@ def stream_to_two(
+-                send(source_chunks, chunk)
+-            if not cancelled.is_set():
+-                send(source_chunks, None)
+-        except BaseException as exc:
+-            errors.put(exc)
+-            cancelled.set()
+-
+-    def write_sink(process: subprocess.Popen[bytes], channel: queue.Queue[bytes | None]) -> None:
++                states[0]["bytes"] += len(chunk)
++                # The coordinator owns diagnostics and process/deadline decisions.
++                while not cancelled.is_set():
++                    try:
++                        source_chunks.put(chunk, timeout=0.05)
++                        break
++                    except queue.Full:
++                        continue
++            while not cancelled.is_set():
++                try:
++                    source_chunks.put(None, timeout=0.05)
++                    break
++                except queue.Full:
++                    continue
++        except (OSError, ValueError):
++            errors.put(("producer", "read_failure"))
++
++    def write_sink(index: int, channel: queue.Queue[bytes | None]) -> None:
+@@ -404 +458,2 @@ def stream_to_two(
+-            assert process.stdin is not None
++            pipe = processes[index].stdin
++            assert pipe is not None
+@@ -407 +462 @@ def stream_to_two(
+-                    chunk = channel.get(timeout=0.2)
++                    chunk = channel.get(timeout=0.05)
+@@ -409,2 +463,0 @@ def stream_to_two(
+-                    if time.monotonic() >= deadline:
+-                        raise BackupError("Backup stream timed out.") from None
+@@ -414,6 +467,21 @@ def stream_to_two(
+-                process.stdin.write(chunk)
+-                process.stdin.flush()
+-            process.stdin.close()
+-        except BaseException as exc:
+-            errors.put(exc)
+-            cancelled.set()
++                pipe.write(chunk)
++                pipe.flush()
++                states[index]["bytes"] += len(chunk)
++            pipe.close()
++        except (OSError, ValueError):
++            errors.put((labels[index], "write_failure"))
++
++    def drain_stderr(index: int) -> None:
++        pipe = cast(io.BufferedReader, processes[index].stderr)
++        assert pipe is not None
++        tail = b""
++        try:
++            while chunk := pipe.read1(4096):
++                states[index]["stderr_bytes"] += len(chunk)
++                sample = (tail + chunk).lower()
++                for category, pattern in patterns.items():
++                    if pattern in sample and category not in states[index]["stderr_categories"]:
++                        states[index]["stderr_categories"].append(category)
++                tail = sample[-64:]
++        except (OSError, ValueError):
++            errors.put((labels[index], "stderr_read_failure"))
+@@ -421 +488,0 @@ def stream_to_two(
+-    threads: list[threading.Thread] = []
+@@ -423,2 +490,15 @@ def stream_to_two(
+-        for command, environment in zip(sink_commands, sink_environments, strict=True):
+-            sinks.append(
++        processes.append(
++            subprocess.Popen(
++                source_command,
++                stdin=subprocess.DEVNULL,
++                stdout=subprocess.PIPE,
++                stderr=subprocess.PIPE,
++                start_new_session=True,
++                env={"PATH": "/usr/bin:/bin", "HOME": "/nonexistent", "PGPASSFILE": "/dev/null"},
++            )
++        )
++        for index, (command, environment) in enumerate(
++            zip(sink_commands, sink_environments, strict=True), 1
++        ):
++            role = labels[index]
++            processes.append(
+@@ -429 +509,2 @@ def stream_to_two(
+-                    stderr=subprocess.DEVNULL,
++                    stderr=subprocess.PIPE,
++                    start_new_session=True,
+@@ -432,0 +514,3 @@ def stream_to_two(
++        stderr_threads = [
++            threading.Thread(target=drain_stderr, args=(i,), daemon=True) for i in range(3)
++        ]
+@@ -436,2 +520,2 @@ def stream_to_two(
+-                threading.Thread(target=write_sink, args=(sink, channel), daemon=True)
+-                for sink, channel in zip(sinks, sink_chunks, strict=True)
++                threading.Thread(target=write_sink, args=(i, channel), daemon=True)
++                for i, channel in enumerate(sink_chunks, 1)
+@@ -440 +524 @@ def stream_to_two(
+-        for thread in threads:
++        for thread in (*stderr_threads, *threads):
+@@ -441,0 +526 @@ def stream_to_two(
++        stage = "transfer"
+@@ -443 +527,0 @@ def stream_to_two(
+-        total = 0
+@@ -445,6 +529 @@ def stream_to_two(
+-            if (
+-                not errors.empty()
+-                or time.monotonic() >= deadline
+-                or any(sink.poll() not in (None, 0) for sink in sinks)
+-            ):
+-                raise BackupError("Backup stream failed or timed out.")
++            fail_if_needed()
+@@ -452 +531 @@ def stream_to_two(
+-                chunk = source_chunks.get(timeout=0.2)
++                chunk = source_chunks.get(timeout=0.05)
+@@ -460,0 +540 @@ def stream_to_two(
++        stage = "drain"
+@@ -463,8 +543,8 @@ def stream_to_two(
+-        for thread in threads:
+-            thread.join(timeout=max(0.1, min(30.0, deadline - time.monotonic())))
+-        if any(thread.is_alive() for thread in threads) or not errors.empty():
+-            raise BackupError("Backup stream workers did not finish.")
+-        if (
+-            source.wait(timeout=30) != 0
+-            or any(sink.wait(timeout=30) != 0 for sink in sinks)
+-            or total == 0
++        while any(thread.is_alive() for thread in threads):
++            fail_if_needed()
++            for thread in threads:
++                thread.join(timeout=0.02)
++        stage = "finalize"
++        # Upload/index/lock finalization is part of the same bounded stream, not 30s.
++        while any(process.poll() is None for process in processes) or any(
++            t.is_alive() for t in stderr_threads
+@@ -472 +552,6 @@ def stream_to_two(
+-            raise BackupError("Backup source or destination failed.")
++            fail_if_needed()
++            time.sleep(0.02)
++        fail_if_needed()
++        if total == 0 or any(state["bytes"] != total for state in states):
++            role, reason = "stream", "byte_count_mismatch"
++            raise BackupError("Backup stream is empty or incomplete.")
+@@ -476,12 +561,16 @@ def stream_to_two(
+-        for process in (source, *sinks):
+-            if process.poll() is None:
+-                process.terminate()
+-        for process in (source, *sinks):
+-            try:
+-                process.wait(timeout=5)
+-            except subprocess.TimeoutExpired:
+-                process.kill()
+-                process.wait(timeout=5)
+-        raise BackupError("Dual-destination backup did not complete.") from None
+-    finally:
+-        for thread in threads:
++        # Snapshot natural status before cancellation so SIGTERM is never called a cause.
++        for state, process in zip(states, processes, strict=False):
++            state["exit_before_cleanup"] = process.poll()
++        for sig in (signal.SIGTERM, signal.SIGKILL if os.name == "posix" else signal.SIGTERM):
++            for process in processes:
++                try:
++                    if os.name == "posix":
++                        os.killpg(process.pid, sig)  # Only groups created by this invocation.
++                    elif process.poll() is None:
++                        process.kill()
++                except ProcessLookupError:
++                    pass
++            until = time.monotonic() + 5
++            while any(p.poll() is None for p in processes) and time.monotonic() < until:
++                time.sleep(0.02)
++        for thread in (*threads, *stderr_threads):
+@@ -488,0 +578,25 @@ def stream_to_two(
++        for state, process in zip(states, processes, strict=False):
++            state["exit_after_cleanup"] = process.poll()
++        diagnostic = {
++            "artifact": artifact,
++            "stage": stage,
++            "role": role,
++            "reason": reason,
++            "elapsed_ms": round((time.monotonic() - started) * 1000),
++            "deadline_seconds": deadline_seconds,
++            "distributed_bytes": total,
++            "children": states,
++            "workers_alive": sum(t.is_alive() for t in (*threads, *stderr_threads)),
++        }
++        logging.getLogger(__name__).error(
++            "BACKUP_STREAM_FAILURE %s", json.dumps(diagnostic, sort_keys=True)
++        )
++        raise BackupStreamError(diagnostic) from None
++    finally:
++        for process in processes:
++            for pipe in (process.stdin, process.stdout, process.stderr):
++                if pipe is not None and not pipe.closed:
++                    try:
++                        pipe.close()
++                    except OSError:
++                        pass  # Preserve the original failure after child cleanup.
+@@ -684 +798,3 @@ def _capture(
+-        size, sha = stream_to_two(producer, commands, [d.environment() for d in DESTINATIONS])
++        size, sha = stream_to_two(
++            producer, commands, [d.environment() for d in DESTINATIONS], artifact=artifact
++        )

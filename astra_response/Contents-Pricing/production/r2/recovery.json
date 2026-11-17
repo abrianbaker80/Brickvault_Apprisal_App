@@ -1,0 +1,43 @@
+{
+  "additional_full_attempts": 1,
+  "additional_attempt_outcome": "PASS",
+  "original_failed_attempt_retained": true,
+  "complete_recovery": {
+    "api_restored": true,
+    "artifacts": [
+      "configuration.tar",
+      "database.dump",
+      "globals.sql",
+      "image-blobs.tar"
+    ],
+    "backup_completed_utc": "2026-11-17T15:36:11.976151+00:00",
+    "backup_verified_utc": "2026-11-17T15:36:11.907447+00:00",
+    "captured_after_mapping_admission": true,
+    "completed_utc": "2026-11-17T15:41:00.532492+00:00",
+    "new_backups": 1,
+    "receipt_sha256": "13a5e9fd2f7471d0dbd4ead912eeece5b17bcf921f0507cd5e809dde939a989d",
+    "revisions": [
+      "0019_reviewed_dataset_foundation"
+    ],
+    "schema": 3,
+    "started_utc": "2026-11-17T15:28:19.855687+00:00",
+    "status": "PASS"
+  },
+  "partial_reconciliation": {
+    "status": "PASS",
+    "reconciled_failed_runs": 1,
+    "new_failed_snapshots_retained": 1,
+    "previous_partial_runs_preserved": 3,
+    "missing_expected_snapshots": 0,
+    "retention_plan_valid": true,
+    "deletion_invoked": false,
+    "failed_history_recovery_eligible": false,
+    "original_receipts_pins_preserved": true,
+    "runtime_code_change_required": false,
+    "cause": "One attributable failed backup attempt; no Drive snapshot, no complete receipt; historical root cause remains unestablished",
+    "completed_at_utc": "2026-11-17T15:24:20.163937+00:00",
+    "ledger_before_sha256": "1b3ab01132ec3acc1c09d6a576790dd447f6ee2a73dc62bd79af10c8157e9dc3",
+    "ledger_after_sha256": "c93a01da9fc0793b26e02e4b1bb3c98ac41425aa9105db33e28b654545c9a3fc"
+  },
+  "historical_root_cause": "unestablished; successful retry does not prove original cause"
+}

@@ -1,0 +1,148 @@
+{
+  "activation": {
+    "api_pause_started_utc": "2026-11-17T15:46:55.055467+00:00",
+    "api_resumed_utc": "2026-11-17T15:46:55.931392+00:00",
+    "backup_schedule_unchanged": true,
+    "completed_utc": "2026-11-17T15:46:59.836496+00:00",
+    "enumerated_function_grants": 17,
+    "health": {
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "CLOCK": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "DATA_SPACE": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "PRIVATE_IMAGE_STORAGE": true,
+      "REBOOT_PENDING": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "ROOT_SPACE": true,
+      "SECURITY_UPDATES": true,
+      "SERVICES": true,
+      "UFW": true
+    },
+    "manifest_sha256": "29c347a9c1878ba3663b27172a70854fd4eab5d13b7f82dcaeb6970cfa1420ea",
+    "new_contents_operations": 0,
+    "new_contents_targets": 0,
+    "price_observation_delta": 0,
+    "provider_attempt_delta": 0,
+    "provider_calls": 0,
+    "recovery_receipt_sha256": "13a5e9fd2f7471d0dbd4ead912eeece5b17bcf921f0507cd5e809dde939a989d",
+    "release": "contents-pricing-production-r2",
+    "runtime_grants": {
+      "market_mapping_revision": {
+        "DELETE": false,
+        "INSERT": false,
+        "SELECT": true,
+        "TRUNCATE": false,
+        "UPDATE": false
+      },
+      "product_refresh_target": {
+        "DELETE": false,
+        "INSERT": false,
+        "SELECT": true,
+        "TRUNCATE": false,
+        "UPDATE": false
+      }
+    },
+    "schema": [
+      "0020_contents_market_refresh"
+    ],
+    "schema_committed": true,
+    "started_utc": "2026-11-17T15:42:59.049907+00:00",
+    "status": "PASS"
+  },
+  "required_operational_checks": {
+    "status": "PASS",
+    "release": "contents-pricing-production-r2",
+    "schema": [
+      "0020_contents_market_refresh"
+    ],
+    "manifest_sha256": "29c347a9c1878ba3663b27172a70854fd4eab5d13b7f82dcaeb6970cfa1420ea",
+    "health": {
+      "PRIVATE_IMAGE_STORAGE": true,
+      "SERVICES": true,
+      "HTTPS_CERTIFICATE": true,
+      "LISTENERS": true,
+      "DATABASE_READY": true,
+      "DATA_MOUNT": true,
+      "BACKUP_FRESH_RETENTION_READY": true,
+      "RELEASE_RUNTIME_HOOK": true,
+      "UFW": true,
+      "CLOCK": true,
+      "ROOT_SPACE": true,
+      "DATA_SPACE": true,
+      "REBOOT_PENDING": true,
+      "SECURITY_UPDATES": true,
+      "REPOSITORY_IDENTITIES": true
+    },
+    "retention_plan": "PASS via deep health",
+    "failed_units": 0,
+    "history_tables_preserved": 24,
+    "prior_activation_status": "PASS",
+    "observed_utc": "2026-11-17T15:47:50.371332+00:00"
+  },
+  "post_phone": {
+    "status": "PASS",
+    "observed_utc": "2026-11-17T15:53:04.658239+00:00",
+    "release": "contents-pricing-production-r2",
+    "schema": [
+      "0020_contents_market_refresh"
+    ],
+    "api_active": true,
+    "failed_units": 0,
+    "history_tables_preserved": 24,
+    "mappings_preserved": 2,
+    "provider_attempts": 5,
+    "provider_attempt_delta": 0,
+    "price_observations": 4,
+    "price_observation_delta": 0,
+    "refresh_operations": 1,
+    "refresh_operation_delta": 0,
+    "contents_operations": 0,
+    "contents_targets": 0,
+    "backup_schedule_unchanged": true
+  },
+  "phone_ui": {
+    "signed_in": true,
+    "displayed_set": "10016-1",
+    "displayed_plan_ready": true,
+    "displayed_plan_expires_at": "2026-11-17T16:07:28.600202Z",
+    "observed_at": "2026-11-17T15:53:04.693Z",
+    "confirmation_invoked": false,
+    "resume_invoked": false,
+    "credentials_extracted": false
+  },
+  "phone_cleanup": {
+    "status": "PHONE_TASK_CLEANUP_PASS",
+    "owned_forward_removed": true,
+    "prior_forward_reverse_state_restored": true,
+    "data_identity_preserved": true,
+    "installed_apk_sha256": "ef4eea9273929525f434fc464e30b81c1ab47ad1ae7b7675354d7b619c9b7db0"
+  },
+  "additional_full_backup_attempts": 1,
+  "new_mappings": 0,
+  "main_application_commit": "f79e94092d272a050ced989eb1761b34320bdd28",
+  "source_commit_or_push": false,
+  "preservation": {
+    "original_pending": 22,
+    "baseline_paths": 59,
+    "three_protected_files": true,
+    "prior_plan_bytes_preserved": true,
+    "original_proof_and_lineage_preserved": true,
+    "main_index_empty": true,
+    "main_unpushed": true
+  },
+  "final_custody": {
+    "status": "PASS",
+    "all_24_histories_match_predeployment_baselines": true,
+    "owned_backup_activation_workers_absent": true,
+    "exact_mapping_receipts_preserved": true,
+    "permanent_pins_preserved": true
+  },
+  "inspection_disposition": {
+    "incidental_capture_removed": true,
+    "unrelated_app_operated": false,
+    "last_verified_brickvault_ui_utc": "2026-11-17T15:53:04.693Z"
+  }
+}

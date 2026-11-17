@@ -1,0 +1,18 @@
+{
+  "changes": [
+    "one stream deadline covers drain and finalization",
+    "bounded safe categories and exit/byte diagnostics",
+    "cleanup invocation-owned process groups"
+  ],
+  "files": {
+    "services/api/src/brickvault_api/production_backup.py": {
+      "after_sha256": "53971192ee03a4f16e68d8829d5fedcdee3036b6294236246ede6c611af751df",
+      "before_sha256": "24bdc7533a1a18b0f7dcba39557db4ff4c4a75e6ff6a285c9d18e5bce8ad8832"
+    }
+  },
+  "historical_root_cause": "unestablished; premature finalization timeout demonstrated synthetically",
+  "kind": "backup-stream-deadline-and-safe-diagnostics",
+  "tests": {
+    "services/api/tests/unit/test_backup_stream_failure.py": "c7515a86c4e1332dac3097e651020c0642d1e059544648bc0386c5d75026b7ea"
+  }
+}

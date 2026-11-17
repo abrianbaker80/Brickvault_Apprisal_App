@@ -1,0 +1,6 @@
+{
+  "status": "REPRODUCED_PREMATURE_ABORT",
+  "elapsed_seconds": 30.07,
+  "configured_deadline_seconds": 60,
+  "sink_finalization_seconds": 31
+}

@@ -1,0 +1,104 @@
+{
+  "qualification": "read-only displayed planning; no live-price qualification",
+  "plans": [
+    {
+      "observed_at": "2026-11-17T15:51:41.366Z",
+      "set_number": "21333-1",
+      "selection": {
+        "revision_id": "66f77536-fd04-4394-b7b0-6beec7c008c5",
+        "occurrences": [
+          "0e7de3b1-63f6-45c0-b595-4c2999a0e8e0"
+        ],
+        "include_extras": false,
+        "views": [
+          {
+            "condition": "U",
+            "basis": "sold"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+          "item_type": "MINIFIG",
+          "item_no": "idea106",
+          "provider_color": null,
+          "regular_quantity": 1,
+          "extra_quantity": 0,
+          "selected_quantity": 1,
+          "mapping": "VERIFIED"
+        }
+      ],
+      "views": [
+        {
+          "condition": "U",
+          "basis": "sold",
+          "target_id": "f8fb4ab6-1464-4c91-9202-659df5788d7a",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        }
+      ],
+      "identity_initials": 0,
+      "price_initials": 1,
+      "retry_reserve": 2,
+      "maximum_attempts": 3,
+      "state": "READY",
+      "admissible": true,
+      "expires_at": "2026-11-17T16:06:40.474524Z",
+      "cooldown_until": null,
+      "displayed_text": "Selected refresh plan\n\n0 identity \u00b7 1 new price requests \u00b7 2 retry reserve \u00b7 3 maximum attempts\n\nREADY. Stricter account/provider limits still apply.\n\nMINIFIG idea106 \u00b7 1 selected recorded units \u00b7 VERIFIED\nUsed / Sold: FETCH \u00b7 unavailable\n\nExpires 10:06:40 AM. Joined work keeps its original accounting.\n\nConfirm selected refreshCancel plan"
+    },
+    {
+      "observed_at": "2026-11-17T15:52:29.458Z",
+      "set_number": "10016-1",
+      "selection": {
+        "revision_id": "12e689d0-4d4f-4197-8cad-5d68c21745db",
+        "occurrences": [
+          "587410c0-9252-427b-8fb1-3e9f781d8667"
+        ],
+        "include_extras": false,
+        "views": [
+          {
+            "condition": "U",
+            "basis": "sold"
+          }
+        ]
+      },
+      "targets": [
+        {
+          "target_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+          "item_type": "PART",
+          "item_no": "3001",
+          "provider_color": 1,
+          "regular_quantity": 2,
+          "extra_quantity": 0,
+          "selected_quantity": 2,
+          "mapping": "VERIFIED"
+        }
+      ],
+      "views": [
+        {
+          "condition": "U",
+          "basis": "sold",
+          "target_id": "5c16974d-74be-4f09-82e5-a755cd5730af",
+          "action": "FETCH",
+          "cache_state": "unavailable"
+        }
+      ],
+      "identity_initials": 0,
+      "price_initials": 1,
+      "retry_reserve": 2,
+      "maximum_attempts": 3,
+      "state": "READY",
+      "admissible": true,
+      "expires_at": "2026-11-17T16:07:28.600202Z",
+      "cooldown_until": null,
+      "displayed_text": "Selected refresh plan\n\n0 identity \u00b7 1 new price requests \u00b7 2 retry reserve \u00b7 3 maximum attempts\n\nREADY. Stricter account/provider limits still apply.\n\nPART 3001 color 1 \u00b7 2 selected recorded units \u00b7 VERIFIED\nUsed / Sold: FETCH \u00b7 unavailable\n\nExpires 10:07:28 AM. Joined work keeps its original accounting.\n\nConfirm selected refreshCancel plan"
+    }
+  ],
+  "final_displayed_set": "10016-1",
+  "confirmation_or_resume_invoked": false,
+  "market_provider_requests": 0,
+  "expiry_timezone": "timestamps UTC; phone displayed America/Chicago",
+  "expiry_rule": "Expired or lost plans must be prepared again through the normal UI; these records are not executable authorization."
+}
