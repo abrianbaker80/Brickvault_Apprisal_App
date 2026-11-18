@@ -1,0 +1,286 @@
+{
+  "base_commit": "20f78c74574834ade40dd4697e04ed3788e5f5d3",
+  "file_count": 35,
+  "files": [
+    {
+      "path": "apps/web/e2e/component-mapping-acceptance.mjs",
+      "change": "added",
+      "bytes": 5094,
+      "working_sha256": "1d63bd224b373c6d9f1a348fcff437a2782cfb14c49159f21f40cbf6334199bc",
+      "lf_sha256": "1d63bd224b373c6d9f1a348fcff437a2782cfb14c49159f21f40cbf6334199bc",
+      "base_sha256": null
+    },
+    {
+      "path": "apps/web/src/ContentsMapping.tsx",
+      "change": "added",
+      "bytes": 11041,
+      "working_sha256": "3c3a46fefda654a71e5219c02a06cc5f612f8306a22c1f5c06211f98cc927e27",
+      "lf_sha256": "3c3a46fefda654a71e5219c02a06cc5f612f8306a22c1f5c06211f98cc927e27",
+      "base_sha256": null
+    },
+    {
+      "path": "apps/web/src/ContentsPricing.tsx",
+      "change": "modified",
+      "bytes": 16519,
+      "working_sha256": "dbfd382d34436adf22ad38706f2a3632732027145025abd4eaf327281f4f1d3b",
+      "lf_sha256": "dbfd382d34436adf22ad38706f2a3632732027145025abd4eaf327281f4f1d3b",
+      "base_sha256": "2e1f93af306465daf125d79b0da10c6b36005863eaad8871233f323346bfe48f"
+    },
+    {
+      "path": "apps/web/src/contents-api.ts",
+      "change": "modified",
+      "bytes": 3144,
+      "working_sha256": "cc3e91312e5e7fa8b8b4ac6deca540af4953dee1c7048737458f234b9fee314f",
+      "lf_sha256": "cc3e91312e5e7fa8b8b4ac6deca540af4953dee1c7048737458f234b9fee314f",
+      "base_sha256": "a1f62a2cf5f2477e5d7cc6e4bc822afc45fbea9f429ce6e2bdc2909752f3752c"
+    },
+    {
+      "path": "apps/web/src/mapping-api.ts",
+      "change": "added",
+      "bytes": 2625,
+      "working_sha256": "099ac764e760dbe0a6f11f6099ee1b81785a235deca5ebdb92e80fec14d39e81",
+      "lf_sha256": "099ac764e760dbe0a6f11f6099ee1b81785a235deca5ebdb92e80fec14d39e81",
+      "base_sha256": null
+    },
+    {
+      "path": "docs/plans/113-selected-component-mapping-onboarding.md",
+      "change": "added",
+      "bytes": 35000,
+      "working_sha256": "e0122fad92bfd4af8d10a526acc185057794cf2df0f01d9b85d11f9eff1d773e",
+      "lf_sha256": "e0122fad92bfd4af8d10a526acc185057794cf2df0f01d9b85d11f9eff1d773e",
+      "base_sha256": null
+    },
+    {
+      "path": "packages/contracts/openapi.json",
+      "change": "modified",
+      "bytes": 490888,
+      "working_sha256": "61c751cfaf96f8f303c9dc050b6e5e4f81600251d29e2b26e36b2d9592cde5ca",
+      "lf_sha256": "61c751cfaf96f8f303c9dc050b6e5e4f81600251d29e2b26e36b2d9592cde5ca",
+      "base_sha256": "b4103607a45a8747a6deee3f3c2c8768873f854214382c4aeb5c40b43d0f42a1"
+    },
+    {
+      "path": "packages/contracts/src/schema.d.ts",
+      "change": "modified",
+      "bytes": 364449,
+      "working_sha256": "f6dcd5b2f83238e2252263c1b9726ff096ca0054c806c65ee28a0c29d2b2715d",
+      "lf_sha256": "f6dcd5b2f83238e2252263c1b9726ff096ca0054c806c65ee28a0c29d2b2715d",
+      "base_sha256": "b157bcd98a90a7106c0c8d44ee06efcba9499373c11b61e3e9e974a15425311f"
+    },
+    {
+      "path": "scripts/package_api.py",
+      "change": "modified",
+      "bytes": 17672,
+      "working_sha256": "8f4fee534e0c002568b7461743937e0943d7897a3df5a71107024a19c07e2d4e",
+      "lf_sha256": "8f4fee534e0c002568b7461743937e0943d7897a3df5a71107024a19c07e2d4e",
+      "base_sha256": "8df796b70ae92d4ef7b93c7cba3c9533e599f6537ad3deeefdc9981847c65d0e"
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/component_mapping.py",
+      "change": "added",
+      "bytes": 4238,
+      "working_sha256": "c03d1641c5ea54b3fd2ae867953001ce6f14603d7152d6861d95414d9c3fb2be",
+      "lf_sha256": "c03d1641c5ea54b3fd2ae867953001ce6f14603d7152d6861d95414d9c3fb2be",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/api/refresh.py",
+      "change": "modified",
+      "bytes": 5653,
+      "working_sha256": "f1abb74cb9768b546699fb85cff8385413267310c4f91e854620197c3c306599",
+      "lf_sha256": "f1abb74cb9768b546699fb85cff8385413267310c4f91e854620197c3c306599",
+      "base_sha256": "8b452e1a71daacef1fbc1b07e36a1957ff2e630fad9e2f5b38b8f5f439336070"
+    },
+    {
+      "path": "services/api/src/brickvault_api/backup_format.py",
+      "change": "modified",
+      "bytes": 3434,
+      "working_sha256": "15a66c763f95123a6f2d7fa8452c73b70015f48d0bd8b176c14bf0d6428d23c1",
+      "lf_sha256": "15a66c763f95123a6f2d7fa8452c73b70015f48d0bd8b176c14bf0d6428d23c1",
+      "base_sha256": "cab684efc277860f644e221d47410074d68515e087d0519cb0c63bb37e5a2808"
+    },
+    {
+      "path": "services/api/src/brickvault_api/component_mapping.py",
+      "change": "added",
+      "bytes": 30010,
+      "working_sha256": "b1bacd7d88bee92588306f0893f6f150aec3be8b30ce97106487ffd3dcc6cbab",
+      "lf_sha256": "b1bacd7d88bee92588306f0893f6f150aec3be8b30ce97106487ffd3dcc6cbab",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/component_mapping_models.py",
+      "change": "added",
+      "bytes": 3271,
+      "working_sha256": "411b4c3162fe8860bd2b8ad41696ea088516ca3f583b8d4ff05a2b7548336512",
+      "lf_sha256": "411b4c3162fe8860bd2b8ad41696ea088516ca3f583b8d4ff05a2b7548336512",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/contents.py",
+      "change": "modified",
+      "bytes": 21273,
+      "working_sha256": "2937ef4eaa47cde9e6104c4a513fd324f4c91609acb73558f2e3fe0a669b0bec",
+      "lf_sha256": "2937ef4eaa47cde9e6104c4a513fd324f4c91609acb73558f2e3fe0a669b0bec",
+      "base_sha256": "9a7280e01c10738bb8511c964f73ae6b8a9f39e9eab7916088210af2d7997db9"
+    },
+    {
+      "path": "services/api/src/brickvault_api/contents_models.py",
+      "change": "modified",
+      "bytes": 3926,
+      "working_sha256": "e9b41e292e6c30bf91368fce0e4509eba39cdac9df9ed138e7029c978bce1d0b",
+      "lf_sha256": "e9b41e292e6c30bf91368fce0e4509eba39cdac9df9ed138e7029c978bce1d0b",
+      "base_sha256": "70d025aec3673555013fc3f48405dbb176dfd53450dcc7bc2ff8db92ef0751d2"
+    },
+    {
+      "path": "services/api/src/brickvault_api/main.py",
+      "change": "modified",
+      "bytes": 5852,
+      "working_sha256": "39d3fa06a51c86b336f588746a6cdc2f43715ed5ebdc8afacf1a017282d9f895",
+      "lf_sha256": "39d3fa06a51c86b336f588746a6cdc2f43715ed5ebdc8afacf1a017282d9f895",
+      "base_sha256": "22667b7d2bcdd06e862eadf773df33746d463d52c053f0bfdc290d2dee224afb"
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/component_evidence.py",
+      "change": "added",
+      "bytes": 5169,
+      "working_sha256": "82dc3c4f2854d9d826518154bf6b9dbc099dd0491c602eac44b18d667907556d",
+      "lf_sha256": "82dc3c4f2854d9d826518154bf6b9dbc099dd0491c602eac44b18d667907556d",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/component_identity.py",
+      "change": "added",
+      "bytes": 8583,
+      "working_sha256": "dc0cfa8740f4beae455cea25ca1b03ba0910336547ddba1b747e66319526146a",
+      "lf_sha256": "dc0cfa8740f4beae455cea25ca1b03ba0910336547ddba1b747e66319526146a",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/discovery.py",
+      "change": "modified",
+      "bytes": 28219,
+      "working_sha256": "fb24e481601b4cc8fb2526c6b64ef74f0f0342d94dd03373388c5b21e1934dea",
+      "lf_sha256": "c419a16aefbbc489f0e304613162c96710ff11210c820faffd96cebc089de5a1",
+      "base_sha256": "9a123123f035ea3b31882a0ee793bc6163f7201429189d27ed70dc36cd2eb514"
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/models.py",
+      "change": "modified",
+      "bytes": 5011,
+      "working_sha256": "06c650552a0ebf374c85e7f54572ee10b9af87893ee716be8baf712d3f923c21",
+      "lf_sha256": "06c650552a0ebf374c85e7f54572ee10b9af87893ee716be8baf712d3f923c21",
+      "base_sha256": "bab6cedc6f29bd7b4147d02b2db10b657e6e8c7c80c146cf24a6d3a777e315ca"
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/product_refresh_models.py",
+      "change": "modified",
+      "bytes": 6445,
+      "working_sha256": "b7a30f0dd13003d1a8eb16e062e61e9457a1948981386e3449f1720bbd5c90b6",
+      "lf_sha256": "b7a30f0dd13003d1a8eb16e062e61e9457a1948981386e3449f1720bbd5c90b6",
+      "base_sha256": "28ac8ff93cef20bc4949b0bf70aa102c91466580e4160e443ec83f519e1b1350"
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/product_refresh_retention.py",
+      "change": "modified",
+      "bytes": 5017,
+      "working_sha256": "5459cae0249ef7568dd70d39e9e9005b54d4f57171c4a2fd5b8bf97cc328f532",
+      "lf_sha256": "5459cae0249ef7568dd70d39e9e9005b54d4f57171c4a2fd5b8bf97cc328f532",
+      "base_sha256": "3e9a5b6070918b3ec37705024e2e0d60e8ce8cc1725d323935bfcf804636c81a"
+    },
+    {
+      "path": "services/api/src/brickvault_api/market/retention.py",
+      "change": "modified",
+      "bytes": 11066,
+      "working_sha256": "105c65240e5023e642711ae2eae3083a0c2e6206f2033b4c7f86b8423cf4c9b3",
+      "lf_sha256": "105c65240e5023e642711ae2eae3083a0c2e6206f2033b4c7f86b8423cf4c9b3",
+      "base_sha256": "fc651e6a5e56fee10f5a5e79fb68ade56730cc3391449577b87b1110e706764b"
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0021_selected_component_mapping_down.sql",
+      "change": "added",
+      "bytes": 25341,
+      "working_sha256": "fc9d4cf0343fef0ba114fff015eb0e7843ab9375eb15eeb76f1ae7c9597fdd6c",
+      "lf_sha256": "fc9d4cf0343fef0ba114fff015eb0e7843ab9375eb15eeb76f1ae7c9597fdd6c",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/sql/0021_selected_component_mapping_up.sql",
+      "change": "added",
+      "bytes": 71369,
+      "working_sha256": "f3d38d767cb916b0eb07c8cfa73dd227a53bc794028b180b159926fa5d53660d",
+      "lf_sha256": "ba456a4bed639cc80a90619f31f7d421d725c226d8cbbbadf5fe7fc4466c6c07",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/migrations/versions/0021_selected_component_mapping.py",
+      "change": "added",
+      "bytes": 447,
+      "working_sha256": "c7293a5067ca432f20888b1652a216a7f1691f1f3341d4a79b02c9eaf330f4d9",
+      "lf_sha256": "c7293a5067ca432f20888b1652a216a7f1691f1f3341d4a79b02c9eaf330f4d9",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/src/brickvault_api/persistence/runtime_grants.py",
+      "change": "modified",
+      "bytes": 9353,
+      "working_sha256": "ad652f3a4b2919ce173c6013665e543372627340ab6ed54ffb42a5b7b49d9ef8",
+      "lf_sha256": "ad652f3a4b2919ce173c6013665e543372627340ab6ed54ffb42a5b7b49d9ef8",
+      "base_sha256": "78c2f547082f6c61fc1ec71e1632f0fdda3c0c60ae230dce431ceffaf550b63f"
+    },
+    {
+      "path": "services/api/tests/integration/component_mapping_browser_fixture.py",
+      "change": "added",
+      "bytes": 4526,
+      "working_sha256": "150f042ce39845e2e0b69bfd6c3f39a2656f18d7b164d8a4e1b24be64617a8f5",
+      "lf_sha256": "150f042ce39845e2e0b69bfd6c3f39a2656f18d7b164d8a4e1b24be64617a8f5",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/tests/integration/component_mapping_fixture.py",
+      "change": "added",
+      "bytes": 7164,
+      "working_sha256": "bb20258db1c854697e2c8f3053bebc3c9bf63acb449baa6d2dc3e73de015bf8b",
+      "lf_sha256": "bb20258db1c854697e2c8f3053bebc3c9bf63acb449baa6d2dc3e73de015bf8b",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/tests/integration/test_component_mapping.py",
+      "change": "added",
+      "bytes": 19964,
+      "working_sha256": "9062e5cfe6611eddfde648f533fd1f7b89cc0da7484e81211eafddbe3875e79f",
+      "lf_sha256": "9062e5cfe6611eddfde648f533fd1f7b89cc0da7484e81211eafddbe3875e79f",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/tests/integration/test_component_mapping_recovery.py",
+      "change": "added",
+      "bytes": 10198,
+      "working_sha256": "f2b63242574d7d62f97e198d27b80f2c0e51a82aae480810522a32da5a09c0da",
+      "lf_sha256": "f2b63242574d7d62f97e198d27b80f2c0e51a82aae480810522a32da5a09c0da",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/tests/integration/test_contents_refresh.py",
+      "change": "modified",
+      "bytes": 29088,
+      "working_sha256": "8970c543a3b3152cac923ebf6362c72c73dc8a755b6682d7f9bea8c99073bf3c",
+      "lf_sha256": "8970c543a3b3152cac923ebf6362c72c73dc8a755b6682d7f9bea8c99073bf3c",
+      "base_sha256": "a6beeab6082c5ebcb5a8100062a6b8b62749122969ccd2a0cbeae13191ad0566"
+    },
+    {
+      "path": "services/api/tests/unit/test_component_identity.py",
+      "change": "added",
+      "bytes": 6767,
+      "working_sha256": "1aad07932de7e0971cf7e3c2bdab17474df200beb262eb03a62ad8b8a0061fa1",
+      "lf_sha256": "1aad07932de7e0971cf7e3c2bdab17474df200beb262eb03a62ad8b8a0061fa1",
+      "base_sha256": null
+    },
+    {
+      "path": "services/api/tests/unit/test_outcome_backup_compatibility.py",
+      "change": "modified",
+      "bytes": 3386,
+      "working_sha256": "e61daec88144841905ba5defddd6f8ad7c877291fbb7c92e7ae2b71f0ba752fa",
+      "lf_sha256": "e61daec88144841905ba5defddd6f8ad7c877291fbb7c92e7ae2b71f0ba752fa",
+      "base_sha256": "3968e09abefcb904679d61c320b34f4552f5ebc5de26289fa7707244e3304707"
+    }
+  ]
+}
